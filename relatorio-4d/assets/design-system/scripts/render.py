@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "1.2.0"
+RENDERER_VERSION = "1.3.0"
 CARD_LABELS = {
     "test_card": {
         "hypothesis": "1. Acreditamos que — hipótese",
@@ -99,6 +99,34 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
                 unknown |= set(card.get("citation_ids", [])) - citation_ids
         if unknown:
             raise ValueError(f"{block['id']}: citações inexistentes: {sorted(unknown)}")
+
+    def nested_citations(value: Any) -> set[str]:
+        found: set[str] = set()
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "citation_id" and isinstance(item, str):
+                    found.add(item)
+                elif key == "citation_ids" and isinstance(item, list):
+                    found.update(entry for entry in item if isinstance(entry, str))
+                found.update(nested_citations(item))
+        elif isinstance(value, list):
+            for item in value:
+                found.update(nested_citations(item))
+        return found
+
+    for block in content["blocks"]:
+        unknown = nested_citations(block["data"]) - citation_ids
+        if unknown:
+            raise ValueError(f"{block['id']}: citações aninhadas inexistentes: {sorted(unknown)}")
+    if meta.get("completeness", "complete") == "complete":
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("deliverable_validators", ROOT / "scripts/validators/__init__.py")
+        validators = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(validators)
+        semantic_errors = validators.run(content)
+        if semantic_errors:
+            raise ValueError("Inconsistência semântica: " + "; ".join(semantic_errors[:12]))
     return profile
 
 
