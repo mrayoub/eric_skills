@@ -133,17 +133,19 @@ def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
                              str(item.get("answer", "")), str(item.get("evidence", "")),
                              str(item.get("evidence_source", ""))])
         return ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte"], rows
-    headers = data.get("headers") or data.get("columns") or []
-    headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in headers]
+    columns = data.get("headers") or data.get("columns") or []
+    keys = [str(h.get("key", h.get("label", ""))) if isinstance(h, dict) else str(h) for h in columns]
+    headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in columns]
     raw_rows = data.get("rows") or []
     if raw_rows and not headers and isinstance(raw_rows[0], dict):
-        headers = list(raw_rows[0])
+        keys = headers = list(raw_rows[0])
     rows: list[list[str]] = []
     for row in raw_rows:
         if isinstance(row, list):
             rows.append([str(x) if x is not None else "" for x in row])
         elif isinstance(row, dict):
-            rows.append([str(row.get(h, "")) for h in headers] if headers else [str(v) for v in row.values()])
+            values = [row.get(k) for k in keys] if keys else row.values()
+            rows.append([str(value) if value is not None else "" for value in values])
         else:
             rows.append([str(row)])
     if not headers and not rows:
