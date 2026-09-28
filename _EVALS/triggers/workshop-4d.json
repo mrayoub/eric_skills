@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Monta o roteiro do aprofundamento 4D de sexta com as perguntas de cada D",
+    "should_trigger": true
+  },
+  {
+    "query": "Como facilito o barco da inovação no D2 com 12 pessoas remotas?",
+    "should_trigger": true
+  },
+  {
+    "query": "Vamos fazer o 4D de forma assíncrona, organiza as etapas",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare a pauta D1-D4 para aprofundar a dor de solicitações internas, com tempos, perguntas e regras de votação.",
+    "should_trigger": true
+  },
+  {
+    "query": "Crie um board colaborativo para descongelar percepções, mapear jornada, desenhar alternativas e decidir com créditos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Estamos ao vivo no D3; organize as alternativas que o grupo propôs e as perguntas para seguir ao D4.",
+    "should_trigger": true
+  },
+  {
+    "query": "Registre o que aconteceu em cada D na sessão de hoje, incluindo divergências e decisões, sem montar o relatório final.",
+    "should_trigger": true
+  },
+  {
+    "query": "A equipe de Cadastro quer explorar ventos, âncoras, icebergs e porto; monte a dinâmica e a orientação para a facilitação.",
+    "should_trigger": true
+  },
+  {
+    "query": "Com essas fotos do mural e a planilha de votos, escreve o relatório 4D",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepara o workshop 5C com os clientes",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeja o E3 do workshop de estruturação",
+    "should_trigger": false
+  },
+  {
+    "query": "Revise o relatório do aprofundamento antes do BP1 e confira se as conclusões estão ligadas aos registros D1-D4.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compile os registros de D1 e D2 em uma versão parcial do Relatório 4D, mostrando o que falta.",
+    "should_trigger": false
+  },
+  {
+    "query": "Monte o roteiro de cocriação com oito agentes de mercado, da experiência atual aos pitches e votos em C5.",
+    "should_trigger": false
+  },
+  {
+    "query": "A partir das notas E1-E3, produza o relatório de solução, o plano de construção e a decisão de rota.",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeje um piloto operacional para testar a hipótese de redução de devoluções, com Test Cards, métricas e protocolo.",
+    "should_trigger": false
+  }
+]

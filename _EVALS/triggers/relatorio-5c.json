@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Aqui está a gravação e a ata do encontro 5C, faz o relatório",
+    "should_trigger": true
+  },
+  {
+    "query": "Consolida os votos do C2 e do C5 e escreve a devolutiva aos clientes",
+    "should_trigger": true
+  },
+  {
+    "query": "Revisa esse relatório 5C: os totais batem?",
+    "should_trigger": true
+  },
+  {
+    "query": "Monte o Relatório 5C a partir do mural e das falas de oito agentes de mercado, registrando propostas e dissensos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Precisamos da síntese do encontro de cocriação de 22 de setembro para enviar aos participantes, com fontes e próximos passos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Atualize o relatório do workshop com clientes usando a planilha de créditos e explicite os denominadores dos votos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Só temos notas de C1-C3; consolide uma versão parcial do relatório com limites e lacunas das etapas restantes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise a rastreabilidade entre experiência atual, experiência desejada e propostas cocriadas neste relatório de C1 a C5.",
+    "should_trigger": true
+  },
+  {
+    "query": "Monta o roteiro do encontro 5C da semana que vem",
+    "should_trigger": false
+  },
+  {
+    "query": "Compila o relatório 4D",
+    "should_trigger": false
+  },
+  {
+    "query": "Analisa as sessões de think aloud",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare o convite e as dinâmicas do workshop 5C para cocriação com clientes de Atendimento.",
+    "should_trigger": false
+  },
+  {
+    "query": "Como devemos facilitar os pitches e créditos de votação no C5? Organize instruções para os participantes.",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide os registros E1-E3 no relatório da solução com decisão de rota e plano de construção.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare os retratos de maturidade de junho e setembro e indique as lacunas de evidência do projeto.",
+    "should_trigger": false
+  },
+  {
+    "query": "Transforme a transcrição da entrevista com o sponsor em briefing de sete campos e perguntas de esclarecimento.",
+    "should_trigger": false
+  }
+]
