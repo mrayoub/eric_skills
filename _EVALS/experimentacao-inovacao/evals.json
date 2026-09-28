@@ -1,0 +1,39 @@
+{
+  "skill_name": "experimentacao-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analise as cinco sessões contra o plano prévio e produza o Learning Card e a recomendação.",
+      "expected_output": "Critério de quatro de cinco não atingido; aprendizado rastreável com limites.",
+      "files": [
+        "files/plano-previo.md",
+        "files/sessoes.md"
+      ],
+      "expectations": [
+        "Calcula três conclusões corretas sem ajuda em cinco sessões elegíveis (60%), preservando o denominador cinco.",
+        "Conclui que o critério prévio de quatro de cinco (80%) não foi atingido; não exclui P03/P05 para melhorar a taxa.",
+        "Produz Learning Card individual ligado ao TC-01 v1, com hipótese, observações, inferência e ação.",
+        "Cita plano-previo.md, Test Card, e sessoes.md, linhas P01–P05, incluindo os contraexemplos com ajuda.",
+        "Não alega economia de tempo, pois não houve cronometragem nem comparação de tempos.",
+        "Distingue achado de usabilidade, limites da amostra, recomendação analítica e decisão de expansão ainda ausente.",
+        "Registra a ajuda em P03/P05 como desvio do protocolo, preservando as observações."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Com esta hipótese e este MVP, prepare a próxima rodada de experimentação.",
+      "expected_output": "Plano prospectivo com método justificado e cards; nenhum resultado ou Learning Card preenchido.",
+      "files": [
+        "files/hipotese-e-mvp.md"
+      ],
+      "expectations": [
+        "Entrega plano prospectivo e justifica o método para verificar envio correto sem ajuda, com tarefa e público elegível.",
+        "Apresenta Test Cards individuais com hipótese, teste, medida e critério; mantém critério decisivo pendente como rascunho se não puder fundamentá-lo.",
+        "Separa a hipótese master do recorte do checklist e não afirma testar acompanhamento inexistente.",
+        "Não gera Learning Cards preenchidos, taxas de sucesso ou resultados de sessões ainda não realizadas.",
+        "Cita hipotese-e-mvp.md e pergunta somente pelas decisões metodológicas indispensáveis, sem inventar limiar aprovado.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}
