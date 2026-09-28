@@ -30,6 +30,54 @@ def content(kind: str, artifact: str) -> dict:
     }
 
 
+class TableRowsTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location("render", SCRIPT)
+        cls.render = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.render)
+
+    def test_column_key_differs_from_label(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "columns": [{"key": "count", "label": "Quantidade"}],
+            "rows": [{"count": 12}],
+        }}), (["Quantidade"], [["12"]]))
+
+    def test_reordered_columns(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "columns": [{"key": "b", "label": "B"}, {"key": "a", "label": "A"}],
+            "rows": [{"a": 1, "b": 2}],
+        }}), (["B", "A"], [["2", "1"]]))
+
+    def test_zero_and_false_are_preserved(self):
+        for value, expected in [(0, "0"), (False, "False")]:
+            with self.subTest(value=value):
+                self.assertEqual(self.render.table_rows({"data": {
+                    "columns": [{"key": "count", "label": "Quantidade"}],
+                    "rows": [{"count": value}],
+                }}), (["Quantidade"], [[expected]]))
+
+    def test_missing_field_is_empty(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "columns": [{"key": "count", "label": "Quantidade"}], "rows": [{}],
+        }}), (["Quantidade"], [[""]]))
+
+    def test_simple_headers_and_list_rows(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "headers": ["Medida", "Valor"], "rows": [["Casos", "12"]],
+        }}), (["Medida", "Valor"], [["Casos", "12"]]))
+
+    def test_string_headers_with_object_rows(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "headers": ["x"], "rows": [{"x": "v"}],
+        }}), (["x"], [["v"]]))
+
+    def test_column_without_label(self):
+        self.assertEqual(self.render.table_rows({"data": {
+            "columns": [{"key": "k"}], "rows": [{"k": "v"}],
+        }}), (["k"], [["v"]]))
+
+
 class RenderTests(unittest.TestCase):
     def render(self, item: dict, formats: str, folder: Path):
         source = folder / "input.json"
