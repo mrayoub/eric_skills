@@ -380,12 +380,16 @@ def html_block(block: dict[str, Any]) -> str:
     if kind == "card_grid":
         return html_card_grid(block)
     if kind == "table":
-        headers, rows = table_rows(block)
-        heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
-        body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
-        caption = f"<caption>{html.escape(str(data['title']))}</caption>" if data.get("title") else ""
         table_class = ' class="scores"' if isinstance(data.get("dimensions"), dict) else ""
-        return f'<div class="block long"><table{table_class}>{caption}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>{refs}</div>'
+        tables = []
+        for index, (_, legend, headers, rows) in enumerate(table_views(block)):
+            heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
+            body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
+            if index == 0 and data.get("title"):
+                legend = data["title"]
+            caption = f"<caption>{html.escape(str(legend))}</caption>" if legend else ""
+            tables.append(f'<table{table_class}>{caption}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
+        return f'<div class="block long">{"".join(tables)}{refs}</div>'
     if kind == "list":
         items = data.get("items", [])
         tag = "ol" if data.get("ordered") else "ul"
@@ -516,10 +520,13 @@ def render_md(content: dict[str, Any]) -> str:
                 lines.append("| " + str(card["title"]).replace("|", "\\|") + " | " + card_text(card).replace("|", "\\|") + " |")
             lines.append("")
         elif kind == "table":
-            headers, rows = table_rows(block)
-            if headers:
-                lines += ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
-            lines += ["| " + " | ".join(row) + " |" for row in rows] + [""]
+            for _, legend, headers, rows in table_views(block):
+                if legend:
+                    lines += ["### " + str(legend), ""]
+                if headers:
+                    lines += ["| " + " | ".join(value.replace("|", "\\|") for value in headers) + " |",
+                              "| " + " | ".join("---" for _ in headers) + " |"]
+                lines += ["| " + " | ".join(value.replace("|", "\\|") for value in row) + " |" for row in rows] + [""]
         elif kind == "list":
             lines += [f"- {item}" for item in block.get("data", {}).get("items", [])] + [""]
         else:
@@ -593,17 +600,19 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                     if card.get("citation_ids"):
                         cell.add_paragraph("Fontes: " + ", ".join(card["citation_ids"]))
         elif kind == "table":
-            heads, rows = table_rows(block)
-            width = max(1, len(heads), *(len(row) for row in rows))
-            table = doc.add_table(rows=1 if heads else 0, cols=width)
-            table.style = "Table Grid"
-            if heads:
-                for cell, value in zip(table.rows[0].cells, heads):
-                    cell.text = value
-            for row in rows:
-                cells = table.add_row().cells
-                for cell, value in zip(cells, row):
-                    cell.text = value
+            for _, legend, heads, rows in table_views(block):
+                if legend:
+                    doc.add_paragraph(str(legend))
+                width = max(1, len(heads), *(len(row) for row in rows))
+                table = doc.add_table(rows=1 if heads else 0, cols=width)
+                table.style = "Table Grid"
+                if heads:
+                    for cell, value in zip(table.rows[0].cells, heads):
+                        cell.text = value
+                for row in rows:
+                    cells = table.add_row().cells
+                    for cell, value in zip(cells, row):
+                        cell.text = value
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
                 doc.add_paragraph(str(item), style="List Bullet")
@@ -673,8 +682,11 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             continue
         line = block_text(block)
         if block["type"] == "table":
-            heads, rows = table_rows(block)
-            line = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+            views = []
+            for _, legend, heads, rows in table_views(block):
+                text = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+                views.append((str(legend) + "\n" if legend else "") + text)
+            line = "\n\n".join(views)
         if block.get("citation_ids"):
             line += " [" + ", ".join(block["citation_ids"]) + "]"
         for chunk in [line[i:i+650] for i in range(0, len(line), 650)] or [""]:
@@ -698,14 +710,15 @@ def write_csv_tables(content: dict[str, Any], out: Path, stem: str) -> list[Path
         if block["type"] != "table" or not export.get("csv"):
             continue
         variant = safe_name(export["variant_key"])
-        path = out / f"{stem}-{variant}.csv"
-        headers, rows = table_rows(block)
-        with path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.writer(handle)
-            if headers:
-                writer.writerow(headers)
-            writer.writerows(rows)
-        written.append(path)
+        for index, (slug, _, headers, rows) in enumerate(table_views(block)):
+            suffix = f"-{slug}" if index else ""
+            path = out / f"{stem}-{variant}{suffix}.csv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle)
+                if headers:
+                    writer.writerow(headers)
+                writer.writerows(rows)
+            written.append(path)
     if not written:
         raise ValueError("CSV solicitado sem bloco table marcado export.csv=true")
     return written
