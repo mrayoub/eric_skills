@@ -16,7 +16,7 @@ Convenções comuns a todos os planos:
 
 | Plano | Título | Prioridade | Esforço | Depende de | Status |
 |---|---|---|---|---|---|
-| 001 | [Sync do design system, limpeza dos pacotes](001-baseline-sync-e-limpeza.md) (git já criado) | P1 | M | — | TODO (passo 1 concluído) |
+| 001 | [Sync do design system, limpeza dos pacotes](001-baseline-sync-e-limpeza.md) (git já criado) | P1 | M | — | DONE (sync verificado; 11 skills válidas; 5 testes passaram) |
 | 002 | [`table_rows` busca por chave, não rótulo](002-table-rows-chave-rotulo.md) (T03) | P1 | S | 001 | TODO |
 | 003 | [Endurecer `score.py` + CLI](003-score-py-endurecer-e-cli.md) (T04) | P1 | S | — | TODO |
 | 004 | [CLI e testes do `iqb.py`](004-iqb-cli.md) | P1 | S | — | TODO |
