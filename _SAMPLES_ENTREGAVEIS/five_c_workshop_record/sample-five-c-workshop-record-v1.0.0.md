@@ -1,0 +1,54 @@
+# EXEMPLO FICTÍCIO — Registro do workshop 5C
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+## C1 — Contextualizar
+
+No encontro fictício, a equipe apresentou o desafio e registrou dúvidas sobre origem das devoluções.
+
+Fontes: FIC-01
+
+## C2 — Compreender
+
+Cinco participantes fictícios descreveram etapas que funcionam e dificuldades de acompanhamento. Com três votos por pessoa, foram registrados 15 votos em temas priorizados.
+
+Fontes: FIC-01
+
+## C3 — Confirmar
+
+O grupo simulado descreveu experiência desejada com confirmação clara de envio e status visível, além de critérios observáveis.
+
+Fontes: FIC-01
+
+## C4 — Cocriar
+
+Ideias individuais fictícias originaram propostas de orientação, formulário guiado e acompanhamento; benefícios são expectativas, não resultados.
+
+Fontes: FIC-01
+
+## C5 — Conduzir
+
+Cinco participantes fictícios distribuíram dez créditos cada, totalizando 50. O ranking orienta investigação, sem comprovar viabilidade ou impacto.
+
+Fontes: FIC-01
+
+| Tema | Votos |
+| --- | --- |
+| Acompanhamento | 6 |
+| Clareza do pedido | 5 |
+| Devoluções | 4 |
+
+Fontes: FIC-01
+
+| Proposta | Créditos | Próxima verificação |
+| --- | --- | --- |
+| Status visível | 24 | Protótipo |
+| Formulário guiado | 18 | Teste de tarefa |
+| Orientação prévia | 8 | Entrevista |
+
+Fontes: FIC-02
+
+## Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

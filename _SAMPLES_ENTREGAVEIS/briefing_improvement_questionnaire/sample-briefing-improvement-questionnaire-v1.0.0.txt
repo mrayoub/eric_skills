@@ -1,0 +1,17 @@
+EXEMPLO FICTÍCIO — Briefing Improvement Questionnaire
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+Perguntas para fechar lacunas do briefing fictício antes de atribuir escala ao problema.
+
+- Qual o volume de solicitações elegíveis por mês e qual é a fonte?
+- Que proporção exige devolução por informação ausente, em qual período?
+- Quais perfis de agentes e equipes são afetados?
+- Quem é responsável pela decisão de prosseguir e quais restrições existem?
+
+Fontes: FIC-01
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

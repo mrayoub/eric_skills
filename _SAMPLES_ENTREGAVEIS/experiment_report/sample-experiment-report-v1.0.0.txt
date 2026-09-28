@@ -1,0 +1,51 @@
+EXEMPLO FICTÍCIO — Relatório de experimentação
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+Escopo
+
+Rodada fictícia sobre formulário guiado, com versão ilustrativa do MVP e público delimitado apenas para demonstrar o formato do relatório.
+
+Fontes: FIC-01
+
+Método
+
+Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo.
+
+Fontes: FIC-01
+
+Evidências
+
+Fontes FIC-01 e FIC-02 são simuladas. Em um projeto real, cada fala, evento e medida precisaria de localização verificável.
+
+Fontes: FIC-01
+
+Resultados
+
+Resultado ilustrativo misto: usuários entenderiam o fluxo, mas parte ainda dependeria de ajuda. Os números desta amostra não representam uma medição real.
+
+Fontes: FIC-01
+
+Limites
+
+Sem coleta real, comparação válida ou amostra representativa, nenhuma conclusão sobre efeito, inadimplência ou escala é permitida.
+
+Fontes: FIC-01
+
+Recomendação
+
+Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo.
+
+Fontes: FIC-01
+
+| Teste | Observação fictícia | Limite |
+| --- | --- | --- |
+| TC-01 | 3 de 5 sem ajuda | amostra de tarefa |
+| TC-02 | tempo não apurado | instrumentação pendente |
+
+Fontes: FIC-02
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

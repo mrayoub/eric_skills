@@ -1,0 +1,142 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "hypothesis_heading",
+        "text": "Hipótese"
+      },
+      "id": "heading-hypothesis",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "hypothesis",
+        "text": "Hipótese simulada: a entrada guiada melhora a completude das solicitações sem elevar o tempo de preenchimento."
+      },
+      "id": "hypothesis",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "method_heading",
+        "text": "Método"
+      },
+      "id": "heading-method",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "method",
+        "text": "Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo."
+      },
+      "id": "method",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "population_heading",
+        "text": "Público e elegibilidade"
+      },
+      "id": "heading-population",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "population",
+        "text": "Amostra ilustrativa de perfis diferentes; critérios de elegibilidade e exclusão devem ser definidos antes do recrutamento real."
+      },
+      "id": "population",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "measures_heading",
+        "text": "Medidas"
+      },
+      "id": "heading-measures",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "measures",
+        "text": "Completude por solicitação elegível; tempo em minutos; necessidade de ajuda por tarefa. Fontes, fórmulas e janelas seriam registradas no protocolo."
+      },
+      "id": "measures",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "protocol_heading",
+        "text": "Protocolo"
+      },
+      "id": "heading-protocol",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "protocol",
+        "text": "Apresentar cenário neutro, registrar ação e ajuda, verificar dados gerados e preservar desvios. Critérios de leitura seriam fechados antes da execução."
+      },
+      "id": "protocol",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "guardrails_heading",
+        "text": "Guardrails"
+      },
+      "id": "heading-guardrails",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "guardrails",
+        "text": "Interromper exposição diante de erro que possa afetar operação ou dados; usar ambiente controlado no piloto."
+      },
+      "id": "guardrails",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "experiment_plan",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-experiment-plan",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "portrait",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Plano de experimentação"
+}

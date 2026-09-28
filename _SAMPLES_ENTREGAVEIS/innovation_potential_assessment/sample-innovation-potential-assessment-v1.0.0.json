@@ -1,0 +1,182 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "impact_heading",
+        "text": "Impacto"
+      },
+      "id": "heading-impact",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "impact",
+        "text": "No cenário simulado, solicitações de dados exigem retrabalho. A magnitude real ainda teria de ser medida; a pontuação de exemplo serve apenas para testar o layout."
+      },
+      "id": "impact",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "feasibility_heading",
+        "text": "Viabilidade"
+      },
+      "id": "heading-feasibility",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "feasibility",
+        "text": "Uma triagem guiada parece tecnicamente possível, mas integração, responsáveis e custo permanecem hipóteses."
+      },
+      "id": "feasibility",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "alignment_heading",
+        "text": "Alinhamento"
+      },
+      "id": "heading-alignment",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "alignment",
+        "text": "A proposta ilustrativa busca reduzir esforço de atendimento e dar previsibilidade à jornada."
+      },
+      "id": "alignment",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "urgency_heading",
+        "text": "Urgência"
+      },
+      "id": "heading-urgency",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "urgency",
+        "text": "O exemplo considera prioridade moderada, sem transformar preferência de participantes em urgência institucional comprovada."
+      },
+      "id": "urgency",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "novelty_heading",
+        "text": "Novidade"
+      },
+      "id": "heading-novelty",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "novelty",
+        "text": "A ideia combina orientações e acompanhamento em uma jornada única; a novidade relativa dependeria de comparação com soluções existentes."
+      },
+      "id": "novelty",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "recommendation_heading",
+        "text": "Recomendação"
+      },
+      "id": "heading-recommendation",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "recommendation",
+        "text": "Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo."
+      },
+      "id": "recommendation",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-02"
+      ],
+      "data": {
+        "headers": [
+          "Critério",
+          "Nota simulada"
+        ],
+        "rows": [
+          [
+            "Impacto",
+            "60"
+          ],
+          [
+            "Viabilidade",
+            "45"
+          ],
+          [
+            "Alinhamento",
+            "70"
+          ],
+          [
+            "Urgência",
+            "40"
+          ],
+          [
+            "Novidade",
+            "55"
+          ]
+        ],
+        "title": "Pontuação ilustrativa, sem avaliação real"
+      },
+      "export": {
+        "csv": true,
+        "variant_key": "pontuacoes"
+      },
+      "id": "scores",
+      "type": "table"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "innovation_potential_assessment",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-innovation-potential-assessment",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "portrait",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Avaliação de potencial de inovação"
+}

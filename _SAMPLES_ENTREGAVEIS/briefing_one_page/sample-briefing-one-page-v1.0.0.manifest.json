@@ -1,0 +1,21 @@
+{
+  "artifact_id": "sample-briefing-one-page",
+  "branding_version": "1.0.0",
+  "content_sha256": "ffc00d719a357baceacceb27b1d7e10b5f47d7f0ab4cd5075d1a0a175d260809",
+  "content_version": "1.0.0",
+  "deliverable_type": "briefing_one_page",
+  "files": {
+    "sample-briefing-one-page-v1.0.0.docx": "ca2f3bc60e44e51a0252ca2c2da6c19bcdc3563b997b6e86592f4501d1d9d561",
+    "sample-briefing-one-page-v1.0.0.html": "12b1742ae55adde96bfd57ff419479a6c3f9a1982e2a2f92d6d7a8b0825034d7",
+    "sample-briefing-one-page-v1.0.0.json": "ffc00d719a357baceacceb27b1d7e10b5f47d7f0ab4cd5075d1a0a175d260809",
+    "sample-briefing-one-page-v1.0.0.md": "6d8f50b1323d60ec93382f9225dd52b4d9256b760f1b3d7d3628ba6906766dbb",
+    "sample-briefing-one-page-v1.0.0.pdf": "d1fc2a2ca2ae970d4b31c576b8818e6176d6f6900dd193b473582f108937adcf",
+    "sample-briefing-one-page-v1.0.0.txt": "78f9b180dfbab0073859d3c51556c5eedcec63f4bb06ffa6f872ee211048bb01"
+  },
+  "layout": "executive_one_page",
+  "paper": "a4_landscape",
+  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_version": "1.2.0",
+  "renderer_version": "1.2.0",
+  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+}

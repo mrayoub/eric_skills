@@ -1,0 +1,38 @@
+# EXEMPLO FICTÍCIO — Apresentação executiva da rodada
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+## Contexto
+
+Exemplo fictício de jornada de solicitações de dados. Hipótese, usuários e escopo são demonstrativos.
+
+Fontes: FIC-01
+
+## Método
+
+Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo.
+
+Fontes: FIC-01
+
+## Achados
+
+Achado ilustrativo: a orientação reduziu dúvidas no protótipo, mas não existe evidência real de efeito operacional.
+
+Fontes: FIC-01
+
+## Recomendação
+
+Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo.
+
+Fontes: FIC-01
+
+## Próximos passos
+
+Consolidar linha de base, fechar Test Cards e executar uma rodada real antes de decidir escala.
+
+Fontes: FIC-01
+
+## Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

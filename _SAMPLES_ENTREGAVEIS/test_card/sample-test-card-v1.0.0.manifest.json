@@ -1,0 +1,21 @@
+{
+  "artifact_id": "sample-test-card",
+  "branding_version": "1.0.0",
+  "content_sha256": "b032ec74a9bf91503039f7363cd50814dc29517fa550ecd9e5fa6decc347e68d",
+  "content_version": "1.0.0",
+  "deliverable_type": "test_card",
+  "files": {
+    "sample-test-card-v1.0.0.docx": "dffa5a44ff5fa5b0cb82fcea1e6f3110b77c1848b1ffe25db0018f842744255f",
+    "sample-test-card-v1.0.0.html": "4e00cb9f46b37c63a284a9d170ec9e9832210c6b3d8211f753ea8c39f8db19d9",
+    "sample-test-card-v1.0.0.json": "b032ec74a9bf91503039f7363cd50814dc29517fa550ecd9e5fa6decc347e68d",
+    "sample-test-card-v1.0.0.md": "37624e5c7f05868b366dce1b40b74c09aa33ede9bd90568ceb5021af69700c92",
+    "sample-test-card-v1.0.0.pdf": "036f25f4385daf65e0d9e6d35b1162585a0fed6462d7cd4c9685bcd0f7118a14",
+    "sample-test-card-v1.0.0.txt": "bdf64025250b6f3a230511cfd6c63509cb06e0f01236ae89067b07922d0256ed"
+  },
+  "layout": "card_portrait",
+  "paper": "a4_portrait",
+  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_version": "1.2.0",
+  "renderer_version": "1.2.0",
+  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+}

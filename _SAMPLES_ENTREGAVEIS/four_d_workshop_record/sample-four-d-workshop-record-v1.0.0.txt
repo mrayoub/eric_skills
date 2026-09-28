@@ -1,0 +1,40 @@
+EXEMPLO FICTÍCIO — Registro do workshop 4D
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+D1 — Descongelar
+
+Participantes fictícios relataram incerteza sobre o andamento das solicitações e divergiram sobre a principal causa.
+
+Fontes: FIC-01
+
+D2 — Diagnosticar
+
+A jornada simulada mostra campos incompletos na entrada, devoluções e ausência de status visível. Não há linha de base real.
+
+Fontes: FIC-01
+
+D3 — Desenhar
+
+Foram simuladas três alternativas: orientação prévia, formulário guiado e painel de status; cada uma responde a uma parte da dor.
+
+Fontes: FIC-01
+
+D4 — Decidir
+
+O grupo fictício priorizou investigar o formulário guiado. O voto exemplifica preferência do grupo, não valida eficácia.
+
+Fontes: FIC-01
+
+| Alternativa | Dor | Prioridade do grupo |
+| --- | --- | --- |
+| Formulário guiado | entrada incompleta | 1 |
+| Status visível | incerteza | 2 |
+| Orientação prévia | dúvidas iniciais | 3 |
+
+Fontes: FIC-01
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

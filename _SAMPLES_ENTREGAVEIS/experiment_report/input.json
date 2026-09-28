@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "experiment_report",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Relatório de experimentação",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-scope",
+      "type": "heading",
+      "data": {
+        "section_key": "scope_heading",
+        "text": "Escopo"
+      }
+    },
+    {
+      "id": "scope",
+      "type": "paragraph",
+      "data": {
+        "section_key": "scope",
+        "text": "Rodada fictícia sobre formulário guiado, com versão ilustrativa do MVP e público delimitado apenas para demonstrar o formato do relatório."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-method",
+      "type": "heading",
+      "data": {
+        "section_key": "method_heading",
+        "text": "Método"
+      }
+    },
+    {
+      "id": "method",
+      "type": "paragraph",
+      "data": {
+        "section_key": "method",
+        "text": "Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-evidence",
+      "type": "heading",
+      "data": {
+        "section_key": "evidence_heading",
+        "text": "Evidências"
+      }
+    },
+    {
+      "id": "evidence",
+      "type": "paragraph",
+      "data": {
+        "section_key": "evidence",
+        "text": "Fontes FIC-01 e FIC-02 são simuladas. Em um projeto real, cada fala, evento e medida precisaria de localização verificável."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-results",
+      "type": "heading",
+      "data": {
+        "section_key": "results_heading",
+        "text": "Resultados"
+      }
+    },
+    {
+      "id": "results",
+      "type": "paragraph",
+      "data": {
+        "section_key": "results",
+        "text": "Resultado ilustrativo misto: usuários entenderiam o fluxo, mas parte ainda dependeria de ajuda. Os números desta amostra não representam uma medição real."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-limits",
+      "type": "heading",
+      "data": {
+        "section_key": "limits_heading",
+        "text": "Limites"
+      }
+    },
+    {
+      "id": "limits",
+      "type": "paragraph",
+      "data": {
+        "section_key": "limits",
+        "text": "Sem coleta real, comparação válida ou amostra representativa, nenhuma conclusão sobre efeito, inadimplência ou escala é permitida."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-recommendation",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendation_heading",
+        "text": "Recomendação"
+      }
+    },
+    {
+      "id": "recommendation",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendation",
+        "text": "Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "evidence-matrix",
+      "type": "table",
+      "data": {
+        "title": "Matriz ilustrativa de evidências",
+        "headers": [
+          "Teste",
+          "Observação fictícia",
+          "Limite"
+        ],
+        "rows": [
+          [
+            "TC-01",
+            "3 de 5 sem ajuda",
+            "amostra de tarefa"
+          ],
+          [
+            "TC-02",
+            "tempo não apurado",
+            "instrumentação pendente"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-experiment-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true
+  }
+}

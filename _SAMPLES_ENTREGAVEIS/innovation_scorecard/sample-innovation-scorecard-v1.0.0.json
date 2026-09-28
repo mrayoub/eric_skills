@@ -1,0 +1,116 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "alignment_opportunity_heading",
+        "text": "Alinhamento e oportunidade"
+      },
+      "id": "heading-alignment_opportunity",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "alignment_opportunity",
+        "text": "O caso fictício tem problema formulado e público definido, mas o potencial institucional não foi validado por fonte real."
+      },
+      "id": "alignment_opportunity",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "risk_reduction_heading",
+        "text": "Redução de riscos"
+      },
+      "id": "heading-risk_reduction",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "risk_reduction",
+        "text": "A evidência simulada equivale a relato e reação a conceito; não demonstra uso em produção, efeito ou viabilidade econômica."
+      },
+      "id": "risk_reduction",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "next_gate_heading",
+        "text": "Próximo gate"
+      },
+      "id": "heading-next_gate",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "next_gate",
+        "text": "Antes de avançar, obter linha de base, testar o fluxo com público elegível e confirmar dependências operacionais."
+      },
+      "id": "next_gate",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "headers": [
+          "Dimensão",
+          "Estado",
+          "Lacuna"
+        ],
+        "rows": [
+          [
+            "Desejabilidade",
+            "relato simulado",
+            "uso real"
+          ],
+          [
+            "Viabilidade",
+            "não avaliada",
+            "custo e operação"
+          ]
+        ],
+        "title": "Força das evidências — exemplo"
+      },
+      "export": {
+        "csv": true,
+        "variant_key": "dimensoes"
+      },
+      "id": "risk-table",
+      "type": "table"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "innovation_scorecard",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-innovation-scorecard",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "landscape",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Scorecard de maturidade das evidências"
+}

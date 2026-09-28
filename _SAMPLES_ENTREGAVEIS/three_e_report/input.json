@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "three_e_report",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Relatório 3E",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-e1",
+      "type": "heading",
+      "data": {
+        "section_key": "e1_heading",
+        "text": "E1 — Esclarecer"
+      }
+    },
+    {
+      "id": "e1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e1",
+        "text": "Hipótese focal simulada: uma entrada guiada pode reduzir solicitações incompletas para equipes e agentes elegíveis."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-e2",
+      "type": "heading",
+      "data": {
+        "section_key": "e2_heading",
+        "text": "E2 — Estruturar"
+      }
+    },
+    {
+      "id": "e2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e2",
+        "text": "O MVP ilustrativo inclui perguntas condicionais e confirmação de envio. Integrações e automações ficam fora do primeiro recorte."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-e3",
+      "type": "heading",
+      "data": {
+        "section_key": "e3_heading",
+        "text": "E3 — Experimentar"
+      }
+    },
+    {
+      "id": "e3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e3",
+        "text": "Planeja-se um Test Card de compreensão do fluxo e outro de completude da solicitação. Medidas e critérios devem ser fechados antes da coleta real."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-route",
+      "type": "heading",
+      "data": {
+        "section_key": "route_heading",
+        "text": "Rota da solução"
+      }
+    },
+    {
+      "id": "route",
+      "type": "paragraph",
+      "data": {
+        "section_key": "route",
+        "text": "Rota ilustrativa: undecided. A escolha interna, externa ou híbrida depende de capacidade, custo e requisitos ainda não verificados."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "mvp-components",
+      "type": "table",
+      "data": {
+        "title": "Componentes fictícios do MVP",
+        "headers": [
+          "Componente",
+          "Recorte",
+          "Dependência"
+        ],
+        "rows": [
+          [
+            "Perguntas guiadas",
+            "agora",
+            "regras de negócio"
+          ],
+          [
+            "Status em tempo real",
+            "futuro",
+            "integração"
+          ],
+          [
+            "Automação de decisão",
+            "fora",
+            "avaliação posterior"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-three-e-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true
+  }
+}

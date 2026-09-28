@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "five_c_workshop_record",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Registro do workshop 5C",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-c1",
+      "type": "heading",
+      "data": {
+        "section_key": "c1_heading",
+        "text": "C1 — Contextualizar"
+      }
+    },
+    {
+      "id": "c1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c1",
+        "text": "No encontro fictício, a equipe apresentou o desafio e registrou dúvidas sobre origem das devoluções."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-c2",
+      "type": "heading",
+      "data": {
+        "section_key": "c2_heading",
+        "text": "C2 — Compreender"
+      }
+    },
+    {
+      "id": "c2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c2",
+        "text": "Cinco participantes fictícios descreveram etapas que funcionam e dificuldades de acompanhamento. Com três votos por pessoa, foram registrados 15 votos em temas priorizados."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-c3",
+      "type": "heading",
+      "data": {
+        "section_key": "c3_heading",
+        "text": "C3 — Confirmar"
+      }
+    },
+    {
+      "id": "c3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c3",
+        "text": "O grupo simulado descreveu experiência desejada com confirmação clara de envio e status visível, além de critérios observáveis."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-c4",
+      "type": "heading",
+      "data": {
+        "section_key": "c4_heading",
+        "text": "C4 — Cocriar"
+      }
+    },
+    {
+      "id": "c4",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c4",
+        "text": "Ideias individuais fictícias originaram propostas de orientação, formulário guiado e acompanhamento; benefícios são expectativas, não resultados."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-c5",
+      "type": "heading",
+      "data": {
+        "section_key": "c5_heading",
+        "text": "C5 — Conduzir"
+      }
+    },
+    {
+      "id": "c5",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c5",
+        "text": "Cinco participantes fictícios distribuíram dez créditos cada, totalizando 50. O ranking orienta investigação, sem comprovar viabilidade ou impacto."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "themes-votes",
+      "type": "table",
+      "data": {
+        "title": "C2 — temas priorizados, exemplo fictício",
+        "headers": [
+          "Tema",
+          "Votos"
+        ],
+        "rows": [
+          [
+            "Acompanhamento",
+            "6"
+          ],
+          [
+            "Clareza do pedido",
+            "5"
+          ],
+          [
+            "Devoluções",
+            "4"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "proposal-credits",
+      "type": "table",
+      "data": {
+        "title": "C5 — distribuição de 50 créditos fictícios",
+        "headers": [
+          "Proposta",
+          "Créditos",
+          "Próxima verificação"
+        ],
+        "rows": [
+          [
+            "Status visível",
+            "24",
+            "Protótipo"
+          ],
+          [
+            "Formulário guiado",
+            "18",
+            "Teste de tarefa"
+          ],
+          [
+            "Orientação prévia",
+            "8",
+            "Entrevista"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-five-c-workshop-record",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true
+  }
+}

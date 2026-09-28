@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "briefing_improvement_questionnaire",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Briefing Improvement Questionnaire",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "intro",
+      "type": "paragraph",
+      "data": {
+        "text": "Perguntas para fechar lacunas do briefing fictício antes de atribuir escala ao problema."
+      }
+    },
+    {
+      "id": "questions",
+      "type": "list",
+      "data": {
+        "section_key": "questions",
+        "items": [
+          "Qual o volume de solicitações elegíveis por mês e qual é a fonte?",
+          "Que proporção exige devolução por informação ausente, em qual período?",
+          "Quais perfis de agentes e equipes são afetados?",
+          "Quem é responsável pela decisão de prosseguir e quais restrições existem?"
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-briefing-improvement-questionnaire",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "portrait",
+    "sample": true,
+    "briefing_version_id": "sample-briefing-v1",
+    "generation_mode": "gap_driven"
+  }
+}

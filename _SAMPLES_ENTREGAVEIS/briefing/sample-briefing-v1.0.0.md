@@ -1,0 +1,41 @@
+# EXEMPLO FICTÍCIO — Melhorar a experiencia de solicitacoes internas
+
+Amostra fictícia do formato original RC6. Não descreve um projeto real. Briefing estruturado do desafio usado como exemplo neutro do contrato canonico.
+
+## Melhorar a experiencia de solicitacoes internas
+
+Como podemos reduzir o esforco de quem solicita e de quem atende para que as demandas sejam resolvidas com clareza de modo que o processo seja previsivel?
+
+Fontes: FIC-01
+
+Descricao detalhada do problema ou oportunidade
+As solicitacoes chegam por canais diferentes e sem informacoes padronizadas, gerando retrabalho para solicitantes e equipes de atendimento.
+Points: As fontes fornecidas relatam duplicidade de pedidos.; O prazo de atendimento nao e visivel para quem solicita.
+
+Fontes: FIC-01
+
+Justificativa da relevancia
+O problema consome capacidade operacional e reduz a confianca no processo interno.
+Points: A melhoria esta ligada a eficiencia operacional descrita nas fontes.; A previsibilidade influencia a experiencia das equipes envolvidas.
+
+Fontes: FIC-01
+
+Resultados esperados
+Reduzir retrabalho e tornar o andamento das solicitacoes compreensivel.
+Points: Diminuir solicitacoes devolvidas por falta de informacao.; Permitir acompanhamento de status pelo solicitante.
+
+Fontes: FIC-01
+
+Responsavel ainda nao identificado nas fontes.
+Name: Nao informado
+
+Fontes: FIC-01
+
+Sponsor ainda nao identificado nas fontes.
+Name: Nao informado
+
+Fontes: FIC-01
+
+## Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
