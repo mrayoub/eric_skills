@@ -25,7 +25,7 @@ Convenções comuns a todos os planos:
 | 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
 | 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (implementação pronta; bateria antes/depois adiada pelo operador; não bloqueia a execução do 009) |
 | 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | DONE (11 conjuntos, 22 casos, 35 fixtures fictícias; integridade e contas verificadas; linha de base não rodada) |
-| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | TODO |
+| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | IN PROGRESS (piloto pronto para revisão: potencial com 650 palavras; checks locais passaram; comparação comportamental pendente; rollout não iniciado) |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | TODO |
 
@@ -54,6 +54,21 @@ runner corrigido e nova autorização de custo; nenhuma nova chamada de diagnós
 ou bateria será disparada nesta retomada. O plano 009 pode prosseguir, pois não
 depende do 008. A criação e validação estrutural de seus casos não exige chamadas
 de modelo; sua linha de base opcional ficará registrada como não rodada.
+
+Piloto do plano 010: o operador autorizou seu início. Apenas o corpo de
+`potencial-inovacao/SKILL.md` foi reestruturado; frontmatter, cálculo, referências
+e design system preservados. O arquivo passou de 839 para 650 palavras
+(corpo: 740 para 551). O texto prescrito no Step 3, expandido com os blocos
+obrigatórios e o contrato `scores`, somava 723 palavras com frontmatter; os
+passos específicos foram condensados para cumprir também o `wc -w` ≤650,
+mantendo os quatro blocos padrão exatos e as regras do método. A instrução
+adicional do plano 005 registrada em `5ec6644` foi mantida no contrato `scores`.
+Validador da skill, links locais, frontmatter, orçamento e blocos padrão
+verificados; 12 testes de potencial e 7 subtestes passaram; sync verificado.
+Nenhuma chamada de modelo foi feita: a comparação comportamental de dois
+casos contra a tag ainda está pendente. O Step 3 exige revisão do resultado
+do piloto antes do rollout; as outras dez skills e a fusão do Step 5 não foram
+alteradas nesta etapa.
 
 ## Notas de dependência
 
