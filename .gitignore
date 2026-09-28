@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+# Material real de projeto: sensível e grande; nunca versionar
+_SAMPLE/
+_OUTPUTS/

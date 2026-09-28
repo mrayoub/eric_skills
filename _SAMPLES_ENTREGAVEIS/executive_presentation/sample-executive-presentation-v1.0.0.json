@@ -1,0 +1,123 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "context_heading",
+        "text": "Contexto"
+      },
+      "id": "heading-context",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "context",
+        "text": "Exemplo fictício de jornada de solicitações de dados. Hipótese, usuários e escopo são demonstrativos."
+      },
+      "id": "context",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "method_heading",
+        "text": "Método"
+      },
+      "id": "heading-method",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "method",
+        "text": "Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo."
+      },
+      "id": "method",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "findings_heading",
+        "text": "Achados"
+      },
+      "id": "heading-findings",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "findings",
+        "text": "Achado ilustrativo: a orientação reduziu dúvidas no protótipo, mas não existe evidência real de efeito operacional."
+      },
+      "id": "findings",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "recommendation_heading",
+        "text": "Recomendação"
+      },
+      "id": "heading-recommendation",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "recommendation",
+        "text": "Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo."
+      },
+      "id": "recommendation",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "next_steps_heading",
+        "text": "Próximos passos"
+      },
+      "id": "heading-next_steps",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "next_steps",
+        "text": "Consolidar linha de base, fechar Test Cards e executar uma rodada real antes de decidir escala."
+      },
+      "id": "next_steps",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "executive_presentation",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-executive-presentation",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "wide",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Apresentação executiva da rodada"
+}

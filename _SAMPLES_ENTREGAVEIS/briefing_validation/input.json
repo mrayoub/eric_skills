@@ -1,0 +1,445 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "briefing_validation",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Validacao do briefing: solicitacoes internas",
+  "summary": "Amostra fictícia do formato original RC6. Não descreve um projeto real. Exemplo neutro da validacao IQB auditavel consolidada a partir dos ERIC RC1 e RC5.",
+  "blocks": [
+    {
+      "id": "challenge",
+      "type": "table",
+      "data": {
+        "section_key": "challenge",
+        "title": "Melhorar a experiencia de solicitacoes internas",
+        "sponsor": {
+          "name": "Nao informado"
+        },
+        "owner": {
+          "name": "Nao informado"
+        }
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "hmw",
+      "type": "callout",
+      "data": {
+        "section_key": "hmw",
+        "status": "attention",
+        "original": "Como podemos reduzir o esforco de quem solicita e de quem atende?",
+        "analysis": "A formulacao identifica as pessoas e o efeito desejado, mas ainda nao explicita o contexto em que o problema ocorre.",
+        "suggestion": "Como podemos reduzir o esforco de quem solicita e de quem atende para que as demandas sejam resolvidas com clareza de modo que o processo seja previsivel?"
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "scores",
+      "type": "table",
+      "data": {
+        "section_key": "scores",
+        "dimensions": {
+          "clarity": {
+            "items": [
+              {
+                "criterion_id": "CLA-01",
+                "answer": true,
+                "evidence": "O briefing identifica quem solicita e as equipes que atendem.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-02",
+                "answer": true,
+                "evidence": "O texto delimita o problema de solicitacoes incompletas e pouco rastreaveis.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-03",
+                "answer": false,
+                "evidence": "As causas ainda nao foram diferenciadas dos sintomas.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "CLA-04",
+                "answer": true,
+                "evidence": "O problema ocorre na entrada e no acompanhamento das solicitacoes internas.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-05",
+                "answer": true,
+                "evidence": "O fluxo e os atores podem ser compreendidos sem contexto organizacional adicional.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-06",
+                "answer": true,
+                "evidence": "O briefing descreve esforco, retrabalho e previsibilidade, sem prescrever tecnologia.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-07",
+                "answer": false,
+                "evidence": "Nao ha volume, frequencia ou abrangencia quantificada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "CLA-08",
+                "answer": false,
+                "evidence": "O briefing nao registra tentativas anteriores nem declara que nada foi tentado.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "CLA-09",
+                "answer": true,
+                "evidence": "A descricao apresenta contexto, atores e impacto operacional suficientes para iniciar a investigacao.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "CLA-10",
+                "answer": true,
+                "evidence": "Existe um problema real de retrabalho e falta de visibilidade, sem solucao predefinida.",
+                "evidence_source": "briefing"
+              }
+            ],
+            "veto_item_id": "CLA-10",
+            "veto_max_score": 2,
+            "veto_triggered": false,
+            "veto_detail": null,
+            "yes_count": 6,
+            "raw_score": 4,
+            "final_score": 4,
+            "label": "Saudavel",
+            "justification": "O problema e compreensivel e centrado nas pessoas, mas ainda nao possui dimensionamento nem registro das causas e tentativas anteriores."
+          },
+          "evidence": {
+            "items": [
+              {
+                "criterion_id": "EVI-01",
+                "answer": false,
+                "evidence": "Nao ha dado quantitativo no briefing.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-02",
+                "answer": false,
+                "evidence": "Nao existe fonte de dado quantitativo identificada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-03",
+                "answer": true,
+                "evidence": "As fontes relatam devolucoes e repeticao de triagens.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "EVI-04",
+                "answer": true,
+                "evidence": "Os relatos tratam especificamente das solicitacoes internas descritas.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "EVI-05",
+                "answer": false,
+                "evidence": "Nao ha prazo, perda ou risco que demonstre urgencia.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-06",
+                "answer": true,
+                "evidence": "Os relatos de devolucoes e triagens repetidas demonstram que o problema ocorre.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "EVI-07",
+                "answer": false,
+                "evidence": "As fontes ou perspectivas dos relatos nao estao identificadas individualmente.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-08",
+                "answer": false,
+                "evidence": "Os relatos nao possuem periodo de referencia.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-09",
+                "answer": false,
+                "evidence": "O impacto operacional nao foi medido.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "EVI-10",
+                "answer": false,
+                "evidence": "As evidencias nao permitem comparar a prioridade com outros problemas.",
+                "evidence_source": "absent"
+              }
+            ],
+            "veto_item_id": "EVI-06",
+            "veto_max_score": 1,
+            "veto_triggered": false,
+            "veto_detail": null,
+            "yes_count": 2,
+            "raw_score": 2,
+            "final_score": 2,
+            "label": "Fragil",
+            "justification": "Os relatos confirmam a existencia do problema, mas nao ha dados quantitativos, fontes identificadas, periodo ou impacto mensuravel."
+          },
+          "outcomes": {
+            "items": [
+              {
+                "criterion_id": "OUT-01",
+                "answer": true,
+                "evidence": "Reduzir retrabalho e tornar o processo previsivel descrevem mudancas de resultado.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "OUT-02",
+                "answer": false,
+                "evidence": "Nao existe meta quantificada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "OUT-03",
+                "answer": false,
+                "evidence": "Nao existe prazo ou horizonte de verificacao.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "OUT-04",
+                "answer": true,
+                "evidence": "Devolucoes e visibilidade de status podem ser verificadas objetivamente.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "OUT-05",
+                "answer": false,
+                "evidence": "A conexao com uma prioridade estrategica nao foi declarada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "OUT-06",
+                "answer": true,
+                "evidence": "O estado futuro inclui solicitacoes completas, rastreaveis e previsiveis.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "OUT-07",
+                "answer": true,
+                "evidence": "Os resultados nao prescrevem uma funcionalidade ou ferramenta especifica.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "OUT-08",
+                "answer": false,
+                "evidence": "Premissas e restricoes de viabilidade nao foram registradas.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "OUT-09",
+                "answer": false,
+                "evidence": "Nao ha baseline nem metodo de verificacao formalizado.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "OUT-10",
+                "answer": true,
+                "evidence": "Existe pelo menos um outcome definido alem de funcionalidades.",
+                "evidence_source": "briefing"
+              }
+            ],
+            "veto_item_id": "OUT-10",
+            "veto_max_score": 2,
+            "veto_triggered": false,
+            "veto_detail": null,
+            "yes_count": 4,
+            "raw_score": 3,
+            "final_score": 3,
+            "label": "Adequado",
+            "justification": "O briefing descreve um estado futuro verificavel, mas ainda nao define meta, prazo, baseline ou conexao estrategica."
+          },
+          "actionability": {
+            "items": [
+              {
+                "criterion_id": "ACT-01",
+                "answer": true,
+                "evidence": "Uma equipe externa consegue compreender o problema e os atores principais.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "ACT-02",
+                "answer": false,
+                "evidence": "A pessoa responsavel nao foi identificada; a ausencia de cargo nao seria penalizada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-03",
+                "answer": false,
+                "evidence": "O sponsor nao foi identificado; a ausencia de cargo nao seria penalizada.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-04",
+                "answer": false,
+                "evidence": "Restricoes conhecidas ou pendentes nao foram registradas.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-05",
+                "answer": false,
+                "evidence": "O que esta fora do escopo nao foi definido.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-06",
+                "answer": false,
+                "evidence": "Recursos disponiveis ou pendentes nao foram registrados.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-07",
+                "answer": false,
+                "evidence": "Dependencias para iniciar nao foram identificadas.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-08",
+                "answer": false,
+                "evidence": "O nivel de autonomia da equipe nao foi definido nem marcado como pendente.",
+                "evidence_source": "absent"
+              },
+              {
+                "criterion_id": "ACT-09",
+                "answer": true,
+                "evidence": "As sete secoes existem e as pessoas ausentes foram marcadas como nao informadas.",
+                "evidence_source": "briefing"
+              },
+              {
+                "criterion_id": "ACT-10",
+                "answer": true,
+                "evidence": "Ha problema e pessoas afetadas suficientes para iniciar a descoberta.",
+                "evidence_source": "briefing"
+              }
+            ],
+            "veto_item_id": "ACT-10",
+            "veto_max_score": 2,
+            "veto_triggered": false,
+            "veto_detail": null,
+            "yes_count": 2,
+            "raw_score": 2,
+            "final_score": 2,
+            "label": "Fragil",
+            "justification": "A equipe pode iniciar a descoberta, mas responsavel, sponsor, escopo, restricoes, recursos, dependencias e autonomia ainda precisam ser definidos."
+          }
+        },
+        "anti_clustering": {
+          "triggered": false,
+          "original_scores": null,
+          "span": 2,
+          "re_evaluation_notes": null
+        }
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "iqb",
+      "type": "metric",
+      "data": {
+        "section_key": "iqb",
+        "score": 2.8,
+        "classification": "Adequado",
+        "diagnosis": "O briefing permite iniciar a descoberta, mas ainda depende de evidencias mensuraveis e definicoes de governanca e escopo. A clareza e o principal ponto forte. Evidencias e acionabilidade concentram as lacunas prioritarias."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "strengths",
+      "type": "list",
+      "data": {
+        "section_key": "strengths",
+        "items": [
+          "O problema diferencia solicitantes e equipes de atendimento.",
+          "O estado futuro desejado de clareza e previsibilidade esta explicito."
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "gaps",
+      "type": "table",
+      "data": {
+        "section_key": "gaps",
+        "rows": [
+          {
+            "priority": 1,
+            "title": "Evidencias sem linha de base",
+            "problem": "Nao ha volume, tempo, periodo ou fonte consolidada para os relatos de retrabalho.",
+            "impact": "Sem linha de base, o resultado posterior nao podera ser comparado de forma confiavel.",
+            "action": "Consolidar os dados existentes e registrar fonte, periodo e unidade de cada medida.",
+            "tag": "critical"
+          },
+          {
+            "priority": 2,
+            "title": "Governanca e escopo pendentes",
+            "problem": "Responsavel, sponsor, limites do escopo e dependencias nao foram identificados.",
+            "impact": "A descoberta pode comecar, mas decisoes e encaminhamentos ficarao sem donos claros.",
+            "action": "Identificar responsavel e sponsor pelo nome e registrar escopo, restricoes e dependencias conhecidas.",
+            "tag": "critical"
+          },
+          {
+            "priority": 3,
+            "title": "Resultados sem meta e prazo",
+            "problem": "Os outcomes sao compreensiveis, mas nao possuem meta, baseline ou horizonte de verificacao.",
+            "impact": "Nao sera possivel determinar objetivamente quando o resultado foi alcancado.",
+            "action": "Definir uma metrica principal, sua linha de base, meta e prazo de verificacao.",
+            "tag": "warning"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "provocations",
+      "type": "list",
+      "data": {
+        "section_key": "provocations",
+        "items": [
+          "Qual numero precisa mudar para demonstrar que o problema foi resolvido?",
+          "Quais canais e tipos de solicitacao estao dentro e fora do escopo?",
+          "Quem possui autoridade para priorizar mudancas no processo e remover dependencias?"
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    }
+  ],
+  "metadata": {
+    "phase_key": "problem_understanding",
+    "briefing_version_id": "example-briefing-v1",
+    "rubric_version": "1.0.0",
+    "artifact_id": "sample-briefing-validation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "portrait",
+    "sample": true
+  }
+}

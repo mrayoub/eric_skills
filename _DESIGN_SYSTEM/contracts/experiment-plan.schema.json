@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:my-skills:schemas:experiment-plan",
+  "title": "Experiment Plan response schema",
+  "description": "Contrato mínimo das seções obrigatórias para uma versão completa. Versões parciais usam o envelope comum e declaram as lacunas.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "experiment_plan"
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "hypothesis"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "method"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "population"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "measures"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "protocol"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "guardrails"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

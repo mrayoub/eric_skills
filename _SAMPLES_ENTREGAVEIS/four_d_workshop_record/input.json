@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "four_d_workshop_record",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Registro do workshop 4D",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-d1",
+      "type": "heading",
+      "data": {
+        "section_key": "d1_heading",
+        "text": "D1 — Descongelar"
+      }
+    },
+    {
+      "id": "d1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d1",
+        "text": "Participantes fictícios relataram incerteza sobre o andamento das solicitações e divergiram sobre a principal causa."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-d2",
+      "type": "heading",
+      "data": {
+        "section_key": "d2_heading",
+        "text": "D2 — Diagnosticar"
+      }
+    },
+    {
+      "id": "d2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d2",
+        "text": "A jornada simulada mostra campos incompletos na entrada, devoluções e ausência de status visível. Não há linha de base real."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-d3",
+      "type": "heading",
+      "data": {
+        "section_key": "d3_heading",
+        "text": "D3 — Desenhar"
+      }
+    },
+    {
+      "id": "d3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d3",
+        "text": "Foram simuladas três alternativas: orientação prévia, formulário guiado e painel de status; cada uma responde a uma parte da dor."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-d4",
+      "type": "heading",
+      "data": {
+        "section_key": "d4_heading",
+        "text": "D4 — Decidir"
+      }
+    },
+    {
+      "id": "d4",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d4",
+        "text": "O grupo fictício priorizou investigar o formulário guiado. O voto exemplifica preferência do grupo, não valida eficácia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "alternatives",
+      "type": "table",
+      "data": {
+        "title": "D3/D4 — alternativas fictícias",
+        "headers": [
+          "Alternativa",
+          "Dor",
+          "Prioridade do grupo"
+        ],
+        "rows": [
+          [
+            "Formulário guiado",
+            "entrada incompleta",
+            "1"
+          ],
+          [
+            "Status visível",
+            "incerteza",
+            "2"
+          ],
+          [
+            "Orientação prévia",
+            "dúvidas iniciais",
+            "3"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-four-d-workshop-record",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true
+  }
+}

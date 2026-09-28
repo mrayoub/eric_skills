@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "innovation_potential_assessment",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Avaliação de potencial de inovação",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-impact",
+      "type": "heading",
+      "data": {
+        "section_key": "impact_heading",
+        "text": "Impacto"
+      }
+    },
+    {
+      "id": "impact",
+      "type": "paragraph",
+      "data": {
+        "section_key": "impact",
+        "text": "No cenário simulado, solicitações de dados exigem retrabalho. A magnitude real ainda teria de ser medida; a pontuação de exemplo serve apenas para testar o layout."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-feasibility",
+      "type": "heading",
+      "data": {
+        "section_key": "feasibility_heading",
+        "text": "Viabilidade"
+      }
+    },
+    {
+      "id": "feasibility",
+      "type": "paragraph",
+      "data": {
+        "section_key": "feasibility",
+        "text": "Uma triagem guiada parece tecnicamente possível, mas integração, responsáveis e custo permanecem hipóteses."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-alignment",
+      "type": "heading",
+      "data": {
+        "section_key": "alignment_heading",
+        "text": "Alinhamento"
+      }
+    },
+    {
+      "id": "alignment",
+      "type": "paragraph",
+      "data": {
+        "section_key": "alignment",
+        "text": "A proposta ilustrativa busca reduzir esforço de atendimento e dar previsibilidade à jornada."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-urgency",
+      "type": "heading",
+      "data": {
+        "section_key": "urgency_heading",
+        "text": "Urgência"
+      }
+    },
+    {
+      "id": "urgency",
+      "type": "paragraph",
+      "data": {
+        "section_key": "urgency",
+        "text": "O exemplo considera prioridade moderada, sem transformar preferência de participantes em urgência institucional comprovada."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-novelty",
+      "type": "heading",
+      "data": {
+        "section_key": "novelty_heading",
+        "text": "Novidade"
+      }
+    },
+    {
+      "id": "novelty",
+      "type": "paragraph",
+      "data": {
+        "section_key": "novelty",
+        "text": "A ideia combina orientações e acompanhamento em uma jornada única; a novidade relativa dependeria de comparação com soluções existentes."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-recommendation",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendation_heading",
+        "text": "Recomendação"
+      }
+    },
+    {
+      "id": "recommendation",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendation",
+        "text": "Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "scores",
+      "type": "table",
+      "data": {
+        "title": "Pontuação ilustrativa, sem avaliação real",
+        "headers": [
+          "Critério",
+          "Nota simulada"
+        ],
+        "rows": [
+          [
+            "Impacto",
+            "60"
+          ],
+          [
+            "Viabilidade",
+            "45"
+          ],
+          [
+            "Alinhamento",
+            "70"
+          ],
+          [
+            "Urgência",
+            "40"
+          ],
+          [
+            "Novidade",
+            "55"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-02"
+      ],
+      "export": {
+        "csv": true,
+        "variant_key": "pontuacoes"
+      }
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-innovation-potential-assessment",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "portrait",
+    "sample": true
+  }
+}

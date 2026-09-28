@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "innovation_scorecard",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Scorecard de maturidade das evidências",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "heading-alignment_opportunity",
+      "type": "heading",
+      "data": {
+        "section_key": "alignment_opportunity_heading",
+        "text": "Alinhamento e oportunidade"
+      }
+    },
+    {
+      "id": "alignment_opportunity",
+      "type": "paragraph",
+      "data": {
+        "section_key": "alignment_opportunity",
+        "text": "O caso fictício tem problema formulado e público definido, mas o potencial institucional não foi validado por fonte real."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-risk_reduction",
+      "type": "heading",
+      "data": {
+        "section_key": "risk_reduction_heading",
+        "text": "Redução de riscos"
+      }
+    },
+    {
+      "id": "risk_reduction",
+      "type": "paragraph",
+      "data": {
+        "section_key": "risk_reduction",
+        "text": "A evidência simulada equivale a relato e reação a conceito; não demonstra uso em produção, efeito ou viabilidade econômica."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-next_gate",
+      "type": "heading",
+      "data": {
+        "section_key": "next_gate_heading",
+        "text": "Próximo gate"
+      }
+    },
+    {
+      "id": "next_gate",
+      "type": "paragraph",
+      "data": {
+        "section_key": "next_gate",
+        "text": "Antes de avançar, obter linha de base, testar o fluxo com público elegível e confirmar dependências operacionais."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "risk-table",
+      "type": "table",
+      "data": {
+        "title": "Força das evidências — exemplo",
+        "headers": [
+          "Dimensão",
+          "Estado",
+          "Lacuna"
+        ],
+        "rows": [
+          [
+            "Desejabilidade",
+            "relato simulado",
+            "uso real"
+          ],
+          [
+            "Viabilidade",
+            "não avaliada",
+            "custo e operação"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "export": {
+        "csv": true,
+        "variant_key": "dimensoes"
+      }
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-innovation-scorecard",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true
+  }
+}

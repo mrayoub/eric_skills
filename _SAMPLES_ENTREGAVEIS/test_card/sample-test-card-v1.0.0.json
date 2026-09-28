@@ -1,0 +1,63 @@
+{
+  "blocks": [
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "hypothesis",
+        "text": "Acreditamos que o fluxo guiado permitirá que perfis elegíveis concluam a solicitação sem ajuda."
+      },
+      "id": "hypothesis",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "test",
+        "text": "Para verificar, vamos observar cinco tarefas fictícias no mesmo protótipo, com instruções neutras e registro de ajuda."
+      },
+      "id": "test",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "measure",
+        "text": "Vamos contar tarefas concluídas sem ajuda / cinco tarefas elegíveis e registrar falhas críticas por sessão."
+      },
+      "id": "measure",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "criteria",
+        "text": "Estaremos certos se ao menos quatro de cinco concluírem sem ajuda e nenhuma falha crítica ocorrer. Este limiar é apenas demonstrativo."
+      },
+      "id": "criteria",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "test_card",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-test-card",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "portrait",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Test Card TC-01"
+}

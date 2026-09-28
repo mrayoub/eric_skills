@@ -1,0 +1,103 @@
+{
+  "blocks": [
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "hmw",
+        "text": "Como podemos tornar as solicitações mais claras e rastreáveis?"
+      },
+      "id": "hmw",
+      "type": "callout"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "Solicitacoes chegam por canais diferentes e sem informacoes padronizadas.",
+        "layout": "column",
+        "points": [
+          "Ha devolucoes por falta de informacao."
+        ],
+        "section_key": "problem_opportunity",
+        "title": "Problema ou oportunidade"
+      },
+      "id": "problem-opportunity",
+      "type": "callout"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "O problema reduz a eficiencia operacional e a confianca no processo interno.",
+        "layout": "column",
+        "points": [
+          "O retrabalho consome capacidade das equipes."
+        ],
+        "section_key": "business_relevance",
+        "title": "Relevancia"
+      },
+      "id": "business-relevance",
+      "type": "callout"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "Tornar as solicitacoes completas, rastreaveis e previsiveis.",
+        "layout": "column",
+        "points": [
+          "Reduzir devolucoes por falta de informacao."
+        ],
+        "section_key": "expected_outcomes",
+        "title": "Resultados esperados"
+      },
+      "id": "expected-outcomes",
+      "type": "callout"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "responsibles": [
+          "Nao informado"
+        ],
+        "section_key": "people",
+        "sponsor": "Nao informado"
+      },
+      "id": "people",
+      "type": "table"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    }
+  ],
+  "deliverable_type": "briefing_one_page",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-briefing-one-page",
+    "briefing_version_id": "example-briefing-v1",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "layout_variant": "executive_one_page",
+    "orientation": "landscape",
+    "page_size": "A4",
+    "phase_key": "problem_understanding",
+    "sample": true,
+    "source_version_ids": [
+      "example-validation-v1"
+    ]
+  },
+  "schema_version": "1.0.0",
+  "summary": "Dados fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Síntese do briefing"
+}

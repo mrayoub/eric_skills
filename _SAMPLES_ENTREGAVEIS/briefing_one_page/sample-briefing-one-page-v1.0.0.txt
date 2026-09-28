@@ -1,0 +1,36 @@
+EXEMPLO FICTÍCIO — Síntese do briefing
+
+Dados fictícios.
+
+Como podemos tornar as solicitações mais claras e rastreáveis?
+
+Fontes: FIC-01
+
+Problema ou oportunidade
+Solicitacoes chegam por canais diferentes e sem informacoes padronizadas.
+Points: Ha devolucoes por falta de informacao.
+
+Fontes: FIC-01
+
+Relevancia
+O problema reduz a eficiencia operacional e a confianca no processo interno.
+Points: O retrabalho consome capacidade das equipes.
+
+Fontes: FIC-01
+
+Resultados esperados
+Tornar as solicitacoes completas, rastreaveis e previsiveis.
+Points: Reduzir devolucoes por falta de informacao.
+
+Fontes: FIC-01
+
+| Campo | Valor |
+| --- | --- |
+| Responsibles | Nao informado |
+| Sponsor | Nao informado |
+
+Fontes: FIC-01
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real

@@ -1,0 +1,44 @@
+# EXEMPLO FICTÍCIO — Plano de experimentação
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+## Hipótese
+
+Hipótese simulada: a entrada guiada melhora a completude das solicitações sem elevar o tempo de preenchimento.
+
+Fontes: FIC-01
+
+## Método
+
+Teste moderado de tarefa para compreensão, seguido de piloto controlado para observar completude e tempo. Nenhuma coleta ocorreu neste exemplo.
+
+Fontes: FIC-01
+
+## Público e elegibilidade
+
+Amostra ilustrativa de perfis diferentes; critérios de elegibilidade e exclusão devem ser definidos antes do recrutamento real.
+
+Fontes: FIC-01
+
+## Medidas
+
+Completude por solicitação elegível; tempo em minutos; necessidade de ajuda por tarefa. Fontes, fórmulas e janelas seriam registradas no protocolo.
+
+Fontes: FIC-01
+
+## Protocolo
+
+Apresentar cenário neutro, registrar ação e ajuda, verificar dados gerados e preservar desvios. Critérios de leitura seriam fechados antes da execução.
+
+Fontes: FIC-01
+
+## Guardrails
+
+Interromper exposição diante de erro que possa afetar operação ou dados; usar ambiente controlado no piloto.
+
+Fontes: FIC-01
+
+## Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

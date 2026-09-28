@@ -1,0 +1,26 @@
+EXEMPLO FICTÍCIO — Test Card TC-01
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+1. Acreditamos que — hipótese
+
+Acreditamos que o fluxo guiado permitirá que perfis elegíveis concluam a solicitação sem ajuda.
+
+Fontes: FIC-01
+
+2. Para verificar, vamos — teste
+
+Para verificar, vamos observar cinco tarefas fictícias no mesmo protótipo, com instruções neutras e registro de ajuda.
+
+3. Vamos medir — medida
+
+Vamos contar tarefas concluídas sem ajuda / cinco tarefas elegíveis e registrar falhas críticas por sessão.
+
+4. Estaremos certos se — critério
+
+Estaremos certos se ao menos quatro de cinco concluírem sem ajuda e nenhuma falha crítica ocorrer. Este limiar é apenas demonstrativo.
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

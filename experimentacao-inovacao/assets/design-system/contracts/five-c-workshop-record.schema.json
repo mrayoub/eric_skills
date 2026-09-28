@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:my-skills:schemas:five-c-workshop-record",
+  "title": "Five C Workshop Record response schema",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "five_c_workshop_record"
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "c1"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "c2"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "c3"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "c4"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "c5"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  }
+                }
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "four_d_report",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Four D Report",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "h-cover",
+      "type": "heading",
+      "data": {
+        "section_key": "cover",
+        "text": "Desafio e escopo"
+      }
+    },
+    {
+      "id": "cover-context",
+      "type": "callout",
+      "data": {
+        "text": "Cenário demonstrativo: solicitações com informações incompletas, devoluções e pouca visibilidade de status. Todos os registros desta amostra são fictícios."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "cover-overview",
+      "type": "card_grid",
+      "data": {
+        "title": "Leitura inicial",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Desafio",
+            "text": "Compreender onde a jornada perde clareza.",
+            "tone": "blue"
+          },
+          {
+            "title": "Escopo",
+            "text": "Workshop simulado; sem operação real.",
+            "tone": "neutral"
+          },
+          {
+            "title": "Limite",
+            "text": "Sem linha de base ou resultado de teste.",
+            "tone": "red"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-d1_d2_diagnosis",
+      "type": "heading",
+      "data": {
+        "section_key": "d1_d2_diagnosis",
+        "text": "D1–D2 — Percepções e diagnóstico"
+      }
+    },
+    {
+      "id": "d1-signals",
+      "type": "card_grid",
+      "data": {
+        "title": "Sinais registrados",
+        "columns": 4,
+        "cards": [
+          {
+            "title": "Percepção",
+            "text": "Há incerteza sobre o andamento das solicitações.",
+            "tone": "blue"
+          },
+          {
+            "title": "Causas",
+            "text": "Participantes divergiram sobre a causa dominante.",
+            "tone": "yellow"
+          },
+          {
+            "title": "Evidência",
+            "text": "Relatos do exercício simulado.",
+            "tone": "neutral"
+          },
+          {
+            "title": "Lacuna",
+            "text": "Não há frequência medida no processo real.",
+            "tone": "red"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "d1-questions",
+      "type": "card_grid",
+      "data": {
+        "title": "Questões para investigação",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Entrada",
+            "text": "Quais campos chegam incompletos e por quê?",
+            "tone": "blue"
+          },
+          {
+            "title": "Acompanhamento",
+            "text": "Que informação de status falta ao solicitante?",
+            "tone": "blue"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-d2_process_journey",
+      "type": "heading",
+      "data": {
+        "section_key": "d2_process_journey",
+        "text": "Jornada do processo"
+      }
+    },
+    {
+      "id": "d2-journey",
+      "type": "card_grid",
+      "data": {
+        "title": "Jornada tabulada",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Antes",
+            "text": "Orientação prévia e preparo da solicitação.",
+            "tone": "blue"
+          },
+          {
+            "title": "Durante",
+            "text": "Preenchimento, conferência e possível devolução.",
+            "tone": "neutral"
+          },
+          {
+            "title": "Depois",
+            "text": "Acompanhamento do status e conclusão.",
+            "tone": "green"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "d2-frictions",
+      "type": "card_grid",
+      "data": {
+        "title": "Pontos de atenção",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Entrada incompleta",
+            "text": "Campos ausentes geram retrabalho na narrativa simulada.",
+            "tone": "red"
+          },
+          {
+            "title": "Status pouco visível",
+            "text": "A pessoa não sabe em que etapa a solicitação está.",
+            "tone": "yellow"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-d3_strategic_consolidation",
+      "type": "heading",
+      "data": {
+        "section_key": "d3_strategic_consolidation",
+        "text": "Alternativas"
+      }
+    },
+    {
+      "id": "d3-ideas",
+      "type": "card_grid",
+      "data": {
+        "title": "Alternativas vinculadas às dores",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Orientação prévia",
+            "text": "Pode esclarecer requisitos antes do pedido.",
+            "tone": "blue"
+          },
+          {
+            "title": "Formulário guiado",
+            "text": "Pode ajudar a preencher campos críticos.",
+            "tone": "yellow"
+          },
+          {
+            "title": "Painel de status",
+            "text": "Pode dar visibilidade ao andamento.",
+            "tone": "green"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "d3-impact",
+      "type": "card_grid",
+      "data": {
+        "title": "Leitura das alternativas",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Incremental",
+            "text": "Melhorar orientação existente.",
+            "tone": "blue"
+          },
+          {
+            "title": "Fluxo",
+            "text": "Apoiar o preenchimento.",
+            "tone": "yellow"
+          },
+          {
+            "title": "Visibilidade",
+            "text": "Expor etapas e pendências.",
+            "tone": "green"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-d4_prioritization",
+      "type": "heading",
+      "data": {
+        "section_key": "d4_prioritization",
+        "text": "Priorização"
+      }
+    },
+    {
+      "id": "d4-options",
+      "type": "card_grid",
+      "data": {
+        "title": "Prioridade do grupo fictício",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Selecionada",
+            "text": "Investigar formulário guiado.",
+            "tone": "blue"
+          },
+          {
+            "title": "Critério conhecido",
+            "text": "Preferência do grupo no exercício.",
+            "tone": "neutral"
+          },
+          {
+            "title": "Não demonstrado",
+            "text": "Adoção, eficácia e impacto não foram testados.",
+            "tone": "red"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "d4-table",
+      "type": "table",
+      "data": {
+        "title": "O que a priorização permite concluir",
+        "headers": [
+          "Dimensão",
+          "Registro",
+          "Limite"
+        ],
+        "rows": [
+          [
+            "Escolha",
+            "Formulário guiado para investigação",
+            "Não equivale a solução aprovada"
+          ],
+          [
+            "Base",
+            "Discussão e voto simulados",
+            "Sem denominador real"
+          ],
+          [
+            "Próximo teste",
+            "Definir hipótese, métrica e critério",
+            "Ainda não executado"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "Conclusão e próximos passos"
+      }
+    },
+    {
+      "id": "conclusion-callout",
+      "type": "callout",
+      "data": {
+        "text": "Recomendação metodológica: medir volumes e causas reais antes de assumir eficácia ou iniciar construção. Nenhuma decisão real foi tomada nesta amostra."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "conclusion-actions",
+      "type": "card_grid",
+      "data": {
+        "title": "Próximos passos rastreáveis",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "Medir",
+            "text": "Levantar frequência de devoluções e campos faltantes.",
+            "tone": "blue"
+          },
+          {
+            "title": "Testar",
+            "text": "Desenhar experimento do formulário guiado com KPI prévio.",
+            "tone": "blue"
+          },
+          {
+            "title": "Decidir",
+            "text": "Revisar a prioridade após evidência observada.",
+            "tone": "green"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-four-d-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "landscape",
+    "sample": true,
+    "method_key": "4d",
+    "method_run_id": "sample-4d-run",
+    "completion_stage": "d4_decide",
+    "execution_mode": "post_workshop"
+  }
+}

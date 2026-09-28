@@ -1,0 +1,117 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "challenge_title",
+        "text": "Melhorar a experiencia de solicitacoes internas"
+      },
+      "id": "challenge-title",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "challenge",
+        "text": "Como podemos reduzir o esforco de quem solicita e de quem atende para que as demandas sejam resolvidas com clareza de modo que o processo seja previsivel?"
+      },
+      "id": "challenge",
+      "type": "callout"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "As solicitacoes chegam por canais diferentes e sem informacoes padronizadas, gerando retrabalho para solicitantes e equipes de atendimento.",
+        "points": [
+          "As fontes fornecidas relatam duplicidade de pedidos.",
+          "O prazo de atendimento nao e visivel para quem solicita."
+        ],
+        "section_key": "problem_opportunity",
+        "title": "Descricao detalhada do problema ou oportunidade"
+      },
+      "id": "problem-opportunity",
+      "type": "rich_text"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "O problema consome capacidade operacional e reduz a confianca no processo interno.",
+        "points": [
+          "A melhoria esta ligada a eficiencia operacional descrita nas fontes.",
+          "A previsibilidade influencia a experiencia das equipes envolvidas."
+        ],
+        "section_key": "business_relevance",
+        "title": "Justificativa da relevancia"
+      },
+      "id": "business-relevance",
+      "type": "rich_text"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "Reduzir retrabalho e tornar o andamento das solicitacoes compreensivel.",
+        "points": [
+          "Diminuir solicitacoes devolvidas por falta de informacao.",
+          "Permitir acompanhamento de status pelo solicitante."
+        ],
+        "section_key": "expected_outcomes",
+        "title": "Resultados esperados"
+      },
+      "id": "expected-outcomes",
+      "type": "rich_text"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "Responsavel ainda nao identificado nas fontes.",
+        "name": "Nao informado",
+        "section_key": "responsible"
+      },
+      "id": "responsible",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "description": "Sponsor ainda nao identificado nas fontes.",
+        "name": "Nao informado",
+        "section_key": "sponsor"
+      },
+      "id": "sponsor",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    }
+  ],
+  "deliverable_type": "briefing",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-briefing",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "generation_mode": "structured",
+    "orientation": "portrait",
+    "phase_key": "problem_understanding",
+    "sample": true,
+    "source_version_ids": []
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra fictícia do formato original RC6. Não descreve um projeto real. Briefing estruturado do desafio usado como exemplo neutro do contrato canonico.",
+  "title": "EXEMPLO FICTÍCIO — Melhorar a experiencia de solicitacoes internas"
+}

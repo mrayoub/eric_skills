@@ -1,0 +1,109 @@
+{
+  "profile_version": "1.2.0",
+  "default_formats": [
+    "json",
+    "pdf",
+    "docx",
+    "md",
+    "txt"
+  ],
+  "types": {
+    "briefing": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "briefing.schema.json"
+    },
+    "briefing_one_page": {
+      "layout": "executive_one_page",
+      "paper": "a4_landscape",
+      "schema": "briefing-one-page.schema.json"
+    },
+    "briefing_improvement_questionnaire": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "briefing-improvement-questionnaire.schema.json"
+    },
+    "briefing_validation": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "briefing-validation-report.schema.json"
+    },
+    "innovation_potential_assessment": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "innovation-potential-assessment.schema.json"
+    },
+    "four_d_workshop_record": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "four-d-workshop-record.schema.json"
+    },
+    "four_d_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "four-d-report.schema.json"
+    },
+    "three_e_workshop_record": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "three-e-workshop-record.schema.json"
+    },
+    "three_e_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "three-e-report.schema.json"
+    },
+    "innovation_scorecard": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "innovation-scorecard.schema.json"
+    },
+    "experiment_plan": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "experiment-plan.schema.json"
+    },
+    "test_card": {
+      "layout": "card_portrait",
+      "paper": "a4_portrait",
+      "schema": "test-card.schema.json"
+    },
+    "learning_card": {
+      "layout": "card_portrait",
+      "paper": "a4_portrait",
+      "schema": "learning-card.schema.json"
+    },
+    "experiment_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "experiment-report.schema.json"
+    },
+    "evidence_recommendation": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "evidence-recommendation.schema.json"
+    },
+    "executive_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "formats": [
+        "json",
+        "pdf",
+        "pptx",
+        "md",
+        "txt"
+      ],
+      "schema": "executive-presentation.schema.json"
+    },
+    "five_c_workshop_record": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "five-c-workshop-record.schema.json"
+    },
+    "five_c_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "five-c-report.schema.json"
+    }
+  }
+}

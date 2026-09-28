@@ -1,0 +1,150 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "question_heading",
+        "text": "Pergunta de decisão"
+      },
+      "id": "heading-question",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "question",
+        "text": "A evidência disponível autoriza ampliar a solução ou recomenda nova verificação?"
+      },
+      "id": "question",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "evidence_heading",
+        "text": "Evidências"
+      },
+      "id": "heading-evidence",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "evidence",
+        "text": "Fontes FIC-01 e FIC-02 são simuladas. Em um projeto real, cada fala, evento e medida precisaria de localização verificável."
+      },
+      "id": "evidence",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "options_heading",
+        "text": "Alternativas"
+      },
+      "id": "heading-options",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "options",
+        "text": "Alternativas ilustrativas: novo teste com fluxo ajustado, piloto controlado ou pausa para melhorar dados e integração."
+      },
+      "id": "options",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "recommendation_heading",
+        "text": "Recomendação"
+      },
+      "id": "heading-recommendation",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "recommendation",
+        "text": "Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo."
+      },
+      "id": "recommendation",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "conditions_heading",
+        "text": "Condições"
+      },
+      "id": "heading-conditions",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "conditions",
+        "text": "Avançar somente após critérios verificatórios, guardrails, responsáveis e evidências de operação serem documentados."
+      },
+      "id": "conditions",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "headers": [
+          "Opção",
+          "Evidência necessária",
+          "Decisão demonstrativa"
+        ],
+        "rows": [
+          [
+            "Escalar",
+            "efeito e operação",
+            "não sustentada"
+          ],
+          [
+            "Iterar",
+            "novo teste",
+            "recomendada apenas no cenário fictício"
+          ]
+        ],
+        "title": "Alternativas ilustrativas"
+      },
+      "id": "options-table",
+      "type": "table"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "evidence_recommendation",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-evidence-recommendation",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "landscape",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO — Síntese de evidências e recomendação"
+}

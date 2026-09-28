@@ -1,0 +1,21 @@
+{
+  "artifact_id": "sample-learning-card",
+  "branding_version": "1.0.0",
+  "content_sha256": "a4e28343521aa90072b4f1d21de17304e47251ada0832c62978366390faa9792",
+  "content_version": "1.0.0",
+  "deliverable_type": "learning_card",
+  "files": {
+    "sample-learning-card-v1.0.0.docx": "5e997046c96243b08f7fe2171df77518eb7f7c2f744272decf7e65f07babc840",
+    "sample-learning-card-v1.0.0.html": "7839852b7b2b9696f32bd00fad9eafe877a395d99af7ae70b33d8058e9be5616",
+    "sample-learning-card-v1.0.0.json": "a4e28343521aa90072b4f1d21de17304e47251ada0832c62978366390faa9792",
+    "sample-learning-card-v1.0.0.md": "c3de724149c1cb6d952f7d7bf342f8bd7abb732c7d93072a89f0465e749e8243",
+    "sample-learning-card-v1.0.0.pdf": "ff03176d3922b08e3d32668a49e15693d45ab118dd6de325fa27f364a1ed46e1",
+    "sample-learning-card-v1.0.0.txt": "55859ec95d569d7cb8581e355eb364acd7da14e842b1470bd4cc8854397b2c6b"
+  },
+  "layout": "card_portrait",
+  "paper": "a4_portrait",
+  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_version": "1.2.0",
+  "renderer_version": "1.2.0",
+  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+}

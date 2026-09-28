@@ -1,0 +1,125 @@
+EXEMPLO FICTÍCIO — Four D Report
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+Desafio e escopo
+
+Cenário demonstrativo: solicitações com informações incompletas, devoluções e pouca visibilidade de status. Todos os registros desta amostra são fictícios.
+
+Fontes: FIC-01
+
+Leitura inicial
+
+| Card | Conteúdo |
+| --- | --- |
+| Desafio | Desafio — Compreender onde a jornada perde clareza. |
+| Escopo | Escopo — Workshop simulado; sem operação real. |
+| Limite | Limite — Sem linha de base ou resultado de teste. |
+
+Fontes: FIC-01
+
+D1–D2 — Percepções e diagnóstico
+
+Sinais registrados
+
+| Card | Conteúdo |
+| --- | --- |
+| Percepção | Percepção — Há incerteza sobre o andamento das solicitações. |
+| Causas | Causas — Participantes divergiram sobre a causa dominante. |
+| Evidência | Evidência — Relatos do exercício simulado. |
+| Lacuna | Lacuna — Não há frequência medida no processo real. |
+
+Fontes: FIC-01
+
+Questões para investigação
+
+| Card | Conteúdo |
+| --- | --- |
+| Entrada | Entrada — Quais campos chegam incompletos e por quê? |
+| Acompanhamento | Acompanhamento — Que informação de status falta ao solicitante? |
+
+Fontes: FIC-01
+
+Jornada do processo
+
+Jornada tabulada
+
+| Card | Conteúdo |
+| --- | --- |
+| Antes | Antes — Orientação prévia e preparo da solicitação. |
+| Durante | Durante — Preenchimento, conferência e possível devolução. |
+| Depois | Depois — Acompanhamento do status e conclusão. |
+
+Fontes: FIC-01
+
+Pontos de atenção
+
+| Card | Conteúdo |
+| --- | --- |
+| Entrada incompleta | Entrada incompleta — Campos ausentes geram retrabalho na narrativa simulada. |
+| Status pouco visível | Status pouco visível — A pessoa não sabe em que etapa a solicitação está. |
+
+Fontes: FIC-01
+
+Alternativas
+
+Alternativas vinculadas às dores
+
+| Card | Conteúdo |
+| --- | --- |
+| Orientação prévia | Orientação prévia — Pode esclarecer requisitos antes do pedido. |
+| Formulário guiado | Formulário guiado — Pode ajudar a preencher campos críticos. |
+| Painel de status | Painel de status — Pode dar visibilidade ao andamento. |
+
+Fontes: FIC-01
+
+Leitura das alternativas
+
+| Card | Conteúdo |
+| --- | --- |
+| Incremental | Incremental — Melhorar orientação existente. |
+| Fluxo | Fluxo — Apoiar o preenchimento. |
+| Visibilidade | Visibilidade — Expor etapas e pendências. |
+
+Fontes: FIC-01
+
+Priorização
+
+Prioridade do grupo fictício
+
+| Card | Conteúdo |
+| --- | --- |
+| Selecionada | Selecionada — Investigar formulário guiado. |
+| Critério conhecido | Critério conhecido — Preferência do grupo no exercício. |
+| Não demonstrado | Não demonstrado — Adoção, eficácia e impacto não foram testados. |
+
+Fontes: FIC-01
+
+| Dimensão | Registro | Limite |
+| --- | --- | --- |
+| Escolha | Formulário guiado para investigação | Não equivale a solução aprovada |
+| Base | Discussão e voto simulados | Sem denominador real |
+| Próximo teste | Definir hipótese, métrica e critério | Ainda não executado |
+
+Fontes: FIC-01
+
+Conclusão e próximos passos
+
+Recomendação metodológica: medir volumes e causas reais antes de assumir eficácia ou iniciar construção. Nenhuma decisão real foi tomada nesta amostra.
+
+Fontes: FIC-01
+
+Próximos passos rastreáveis
+
+| Card | Conteúdo |
+| --- | --- |
+| Medir | Medir — Levantar frequência de devoluções e campos faltantes. |
+| Testar | Testar — Desenhar experimento do formulário guiado com KPI prévio. |
+| Decidir | Decidir — Revisar a prioridade após evidência observada. |
+
+Fontes: FIC-01
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

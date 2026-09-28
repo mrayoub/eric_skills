@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eric:schemas:four-d-report",
+  "title": "ERIC Four-D Report",
+  "description": "Contrato especializado do entregavel oficial Relatorio 4D.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "four_d_report"
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "method_key",
+            "method_run_id",
+            "completion_stage",
+            "execution_mode"
+          ],
+          "properties": {
+            "phase_key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Contexto opcional da fase registrada; não controla o uso da skill."
+            },
+            "covered_phase_keys": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "method_key": {
+              "const": "4d"
+            },
+            "method_run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "completion_stage": {
+              "const": "d4_decide"
+            },
+            "breakpoint_review_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "execution_mode": {
+              "enum": [
+                "post_workshop",
+                "asynchronous_analysis"
+              ]
+            }
+          }
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "$ref": "#/$defs/coverHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/d1d2Heading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/journeyHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/designHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/decisionHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/conclusionHeading"
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sectionHeading": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "properties": {
+        "type": {
+          "const": "heading"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "section_key"
+          ]
+        }
+      }
+    },
+    "coverHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "cover"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "d1d2Heading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "d1_d2_diagnosis"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "journeyHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "d2_process_journey"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "designHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "d3_strategic_consolidation"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "decisionHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "d4_prioritization"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "conclusionHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "conclusion"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

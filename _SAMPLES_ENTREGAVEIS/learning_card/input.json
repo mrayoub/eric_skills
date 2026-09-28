@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "learning_card",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO — Learning Card LC-01",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "blocks": [
+    {
+      "id": "hypothesis",
+      "type": "paragraph",
+      "data": {
+        "section_key": "hypothesis",
+        "text": "Acreditávamos que pelo menos quatro de cinco concluiriam sem ajuda, sem falha crítica, conforme TC-01 fictício."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "observations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "observations",
+        "text": "Observamos no exemplo simulado três de cinco tarefas concluídas sem ajuda; duas exigiram ajuda no campo de classificação. Nenhuma falha crítica foi registrada."
+      },
+      "citation_ids": [
+        "FIC-01",
+        "FIC-02"
+      ]
+    },
+    {
+      "id": "learning",
+      "type": "paragraph",
+      "data": {
+        "section_key": "learning",
+        "text": "Aprendemos que o critério fictício de quatro de cinco não foi atingido. A amostra pequena aponta problema de compreensão, sem demonstrar efeito populacional ou operacional."
+      }
+    },
+    {
+      "id": "action",
+      "type": "paragraph",
+      "data": {
+        "section_key": "action",
+        "text": "Portanto, vamos revisar o rótulo e executar novo teste com critério definido antes da coleta real."
+      }
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada-5c",
+      "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-02",
+      "source_id": "planilha-simulada",
+      "locator": "exemplo fictício, sem dados reais"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-learning-card",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "portrait",
+    "sample": true
+  }
+}

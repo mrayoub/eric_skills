@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:my-skills:schemas:evidence-recommendation",
+  "title": "Evidence Recommendation response schema",
+  "description": "Contrato mínimo das seções obrigatórias para uma versão completa. Versões parciais usam o envelope comum e declaram as lacunas.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "evidence_recommendation"
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "question"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "evidence"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "options"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "recommendation"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "conditions"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
