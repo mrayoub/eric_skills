@@ -11,5 +11,6 @@ código 1 lista as divergências. Para visualizar as ações sem alterar arquivo
 use `python3 _TOOLS/sync_shared.py --dry-run`.
 
 A sincronização remove arquivos excedentes do design system e lixo dos pacotes.
-`levantamento-documental-e-grilling.md` é atualizado somente nas skills em que
-já existe, preservando as ausências intencionais.
+O levantamento documental foi incorporado ao protocolo comum de grilling.
+A sincronização também remove as cópias aposentadas dessa referência, mantendo
+`grilling-operacional.md` como fonte única nas onze skills.
