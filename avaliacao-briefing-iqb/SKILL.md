@@ -5,36 +5,63 @@ description: "Avalia a qualidade de um briefing de inovação pela rubrica IQB d
 
 # Avaliação de briefing pelo IQB
 
-Esta skill reescreve `validate-briefing` do ERIC_RC6. O IQB é uma rubrica interna de **qualidade do briefing**, distinta do Innovation Project Scorecard da Strategyzer, que avalia maturidade da evidência do projeto.
+Avalia qualidade do briefing pela rubrica interna IQB; não mede maturidade do projeto pelo Scorecard da Strategyzer.
 
-## Grilling obrigatório na leitura e na interação
+## Leia primeiro
 
-Antes de sintetizar, pontuar ou planejar, leia o [protocolo operacional de grilling](references/grilling-operacional.md). Aplique-o aos documentos e às respostas recebidas: confronte afirmações e fontes, registre questões resolvidas e pendentes, apresente somente a fronteira de perguntas que exige resposta humana e reavalie-a após cada novo insumo. Mostre a síntese documental e as lacunas decisivas; não trate leitura silenciosa ou preenchimento do template como grilling concluído. Continue tarefas independentes enquanto aguarda respostas e declare a entrega parcial quando faltar suporte decisivo. O protocolo está incorporado nesta skill e complementa suas referências específicas.
+- [Rubrica IQB](references/iqb-rubric.md) — critérios, vetos e reauditoria.
+- [Schema do relatório](references/briefing-validation-report.schema.json) — saída estruturada opcional.
 
-## Uso independente da fase
+## Grilling
 
-Ative esta skill pela tarefa solicitada e pelos insumos disponíveis, em qualquer ponto da esteira ou fora dela. A fase registrada no projeto é contexto de proveniência, não condição de uso nem autorização para inventar conteúdo. Consulte o Scorecard de maturidade quando disponível para localizar evidências e lacunas, sem usá-lo como bloqueio automático. Se a pessoa chegar antes do trabalho usual, produza preparação ou versão parcial e pergunte somente pelos insumos decisivos. Se chegar depois, incorpore os materiais posteriores, preserve a cronologia e indique o que foi definido antes ou reconstruído depois; não apresente reconstrução retrospectiva como plano previamente acordado. A completude depende dos requisitos da entrega e da evidência, não do nome da fase.
+Leia [o protocolo de grilling](references/grilling-operacional.md) antes de sintetizar,
+pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: resolva
+nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
+cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
+entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
+resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
 
-## Evidência antes de nota
+## Quando usar
 
-Leia [levantamento documental e grilling](references/levantamento-documental-e-grilling.md) e a [rubrica IQB](references/iqb-rubric.md). Identifique briefing, versão, HMW, sete campos e fontes. Quando a entrada for transcrição, explicite que é uma reconstrução e não um briefing aprovado. Marque para cada critério `yes` ou `no`, fonte e localização; ausência ou ambiguidade contam `no`, com lacuna específica. Não peça ao usuário qual nota deseja. Pergunte em fronteiras apenas para identificar fontes, versões ou definições que possam alterar a avaliação; resposta sobre intenção não substitui evidência documental.
+A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do momento
+usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
+com data e não apresente reconstrução como plano combinado previamente.
 
-## Avalie e calcule
+## Passos
 
-Responda exatamente os 10 itens de cada família `CLA`, `EVI`, `OUT` e `ACT`, inclusive o veto de cada uma. A nota de cada dimensão vem dos nove itens pontuáveis, com teto de veto; o IQB é a média das quatro notas. Grave as 40 respostas em JSON (formato no topo de `scripts/iqb.py`) e rode `python3 scripts/iqb.py respostas.json` para contagens, vetos, média e classificação; copie os números do resultado, sem recalcular à mão. O script exige os 40 itens, IDs corretos, resposta booleana e justificativa; não complete avaliações faltantes com valores inventados. O [schema do relatório](references/briefing-validation-report.schema.json) é uma opção de saída estruturada, não dependência de infraestrutura externa.
+1. Identifique briefing, versão, HMW, sete campos e fontes/localizadores. Transcrição é reconstrução, não aprovação; pergunte apenas por fontes, versões ou definições decisivas. Intenção não substitui evidência.
+2. Responda `yes`/`no` aos dez itens de cada família `CLA`, `EVI`, `OUT`, `ACT`, inclusive vetos. Ausência ou ambiguidade contam `no`; registre lacuna, evidência e localização, sem inventar itens.
+3. Grave as 40 respostas booleanas justificadas em JSON (formato em `scripts/iqb.py`); rode `python3 scripts/iqb.py respostas.json`. Copie contagens, notas brutas/finais, tetos, média e classificação; não recalcule nem ajuste editorialmente.
+4. Com amplitude das quatro notas finais ≤1, reaudite cada resposta e evidência. Notas próximas podem estar corretas; não force dispersão.
+5. Entregue matriz citada, vetos, IQB, classificação, pontos fortes, lacunas priorizadas e até três provocações ao sponsor. Fonte decisiva inacessível exige diagnóstico parcial antes da nota final. Compare versões calculando cada uma separadamente; IQB alto não aprova projeto ou experimento.
 
-Se o intervalo entre as quatro notas finais for até 1, reaudite manualmente as evidências de cada resposta antes de finalizar. Notas próximas podem ser corretas; não force dispersão. Não altere a classificação calculada por julgamento editorial. Oriente a melhoria pelos critérios não atendidos e pelos vetos, sem tratar IQB alto como aprovação automática do projeto ou do experimento.
+## Exemplo
 
-## Entregue
+Entrada: “Avalie o briefing do Portal de Solicitações de Dados.”
+Saída (trecho):
+> EVI-06: no — briefing.md, Evidências: somente suposições.
+> Veto: evidências limitadas a 1; números derivados de `scripts/iqb.py`.
+> Próximo dado: registro que demonstre ocorrência do problema.
 
-Mostre versão e recorte avaliados, matriz de 40 respostas com citações, notas brutas e finais, veto aplicado, IQB, classificação, pontos fortes, lacunas priorizadas e até três provocações úteis ao sponsor. Se fontes decisivas estiverem inacessíveis, entregue diagnóstico parcial e identifique o que falta antes de calcular nota final. Em comparação de versões, calcule cada uma separadamente com sua própria base e explique mudanças por critério.
+## Checagem final
 
-## Contexto institucional
+- [ ] 40 critérios, respostas e fontes/localizadores registrados
+- [ ] Ausências, vetos e notas brutas/finais expostos
+- [ ] Cálculo copiado do script; reauditoria quando amplitude ≤1
+- [ ] Versões comparadas independentemente; lacunas priorizadas
 
-Leia [ERIC — Esteira Robusta de Inovação Colaborativa](references/eric-esteira.md) antes de trabalhar com esta skill. Use o contexto da CCEE, as oito etapas, os dois pontos de avaliação, as rotas condicionais e as relações entre entregáveis para interpretar as fontes. Acione a skill pela tarefa e pelas evidências disponíveis, em qualquer momento; a sequência usual da esteira não bloqueia o uso.
+## Contexto ERIC
 
-## Arquivos e padrão visual
+ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comercialização de
+Energia Elétrica). Consulte [a esteira](references/eric-esteira.md) quando precisar
+interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre entregáveis.
 
-Para qualquer entregável em arquivo, siga o [sistema visual da skill](assets/design-system/README.md) e seu `profiles.json`. Gere primeiro o `content_json` versionado com blocos, citações e metadados; use o tipo `briefing_validation`. O schema de resposta comum e o perfil deste tipo são obrigatórios; aplique também o schema específico quando existir. Execute a validação pelo renderizador incluído em `assets/design-system/scripts/render.py` antes de gerar qualquer arquivo final. Se ela falhar, corrija a resposta ou identifique explicitamente uma versão parcial; nunca contorne o schema. Preserve o mesmo JSON canônico validado junto de todos os derivados, garantindo estrutura, rastreabilidade e padrão visual idênticos entre skills. O perfil determina a orientação A4 retrato, A4 paisagem ou apresentação 16:9 e aplica os mesmos tokens de cor, fonte e área segura. Por padrão, ofereça JSON, PDF, DOCX, MD e TXT quando o tipo aceitar; PPTX é próprio de apresentação, CSV exige tabela exportável e HTML é prévia. Não componha um layout ad hoc nem altere conteúdo para caber: pagine ou registre impossibilidade de uma página. Antes de entregar, confira ordem, tabelas, citações, orientação, ausência de corte e igualdade semântica entre formatos.
+## Entrega em arquivo
+
+Para PDF, DOCX, MD, TXT ou PPTX, siga [o design system](assets/design-system/README.md)
+com `deliverable_type` `briefing_validation`: monte o JSON canônico, rode
+`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
+JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
+`metadata.completeness: "partial"` — nunca contorne o schema.
 
 **Proveniência:** rubrica, schema e cálculo adaptados de fonte metodológica RC6 (`validate-briefing/`); o cálculo foi endurecido para impedir pontuação com itens ausentes.
