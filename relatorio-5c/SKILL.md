@@ -5,42 +5,68 @@ description: "Compila ou revisa o Relatório 5C de um encontro de cocriação co
 
 # Compilar o Relatório 5C
 
-Leia primeiro a [transcrição integral do DOCX 5C](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) para consultar as perguntas e dinâmicas originais, e então o [método 5C adaptado](references/metodo-5c.md) e o [protocolo de levantamento documental e grilling](references/levantamento-documental-e-grilling.md). O [DOCX original](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx) e a [transcrição textual](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) descrevem o roteiro, não os resultados de uma execução. Não produza achados, votos ou consensos a partir do playbook sozinho.
+Consolida cocriação; playbook sozinho não fornece achados, votos ou consenso, nem valida eficácia ou autoriza escala.
 
-## Grilling obrigatório na leitura e na interação
+## Leia primeiro
 
-Antes de sintetizar, pontuar ou planejar, leia o [protocolo operacional de grilling](references/grilling-operacional.md). Aplique-o aos documentos e às respostas recebidas: confronte afirmações e fontes, registre questões resolvidas e pendentes, apresente somente a fronteira de perguntas que exige resposta humana e reavalie-a após cada novo insumo. Mostre a síntese documental e as lacunas decisivas; não trate leitura silenciosa ou preenchimento do template como grilling concluído. Continue tarefas independentes enquanto aguarda respostas e declare a entrega parcial quando faltar suporte decisivo. O protocolo está incorporado nesta skill e complementa suas referências específicas.
+- [Método 5C](references/metodo-5c.md) — estrutura metodológica.
+Para conferir a fonte: [transcrição](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) e [DOCX](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx).
 
-## Uso independente da fase
+## Grilling
 
-Ative pela tarefa e pelos registros disponíveis, em qualquer ponto da esteira ou fora dela. Identifique data, versão do desafio e escopo real do encontro. Se C1–C5 não estiverem documentadas, entregue relatório parcial ou estrutura de consolidação com lacunas decisivas; não marque a rodada como concluída. Fontes posteriores são atualizações datadas, não prova de que o grupo as conhecia no workshop. O relatório pode ser revisto depois sem reescrever a versão original.
+Leia [o protocolo de grilling](references/grilling-operacional.md) antes de sintetizar,
+pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: resolva
+nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
+cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
+entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
+resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
 
-## Levantamento e fronteiras de perguntas
+## Quando usar
 
-Inventarie briefing, diagnóstico, convites e presença, materiais exibidos, mural ou notas, gravações acessíveis, formulários, votos, canvases de proposta, ata e decisões posteriores. Registre para cada fonte seu identificador, data, versão e localização. Diferencie fala de cliente, relato de representante interno, dado operacional, proposta, inferência do facilitador e decisão institucional. Resolva primeiro as lacunas nos arquivos; pergunte somente pelo que muda a interpretação, como unidade de voto, participantes elegíveis, proposta votada, regra usada ou responsável que aprovou um encaminhamento. Não peça ao usuário a conclusão ou recomendação desejada.
+A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do momento
+usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
+com data e não apresente reconstrução como plano combinado previamente.
 
-## Estrutura do relatório
+## Passos
 
-1. **Contexto e método:** desafio original e sua revisão, público convidado e presente, perfis cobertos e ausentes, objetivo, duração real, adaptações de agenda, regras de registro e votação. Não confunda grupo presente com população total de clientes.
-2. **C1 — Contextualizar:** o que foi apresentado, que evidência sustentava o enquadramento, dúvidas e mudanças registradas no desafio.
-3. **C2 — Compreender:** temas discutidos, experiência atual, situações positivas, dificuldades, episódios concretos, contradições e oportunidades. Mostre a priorização com votos, elegibilidade, denominador e regra efetiva; não trate contagem de menções como prevalência sem desenho apropriado.
-4. **C3 — Confirmar:** dores escolhidas, experiência desejada, situações a evitar, necessidades e critérios observáveis de melhora. Separe critério proposto de meta já aprovada e de resultado medido.
-5. **C4 — Cocriar:** ideias individuais e propostas coletivas, composição real dos grupos, vínculo de cada proposta à dor, funcionamento, benefícios alegados, dependências, riscos e alternativas não selecionadas. Guarde a origem das ideias quando disponível.
-6. **C5 — Conduzir:** pitches, regra de créditos, votos por proposta, ranking reproduzível, razões, objeções e aprendizados. Distinga preferência dos participantes, recomendação analítica e decisão institucional efetivamente tomada.
-7. **Síntese e próximos passos:** achados sustentados, limites da evidência, suposições que exigem Test Cards ou outro método, responsáveis e devolutiva acordada. Recomendação proporcional ao que o workshop permite concluir.
+1. **Entrada/contexto:** inventarie briefing, diagnóstico, convites/presença, materiais exibidos, mural/notas, gravações, formulários, votos, canvases, ata e decisões. Registre identificador/data/versão/localizador; distinga fala de cliente, relato interno, dado, proposta, inferência e decisão. Documente desafio original/revisão, convidados/presentes, perfis cobertos/ausentes, objetivo, duração/adaptações e regras. Presença não representa toda população; pergunte só por fontes/definições/decisões decisivas.
+2. **C1 — Contextualizar:** enquadramento apresentado, evidências, dúvidas e mudanças.
+3. **C2 — Compreender:** temas, experiências positivas, dificuldades, episódios, contradições e oportunidades; votos com regra efetiva, elegibilidade e denominador. Menções não são prevalência sem desenho adequado.
+4. **C3 — Confirmar:** dores escolhidas, experiência desejada, situações a evitar, necessidades e critérios observáveis. Separe critério proposto, meta aprovada e resultado medido.
+5. **C4 — Cocriar:** ideias/propostas, composição real dos grupos, origem das ideias, dor, funcionamento, benefícios alegados, dependências, riscos e alternativas descartadas.
+6. **C5 — Conduzir:** pitches, créditos, votos/ranking reproduzível, razões, objeções e aprendizados; separe preferência, recomendação e decisão efetiva. Sem votação confiável, registre lacuna, não ranking fabricado.
+7. **Síntese/próximos passos:** achados citados, limites, suposições a testar, responsáveis e devolutiva acordada. Eficácia, adesão e viabilidade exigem experimento adequado, sem antecipar resultado.
 
-Cada afirmação relevante deve apontar para trecho, página, célula, mural, voto ou tempo de gravação verificável. Reconcilie totais entre quadros e narrativa. Preserve divergências e não atribua fala ou aprovação a quem não consta da fonte. Se a votação combinada não foi executada ou não há contagem confiável, descreva essa lacuna em vez de fabricar ranking.
+Reconcilie totais entre narrativa/quadros; preserve conflitos e não atribua fala/aprovação sem fonte. Relatório completo exige síntese/fonte em C1–C5; etapas ausentes mantêm parcial. Fontes posteriores atualizam com data; revisões preservam a versão original.
 
-## Qualidade e entrega
+## Exemplo
 
-Confira C1–C5 separadamente, denominadores, versões e distinção entre experiência relatada, critério desejado e efeito demonstrado. O produto é um relatório de cocriação, não uma validação causal nem autorização de escala. Se a pergunta decisória exigir eficácia, adesão ou viabilidade, recomende um experimento adequado sem antecipar seu resultado.
+Entrada: “Relate o 5C do Portal de Solicitações de Dados.”
+Saída (trecho):
+> Ata: B aprovada; planilha: A recebeu mais créditos.
+> Conflito preservado; pedir fonte da decisão formal.
+> Votos não validam efeito da solução.
 
-## Contexto institucional
+## Checagem final
 
-Leia [ERIC — Esteira Robusta de Inovação Colaborativa](references/eric-esteira.md) antes de trabalhar com esta skill. Use o contexto da CCEE, as oito etapas, os dois pontos de avaliação, as rotas condicionais e as relações entre entregáveis para interpretar fontes e encaminhamentos. A sequência da esteira informa a cronologia; não restringe quando o relatório pode ser preparado ou atualizado.
+- [ ] C1–C5 e versões separadas, com síntese/fonte
+- [ ] Denominadores, regras e totais conferidos
+- [ ] Falas, conflitos e alternativas preservados
+- [ ] Preferência, meta, decisão e efeito distinguidos
+- [ ] Recomendação proporcional e pendências explícitas
 
-## Arquivos e padrão visual
+## Contexto ERIC
 
-Siga o [sistema visual incluído](assets/design-system/README.md). Gere um `content_json` versionado do tipo `five_c_report`, com blocos, citações e metadados. O schema comum, o perfil visual, as seções de `assets/design-system/response-sections.json` e o [schema específico do relatório](assets/design-system/contracts/five-c-report.schema.json) são obrigatórios para entrega completa; C1–C5 devem conter síntese com fonte. Valide pelo [renderizador local](assets/design-system/scripts/render.py) antes de gerar arquivos. Se faltarem etapas ou evidências, marque `metadata.completeness` como `partial` ou `inconclusive` e mantenha a validação comum; nunca preencha uma lacuna para passar no schema. Derive JSON, PDF, DOCX, MD e TXT do mesmo conteúdo validado, em A4 paisagem conforme o perfil, com fontes, cores, citações e área segura. Pagine conteúdo extenso e confira ordem, tabelas, rastreabilidade e ausência de corte.
+ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comercialização de
+Energia Elétrica). Consulte [a esteira](references/eric-esteira.md) quando precisar
+interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre entregáveis.
+
+## Entrega em arquivo
+
+Para PDF, DOCX, MD, TXT ou PPTX, siga [o design system](assets/design-system/README.md)
+com `deliverable_type` `five_c_report`: monte o JSON canônico, rode
+`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
+JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
+`metadata.completeness: "partial"` — nunca contorne o schema.
 
 **Proveniência:** adaptação do playbook 5C fornecido pelo usuário, preservado integralmente em `assets/`. A análise de uma execução depende de fontes adicionais daquela execução.
