@@ -119,32 +119,64 @@
         "FIC-02"
       ],
       "data": {
-        "headers": [
-          "Critério",
-          "Nota simulada"
+        "classification": "monitorar",
+        "columns": [
+          {
+            "key": "label",
+            "label": "Critério"
+          },
+          {
+            "key": "score",
+            "label": "Nota"
+          },
+          {
+            "key": "weight",
+            "label": "Peso"
+          },
+          {
+            "key": "justification",
+            "label": "Justificativa"
+          }
         ],
+        "overall_score": 54.8,
         "rows": [
-          [
-            "Impacto",
-            "60"
-          ],
-          [
-            "Viabilidade",
-            "45"
-          ],
-          [
-            "Alinhamento",
-            "70"
-          ],
-          [
-            "Urgência",
-            "40"
-          ],
-          [
-            "Novidade",
-            "55"
-          ]
+          {
+            "criterion": "impact",
+            "justification": "Retrabalho relatado; magnitude ainda não medida (exemplo).",
+            "label": "Impacto",
+            "score": 60,
+            "weight": 0.3
+          },
+          {
+            "criterion": "viability",
+            "justification": "Integração, responsáveis e custo são hipóteses (exemplo).",
+            "label": "Viabilidade",
+            "score": 45,
+            "weight": 0.25
+          },
+          {
+            "criterion": "strategic_alignment",
+            "justification": "Reduz esforço de atendimento (exemplo).",
+            "label": "Alinhamento",
+            "score": 70,
+            "weight": 0.2
+          },
+          {
+            "criterion": "urgency",
+            "justification": "Prioridade moderada, não comprovada (exemplo).",
+            "label": "Urgência",
+            "score": 40,
+            "weight": 0.15
+          },
+          {
+            "criterion": "innovation",
+            "justification": "Novidade relativa não comparada (exemplo).",
+            "label": "Novidade",
+            "score": 55,
+            "weight": 0.1
+          }
         ],
+        "section_key": "scores",
         "title": "Pontuação ilustrativa, sem avaliação real"
       },
       "export": {

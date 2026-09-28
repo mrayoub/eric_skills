@@ -123,33 +123,65 @@
       "id": "scores",
       "type": "table",
       "data": {
+        "section_key": "scores",
         "title": "Pontuação ilustrativa, sem avaliação real",
-        "headers": [
-          "Critério",
-          "Nota simulada"
+        "columns": [
+          {
+            "key": "label",
+            "label": "Critério"
+          },
+          {
+            "key": "score",
+            "label": "Nota"
+          },
+          {
+            "key": "weight",
+            "label": "Peso"
+          },
+          {
+            "key": "justification",
+            "label": "Justificativa"
+          }
         ],
         "rows": [
-          [
-            "Impacto",
-            "60"
-          ],
-          [
-            "Viabilidade",
-            "45"
-          ],
-          [
-            "Alinhamento",
-            "70"
-          ],
-          [
-            "Urgência",
-            "40"
-          ],
-          [
-            "Novidade",
-            "55"
-          ]
-        ]
+          {
+            "criterion": "impact",
+            "label": "Impacto",
+            "score": 60,
+            "weight": 0.3,
+            "justification": "Retrabalho relatado; magnitude ainda não medida (exemplo)."
+          },
+          {
+            "criterion": "viability",
+            "label": "Viabilidade",
+            "score": 45,
+            "weight": 0.25,
+            "justification": "Integração, responsáveis e custo são hipóteses (exemplo)."
+          },
+          {
+            "criterion": "strategic_alignment",
+            "label": "Alinhamento",
+            "score": 70,
+            "weight": 0.2,
+            "justification": "Reduz esforço de atendimento (exemplo)."
+          },
+          {
+            "criterion": "urgency",
+            "label": "Urgência",
+            "score": 40,
+            "weight": 0.15,
+            "justification": "Prioridade moderada, não comprovada (exemplo)."
+          },
+          {
+            "criterion": "innovation",
+            "label": "Novidade",
+            "score": 55,
+            "weight": 0.1,
+            "justification": "Novidade relativa não comparada (exemplo)."
+          }
+        ],
+        "overall_score": 54.8,
+        "classification": "monitorar"
       },
       "citation_ids": [
         "FIC-02"

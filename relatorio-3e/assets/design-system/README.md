@@ -25,6 +25,8 @@ Esta pasta é o contrato compartilhado das onze skills. O `content_json` validad
 3. Valide o JSON e renderize com `python scripts/render.py input.json --out-dir pasta --formats html,pdf,md` a partir desta pasta. O renderizador executa os schemas antes de criar arquivos. `--formats` é opcional e usa os formatos padrão do perfil. Para DOCX/PPTX, passe o formato explicitamente quando permitido e instale as bibliotecas indicadas em `requirements.txt`.
 4. Guarde o JSON junto dos derivados. O renderizador grava um manifesto com hashes do conteúdo, dos tokens, do perfil e dos arquivos. Reexecutar o mesmo JSON e as mesmas versões sobrescreve somente os derivados daquele ID; alterações de conteúdo exigem novo `content_version`.
 
+5. Para `briefing_validation` e `innovation_potential_assessment` completos, o renderizador recalcula notas, vetos, totais e classes e rejeita o JSON se algum número divergir. Corrija o conteúdo com o resultado do script da skill (`iqb.py` ou `score.py`); não edite números à mão.
+
 ## Regras visuais
 
 - Relatórios analíticos e matrizes: A4 paisagem (`report_landscape`). Briefings, avaliações e documentos narrativos: A4 retrato (`report_portrait`). Síntese executiva: A4 paisagem em uma página (`executive_one_page`), com erro se o conteúdo não couber. Apresentação: 16:9 (`presentation`). Test Cards e Learning Cards: A4 retrato, um card por página.
