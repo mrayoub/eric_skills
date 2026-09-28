@@ -11,7 +11,7 @@ Leia [levantamento documental e grilling](references/levantamento-documental-e-g
 
 Se faltar base para qualquer nota, marque `não pontuável` e investigue a fonte ou o responsável em ordem de dependência. Não converta ausência de dados em zero e não emita `priorizar`, `monitorar` ou `arquivar` como classificação definitiva sobre entrada incompleta. Uma nota zero é uma avaliação sustentada, não um marcador de lacuna. Pergunte por dados, critérios e restrições; nunca pela prioridade desejada.
 
-Após justificar as cinco notas, execute `scripts/score.py` para aplicar pesos e faixas definidos na rubrica. Não ajuste resultado calculado editorialmente. Mostre as notas, fontes, pesos, total, classe, principais sensibilidades e próximos dados capazes de mudar a leitura. Registre decisão de priorização efetivamente tomada separadamente da recomendação calculada.
+Após justificar as cinco notas, grave as cinco notas e justificativas em JSON (formato no topo de `scripts/score.py`) e execute `python3 scripts/score.py notas.json` para aplicar pesos e faixas definidos na rubrica. Não ajuste resultado calculado editorialmente. Mostre as notas, fontes, pesos, total, classe, principais sensibilidades e próximos dados capazes de mudar a leitura. Registre decisão de priorização efetivamente tomada separadamente da recomendação calculada.
 
 ## Grilling obrigatório na leitura e na interação
 
