@@ -19,6 +19,12 @@ Esta pasta é o contrato compartilhado das onze skills. O `content_json` validad
 
 ## Uso pelas skills
 
+Antes de montar o conteúdo, leia `references/linguagem-dos-entregaveis.md` na pasta
+da skill (fonte: `_SHARED/linguagem-dos-entregaveis.md`).
+Títulos, explicações e células de tabelas devem ser compreensíveis sem conhecimento
+do método. Preserve os nomes de campos exigidos nos schemas; escreva seus valores
+textuais para o leitor, explicando medidas e termos necessários.
+
 1. Produza primeiro um JSON canônico com `schema_version`, `deliverable_type`, `locale`, `title`, `blocks`, `citations` e `metadata`. Preserve IDs estáveis de blocos e citações. Não use o layout para esconder dado ausente ou trocar a conclusão.
 2. Escolha o `deliverable_type` do perfil correspondente à entrega. Quando um método produzir vários arquivos, cada um recebe seu tipo e sua própria versão de conteúdo. Leia o schema desse tipo e, quando aplicável, `response-sections.json` antes de compor blocos. Uma entrega completa só pode usar `metadata.completeness = complete` se todas as seções obrigatórias e as fontes exigidas estiverem presentes. Use a orientação padrão do perfil, salvo variante explicitamente aceita pelo perfil e pedida pelo usuário.
    Nos cards completos, use `data.section_key` e `data.text` em quatro blocos: Test Card = `hypothesis`, `test`, `measure`, `criteria`; Learning Card = `hypothesis`, `observations`, `learning`, `action`. Se faltar informação decisiva, identifique `metadata.completeness` como `partial` ou `inconclusive`; a validação comum continua obrigatória.

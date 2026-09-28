@@ -61,7 +61,7 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Para PDF, DOCX, MD, TXT ou PPTX, siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `four_d_report`: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque

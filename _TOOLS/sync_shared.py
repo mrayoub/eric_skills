@@ -58,6 +58,7 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
     references = [
         (ROOT / "_ERIC_CONTEXT/README.md", "eric-esteira.md", False),
         (ROOT / "_SHARED/grilling-operacional.md", "grilling-operacional.md", False),
+        (ROOT / "_SHARED/linguagem-dos-entregaveis.md", "linguagem-dos-entregaveis.md", False),
     ]
     for src, name, optional in references:
         dst = skill / "references" / name
@@ -88,7 +89,8 @@ def main() -> int:
     args = parser.parse_args()
     try:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
-                    ROOT / "_SHARED/grilling-operacional.md"]
+                    ROOT / "_SHARED/grilling-operacional.md",
+                    ROOT / "_SHARED/linguagem-dos-entregaveis.md"]
         for path in required:
             if not path.exists():
                 raise FileNotFoundError(f"Fonte ausente: {path.relative_to(ROOT)}")
