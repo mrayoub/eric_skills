@@ -24,7 +24,7 @@ Convenções comuns a todos os planos:
 | 006 | [IQB completo nos derivados](006-iqb-completo-nos-derivados.md) (T01) | P1 | M | 001, 002 | DONE (54 testes passaram; PDF sem corte; amostra regenerada; sync verificado) |
 | 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
 | 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (implementação pronta; bateria antes/depois adiada pelo operador; não bloqueia a execução do 009) |
-| 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | TODO |
+| 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | DONE (11 conjuntos, 22 casos, 35 fixtures fictícias; integridade e contas verificadas; linha de base não rodada) |
 | 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | TODO |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | TODO |
@@ -38,7 +38,8 @@ não substitui a medição real. Para medir antes/depois, use as descriptions do
 `ae5e211` como linha de base e as de `ee8e9f1` como versão nova, em checkouts separados,
 seguindo `_EVALS/triggers/README.md`. Confirme a autorização antes das chamadas,
 conforme o plano. O plano 009 permanece `TODO`; apenas sua branch foi criada,
-sem arquivos implementados.
+sem arquivos implementados naquele momento. A implementação posterior do 009
+está registrada no status atual acima.
 
 Auditoria da retomada com Claude: sessão `609c5081-03a7-4c59-8e06-7671f031a322`.
 Correção adicional do plano 005 preservada em `5ec6644`; suíte revalidada com
