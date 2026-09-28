@@ -23,7 +23,7 @@ Convenções comuns a todos os planos:
 | 005 | [Validador semântico por tipo: IQB, potencial, citações aninhadas](005-validador-semantico-por-tipo.md) (T02 + parte de T04) | P1 | M | 001, 002, 003, 004 | DONE (51 testes passaram; amostras regeneradas; sync verificado) |
 | 006 | [IQB completo nos derivados](006-iqb-completo-nos-derivados.md) (T01) | P1 | M | 001, 002 | DONE (54 testes passaram; PDF sem corte; amostra regenerada; sync verificado) |
 | 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
-| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (reaberto pelo operador; descriptions e conjuntos prontos; falta medição real antes/depois com Claude) |
+| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (tentativa Claude auditada; resultados inválidos por limite e runner; descriptions e conjuntos prontos; medição real pendente) |
 | 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | TODO |
 | 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | TODO |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
@@ -39,6 +39,13 @@ não substitui a medição real. Para medir antes/depois, use as descriptions do
 seguindo `_EVALS/triggers/README.md`. Confirme a autorização antes das chamadas,
 conforme o plano. O plano 009 permanece `TODO`; apenas sua branch foi criada,
 sem arquivos implementados.
+
+Auditoria da retomada com Claude: sessão `609c5081-03a7-4c59-8e06-7671f031a322`.
+Correção adicional do plano 005 preservada em `5ec6644`; suíte revalidada com
+58 testes passando e 25 subtestes. A medição do 008 não foi concluída e seus
+8/16 são inválidos: erros de limite foram contados como não acionamento.
+Diagnóstico e requisitos para uma nova execução em `_EVALS/triggers/resultados.md`
+e `_EVALS/triggers/README.md`. Não repetir a bateria original automaticamente.
 
 ## Notas de dependência
 

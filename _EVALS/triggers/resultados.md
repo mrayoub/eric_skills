@@ -1,5 +1,55 @@
 # Comparação local das descriptions — plano 008
 
+## Auditoria da tentativa com Claude em 28/09/2026
+
+Sessão examinada: `609c5081-03a7-4c59-8e06-7671f031a322`. O plano 008
+continua pendente de medição real válida; os resultados locais abaixo são
+preservados como revisão, sem substituí-la.
+
+O Claude revisou os planos 001–007 e registrou uma correção de paridade do
+potencial no commit `5ec6644`: a soma do validador agora acumula os pesos na
+mesma ordem e forma de `score.py`, evitando divergência de arredondamento no
+Python 3.12. Na auditoria posterior, a suíte passou com **58 testes e 25
+subtestes**, incluindo PDF, usando o ambiente isolado preparado na sessão.
+
+A tentativa de medição não produziu uma comparação antes/depois válida:
+
+- Foram encontrados 517 históricos de subprocessos da fase de linha de base.
+  Na segunda tentativa, iniciada após o ajuste do runner (a partir de
+  `2026-09-28T18:14:00Z`), há 384 históricos, dos quais 366 contêm a mensagem
+  explícita de limite de sessão atingido.
+- O runner usava oito processos simultâneos, três repetições por consulta e,
+  após o ajuste, até seis turnos por execução. A previsão completa era de
+  1.056 execuções, sem considerar diagnóstico ou repetição de tentativas.
+- Os erros de limite eram interpretados como `False` (não acionou). Assim,
+  as consultas negativas ganhavam acertos artificiais. Os resultados de 8/16
+  não devem ser usados para julgar as descriptions.
+- O runner original encerrava a observação quando a primeira ferramenta era
+  diferente de `Skill`/`Read`; os históricos mostram chamadas exploratórias
+  a `Bash`. O ajuste local permitiu mais turnos, mas não corrigiu o tratamento
+  de limite, timeout, falhas de processo ou autenticação como resultados.
+- A configuração omitia a skill avaliada do catálogo nativo e inseria em seu
+  lugar um comando temporário com nome aleatório. As dez irmãs eram skills
+  reais. Essa assimetria limita a interpretação como competição entre as
+  onze skills; os quatro diagnósticos bem-sucedidos do comando substituto
+  não validaram uma rodada completa nem demonstram acionamento nativo.
+- Há oito JSONs completos de `base-*`, com 48 tentativas registradas por
+  arquivo, e um arquivo incompleto de `base-workshop-3e`. Não há JSONs da
+  medição posterior. Preserve esses registros como evidência de falha,
+  nunca como benchmark válido.
+
+Os históricos estão sob `~/.claude/projects/`; os artefatos temporários estão
+em `/private/tmp/claude-945238751/-Users-mayoub-Desktop-workspaces-my-skills/609c5081-03a7-4c59-8e06-7671f031a322/scratchpad/eval/`.
+Esses temporários podem desaparecer; este registro conserva as conclusões.
+Contagens de históricos não estabelecem custo faturado nem consumo exato da
+franquia. O volume, a concorrência e o contexto carregado explicam o risco de
+consumo rápido; não há medição de quota por chamada neste relatório.
+
+Antes de qualquer nova bateria, faça um diagnóstico pequeno e sequencial,
+com autorização explícita, catálogo nativo das onze skills e interrupção no
+primeiro erro. A autorização para até quatro chamadas foi solicitada nesta
+retomada; nenhuma nova chamada de modelo foi feita até este registro.
+
 ## Método e limites
 
 Em 28/09/2026, o operador pediu as duas avaliações nesta sessão em vez de chamadas ao Claude Opus. A linha de base foi revisada antes de editar as descriptions. O avaliador é o próprio Codex nesta sessão, com acesso prévio ao plano e aos rótulos esperados: avaliação **não cega**, sujeita a influência do contexto. Não houve execução do `run_eval`, invocação real das skills ou três tentativas independentes por consulta. Portanto, os números abaixo são concordâncias de uma revisão de seleção, não taxas empíricas de acionamento.

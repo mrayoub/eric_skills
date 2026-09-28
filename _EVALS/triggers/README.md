@@ -23,6 +23,36 @@ resultado anterior do avaliador e usar contexto novo para cada consulta.
 
 ## Medição empírica com Claude CLI
 
+**Procedimento suspenso após a auditoria de 28/09/2026.** Os comandos abaixo
+documentam o procedimento original do plano; não os execute como uma bateria
+até corrigir e validar o runner. Veja a auditoria em [resultados.md](resultados.md).
+O `run_eval` observado trata limite, timeout e algumas falhas como ausência de
+acionamento, o que produz acertos artificiais nas negativas. Ele também cria
+um comando substituto, em vez de observar diretamente a skill nativa.
+
+Para retomar, prepare um runner que:
+
+- Instale as onze skills nativas, incluindo a avaliada, sem um comando duplicado
+  ou substituto. Registre o catálogo recebido por cada sessão e detecte o nome
+  real em `Skill` ou a leitura do `SKILL.md` correspondente.
+- Execute sequencialmente, começando com no máximo quatro chamadas autorizadas:
+  uma positiva e uma negativa, nas versões anterior e posterior.
+- Restrinja as ferramentas a leitura/seleção de skills, reduza o número de
+  turnos e encerre após observar a seleção. Não execute os entregáveis pedidos
+  por essas consultas: o objeto desta avaliação é apenas o acionamento.
+- Separe `acionou`, `não acionou` e `erro`. Limite de uso, autenticação, timeout,
+  processo malsucedido, catálogo incompleto e fluxo inválido são erros; não
+  entram na taxa de acerto. Interrompa a rodada no primeiro erro.
+- Grave cada tentativa imediatamente, com versão, modelo, consulta, catálogo,
+  escolha observada e estado de execução, permitindo retomar sem repetir as
+  tentativas válidas. Preserve stdout/stderr de falhas para diagnóstico.
+- Só amplie a amostra após validar o diagnóstico e obter autorização para o
+  novo número de chamadas. Não repita automaticamente a bateria de 1.056.
+
+Compare as descriptions de `ae5e211` (antes) e `ee8e9f1` (depois), sem alterar
+a árvore de trabalho atual. Mesmo o diagnóstico de quatro chamadas não
+substitui a comparação completa nem atende sozinho à meta por skill do plano.
+
 Rode novamente estes conjuntos sempre que uma `description` mudar. O procedimento
 empírico abaixo mede a competição entre estas onze skills e exige Claude CLI autenticado.
 Peça autorização antes das chamadas de modelo: cada medição completa usa
