@@ -1,0 +1,40 @@
+{
+  "skill_name": "potencial-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Classifique o potencial desta oportunidade com as três fontes e explique a recomendação.",
+      "expected_output": "Cinco notas justificadas e cálculo determinístico, com limites e decisão institucional separados.",
+      "files": [
+        "files/impacto.md",
+        "files/viabilidade.md",
+        "files/prazo-e-estrategia.md"
+      ],
+      "expectations": [
+        "Apresenta cinco notas de 0 a 100 para impacto, viabilidade, alinhamento estratégico, urgência e inovação, cada uma com justificativa.",
+        "Vincula as justificativas a impacto.md, viabilidade.md e prazo-e-estrategia.md, com seções ou trechos verificáveis.",
+        "Declara cálculo por scripts/score.py e usa os pesos 30%, 25%, 20%, 15% e 10%.",
+        "Apresenta total igual à soma ponderada arredondada a uma casa e classe coerente: priorizar para >=70, monitorar para >=40 e <70, arquivar para <40.",
+        "Separa a recomendação analítica de uma decisão institucional, que ainda não consta nas fontes.",
+        "Preserva o limite do teste exploratório e não apresenta 45 horas de retrabalho como economia já obtida."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Classifique o potencial com impacto.md e a mensagem do sponsor; ele quer priorizar a ideia.",
+      "expected_output": "Avaliação parcial com viabilidade não pontuável e sem classe final.",
+      "files": [
+        "files/impacto.md",
+        "files/preferencia-sponsor.md"
+      ],
+      "expectations": [
+        "Marca viabilidade como não pontuável por ausência de custo, recursos e avaliação técnica, sem atribuir zero.",
+        "Não apresenta classificação final nem total completo enquanto faltar suporte decisivo para viabilidade.",
+        "Distingue a preferência de Bruno Lima de evidência de urgência e não inventa prazo obrigatório.",
+        "Pergunta apenas pelos dados decisivos de viabilidade/urgência ausentes e vincula a pergunta à mensagem do sponsor.",
+        "Entrega análise parcial dos critérios sustentados, com fonte e localizador, sem inventar orçamento.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}
