@@ -1,6 +1,6 @@
 ---
 name: potencial-inovacao
-description: "Avalia e prioriza uma dor ou oportunidade com a rubrica interna de potencial de inovação do ERIC: impacto, viabilidade, alinhamento, urgência e novidade. Use para informar, revisar ou auditar uma decisão de prioridade em qualquer momento; exige justificativa e evidência para cada critério."
+description: "Pontua e classifica o potencial de uma dor ou oportunidade de inovação com a rubrica interna do ERIC (impacto 30%, viabilidade 25%, alinhamento estratégico 20%, urgência 15%, novidade 10%), resultando em priorizar, monitorar ou arquivar, com justificativa e fonte por critério e cálculo por script. Use quando o usuário quiser priorizar, ranquear, triar ou comparar oportunidades, ideias ou dores, decidir se vale investir nelas ou revisar uma priorização já feita. Não use para dar nota a um briefing (use avaliacao-briefing-iqb) nem para avaliar a força das evidências de um projeto em andamento (use scorecard-inovacao)."
 ---
 
 # Potencial de inovação

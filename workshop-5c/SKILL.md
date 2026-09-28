@@ -1,6 +1,6 @@
 ---
 name: workshop-5c
-description: "Prepara, facilita ou reconstrói o workshop 5C de cocriação com clientes: Contextualizar, Compreender, Confirmar, Cocriar e Conduzir. Use para escutar experiências, definir critérios desejados e priorizar propostas com registros rastreáveis, em qualquer momento de um projeto."
+description: "Prepara, facilita ou reconstrói um workshop 5C de cocriação com clientes: C1 contextualizar, C2 compreender a experiência atual, C3 confirmar a experiência desejada, C4 cocriar propostas e C5 conduzir com pitches e créditos de votação. Use para montar roteiro, convite, regras de voto, dinâmicas ou o registro de um encontro com clientes ou agentes. Não use para escrever o relatório consolidado depois do encontro (use relatorio-5c)."
 ---
 
 # Facilitar o workshop 5C

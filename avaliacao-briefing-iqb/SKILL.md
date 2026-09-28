@@ -1,6 +1,6 @@
 ---
 name: avaliacao-briefing-iqb
-description: "Valida um briefing de inovação pela rubrica IQB do ERIC: quatro dimensões, 40 critérios, vetos e cálculo auditável. Use para avaliar um briefing preenchido ou uma transcrição estruturável e comparar versões sem escolher a nota por impressão geral."
+description: "Avalia a qualidade de um briefing de inovação pela rubrica IQB do ERIC: 40 critérios binários em clareza, evidências, resultados e acionabilidade, com vetos, nota por dimensão, IQB de 1 a 5 e classificação calculados por script. Use quando o usuário pedir nota, IQB, validação, auditoria, checklist ou comparação de versões de um briefing, ou perguntar se o briefing está bom o suficiente para seguir. Não use para escrever ou melhorar o briefing (use briefing-inovacao), para priorizar a oportunidade (use potencial-inovacao) nem para medir a maturidade das evidências do projeto (use scorecard-inovacao)."
 ---
 
 # Avaliação de briefing pelo IQB

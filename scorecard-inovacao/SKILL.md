@@ -1,6 +1,6 @@
 ---
 name: scorecard-inovacao
-description: "Avalia a maturidade das evidências de um projeto ao longo da esteira de inovação com o Innovation Project Scorecard da Strategyzer. Lê os documentos disponíveis, entrevista o usuário em rodadas sobre lacunas decisivas e entrega avaliação rastreável, sem depender de outras skills."
+description: "Avalia a maturidade das evidências de um projeto de inovação com o Innovation Project Scorecard da Strategyzer, oficial ou em adaptação institucional declarada, gerando um retrato datado, sem média geral, com lacunas decisivas e próximos testes. Use quando o usuário perguntar quão validado ou maduro está um projeto, se há evidência suficiente para passar um gate, ou quiser comparar retratos ao longo da esteira. Não use para dar nota a um briefing (use avaliacao-briefing-iqb) nem para priorizar oportunidades novas (use potencial-inovacao)."
 ---
 
 # Scorecard de evidências para inovação

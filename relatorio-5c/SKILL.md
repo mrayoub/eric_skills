@@ -1,6 +1,6 @@
 ---
 name: relatorio-5c
-description: "Compila ou revisa um Relatório 5C de cocriação com clientes, ligando C1–C5 a fontes, falas, critérios de experiência, propostas, votos, dissensos e próximos passos. Use após um encontro ou para reconstrução parcial documentada, em qualquer fase de um projeto."
+description: "Compila ou revisa o Relatório 5C de um encontro de cocriação com clientes, ligando C1 a C5 a falas, votos com denominador, critérios de experiência, propostas, dissensos e próximos passos. Use quando houver registros de um workshop 5C (notas, mural, gravação, votos, ata) e o usuário quiser o relatório, a síntese ou a devolutiva aos participantes. Não use para preparar ou facilitar o encontro (use workshop-5c)."
 ---
 
 # Compilar o Relatório 5C

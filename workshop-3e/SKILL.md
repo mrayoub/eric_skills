@@ -1,6 +1,6 @@
 ---
 name: workshop-3e
-description: "Prepara e cofacilita o workshop 3E da esteira ERIC: esclarecer hipótese e escopo, estruturar a solução e planejar experimentos. Use em qualquer momento para planejar, revisar ou conduzir E1–E3; registra planos e resultados existentes sem declarar testes não realizados."
+description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
 ---
 
 # Facilitar o 3E

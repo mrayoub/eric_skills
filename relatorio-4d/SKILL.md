@@ -1,6 +1,6 @@
 ---
 name: relatorio-4d
-description: "Compila o Relatório 4D após D1 a D4, com diagnóstico, alternativas, priorização, evidências e lacunas rastreáveis. Use em qualquer momento para transformar registros de workshop ou fontes equivalentes em entrega rastreável, inclusive para avaliação ou revisão posterior."
+description: "Compila ou revisa o Relatório 4D a partir dos registros de D1 a D4 (mural, notas, transcrições, votos, snapshot D2): diagnóstico, alternativas, priorização com denominadores, dissensos, evidências e lacunas rastreáveis. Use quando houver material de um workshop 4D ou fontes equivalentes e o usuário quiser o relatório, a síntese para o BP1 ou a revisão de um relatório existente. Não use para preparar ou facilitar o encontro (use workshop-4d)."
 ---
 
 # Compilar o Relatório 4D
