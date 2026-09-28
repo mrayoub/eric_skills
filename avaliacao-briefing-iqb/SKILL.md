@@ -21,7 +21,7 @@ Leia [levantamento documental e grilling](references/levantamento-documental-e-g
 
 ## Avalie e calcule
 
-Responda exatamente os 10 itens de cada família `CLA`, `EVI`, `OUT` e `ACT`, inclusive o veto de cada uma. A nota de cada dimensão vem dos nove itens pontuáveis, com teto de veto; o IQB é a média das quatro notas. Use `scripts/iqb.py` para contagens, vetos, média e classificação. O script exige os 40 itens, IDs corretos, resposta booleana e justificativa; não complete avaliações faltantes com valores inventados. O [schema do relatório](references/briefing-validation-report.schema.json) é uma opção de saída estruturada, não dependência de infraestrutura externa.
+Responda exatamente os 10 itens de cada família `CLA`, `EVI`, `OUT` e `ACT`, inclusive o veto de cada uma. A nota de cada dimensão vem dos nove itens pontuáveis, com teto de veto; o IQB é a média das quatro notas. Grave as 40 respostas em JSON (formato no topo de `scripts/iqb.py`) e rode `python3 scripts/iqb.py respostas.json` para contagens, vetos, média e classificação; copie os números do resultado, sem recalcular à mão. O script exige os 40 itens, IDs corretos, resposta booleana e justificativa; não complete avaliações faltantes com valores inventados. O [schema do relatório](references/briefing-validation-report.schema.json) é uma opção de saída estruturada, não dependência de infraestrutura externa.
 
 Se o intervalo entre as quatro notas finais for até 1, reaudite manualmente as evidências de cada resposta antes de finalizar. Notas próximas podem ser corretas; não force dispersão. Não altere a classificação calculada por julgamento editorial. Oriente a melhoria pelos critérios não atendidos e pelos vetos, sem tratar IQB alto como aprovação automática do projeto ou do experimento.
 
