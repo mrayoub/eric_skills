@@ -39,7 +39,11 @@ def validate(content: dict[str, Any]) -> list[str]:
         else:
             numeric_scores[key] = float(value)
     if not duplicates and not missing and not extra and len(numeric_scores) == 5:
-        total = round(sum(numeric_scores[key] * weight for key, weight in WEIGHTS.items()), 1)
+        # Acumula na mesma ordem e forma de score.py; sum() de floats (Python 3.12+) arredonda diferente.
+        weighted_total = 0.0
+        for key, weight in WEIGHTS.items():
+            weighted_total += numeric_scores[key] * weight
+        total = round(weighted_total, 1)
         if data.get("overall_score") != total:
             errors.append(f"scores.overall_score: informado {data.get('overall_score')!r}, calculado {total}")
         classification = classify(total)
