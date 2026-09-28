@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Quero testar se o formulário guiado reduz devoluções; qual método e quais Test Cards?",
+    "should_trigger": true
+  },
+  {
+    "query": "Rodamos 5 sessões de think aloud, analisa e gera os Learning Cards",
+    "should_trigger": true
+  },
+  {
+    "query": "O piloto terminou, faz a síntese de evidências e a recomendação",
+    "should_trigger": true
+  },
+  {
+    "query": "Planeje uma rodada de teste de usabilidade para validar a hipótese de que os agentes entendem o status das solicitações.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare Test Cards individuais, amostragem e protocolo para comparar dois fluxos de atendimento em setembro.",
+    "should_trigger": true
+  },
+  {
+    "query": "Temos observações do MVP manual e entrevistas; analise o que foi aprendido e proponha os próximos testes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Escreva o plano de experimentação e a apresentação dos resultados, distinguindo hipóteses prévias de evidência coletada.",
+    "should_trigger": true
+  },
+  {
+    "query": "Ajude a escolher entre entrevista, teste think aloud e piloto operacional para investigar esta hipótese; registre critérios e riscos de cada método.",
+    "should_trigger": true
+  },
+  {
+    "query": "Escreve testes unitários pro módulo de cobrança",
+    "should_trigger": false
+  },
+  {
+    "query": "Compila o relatório 3E",
+    "should_trigger": false
+  },
+  {
+    "query": "Quão maduro está o projeto no scorecard?",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare apenas a pauta e o board do E3 do workshop 3E, para o grupo planejar seus Test Cards iniciais.",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide os cards prospectivos já definidos em E1-E3 no relatório de solução e decisão de rota.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare oportunidades de triagem e cadastro pela rubrica de potencial e recomende uma priorização calculada.",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalie o briefing pelo IQB e aplique os 40 critérios com vetos e nota por dimensão.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compile os registros C1-C5 do encontro com clientes em relatório, incluindo falas, votação e dissensos.",
+    "should_trigger": false
+  }
+]

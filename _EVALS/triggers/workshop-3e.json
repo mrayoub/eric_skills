@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Prepara a pauta do workshop de estruturação da solução E1 a E3",
+    "should_trigger": true
+  },
+  {
+    "query": "Como conduzo a classificação precisa ter / pode evoluir / fora do recorte?",
+    "should_trigger": true
+  },
+  {
+    "query": "Registra o que o grupo decidiu no E2 hoje",
+    "should_trigger": true
+  },
+  {
+    "query": "Monte um board para esclarecer a hipótese, delimitar o escopo e estruturar os componentes da solução candidata.",
+    "should_trigger": true
+  },
+  {
+    "query": "Vamos fazer a estruturação com a área de Operações na quinta: organize roteiro, perguntas e os Test Cards do E3.",
+    "should_trigger": true
+  },
+  {
+    "query": "Ajude a facilitar o E1 ao vivo e registrar o que o grupo concordou sobre hipótese e escopo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Organize um workshop 3E assíncrono, com tarefas de esclarecimento, estruturação e planejamento inicial de testes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare a dinâmica do E2 para separar o mínimo necessário das evoluções futuras e dos itens fora do recorte.",
+    "should_trigger": true
+  },
+  {
+    "query": "Compila o relatório 3E com os Test Cards",
+    "should_trigger": false
+  },
+  {
+    "query": "Analisa os resultados do piloto que rodou em agosto",
+    "should_trigger": false
+  },
+  {
+    "query": "Roteiro do workshop 4D",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide as notas de E1-E3 em relatório de solução, responsáveis, prazos e decisão de rota híbrida.",
+    "should_trigger": false
+  },
+  {
+    "query": "Revise o relatório 3E existente e confira se os cards prospectivos mantêm os quatro campos da Strategyzer.",
+    "should_trigger": false
+  },
+  {
+    "query": "Defina um protocolo detalhado para cinco sessões de think aloud e as regras de análise dos resultados.",
+    "should_trigger": false
+  },
+  {
+    "query": "Escreva os Learning Cards dos experimentos concluídos em setembro, ligando observações e próximos passos.",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare um encontro 5C com clientes para compreender experiência atual, cocriar propostas e votar os pitches.",
+    "should_trigger": false
+  }
+]
