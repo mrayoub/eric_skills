@@ -1,0 +1,37 @@
+{
+  "skill_name": "workshop-4d",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Prepare o workshop 4D com briefing e dados; inclua facilitação e regras de votação.",
+      "expected_output": "Roteiro prospectivo D1–D4, com créditos acordados antes do voto.",
+      "files": [
+        "files/briefing.md",
+        "files/dados-e-preparacao.md"
+      ],
+      "expectations": [
+        "Apresenta D1, D2, D3 e D4 com objetivo, duração, pergunta de facilitação e forma de registro em cada etapa.",
+        "Conecta perguntas e diagnóstico ao briefing.md e a dados-e-preparacao.md, indicando seção ou trecho.",
+        "Define dez créditos por participante presente e elegível antes da votação e prevê registro da presença real.",
+        "Preserva o teto de 150 minutos ou identifica explicitamente um ajuste necessário na agenda proposta.",
+        "Não simula respostas, propostas escolhidas, presenças ou votos de um grupo que ainda não se reuniu.",
+        "Distingue priorização por voto de validação de impacto."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Registre o D4 do encontro a partir das notas disponíveis.",
+      "expected_output": "Registro parcial: D4 não ocorreu, sem votos inventados.",
+      "files": [
+        "files/notas-d1-d2.md"
+      ],
+      "expectations": [
+        "Declara registro parcial e informa que só D1 e D2 ocorreram, citando notas-d1-d2.md, Limites do registro.",
+        "Não inventa créditos, votação, ranking, alternativas finais nem decisão do D4.",
+        "Conserva o diagnóstico documentado de D1/D2 sem convertê-lo em decisão.",
+        "Aponta a necessidade de realizar e registrar D3/D4 e seus votos/regras para completar a entrega.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}
