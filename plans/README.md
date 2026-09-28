@@ -23,7 +23,7 @@ Convenções comuns a todos os planos:
 | 005 | [Validador semântico por tipo: IQB, potencial, citações aninhadas](005-validador-semantico-por-tipo.md) (T02 + parte de T04) | P1 | M | 001, 002, 003, 004 | DONE (51 testes passaram; amostras regeneradas; sync verificado) |
 | 006 | [IQB completo nos derivados](006-iqb-completo-nos-derivados.md) (T01) | P1 | M | 001, 002 | DONE (54 testes passaram; PDF sem corte; amostra regenerada; sync verificado) |
 | 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
-| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO |
+| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | DONE (descriptions validadas; comparação local antes/depois por solicitação do operador; run_eval não executado) |
 | 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | TODO |
 | 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | TODO |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |

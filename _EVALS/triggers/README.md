@@ -4,8 +4,27 @@ Cada JSON contém 16 consultas em português: oito devem acionar a skill e oito
 não devem. As negativas testam fronteiras com skills vizinhas; as sementes do
 plano 008 foram preservadas. As consultas são fictícias e não usam `_SAMPLE/`.
 
-Rode novamente estes conjuntos sempre que uma `description` mudar. A avaliação
-mede somente a competição entre estas onze skills e exige Claude CLI autenticado.
+## Revisão local nesta implementação
+
+Por instrução do operador, o plano 008 foi avaliado nesta sessão de Codex antes
+e depois de editar as descriptions, sem chamadas ao Claude Opus. Consulte
+[resultados.md](resultados.md) para as escolhas por consulta e os limites do método.
+
+Para repetir essa revisão, apresente o catálogo de `name` e `description` das onze
+skills e cada consulta a um avaliador, peça uma escolha primária ou `nenhuma`,
+registre todas as escolhas antes de compará-las com `should_trigger` e calcule
+`(escolha == skill do conjunto) == should_trigger`. Salve a linha de base antes
+de editar o catálogo e repita com as mesmas consultas após a mudança.
+
+A revisão desta sessão não foi cega: o avaliador já tinha lido planos e rótulos.
+Ela não reproduz invocações reais de skills nem as três tentativas por consulta
+do `run_eval`. Uma nova avaliação independente deve ocultar os rótulos e o
+resultado anterior do avaliador e usar contexto novo para cada consulta.
+
+## Medição empírica com Claude CLI
+
+Rode novamente estes conjuntos sempre que uma `description` mudar. O procedimento
+empírico abaixo mede a competição entre estas onze skills e exige Claude CLI autenticado.
 Peça autorização antes das chamadas de modelo: cada medição completa usa
 11 × 16 × 3 = 528 chamadas; antes e depois somam 1.056 chamadas.
 

@@ -1,6 +1,6 @@
 ---
 name: briefing-inovacao
-description: "Cria ou atualiza o briefing de um desafio de inovação e, quando solicitado, gera sua síntese executiva de uma página ou perguntas para fechar lacunas. Use em qualquer momento para documentar, reconstruir ou atualizar o desafio com versão e fontes rastreáveis."
+description: "Cria, reconstrói ou atualiza o briefing de sete campos de um desafio de inovação da CCEE (título, HMW, problema, relevância, resultados esperados, responsável, sponsor) e, quando pedido, gera a síntese executiva de uma página (one-page) ou perguntas para fechar lacunas do briefing. Use sempre que o usuário quiser escrever, preencher, revisar, versionar ou resumir um briefing, transformar entrevista ou transcrição em briefing, formular um 'how might we', montar uma one-page ou perguntas ao sponsor, mesmo sem dizer 'briefing'. Não use para dar nota ao briefing (use avaliacao-briefing-iqb) nem para priorizar oportunidades (use potencial-inovacao)."
 ---
 
 # Briefing de inovação

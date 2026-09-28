@@ -1,6 +1,6 @@
 ---
 name: experimentacao-inovacao
-description: "Conduz a fase de experimentação de inovação desde a hipótese master e os materiais de descoberta: recomenda métodos e planeja Test Cards, medidas e protocolo antes da coleta; depois analisa a execução e gera Learning Cards, síntese de evidências e recomendação, relatório e apresentação rastreáveis. Não use para testes automatizados de software sem pesquisa com pessoas ou hipótese de negócio."
+description: "Planeja e analisa experimentos de inovação com pessoas ou operação: escolhe o método pela hipótese (entrevista, think aloud, MVP manual, piloto, comparação A/B e outros), escreve Test Cards e protocolo antes da coleta e, depois da execução, produz Learning Cards, síntese de evidências, recomendação, relatório e apresentação rastreáveis. Use quando o usuário falar em testar uma hipótese, piloto, MVP, teste de usabilidade, análise de sessões, resultados de experimento, Test Card ou Learning Card. Não use para testes automatizados de software nem apenas para o E3 de um workshop 3E (use workshop-3e)."
 ---
 
 # Experimentação de inovação

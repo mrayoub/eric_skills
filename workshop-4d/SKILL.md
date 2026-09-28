@@ -1,6 +1,6 @@
 ---
 name: workshop-4d
-description: "Prepara e cofacilita o método 4D da esteira ERIC para aprofundar um desafio: D1 percepção, D2 diagnóstico, D3 alternativas e D4 priorização. Use durante o workshop ou para organizar uma execução assíncrona, preservando registros para o relatório 4D."
+description: "Prepara, conduz ao vivo ou organiza de forma assíncrona o workshop 4D de aprofundamento de um desafio: D1 descongelar percepções, D2 diagnosticar (jornada e barco da inovação: ventos, âncoras, icebergs, porto), D3 desenhar alternativas e D4 decidir com créditos de votação. Use para montar roteiro, pauta, board colaborativo, perguntas de facilitação ou para registrar o que aconteceu em cada D. Não use para escrever o relatório consolidado depois do encontro (use relatorio-4d)."
 ---
 
 # Facilitar o 4D

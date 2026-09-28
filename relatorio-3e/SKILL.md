@@ -1,6 +1,6 @@
 ---
 name: relatorio-3e
-description: "Compila a estruturação 3E de uma solução com escopo, plano de construção, Test Cards prospectivos e decisão de rota interna, externa ou híbrida. Use para preparar, compilar ou revisar E1–E3 em qualquer momento, inclusive com resultados existentes; distingue plano de evidência observada."
+description: "Compila ou revisa o Relatório 3E: solução e escopo, plano de construção com responsáveis e prazos, Test Cards individuais prospectivos e decisão de rota (interna, externa, híbrida ou indefinida), separando plano de evidência observada. Use quando houver registros de E1 a E3 ou material equivalente e o usuário quiser o relatório ou os Test Cards consolidados. Não use para facilitar o workshop (use workshop-3e) nem para analisar resultados de testes já executados (use experimentacao-inovacao)."
 ---
 
 # Compilar o Relatório 3E
