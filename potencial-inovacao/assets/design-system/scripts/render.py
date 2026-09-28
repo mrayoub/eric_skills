@@ -774,23 +774,30 @@ def main() -> None:
         path = out / f"{stem}.html"
         path.write_text(source_html or "", encoding="utf-8")
         files.append(path)
+    unavailable: dict[str, str] = {}
     if "pdf" in requested:
+        path = out / f"{stem}.pdf"
         try:
             from weasyprint import HTML
-        except ImportError as exc:
-            raise RuntimeError("PDF requer WeasyPrint: pip install weasyprint") from exc
-        path = out / f"{stem}.pdf"
-        HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
-        if profile["layout"] in ("executive_one_page", "card_portrait"):
-            try:
-                from pypdf import PdfReader
-            except ImportError as exc:
-                raise RuntimeError("Verificação de página única requer pypdf: pip install pypdf") from exc
-            count = len(PdfReader(str(path)).pages)
-            if count != 1:
-                path.unlink(missing_ok=True)
-                raise ValueError(f"{profile['layout']} excedeu uma página ({count}); revise ou divida o conteúdo sem reduzir a fonte")
-        files.append(path)
+            HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
+        except (ImportError, OSError) as exc:
+            import sys
+
+            path.unlink(missing_ok=True)
+            unavailable["pdf"] = f"{type(exc).__name__}: {exc}"[:300]
+            print(f"AVISO: PDF não gerado ({unavailable['pdf']}). No macOS: brew install pango; "
+                  "no Debian/Ubuntu: apt-get install libpango-1.0-0 libpangoft2-1.0-0.", file=sys.stderr)
+        else:
+            if profile["layout"] in ("executive_one_page", "card_portrait"):
+                try:
+                    from pypdf import PdfReader
+                except ImportError as exc:
+                    raise RuntimeError("Verificação de página única requer pypdf: pip install pypdf") from exc
+                count = len(PdfReader(str(path)).pages)
+                if count != 1:
+                    path.unlink(missing_ok=True)
+                    raise ValueError(f"{profile['layout']} excedeu uma página ({count}); revise ou divida o conteúdo sem reduzir a fonte")
+            files.append(path)
     if "md" in requested or "txt" in requested:
         markdown = render_md(content)
         if "md" in requested:
@@ -824,9 +831,11 @@ def main() -> None:
         "profile_sha256": sha(canonical_bytes(profiles)),
         "tokens_sha256": sha(canonical_bytes(tokens)),
         "files": {path.name: sha(path.read_bytes()) for path in files},
+        "unavailable": unavailable,
     }
     (out / f"{stem}.manifest.json").write_bytes(canonical_bytes(manifest))
-    print(json.dumps({"manifest": f"{stem}.manifest.json", "files": list(manifest["files"])}, ensure_ascii=False))
+    print(json.dumps({"manifest": f"{stem}.manifest.json", "files": list(manifest["files"]),
+                      "unavailable": unavailable}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
