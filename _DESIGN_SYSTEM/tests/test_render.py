@@ -182,6 +182,16 @@ class RenderTests(unittest.TestCase):
                     {"id": key, "type": "paragraph", "data": {"section_key": key, "text": "Síntese registrada."}, "citation_ids": ["F01"]}
                     for key in keys
                 ]
+                if kind == "innovation_potential_assessment":
+                    item["blocks"].insert(0, {
+                        "id": "scores", "type": "table", "data": {
+                            "section_key": "scores", "columns": ["criterion", "score", "weight", "justification"],
+                            "rows": [{"criterion": key, "score": 80, "weight": weight, "justification": "Evidência de teste."}
+                                     for key, weight in [("impact", 0.30), ("viability", 0.25),
+                                                         ("strategic_alignment", 0.20), ("urgency", 0.15), ("innovation", 0.10)]],
+                            "overall_score": 80.0, "classification": "priorizar",
+                        },
+                    })
                 self.render(item, "md", folder)
                 item["blocks"].pop()
                 source = folder / "input.json"
