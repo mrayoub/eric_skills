@@ -16,6 +16,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER_VERSION = "1.3.0"
+IQB_TABLE_WIDTHS = {
+    "criterios": [14, 15, 10, 41, 10, 10],
+    "dimensoes": [14, 7, 10, 12, 9, 10, 10, 28],
+    "agrupamento": [35, 65],
+}
 CARD_LABELS = {
     "test_card": {
         "hypothesis": "1. Acreditamos que — hipótese",
@@ -294,6 +299,10 @@ def css(tokens: dict[str, Any], paper: str) -> str:
     else:
         size = f"{page['width']}mm {page['height']}mm"
         margins = f"{page['margin_top']}mm {page['margin_right']}mm {page['margin_bottom']}mm {page['margin_left']}mm"
+    iqb_columns = "\n".join(
+        f"table.scores-{slug} col:nth-child({index}) {{ width: {width}%; }}"
+        for slug, widths in IQB_TABLE_WIDTHS.items() for index, width in enumerate(widths, 1)
+    )
     return f"""
 @font-face {{ font-family: Montserrat; src: url(data:font/ttf;base64,{montserrat_data}) format('truetype'); font-weight: 100 900; }}
 @font-face {{ font-family: Roboto; src: url(data:font/ttf;base64,{roboto_data}) format('truetype'); font-weight: 100 900; }}
@@ -322,13 +331,10 @@ table {{ border-collapse: collapse; width: 100%; font-size: 8pt; break-inside: a
 th {{ background: {color['document_primary']}; color: {color['inverse']}; text-align: left; }}
 td, th {{ border: .75pt solid {color['border']}; padding: 6pt 8pt; vertical-align: top; overflow-wrap: anywhere; }}
 tr {{ break-inside: avoid; }}
-table.scores {{ table-layout: fixed; font-size: 7.5pt; }}
-table.scores th:nth-child(1) {{ width: 15%; }}
-table.scores th:nth-child(2) {{ width: 12%; }}
-table.scores th:nth-child(3) {{ width: 11%; }}
-table.scores th:nth-child(4) {{ width: 49%; }}
-table.scores th:nth-child(5) {{ width: 13%; }}
-table.scores td:nth-child(2), table.scores td:nth-child(3) {{ white-space: nowrap; }}
+table.scores {{ table-layout: fixed; font-size: 8pt; }}
+table.scores td, table.scores th {{ padding: 4pt; white-space: normal; overflow-wrap: anywhere; }}
+table.scores caption {{ text-align: left; font-weight: 700; padding: 8pt 0 4pt; break-after: avoid; }}
+{iqb_columns}
 .refs {{ margin-top: 18pt; border-top: .75pt solid {color['border']}; font-size: 8pt; }}
 .meta {{ margin-top: 12pt; color: {color['text_muted']}; font-size: 7.5pt; }}
 .page-break {{ break-before: page; }}
@@ -380,15 +386,17 @@ def html_block(block: dict[str, Any]) -> str:
     if kind == "card_grid":
         return html_card_grid(block)
     if kind == "table":
-        table_class = ' class="scores"' if isinstance(data.get("dimensions"), dict) else ""
+        iqb = isinstance(data.get("dimensions"), dict)
         tables = []
-        for index, (_, legend, headers, rows) in enumerate(table_views(block)):
+        for index, (slug, legend, headers, rows) in enumerate(table_views(block)):
+            table_class = f' class="scores scores-{slug}"' if iqb else ""
+            columns = "<colgroup>" + "<col>" * len(headers) + "</colgroup>" if iqb else ""
             heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
             body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
             if index == 0 and data.get("title"):
                 legend = data["title"]
             caption = f"<caption>{html.escape(str(legend))}</caption>" if legend else ""
-            tables.append(f'<table{table_class}>{caption}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
+            tables.append(f'<table{table_class}>{caption}{columns}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
         return f'<div class="block long">{"".join(tables)}{refs}</div>'
     if kind == "list":
         items = data.get("items", [])
@@ -600,7 +608,7 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                     if card.get("citation_ids"):
                         cell.add_paragraph("Fontes: " + ", ".join(card["citation_ids"]))
         elif kind == "table":
-            for _, legend, heads, rows in table_views(block):
+            for slug, legend, heads, rows in table_views(block):
                 if legend:
                     doc.add_paragraph(str(legend))
                 width = max(1, len(heads), *(len(row) for row in rows))
@@ -613,6 +621,17 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                     cells = table.add_row().cells
                     for cell, value in zip(cells, row):
                         cell.text = value
+                if isinstance(block["data"].get("dimensions"), dict):
+                    table.autofit = False
+                    available_width = section.page_width - section.left_margin - section.right_margin
+                    for column, percentage in zip(table.columns, IQB_TABLE_WIDTHS[slug]):
+                        column.width = int(available_width * percentage / 100)
+                    for row in table.rows:
+                        for cell, column in zip(row.cells, table.columns):
+                            cell.width = column.width
+                            for paragraph in cell.paragraphs:
+                                for run in paragraph.runs:
+                                    run.font.size = Pt(8)
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
                 doc.add_paragraph(str(item), style="List Bullet")

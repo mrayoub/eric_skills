@@ -126,6 +126,23 @@ class RenderTests(unittest.TestCase):
             self.render(item, "md", folder)
             self.assertIn(r"a\|b", (folder / "pipe-test-v1.0.0.md").read_text(encoding="utf-8"))
 
+    def test_iqb_pdf_keeps_wide_table_columns(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra IQB ausente")
+        item = json.loads(path.read_text(encoding="utf-8"))
+        scores = next(block["data"] for block in item["blocks"] if block["id"] == "scores")
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.render(item, "pdf", folder)
+            stem = f"{item['metadata']['artifact_id']}-v{item['metadata']['content_version']}"
+            reader = PdfReader(folder / f"{stem}.pdf")
+            text = " ".join(" ".join(page.extract_text() for page in reader.pages).split())
+            for label in ("Citação", "Nota bruta", "Nota final", "Rótulo", "Justificativa", "Auditoria de agrupamento"):
+                self.assertTrue(label in text, f"PDF: coluna/seção {label!r} ausente")
+            for detail in scores["dimensions"].values():
+                self.assertTrue(detail["justification"] in text, "PDF: justificativa cortada")
+
     def test_portrait_and_landscape_and_semantic_identity(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
