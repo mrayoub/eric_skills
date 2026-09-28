@@ -16,6 +16,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER_VERSION = "1.3.0"
+IQB_TABLE_WIDTHS = {
+    "criterios": [14, 15, 10, 41, 10, 10],
+    "dimensoes": [14, 7, 10, 12, 9, 10, 10, 28],
+    "agrupamento": [35, 65],
+}
 CARD_LABELS = {
     "test_card": {
         "hypothesis": "1. Acreditamos que — hipótese",
@@ -154,13 +159,8 @@ def block_text(block: dict[str, Any]) -> str:
 def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
     data = block.get("data", {})
     if isinstance(data.get("dimensions"), dict):
-        rows = []
-        for dimension, detail in data["dimensions"].items():
-            for item in detail.get("items", []):
-                rows.append([dimension, str(item.get("criterion_id", "")),
-                             str(item.get("answer", "")), str(item.get("evidence", "")),
-                             str(item.get("evidence_source", ""))])
-        return ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte"], rows
+        _, _, headers, rows = table_views(block)[0]
+        return headers, rows
     columns = data.get("headers") or data.get("columns") or []
     keys = [str(h.get("key", h.get("label", ""))) if isinstance(h, dict) else str(h) for h in columns]
     headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in columns]
@@ -181,6 +181,40 @@ def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
                 for key, value in data.items() if key not in ("section_key", "layout")]
         headers = ["Campo", "Valor"]
     return headers, rows
+
+
+def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[list[str]]]]:
+    """Retorna [(slug, legenda, cabeçalhos, linhas)]; três vistas para o IQB."""
+    data = block.get("data", {})
+    if not isinstance(data.get("dimensions"), dict):
+        return [("", data.get("title", ""), *table_rows(block))]
+    labels = {"clarity": "Clareza", "evidence": "Evidências", "outcomes": "Resultados", "actionability": "Acionabilidade"}
+    criteria: list[list[str]] = []
+    dimensions: list[list[str]] = []
+    for dimension, detail in data["dimensions"].items():
+        label = labels.get(dimension, dimension)
+        for item in detail.get("items", []):
+            criterion = str(item.get("criterion_id", ""))
+            if criterion == detail.get("veto_item_id"):
+                criterion += " (veto)"
+            criteria.append([label, criterion, "Sim" if item.get("answer") is True else "Não",
+                             str(item.get("evidence", "")), str(item.get("evidence_source", "")),
+                             str(item.get("citation_id") or "")])
+        veto = f"Disparado: {detail.get('veto_detail') or '—'}" if detail.get("veto_triggered") else "Não disparado"
+        dimensions.append([label, str(detail.get("yes_count", "")), str(detail.get("raw_score", "")),
+                           veto, str(detail.get("veto_max_score", "")), str(detail.get("final_score", "")),
+                           str(detail.get("label", "")), str(detail.get("justification", ""))])
+    anti = data.get("anti_clustering", {})
+    originals = anti.get("original_scores")
+    audit = [["Disparada", "Sim" if anti.get("triggered") else "Não"],
+             ["Amplitude", str(anti.get("span", ""))],
+             ["Notas originais", ", ".join(map(str, originals)) if originals is not None else "—"],
+             ["Notas da reavaliação", str(anti.get("re_evaluation_notes") or "—")]]
+    return [
+        ("criterios", "Critérios avaliados", ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte", "Citação"], criteria),
+        ("dimensoes", "Notas por dimensão", ["Dimensão", "Sim (de 9)", "Nota bruta", "Veto", "Teto do veto", "Nota final", "Rótulo", "Justificativa"], dimensions),
+        ("agrupamento", "Auditoria de agrupamento", ["Campo", "Valor"], audit),
+    ]
 
 
 def card_text(card: dict[str, Any]) -> str:
@@ -265,6 +299,10 @@ def css(tokens: dict[str, Any], paper: str) -> str:
     else:
         size = f"{page['width']}mm {page['height']}mm"
         margins = f"{page['margin_top']}mm {page['margin_right']}mm {page['margin_bottom']}mm {page['margin_left']}mm"
+    iqb_columns = "\n".join(
+        f"table.scores-{slug} col:nth-child({index}) {{ width: {width}%; }}"
+        for slug, widths in IQB_TABLE_WIDTHS.items() for index, width in enumerate(widths, 1)
+    )
     return f"""
 @font-face {{ font-family: Montserrat; src: url(data:font/ttf;base64,{montserrat_data}) format('truetype'); font-weight: 100 900; }}
 @font-face {{ font-family: Roboto; src: url(data:font/ttf;base64,{roboto_data}) format('truetype'); font-weight: 100 900; }}
@@ -293,13 +331,10 @@ table {{ border-collapse: collapse; width: 100%; font-size: 8pt; break-inside: a
 th {{ background: {color['document_primary']}; color: {color['inverse']}; text-align: left; }}
 td, th {{ border: .75pt solid {color['border']}; padding: 6pt 8pt; vertical-align: top; overflow-wrap: anywhere; }}
 tr {{ break-inside: avoid; }}
-table.scores {{ table-layout: fixed; font-size: 7.5pt; }}
-table.scores th:nth-child(1) {{ width: 15%; }}
-table.scores th:nth-child(2) {{ width: 12%; }}
-table.scores th:nth-child(3) {{ width: 11%; }}
-table.scores th:nth-child(4) {{ width: 49%; }}
-table.scores th:nth-child(5) {{ width: 13%; }}
-table.scores td:nth-child(2), table.scores td:nth-child(3) {{ white-space: nowrap; }}
+table.scores {{ table-layout: fixed; font-size: 8pt; }}
+table.scores td, table.scores th {{ padding: 4pt; white-space: normal; overflow-wrap: anywhere; }}
+table.scores caption {{ text-align: left; font-weight: 700; padding: 8pt 0 4pt; break-after: avoid; }}
+{iqb_columns}
 .refs {{ margin-top: 18pt; border-top: .75pt solid {color['border']}; font-size: 8pt; }}
 .meta {{ margin-top: 12pt; color: {color['text_muted']}; font-size: 7.5pt; }}
 .page-break {{ break-before: page; }}
@@ -351,12 +386,18 @@ def html_block(block: dict[str, Any]) -> str:
     if kind == "card_grid":
         return html_card_grid(block)
     if kind == "table":
-        headers, rows = table_rows(block)
-        heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
-        body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
-        caption = f"<caption>{html.escape(str(data['title']))}</caption>" if data.get("title") else ""
-        table_class = ' class="scores"' if isinstance(data.get("dimensions"), dict) else ""
-        return f'<div class="block long"><table{table_class}>{caption}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>{refs}</div>'
+        iqb = isinstance(data.get("dimensions"), dict)
+        tables = []
+        for index, (slug, legend, headers, rows) in enumerate(table_views(block)):
+            table_class = f' class="scores scores-{slug}"' if iqb else ""
+            columns = "<colgroup>" + "<col>" * len(headers) + "</colgroup>" if iqb else ""
+            heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
+            body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
+            if index == 0 and data.get("title"):
+                legend = data["title"]
+            caption = f"<caption>{html.escape(str(legend))}</caption>" if legend else ""
+            tables.append(f'<table{table_class}>{caption}{columns}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
+        return f'<div class="block long">{"".join(tables)}{refs}</div>'
     if kind == "list":
         items = data.get("items", [])
         tag = "ol" if data.get("ordered") else "ul"
@@ -487,10 +528,13 @@ def render_md(content: dict[str, Any]) -> str:
                 lines.append("| " + str(card["title"]).replace("|", "\\|") + " | " + card_text(card).replace("|", "\\|") + " |")
             lines.append("")
         elif kind == "table":
-            headers, rows = table_rows(block)
-            if headers:
-                lines += ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
-            lines += ["| " + " | ".join(row) + " |" for row in rows] + [""]
+            for _, legend, headers, rows in table_views(block):
+                if legend:
+                    lines += ["### " + str(legend), ""]
+                if headers:
+                    lines += ["| " + " | ".join(value.replace("|", "\\|") for value in headers) + " |",
+                              "| " + " | ".join("---" for _ in headers) + " |"]
+                lines += ["| " + " | ".join(value.replace("|", "\\|") for value in row) + " |" for row in rows] + [""]
         elif kind == "list":
             lines += [f"- {item}" for item in block.get("data", {}).get("items", [])] + [""]
         else:
@@ -564,17 +608,30 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                     if card.get("citation_ids"):
                         cell.add_paragraph("Fontes: " + ", ".join(card["citation_ids"]))
         elif kind == "table":
-            heads, rows = table_rows(block)
-            width = max(1, len(heads), *(len(row) for row in rows))
-            table = doc.add_table(rows=1 if heads else 0, cols=width)
-            table.style = "Table Grid"
-            if heads:
-                for cell, value in zip(table.rows[0].cells, heads):
-                    cell.text = value
-            for row in rows:
-                cells = table.add_row().cells
-                for cell, value in zip(cells, row):
-                    cell.text = value
+            for slug, legend, heads, rows in table_views(block):
+                if legend:
+                    doc.add_paragraph(str(legend))
+                width = max(1, len(heads), *(len(row) for row in rows))
+                table = doc.add_table(rows=1 if heads else 0, cols=width)
+                table.style = "Table Grid"
+                if heads:
+                    for cell, value in zip(table.rows[0].cells, heads):
+                        cell.text = value
+                for row in rows:
+                    cells = table.add_row().cells
+                    for cell, value in zip(cells, row):
+                        cell.text = value
+                if isinstance(block["data"].get("dimensions"), dict):
+                    table.autofit = False
+                    available_width = section.page_width - section.left_margin - section.right_margin
+                    for column, percentage in zip(table.columns, IQB_TABLE_WIDTHS[slug]):
+                        column.width = int(available_width * percentage / 100)
+                    for row in table.rows:
+                        for cell, column in zip(row.cells, table.columns):
+                            cell.width = column.width
+                            for paragraph in cell.paragraphs:
+                                for run in paragraph.runs:
+                                    run.font.size = Pt(8)
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
                 doc.add_paragraph(str(item), style="List Bullet")
@@ -644,8 +701,11 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             continue
         line = block_text(block)
         if block["type"] == "table":
-            heads, rows = table_rows(block)
-            line = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+            views = []
+            for _, legend, heads, rows in table_views(block):
+                text = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+                views.append((str(legend) + "\n" if legend else "") + text)
+            line = "\n\n".join(views)
         if block.get("citation_ids"):
             line += " [" + ", ".join(block["citation_ids"]) + "]"
         for chunk in [line[i:i+650] for i in range(0, len(line), 650)] or [""]:
@@ -669,14 +729,15 @@ def write_csv_tables(content: dict[str, Any], out: Path, stem: str) -> list[Path
         if block["type"] != "table" or not export.get("csv"):
             continue
         variant = safe_name(export["variant_key"])
-        path = out / f"{stem}-{variant}.csv"
-        headers, rows = table_rows(block)
-        with path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.writer(handle)
-            if headers:
-                writer.writerow(headers)
-            writer.writerows(rows)
-        written.append(path)
+        for index, (slug, _, headers, rows) in enumerate(table_views(block)):
+            suffix = f"-{slug}" if index else ""
+            path = out / f"{stem}-{variant}{suffix}.csv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle)
+                if headers:
+                    writer.writerow(headers)
+                writer.writerows(rows)
+            written.append(path)
     if not written:
         raise ValueError("CSV solicitado sem bloco table marcado export.csv=true")
     return written
