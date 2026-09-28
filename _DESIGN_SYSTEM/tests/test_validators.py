@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import random
 import subprocess
 import sys
 import tempfile
@@ -163,6 +164,23 @@ class PotentialValidationTests(unittest.TestCase):
                 result = score.calculate_innovation_score({key: {"score": value, "justification": "x"}
                                                           for key in validator.WEIGHTS})
                 self.assertEqual(validator.classify(result["overall_score"]), result["classification"])
+
+    def test_parity_with_score_script_on_random_scores(self):
+        path = ROOT.parent / "potencial-inovacao/scripts/score.py"
+        if not path.exists():
+            self.skipTest("Script de potencial ausente")
+        score = load_module("score", path)
+        rng = random.Random(20260928)
+        for _ in range(2000):
+            notes = {item["key"]: {"score": rng.choice([rng.randint(0, 100), round(rng.uniform(0, 100), 1)]),
+                                   "justification": "x"} for item in score.CRITERIA}
+            result = score.calculate_innovation_score(notes)
+            data = section(self.content, "scores")
+            data["rows"] = [{"criterion": key, "score": note["score"], "weight": result["criteria_weights"][key],
+                             "justification": "x"} for key, note in notes.items()]
+            data["overall_score"] = result["overall_score"]
+            data["classification"] = result["classification"]
+            self.assertEqual(validators.run(self.content), [], notes)
 
     def test_changed_total(self):
         section(self.content, "scores")["overall_score"] = 80
