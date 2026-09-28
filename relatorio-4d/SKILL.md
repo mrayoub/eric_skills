@@ -11,7 +11,7 @@ Consolida registros de D1–D4; playbook e referências visuais não fornecem re
 
 - [Playbook 4D](references/4d-workshop-playbook.md) — sequência metodológica.
 - [Layout de cards](references/relatorio-4d-layout.md) — grades tabuladas e comparações citadas.
-Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md), [PDF de referência](assets/official-four-d-report.pdf). Preserve originais; diferenças/datadas; não copie conteúdo de outro projeto.
+Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md), [PDF de referência](assets/official-four-d-report.pdf). Preserve originais; registre diferenças e datas; não copie conteúdo de outro projeto.
 
 ## Grilling
 

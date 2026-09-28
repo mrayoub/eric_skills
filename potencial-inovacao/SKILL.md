@@ -11,7 +11,7 @@ Não avalia maturidade de evidências (Scorecard da Strategyzer) nem resultados 
 ## Leia primeiro
 
 - [Rubrica de potencial](references/innovation-potential-rubric.md) — critérios, pesos, faixas e a regra de ausência.
-- [Levantamento documental](references/levantamento-documental-e-grilling.md) — como montar o mapa afirmação → fonte.
+- [Levantamento documental](references/grilling-operacional.md#5-complementos-de-levantamento-documental) — mapa afirmação → fonte.
 
 ## Grilling
 

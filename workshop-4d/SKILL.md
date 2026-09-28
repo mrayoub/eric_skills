@@ -10,7 +10,7 @@ Prepara, conduz ou registra D1–D4 em sequência lógica; resultados posteriore
 ## Leia primeiro
 
 - [Playbook 4D](references/4d-workshop-playbook.md) — tempos e dinâmicas.
-Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md). Preserve originais; registre diferenças/datadas.
+Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md). Preserve originais; registre diferenças e datas.
 [Blueprint Mural](references/mural-board-4d-template.md) opcional: board autorizado ou registros físicos/conversacionais.
 
 ## Grilling

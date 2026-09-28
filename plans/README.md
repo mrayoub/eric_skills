@@ -25,7 +25,7 @@ Convenções comuns a todos os planos:
 | 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
 | 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (implementação pronta; bateria antes/depois adiada pelo operador; não bloqueia a execução do 009) |
 | 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | DONE (11 conjuntos, 22 casos, 35 fixtures fictícias; integridade e contas verificadas; linha de base não rodada) |
-| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | IN PROGRESS (piloto pronto para revisão: potencial com 650 palavras; checks locais passaram; comparação comportamental pendente; rollout não iniciado) |
+| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | DONE (11 skills reestruturadas; grilling unificado; checks locais passaram; evals comportamentais não executados) |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | TODO |
 
@@ -65,10 +65,26 @@ mantendo os quatro blocos padrão exatos e as regras do método. A instrução
 adicional do plano 005 registrada em `5ec6644` foi mantida no contrato `scores`.
 Validador da skill, links locais, frontmatter, orçamento e blocos padrão
 verificados; 12 testes de potencial e 7 subtestes passaram; sync verificado.
-Nenhuma chamada de modelo foi feita: a comparação comportamental de dois
-casos contra a tag ainda está pendente. O Step 3 exige revisão do resultado
-do piloto antes do rollout; as outras dez skills e a fusão do Step 5 não foram
-alteradas nesta etapa.
+Nenhuma chamada de modelo foi feita nessa etapa; o rollout aguardou a revisão
+do operador, conforme o Step 3.
+
+Fechamento do plano 010: o operador aprovou o piloto e autorizou o rollout.
+As outras dez skills foram reestruturadas, com um commit por skill, preservando
+frontmatter e regras específicas nos textos principais ou referências linkadas.
+Planejamento e análise da experimentação foram movidos integralmente para duas
+referências locais, com ajuste apenas dos caminhos relativos dos links.
+O levantamento documental foi incorporado ao grilling comum e suas nove cópias
+aposentadas foram removidas pela sincronização.
+
+As 11 skills passaram no validador, na checagem de links, na estrutura de seções
+e no orçamento: até 650 palavras nas skills comuns, 900 no scorecard e 1.400 na
+experimentação. Os quatro blocos padrão foram conferidos; frontmatter, scripts,
+assets, design system e contexto ERIC foram preservados. A suíte local passou
+com 58 testes e 25 subtestes; `sync_shared.py --check` e `git diff --check` passaram.
+As evals comportamentais do plano 009 contra a linha de base não foram executadas:
+as chamadas de modelo seguem adiadas, sem autorização específica de custo nesta
+etapa. Os checks locais não comprovam ausência de regressão comportamental.
+O plano permite o fechamento com esse registro; a comparação permanece pendente.
 
 ## Notas de dependência
 

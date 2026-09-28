@@ -58,8 +58,6 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
     references = [
         (ROOT / "_ERIC_CONTEXT/README.md", "eric-esteira.md", False),
         (ROOT / "_SHARED/grilling-operacional.md", "grilling-operacional.md", False),
-        (ROOT / "_SHARED/levantamento-documental-e-grilling.md",
-         "levantamento-documental-e-grilling.md", True),
     ]
     for src, name, optional in references:
         dst = skill / "references" / name
@@ -67,6 +65,10 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
             continue
         if not dst.is_file() or digest(src) != digest(dst):
             result.append(("copy", dst, src))
+    # Referência incorporada ao grilling no plano 010; remove só a cópia aposentada.
+    retired = skill / "references/levantamento-documental-e-grilling.md"
+    if retired.exists():
+        result.append(("delete", retired, None))
     for dst in sorted(skill.rglob("*"), key=lambda p: (len(p.parts), str(p))):
         if base in dst.parents or dst == base:
             continue
@@ -86,8 +88,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
-                    ROOT / "_SHARED/grilling-operacional.md",
-                    ROOT / "_SHARED/levantamento-documental-e-grilling.md"]
+                    ROOT / "_SHARED/grilling-operacional.md"]
         for path in required:
             if not path.exists():
                 raise FileNotFoundError(f"Fonte ausente: {path.relative_to(ROOT)}")
