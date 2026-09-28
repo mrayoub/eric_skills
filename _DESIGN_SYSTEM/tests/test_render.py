@@ -98,6 +98,27 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(output["unavailable"], {})
         return output
 
+    def test_reader_labels_are_portuguese_and_canonical_keys_are_preserved(self):
+        for kind, label in [
+            ("experiment_plan", "Plano de experimentação"),
+            ("test_card", "Cartão de teste"),
+            ("executive_presentation", "Apresentação executiva"),
+        ]:
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as folder:
+                path = Path(folder)
+                item = content(kind, "linguagem")
+                result = self.render(item, "html", path)
+                html_path = next(path / name for name in result["files"] if name.endswith(".html"))
+                rendered = html_path.read_text()
+                self.assertIn(f'<span class="eyebrow">{label}</span>', rendered)
+                self.assertIn("Evidência resumida e verificável.", rendered)
+                self.assertNotIn(f'>{kind.replace("_", " ")}</span>', rendered)
+                if kind != "executive_presentation":
+                    self.assertIn("Parcial", rendered)
+                    self.assertNotIn("perfil report_portrait", rendered)
+                json_path = next(path / name for name in result["files"] if name.endswith(".json"))
+                self.assertEqual(json.loads(json_path.read_text()), item)
+
     def test_iqb_derivatives_keep_scores_vetoes_and_audit(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
         if not path.exists():

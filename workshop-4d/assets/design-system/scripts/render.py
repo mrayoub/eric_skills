@@ -15,7 +15,32 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "1.3.0"
+RENDERER_VERSION = "1.3.1"
+DELIVERABLE_LABELS = {
+    "briefing": "Briefing",
+    "briefing_one_page": "Resumo do briefing",
+    "briefing_improvement_questionnaire": "Perguntas para melhorar o briefing",
+    "briefing_validation": "Avaliação do briefing",
+    "innovation_potential_assessment": "Avaliação do potencial de inovação",
+    "four_d_workshop_record": "Registro do workshop 4D",
+    "four_d_report": "Relatório 4D",
+    "three_e_workshop_record": "Registro do workshop 3E",
+    "three_e_report": "Relatório 3E",
+    "innovation_scorecard": "Avaliação das evidências de inovação",
+    "experiment_plan": "Plano de experimentação",
+    "test_card": "Cartão de teste",
+    "learning_card": "Cartão de aprendizado",
+    "experiment_report": "Relatório de experimentação",
+    "evidence_recommendation": "Evidências e recomendação",
+    "executive_presentation": "Apresentação executiva",
+    "five_c_workshop_record": "Registro do workshop 5C",
+    "five_c_report": "Relatório 5C",
+}
+COMPLETENESS_LABELS = {
+    "complete": "Completo",
+    "partial": "Parcial",
+    "inconclusive": "Inconclusivo",
+}
 IQB_TABLE_WIDTHS = {
     "criterios": [14, 15, 10, 41, 10, 10],
     "dimensoes": [14, 7, 10, 12, 9, 10, 10, 28],
@@ -418,6 +443,8 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     uri = "data:image/png;base64," + base64.b64encode(logo.read_bytes()).decode("ascii")
     meta = content["metadata"]
     title = html.escape(content["title"])
+    deliverable_label = html.escape(DELIVERABLE_LABELS[content["deliverable_type"]])
+    completeness_label = COMPLETENESS_LABELS[meta.get("completeness") or "complete"]
     if profile["layout"] == "presentation":
         sections: list[tuple[str, list[dict[str, Any]]]] = []
         current_title = "Conteúdo"
@@ -433,7 +460,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             current_blocks.append(block)
         if current_blocks:
             sections.append((current_title, current_blocks))
-        masthead = f'<header class="masthead"><span class="eyebrow">{html.escape(content["deliverable_type"].replace("_", " "))}</span><img src="{uri}" alt="CCEE"></header>'
+        masthead = f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
         slides = [f'<section class="slide">{masthead}<h1>{title}</h1><p class="summary">{html.escape(content.get("summary", ""))}</p></section>']
         for section_title, section_blocks in sections:
             slides.append(f'<section class="slide">{masthead}<h1>{html.escape(section_title)}</h1>'
@@ -493,16 +520,16 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                        ".summary { margin-bottom: 9pt; } "
                        ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
     footer_label = (f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · '
-                    f'{profile["layout"]}')
+                    f'{completeness_label}')
     footer_css = (f'@page {{ @bottom-right {{ content: "{footer_label}"; '
                   f'font-family: Roboto; font-size: 7.5pt; color: {tokens["color"]["text_muted"]}; }} }} '
                   '@media print { footer.meta { display: none; } }')
     return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
             f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"
-            f'<header class="masthead"><span class="eyebrow">{html.escape(content["deliverable_type"].replace("_", " "))}</span><img src="{uri}" alt="CCEE"></header>'
+            f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
             f"<h1>{title}</h1>{summary}{blocks}{refs}"
             f'<footer class="meta">ID {html.escape(meta["artifact_id"])} · versão {html.escape(meta["content_version"])} · '
-            f'perfil {html.escape(profile["layout"])} · estado {html.escape(meta.get("completeness", "complete"))}</footer>'
+            f'{html.escape(completeness_label)}</footer>'
             "</article></body></html>\n")
 
 

@@ -86,6 +86,15 @@ as chamadas de modelo seguem adiadas, sem autorização específica de custo nes
 etapa. Os checks locais não comprovam ausência de regressão comportamental.
 O plano permite o fechamento com esse registro; a comparação permanece pendente.
 
+Ajuste posterior solicitado pelo operador: linguagem simples e direta nas onze
+skills, tanto no chat quanto nos entregáveis. A orientação comum está em
+`_SHARED/linguagem-dos-entregaveis.md`, distribuída por sync e linkada em cada
+SKILL.md. Ela atualiza o bloco padrão de entrega do plano 010 para exigir clareza
+ao leitor, preservando os métodos. Cabeçalhos e estados visíveis do renderizador
+foram traduzidos para português; os campos canônicos continuam preservados.
+Validação local: onze skills válidas, links e orçamentos conferidos, sync consistente;
+59 testes e 28 subtestes passaram. Nenhuma avaliação com modelo foi disparada.
+
 ## Notas de dependência
 
 - **001 antes de tudo que toca o design system** (002, 005, 006, 007, 011): sem o script de sync, cada correção teria de ser copiada à mão para 11 pastas.
