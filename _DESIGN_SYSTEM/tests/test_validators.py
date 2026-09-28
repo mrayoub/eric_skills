@@ -53,6 +53,47 @@ class BriefingValidationTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("citações aninhadas", result.stderr)
 
+    def test_original_sample_is_valid_and_unchanged(self):
+        original = copy.deepcopy(self.content)
+        self.assertEqual(validators.run(self.content), [])
+        self.assertEqual(self.content, original)
+
+    def test_inconsistent_iqb_and_classification(self):
+        section(self.content, "iqb").update(score=1, classification="Excelente")
+        errors = validators.run(self.content)
+        self.assertTrue(any("iqb.score" in error for error in errors))
+        self.assertTrue(any("iqb.classification" in error for error in errors))
+
+    def test_duplicate_criterion_id(self):
+        section(self.content, "scores")["dimensions"]["clarity"]["items"][1]["criterion_id"] = "CLA-01"
+        errors = validators.run(self.content)
+        self.assertTrue(any("criterion_id" in error and "CLA-01" in error and "CLA-02" in error for error in errors))
+
+    def test_veto_caps_final_score(self):
+        detail = section(self.content, "scores")["dimensions"]["evidence"]
+        detail["items"][5]["answer"] = False
+        detail["veto_triggered"] = True
+        self.assertTrue(any("scores.evidence.final_score" in error for error in validators.run(self.content)))
+
+    def test_tampered_yes_count(self):
+        section(self.content, "scores")["dimensions"]["clarity"]["yes_count"] = 9
+        self.assertTrue(any("scores.clarity.yes_count" in error for error in validators.run(self.content)))
+
+    def test_renderer_rejects_inconsistent_iqb(self):
+        section(self.content, "iqb")["score"] = 1
+        result = self.render()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Inconsistência semântica", result.stderr)
+
+    def test_parity_with_iqb_script(self):
+        path = ROOT.parent / "avaliacao-briefing-iqb/scripts/iqb.py"
+        if not path.exists():
+            self.skipTest("Script IQB ausente")
+        iqb = load_module("iqb", path)
+        validator = load_module("briefing_validator", ROOT / "scripts/validators/briefing_validation.py")
+        for name in ("YES_COUNT_TO_RAW_SCORE", "VETO_ITEM_IDS", "VETO_MAX_SCORES", "RAW_SCORE_TO_LABEL"):
+            self.assertEqual(getattr(validator, name), getattr(iqb, name), name)
+
 
 if __name__ == "__main__":
     unittest.main()
