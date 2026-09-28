@@ -154,13 +154,8 @@ def block_text(block: dict[str, Any]) -> str:
 def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
     data = block.get("data", {})
     if isinstance(data.get("dimensions"), dict):
-        rows = []
-        for dimension, detail in data["dimensions"].items():
-            for item in detail.get("items", []):
-                rows.append([dimension, str(item.get("criterion_id", "")),
-                             str(item.get("answer", "")), str(item.get("evidence", "")),
-                             str(item.get("evidence_source", ""))])
-        return ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte"], rows
+        _, _, headers, rows = table_views(block)[0]
+        return headers, rows
     columns = data.get("headers") or data.get("columns") or []
     keys = [str(h.get("key", h.get("label", ""))) if isinstance(h, dict) else str(h) for h in columns]
     headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in columns]
@@ -181,6 +176,40 @@ def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
                 for key, value in data.items() if key not in ("section_key", "layout")]
         headers = ["Campo", "Valor"]
     return headers, rows
+
+
+def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[list[str]]]]:
+    """Retorna [(slug, legenda, cabeçalhos, linhas)]; três vistas para o IQB."""
+    data = block.get("data", {})
+    if not isinstance(data.get("dimensions"), dict):
+        return [("", data.get("title", ""), *table_rows(block))]
+    labels = {"clarity": "Clareza", "evidence": "Evidências", "outcomes": "Resultados", "actionability": "Acionabilidade"}
+    criteria: list[list[str]] = []
+    dimensions: list[list[str]] = []
+    for dimension, detail in data["dimensions"].items():
+        label = labels.get(dimension, dimension)
+        for item in detail.get("items", []):
+            criterion = str(item.get("criterion_id", ""))
+            if criterion == detail.get("veto_item_id"):
+                criterion += " (veto)"
+            criteria.append([label, criterion, "Sim" if item.get("answer") is True else "Não",
+                             str(item.get("evidence", "")), str(item.get("evidence_source", "")),
+                             str(item.get("citation_id") or "")])
+        veto = f"Disparado: {detail.get('veto_detail') or '—'}" if detail.get("veto_triggered") else "Não disparado"
+        dimensions.append([label, str(detail.get("yes_count", "")), str(detail.get("raw_score", "")),
+                           veto, str(detail.get("veto_max_score", "")), str(detail.get("final_score", "")),
+                           str(detail.get("label", "")), str(detail.get("justification", ""))])
+    anti = data.get("anti_clustering", {})
+    originals = anti.get("original_scores")
+    audit = [["Disparada", "Sim" if anti.get("triggered") else "Não"],
+             ["Amplitude", str(anti.get("span", ""))],
+             ["Notas originais", ", ".join(map(str, originals)) if originals is not None else "—"],
+             ["Notas da reavaliação", str(anti.get("re_evaluation_notes") or "—")]]
+    return [
+        ("criterios", "Critérios avaliados", ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte", "Citação"], criteria),
+        ("dimensoes", "Notas por dimensão", ["Dimensão", "Sim (de 9)", "Nota bruta", "Veto", "Teto do veto", "Nota final", "Rótulo", "Justificativa"], dimensions),
+        ("agrupamento", "Auditoria de agrupamento", ["Campo", "Valor"], audit),
+    ]
 
 
 def card_text(card: dict[str, Any]) -> str:

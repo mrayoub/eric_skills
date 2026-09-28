@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import importlib.util
+import re
 import subprocess
 import sys
 import tempfile
@@ -85,6 +86,45 @@ class RenderTests(unittest.TestCase):
         result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder), "--formats", formats], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         return json.loads(result.stdout)
+
+    def test_iqb_derivatives_keep_scores_vetoes_and_audit(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra IQB ausente")
+        item = json.loads(path.read_text(encoding="utf-8"))
+        scores = next(block["data"] for block in item["blocks"] if block["id"] == "scores")
+        scores["dimensions"]["clarity"]["items"][0]["citation_id"] = "FIC-01"
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.render(item, "md,docx,html,txt", folder)
+            stem = f"{item['metadata']['artifact_id']}-v{item['metadata']['content_version']}"
+            doc = Document(folder / f"{stem}.docx")
+            doc_text = "\n".join([p.text for p in doc.paragraphs] +
+                                 [" | ".join(cell.text for cell in row.cells)
+                                  for table in doc.tables for row in table.rows])
+            for format in ("md", "docx", "html", "txt"):
+                with self.subTest(format=format):
+                    text = doc_text if format == "docx" else (folder / f"{stem}.{format}").read_text(encoding="utf-8")
+                    if format == "html":
+                        text = re.sub(r"<style>.*?</style>", "", text, flags=re.DOTALL)
+                        text = re.sub(r"<[^>]*>", " ", text.replace("</tr>", "</tr>\n"))
+                    for prefix in ("CLA", "EVI", "OUT", "ACT"):
+                        for index in range(1, 11):
+                            self.assertIn(f"{prefix}-{index:02d}", text)
+                    self.assertTrue("Nota bruta" in text, f"{format}: Nota bruta ausente")
+                    self.assertTrue("Nota final" in text, f"{format}: Nota final ausente")
+                    self.assertIn(scores["dimensions"]["clarity"]["justification"], text)
+                    self.assertIn("Auditoria de agrupamento", text)
+                    self.assertRegex(text, rf"Amplitude[\s:|]+{scores['anti_clustering']['span']}\b")
+                    self.assertTrue(any("CLA-01" in line and "FIC-01" in line for line in text.splitlines()))
+
+    def test_md_escapes_pipes(self):
+        item = content("innovation_potential_assessment", "pipe-test")
+        item["blocks"][2]["data"]["rows"] = [["Casos", "a|b"]]
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.render(item, "md", folder)
+            self.assertIn(r"a\|b", (folder / "pipe-test-v1.0.0.md").read_text(encoding="utf-8"))
 
     def test_portrait_and_landscape_and_semantic_identity(self):
         with tempfile.TemporaryDirectory() as temp:
