@@ -29,7 +29,7 @@ Convenções comuns a todos os planos:
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | DONE (vínculo e derivados verificados; 62 testes e 36 subtestes passaram; sync consistente) |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | DONE (27 fontes, 11 páginas; hashes e 5 negativos verificados; 20 testes e 9 subtestes passaram) |
 | 013 | [Calcular total e classe com as mesmas notas publicadas](013-potencial-precisao-consistente.md) (A01) | P1 | S | 012; 003 e 005 | DONE (65 testes e 54 subtestes passaram; precisão e exportação consistentes; sync e fontes verificados) |
-| 014 | [Rejeitar evidências nulas ou de tipo inadequado no IQB](014-iqb-evidencia-textual.md) (A02) | P1 | S | 012; 004 | TODO |
+| 014 | [Rejeitar evidências nulas ou de tipo inadequado no IQB](014-iqb-evidencia-textual.md) (A02) | P1 | S | 012; 004 | DONE (68 testes e 87 subtestes passaram; API e CLI rejeitam evidência inválida; fontes e sync verificados) |
 | 015 | [Exigir que seções obrigatórias apareçam nos arquivos entregues](015-secoes-obrigatorias-visiveis.md) (A03) | P1 | M | 012; 001 e 005 | TODO |
 | 016 | [Manter os quatro campos em cards parciais e inconclusivos](016-cards-parciais-quatro-campos.md) (A04) | P1 | S | 012; 015; 001 e 005 | TODO |
 | 017 | [Preservar fontes individuais dos cards em Markdown e TXT](017-citacoes-dos-cards-em-md-txt.md) (A05) | P1 | S | 012; 001 e 005 | TODO |

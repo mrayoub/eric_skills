@@ -212,7 +212,8 @@ def _validate_complete_evaluations(evaluations: dict[str, list[dict]]) -> None:
         for item in items:
             if type(item.get("answer")) is not bool:
                 raise ValueError(f"{item['criterion_id']}: answer must be true or false")
-            if not str(item.get("evidence", "")).strip():
+            evidence = item.get("evidence")
+            if not isinstance(evidence, str) or not evidence.strip():
                 raise ValueError(f"{item['criterion_id']}: evidence or an explicit absence note is required")
 
 
