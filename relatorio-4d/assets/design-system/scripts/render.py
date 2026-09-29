@@ -80,6 +80,15 @@ def safe_name(value: str) -> str:
     return value
 
 
+def identity_line(content: dict[str, Any]) -> str:
+    meta = content["metadata"]
+    state = COMPLETENESS_LABELS[meta.get("completeness") or "complete"]
+    label = f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · {state}'
+    if isinstance(meta.get("date"), str) and meta["date"].strip():
+        label += f' · data {meta["date"]}'
+    return label
+
+
 def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any]:
     try:
         from jsonschema import Draft202012Validator
@@ -105,7 +114,8 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
 
     envelope = read_json(ROOT / "contracts" / "deliverable-content.schema.json")
     registry = Registry().with_resource(envelope["$id"], Resource.from_contents(envelope))
-    schema_file = profile.get("schema") if meta.get("completeness", "complete") == "complete" else None
+    effective_completeness = meta.get("completeness") or "complete"
+    schema_file = profile.get("schema") if effective_completeness == "complete" else None
     schema = read_json(ROOT / "contracts" / schema_file) if schema_file else envelope
     errors = sorted(Draft202012Validator(schema, registry=registry).iter_errors(content), key=lambda e: str(e.path))
     if errors:
@@ -163,7 +173,7 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
         unknown = nested_citations(block["data"]) - citation_ids
         if unknown:
             raise ValueError(f"{block['id']}: citações aninhadas inexistentes: {sorted(unknown)}")
-    if meta.get("completeness", "complete") == "complete":
+    if effective_completeness == "complete":
         import importlib.util
 
         spec = importlib.util.spec_from_file_location("deliverable_validators", ROOT / "scripts/validators/__init__.py")
@@ -459,7 +469,6 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     meta = content["metadata"]
     title = html.escape(content["title"])
     deliverable_label = html.escape(DELIVERABLE_LABELS[content["deliverable_type"]])
-    completeness_label = COMPLETENESS_LABELS[meta.get("completeness") or "complete"]
     if profile["layout"] == "presentation":
         sections: list[tuple[str, list[dict[str, Any]]]] = []
         current_title = "Conteúdo"
@@ -485,7 +494,12 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                            + (f', {html.escape(c["locator"])}' if c.get("locator") else '') + '</li>'
                            for c in content["citations"])
             slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1><ol>{refs}</ol></section>')
+        slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
+        slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
         slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
+        slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: Roboto; '
+                      f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
+                      f'color: {tokens["color"]["text_muted"]}; }}')
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
@@ -534,8 +548,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                        "h2 { margin: 10pt 0 5pt; } "
                        ".summary { margin-bottom: 9pt; } "
                        ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
-    footer_label = (f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · '
-                    f'{completeness_label}')
+    footer_label = identity_line(content)
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
         footer_label += f' · Test Card {meta["test_card_id"]} v{meta.get("test_card_version", "")}'
     css_footer_label = json.dumps(footer_label, ensure_ascii=False).replace("<", "\\003c ")
@@ -554,7 +567,7 @@ def render_md(content: dict[str, Any]) -> str:
     def grid_cell(text: str) -> str:
         return text.replace("|", "\\|").replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>")
 
-    lines = [f"# {content['title']}", ""]
+    lines = [f"# {content['title']}", "", identity_line(content), ""]
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
         lines += [f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}', ""]
@@ -637,6 +650,10 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     header.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.2))
     doc.add_heading(content["title"], 0)
+    identity = doc.add_paragraph(identity_line(content))
+    for run in identity.runs:
+        run.font.size = Pt(tokens["typography"]["styles"]["footer"]["size"])
+        run.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
         doc.add_paragraph(f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}')
@@ -743,6 +760,13 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
             para.text = line
             para.font.name, para.font.size = "Roboto", Pt(17)
+        footer = s.shapes.add_textbox(Inches(.6), Inches(7.02), Inches(12.1), Inches(.33))
+        footer.text_frame.word_wrap = True
+        paragraph = footer.text_frame.paragraphs[0]
+        paragraph.text = identity_line(content)
+        paragraph.font.name = tokens["typography"]["font_body"]
+        paragraph.font.size = Pt(10)
+        paragraph.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
 
     slide(content["title"], content.get("summary", ""))
     title = "Conteúdo"

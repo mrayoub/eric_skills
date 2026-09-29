@@ -6,13 +6,13 @@
 
 ## Status
 
-- **Status:** TODO
+- **Status:** DONE
 - **Prioridade:** P1
 - **Esforço:** S (S = horas; M = cerca de um dia)
 - **Risco da correção:** LOW
 - **Depende de:** 012 (fontes geradas); 017; 001 e 007 (DONE)
 - **Categoria:** bug
-- **Planejado contra:** commit `3404a5c`, 2026-09-29
+- **Planejado contra:** commit `3404a5c`, 2026-09-29; reconciliado em `ec43e58` após 011–017
 - **Achado coberto:** A06; seleção de todos os achados autorizada pelo operador
 
 ## Por que importa
@@ -67,6 +67,23 @@ Se esse ambiente temporário não existir, use `PLAN_PYTHON=python3` **somente s
 
 ## Passos
 
+### Passo 0: Alinhar o estado validado ao estado apresentado
+
+Na revisão em `ec43e58`, `metadata.completeness: null` foi aceito como completo
+pelo HTML, mas pulou o contrato especializado e a validação semântica. Reproduzido
+com Learning Card sem vínculo e relatório 3E sem seções: `null` aceito, `complete`
+rejeitado. Normalize o estado efetivo em `validate` com
+`meta.get("completeness") or "complete"`, usando-o tanto na seleção do schema
+quanto na execução do validador semântico, sem escrever no JSON. Ausência e `null`
+devem exigir o mesmo contrato completo exibido ao leitor. Partial/inconclusive
+mantêm seu contrato atual; não criar novos estados.
+
+Teste ausência e `null`: rejeição de LC sem vínculo, relatório sem seções e total
+numérico adulterado; positivos válidos e entrada intacta. Demonstre o comportamento
+anterior antes da correção. Esta correção está no escopo já previsto de render.py
+e seus testes e impede identificar como completo um conteúdo que não foi validado
+como tal.
+
 ### Passo 1: Definir uma linha comum de identificação
 
 Adicione uma função curta no render.py que forme “ID <artifact_id> · versão <content_version> · <estado em português>”. Use os campos já validados, sem escrever no objeto content. Se metadata trouxer data identificada, preserve-a; não invente uma data de avaliação a partir da hora da exportação e não adicione exigência nova de data. Acrescente testes `test_editable_formats_show_identity_and_state`, primeiro demonstrando a ausência em MD/DOCX/PPTX.
@@ -90,6 +107,13 @@ PYTHONDONTWRITEBYTECODE=1 "$PLAN_PYTHON" -m pytest _DESIGN_SYSTEM/tests/test_ren
 ```
 
 **Esperado:** todos passam; texto extraído mostra ID, versão e estado nos formatos suportados.
+
+Na conferência do executor, o ramo HTML/PDF de apresentação retorna antes do
+rodapé comum e não apresenta identidade hoje. Acrescente a mesma identificação
+legível à capa e a cada slide HTML/PDF da apresentação, cobrindo também os slides
+de fontes. Esta exceção foi reconciliada para cumprir todos os formatos: preserve
+o rodapé existente dos demais perfis e mantenha orientação, fontes, corpo e timbre.
+Teste extração por slide/página e ausência de sobreposição no PPTX.
 
 ### Passo 3: Verificar formatos e estados sem aumentar fonte nem cortar conteúdo
 
@@ -132,13 +156,13 @@ Mudanças anteriores geradas por 012 são esperadas na conferência de deriva.
 
 ## Critérios de conclusão
 
-- [ ] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
-- [ ] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
-- [ ] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
-- [ ] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
-- [ ] `git diff --check` retorna exit 0.
-- [ ] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
-- [ ] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
+- [x] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
+- [x] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
+- [x] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
+- [x] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
+- [x] `git diff --check` retorna exit 0.
+- [x] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
+- [x] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
 
 ## Condições de parada
 
@@ -152,3 +176,8 @@ Pare e reporte se:
 ## Manutenção
 
 As onze skills recebem o ajuste por sync. Critérios específicos de cada skill podem exigir mais informação no cabeçalho; esta linha é o mínimo compartilhado e não prova vigência das fontes, tratada em 012.
+
+## Fechamento — 29/09/2026
+
+Revisão independente aprovada: 78 testes e 425 subtestes passaram; identificação nos formatos e slides, contrato completo para ausência/null, data informada, vínculo TC/LC e card de uma página verificados; sync e fontes consistentes..
+Checks de escopo, fontes e diff passaram; nenhuma bateria de modelos executada.

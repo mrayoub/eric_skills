@@ -123,6 +123,112 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(output["unavailable"], {})
         return output
 
+    def test_null_completeness_enforces_complete_validation(self):
+        learning = self.card_document("learning_card", "partial")
+        report = content("three_e_report", "invalid-report")
+        potential = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/innovation_potential_assessment/input.json").read_text())
+        next(block["data"] for block in potential["blocks"] if block["data"].get("section_key") == "scores")["overall_score"] = 80
+        for original in (learning, report, potential):
+            for state in ("complete", "missing", None):
+                with self.subTest(kind=original["deliverable_type"], state=state):
+                    item = copy.deepcopy(original)
+                    if state == "missing":
+                        item["metadata"].pop("completeness", None)
+                    else:
+                        item["metadata"]["completeness"] = state
+                    before = copy.deepcopy(item)
+                    with self.assertRaises(ValueError):
+                        self.renderer.validate(item, self.profiles)
+                    self.assertEqual(item, before)
+
+    def test_editable_formats_show_identity_and_state(self):
+        for kind in ("three_e_report", "learning_card", "executive_presentation"):
+            item = self.card_document(kind, "partial") if kind == "learning_card" else content(kind, "identity-test")
+            identity = f'ID {item["metadata"]["artifact_id"]} · versão 1.0.0 · Parcial'
+            with tempfile.TemporaryDirectory() as temp:
+                folder = Path(temp)
+                editable = "pptx" if kind == "executive_presentation" else "docx"
+                self.render(item, "md,txt," + editable, folder)
+                stem = item["metadata"]["artifact_id"] + "-v1.0.0"
+                for fmt in ("md", "txt", editable):
+                    with self.subTest(kind=kind, format=fmt):
+                        path = folder / f"{stem}.{fmt}"
+                        if fmt == "docx":
+                            text = "\n".join(p.text for p in Document(path).paragraphs)
+                            self.assertIn(identity, text)
+                        elif fmt == "pptx":
+                            for slide in Presentation(path).slides:
+                                text = "\n".join(shape.text for shape in slide.shapes if shape.has_text_frame)
+                                self.assertIn(identity, text)
+                        else:
+                            self.assertIn(identity, path.read_text())
+
+    def test_identity_for_all_states_and_supported_profiles(self):
+        for kind in ("briefing_one_page", "three_e_report", "learning_card", "executive_presentation"):
+            source = ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json"
+            original = json.loads(source.read_text())
+            for state in ("partial", "inconclusive", "complete", "missing", None):
+                with self.subTest(kind=kind, state=state), tempfile.TemporaryDirectory() as temp:
+                    item = copy.deepcopy(original)
+                    if state == "missing":
+                        item["metadata"].pop("completeness", None)
+                    else:
+                        item["metadata"]["completeness"] = state
+                    label = {"partial": "Parcial", "inconclusive": "Inconclusivo"}.get(state, "Completo")
+                    identity = f'ID {item["metadata"]["artifact_id"]} · versão {item["metadata"]["content_version"]} · {label}'
+                    before = copy.deepcopy(item)
+                    self.renderer.validate(item, self.profiles)
+                    folder = Path(temp)
+                    has_pdf = pdf_available()
+                    editable = "pptx" if kind == "executive_presentation" else "docx"
+                    self.render(item, "md,txt,html," + editable + (",pdf" if has_pdf else ""), folder)
+                    stem = item["metadata"]["artifact_id"] + "-v" + item["metadata"]["content_version"]
+                    for fmt in ("md", "txt", "html"):
+                        self.assertIn(identity, (folder / f"{stem}.{fmt}").read_text())
+                    if editable == "docx":
+                        self.assertIn(identity, "\n".join(p.text for p in Document(folder / f"{stem}.docx").paragraphs))
+                    else:
+                        presentation = Presentation(folder / f"{stem}.pptx")
+                        for slide in presentation.slides:
+                            footers = [shape for shape in slide.shapes if shape.has_text_frame and identity in shape.text]
+                            self.assertEqual(len(footers), 1)
+                            footer = footers[0]
+                            self.assertLessEqual(footer.top + footer.height, presentation.slide_height)
+                            self.assertLessEqual(footer.left + footer.width, presentation.slide_width)
+                            other_text = [shape for shape in slide.shapes if shape.has_text_frame and shape.shape_id != footer.shape_id]
+                            self.assertGreaterEqual(footer.top, max(shape.top + shape.height for shape in other_text))
+                            self.assertEqual(footer.text_frame.paragraphs[0].font.name, "Roboto")
+                            self.assertGreaterEqual(footer.text_frame.paragraphs[0].font.size.pt, 7.5)
+                        html = (folder / f"{stem}.html").read_text()
+                        self.assertEqual(html.count(f'<footer class="meta">{identity}</footer>'), len(presentation.slides))
+                        self.assertTrue(any("Fontes" in shape.text for shape in presentation.slides[-1].shapes if shape.has_text_frame))
+                    if has_pdf:
+                        pdf = PdfReader(folder / f"{stem}.pdf")
+                        for page in pdf.pages:
+                            self.assertIn(identity, " ".join(page.extract_text().split()))
+                        if kind == "learning_card":
+                            self.assertEqual(len(pdf.pages), 1)
+                            self.assertIn("Test Card sample-test-card v1.0.0", pdf.pages[0].extract_text())
+                        if kind == "executive_presentation":
+                            self.assertEqual(len(pdf.pages), len(presentation.slides))
+                    canonical = json.loads((folder / f"{stem}.json").read_text())
+                    self.assertEqual(canonical, before)
+                    self.assertEqual(item, before)
+
+    def test_identity_uses_only_provided_date(self):
+        item = content("three_e_report", "dated-identity")
+        before = copy.deepcopy(item)
+        self.assertEqual(self.renderer.identity_line(item), "ID dated-identity · versão 1.0.0 · Parcial")
+        self.assertEqual(item, before)
+        item["metadata"]["date"] = "2026-08-21"
+        self.assertEqual(self.renderer.identity_line(item), "ID dated-identity · versão 1.0.0 · Parcial · data 2026-08-21")
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.render(item, "md,txt,html,docx", folder)
+            for fmt in ("md", "txt", "html"):
+                self.assertIn("data 2026-08-21", (folder / f"dated-identity-v1.0.0.{fmt}").read_text())
+            self.assertIn("data 2026-08-21", "\n".join(p.text for p in Document(folder / "dated-identity-v1.0.0.docx").paragraphs))
+
     def test_reader_labels_are_portuguese_and_canonical_keys_are_preserved(self):
         for kind, label in [
             ("experiment_plan", "Plano de experimentação"),
