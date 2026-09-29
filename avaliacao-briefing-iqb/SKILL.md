@@ -33,7 +33,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 2. Responda `yes`/`no` aos dez itens de cada família `CLA`, `EVI`, `OUT`, `ACT`, inclusive vetos. Ausência ou ambiguidade contam `no`; registre lacuna, evidência e localização, sem inventar itens.
 3. Grave as 40 respostas booleanas justificadas em JSON (formato em `scripts/iqb.py`); rode `python3 scripts/iqb.py respostas.json`. Copie contagens, notas brutas/finais, tetos, média e classificação; não recalcule nem ajuste editorialmente.
 4. Com amplitude das quatro notas finais ≤1, reaudite cada resposta e evidência. Notas próximas podem estar corretas; não force dispersão.
-5. Entregue matriz citada, vetos, IQB, classificação, pontos fortes, lacunas priorizadas e até três provocações ao sponsor. Fonte decisiva inacessível exige diagnóstico parcial antes da nota final. Compare versões calculando cada uma separadamente; IQB alto não aprova projeto ou experimento.
+5. Entregue matriz citada, vetos, IQB, classificação, até três pontos fortes sustentados, lacunas priorizadas e até três provocações relevantes ao sponsor. Declare a ausência no resumo quando não houver itens. Fonte decisiva inacessível exige diagnóstico parcial antes da nota final. Compare versões calculando cada uma separadamente; IQB alto não aprova projeto ou experimento.
 
 ## Exemplo
 

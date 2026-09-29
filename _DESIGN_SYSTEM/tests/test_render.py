@@ -250,6 +250,47 @@ class RenderTests(unittest.TestCase):
                 json_path = next(path / name for name in result["files"] if name.endswith(".json"))
                 self.assertEqual(json.loads(json_path.read_text()), item)
 
+    def test_iqb_accepts_zero_to_three_strengths_and_questions(self):
+        original = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json").read_text())
+        for key in ("strengths", "provocations"):
+            for count in range(4):
+                with self.subTest(section=key, count=count):
+                    item = copy.deepcopy(original)
+                    next(b["data"] for b in item["blocks"] if b["data"].get("section_key") == key)["items"] = [f"Achado fictício {index}" for index in range(count)]
+                    if count == 0:
+                        item["summary"] += " Nenhum item sustentado registrado nesta seção do exemplo fictício."
+                    before = copy.deepcopy(item)
+                    self.renderer.validate(item, self.profiles)
+                    self.assertEqual(item, before)
+        item = copy.deepcopy(original)
+        note = "Não há pontos fortes sustentados nem perguntas relevantes neste exemplo fictício."
+        item["summary"] = note
+        for block in item["blocks"]:
+            if block["data"].get("section_key") in ("strengths", "provocations"):
+                block["data"]["items"] = []
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.render(item, "md,html,docx", folder)
+            stem = item["metadata"]["artifact_id"] + "-v" + item["metadata"]["content_version"]
+            for fmt in ("md", "html"):
+                self.assertIn(note, (folder / f"{stem}.{fmt}").read_text())
+            self.assertIn(note, "\n".join(p.text for p in Document(folder / f"{stem}.docx").paragraphs))
+            canonical = json.loads((folder / f"{stem}.json").read_text())
+            self.assertEqual(canonical, item)
+
+    def test_iqb_rejects_four_strengths_or_questions(self):
+        original = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json").read_text())
+        for key in ("strengths", "provocations"):
+            for case in ("four", "missing"):
+                with self.subTest(section=key, case=case):
+                    item = copy.deepcopy(original)
+                    if case == "missing":
+                        item["blocks"] = [b for b in item["blocks"] if b["data"].get("section_key") != key]
+                    else:
+                        next(b["data"] for b in item["blocks"] if b["data"].get("section_key") == key)["items"] = ["Achado fictício"] * 4
+                    with self.assertRaisesRegex(ValueError, "Conteúdo inválido"):
+                        self.renderer.validate(item, self.profiles)
+
     def test_iqb_derivatives_keep_scores_vetoes_and_audit(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
         if not path.exists():

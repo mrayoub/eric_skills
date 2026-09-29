@@ -620,7 +620,7 @@
           "properties": {
             "items": {
               "type": "array",
-              "minItems": 2,
+              "minItems": 0,
               "maxItems": 3,
               "items": {
                 "type": "string",
@@ -734,7 +734,7 @@
                   "const": "provocations"
                 },
                 "items": {
-                  "minItems": 3,
+                  "minItems": 0,
                   "maxItems": 3
                 }
               }
