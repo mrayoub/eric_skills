@@ -62,6 +62,8 @@
     "content_version": "1.0.0",
     "completeness": "complete",
     "orientation": "portrait",
-    "sample": true
+    "sample": true,
+    "test_card_id": "sample-test-card",
+    "test_card_version": "1.0.0"
   }
 }
