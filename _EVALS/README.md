@@ -65,6 +65,14 @@ PY
 Essa checagem valida os casos e seus insumos. Ela não executa as skills nem prova
 que um modelo cumpre as expectativas.
 
+## Conjunto complementar: critério local da experimentação
+
+[`experimentacao-inovacao/casos-criterio-local.json`](experimentacao-inovacao/casos-criterio-local.json) acrescenta quatro casos fictícios aos dois casos originais: critério prévio não atingido (3/5), atingido localmente (4/5), plano exploratório sem limiar e coleta incompleta. O conjunto original `experimentacao-inovacao/evals.json` e a checagem de 11 conjuntos/22 casos acima continuam independentes.
+
+Para conferir a estrutura sem chamadas de modelo, carregue esse JSON, exija `skill_name: experimentacao-inovacao`, IDs 1–4, quatro a sete expectativas por caso e verifique que cada arquivo listado existe, começa com o marcador de material fictício e tem no máximo 60 linhas. Isso confere os insumos; **não mede o comportamento**. A execução comportamental permanece **não rodada** e exige autorização específica de custo.
+
+Em uma comparação futura, use os mesmos quatro casos e fixtures em contextos novos contra a versão-base `3404a5c` e a versão corrigida. Forneça ao agente somente o pedido e os arquivos do caso; guarde `expectations` para avaliação posterior. Registre versão, modelo, configuração, saída e evidência por expectativa antes de comparar. Não trate a existência dos casos como benchmark aprovado.
+
 ## Executar os casos e comparar versões
 
 Use a skill **skill-creator da Anthropic**, no fluxo de execução de evals/benchmark.

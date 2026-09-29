@@ -11,6 +11,8 @@ Escolha o desenho da rodada pela decisão necessária e pela força de evidênci
 
 Uma rodada pode combinar finalidades, mas cada afirmação precisa carregar o método que a sustenta. Não chame automaticamente de KPI toda medida de tarefa. Em pesquisa qualitativa pequena, uma contagem como `4 de 10 participantes` descreve os casos observados; não é estimativa confiável de prevalência nem comprova que o MVP atingiu um limiar populacional.
 
+Exemplo ilustrativo: se o Test Card definiu **antes da coleta** sucesso sem ajuda em pelo menos quatro de cinco sessões elegíveis, e quatro pessoas concluíram corretamente sem ajuda sob o protocolo, o **critério local foi atingido**. Registre a quinta sessão e eventuais desvios. Isso não estima sucesso na população, não prova ganho causal e não aprova expansão; essa decisão exige evidência e responsável próprios. Se faltarem registros decisivos, o status do critério é **inconclusivo**, sem reduzir o denominador planejado.
+
 Quando a rodada já terminou, recupere a versão original do plano. Se ela não trouxe medida ou limiar, faça análise exploratória honesta e proponha o contrato de medição da próxima rodada. Não atribua ao Test Card um critério que foi inventado após conhecer os resultados. Quando o objetivo original era apenas explorar, a ausência de um KPI formal não é, por si só, falha metodológica.
 
 ## Da suposição ao desenho do teste
