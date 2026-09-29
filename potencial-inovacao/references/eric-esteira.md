@@ -51,6 +51,16 @@ As etapas abaixo são o arranjo metodológico de referência do RC6. O RC5 usa r
 - **3E → experimentação:** E3 produz Test Cards e plano. **Learning Card exige teste executado e evidência**. Uma menção a Learning Card em E3 no texto de referência do RC6 é tratada aqui como planejamento do registro futuro, nunca como achado antecipado.
 - **Experimentação → implementação:** um teste de usabilidade, reação ao protótipo, piloto operacional e comparação de efeito respondem perguntas diferentes. A recomendação deve acompanhar a força e o alcance do método realmente executado. BP2 e Scorecard avaliam prontidão; não fabricam aprovação por nota.
 
+No afunilamento **briefing → 4D → 3E**, use as decisões vigentes do 3E como referência
+principal de hipótese, público, solução e testes para a experimentação. Briefing e
+4D preservam a origem, as alternativas e os riscos. Não reabra dúvidas resolvidas
+ou assuntos retirados do escopo pelo 3E; registre qual decisão os encerrou. Uma
+atualização posterior documentada pode mudar esse recorte. Lacunas que ainda
+afetam o teste e evidências contrárias relevantes continuam exigindo atenção.
+Essa prioridade de decisões não transforma hipóteses em fatos nem permite alterar
+critérios retroativamente. Sem 3E disponível, use as fontes existentes e indique
+as decisões ausentes, respeitando o uso das skills em qualquer momento.
+
 ## Uso das skills em qualquer momento
 
 1. Comece pela pergunta do usuário e pelo material disponível. Registre o estado real do projeto, mesmo se documentos tiverem nomes ou datas fora da ordem usual.

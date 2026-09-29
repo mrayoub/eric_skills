@@ -95,6 +95,14 @@ foram traduzidos para português; os campos canônicos continuam preservados.
 Validação local: onze skills válidas, links e orçamentos conferidos, sync consistente;
 59 testes e 28 subtestes passaram. Nenhuma avaliação com modelo foi disparada.
 
+Em 29 set 2026, o operador pediu explicitar o afunilamento briefing → 4D → 3E.
+A skill de experimentação e sua triagem agora usam as decisões vigentes do 3E
+como referência principal, sem reabrir dúvidas resolvidas ou retiradas do escopo.
+Contexto ERIC e grilling comum foram alinhados e sincronizados. Lacunas relevantes,
+evidências contrárias e critérios anteriores à coleta continuam preservados.
+Onze skills passaram no validador, com links e orçamentos conferidos; sync consistente.
+A verificação foi documental e estrutural, sem nova avaliação comportamental de modelo.
+
 ## Notas de dependência
 
 - **001 antes de tudo que toca o design system** (002, 005, 006, 007, 011): sem o script de sync, cada correção teria de ser copiada à mão para 11 pastas.

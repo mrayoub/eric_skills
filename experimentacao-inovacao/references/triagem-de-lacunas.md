@@ -4,7 +4,35 @@ Use este fluxo quando faltar contexto para planejar, analisar ou recomendar. A c
 
 ## 1. Levante o que já se sabe
 
-Leia briefing, descoberta, hipótese master, Test Cards, protocolo, registros de execução, transcrições, vídeos acessíveis, planilhas e resultados já produzidos. Separe fatos observados, decisões registradas, inferências e fontes ausentes. Quando houver duas versões da mesma informação, preserve ambas com data e origem até resolver a divergência. Não trate resumo anterior como substituto automático da fonte primária.
+Leia primeiro as decisões vigentes do 3E e o plano do experimento, quando disponíveis. Consulte briefing e descoberta para entender como se chegou a esse recorte; examine também Test Cards, registros de execução, transcrições, vídeos acessíveis, planilhas e resultados já produzidos. Separe fatos observados, decisões registradas, inferências e fontes ausentes. Quando houver conflito factual ou não for possível identificar a decisão vigente, preserve as versões com data e origem até esclarecer. Não trate resumo anterior como substituto automático da fonte primária.
+
+### Afunilamento do briefing ao 3E
+
+O briefing apresenta o problema inicial; o 4D aprofunda o entendimento e as
+alternativas; o 3E consolida a hipótese, o público, a solução escolhida e os testes.
+Para esses campos, use as decisões registradas no 3E vigente como referência
+principal. Uma atualização posterior documentada pode substituí-las; a data ou
+o nome do arquivo, sozinhos, não comprovam que houve essa decisão.
+
+Antes de transformar uma dúvida antiga em pergunta, confira se o 3E a resolveu,
+substituiu ou deixou fora do escopo. Registre a fonte e o motivo e encerre essa
+questão para a rodada atual, preservando o histórico. Não peça ao usuário para
+decidir novamente algo já decidido. Um recorte mais estreito não é, por si só,
+contradição com o briefing.
+
+Exemplo: o briefing aborda obrigações financeiras em geral, o 4D discute várias
+ações e o 3E escolhe testar avisos na contribuição associativa, deixando Pix
+automático para depois. Planeje esse teste; não reabra o tipo de obrigação nem
+exija Pix automático para completar o pacote inicial. Se o 3E não definiu a
+data-limite de pagamento ou o critério de sucesso, essas lacunas continuam abertas.
+
+A prioridade do 3E vale para decisões, não para tornar afirmações verdadeiras.
+Mantenha riscos e evidências contrárias do histórico que ainda afetem o recorte
+escolhido. Reabra uma questão quando aparecer evidência nova relevante, uma
+contradição factual não resolvida ou dúvida sobre qual decisão vale. Preserve os
+critérios registrados antes da coleta; um documento posterior não os altera
+retroativamente. Se não houver 3E, trabalhe com o material disponível e identifique
+as decisões ausentes, sem exigir o workshop como pré-requisito.
 
 Mantenha um registro com: `item_id`, pergunta que afeta, resposta ou lacuna, status (`fonte examinada`, `decisão confirmada`, `inferência`, `pendente`, `inaplicável`), localização da fonte, responsável pela resposta, artefatos afetados e próxima ação. Use o [caderno da rodada](../assets/caderno-da-rodada.md) quando estiver gerando arquivos.
 
