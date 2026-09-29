@@ -146,6 +146,36 @@ class PotentialValidationTests(unittest.TestCase):
         self.assertEqual(validators.run(self.content), [])
         self.assertEqual(self.content, original)
 
+    def test_returned_scores_roundtrip_precision(self):
+        score = load_module("score_precision", ROOT.parent / "potencial-inovacao/scripts/score.py")
+        cases = [(69.91, 69.91, 69.95, 70.04, 70.04),
+                 (24.125, 75.999, 43.345, 0.005, 99.994)]
+        cases += [(value,) * 5 for value in (0, 39.9, 40, 40.1, 69.9, 70, 70.1, 100)]
+        for values in cases:
+            with self.subTest(values=values):
+                result = score.calculate_innovation_score({
+                    criterion["key"]: {"score": value, "justification": "Exemplo fictício"}
+                    for criterion, value in zip(score.CRITERIA, values)
+                })
+                content = copy.deepcopy(self.content)
+                data = section(content, "scores")
+                data["rows"] = [{"criterion": key, "score": note["score"],
+                                 "weight": result["criteria_weights"][key],
+                                 "justification": note["justification"]}
+                                for key, note in result["scores"].items()]
+                data["overall_score"] = result["overall_score"]
+                data["classification"] = result["classification"]
+                self.assertEqual(validators.run(content), [])
+                if values == cases[0]:
+                    with tempfile.TemporaryDirectory() as temp:
+                        folder = Path(temp)
+                        path = folder / "input.json"
+                        path.write_text(json.dumps(content), encoding="utf-8")
+                        exported = subprocess.run([sys.executable, str(SCRIPT), str(path),
+                                                   "--out-dir", str(folder / "output"), "--formats", "md"],
+                                                  capture_output=True, text=True)
+                        self.assertEqual(exported.returncode, 0, exported.stderr)
+
     def test_changed_classification(self):
         section(self.content, "scores")["classification"] = "priorizar"
         self.assertTrue(any("scores.classification" in error for error in validators.run(self.content)))
