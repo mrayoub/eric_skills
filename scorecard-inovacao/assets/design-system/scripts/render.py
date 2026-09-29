@@ -111,6 +111,21 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     if errors:
         raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
 
+    if kind in ("test_card", "learning_card"):
+        keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
+        blocks = content["blocks"]
+        if len(blocks) != 4:
+            raise ValueError(f"{kind}: exige exatamente quatro campos")
+        for block, key in zip(blocks, keys):
+            data = block["data"]
+            text = data.get("text")
+            if data.get("section_key") != key:
+                raise ValueError(f"{kind}: campo esperado na ordem do método: {key}")
+            if block["type"] not in ("paragraph", "heading", "callout", "metric"):
+                raise ValueError(f"{kind}.{key}: campo deve usar um bloco textual visível")
+            if not isinstance(text, str) or not text.strip():
+                raise ValueError(f"{kind}.{key}: exige texto ou indicação explícita de pendência")
+
     ids = [block["id"] for block in content["blocks"]]
     if len(ids) != len(set(ids)):
         raise ValueError("IDs de blocos devem ser únicos")
