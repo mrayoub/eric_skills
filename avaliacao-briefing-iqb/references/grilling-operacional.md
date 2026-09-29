@@ -22,6 +22,13 @@ Preserve página, parágrafo, slide, célula, evento ou timestamp. Para PDF visu
 
 Pesquise nos arquivos as respostas acessíveis antes de transferir uma pergunta ao usuário. Se um documento citar outra fonte relevante acessível, examine-a. Mantenha conflitos em aberto até encontrar a versão ou definição aplicável; não use automaticamente o documento mais recente ou a resposta mais conveniente.
 
+Distinga conflito factual de evolução do projeto. Uma decisão posterior registrada
+pode resolver uma pergunta anterior, substituir uma escolha ou reduzir o escopo.
+Nesses casos, use a decisão vigente e registre sua fonte; não reabra a questão só
+porque ela aparece como dúvida em um documento antigo. A data, sozinha, não prova
+essa mudança. Mantenha riscos e evidências contrárias que ainda afetem a entrega;
+uma decisão não comprova uma hipótese nem muda critérios depois da coleta.
+
 ## 2. Mantenha um registro verificável
 
 Para cada questão relevante, registre:

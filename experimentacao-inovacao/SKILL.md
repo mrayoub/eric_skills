@@ -30,6 +30,13 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
+Use as decisões vigentes do 3E como referência principal para hipótese, público,
+solução e testes. Briefing e 4D explicam o histórico desse afunilamento: não reabra
+questões já resolvidas ou retiradas do escopo no 3E. Confira origem, versão e data;
+uma decisão posterior registrada pode atualizar o plano. Questione apenas lacunas
+que ainda afetem o teste ou evidências contrárias relevantes. Uma decisão de escopo
+não comprova a hipótese nem autoriza mudar critérios após a coleta.
+
 1. **Estado:** antes da execução, proponha método, escopo/versão, suposições prioritárias, cards, protocolo, contrato de medidas, cronograma, responsáveis e guardrails; critérios verificatórios precedem exposição/coleta. Durante, acompanhe elegibilidade, versão, adesão ao protocolo, qualidade e desvios; registre adaptações datadas sem apagar o plano. Depois, reconstrua método real, população, unidade, exposição, comparação, janela, medidas/critérios e desvios. Método ambíguo exige descrição verificável, não nome inventado. Sem contrato prévio, preserve lacuna e planeje nova verificação.
 2. **Contrato:** formule pergunta sobre efeito, comportamento ou viabilidade em público/versão delimitados. Preserve hipótese master e recorte do MVP; efeito do pacote não prova componentes nem causa suposta. Contexto de descoberta não é amostra experimental: não some seus participantes. Priorize suposições por risco e evidência. Registre formulação original, versão, objetivos, métricas, denominadores, limiares, amostra e duração; adaptações em separado, com data, motivo e responsável. Preserve critérios mesmo com execução distinta.
 3. **Fontes/lacunas:** inventarie roteiro, MVP, gravações, transcrições, feedback, telemetria, saídas, gabaritos e baseline com caminho/ID e estado: examinada, localizada não examinada, indisponível, fora do escopo. Lista inacessível impede alegar inventário completo. Em PDF/imagem sem texto, aplique OCR e confira original, preservando página e incertezas; transcrição não prova revisão de vídeo. Leia [triagem](references/triagem-de-lacunas.md) nas lacunas; pesquise arquivos antes de perguntar. Pergunte por fatos, restrições e aprovações metodológicas, não conclusão desejada. Proponha método justificado; aguarde decisões dependentes, registre respostas e reabra conflitos.
