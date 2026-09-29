@@ -78,9 +78,9 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 | Titulo da secao | Texto | "[D2] Jornada do Usuario" |
 | Instrucao | Texto | "Desenhe a jornada de quem vive o problema" |
 | Linha do tempo | 3 colunas | **Antes** / **Durante** / **Depois** |
-| Coluna Antes | Area de post-its | Pergunta: "Como era antes? Quem faz o que?" |
-| Coluna Durante | Area de post-its | Pergunta: "O que acontece no momento critico? Onde estao as dores?" |
-| Coluna Depois | Area de post-its | Pergunta: "Qual o resultado? O que melhora ou piora?" |
+| Coluna Antes | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: quem faz o quê antes? |
+| Coluna Durante | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o momento crítico? |
+| Coluna Depois | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o resultado e o que melhora ou piora? |
 
 ### Subsecao 3.2 — Barco da Inovacao
 
