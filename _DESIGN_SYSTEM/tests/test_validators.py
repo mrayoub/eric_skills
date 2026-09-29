@@ -54,6 +54,42 @@ class BriefingValidationTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("citações aninhadas", result.stderr)
 
+    def test_empty_briefing_known_absence_uses_real_iqb_calculation(self):
+        iqb = load_module("iqb_known_absence", ROOT.parent / "avaliacao-briefing-iqb/scripts/iqb.py")
+        data = section(self.content, "scores")
+        evaluations = {}
+        for dimension, detail in data["dimensions"].items():
+            for item in detail["items"]:
+                item["answer"] = False
+                item["evidence"] = "Ausência conhecida: briefing fictício examinado e vazio."
+                item["evidence_source"] = "absent"
+            evaluations[dimension] = [{"criterion_id": item["criterion_id"], "answer": item["answer"],
+                                       "evidence": item["evidence"]} for item in detail["items"]]
+        calculated = iqb.calculate_iqb_from_evaluations(evaluations)
+        for dimension, result in calculated["scores"].items():
+            data["dimensions"][dimension].update(result)
+            data["dimensions"][dimension]["veto_detail"] = "Veto fictício por ausência conhecida no briefing vazio."
+            data["dimensions"][dimension]["justification"] = "Todos os critérios foram examinados no exemplo vazio."
+        data["anti_clustering"].update(triggered=calculated["anti_clustering"]["triggered"],
+                                       original_scores=calculated["anti_clustering"]["original_scores"],
+                                       span=calculated["span"],
+                                       re_evaluation_notes="Reauditoria fictícia dos quarenta critérios confirmou a ausência conhecida de conteúdo.")
+        section(self.content, "iqb").update(score=calculated["iqb_score"], classification=calculated["classification"],
+                                             diagnosis=calculated["diagnosis"])
+        section(self.content, "strengths")["items"] = []
+        section(self.content, "provocations")["items"] = []
+        self.content["summary"] = "Briefing fictício examinado e vazio; nenhum ponto forte sustentado ou pergunta relevante registrado."
+        self.assertEqual(sum(len(items) for items in evaluations.values()), 40)
+        self.assertTrue(all(item["answer"] is False for items in evaluations.values() for item in items))
+        self.assertEqual(calculated["iqb_score"], 1.0)
+        self.assertEqual(calculated["classification"], "Insuficiente")
+        self.assertTrue(all(detail["veto_triggered"] for detail in calculated["scores"].values()))
+        original = copy.deepcopy(self.content)
+        self.assertEqual(validators.run(self.content), [])
+        exported = self.render()
+        self.assertEqual(exported.returncode, 0, exported.stderr)
+        self.assertEqual(self.content, original)
+
     def test_original_sample_is_valid_and_unchanged(self):
         original = copy.deepcopy(self.content)
         self.assertEqual(validators.run(self.content), [])

@@ -6,7 +6,7 @@
 
 ## Status
 
-- **Status:** TODO
+- **Status:** DONE
 - **Prioridade:** P2
 - **Esforço:** S (S = horas; M = cerca de um dia)
 - **Risco da correção:** LOW
@@ -131,13 +131,13 @@ Mudanças anteriores geradas por 012 são esperadas na conferência de deriva.
 
 ## Critérios de conclusão
 
-- [ ] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
-- [ ] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
-- [ ] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
-- [ ] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
-- [ ] `git diff --check` retorna exit 0.
-- [ ] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
-- [ ] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
+- [x] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
+- [x] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
+- [x] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
+- [x] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
+- [x] `git diff --check` retorna exit 0.
+- [x] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
+- [x] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
 
 ## Condições de parada
 
@@ -151,3 +151,8 @@ Pare e reporte se:
 ## Manutenção
 
 Schemas em references são documentos especializados e não fazem parte do sync atual; sua igualdade precisa ser revisada quando o contrato muda. Perguntas devem derivar das lacunas observadas, não de uma cota.
+
+## Fechamento — 29/09/2026
+
+Revisão independente aprovada: 81 testes e 437 subtestes passaram; listas de 0–3, rejeição de quatro e de seção ausente, nota de ausência e IQB real com 40 false verificados; schemas iguais, 602 palavras e sync/fontes consistentes..
+Checks de escopo, fontes e diff passaram; nenhuma bateria de modelos executada.
