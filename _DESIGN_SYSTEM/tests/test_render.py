@@ -175,6 +175,49 @@ class RenderTests(unittest.TestCase):
                     self.assertRegex(text, rf"Amplitude[\s:|]+{scores['anti_clustering']['span']}\b")
                     self.assertTrue(any("CLA-01" in line and "FIC-01" in line for line in text.splitlines()))
 
+    def test_card_grid_citations_survive_md_txt(self):
+        for second_refs in (["F02"], ["F01", "F02"]):
+            with self.subTest(second_refs=second_refs), tempfile.TemporaryDirectory() as temp:
+                item = content("four_d_report", "grid-citations")
+                cards = [{"title": "Primeiro card", "text": "Primeiro achado", "citation_ids": ["F01"]},
+                         {"title": "Segundo | card\r\ncontinuação", "text": "Segundo | achado\nOutra linha", "citation_ids": second_refs},
+                         {"title": "Terceiro card", "text": "Achado sem fonte"}]
+                item["blocks"] = [{"id": "grid", "type": "card_grid", "data": {"cards": cards}, "citation_ids": ["FB"]}]
+                item["citations"] = [{"id": key, "source_id": "fonte-ficticia-" + key} for key in ("F01", "F02", "FB")]
+                before = copy.deepcopy(item)
+                folder = Path(temp)
+                self.render(item, "md,txt,html,docx", folder)
+                for fmt in ("md", "txt"):
+                    rendered = (folder / f"grid-citations-v1.0.0.{fmt}").read_text()
+                    rows = [line for line in rendered.splitlines() if line.startswith(("| Primeiro card |", "| Segundo", "| Terceiro card |"))]
+                    self.assertEqual(len(rows), 3)
+                    self.assertIn("Fontes: F01", rows[0])
+                    self.assertNotIn("F02", rows[0])
+                    self.assertIn("Fontes: " + ", ".join(second_refs), rows[1])
+                    self.assertNotIn("Fontes:", rows[2])
+                    self.assertTrue(all("FB" not in row for row in rows))
+                    self.assertIn("Fontes: FB", rendered.splitlines())
+                    self.assertIn("- F01: fonte-ficticia-F01", rendered)
+                    self.assertIn("- F02: fonte-ficticia-F02", rendered)
+                    self.assertIn(r"Segundo \| card<br>continuação", rows[1])
+                    self.assertIn(r"Segundo \| achado<br>Outra linha", rows[1])
+                    self.assertNotIn("\r", rows[1])
+                html = (folder / "grid-citations-v1.0.0.html").read_text()
+                articles = re.findall(r'<article class="grid-card[^"]*">(.*?)</article>', html, re.DOTALL)
+                self.assertEqual([re.findall(r"<sup>\[(.*?)\]</sup>", article) for article in articles],
+                                 [["F01"], second_refs, []])
+                doc = Document(folder / "grid-citations-v1.0.0.docx")
+                cells = [cell.text for table in doc.tables for row in table.rows for cell in row.cells]
+                self.assertEqual(len(cells), 3)
+                self.assertIn("Fontes: F01", cells[0])
+                self.assertIn("Fontes: " + ", ".join(second_refs), cells[1])
+                self.assertNotIn("Fontes:", cells[2])
+                self.assertTrue(any(p.text == "Fontes: FB" for p in doc.paragraphs))
+                self.assertEqual(item, before)
+                item["blocks"][0]["data"]["cards"][0]["citation_ids"] = ["UNKNOWN"]
+                with self.assertRaisesRegex(ValueError, "citações inexistentes"):
+                    self.renderer.validate(item, self.profiles)
+
     def test_md_escapes_pipes(self):
         item = content("innovation_potential_assessment", "pipe-test")
         item["blocks"][2]["data"]["rows"] = [["Casos", "a|b"]]

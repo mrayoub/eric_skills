@@ -551,6 +551,9 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
 
 
 def render_md(content: dict[str, Any]) -> str:
+    def grid_cell(text: str) -> str:
+        return text.replace("|", "\\|").replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>")
+
     lines = [f"# {content['title']}", ""]
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
@@ -572,7 +575,10 @@ def render_md(content: dict[str, Any]) -> str:
                 lines += ["### " + str(block["data"]["title"]), ""]
             lines += ["| Card | Conteúdo |", "| --- | --- |"]
             for card in block["data"]["cards"]:
-                lines.append("| " + str(card["title"]).replace("|", "\\|") + " | " + card_text(card).replace("|", "\\|") + " |")
+                text = card_text(card)
+                if card.get("citation_ids"):
+                    text += "\nFontes: " + ", ".join(card["citation_ids"])
+                lines.append("| " + grid_cell(str(card["title"])) + " | " + grid_cell(text) + " |")
             lines.append("")
         elif kind == "table":
             for _, legend, headers, rows in table_views(block):
