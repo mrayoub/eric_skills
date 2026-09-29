@@ -8,7 +8,7 @@ A vigência indica o que está confirmado sobre a fonte. Publicação oficial n�
 |---|---|---|---|---|---|---|
 | Contexto da esteira ERIC | adaptacao | [references/eric-esteira.md](<../references/eric-esteira.md>) | — | desconhecida | dd45108bc5ff | Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py. |
 | Rubrica de potencial de inovação | rubrica | [references/innovation-potential-rubric.md](<../references/innovation-potential-rubric.md>) | — | desconhecida | 25d8812909b7 | A origem RC6 não comprova norma institucional vigente. |
-| Cálculo do potencial de inovação | script | [scripts/score.py](<../scripts/score.py>) | Rubrica de potencial de inovação (potencial-rubrica) | desconhecida | a4bdcbbf13d4 | Automatiza cálculo; não substitui avaliação fundamentada dos critérios. |
+| Cálculo do potencial de inovação | script | [scripts/score.py](<../scripts/score.py>) | Rubrica de potencial de inovação (potencial-rubrica) | desconhecida | 76a7c16d00d6 | Automatiza cálculo; não substitui avaliação fundamentada dos critérios. |
 
 ## Vigência a confirmar
 

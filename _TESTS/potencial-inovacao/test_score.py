@@ -21,6 +21,27 @@ def scores(value=80, justification="Evidência registrada"):
 
 
 class ScoreTests(unittest.TestCase):
+    def test_published_scores_drive_total_and_classification(self):
+        values = (69.91, 69.91, 69.95, 70.04, 70.04)
+        result = score.calculate_innovation_score({
+            key: {"score": value, "justification": "Exemplo fictício"}
+            for key, value in zip(KEYS, values)
+        })
+        self.assertEqual([item["score"] for item in result["scores"].values()],
+                         [69.9, 69.9, 70.0, 70.0, 70.0])
+        self.assertEqual(result["overall_score"], 69.9)
+        self.assertEqual(result["classification"], "monitorar")
+
+    def test_two_and_three_decimal_scores_publish_one_decimal(self):
+        for value, published, classification in [(42.14, 42.1, "monitorar"),
+                                                  (39.949, 39.9, "arquivar"),
+                                                  (69.951, 70.0, "priorizar")]:
+            with self.subTest(value=value):
+                result = score.calculate_innovation_score(scores(value))
+                self.assertEqual([note["score"] for note in result["scores"].values()], [published] * 5)
+                self.assertEqual(result["overall_score"], published)
+                self.assertEqual(result["classification"], classification)
+
     def test_boolean_is_rejected(self):
         with self.assertRaises(ValueError):
             score.calculate_innovation_score(scores(True, "x"))
@@ -70,7 +91,9 @@ class ScoreTests(unittest.TestCase):
                 score.calculate_innovation_score(scores(value))
 
     def test_classification_boundaries(self):
-        for value, classification in [(70.0, "priorizar"), (40.0, "monitorar"), (39.9, "arquivar")]:
+        for value, classification in [(0, "arquivar"), (39.9, "arquivar"), (40.0, "monitorar"),
+                                       (40.1, "monitorar"), (69.9, "monitorar"), (70.0, "priorizar"),
+                                       (70.1, "priorizar"), (100, "priorizar")]:
             with self.subTest(value=value):
                 result = score.calculate_innovation_score(scores(value))
                 self.assertEqual(result["overall_score"], value)

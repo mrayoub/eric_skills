@@ -73,7 +73,7 @@ def calculate_innovation_score(scores: dict[str, Any]) -> dict[str, Any]:
             "score": normalized_score,
             "justification": str(raw.get("justification", "")),
         }
-        weighted_total += value * criterion["weight"]
+        weighted_total += normalized_score * criterion["weight"]
 
     if missing or missing_justification:
         return {

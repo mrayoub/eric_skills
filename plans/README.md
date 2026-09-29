@@ -28,17 +28,17 @@ Convenções comuns a todos os planos:
 | 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | DONE (11 skills reestruturadas; grilling unificado; checks locais passaram; evals comportamentais não executados) |
 | 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | DONE (vínculo e derivados verificados; 62 testes e 36 subtestes passaram; sync consistente) |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | DONE (27 fontes, 11 páginas; hashes e 5 negativos verificados; 20 testes e 9 subtestes passaram) |
-| 013 | [Calcular total e classe com as mesmas notas publicadas](013-potencial-precisao-consistente.md) (A01) | P1 | S | 003 e 005 | 012; TODO |
-| 014 | [Rejeitar evidências nulas ou de tipo inadequado no IQB](014-iqb-evidencia-textual.md) (A02) | P1 | S | 004 | 012; TODO |
-| 015 | [Exigir que seções obrigatórias apareçam nos arquivos entregues](015-secoes-obrigatorias-visiveis.md) (A03) | P1 | M | 001 e 005 | 012; TODO |
-| 016 | [Manter os quatro campos em cards parciais e inconclusivos](016-cards-parciais-quatro-campos.md) (A04) | P1 | S | 015; 001 e 005 | 012; TODO |
-| 017 | [Preservar fontes individuais dos cards em Markdown e TXT](017-citacoes-dos-cards-em-md-txt.md) (A05) | P1 | S | 001 e 005 | 012; TODO |
-| 018 | [Mostrar estado, ID e versão em todos os formatos de leitura](018-estado-e-versao-nos-editaveis.md) (A06) | P1 | S | 017; 001 e 007 | 012; TODO |
-| 019 | [Permitir até três forças e perguntas sem exigir preenchimento artificial](019-iqb-quantidades-sem-preenchimento-artificial.md) (A07) | P2 | S | 014; 001 e 005 | 012; TODO |
-| 020 | [Alinhar o contrato da one-page à orientação paisagem](020-one-page-paisagem-consistente.md) (A08) | P2 | S | 001 | 012; TODO |
-| 021 | [Separar natureza da mudança e complexidade no mural 4D](021-4d-natureza-separada-do-esforco.md) (A09) | P2 | S | nenhuma | 012; TODO |
-| 022 | [Manter quatro perguntas em cada fase da jornada 4D](022-4d-jornada-quatro-perguntas.md) (A10) | P2 | S | 021 (mesmo arquivo; execução sequencial) | 012; TODO |
-| 023 | [Distinguir critério local atingido de aprovação para expansão](023-experimentacao-criterio-local-e-limites.md) (A11) | P2 | S | 009; 016 recomendado antes de exportar os cards | 012; TODO |
+| 013 | [Calcular total e classe com as mesmas notas publicadas](013-potencial-precisao-consistente.md) (A01) | P1 | S | 012; 003 e 005 | DONE (65 testes e 54 subtestes passaram; precisão e exportação consistentes; sync e fontes verificados) |
+| 014 | [Rejeitar evidências nulas ou de tipo inadequado no IQB](014-iqb-evidencia-textual.md) (A02) | P1 | S | 012; 004 | TODO |
+| 015 | [Exigir que seções obrigatórias apareçam nos arquivos entregues](015-secoes-obrigatorias-visiveis.md) (A03) | P1 | M | 012; 001 e 005 | TODO |
+| 016 | [Manter os quatro campos em cards parciais e inconclusivos](016-cards-parciais-quatro-campos.md) (A04) | P1 | S | 012; 015; 001 e 005 | TODO |
+| 017 | [Preservar fontes individuais dos cards em Markdown e TXT](017-citacoes-dos-cards-em-md-txt.md) (A05) | P1 | S | 012; 001 e 005 | TODO |
+| 018 | [Mostrar estado, ID e versão em todos os formatos de leitura](018-estado-e-versao-nos-editaveis.md) (A06) | P1 | S | 012; 017; 001 e 007 | TODO |
+| 019 | [Permitir até três forças e perguntas sem exigir preenchimento artificial](019-iqb-quantidades-sem-preenchimento-artificial.md) (A07) | P2 | S | 012; 014; 001 e 005 | TODO |
+| 020 | [Alinhar o contrato da one-page à orientação paisagem](020-one-page-paisagem-consistente.md) (A08) | P2 | S | 012; 001 | TODO |
+| 021 | [Separar natureza da mudança e complexidade no mural 4D](021-4d-natureza-separada-do-esforco.md) (A09) | P2 | S | 012; nenhuma | TODO |
+| 022 | [Manter quatro perguntas em cada fase da jornada 4D](022-4d-jornada-quatro-perguntas.md) (A10) | P2 | S | 012; 021 (mesmo arquivo; execução sequencial) | TODO |
+| 023 | [Distinguir critério local atingido de aprovação para expansão](023-experimentacao-criterio-local-e-limites.md) (A11) | P2 | S | 012; 009; 016 recomendado antes de exportar os cards | TODO |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
 
