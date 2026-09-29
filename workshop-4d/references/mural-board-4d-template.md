@@ -117,9 +117,11 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 |---|---|---|
 | Titulo da secao | Texto | "[D3] Consolidacao Estrategica" |
 | Instrucao | Texto | "Agrupe as ideias em 3 grupos" |
-| Zona Incrementais | Area | Melhorias continuas, baixo esforco |
-| Zona Estruturais | Area | Mudancas de processo/modelo, medio esforco |
-| Zona Radicais | Area | Inovacoes disruptivas, alto esforco |
+| Zona Incrementais | Area | Melhorias contínuas em práticas existentes |
+| Zona Estruturais | Area | Mudanças de processo ou modelo de trabalho |
+| Zona Radicais | Area | Propostas que mudam a lógica atual |
+
+Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta, registre **Complexidade (baixa/média/alta)** e a justificativa; se ainda não houver suporte, marque como pendente. Exemplos ilustrativos: uma melhoria incremental pode exigir integração difícil entre sistemas; uma mudança radical pode ser simples de executar em um pequeno piloto.
 
 ---
 
