@@ -14,6 +14,8 @@ from pathlib import Path
 from docx import Document
 from pypdf import PdfReader
 from pptx import Presentation
+from jsonschema import Draft202012Validator
+from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "render.py"
@@ -122,6 +124,29 @@ class RenderTests(unittest.TestCase):
         output = json.loads(result.stdout)
         self.assertEqual(output["unavailable"], {})
         return output
+
+    def test_one_page_contract_only_accepts_landscape(self):
+        item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json").read_text())
+        envelope = json.loads((ROOT / "contracts/deliverable-content.schema.json").read_text())
+        registry = Registry().with_resource(envelope["$id"], Resource.from_contents(envelope))
+        for path in (ROOT / "contracts/briefing-one-page.schema.json",
+                     ROOT.parent / "briefing-inovacao/references/briefing-one-page.schema.json"):
+            with self.subTest(schema=path):
+                schema = json.loads(path.read_text())
+                validator = Draft202012Validator(schema, registry=registry)
+                self.assertEqual(list(validator.iter_errors(item)), [])
+                portrait = copy.deepcopy(item)
+                portrait["metadata"]["orientation"] = "portrait"
+                self.assertTrue(list(validator.iter_errors(portrait)))
+
+    def test_briefing_modes_keep_supported_orientation(self):
+        for kind, orientation in (("briefing", "portrait"),
+                                  ("briefing_improvement_questionnaire", "portrait"),
+                                  ("briefing_one_page", "landscape")):
+            with self.subTest(kind=kind):
+                item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                self.assertEqual(item["metadata"]["orientation"], orientation)
+                self.renderer.validate(item, self.profiles)
 
     def test_null_completeness_enforces_complete_validation(self):
         learning = self.card_document("learning_card", "partial")
