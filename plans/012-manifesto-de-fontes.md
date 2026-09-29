@@ -6,17 +6,19 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat improve-baseline-2026-09-28..HEAD -- '*/assets' '*/references/fonte-*' _TOOLS`
+> `git diff --stat 80b17a5..HEAD -- '*/assets' '*/references/fonte-*' _TOOLS`
 > Os originais em `assets/` não deveriam ter mudado; se mudaram, STOP.
 
 ## Status
+
+- **Status:** DONE
 
 - **Priority**: P3
 - **Effort**: S
 - **Risk**: LOW
 - **Depends on**: 001 (`_TOOLS/sync_shared.py`)
 - **Category**: docs
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `80b17a5`, reconciliado em 2026-09-29
 
 ## Why this matters
 
@@ -107,7 +109,19 @@ Em `_TOOLS/README.md`: "Ao importar ou substituir uma fonte, atualize `_FONTES/m
 
 ## Test plan
 
-Teste manual: altere 1 byte numa cópia de `assets/test-card.md` em `relatorio-3e` → `--check` falha apontando divergência entre skills; desfaça com `git checkout`.
+Verifique a divergência em uma cópia descartável da árvore mínima no diretório
+temporário, sem modificar os originais do worktree: altere um byte de
+`relatorio-3e/assets/test-card.md` nessa cópia e confirme que `--check` falha.
+Verifique também página gerada desatualizada e hash de DOCX divergente na cópia.
+Os checks negativos não podem reescrever originais nem páginas, e devem informar
+o arquivo envolvido. Na árvore real, geração e `--check` devem passar.
+
+Reconciliação em 29/09/2026: hashes dos três DOCX e suas cópias foram conferidos
+e coincidem com os registros abaixo. Mudanças anteriores no design system são
+geradas e não representam alterações dos originais metodológicos. Fonte oficial
+publicada e vigência institucional são coisas distintas: para PDFs Strategyzer,
+explique nas notas que a publicação é oficial mas adoção institucional não está
+confirmada. Não inventar autoria, data de importação ou aprovação.
 
 ## Done criteria
 
@@ -125,3 +139,13 @@ Teste manual: altere 1 byte numa cópia de `assets/test-card.md` em `relatorio-3
 ## Maintenance notes
 
 - A confirmação institucional (mudar `desconhecida` → `confirmada`) depende do mantenedor obter os documentos; o manifesto só torna a pendência visível.
+
+## Fechamento — 29/09/2026
+
+Manifesto com 27 entradas e 11 páginas geradas. Revisor confirmou geração
+idempotente, `--check` sem escrita e cinco negativos em cópia descartável:
+fonte divergente, DOCX alterado, página desatualizada, fonte ausente e deriva_de
+inexistente. Hashes originais preservados; `_TESTS`: 20 testes e 9 subtestes passaram.
+Os planos 013–023 foram alinhados à manutenção das páginas geradas por 012:
+fontes alteradas exigem regenerar suas páginas no mesmo commit, sem duplicação.
+Nenhuma confirmação institucional foi inferida nem bateria de modelos executada.

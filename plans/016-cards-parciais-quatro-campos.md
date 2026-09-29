@@ -10,7 +10,7 @@
 - **Prioridade:** P1
 - **Esforço:** S (S = horas; M = cerca de um dia)
 - **Risco da correção:** MED
-- **Depende de:** 015; 001 e 005 (DONE)
+- **Depende de:** 012 (fontes geradas); 015; 001 e 005 (DONE)
 - **Categoria:** bug
 - **Planejado contra:** commit `3404a5c`, 2026-09-29
 - **Achado coberto:** A04; seleção de todos os achados autorizada pelo operador
@@ -54,6 +54,7 @@ Se esse ambiente temporário não existir, use `PLAN_PYTHON=python3` **somente s
 - `_DESIGN_SYSTEM/tests/test_render.py`
 - `_DESIGN_SYSTEM/README.md`
 - `plans/README.md` (somente status e evidências de conclusão deste plano)
+- `<skill>/references/fontes.md`: somente páginas geradas pelo plano 012 afetadas por uma fonte alterada neste plano; nenhuma edição manual.
 - `<skill>/assets/design-system/**` das onze skills: somente arquivos gerados pelo sync a partir das fontes listadas; nenhuma edição manual.
 
 **Fora do escopo:** todos os outros arquivos, mudanças na rubrica não especificadas, frontmatter das skills, _SAMPLE/, _OUTPUTS/, .claude/, registros históricos e regeneração ampla de amostras. Use somente dados fictícios em memória ou diretório temporário. Preserve linguagem simples e a regra vigente de prioridade das decisões do 3E. Não executar baterias de acionamento/comportamento nem consumir chamadas de modelo.
@@ -119,8 +120,20 @@ python3 _TOOLS/sync_shared.py --check
 
 Cobrir os dois tipos e três estados. Default sem completeness continua sendo complete. Não inventar Test Card prospectivo a partir de resultados; não transformar inconclusivo em completo. Testar rejeição antes da saída e que o objeto de entrada não foi modificado.
 
+## Integração com o manifesto de fontes (plano 012)
+
+Quando uma fonte listada em `_FONTES/manifest.json` mudar neste plano, execute
+`python3 _TOOLS/build_sources.py` depois da alteração/sync para atualizar somente
+as páginas geradas afetadas. Não mudar metadados de aprovação nem hashes fixados
+dos originais para fazer a checagem passar. Inclua as páginas alteradas no mesmo
+commit da correção. Se nenhuma fonte listada mudar, não regenere páginas.
+
+**Verificar:** `python3 _TOOLS/build_sources.py --check` → exit 0, sem divergências.
+Mudanças anteriores geradas por 012 são esperadas na conferência de deriva.
+
 ## Critérios de conclusão
 
+- [ ] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
 - [ ] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
 - [ ] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
 - [ ] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
