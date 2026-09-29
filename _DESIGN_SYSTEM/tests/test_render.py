@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import importlib.util
 import os
 import re
@@ -88,7 +89,27 @@ class TableRowsTests(unittest.TestCase):
         }}), (["k"], [["v"]]))
 
 
+REQUIRED_SECTION_TYPES = ("four_d_workshop_record", "three_e_workshop_record", "three_e_report",
+                          "five_c_workshop_record", "five_c_report", "innovation_scorecard")
+
+
 class RenderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location("required_sections_render", SCRIPT)
+        cls.renderer = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.renderer)
+        cls.profiles = json.loads((ROOT / "profiles.json").read_text())
+        cls.sections = json.loads((ROOT / "response-sections.json").read_text())
+
+    def complete_section_document(self, kind):
+        item = content(kind, kind)
+        item["metadata"]["completeness"] = "complete"
+        item["blocks"] = [{"id": key, "type": "paragraph", "data": {
+            "section_key": key, "text": "Registro fictício " + key}, "citation_ids": ["F01"]}
+            for key in self.sections[kind]]
+        return item
+
     def render(self, item: dict, formats: str, folder: Path):
         source = folder / "input.json"
         source.write_text(json.dumps(item, ensure_ascii=False))
@@ -371,6 +392,97 @@ class RenderTests(unittest.TestCase):
                 if pdf_available():
                     text = "\n".join(p.extract_text() for p in PdfReader(folder / f"{stem}.pdf").pages)
                     self.assertIn("Test Card sample-test-card v" + version, text)
+
+    def test_required_sections_reject_hidden_block_types(self):
+        for kind in REQUIRED_SECTION_TYPES:
+            original = self.complete_section_document(kind)
+            for index, section_block in enumerate(original["blocks"]):
+                for block_type in ("page_break", "list", "table", "card_grid"):
+                    with self.subTest(kind=kind, section=section_block["id"], block_type=block_type):
+                        item = copy.deepcopy(original)
+                        block = item["blocks"][index]
+                        block["type"] = block_type
+                        if block_type == "list":
+                            block["data"]["items"] = ["Item próprio da lista"]
+                        elif block_type == "table":
+                            block["data"].update(headers=["Coluna"], rows=[["Linha própria da tabela"]])
+                        elif block_type == "card_grid":
+                            block["data"]["cards"] = [{"title": "Card próprio", "text": "Texto próprio da grade"}]
+                        with self.assertRaisesRegex(ValueError, "Conteúdo inválido"):
+                            self.renderer.validate(item, self.profiles)
+            with self.subTest(kind=kind, boundary="CLI"), tempfile.TemporaryDirectory() as temp:
+                item = copy.deepcopy(original)
+                item["blocks"][0]["type"] = "page_break"
+                folder = Path(temp)
+                source = folder / "input.json"
+                source.write_text(json.dumps(item))
+                result = subprocess.run([sys.executable, str(SCRIPT), str(source),
+                                         "--out-dir", str(folder / "output"), "--formats", "md"],
+                                        capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Conteúdo inválido", result.stderr)
+                self.assertFalse((folder / "output").exists())
+
+    def test_required_sections_reject_missing_blank_and_uncited_summaries(self):
+        for kind in REQUIRED_SECTION_TYPES:
+            original = self.complete_section_document(kind)
+            for index, section_block in enumerate(original["blocks"]):
+                cases = ["missing_section", "blank_text", "missing_type", "missing_data"]
+                if kind.startswith("five_c"):
+                    cases += ["missing_citations", "empty_citations"]
+                for case in cases:
+                    with self.subTest(kind=kind, section=section_block["id"], case=case):
+                        item = copy.deepcopy(original)
+                        block = item["blocks"][index]
+                        if case == "missing_section":
+                            item["blocks"].pop(index)
+                        elif case == "blank_text":
+                            block["data"]["text"] = " \n\t "
+                        elif case == "missing_type":
+                            del block["type"]
+                        elif case == "missing_data":
+                            del block["data"]
+                        elif case == "missing_citations":
+                            del block["citation_ids"]
+                        else:
+                            block["citation_ids"] = []
+                        with self.assertRaisesRegex(ValueError, "Conteúdo inválido"):
+                            self.renderer.validate(item, self.profiles)
+
+    def test_required_section_text_survives_exports(self):
+        allowed = ("paragraph", "heading", "callout", "metric")
+        for kind_index, kind in enumerate(REQUIRED_SECTION_TYPES):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                item = self.complete_section_document(kind)
+                item["blocks"] = []
+                texts = []
+                for section_index, key in enumerate(self.sections[kind]):
+                    for variant, block_type in enumerate(allowed):
+                        text = f"Registro fictício {kind_index} seção {section_index} variante {variant}."
+                        texts.append(text)
+                        item["blocks"].append({"id": f"{key}-{block_type}", "type": block_type,
+                                               "data": {"section_key": key, "text": text}, "citation_ids": ["F01"]})
+                item["blocks"].insert(2, {"id": "extra-break", "type": "page_break", "data": {}})
+                item["blocks"] += [
+                    {"id": "extra-list", "type": "list", "data": {"items": ["Lista complementar"]}},
+                    {"id": "extra-table", "type": "table", "data": {"headers": ["Coluna"], "rows": [["Tabela complementar"]]}},
+                    {"id": "extra-grid", "type": "card_grid", "data": {"cards": [{"title": "Card complementar", "text": "Texto complementar"}]}},
+                ]
+                folder = Path(temp)
+                has_pdf = pdf_available()
+                formats = "html,md,txt,docx" + (",pdf" if has_pdf else "")
+                self.render(item, formats, folder)
+                stem = f"{kind}-v1.0.0"
+                exports = {fmt: (folder / f"{stem}.{fmt}").read_text() for fmt in ("html", "md", "txt")}
+                doc = Document(folder / f"{stem}.docx")
+                exports["docx"] = "\n".join([p.text for p in doc.paragraphs] +
+                                            [cell.text for table in doc.tables for row in table.rows for cell in row.cells])
+                if has_pdf:
+                    exports["pdf"] = "\n".join(page.extract_text() for page in PdfReader(folder / f"{stem}.pdf").pages)
+                for fmt, rendered in exports.items():
+                    normalized = " ".join(rendered.split())
+                    for text in texts:
+                        self.assertIn(text.casefold(), normalized.casefold(), (kind, fmt, text))
 
     def test_every_type_has_schema_and_complete_sections_are_enforced(self):
         profiles = json.loads((ROOT / "profiles.json").read_text())

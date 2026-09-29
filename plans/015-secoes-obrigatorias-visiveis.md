@@ -6,7 +6,7 @@
 
 ## Status
 
-- **Status:** TODO
+- **Status:** DONE
 - **Prioridade:** P1
 - **Esforço:** M (S = horas; M = cerca de um dia)
 - **Risco da correção:** MED
@@ -139,13 +139,13 @@ Mudanças anteriores geradas por 012 são esperadas na conferência de deriva.
 
 ## Critérios de conclusão
 
-- [ ] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
-- [ ] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
-- [ ] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
-- [ ] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
-- [ ] `git diff --check` retorna exit 0.
-- [ ] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
-- [ ] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
+- [x] `python3 _TOOLS/build_sources.py --check` retorna exit 0; páginas afetadas atualizadas no mesmo commit.
+- [x] Suíte final local passa; testes de regressão nomeados neste plano foram coletados e passam.
+- [x] `python3 _TOOLS/sync_shared.py --check` retorna exit 0, sem divergências.
+- [x] Os casos e resultados especificados acima foram conferidos e registrados no fechamento.
+- [x] `git diff --check` retorna exit 0.
+- [x] Revisão de `git status --short`/`git diff --name-only` confirma o escopo e preservação de alterações preexistentes.
+- [x] Linha deste plano em `plans/README.md` atualizada com evidências e limitações, sem marcar bateria de modelo como executada.
 
 ## Condições de parada
 
@@ -159,3 +159,8 @@ Pare e reporte se:
 ## Manutenção
 
 Adicionar um tipo visual não significa que ele pode cumprir uma seção textual. Novos contratos devem declarar tipos admissíveis e testar presença do texto nos derivados. Cards têm uma regra separada no plano 016.
+
+## Fechamento — 29/09/2026
+
+Revisão independente aprovada: 71 testes e 311 subtestes passaram; 96 casos antes aceitos agora rejeitados; textos preservados em cinco formatos; sync e fontes verificados.
+Checks de escopo, fontes e diff passaram; nenhuma bateria de modelos executada.
