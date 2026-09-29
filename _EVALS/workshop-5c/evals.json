@@ -1,0 +1,38 @@
+{
+  "skill_name": "workshop-5c",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Monte o roteiro 5C com o briefing, os perfis convidados e a agenda proposta.",
+      "expected_output": "Roteiro adaptado ao encontro de 120 minutos, com regras prospectivas.",
+      "files": [
+        "files/briefing.md",
+        "files/perfis-e-agenda.md"
+      ],
+      "expectations": [
+        "Apresenta C1–C5 com objetivos, perguntas/dinâmicas e forma de registro, vinculados ao briefing e aos perfis.",
+        "Planeja combinar e registrar as regras de C2 e C5 antes das respectivas votações.",
+        "Distingue seis convidados de presença real e prevê registrar elegibilidade; Bruno observa sem votar.",
+        "Adapta a agenda aos 120 minutos e não impõe quantidade de participantes ou duração do playbook como requisito obrigatório.",
+        "Não simula falas, votos ou resultados de um encontro ainda não ocorrido.",
+        "Cita briefing.md e perfis-e-agenda.md com localizadores e preserva o limite de representatividade."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Registre o encontro 5C com as notas fornecidas.",
+      "expected_output": "Registro parcial com presença, elegibilidade e votação pendentes.",
+      "files": [
+        "files/notas-sem-presenca.md"
+      ],
+      "expectations": [
+        "Declara registro parcial e aponta ausência de lista de presença e elegibilidade em notas-sem-presenca.md, Convite.",
+        "Não usa os seis convidados como denominador de presença ou votação nem inventa participantes.",
+        "Preserva a fala sem identificação como tal, sem atribuí-la a Ana ou Bruno.",
+        "Não fabrica votos, créditos, pitches ou responsáveis de propostas.",
+        "Pergunta pela lista de presença e pelos registros decisivos de votação antes de fechar a apuração.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

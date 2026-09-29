@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Vamos receber 8 agentes de mercado para cocriar, monta o roteiro 5C",
+    "should_trigger": true
+  },
+  {
+    "query": "Como faço a votação de créditos no C5?",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepara as perguntas do C2 sobre a experiência atual",
+    "should_trigger": true
+  },
+  {
+    "query": "Monte a pauta do encontro com clientes para contextualizar, compreender a jornada, confirmar expectativas e cocriar propostas.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare o convite e as regras de participação do workshop 5C de Atendimento em 22 de setembro.",
+    "should_trigger": true
+  },
+  {
+    "query": "Ajude a facilitar o C3 ao vivo e registrar os critérios da experiência desejada que os agentes estão discutindo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Organize pitches e créditos de votação para o C5, incluindo como registrar totais e dissensos do grupo.",
+    "should_trigger": true
+  },
+  {
+    "query": "Reconstrua o registro do encontro de cocriação por etapa C1-C5 usando estas notas, sem elaborar ainda o relatório consolidado.",
+    "should_trigger": true
+  },
+  {
+    "query": "Escreve o relatório do 5C de ontem com base nas notas",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeja o workshop 4D",
+    "should_trigger": false
+  },
+  {
+    "query": "Monta a pauta do E1-E3",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide a gravação, a ata e os votos do encontro com clientes em um Relatório 5C com próximos passos.",
+    "should_trigger": false
+  },
+  {
+    "query": "Revise o Relatório 5C antes da devolutiva aos participantes e confira os denominadores da votação.",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare perguntas, jornada e barco da inovação para aprofundar o desafio interno no D2.",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeje entrevistas de teste e sessões de think aloud para verificar a hipótese do formulário guiado.",
+    "should_trigger": false
+  },
+  {
+    "query": "Produza uma one-page do briefing para o sponsor com resultados esperados e lacunas decisivas.",
+    "should_trigger": false
+  }
+]

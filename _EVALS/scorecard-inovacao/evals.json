@@ -1,0 +1,39 @@
+{
+  "skill_name": "scorecard-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Produza o scorecard do projeto em 28/10/2026 usando briefing, relatório 4D e Learning Card.",
+      "expected_output": "Retrato datado por dimensão, modalidade declarada e evidência contrária ou ausente distinta de inaplicabilidade.",
+      "files": [
+        "files/briefing.md",
+        "files/relatorio-4d.md",
+        "files/learning-card.md"
+      ],
+      "expectations": [
+        "Declara modalidade oficial como referência ou adaptação institucional; se adapta, explica a tradução das dimensões para serviço interno.",
+        "Preserva a data de corte 28/10/2026 e vincula conclusões a briefing.md, relatorio-4d.md ou learning-card.md com localizadores.",
+        "Distingue evidência contrária ao critério de usabilidade (três de cinco) de ausência de evidência sobre adoção continuada e custo de escala.",
+        "Distingue receita comercial não aplicável ao serviço interno de dimensões aplicáveis que estão sem evidência, justificando cada estado.",
+        "Não calcula média geral nem aprova automaticamente um gate com base em votos ou em uma dimensão forte.",
+        "Propõe próximos testes para as lacunas decisivas e separa recomendação de uma decisão institucional ainda não registrada."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "O projeto já está validado! Faça o scorecard usando as entrevistas que anexei.",
+      "expected_output": "Retrato parcial baseado em descoberta, sem afirmar adoção validada.",
+      "files": [
+        "files/entrevistas-descoberta.md"
+      ],
+      "expectations": [
+        "Distingue entrevistas de descoberta e intenção declarada de evidência de adoção ou uso real do MVP.",
+        "Não aceita a afirmação de projeto validado como prova; cita os limites de entrevistas-descoberta.md.",
+        "Atribui notas baixas quando a rubrica sustenta essa nota, ou registra não pontuável/sem evidência nas dimensões sem base.",
+        "Declara modalidade, preserva estados de evidência e não calcula média geral ou sinal verde automático.",
+        "Indica testes ou fontes necessários para avaliar adoção e impacto sem inventar observações.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

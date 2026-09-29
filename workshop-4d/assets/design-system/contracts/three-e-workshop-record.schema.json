@@ -34,11 +34,24 @@
                       },
                       "text": {
                         "type": "string",
-                        "minLength": 1
+                        "minLength": 1,
+                        "pattern": "\\S"
                       }
                     }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
               },
               "minContains": 1
             },
@@ -58,11 +71,24 @@
                       },
                       "text": {
                         "type": "string",
-                        "minLength": 1
+                        "minLength": 1,
+                        "pattern": "\\S"
                       }
                     }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
               },
               "minContains": 1
             },
@@ -82,11 +108,24 @@
                       },
                       "text": {
                         "type": "string",
-                        "minLength": 1
+                        "minLength": 1,
+                        "pattern": "\\S"
                       }
                     }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
               },
               "minContains": 1
             }

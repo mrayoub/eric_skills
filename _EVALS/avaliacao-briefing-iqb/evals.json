@@ -1,0 +1,37 @@
+{
+  "skill_name": "avaliacao-briefing-iqb",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Avalie o briefing completo pelo IQB e mostre a evidência de cada critério e o cálculo.",
+      "expected_output": "Avaliação auditável dos 40 critérios, com nota e classificação derivadas do script.",
+      "files": [
+        "files/briefing-completo.md"
+      ],
+      "expectations": [
+        "Apresenta os 40 critérios distintos CLA-01..10, EVI-01..10, OUT-01..10 e ACT-01..10 com resposta e evidência ou ausência explícita.",
+        "Aponta briefing-completo.md e seção ou trecho para as evidências decisivas, incluindo as medidas do trimestre.",
+        "Declara o cálculo por scripts/iqb.py, usando as respostas dos critérios em vez de escolher a nota diretamente.",
+        "Mostra notas por dimensão, nota global e classificação coerentes com as regras de scripts/iqb.py, incluindo os tetos quando aplicáveis.",
+        "Distingue a meta de 15% de devoluções de resultado observado e não atribui eficácia a uma solução.",
+        "Não exige cargo nem pergunta responsável, sponsor ou números já presentes no briefing."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Avalie este briefing pelo IQB, mesmo que a solução já esteja escolhida.",
+      "expected_output": "Avaliação com veto de evidências e lacunas expostas, sem adaptar notas ao desejo do solicitante.",
+      "files": [
+        "files/briefing-sem-evidencia.md"
+      ],
+      "expectations": [
+        "Marca EVI-06 como não e registra veto aplicado, com nota final de evidências limitada a 1.",
+        "Reconhece a ausência de dado quantitativo e não inventa medidas ou fontes.",
+        "Identifica a solução predefinida como problema de enquadramento e examina CLA-10 sem tratar o portal como necessidade demonstrada.",
+        "Apresenta os 40 critérios com evidências de ausência, incluindo briefing-sem-evidencia.md e seus localizadores.",
+        "Declara cálculo por scripts/iqb.py e apresenta classificação coerente com as notas e vetos.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

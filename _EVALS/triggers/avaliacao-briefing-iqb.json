@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Esse briefing está bom o suficiente pra seguir pro aprofundamento? Avalia pela rubrica",
+    "should_trigger": true
+  },
+  {
+    "query": "Compara a versão 1 e a 2 do briefing e diz se a qualidade melhorou",
+    "should_trigger": true
+  },
+  {
+    "query": "Roda o checklist dos 40 critérios nesse briefing",
+    "should_trigger": true
+  },
+  {
+    "query": "Dê a nota IQB do briefing de Atendimento, justificando cada resposta e mostrando os vetos aplicados.",
+    "should_trigger": true
+  },
+  {
+    "query": "Audite a qualidade deste enquadramento pela rubrica interna, com clareza, evidências, resultados e acionabilidade.",
+    "should_trigger": true
+  },
+  {
+    "query": "Verifique se briefing-v4.md permite iniciar a descoberta; preciso da matriz completa de critérios e da classificação calculada.",
+    "should_trigger": true
+  },
+  {
+    "query": "A diretoria quer saber se a qualidade do briefing melhorou depois da revisão de 15 de setembro: compare as duas versões pelo IQB.",
+    "should_trigger": true
+  },
+  {
+    "query": "Valide este briefing preenchido e explique quais critérios impedem uma nota maior, preservando a evidência usada em cada resposta.",
+    "should_trigger": true
+  },
+  {
+    "query": "Melhora a redação do HMW desse briefing",
+    "should_trigger": false
+  },
+  {
+    "query": "Quão validado está o projeto de adimplemento hoje?",
+    "should_trigger": false
+  },
+  {
+    "query": "Pontua essa oportunidade em impacto, viabilidade e urgência",
+    "should_trigger": false
+  },
+  {
+    "query": "Transforme a transcrição da conversa com o sponsor em um briefing de sete campos com lacunas explícitas.",
+    "should_trigger": false
+  },
+  {
+    "query": "Monte a one-page do desafio de cadastro para a reunião do comitê, usando o briefing v2 como fonte.",
+    "should_trigger": false
+  },
+  {
+    "query": "Ranqueie as quatro oportunidades do garimpo e justifique qual merece investimento primeiro.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compila o relatório 4D a partir do mural, dos dissensos e da planilha de votos anexada.",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeje um teste de usabilidade do formulário com hipóteses, métricas, Test Cards e protocolo de coleta.",
+    "should_trigger": false
+  }
+]

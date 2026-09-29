@@ -1,0 +1,38 @@
+{
+  "skill_name": "workshop-3e",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Prepare o workshop 3E a partir do relatório 4D e da hipótese.",
+      "expected_output": "Roteiro E1–E3 e cards individuais; método adequado ao risco de acurácia.",
+      "files": [
+        "files/relatorio-4d.md",
+        "files/hipotese.md"
+      ],
+      "expectations": [
+        "Apresenta E1, E2 e E3 com perguntas, escopo da solução e registro das decisões previstas.",
+        "Cria um Test Card individual por teste proposto, com hipótese, teste, medida e critério separados.",
+        "Justifica o método para avaliar classificação de pedidos contra gabarito; não usa think aloud como única prova de acurácia.",
+        "Preserva a regra prévia de detectar dez incompletos sem bloquear os dez completos da matriz de vinte casos.",
+        "Separa a hipótese master do recorte do checklist e mantém acompanhamento fora do teste focal.",
+        "Cita relatorio-4d.md e hipotese.md com localizadores e não inventa respostas do grupo ou resultados."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Prepare o 3E e seus Test Cards com os insumos disponíveis.",
+      "expected_output": "Cards em rascunho, baseline/critério pendentes e nenhum aprendizado fictício.",
+      "files": [
+        "files/hipotese-sem-baseline.md"
+      ],
+      "expectations": [
+        "Identifica a ausência de baseline e de critério aprovado em hipotese-sem-baseline.md, seção Lacunas.",
+        "Mantém os Test Cards como rascunho ou a fechar antes da coleta, com os quatro campos e o critério pendente.",
+        "Não inventa baseline, percentual de redução ou limiar de sucesso.",
+        "Indica a obtenção do registro e a aprovação metodológica por Bruno Lima como próximos passos para fechar o critério.",
+        "Não cria Learning Card preenchido nem apresenta resultados de um teste ainda não executado.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

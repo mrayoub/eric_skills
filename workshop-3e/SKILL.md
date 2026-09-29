@@ -1,44 +1,72 @@
 ---
 name: workshop-3e
-description: "Prepara e cofacilita o workshop 3E da esteira ERIC: esclarecer hipótese e escopo, estruturar a solução e planejar experimentos. Use em qualquer momento para planejar, revisar ou conduzir E1–E3; registra planos e resultados existentes sem declarar testes não realizados."
+description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
 ---
 
 # Facilitar o 3E
 
-Adapta `facilitate-3e-workshop` do ERIC_RC6. Leia o [playbook 3E](references/3e-solution-structuring-playbook.md) para dinâmicas e tempos. O [blueprint Mural](references/mural-board-3e-template.md) é opcional: use uma ferramenta colaborativa disponível e autorizada, ou registros manuais. Não dependa de nomes específicos de ferramentas.
+Prepara, conduz ou registra a solução candidata em E1–E3; preserva decisões, propostas e cronologia.
 
-Leia a [transcrição integral do playbook 3E fornecido](<assets/Modelo 3E Estruturação da Solução.transcricao.md>) e consulte o [DOCX original](<assets/Modelo 3E Estruturação da Solução.docx>) para conferir o método. O [registro de comparação com o RC6](references/fonte-3e-e-divergencias.md) explicita as adaptações dos cards e os limites da fonte.
+## Leia primeiro
 
-## Grilling obrigatório na leitura e na interação
+- [Playbook 3E](references/3e-solution-structuring-playbook.md) — dinâmicas e tempos.
+- [Test Card](assets/test-card.md) — quatro campos individuais.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+[Blueprint Mural](references/mural-board-3e-template.md) opcional: ferramenta autorizada ou registro manual.
 
-Antes de sintetizar, pontuar ou planejar, leia o [protocolo operacional de grilling](references/grilling-operacional.md). Aplique-o aos documentos e às respostas recebidas: confronte afirmações e fontes, registre questões resolvidas e pendentes, apresente somente a fronteira de perguntas que exige resposta humana e reavalie-a após cada novo insumo. Mostre a síntese documental e as lacunas decisivas; não trate leitura silenciosa ou preenchimento do template como grilling concluído. Continue tarefas independentes enquanto aguarda respostas e declare a entrega parcial quando faltar suporte decisivo. O protocolo está incorporado nesta skill e complementa suas referências específicas.
+## Grilling
 
-## Uso independente da fase
+Leia [o protocolo de grilling](references/grilling-operacional.md) antes de sintetizar,
+pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: resolva
+nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
+cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
+entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
+resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
 
-Ative esta skill pela tarefa solicitada e pelos insumos disponíveis, em qualquer ponto da esteira ou fora dela. A fase registrada no projeto é contexto de proveniência, não condição de uso nem autorização para inventar conteúdo. Consulte o Scorecard de maturidade quando disponível para localizar evidências e lacunas, sem usá-lo como bloqueio automático. Se a pessoa chegar antes do trabalho usual, produza preparação ou versão parcial e pergunte somente pelos insumos decisivos. Se chegar depois, incorpore os materiais posteriores, preserve a cronologia e indique o que foi definido antes ou reconstruído depois; não apresente reconstrução retrospectiva como plano previamente acordado. A completude depende dos requisitos da entrega e da evidência, não do nome da fase.
+## Quando usar
 
-## Preparação
+A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do momento
+usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
+com data e não apresente reconstrução como plano combinado previamente.
 
-Use [levantamento documental e grilling](references/levantamento-documental-e-grilling.md) para ler a hipótese disponível, registros de problema, Relatório 4D, avaliação BP1, resultados experimentais e restrições que existirem. Faça perguntas por fronteiras sobre a solução candidata, papéis, dados e prazo que não estejam documentados. A pergunta de decisão deve ser neutra; não pergunte qual resultado a equipe quer obter na experimentação.
+## Passos
 
-## Condução
+Prepare hipótese, problema, 4D, BP1, resultados e restrições existentes; não exija fase específica. Pergunte só por solução, papéis, dados e prazos não documentados; formule decisão neutra.
 
-Conduza E1–E3 em ordem lógica ao iniciar o método. No RC6, o 3E costuma ser registrado em ideação após o BP1; essa localização não impede execução antecipada, retomada ou revisão posterior. Registre o que o grupo decidiu, o que foi apenas sugerido, quando ocorreu e quem assumiu cada dependência.
+1. **E1 — Esclarecer:** explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
+2. **E2 — Estruturar:** classifique `precisa ter`, `pode evoluir`, `fora deste recorte`. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
+3. **E3 — Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
 
-1. **E1 — Esclarecer:** explicite a hipótese de origem, a dor focal, o público e a distinção entre o que a solução é, não é e não resolve agora. Liste resultados esperados como hipóteses; critérios de sucesso devem apontar para medidas verificáveis ou lacunas a fechar.
-2. **E2 — Estruturar:** classifique componentes em `precisa ter`, `pode evoluir` e `fora deste recorte`. Diferencie o que já existe do que precisa ser construído ou contratado. Registre ação, responsável, apoio, dependência e prazo estimado; nenhum nome ou prazo deve ser inventado.
-3. **E3 — Experimentar:** priorize suposições pelo risco, proponha Test Cards **individuais** usando o [modelo de Test Card](assets/test-card.md), com os quatro campos da Strategyzer (hipótese, teste, medida, critério), e escolha método apropriado ao risco, não automaticamente think aloud. Feche medidas e critérios verificatórios antes de executar; marque card incompleto como rascunho. Registre que evidências futuras serão necessárias para os Learning Cards. Se a execução já ocorreu, distinga Test Cards originalmente definidos de reconstruções retrospectivas e encaminhe evidências reais para Learning Cards; antes da execução, não produza achados nem Learning Cards.
+Registre quem assumiu dependências e quando, separando decisão de sugestão. Tempos são sugestões, não prova de conclusão; etapa ausente mantém registro parcial e impacto da lacuna. `relatorio-3e` compila; `experimentacao-inovacao` pode detalhar/analisar testes, sem ser dependência obrigatória.
 
-O tempo do playbook é sugestão, não prova de conclusão. Se alguma etapa não ocorrer, mantenha o registro parcial e o impacto dessa lacuna no plano. Use `relatorio-3e` para compilar a entrega; a skill `experimentacao-inovacao` pode aprofundar, executar ou analisar testes em qualquer fase, sem depender dela para que esta skill funcione.
+## Exemplo
 
-## Contexto institucional
+Entrada: “Prepare o 3E do Portal de Solicitações de Dados.”
+Saída (trecho):
+> E3: testar checklist contra gabarito independente.
+> Test Card: critério pendente de baseline; rascunho.
+> Sem coleta, nenhum Learning Card preenchido.
 
-Leia [ERIC — Esteira Robusta de Inovação Colaborativa](references/eric-esteira.md) antes de trabalhar com esta skill. Use o contexto da CCEE, as oito etapas, os dois pontos de avaliação, as rotas condicionais e as relações entre entregáveis para interpretar as fontes. Acione a skill pela tarefa e pelas evidências disponíveis, em qualquer momento; a sequência usual da esteira não bloqueia o uso.
+## Checagem final
 
-## Arquivos e padrão visual
+- [ ] E1–E3 e escopo registrados sem etapas inventadas
+- [ ] Ações, papéis, prazos e decisões rastreáveis
+- [ ] Um Test Card completo ou rascunho explícito por teste
+- [ ] Método pelo risco; critérios prévios preservados
+- [ ] Learning Cards somente após execução
 
-O [playbook 3E original do RC6](assets/3e-solution-structuring-playbook-original-rc6.md) está preservado como fonte histórica imutável; a versão em `references/` contém as adaptações operacionais. Em divergência, identifique a diferença e a data; não reescreva silenciosamente o original.
+## Contexto ERIC
 
-Para qualquer entregável em arquivo, siga o [sistema visual da skill](assets/design-system/README.md) e seu `profiles.json`. Gere primeiro o `content_json` versionado com blocos, citações e metadados; use o tipo `three_e_workshop_record` e, para cada teste, `test_card`. O schema de resposta comum e o perfil deste tipo são obrigatórios; aplique também o schema específico quando existir. Execute a validação pelo renderizador incluído em `assets/design-system/scripts/render.py` antes de gerar qualquer arquivo final. Se ela falhar, corrija a resposta ou identifique explicitamente uma versão parcial; nunca contorne o schema. Preserve o mesmo JSON canônico validado junto de todos os derivados, garantindo estrutura, rastreabilidade e padrão visual idênticos entre skills. O perfil determina a orientação A4 retrato, A4 paisagem ou apresentação 16:9 e aplica os mesmos tokens de cor, fonte e área segura. Por padrão, ofereça JSON, PDF, DOCX, MD e TXT quando o tipo aceitar; PPTX é próprio de apresentação, CSV exige tabela exportável e HTML é prévia. Não componha um layout ad hoc nem altere conteúdo para caber: pagine ou registre impossibilidade de uma página. Antes de entregar, confira ordem, tabelas, citações, orientação, ausência de corte e igualdade semântica entre formatos.
+ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comercialização de
+Energia Elétrica). Consulte [a esteira](references/eric-esteira.md) quando precisar
+interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre entregáveis.
+
+## Entrega em arquivo
+
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+com `deliverable_type` `three_e_workshop_record` e `test_card` por teste: monte o JSON canônico, rode
+`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
+JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
+`metadata.completeness: "partial"` — nunca contorne o schema.
 
 **Proveniência:** reescrita de fonte metodológica RC6 (`facilitate-3e-workshop/`). A ordem interna E1–E3 e a separação entre plano e evidência foram preservadas sem restringir a fase de uso.

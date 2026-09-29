@@ -38,13 +38,13 @@ Investigar volumes e causas antes de comprometer construção. Nenhuma decisão 
 
 Fontes: FIC-01
 
-| Critério | Nota simulada |
-| --- | --- |
-| Impacto | 60 |
-| Viabilidade | 45 |
-| Alinhamento | 70 |
-| Urgência | 40 |
-| Novidade | 55 |
+| Critério | Nota | Peso | Justificativa |
+| --- | --- | --- | --- |
+| Impacto | 60 | 0.3 | Retrabalho relatado; magnitude ainda não medida (exemplo). |
+| Viabilidade | 45 | 0.25 | Integração, responsáveis e custo são hipóteses (exemplo). |
+| Alinhamento | 70 | 0.2 | Reduz esforço de atendimento (exemplo). |
+| Urgência | 40 | 0.15 | Prioridade moderada, não comprovada (exemplo). |
+| Novidade | 55 | 0.1 | Novidade relativa não comparada (exemplo). |
 
 Fontes: FIC-02
 

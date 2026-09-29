@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Tenho o mural, a transcrição e os votos do D4, compila o relatório",
+    "should_trigger": true
+  },
+  {
+    "query": "Revisa esse relatório 4D antes de ir pro BP1",
+    "should_trigger": true
+  },
+  {
+    "query": "Só fizemos D1 e D2, consegue consolidar o que temos?",
+    "should_trigger": true
+  },
+  {
+    "query": "Produza o Relatório 4D do aprofundamento de Cadastro usando notas, snapshot da jornada e a planilha de créditos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Consolide as evidências de D1-D4 em uma síntese para o BP1, incluindo diagnóstico, alternativas e dissensos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise a versão 2 do relatório de aprofundamento e confira denominadores dos votos e rastreabilidade das conclusões.",
+    "should_trigger": true
+  },
+  {
+    "query": "O encontro não teve gravação, mas temos registros completos dos quatro Ds; monte o relatório e marque os limites das fontes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Atualize o Relatório 4D com a ata da votação de setembro, preservando os registros anteriores e as lacunas do diagnóstico.",
+    "should_trigger": true
+  },
+  {
+    "query": "Quais perguntas uso para abrir o D1 amanhã?",
+    "should_trigger": false
+  },
+  {
+    "query": "Escreve o relatório do encontro com clientes de ontem (5C)",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalia o briefing pelo IQB",
+    "should_trigger": false
+  },
+  {
+    "query": "Organize o board e o roteiro do barco da inovação para uma sessão remota com 12 participantes.",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare um 4D assíncrono para aprofundar o desafio de atendimento, com instruções e regras de decisão.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compile as decisões de E1-E3 em relatório de solução com plano de construção e Test Cards individuais.",
+    "should_trigger": false
+  },
+  {
+    "query": "Monte os Learning Cards a partir dos resultados do piloto operacional e sintetize a recomendação.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare a maturidade do projeto nos retratos de junho e setembro usando o scorecard da Strategyzer.",
+    "should_trigger": false
+  }
+]

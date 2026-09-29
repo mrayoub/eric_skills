@@ -46,11 +46,8 @@
               "const": "A4"
             },
             "orientation": {
-              "enum": [
-                "portrait",
-                "landscape"
-              ],
-              "description": "Retrato por padrão (UXR-17); landscape aceito para compatibilidade com one-pages persistidas anteriormente."
+              "const": "landscape",
+              "description": "A4 paisagem, conforme o perfil executive_one_page."
             }
           }
         },

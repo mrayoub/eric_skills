@@ -15,7 +15,37 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "1.2.0"
+RENDERER_VERSION = "1.3.1"
+DELIVERABLE_LABELS = {
+    "briefing": "Briefing",
+    "briefing_one_page": "Resumo do briefing",
+    "briefing_improvement_questionnaire": "Perguntas para melhorar o briefing",
+    "briefing_validation": "Avaliação do briefing",
+    "innovation_potential_assessment": "Avaliação do potencial de inovação",
+    "four_d_workshop_record": "Registro do workshop 4D",
+    "four_d_report": "Relatório 4D",
+    "three_e_workshop_record": "Registro do workshop 3E",
+    "three_e_report": "Relatório 3E",
+    "innovation_scorecard": "Avaliação das evidências de inovação",
+    "experiment_plan": "Plano de experimentação",
+    "test_card": "Cartão de teste",
+    "learning_card": "Cartão de aprendizado",
+    "experiment_report": "Relatório de experimentação",
+    "evidence_recommendation": "Evidências e recomendação",
+    "executive_presentation": "Apresentação executiva",
+    "five_c_workshop_record": "Registro do workshop 5C",
+    "five_c_report": "Relatório 5C",
+}
+COMPLETENESS_LABELS = {
+    "complete": "Completo",
+    "partial": "Parcial",
+    "inconclusive": "Inconclusivo",
+}
+IQB_TABLE_WIDTHS = {
+    "criterios": [14, 15, 10, 41, 10, 10],
+    "dimensoes": [14, 7, 10, 12, 9, 10, 10, 28],
+    "agrupamento": [35, 65],
+}
 CARD_LABELS = {
     "test_card": {
         "hypothesis": "1. Acreditamos que — hipótese",
@@ -50,6 +80,15 @@ def safe_name(value: str) -> str:
     return value
 
 
+def identity_line(content: dict[str, Any]) -> str:
+    meta = content["metadata"]
+    state = COMPLETENESS_LABELS[meta.get("completeness") or "complete"]
+    label = f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · {state}'
+    if isinstance(meta.get("date"), str) and meta["date"].strip():
+        label += f' · data {meta["date"]}'
+    return label
+
+
 def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any]:
     try:
         from jsonschema import Draft202012Validator
@@ -75,11 +114,27 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
 
     envelope = read_json(ROOT / "contracts" / "deliverable-content.schema.json")
     registry = Registry().with_resource(envelope["$id"], Resource.from_contents(envelope))
-    schema_file = profile.get("schema") if meta.get("completeness", "complete") == "complete" else None
+    effective_completeness = meta.get("completeness") or "complete"
+    schema_file = profile.get("schema") if effective_completeness == "complete" else None
     schema = read_json(ROOT / "contracts" / schema_file) if schema_file else envelope
     errors = sorted(Draft202012Validator(schema, registry=registry).iter_errors(content), key=lambda e: str(e.path))
     if errors:
         raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
+
+    if kind in ("test_card", "learning_card"):
+        keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
+        blocks = content["blocks"]
+        if len(blocks) != 4:
+            raise ValueError(f"{kind}: exige exatamente quatro campos")
+        for block, key in zip(blocks, keys):
+            data = block["data"]
+            text = data.get("text")
+            if data.get("section_key") != key:
+                raise ValueError(f"{kind}: campo esperado na ordem do método: {key}")
+            if block["type"] not in ("paragraph", "heading", "callout", "metric"):
+                raise ValueError(f"{kind}.{key}: campo deve usar um bloco textual visível")
+            if not isinstance(text, str) or not text.strip():
+                raise ValueError(f"{kind}.{key}: exige texto ou indicação explícita de pendência")
 
     ids = [block["id"] for block in content["blocks"]]
     if len(ids) != len(set(ids)):
@@ -99,6 +154,34 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
                 unknown |= set(card.get("citation_ids", [])) - citation_ids
         if unknown:
             raise ValueError(f"{block['id']}: citações inexistentes: {sorted(unknown)}")
+
+    def nested_citations(value: Any) -> set[str]:
+        found: set[str] = set()
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "citation_id" and isinstance(item, str):
+                    found.add(item)
+                elif key == "citation_ids" and isinstance(item, list):
+                    found.update(entry for entry in item if isinstance(entry, str))
+                found.update(nested_citations(item))
+        elif isinstance(value, list):
+            for item in value:
+                found.update(nested_citations(item))
+        return found
+
+    for block in content["blocks"]:
+        unknown = nested_citations(block["data"]) - citation_ids
+        if unknown:
+            raise ValueError(f"{block['id']}: citações aninhadas inexistentes: {sorted(unknown)}")
+    if effective_completeness == "complete":
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("deliverable_validators", ROOT / "scripts/validators/__init__.py")
+        validators = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(validators)
+        semantic_errors = validators.run(content)
+        if semantic_errors:
+            raise ValueError("Inconsistência semântica: " + "; ".join(semantic_errors[:12]))
     return profile
 
 
@@ -126,24 +209,21 @@ def block_text(block: dict[str, Any]) -> str:
 def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
     data = block.get("data", {})
     if isinstance(data.get("dimensions"), dict):
-        rows = []
-        for dimension, detail in data["dimensions"].items():
-            for item in detail.get("items", []):
-                rows.append([dimension, str(item.get("criterion_id", "")),
-                             str(item.get("answer", "")), str(item.get("evidence", "")),
-                             str(item.get("evidence_source", ""))])
-        return ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte"], rows
-    headers = data.get("headers") or data.get("columns") or []
-    headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in headers]
+        _, _, headers, rows = table_views(block)[0]
+        return headers, rows
+    columns = data.get("headers") or data.get("columns") or []
+    keys = [str(h.get("key", h.get("label", ""))) if isinstance(h, dict) else str(h) for h in columns]
+    headers = [str(h.get("label", h.get("key", ""))) if isinstance(h, dict) else str(h) for h in columns]
     raw_rows = data.get("rows") or []
     if raw_rows and not headers and isinstance(raw_rows[0], dict):
-        headers = list(raw_rows[0])
+        keys = headers = list(raw_rows[0])
     rows: list[list[str]] = []
     for row in raw_rows:
         if isinstance(row, list):
             rows.append([str(x) if x is not None else "" for x in row])
         elif isinstance(row, dict):
-            rows.append([str(row.get(h, "")) for h in headers] if headers else [str(v) for v in row.values()])
+            values = [row.get(k) for k in keys] if keys else row.values()
+            rows.append([str(value) if value is not None else "" for value in values])
         else:
             rows.append([str(row)])
     if not headers and not rows:
@@ -151,6 +231,40 @@ def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
                 for key, value in data.items() if key not in ("section_key", "layout")]
         headers = ["Campo", "Valor"]
     return headers, rows
+
+
+def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[list[str]]]]:
+    """Retorna [(slug, legenda, cabeçalhos, linhas)]; três vistas para o IQB."""
+    data = block.get("data", {})
+    if not isinstance(data.get("dimensions"), dict):
+        return [("", data.get("title", ""), *table_rows(block))]
+    labels = {"clarity": "Clareza", "evidence": "Evidências", "outcomes": "Resultados", "actionability": "Acionabilidade"}
+    criteria: list[list[str]] = []
+    dimensions: list[list[str]] = []
+    for dimension, detail in data["dimensions"].items():
+        label = labels.get(dimension, dimension)
+        for item in detail.get("items", []):
+            criterion = str(item.get("criterion_id", ""))
+            if criterion == detail.get("veto_item_id"):
+                criterion += " (veto)"
+            criteria.append([label, criterion, "Sim" if item.get("answer") is True else "Não",
+                             str(item.get("evidence", "")), str(item.get("evidence_source", "")),
+                             str(item.get("citation_id") or "")])
+        veto = f"Disparado: {detail.get('veto_detail') or '—'}" if detail.get("veto_triggered") else "Não disparado"
+        dimensions.append([label, str(detail.get("yes_count", "")), str(detail.get("raw_score", "")),
+                           veto, str(detail.get("veto_max_score", "")), str(detail.get("final_score", "")),
+                           str(detail.get("label", "")), str(detail.get("justification", ""))])
+    anti = data.get("anti_clustering", {})
+    originals = anti.get("original_scores")
+    audit = [["Disparada", "Sim" if anti.get("triggered") else "Não"],
+             ["Amplitude", str(anti.get("span", ""))],
+             ["Notas originais", ", ".join(map(str, originals)) if originals is not None else "—"],
+             ["Notas da reavaliação", str(anti.get("re_evaluation_notes") or "—")]]
+    return [
+        ("criterios", "Critérios avaliados", ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte", "Citação"], criteria),
+        ("dimensoes", "Notas por dimensão", ["Dimensão", "Sim (de 9)", "Nota bruta", "Veto", "Teto do veto", "Nota final", "Rótulo", "Justificativa"], dimensions),
+        ("agrupamento", "Auditoria de agrupamento", ["Campo", "Valor"], audit),
+    ]
 
 
 def card_text(card: dict[str, Any]) -> str:
@@ -235,6 +349,10 @@ def css(tokens: dict[str, Any], paper: str) -> str:
     else:
         size = f"{page['width']}mm {page['height']}mm"
         margins = f"{page['margin_top']}mm {page['margin_right']}mm {page['margin_bottom']}mm {page['margin_left']}mm"
+    iqb_columns = "\n".join(
+        f"table.scores-{slug} col:nth-child({index}) {{ width: {width}%; }}"
+        for slug, widths in IQB_TABLE_WIDTHS.items() for index, width in enumerate(widths, 1)
+    )
     return f"""
 @font-face {{ font-family: Montserrat; src: url(data:font/ttf;base64,{montserrat_data}) format('truetype'); font-weight: 100 900; }}
 @font-face {{ font-family: Roboto; src: url(data:font/ttf;base64,{roboto_data}) format('truetype'); font-weight: 100 900; }}
@@ -263,13 +381,10 @@ table {{ border-collapse: collapse; width: 100%; font-size: 8pt; break-inside: a
 th {{ background: {color['document_primary']}; color: {color['inverse']}; text-align: left; }}
 td, th {{ border: .75pt solid {color['border']}; padding: 6pt 8pt; vertical-align: top; overflow-wrap: anywhere; }}
 tr {{ break-inside: avoid; }}
-table.scores {{ table-layout: fixed; font-size: 7.5pt; }}
-table.scores th:nth-child(1) {{ width: 15%; }}
-table.scores th:nth-child(2) {{ width: 12%; }}
-table.scores th:nth-child(3) {{ width: 11%; }}
-table.scores th:nth-child(4) {{ width: 49%; }}
-table.scores th:nth-child(5) {{ width: 13%; }}
-table.scores td:nth-child(2), table.scores td:nth-child(3) {{ white-space: nowrap; }}
+table.scores {{ table-layout: fixed; font-size: 8pt; }}
+table.scores td, table.scores th {{ padding: 4pt; white-space: normal; overflow-wrap: anywhere; }}
+table.scores caption {{ text-align: left; font-weight: 700; padding: 8pt 0 4pt; break-after: avoid; }}
+{iqb_columns}
 .refs {{ margin-top: 18pt; border-top: .75pt solid {color['border']}; font-size: 8pt; }}
 .meta {{ margin-top: 12pt; color: {color['text_muted']}; font-size: 7.5pt; }}
 .page-break {{ break-before: page; }}
@@ -321,12 +436,18 @@ def html_block(block: dict[str, Any]) -> str:
     if kind == "card_grid":
         return html_card_grid(block)
     if kind == "table":
-        headers, rows = table_rows(block)
-        heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
-        body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
-        caption = f"<caption>{html.escape(str(data['title']))}</caption>" if data.get("title") else ""
-        table_class = ' class="scores"' if isinstance(data.get("dimensions"), dict) else ""
-        return f'<div class="block long"><table{table_class}>{caption}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>{refs}</div>'
+        iqb = isinstance(data.get("dimensions"), dict)
+        tables = []
+        for index, (slug, legend, headers, rows) in enumerate(table_views(block)):
+            table_class = f' class="scores scores-{slug}"' if iqb else ""
+            columns = "<colgroup>" + "<col>" * len(headers) + "</colgroup>" if iqb else ""
+            heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
+            body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
+            if index == 0 and data.get("title"):
+                legend = data["title"]
+            caption = f"<caption>{html.escape(str(legend))}</caption>" if legend else ""
+            tables.append(f'<table{table_class}>{caption}{columns}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
+        return f'<div class="block long">{"".join(tables)}{refs}</div>'
     if kind == "list":
         items = data.get("items", [])
         tag = "ol" if data.get("ordered") else "ul"
@@ -347,6 +468,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     uri = "data:image/png;base64," + base64.b64encode(logo.read_bytes()).decode("ascii")
     meta = content["metadata"]
     title = html.escape(content["title"])
+    deliverable_label = html.escape(DELIVERABLE_LABELS[content["deliverable_type"]])
     if profile["layout"] == "presentation":
         sections: list[tuple[str, list[dict[str, Any]]]] = []
         current_title = "Conteúdo"
@@ -362,7 +484,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             current_blocks.append(block)
         if current_blocks:
             sections.append((current_title, current_blocks))
-        masthead = f'<header class="masthead"><span class="eyebrow">{html.escape(content["deliverable_type"].replace("_", " "))}</span><img src="{uri}" alt="CCEE"></header>'
+        masthead = f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
         slides = [f'<section class="slide">{masthead}<h1>{title}</h1><p class="summary">{html.escape(content.get("summary", ""))}</p></section>']
         for section_title, section_blocks in sections:
             slides.append(f'<section class="slide">{masthead}<h1>{html.escape(section_title)}</h1>'
@@ -372,7 +494,12 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                            + (f', {html.escape(c["locator"])}' if c.get("locator") else '') + '</li>'
                            for c in content["citations"])
             slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1><ol>{refs}</ol></section>')
+        slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
+        slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
         slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
+        slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: Roboto; '
+                      f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
+                      f'color: {tokens["color"]["text_muted"]}; }}')
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
@@ -421,22 +548,29 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                        "h2 { margin: 10pt 0 5pt; } "
                        ".summary { margin-bottom: 9pt; } "
                        ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
-    footer_label = (f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · '
-                    f'{profile["layout"]}')
-    footer_css = (f'@page {{ @bottom-right {{ content: "{footer_label}"; '
+    footer_label = identity_line(content)
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        footer_label += f' · Test Card {meta["test_card_id"]} v{meta.get("test_card_version", "")}'
+    css_footer_label = json.dumps(footer_label, ensure_ascii=False).replace("<", "\\003c ")
+    footer_css = (f'@page {{ @bottom-right {{ content: {css_footer_label}; '
                   f'font-family: Roboto; font-size: 7.5pt; color: {tokens["color"]["text_muted"]}; }} }} '
                   '@media print { footer.meta { display: none; } }')
     return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
             f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"
-            f'<header class="masthead"><span class="eyebrow">{html.escape(content["deliverable_type"].replace("_", " "))}</span><img src="{uri}" alt="CCEE"></header>'
+            f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
             f"<h1>{title}</h1>{summary}{blocks}{refs}"
-            f'<footer class="meta">ID {html.escape(meta["artifact_id"])} · versão {html.escape(meta["content_version"])} · '
-            f'perfil {html.escape(profile["layout"])} · estado {html.escape(meta.get("completeness", "complete"))}</footer>'
+            f'<footer class="meta">{html.escape(footer_label)}</footer>'
             "</article></body></html>\n")
 
 
 def render_md(content: dict[str, Any]) -> str:
-    lines = [f"# {content['title']}", ""]
+    def grid_cell(text: str) -> str:
+        return text.replace("|", "\\|").replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>")
+
+    lines = [f"# {content['title']}", "", identity_line(content), ""]
+    meta = content.get("metadata", {})
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        lines += [f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}', ""]
     if content.get("summary"):
         lines += [content["summary"], ""]
     for block in content["blocks"]:
@@ -454,13 +588,19 @@ def render_md(content: dict[str, Any]) -> str:
                 lines += ["### " + str(block["data"]["title"]), ""]
             lines += ["| Card | Conteúdo |", "| --- | --- |"]
             for card in block["data"]["cards"]:
-                lines.append("| " + str(card["title"]).replace("|", "\\|") + " | " + card_text(card).replace("|", "\\|") + " |")
+                text = card_text(card)
+                if card.get("citation_ids"):
+                    text += "\nFontes: " + ", ".join(card["citation_ids"])
+                lines.append("| " + grid_cell(str(card["title"])) + " | " + grid_cell(text) + " |")
             lines.append("")
         elif kind == "table":
-            headers, rows = table_rows(block)
-            if headers:
-                lines += ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
-            lines += ["| " + " | ".join(row) + " |" for row in rows] + [""]
+            for _, legend, headers, rows in table_views(block):
+                if legend:
+                    lines += ["### " + str(legend), ""]
+                if headers:
+                    lines += ["| " + " | ".join(value.replace("|", "\\|") for value in headers) + " |",
+                              "| " + " | ".join("---" for _ in headers) + " |"]
+                lines += ["| " + " | ".join(value.replace("|", "\\|") for value in row) + " |" for row in rows] + [""]
         elif kind == "list":
             lines += [f"- {item}" for item in block.get("data", {}).get("items", [])] + [""]
         else:
@@ -510,6 +650,13 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     header.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.2))
     doc.add_heading(content["title"], 0)
+    identity = doc.add_paragraph(identity_line(content))
+    for run in identity.runs:
+        run.font.size = Pt(tokens["typography"]["styles"]["footer"]["size"])
+        run.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
+    meta = content.get("metadata", {})
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        doc.add_paragraph(f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}')
     if content.get("summary"):
         doc.add_paragraph(content["summary"])
     for block in content["blocks"]:
@@ -534,17 +681,30 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                     if card.get("citation_ids"):
                         cell.add_paragraph("Fontes: " + ", ".join(card["citation_ids"]))
         elif kind == "table":
-            heads, rows = table_rows(block)
-            width = max(1, len(heads), *(len(row) for row in rows))
-            table = doc.add_table(rows=1 if heads else 0, cols=width)
-            table.style = "Table Grid"
-            if heads:
-                for cell, value in zip(table.rows[0].cells, heads):
-                    cell.text = value
-            for row in rows:
-                cells = table.add_row().cells
-                for cell, value in zip(cells, row):
-                    cell.text = value
+            for slug, legend, heads, rows in table_views(block):
+                if legend:
+                    doc.add_paragraph(str(legend))
+                width = max(1, len(heads), *(len(row) for row in rows))
+                table = doc.add_table(rows=1 if heads else 0, cols=width)
+                table.style = "Table Grid"
+                if heads:
+                    for cell, value in zip(table.rows[0].cells, heads):
+                        cell.text = value
+                for row in rows:
+                    cells = table.add_row().cells
+                    for cell, value in zip(cells, row):
+                        cell.text = value
+                if isinstance(block["data"].get("dimensions"), dict):
+                    table.autofit = False
+                    available_width = section.page_width - section.left_margin - section.right_margin
+                    for column, percentage in zip(table.columns, IQB_TABLE_WIDTHS[slug]):
+                        column.width = int(available_width * percentage / 100)
+                    for row in table.rows:
+                        for cell, column in zip(row.cells, table.columns):
+                            cell.width = column.width
+                            for paragraph in cell.paragraphs:
+                                for run in paragraph.runs:
+                                    run.font.size = Pt(8)
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
                 doc.add_paragraph(str(item), style="List Bullet")
@@ -600,6 +760,13 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
             para.text = line
             para.font.name, para.font.size = "Roboto", Pt(17)
+        footer = s.shapes.add_textbox(Inches(.6), Inches(7.02), Inches(12.1), Inches(.33))
+        footer.text_frame.word_wrap = True
+        paragraph = footer.text_frame.paragraphs[0]
+        paragraph.text = identity_line(content)
+        paragraph.font.name = tokens["typography"]["font_body"]
+        paragraph.font.size = Pt(10)
+        paragraph.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
 
     slide(content["title"], content.get("summary", ""))
     title = "Conteúdo"
@@ -614,8 +781,11 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             continue
         line = block_text(block)
         if block["type"] == "table":
-            heads, rows = table_rows(block)
-            line = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+            views = []
+            for _, legend, heads, rows in table_views(block):
+                text = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
+                views.append((str(legend) + "\n" if legend else "") + text)
+            line = "\n\n".join(views)
         if block.get("citation_ids"):
             line += " [" + ", ".join(block["citation_ids"]) + "]"
         for chunk in [line[i:i+650] for i in range(0, len(line), 650)] or [""]:
@@ -639,14 +809,15 @@ def write_csv_tables(content: dict[str, Any], out: Path, stem: str) -> list[Path
         if block["type"] != "table" or not export.get("csv"):
             continue
         variant = safe_name(export["variant_key"])
-        path = out / f"{stem}-{variant}.csv"
-        headers, rows = table_rows(block)
-        with path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.writer(handle)
-            if headers:
-                writer.writerow(headers)
-            writer.writerows(rows)
-        written.append(path)
+        for index, (slug, _, headers, rows) in enumerate(table_views(block)):
+            suffix = f"-{slug}" if index else ""
+            path = out / f"{stem}-{variant}{suffix}.csv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle)
+                if headers:
+                    writer.writerow(headers)
+                writer.writerows(rows)
+            written.append(path)
     if not written:
         raise ValueError("CSV solicitado sem bloco table marcado export.csv=true")
     return written
@@ -683,23 +854,30 @@ def main() -> None:
         path = out / f"{stem}.html"
         path.write_text(source_html or "", encoding="utf-8")
         files.append(path)
+    unavailable: dict[str, str] = {}
     if "pdf" in requested:
+        path = out / f"{stem}.pdf"
         try:
             from weasyprint import HTML
-        except ImportError as exc:
-            raise RuntimeError("PDF requer WeasyPrint: pip install weasyprint") from exc
-        path = out / f"{stem}.pdf"
-        HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
-        if profile["layout"] in ("executive_one_page", "card_portrait"):
-            try:
-                from pypdf import PdfReader
-            except ImportError as exc:
-                raise RuntimeError("Verificação de página única requer pypdf: pip install pypdf") from exc
-            count = len(PdfReader(str(path)).pages)
-            if count != 1:
-                path.unlink(missing_ok=True)
-                raise ValueError(f"{profile['layout']} excedeu uma página ({count}); revise ou divida o conteúdo sem reduzir a fonte")
-        files.append(path)
+            HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
+        except (ImportError, OSError) as exc:
+            import sys
+
+            path.unlink(missing_ok=True)
+            unavailable["pdf"] = f"{type(exc).__name__}: {exc}"[:300]
+            print(f"AVISO: PDF não gerado ({unavailable['pdf']}). No macOS: brew install pango; "
+                  "no Debian/Ubuntu: apt-get install libpango-1.0-0 libpangoft2-1.0-0.", file=sys.stderr)
+        else:
+            if profile["layout"] in ("executive_one_page", "card_portrait"):
+                try:
+                    from pypdf import PdfReader
+                except ImportError as exc:
+                    raise RuntimeError("Verificação de página única requer pypdf: pip install pypdf") from exc
+                count = len(PdfReader(str(path)).pages)
+                if count != 1:
+                    path.unlink(missing_ok=True)
+                    raise ValueError(f"{profile['layout']} excedeu uma página ({count}); revise ou divida o conteúdo sem reduzir a fonte")
+            files.append(path)
     if "md" in requested or "txt" in requested:
         markdown = render_md(content)
         if "md" in requested:
@@ -733,9 +911,11 @@ def main() -> None:
         "profile_sha256": sha(canonical_bytes(profiles)),
         "tokens_sha256": sha(canonical_bytes(tokens)),
         "files": {path.name: sha(path.read_bytes()) for path in files},
+        "unavailable": unavailable,
     }
     (out / f"{stem}.manifest.json").write_bytes(canonical_bytes(manifest))
-    print(json.dumps({"manifest": f"{stem}.manifest.json", "files": list(manifest["files"])}, ensure_ascii=False))
+    print(json.dumps({"manifest": f"{stem}.manifest.json", "files": list(manifest["files"]),
+                      "unavailable": unavailable}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

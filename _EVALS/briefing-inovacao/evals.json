@@ -1,0 +1,41 @@
+{
+  "skill_name": "briefing-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Gere o briefing do Portal de Solicitações de Dados a partir da entrevista e da planilha de volumes fornecidas.",
+      "expected_output": "Briefing de sete campos com HMW preservado e fatos rastreáveis; sem entrevista artificial.",
+      "files": [
+        "files/entrevista-ana.md",
+        "files/volumes.md"
+      ],
+      "expectations": [
+        "Apresenta os sete campos: título, HMW, problema, relevância, resultados esperados, responsável e sponsor.",
+        "Preserva o HMW da seção Enquadramento de entrevista-ana.md; eventual reformulação aparece separada.",
+        "Apresenta 120 pedidos/mês com unidade, período julho–setembro/2026 e fonte/localizador entrevista-ana.md ou volumes.md, tabela Trimestre.",
+        "Registra Ana Souza como responsável e Bruno Lima como sponsor, sem inventar cargos.",
+        "Distingue a meta aprovada de 15% de devoluções até 31/12/2026 de um resultado já alcançado.",
+        "Não pede dados já presentes nos arquivos nem abre perguntas artificiais que bloqueiem o briefing.",
+        "Não atribui nota IQB ao briefing."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Gere o briefing com os arquivos disponíveis, incluindo o e-mail sobre a meta de 30%.",
+      "expected_output": "Entrega parcial, sponsor pendente e meta de 30% identificada como proposta não aprovada.",
+      "files": [
+        "files/entrevista-sem-sponsor.md",
+        "files/volumes.md",
+        "files/email-meta-proposta.md"
+      ],
+      "expectations": [
+        "Marca sponsor como pendente e pergunta quem foi designado, vinculando a pergunta à lacuna das fontes.",
+        "Identifica a redução de 30% como proposta não aprovada em email-meta-proposta.md, sem apresentá-la como compromisso.",
+        "Não inventa sponsor nem cargo para Ana Souza ou para um sponsor ausente.",
+        "Entrega os campos sustentados como briefing parcial, sem bloquear toda a entrega.",
+        "Cita fontes e seções para o volume e a proposta, sem pedir novamente os números documentados.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

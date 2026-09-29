@@ -1,5 +1,7 @@
 # EXEMPLO FICTÍCIO — Learning Card LC-01
 
+Test Card: sample-test-card v1.0.0
+
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
 ## 1. Acreditávamos que — hipótese testada

@@ -1,0 +1,61 @@
+{
+  "skill_name": "experimentacao-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analise as cinco sessões contra o plano prévio. Informe o status do critério local e a recomendação.",
+      "expected_output": "Três sucessos sem ajuda em cinco sessões; critério local não atingido, com limites e próximo teste.",
+      "files": ["files/plano-previo.md", "files/sessoes.md"],
+      "expectations": [
+        "Identifica o TC-01 v1 e o limiar de quatro sucessos sem ajuda em cinco sessões, aprovado antes da coleta.",
+        "Conta P01, P02 e P04 como sucessos sem ajuda; mantém P03 e P05 no denominador de cinco.",
+        "Declara o critério local não atingido (3/5), sem mudar o limiar ou excluir sessões com ajuda.",
+        "Cita plano-previo.md e sessoes.md, incluindo as observações contrárias de P03 e P05.",
+        "Não infere taxa populacional, economia de tempo, causalidade ou decisão de expansão.",
+        "Recomenda investigar o campo obrigatório e testar a alteração antes de nova decisão."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Analise estas sessões e diga se o critério do Test Card foi atingido e se o protótipo pode ser expandido.",
+      "expected_output": "Quatro sucessos sem ajuda em cinco sessões; critério local atingido, expansão ainda sem decisão sustentada.",
+      "files": ["files/plano-previo.md", "files/sessoes-criterio-atingido.md"],
+      "expectations": [
+        "Liga a análise ao TC-01 v1 e ao critério de quatro de cinco aprovado antes da coleta.",
+        "Conta P01–P04 como quatro sucessos sem ajuda e mantém P05 no denominador de cinco como desvio do protocolo.",
+        "Declara o critério local atingido (4/5) com base no plano e nas sessões, sem o tratar como aprovação geral.",
+        "Cita plano-previo.md e sessoes-criterio-atingido.md, inclusive a ajuda em P05.",
+        "Não afirma taxa populacional, ganho de tempo ou causalidade; não autoriza escala ou produção.",
+        "Propõe que Bruno Lima avalie evidência adicional e decida o próximo teste ou a expansão separadamente."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use o plano exploratório e as sessões para dizer o que foi aprendido e se algum critério foi aprovado.",
+      "expected_output": "Resultados descritivos de cinco sessões, sem critério anterior e sem aprovação inventada.",
+      "files": ["files/plano-sem-criterio.md", "files/sessoes-criterio-atingido.md"],
+      "expectations": [
+        "Identifica que plano-sem-criterio.md definiu exploração e não fixou limiar antes da coleta.",
+        "Descreve quatro conclusões corretas sem ajuda em cinco sessões, com P05 assistido.",
+        "Não reaproveita o limiar de outro plano nem declara Test Card aprovado ou critério local atingido.",
+        "Cita plano-sem-criterio.md e sessoes-criterio-atingido.md, incluindo P05 como limite.",
+        "Não extrapola prevalência, causalidade, ganho de tempo ou autorização de expansão.",
+        "Sugere definir prospectivamente medida, elegibilidade e limiar para uma próxima rodada se a decisão exigir verificação."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Compare a coleta parcial com o Test Card e informe se o critério de sucesso foi atingido.",
+      "expected_output": "Três sucessos observados, dois registros ausentes; status inconclusivo com denominador planejado cinco.",
+      "files": ["files/plano-previo.md", "files/sessoes-coleta-incompleta.md"],
+      "expectations": [
+        "Liga os registros ao TC-01 v1 e ao limiar prévio de quatro sucessos sem ajuda em cinco sessões elegíveis.",
+        "Relata P01, P02 e P04 como observados e P03/P05 como sem registro, preservando o denominador planejado cinco.",
+        "Declara inconclusivo se o limiar quatro de cinco ocorreu, sem converter três observações em três de três ou presumir falha dos ausentes.",
+        "Cita plano-previo.md e sessoes-coleta-incompleta.md para observações e lacunas.",
+        "Não estima taxa populacional, causalidade ou aprovação para expansão.",
+        "Pede localizar os registros de P03/P05 ou planejar coleta complementar antes de decidir o status."
+      ]
+    }
+  ]
+}

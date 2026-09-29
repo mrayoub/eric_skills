@@ -1,8 +1,15 @@
 """Cálculo determinístico e portátil do Índice de Qualidade do Briefing.
 
-Este módulo é a fonte de verdade executável da skill ``validate-briefing``.
+Este módulo é a fonte de verdade executável da skill ``avaliacao-briefing-iqb``
+(adaptada de ``validate-briefing`` do ERIC_RC6).
 Ele não acessa banco, rede, LLM ou módulos do host: recebe as respostas binárias
 da rubrica e devolve apenas resultados determinísticos e auditáveis.
+
+Entrada JSON: objeto com as chaves clarity, evidence, outcomes e actionability,
+cada uma contendo 10 itens com IDs CLA-01..10, EVI-01..10, OUT-01..10 ou
+ACT-01..10, respectivamente. Exemplo de item:
+{"criterion_id": "CLA-01", "answer": true, "evidence": "Trecho da fonte"}
+Uso: python3 scripts/iqb.py respostas.json (ou '-' para ler de stdin).
 """
 
 from __future__ import annotations
@@ -205,7 +212,8 @@ def _validate_complete_evaluations(evaluations: dict[str, list[dict]]) -> None:
         for item in items:
             if type(item.get("answer")) is not bool:
                 raise ValueError(f"{item['criterion_id']}: answer must be true or false")
-            if not str(item.get("evidence", "")).strip():
+            evidence = item.get("evidence")
+            if not isinstance(evidence, str) or not evidence.strip():
                 raise ValueError(f"{item['criterion_id']}: evidence or an explicit absence note is required")
 
 
@@ -314,3 +322,26 @@ def _classification_to_verb(classification: str) -> str:
         "Insuficiente": "nao possui fundamentacao minima",
     }
     return verbs.get(classification, "requer atencao")
+
+
+def main() -> None:
+    import argparse
+    import json
+    import sys
+    from pathlib import Path
+
+    parser = argparse.ArgumentParser(description="Calcula o IQB a partir de um JSON com as 40 respostas da rubrica.")
+    parser.add_argument("input", help="arquivo JSON ou '-' para stdin")
+    args = parser.parse_args()
+    raw = sys.stdin.read() if args.input == "-" else Path(args.input).read_text(encoding="utf-8")
+    try:
+        result = calculate_iqb_from_evaluations(json.loads(raw))
+    except ValueError as exc:
+        print(json.dumps({"status": "error", "error": str(exc)}, ensure_ascii=False))
+        sys.exit(2)
+    print(json.dumps({**result, "status": "complete", "rubric_version": IQB_RUBRIC_VERSION},
+                     ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
