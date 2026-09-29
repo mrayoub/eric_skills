@@ -521,20 +521,25 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                        ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
     footer_label = (f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · '
                     f'{completeness_label}')
-    footer_css = (f'@page {{ @bottom-right {{ content: "{footer_label}"; '
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        footer_label += f' · Test Card {meta["test_card_id"]} v{meta.get("test_card_version", "")}'
+    css_footer_label = json.dumps(footer_label, ensure_ascii=False).replace("<", "\\003c ")
+    footer_css = (f'@page {{ @bottom-right {{ content: {css_footer_label}; '
                   f'font-family: Roboto; font-size: 7.5pt; color: {tokens["color"]["text_muted"]}; }} }} '
                   '@media print { footer.meta { display: none; } }')
     return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
             f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"
             f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
             f"<h1>{title}</h1>{summary}{blocks}{refs}"
-            f'<footer class="meta">ID {html.escape(meta["artifact_id"])} · versão {html.escape(meta["content_version"])} · '
-            f'{html.escape(completeness_label)}</footer>'
+            f'<footer class="meta">{html.escape(footer_label)}</footer>'
             "</article></body></html>\n")
 
 
 def render_md(content: dict[str, Any]) -> str:
     lines = [f"# {content['title']}", ""]
+    meta = content.get("metadata", {})
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        lines += [f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}', ""]
     if content.get("summary"):
         lines += [content["summary"], ""]
     for block in content["blocks"]:
@@ -611,6 +616,9 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     header.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.2))
     doc.add_heading(content["title"], 0)
+    meta = content.get("metadata", {})
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        doc.add_paragraph(f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}')
     if content.get("summary"):
         doc.add_paragraph(content["summary"])
     for block in content["blocks"]:

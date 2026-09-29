@@ -26,7 +26,7 @@ Convenções comuns a todos os planos:
 | 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (implementação pronta; bateria antes/depois adiada pelo operador; não bloqueia a execução do 009) |
 | 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | DONE (11 conjuntos, 22 casos, 35 fixtures fictícias; integridade e contas verificadas; linha de base não rodada) |
 | 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | DONE (11 skills reestruturadas; grilling unificado; checks locais passaram; evals comportamentais não executados) |
-| 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
+| 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | DONE (vínculo e derivados verificados; 62 testes e 36 subtestes passaram; sync consistente) |
 | 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | TODO |
 
 | 013 | [Calcular total e classe com as mesmas notas publicadas](013-potencial-precisao-consistente.md) (A01) | P1 | S | 003 e 005 | TODO |

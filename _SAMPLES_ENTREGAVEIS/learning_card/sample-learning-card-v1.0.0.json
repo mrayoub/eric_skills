@@ -59,7 +59,9 @@
     "completeness": "complete",
     "content_version": "1.0.0",
     "orientation": "portrait",
-    "sample": true
+    "sample": true,
+    "test_card_id": "sample-test-card",
+    "test_card_version": "1.0.0"
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",

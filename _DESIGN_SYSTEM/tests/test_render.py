@@ -316,7 +316,7 @@ class RenderTests(unittest.TestCase):
             self.assertIn("Conteúdo inválido", result.stderr)
 
             learning = content("learning_card", "LC-02")
-            learning["metadata"]["completeness"] = "complete"
+            learning["metadata"].update(completeness="complete", test_card_id="TC-02", test_card_version="1.0.0")
             learning["blocks"] = [
                 {"id": key, "type": "paragraph", "data": {"section_key": key, "text": key}}
                 for key in ("hypothesis", "observations", "learning", "action")
@@ -326,6 +326,51 @@ class RenderTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             learning["blocks"][1]["citation_ids"] = ["F01"]
             self.render(learning, "md", folder)
+
+    def test_learning_card_link_required_only_for_complete_content(self):
+        sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/learning_card/input.json").read_text())
+        for field, value in [("test_card_id", None), ("test_card_version", None),
+                             ("test_card_id", ""), ("test_card_id", "invalid id"),
+                             ("test_card_version", ""), ("test_card_version", "invalid version")]:
+            with self.subTest(field=field, value=value), tempfile.TemporaryDirectory() as temp:
+                item = json.loads(json.dumps(sample))
+                if value is None:
+                    del item["metadata"][field]
+                else:
+                    item["metadata"][field] = value
+                folder = Path(temp)
+                source = folder / "input.json"
+                source.write_text(json.dumps(item))
+                result = subprocess.run([sys.executable, str(SCRIPT), str(source),
+                                         "--out-dir", str(folder / "output"), "--formats", "md"],
+                                        capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Conteúdo inválido", result.stderr)
+                self.assertFalse((folder / "output").exists())
+        with tempfile.TemporaryDirectory() as temp:
+            sample["metadata"]["completeness"] = "partial"
+            del sample["metadata"]["test_card_id"]
+            del sample["metadata"]["test_card_version"]
+            self.render(sample, "md", Path(temp))
+
+    def test_learning_card_link_versions_and_visible_exports(self):
+        sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/learning_card/input.json").read_text())
+        for version in ("1", "1.0.0"):
+            with self.subTest(version=version), tempfile.TemporaryDirectory() as temp:
+                sample["metadata"]["test_card_version"] = version
+                folder = Path(temp)
+                formats = "html,docx,md,txt" + (",pdf" if pdf_available() else "")
+                self.render(sample, formats, folder)
+                stem = "sample-learning-card-v1.0.0"
+                link = "Test Card: sample-test-card v" + version
+                for extension in ("md", "txt"):
+                    self.assertIn(link, (folder / f"{stem}.{extension}").read_text())
+                self.assertIn("Test Card sample-test-card v" + version,
+                              (folder / f"{stem}.html").read_text())
+                self.assertIn(link, "\n".join(p.text for p in Document(folder / f"{stem}.docx").paragraphs))
+                if pdf_available():
+                    text = "\n".join(p.extract_text() for p in PdfReader(folder / f"{stem}.pdf").pages)
+                    self.assertIn("Test Card sample-test-card v" + version, text)
 
     def test_every_type_has_schema_and_complete_sections_are_enforced(self):
         profiles = json.loads((ROOT / "profiles.json").read_text())

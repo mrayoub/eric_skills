@@ -123,6 +123,17 @@ class BriefingValidationTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
 
 
+class LearningCardValidationTests(unittest.TestCase):
+    def test_link_cannot_reference_learning_card_itself(self):
+        content = {"deliverable_type": "learning_card", "metadata": {
+            "artifact_id": "LC-01", "test_card_id": "LC-01", "test_card_version": "1"}}
+        self.assertTrue(any("test_card_id" in error for error in validators.run(content)))
+        content["metadata"]["test_card_id"] = "TC-01"
+        original = copy.deepcopy(content)
+        self.assertEqual(validators.run(content), [])
+        self.assertEqual(content, original)
+
+
 class PotentialValidationTests(unittest.TestCase):
     def setUp(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/innovation_potential_assessment/input.json"

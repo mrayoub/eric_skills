@@ -107,6 +107,24 @@
               }
             }
           ]
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "test_card_id",
+            "test_card_version"
+          ],
+          "properties": {
+            "test_card_id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            },
+            "test_card_version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            }
+          }
         }
       }
     }
