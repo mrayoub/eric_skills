@@ -33,6 +33,10 @@ def content(kind: str, artifact: str) -> dict:
         {"id": "p-1", "type": "paragraph", "data": {"text": "Evidência resumida e verificável."}, "citation_ids": ["F01"]},
         {"id": "t-1", "type": "table", "data": {"headers": ["Medida", "Valor"], "rows": [["Casos", "12"]]}, "export": {"csv": True, "variant_key": "medidas"}},
     ]
+    if kind in ("test_card", "learning_card"):
+        keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
+        blocks = [{"id": key, "type": "paragraph", "data": {
+            "section_key": key, "text": "Evidência resumida e verificável."}} for key in keys]
     return {
         "schema_version": "1.0.0", "deliverable_type": kind, "locale": "pt-BR",
         "title": "Avaliação de exemplo", "summary": "Resumo curto.", "blocks": blocks,
@@ -318,6 +322,105 @@ class RenderTests(unittest.TestCase):
             result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder)], capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("orientation", result.stderr)
+
+    def card_document(self, kind, state):
+        keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
+        item = content(kind, "TC-state" if kind == "test_card" else "LC-state")
+        item["metadata"]["completeness"] = state
+        item["blocks"] = [{"id": key, "type": "paragraph", "data": {
+            "section_key": key, "text": "Pendente: registrar " + key}} for key in keys]
+        item["citations"] = []
+        if state == "complete":
+            item["citations"] = [{"id": "F01", "source_id": "registro-ficticio"}]
+            if kind == "learning_card":
+                item["metadata"].update(test_card_id="TC-executed", test_card_version="1")
+                item["blocks"][1]["citation_ids"] = ["F01"]
+        return item
+
+    def test_cards_keep_four_fields_for_all_states(self):
+        for kind in ("test_card", "learning_card"):
+            for state in ("complete", "partial", "inconclusive"):
+                original = self.card_document(kind, state)
+                with self.subTest(kind=kind, state=state, case="valid"):
+                    self.renderer.validate(original, self.profiles)
+                    self.assertEqual(original, self.card_document(kind, state))
+                for case in ("only_hypothesis", "missing", "duplicate", "inverted", "extra", "blank", "page_break", "list", "table", "card_grid"):
+                    with self.subTest(kind=kind, state=state, case=case):
+                        item = copy.deepcopy(original)
+                        if case == "only_hypothesis":
+                            item["blocks"] = item["blocks"][:1]
+                        elif case == "missing":
+                            item["blocks"].pop()
+                        elif case == "duplicate":
+                            item["blocks"][2]["data"]["section_key"] = item["blocks"][0]["data"]["section_key"]
+                        elif case == "inverted":
+                            item["blocks"][2:4] = reversed(item["blocks"][2:4])
+                        elif case == "extra":
+                            item["blocks"].append({"id": "extra", "type": "paragraph", "data": {"text": "Extra"}})
+                        elif case == "blank":
+                            item["blocks"][2]["data"]["text"] = " \n\t "
+                        else:
+                            item["blocks"][2]["type"] = case
+                            data = item["blocks"][2]["data"]
+                            if case == "list":
+                                data["items"] = ["Item diferente"]
+                            elif case == "table":
+                                data.update(headers=["Coluna"], rows=[["Linha diferente"]])
+                            elif case == "card_grid":
+                                data["cards"] = [{"title": "Card próprio", "text": "Texto diferente"}]
+                        before = copy.deepcopy(item)
+                        with self.assertRaises(ValueError):
+                            self.renderer.validate(item, self.profiles)
+                        self.assertEqual(item, before)
+            with self.subTest(kind=kind, case="CLI"), tempfile.TemporaryDirectory() as temp:
+                item = self.card_document(kind, "partial")
+                item["blocks"] = item["blocks"][:1]
+                folder = Path(temp)
+                source = folder / "input.json"
+                source.write_text(json.dumps(item))
+                result = subprocess.run([sys.executable, str(SCRIPT), str(source),
+                                         "--out-dir", str(folder / "output"), "--formats", "md"],
+                                        capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse((folder / "output").exists())
+            with self.subTest(kind=kind, case="default_complete"):
+                item = self.card_document(kind, "complete")
+                del item["metadata"]["completeness"]
+                self.renderer.validate(item, self.profiles)
+                if kind == "learning_card":
+                    del item["metadata"]["test_card_id"]
+                    with self.assertRaisesRegex(ValueError, "Conteúdo inválido"):
+                        self.renderer.validate(item, self.profiles)
+
+    def test_partial_cards_preserve_pending_fields_in_exports(self):
+        for kind in ("test_card", "learning_card"):
+            for state in ("partial", "inconclusive"):
+                with self.subTest(kind=kind, state=state), tempfile.TemporaryDirectory() as temp:
+                    item = self.card_document(kind, state)
+                    texts = (["Hipótese pendente de definição.", "Pendente: definir teste antes da coleta.",
+                              "Pendente: definir medida antes da coleta.", "Pendente: definir critério antes da coleta."]
+                             if kind == "test_card" else
+                             ["Hipótese do teste ainda não informada.", "Não observado: coleta ainda não realizada.",
+                              "Aprendizado pendente de observação.", "Ação pendente de análise."])
+                    for block, text, block_type in zip(item["blocks"], texts, ("paragraph", "heading", "callout", "metric")):
+                        block["data"]["text"] = text
+                        block["type"] = block_type
+                    before = copy.deepcopy(item)
+                    folder = Path(temp)
+                    has_pdf = pdf_available()
+                    self.render(item, "md,html,docx" + (",pdf" if has_pdf else ""), folder)
+                    self.assertEqual(item, before)
+                    stem = item["metadata"]["artifact_id"] + "-v1.0.0"
+                    exports = {fmt: (folder / f"{stem}.{fmt}").read_text() for fmt in ("md", "html")}
+                    exports["docx"] = "\n".join(p.text for p in Document(folder / f"{stem}.docx").paragraphs)
+                    if has_pdf:
+                        exports["pdf"] = "\n".join(p.extract_text() for p in PdfReader(folder / f"{stem}.pdf").pages)
+                    for fmt, rendered in exports.items():
+                        for text in texts:
+                            self.assertIn(text.casefold(), " ".join(rendered.split()).casefold(), (kind, state, fmt, text))
+                    item["blocks"][0]["citation_ids"] = ["INEXISTENTE"]
+                    with self.assertRaisesRegex(ValueError, "citações inexistentes"):
+                        self.renderer.validate(item, self.profiles)
 
     def test_complete_cards_require_four_fields_and_learning_evidence(self):
         with tempfile.TemporaryDirectory() as temp:
