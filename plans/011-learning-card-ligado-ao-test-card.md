@@ -11,6 +11,8 @@
 
 ## Status
 
+- **Status:** DONE
+
 - **Priority**: P3
 - **Effort**: S
 - **Risk**: LOW
@@ -67,9 +69,13 @@ acrescente:
 
 ```json
 "metadata": {"type": "object", "required": ["test_card_id", "test_card_version"],
-  "properties": {"test_card_id": {"type": "string", "minLength": 1},
-                 "test_card_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}}}
+  "properties": {"test_card_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+                 "test_card_version": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"}}}
 ```
+
+Reconciliação em 29/09/2026: ID e versão seguem o padrão já aceito para
+`artifact_id`/`content_version`; versões `1` e `1.0.0` são válidas. Não exigir
+semver apenas no vínculo, pois o Test Card não tem essa restrição.
 
 (Só se aplica a cards completos, porque `render.py` só usa o schema específico quando `completeness == "complete"`.)
 
@@ -114,3 +120,11 @@ Casos: com ligação → passa; sem ligação (completo) → falha; parcial sem 
 ## Maintenance notes
 
 - Se um dia houver um "índice da rodada" (experiment_report) com lista de pares Test/Learning Card, a checagem cruzada (todo Test Card executado tem Learning Card) pode ir para `validators/experiment_report.py`.
+
+## Fechamento — 29/09/2026
+
+Vínculo obrigatório em Learning Cards completos e rejeição de autorreferência.
+Amostra fictícia regenerada em HTML/PDF/DOCX/MD/TXT com vínculo visível.
+Revisão independente: 62 testes e 36 subtestes passaram; sync e diff-check passaram.
+Versões preservam o padrão seguro existente, incluindo `1` e `1.0.0`.
+Nenhuma bateria de modelos executada; entregas históricas preservadas.

@@ -1,49 +1,71 @@
 ---
 name: workshop-4d
-description: "Prepara e cofacilita o método 4D da esteira ERIC para aprofundar um desafio: D1 percepção, D2 diagnóstico, D3 alternativas e D4 priorização. Use durante o workshop ou para organizar uma execução assíncrona, preservando registros para o relatório 4D."
+description: "Prepara, conduz ao vivo ou organiza de forma assíncrona o workshop 4D de aprofundamento de um desafio: D1 descongelar percepções, D2 diagnosticar (jornada e barco da inovação: ventos, âncoras, icebergs, porto), D3 desenhar alternativas e D4 decidir com créditos de votação. Use para montar roteiro, pauta, board colaborativo, perguntas de facilitação ou para registrar o que aconteceu em cada D. Não use para escrever o relatório consolidado depois do encontro (use relatorio-4d)."
 ---
 
 # Facilitar o 4D
 
-Leia a [transcrição integral do playbook 4D fornecido](<assets/Modelo 4D de Aprofundamento.transcricao.md>) e consulte o [DOCX original](<assets/Modelo 4D de Aprofundamento.docx>) para conferir as perguntas, dinâmicas e regras. O [registro de comparação com o RC6](references/fonte-4d-e-divergencias.md) identifica a origem e as adaptações.
+Prepara, conduz ou registra D1–D4 em sequência lógica; resultados posteriores atualizam contexto, não recriam votações.
 
-Adapta `facilitate-4d-workshop` do ERIC_RC6. Leia o [playbook 4D](references/4d-workshop-playbook.md) para tempos e dinâmicas; use o [blueprint Mural](references/mural-board-4d-template.md) apenas se houver board e autorização para editá-lo. O método pode ocorrer em material físico, conversa ou ferramenta colaborativa.
+## Leia primeiro
 
-## Grilling obrigatório na leitura e na interação
+- [Playbook 4D](references/4d-workshop-playbook.md) — tempos e dinâmicas.
+Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md). Preserve originais; registre diferenças e datas.
+[Blueprint Mural](references/mural-board-4d-template.md) opcional: board autorizado ou registros físicos/conversacionais.
 
-Antes de sintetizar, pontuar ou planejar, leia o [protocolo operacional de grilling](references/grilling-operacional.md). Aplique-o aos documentos e às respostas recebidas: confronte afirmações e fontes, registre questões resolvidas e pendentes, apresente somente a fronteira de perguntas que exige resposta humana e reavalie-a após cada novo insumo. Mostre a síntese documental e as lacunas decisivas; não trate leitura silenciosa ou preenchimento do template como grilling concluído. Continue tarefas independentes enquanto aguarda respostas e declare a entrega parcial quando faltar suporte decisivo. O protocolo está incorporado nesta skill e complementa suas referências específicas.
+## Grilling
 
-## Uso independente da fase
+Leia [o protocolo de grilling](references/grilling-operacional.md) antes de sintetizar,
+pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: resolva
+nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
+cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
+entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
+resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
 
-Ative esta skill pela tarefa solicitada e pelos insumos disponíveis, em qualquer ponto da esteira ou fora dela. A fase registrada no projeto é contexto de proveniência, não condição de uso nem autorização para inventar conteúdo. Consulte o Scorecard de maturidade quando disponível para localizar evidências e lacunas, sem usá-lo como bloqueio automático. Se a pessoa chegar antes do trabalho usual, produza preparação ou versão parcial e pergunte somente pelos insumos decisivos. Se chegar depois, incorpore os materiais posteriores, preserve a cronologia e indique o que foi definido antes ou reconstruído depois; não apresente reconstrução retrospectiva como plano previamente acordado. A completude depende dos requisitos da entrega e da evidência, não do nome da fase.
+## Quando usar
 
-## Preparação e entrevista
+A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do momento
+usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
+com data e não apresente reconstrução como plano combinado previamente.
 
-Leia [levantamento documental e grilling](references/levantamento-documental-e-grilling.md). Examine briefing vigente, HMW, dados, entrevistas e decisões antes de propor perguntas ao grupo. Faça uma fronteira curta de lacunas sobre objetivo, público, participantes, acesso aos materiais e restrições. Não peça ao grupo para confirmar uma causa ou proposta preferida. Diferencie dados externos, percepções internas e hipóteses.
+## Passos
 
-## Condução
+Prepare briefing/HMW, dados, entrevistas e decisões; se D1/D2 existirem, confira diagnóstico e lacunas. Pergunte só por objetivo, público, presença, acesso e restrições ausentes; distinga dados, percepções e hipóteses sem confirmar causas preferidas.
 
-Quando a tarefa for conduzir o método completo, percorra D1–D4 em ordem lógica. O RC6 costuma registrar essa rodada em aprofundamento e avaliar seu relatório no BP1, conforme ADR-0037; isso descreve a esteira de origem e não restringe quando a skill pode ser usada. Se D1/D2 já existirem, retome das lacunas e confira se o diagnóstico ainda vale. Se houver resultados posteriores, use-os para atualizar o contexto sem simular uma votação antiga.
+1. **D1 — Descongelar:** apresente desafio/dados citados; recolha anonimamente elefante na sala e sentimento dominante; preserve dissensos.
+2. **D2 — Diagnosticar:** jornada antes/durante/depois; barco com ventos, âncoras, icebergs e porto. Registre relator, evidência, contraexemplos e verificações pendentes. Salve snapshot D2: intermediário, não diagnóstico final ou aprovação.
+3. **D3 — Desenhar:** brainwriting individual para eliminar, simplificar e mudar a lógica; agrupe alternativas incrementais/estruturais/radicais ligadas à dor.
+4. **D4 — Decidir:** aplique créditos combinados antes do voto; registre ranking, razões, dissensos, riscos e responsáveis que aceitaram investigar. Voto indica prioridade, não efeito ou adesão.
 
-1. **D1 — Descongelar:** apresente desafio e dados com fonte; recolha anonimamente o “elefante na sala” e o sentimento dominante. Preserve divergências sem transformá-las em consenso.
-2. **D2 — Diagnosticar:** mapeie jornada antes/durante/depois e barco da inovação (ventos, âncoras, icebergs e porto). Para cada afirmação, registre quem relatou, evidência disponível, casos contrários e o que deve ser verificado depois. Salve um snapshot do desafio ao concluir D2; não trate o snapshot como diagnóstico final.
-3. **D3 — Desenhar:** faça brainwriting individual nas lógicas eliminar, simplificar e mudar a lógica; depois agrupe alternativas incrementais, estruturais e radicais. Ligue cada alternativa à dor que pretende resolver.
-4. **D4 — Decidir:** apresente propostas, aloque créditos segundo a regra combinada antes da votação e registre ranking, razões, dissensos, riscos e responsáveis que aceitaram assumir a próxima investigação. Voto do workshop indica prioridade do grupo, não comprova efeito ou adesão de usuários.
+Em cada D, registre objetivo, tempo, pergunta e saída; adapte duração e documente desvios. Não invente participação/votos/dinâmicas. Sem D3/D4, entregue parcial; em modo assíncrono, indique substituições documentais. Registro por dimensão deve incluir fontes, participantes, versão, decisões e lacunas para `relatorio-4d`. Se houver BP1, seu insumo é o relatório concluído, não snapshot D2.
 
-Em cada passagem, apresente objetivo, tempo sugerido, pergunta de facilitação e registro esperado. Adapte duração ao encontro real e registre desvios. Não invente participação, votação nem saída de dinâmica que não aconteceu. Se faltarem D3/D4, entregue registro parcial, não um 4D concluído.
+## Exemplo
 
-## Encerramento
+Entrada: “Prepare o 4D do Portal de Solicitações de Dados.”
+Saída (trecho):
+> D2: investigar devoluções; snapshot ainda provisório.
+> D4: combinar dez créditos por presente antes de votar.
+> Nenhuma preferência é impacto já validado.
 
-Produza um registro por dimensão com fontes, participantes, versão, decisões e lacunas, pronto para `relatorio-4d`. Se o projeto usar BP1, ofereça o Relatório 4D concluído como insumo da avaliação; o snapshot D2 é um registro intermediário e não comprova aprovação. Em execução assíncrona, preserve a mesma ordem lógica e identifique quais dinâmicas foram substituídas por leitura documental.
+## Checagem final
 
-## Contexto institucional
+- [ ] D1–D4 rastreáveis e lacunas explícitas
+- [ ] Objetivo, duração, pergunta e registro por etapa
+- [ ] Snapshot intermediário e voto distinguidos de validação
+- [ ] Participação, decisões e responsáveis sustentados
 
-Leia [ERIC — Esteira Robusta de Inovação Colaborativa](references/eric-esteira.md) antes de trabalhar com esta skill. Use o contexto da CCEE, as oito etapas, os dois pontos de avaliação, as rotas condicionais e as relações entre entregáveis para interpretar as fontes. Acione a skill pela tarefa e pelas evidências disponíveis, em qualquer momento; a sequência usual da esteira não bloqueia o uso.
+## Contexto ERIC
 
-## Arquivos e padrão visual
+ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comercialização de
+Energia Elétrica). Consulte [a esteira](references/eric-esteira.md) quando precisar
+interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre entregáveis.
 
-O [playbook 4D original do RC6](assets/4d-workshop-playbook-original-rc6.md) está preservado como fonte histórica imutável; a versão em `references/` contém as adaptações operacionais. Em divergência, identifique a diferença e a data; não reescreva silenciosamente o original.
+## Entrega em arquivo
 
-Para qualquer entregável em arquivo, siga o [sistema visual da skill](assets/design-system/README.md) e seu `profiles.json`. Gere primeiro o `content_json` versionado com blocos, citações e metadados; use o tipo `four_d_workshop_record` para registros exportados do encontro. O schema de resposta comum e o perfil deste tipo são obrigatórios; aplique também o schema específico quando existir. Execute a validação pelo renderizador incluído em `assets/design-system/scripts/render.py` antes de gerar qualquer arquivo final. Se ela falhar, corrija a resposta ou identifique explicitamente uma versão parcial; nunca contorne o schema. Preserve o mesmo JSON canônico validado junto de todos os derivados, garantindo estrutura, rastreabilidade e padrão visual idênticos entre skills. O perfil determina a orientação A4 retrato, A4 paisagem ou apresentação 16:9 e aplica os mesmos tokens de cor, fonte e área segura. Por padrão, ofereça JSON, PDF, DOCX, MD e TXT quando o tipo aceitar; PPTX é próprio de apresentação, CSV exige tabela exportável e HTML é prévia. Não componha um layout ad hoc nem altere conteúdo para caber: pagine ou registre impossibilidade de uma página. Antes de entregar, confira ordem, tabelas, citações, orientação, ausência de corte e igualdade semântica entre formatos.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+com `deliverable_type` `four_d_workshop_record`: monte o JSON canônico, rode
+`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
+JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
+`metadata.completeness: "partial"` — nunca contorne o schema.
 
 **Proveniência:** reescrita de fonte metodológica RC6 (`facilitate-4d-workshop/`). A sequência interna D1–D4 foi preservada; o vínculo do RC6 com fase e BP1 é apenas contexto histórico da fonte.

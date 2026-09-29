@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Temos 5 dores levantadas no garimpo, me ajuda a ranquear qual atacar primeiro",
+    "should_trigger": true
+  },
+  {
+    "query": "Vale a pena investir nessa ideia de triagem automática? Classifica o potencial",
+    "should_trigger": true
+  },
+  {
+    "query": "Revisa a priorização que fizemos mês passado com os dados novos",
+    "should_trigger": true
+  },
+  {
+    "query": "Compare as oportunidades de cadastro e atendimento pela rubrica de impacto, viabilidade, alinhamento, urgência e novidade.",
+    "should_trigger": true
+  },
+  {
+    "query": "Preciso triar as sugestões da área de Operações em priorizar, monitorar ou arquivar; registre notas justificadas e fontes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Avalie o potencial dessa proposta de conciliação e calcule a recomendação com os pesos da rubrica interna.",
+    "should_trigger": true
+  },
+  {
+    "query": "As restrições de orçamento mudaram em setembro; reavalie nossa decisão de priorização das três dores registradas.",
+    "should_trigger": true
+  },
+  {
+    "query": "Qual destas ideias merece atenção primeiro? Use as evidências disponíveis para pontuar cada critério e mostre as lacunas que impedem a comparação.",
+    "should_trigger": true
+  },
+  {
+    "query": "Qual é o IQB desse briefing?",
+    "should_trigger": false
+  },
+  {
+    "query": "O projeto tem evidência pra passar no gate de piloto?",
+    "should_trigger": false
+  },
+  {
+    "query": "Monta os Test Cards para essa hipótese",
+    "should_trigger": false
+  },
+  {
+    "query": "Reescreva o briefing de adimplemento a partir da entrevista, preenchendo seus sete campos.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare os retratos de maturidade de junho e setembro pelo Innovation Project Scorecard da Strategyzer.",
+    "should_trigger": false
+  },
+  {
+    "query": "Organize o roteiro do workshop 4D com barco da inovação e votação para sexta-feira.",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide o relatório 5C do encontro com clientes, incluindo os votos e os dissensos de C1 a C5.",
+    "should_trigger": false
+  },
+  {
+    "query": "Analise as sessões de think aloud já realizadas e produza Learning Cards e recomendação para a próxima rodada.",
+    "should_trigger": false
+  }
+]

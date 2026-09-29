@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Transforma essa transcrição da conversa com a área de adimplemento num briefing do desafio",
+    "should_trigger": true
+  },
+  {
+    "query": "Preciso de uma one-page do briefing v2 pra levar pro comitê amanhã",
+    "should_trigger": true
+  },
+  {
+    "query": "Quais perguntas eu deveria mandar pro sponsor pra fechar as lacunas desse briefing?",
+    "should_trigger": true
+  },
+  {
+    "query": "A entrevista de 12 de setembro com Operações está em entrevista.md; reconstrua o desafio nos sete campos e destaque o que ainda falta confirmar.",
+    "should_trigger": true
+  },
+  {
+    "query": "A área de Atendimento trouxe um problema de devolução de solicitações; escreva o enquadramento com pessoas afetadas, relevância e resultados esperados.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise nosso briefing v3 com base na nova conversa com a responsável e registre as mudanças em relação à versão anterior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Ajude a formular o how might we dessa dor de cadastro e complete a proposta de briefing sem antecipar a solução.",
+    "should_trigger": true
+  },
+  {
+    "query": "Monte um resumo executivo de uma página e perguntas para o sponsor a partir deste briefing com escopo e resultados ainda incompletos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Dá uma nota IQB pra esse briefing",
+    "should_trigger": false
+  },
+  {
+    "query": "Entre essas três dores, qual devemos priorizar?",
+    "should_trigger": false
+  },
+  {
+    "query": "Escreve um e-mail convidando os clientes pro workshop 5C",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare a qualidade dos briefings v1 e v2 pelos 40 critérios, aplicando vetos e mostrando as notas por dimensão.",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalie a maturidade das evidências do projeto de adimplemento e identifique o que falta para o gate de piloto.",
+    "should_trigger": false
+  },
+  {
+    "query": "Temos notas e votos de D1 a D4; compile o relatório do aprofundamento e a síntese para o BP1.",
+    "should_trigger": false
+  },
+  {
+    "query": "Prepare a pauta E1-E3 para o grupo estruturar a solução de cadastro e discutir seus componentes.",
+    "should_trigger": false
+  },
+  {
+    "query": "O piloto terminou em setembro; analise as observações e monte Learning Cards com recomendações para a próxima rodada.",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,458 @@
+[
+  {
+    "id": "4d-docx",
+    "titulo": "Fonte fornecida 4D",
+    "tipo": "original",
+    "arquivo": "assets/Modelo 4D de Aprofundamento.docx",
+    "skills": [
+      "workshop-4d",
+      "relatorio-4d"
+    ],
+    "origem": "Fornecido pelo usuário; preservado no pacote local.",
+    "autor": null,
+    "versao_declarada": "3h",
+    "data_importacao": "2026-09-28",
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+  },
+  {
+    "id": "4d-transcricao",
+    "titulo": "Transcrição integral 4D",
+    "tipo": "transcricao",
+    "arquivo": "assets/Modelo 4D de Aprofundamento.transcricao.md",
+    "skills": [
+      "workshop-4d",
+      "relatorio-4d"
+    ],
+    "origem": "Transcrição local do DOCX preservado.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-09-28",
+    "deriva_de": "4d-docx",
+    "vigencia": "desconhecida",
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+  },
+  {
+    "id": "4d-rc6",
+    "titulo": "Playbook histórico 4D do RC6",
+    "tipo": "historico",
+    "arquivo": "assets/4d-workshop-playbook-original-rc6.md",
+    "skills": [
+      "workshop-4d",
+      "relatorio-4d"
+    ],
+    "origem": "ERIC_RC6; cópia textual histórica preservada no pacote.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "historica",
+    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido."
+  },
+  {
+    "id": "4d-adaptacao",
+    "titulo": "Método operacional 4D",
+    "tipo": "adaptacao",
+    "arquivo": "references/4d-workshop-playbook.md",
+    "skills": [
+      "workshop-4d",
+      "relatorio-4d"
+    ],
+    "origem": "Adaptação metodológica local dos materiais preservados.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "4d-docx",
+    "vigencia": "desconhecida",
+    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX."
+  },
+  {
+    "id": "4d-comparacao",
+    "titulo": "Comparação de fontes e divergências 4D",
+    "tipo": "adaptacao",
+    "arquivo": "references/fonte-4d-e-divergencias.md",
+    "skills": [
+      "workshop-4d",
+      "relatorio-4d"
+    ],
+    "origem": "Conferência documental local entre DOCX, RC6 e adaptação.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "4d-docx",
+    "vigencia": "desconhecida",
+    "notas": "Registra diferenças; não declara aprovação institucional."
+  },
+  {
+    "id": "3e-docx",
+    "titulo": "Fonte fornecida 3E",
+    "tipo": "original",
+    "arquivo": "assets/Modelo 3E Estruturação da Solução.docx",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "Fornecido pelo usuário; preservado no pacote local.",
+    "autor": null,
+    "versao_declarada": "3h",
+    "data_importacao": "2026-09-28",
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+  },
+  {
+    "id": "3e-transcricao",
+    "titulo": "Transcrição integral 3E",
+    "tipo": "transcricao",
+    "arquivo": "assets/Modelo 3E Estruturação da Solução.transcricao.md",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "Transcrição local do DOCX preservado.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-09-28",
+    "deriva_de": "3e-docx",
+    "vigencia": "desconhecida",
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+  },
+  {
+    "id": "3e-rc6",
+    "titulo": "Playbook histórico 3E do RC6",
+    "tipo": "historico",
+    "arquivo": "assets/3e-solution-structuring-playbook-original-rc6.md",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "ERIC_RC6; cópia textual histórica preservada no pacote.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "historica",
+    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido."
+  },
+  {
+    "id": "3e-adaptacao",
+    "titulo": "Método operacional 3E",
+    "tipo": "adaptacao",
+    "arquivo": "references/3e-solution-structuring-playbook.md",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "Adaptação metodológica local dos materiais preservados.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "3e-docx",
+    "vigencia": "desconhecida",
+    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX."
+  },
+  {
+    "id": "3e-comparacao",
+    "titulo": "Comparação de fontes e divergências 3E",
+    "tipo": "adaptacao",
+    "arquivo": "references/fonte-3e-e-divergencias.md",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "Conferência documental local entre DOCX, RC6 e adaptação.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "3e-docx",
+    "vigencia": "desconhecida",
+    "notas": "Registra diferenças; não declara aprovação institucional."
+  },
+  {
+    "id": "5c-docx",
+    "titulo": "Fonte fornecida 5C",
+    "tipo": "original",
+    "arquivo": "assets/Playbook_Modelo_5C_Centralidade_Cliente.docx",
+    "skills": [
+      "workshop-5c",
+      "relatorio-5c"
+    ],
+    "origem": "Fornecido pelo usuário; preservado no pacote local.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Playbook de um encontro de Centralidade no Cliente; não comprova uma norma institucional geral."
+  },
+  {
+    "id": "5c-transcricao",
+    "titulo": "Transcrição integral 5C",
+    "tipo": "transcricao",
+    "arquivo": "assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md",
+    "skills": [
+      "workshop-5c",
+      "relatorio-5c"
+    ],
+    "origem": "Transcrição local do DOCX preservado.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "5c-docx",
+    "vigencia": "desconhecida",
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original."
+  },
+  {
+    "id": "5c-adaptacao",
+    "titulo": "Método operacional 5C",
+    "tipo": "adaptacao",
+    "arquivo": "references/metodo-5c.md",
+    "skills": [
+      "workshop-5c",
+      "relatorio-5c"
+    ],
+    "origem": "Adaptação metodológica local dos materiais preservados.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "5c-docx",
+    "vigencia": "desconhecida",
+    "notas": "Separa parâmetros do encontro original de regras para novas aplicações."
+  },
+  {
+    "id": "4d-pdf",
+    "titulo": "PDF de referência do relatório 4D",
+    "tipo": "original",
+    "arquivo": "assets/official-four-d-report.pdf",
+    "skills": [
+      "relatorio-4d"
+    ],
+    "origem": "PDF de referência preservado junto da skill originada de compile-4d-report/ (RC6).",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "O nome do arquivo não comprova aprovação institucional; autoria e versão não confirmadas."
+  },
+  {
+    "id": "3e-test-card",
+    "titulo": "Test Card adaptado para o 3E",
+    "tipo": "adaptacao",
+    "arquivo": "assets/test-card.md",
+    "skills": [
+      "workshop-3e",
+      "relatorio-3e"
+    ],
+    "origem": "Adaptação local dos quatro campos Strategyzer, registrada em fonte-3e-e-divergencias.md.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "strategyzer-test",
+    "vigencia": "desconhecida",
+    "notas": "Adapta os quatro campos Strategyzer por orientação do usuário. O DOCX 3e-docx fornece o contexto E3 e um formulário simplificado; não é a origem literal dos quatro campos adotados."
+  },
+  {
+    "id": "strategyzer-test",
+    "titulo": "Test Card Strategyzer 2023",
+    "tipo": "original",
+    "arquivo": "assets/strategyzer-test-card-2023.pdf",
+    "skills": [
+      "experimentacao-inovacao"
+    ],
+    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "autor": "Strategyzer AG",
+    "versao_declarada": "2023",
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "confirmada",
+    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+  },
+  {
+    "id": "strategyzer-learning",
+    "titulo": "Learning Card Strategyzer 2023",
+    "tipo": "original",
+    "arquivo": "assets/strategyzer-learning-card-2023.pdf",
+    "skills": [
+      "experimentacao-inovacao"
+    ],
+    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "autor": "Strategyzer AG",
+    "versao_declarada": "2023",
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "confirmada",
+    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+  },
+  {
+    "id": "strategyzer-scorecard",
+    "titulo": "Innovation Project Scorecard Strategyzer 2023",
+    "tipo": "original",
+    "arquivo": "assets/strategyzer-innovation-project-scorecard-2023.pdf",
+    "skills": [
+      "scorecard-inovacao"
+    ],
+    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "autor": "Strategyzer AG",
+    "versao_declarada": "2023",
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "confirmada",
+    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+  },
+  {
+    "id": "iqb-rubrica",
+    "titulo": "Rubrica IQB",
+    "tipo": "rubrica",
+    "arquivo": "references/iqb-rubric.md",
+    "skills": [
+      "avaliacao-briefing-iqb"
+    ],
+    "origem": "ERIC_RC6 1.0.0; critérios, vetos e faixas com adaptações operacionais locais.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "A origem RC6 não comprova norma institucional vigente."
+  },
+  {
+    "id": "potencial-rubrica",
+    "titulo": "Rubrica de potencial de inovação",
+    "tipo": "rubrica",
+    "arquivo": "references/innovation-potential-rubric.md",
+    "skills": [
+      "potencial-inovacao"
+    ],
+    "origem": "ERIC_RC6 1.0.0; critérios, pesos e faixas com tratamento local de dados ausentes.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "A origem RC6 não comprova norma institucional vigente."
+  },
+  {
+    "id": "iqb-script",
+    "titulo": "Cálculo portátil do IQB",
+    "tipo": "script",
+    "arquivo": "scripts/iqb.py",
+    "skills": [
+      "avaliacao-briefing-iqb"
+    ],
+    "origem": "Implementação local da rubrica IQB.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "iqb-rubrica",
+    "vigencia": "desconhecida",
+    "notas": "Automatiza cálculo e estrutura; não confirma adequação das evidências."
+  },
+  {
+    "id": "potencial-script",
+    "titulo": "Cálculo do potencial de inovação",
+    "tipo": "script",
+    "arquivo": "scripts/score.py",
+    "skills": [
+      "potencial-inovacao"
+    ],
+    "origem": "Implementação local da rubrica de potencial.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "potencial-rubrica",
+    "vigencia": "desconhecida",
+    "notas": "Automatiza cálculo; não substitui avaliação fundamentada dos critérios."
+  },
+  {
+    "id": "briefing-template",
+    "titulo": "Modelo operacional de briefing",
+    "tipo": "adaptacao",
+    "arquivo": "references/briefing_template.md",
+    "skills": [
+      "briefing-inovacao"
+    ],
+    "origem": "Modelo local preservado na skill; modelo institucional oficial ainda a confirmar.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Não apresentar como modelo oficialmente aprovado."
+  },
+  {
+    "id": "eric-esteira",
+    "titulo": "Contexto da esteira ERIC",
+    "tipo": "adaptacao",
+    "arquivo": "references/eric-esteira.md",
+    "skills": [
+      "avaliacao-briefing-iqb",
+      "briefing-inovacao",
+      "experimentacao-inovacao",
+      "potencial-inovacao",
+      "relatorio-3e",
+      "relatorio-4d",
+      "relatorio-5c",
+      "scorecard-inovacao",
+      "workshop-3e",
+      "workshop-4d",
+      "workshop-5c"
+    ],
+    "origem": "Cópia gerada de _ERIC_CONTEXT/README.md; síntese das especificações RC6 e comparação com RC5.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py."
+  },
+  {
+    "id": "experimento-test-template",
+    "titulo": "Test Card operacional",
+    "tipo": "adaptacao",
+    "arquivo": "assets/test-card.md",
+    "skills": [
+      "experimentacao-inovacao"
+    ],
+    "origem": "Adaptação local dos quatro campos da Strategyzer.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "strategyzer-test",
+    "vigencia": "desconhecida",
+    "notas": "Inclui controles operacionais locais; não é reprodução literal do PDF."
+  },
+  {
+    "id": "experimento-learning-template",
+    "titulo": "Learning Card operacional",
+    "tipo": "adaptacao",
+    "arquivo": "assets/learning-card.md",
+    "skills": [
+      "experimentacao-inovacao"
+    ],
+    "origem": "Adaptação local dos quatro campos da Strategyzer.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "strategyzer-learning",
+    "vigencia": "desconhecida",
+    "notas": "Inclui vínculo ao teste executado; não é reprodução literal do PDF."
+  },
+  {
+    "id": "scorecard-adaptacao",
+    "titulo": "Estrutura e adaptação do scorecard",
+    "tipo": "adaptacao",
+    "arquivo": "references/estrutura-e-adaptacao.md",
+    "skills": [
+      "scorecard-inovacao"
+    ],
+    "origem": "Adaptação institucional própria explicitada na referência local.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": null,
+    "deriva_de": "strategyzer-scorecard",
+    "vigencia": "desconhecida",
+    "notas": "Adaptação local; não implica aprovação institucional nem notas demonstradas."
+  }
+]

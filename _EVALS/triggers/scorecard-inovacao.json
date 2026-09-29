@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Quão validado está o projeto de adimplemento? Usa o scorecard da Strategyzer",
+    "should_trigger": true
+  },
+  {
+    "query": "Temos evidência suficiente pra passar pro piloto?",
+    "should_trigger": true
+  },
+  {
+    "query": "Compara o retrato de maturidade de junho com o de hoje",
+    "should_trigger": true
+  },
+  {
+    "query": "Avalie a força das evidências do projeto de cadastro com o Innovation Project Scorecard e identifique lacunas decisivas.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare um retrato datado da maturidade deste projeto, sem média geral, separando o que foi demonstrado do que ainda é hipótese.",
+    "should_trigger": true
+  },
+  {
+    "query": "O comitê pediu uma análise de evidências para o gate de setembro; use o scorecard e recomende os próximos testes.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise a avaliação institucional de maturidade e declare o que foi adaptado do instrumento oficial da Strategyzer.",
+    "should_trigger": true
+  },
+  {
+    "query": "Compare o projeto antes e depois do piloto quanto à maturidade das evidências, preservando as fontes e limites de cada retrato.",
+    "should_trigger": true
+  },
+  {
+    "query": "Pontua o potencial dessa oportunidade",
+    "should_trigger": false
+  },
+  {
+    "query": "Dá nota IQB no briefing",
+    "should_trigger": false
+  },
+  {
+    "query": "Gera Learning Cards dos testes",
+    "should_trigger": false
+  },
+  {
+    "query": "Priorize as cinco dores do garimpo usando impacto, viabilidade, alinhamento, urgência e novidade.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rode o checklist dos 40 critérios no briefing de Atendimento e calcule a classificação por dimensão.",
+    "should_trigger": false
+  },
+  {
+    "query": "Planeje um piloto operacional detalhado, com Test Cards, método de coleta e protocolo de análise.",
+    "should_trigger": false
+  },
+  {
+    "query": "Analise os dados do experimento e escreva a síntese de aprendizados e a recomendação final.",
+    "should_trigger": false
+  },
+  {
+    "query": "Com base na ata de E1-E3, compile o relatório da solução com recorte, plano de construção e decisão de rota.",
+    "should_trigger": false
+  }
+]

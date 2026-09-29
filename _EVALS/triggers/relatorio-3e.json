@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Com as notas do E1-E3, monta o relatório 3E e a decisão de rota",
+    "should_trigger": true
+  },
+  {
+    "query": "Revisa o relatório 3E e confere se cada Test Card tem os quatro campos",
+    "should_trigger": true
+  },
+  {
+    "query": "A rota ficou híbrida; compila o relatório com o plano de construção",
+    "should_trigger": true
+  },
+  {
+    "query": "Consolide as decisões do workshop de estruturação em solução, recorte, componentes, responsáveis e prazos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Temos o board do E1, a lista do E2 e os cards do E3; produza o documento final da estruturação.",
+    "should_trigger": true
+  },
+  {
+    "query": "Atualize o Relatório 3E com a decisão de construção interna e preserve os Test Cards ainda prospectivos.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise o relatório da solução de cadastro e identifique lacunas do plano de construção sem inventar evidência observada.",
+    "should_trigger": true
+  },
+  {
+    "query": "Prepare a consolidação dos Test Cards e da decisão de rota a partir da ata de E1-E3 de 18 de setembro.",
+    "should_trigger": true
+  },
+  {
+    "query": "Facilita o E1 comigo agora",
+    "should_trigger": false
+  },
+  {
+    "query": "Gera os Learning Cards dos testes que rodamos",
+    "should_trigger": false
+  },
+  {
+    "query": "Escreve o relatório 4D",
+    "should_trigger": false
+  },
+  {
+    "query": "Monte a pauta e o board do workshop de estruturação da solução para a próxima semana.",
+    "should_trigger": false
+  },
+  {
+    "query": "Organize a dinâmica precisa ter, pode evoluir e fora do recorte para o grupo decidir os componentes no E2.",
+    "should_trigger": false
+  },
+  {
+    "query": "Analise o resultado das sessões de usabilidade e recomende como testar a hipótese na próxima rodada.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compile a devolutiva do encontro de cocriação com clientes, ligando C1-C5 às falas e votos registrados.",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalie o potencial das oportunidades do garimpo e classifique cada uma em priorizar, monitorar ou arquivar.",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "skill_name": "relatorio-4d",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Escreva o relatório 4D a partir das notas D1–D4 e dos créditos individuais.",
+      "expected_output": "Relatório rastreável com denominadores, dissenso e limites do voto.",
+      "files": [
+        "files/notas-d1-d4.md",
+        "files/votos-d4.md"
+      ],
+      "expectations": [
+        "Apresenta D1–D4 distinguindo diagnóstico, alternativas e priorização.",
+        "Apura A=54 e B=36 créditos sobre 90 distribuídos por nove presentes elegíveis, sem confundir créditos com pessoas.",
+        "Preserva o dissenso de P03 sobre previsibilidade e a alternativa B.",
+        "Distingue preferência do grupo, encaminhamento para testes e ausência de decisão de implantação.",
+        "Não apresenta o ranking como prova de impacto ou eficácia das alternativas.",
+        "Cita notas-d1-d4.md e votos-d4.md, com seção ou linhas de participantes para os números e dissenso."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Consolide o relatório 4D com a ata e a planilha de votos divergentes.",
+      "expected_output": "Relatório parcial com 95/100 créditos, conflito preservado e pergunta de reconciliação.",
+      "files": [
+        "files/ata-regra-dez.md",
+        "files/votos-divergentes.md"
+      ],
+      "expectations": [
+        "Expõe 95 créditos registrados contra 100 esperados para dez pessoas com dez créditos cada, diferença de cinco.",
+        "Preserva A=57 e B=38 sem preencher os cinco créditos ausentes ou redistribuí-los.",
+        "Identifica a linha P10 de votos-divergentes.md e a regra da ata-regra-dez.md como localizadores da divergência.",
+        "Pergunta pela fonte ou correção da apuração/regra que explique os cinco créditos, sem assumir abstenção.",
+        "Marca a apuração como pendente e não transforma o ranking incompleto em decisão validada.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

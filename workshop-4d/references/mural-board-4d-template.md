@@ -78,9 +78,9 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 | Titulo da secao | Texto | "[D2] Jornada do Usuario" |
 | Instrucao | Texto | "Desenhe a jornada de quem vive o problema" |
 | Linha do tempo | 3 colunas | **Antes** / **Durante** / **Depois** |
-| Coluna Antes | Area de post-its | Pergunta: "Como era antes? Quem faz o que?" |
-| Coluna Durante | Area de post-its | Pergunta: "O que acontece no momento critico? Onde estao as dores?" |
-| Coluna Depois | Area de post-its | Pergunta: "Qual o resultado? O que melhora ou piora?" |
+| Coluna Antes | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: quem faz o quê antes? |
+| Coluna Durante | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o momento crítico? |
+| Coluna Depois | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o resultado e o que melhora ou piora? |
 
 ### Subsecao 3.2 — Barco da Inovacao
 
@@ -117,9 +117,11 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 |---|---|---|
 | Titulo da secao | Texto | "[D3] Consolidacao Estrategica" |
 | Instrucao | Texto | "Agrupe as ideias em 3 grupos" |
-| Zona Incrementais | Area | Melhorias continuas, baixo esforco |
-| Zona Estruturais | Area | Mudancas de processo/modelo, medio esforco |
-| Zona Radicais | Area | Inovacoes disruptivas, alto esforco |
+| Zona Incrementais | Area | Melhorias contínuas em práticas existentes |
+| Zona Estruturais | Area | Mudanças de processo ou modelo de trabalho |
+| Zona Radicais | Area | Propostas que mudam a lógica atual |
+
+Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta, registre **Complexidade (baixa/média/alta)** e a justificativa; se ainda não houver suporte, marque como pendente. Exemplos ilustrativos: uma melhoria incremental pode exigir integração difícil entre sistemas; uma mudança radical pode ser simples de executar em um pequeno piloto.
 
 ---
 

@@ -1,6 +1,6 @@
 # ERIC — Esteira Robusta de Inovação Colaborativa
 
-Esta é a referência metodológica comum das nove skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
+Esta é a referência metodológica comum das onze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
 
 ## Contexto institucional
 
@@ -50,6 +50,16 @@ As etapas abaixo são o arranjo metodológico de referência do RC6. O RC5 usa r
 - **4D → 3E:** alternativas priorizadas pelo grupo são candidatas, não soluções validadas. E1–E3 tornam uma delas testável. No arranjo RC6, os três E ocorrem na geração de ideias; a skill também pode ser aplicada antes ou depois, com origem e data explícitas.
 - **3E → experimentação:** E3 produz Test Cards e plano. **Learning Card exige teste executado e evidência**. Uma menção a Learning Card em E3 no texto de referência do RC6 é tratada aqui como planejamento do registro futuro, nunca como achado antecipado.
 - **Experimentação → implementação:** um teste de usabilidade, reação ao protótipo, piloto operacional e comparação de efeito respondem perguntas diferentes. A recomendação deve acompanhar a força e o alcance do método realmente executado. BP2 e Scorecard avaliam prontidão; não fabricam aprovação por nota.
+
+No afunilamento **briefing → 4D → 3E**, use as decisões vigentes do 3E como referência
+principal de hipótese, público, solução e testes para a experimentação. Briefing e
+4D preservam a origem, as alternativas e os riscos. Não reabra dúvidas resolvidas
+ou assuntos retirados do escopo pelo 3E; registre qual decisão os encerrou. Uma
+atualização posterior documentada pode mudar esse recorte. Lacunas que ainda
+afetam o teste e evidências contrárias relevantes continuam exigindo atenção.
+Essa prioridade de decisões não transforma hipóteses em fatos nem permite alterar
+critérios retroativamente. Sem 3E disponível, use as fontes existentes e indique
+as decisões ausentes, respeitando o uso das skills em qualquer momento.
 
 ## Uso das skills em qualquer momento
 

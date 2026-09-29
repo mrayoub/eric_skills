@@ -1,0 +1,39 @@
+{
+  "skill_name": "relatorio-5c",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Escreva o relatório 5C e a devolutiva com ata, falas e votos.",
+      "expected_output": "Relatório C1–C5 com apuração, dissenso e limites de decisão.",
+      "files": [
+        "files/ata-c1-c5.md",
+        "files/votos-c2-c5.md"
+      ],
+      "expectations": [
+        "Organiza C1, C2, C3, C4 e C5 separadamente, sem misturar experiência atual, desejada e propostas.",
+        "Apura C2 como 12 e 6 votos sobre 18; C5 como 40 e 20 créditos sobre 60, com seis presentes elegíveis.",
+        "Preserva as falas de P01/P02 e a objeção de P03, citando ata-c1-c5.md e seus localizadores.",
+        "Distingue preferência do grupo por A, decisão institucional ainda ausente e validação experimental ainda não realizada.",
+        "Não converte votos em número de apoiadores nem em efeito operacional comprovado.",
+        "Cita votos-c2-c5.md para a apuração e registra o próximo teste com responsável e prazo da ata."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Consolide o relatório 5C com a ata que registra B aprovada e a planilha fornecida.",
+      "expected_output": "Relatório com conflito ata/votos preservado e decisão institucional pendente.",
+      "files": [
+        "files/ata-aprovacao-conflitante.md",
+        "files/votos-c2-c5.md"
+      ],
+      "expectations": [
+        "Expõe que a ata registra B aprovada enquanto a planilha mostra A=40 e B=20 créditos.",
+        "Preserva ambos os registros, sem alterar números nem escolher vencedor institucional para resolver o conflito.",
+        "Pergunta pelo ato ou registro de decisão formal, decisor e fundamento, pois a ata não os informa.",
+        "Cita ata-aprovacao-conflitante.md, C5, e votos-c2-c5.md com seus denominadores.",
+        "Mantém a decisão pendente e não trata a aprovação declarada nem os votos como validação de eficácia.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

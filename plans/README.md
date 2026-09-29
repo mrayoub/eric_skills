@@ -7,7 +7,7 @@ paralelizar. Cada executor: leia o plano inteiro antes de começar, respeite as 
 conditions e atualize sua linha aqui ao terminar.
 
 Convenções comuns a todos os planos:
-- **Fonte x cópia:** edite só `_DESIGN_SYSTEM/`, `_ERIC_CONTEXT/`, `_SHARED/`; as cópias dentro das skills são geradas por `python3 _TOOLS/sync_shared.py` (plano 001).
+- **Fonte x cópia:** para recursos compartilhados, edite só `_DESIGN_SYSTEM/`, `_ERIC_CONTEXT/`, `_SHARED/`; as cópias dentro das skills são geradas por `python3 _TOOLS/sync_shared.py` (plano 001). Scripts e referências específicos podem ser alterados quando listados no escopo do plano; schemas especializados em `references/` não são atualizados pelo sync.
 - **Testes de manutenção** ficam fora das skills: `_DESIGN_SYSTEM/tests/` e `_TESTS/`. **Evals** em `_EVALS/`.
 - **Nunca** use nada de `_SAMPLE/` (material real, fora do git) em fixtures, testes ou amostras.
 - Planos 008, 009 e 010 têm passos que gastam chamadas de modelo (evals): peça autorização ao operador antes.
@@ -16,20 +16,103 @@ Convenções comuns a todos os planos:
 
 | Plano | Título | Prioridade | Esforço | Depende de | Status |
 |---|---|---|---|---|---|
-| 001 | [Sync do design system, limpeza dos pacotes](001-baseline-sync-e-limpeza.md) (git já criado) | P1 | M | — | TODO (passo 1 concluído) |
-| 002 | [`table_rows` busca por chave, não rótulo](002-table-rows-chave-rotulo.md) (T03) | P1 | S | 001 | TODO |
-| 003 | [Endurecer `score.py` + CLI](003-score-py-endurecer-e-cli.md) (T04) | P1 | S | — | TODO |
-| 004 | [CLI e testes do `iqb.py`](004-iqb-cli.md) | P1 | S | — | TODO |
-| 005 | [Validador semântico por tipo: IQB, potencial, citações aninhadas](005-validador-semantico-por-tipo.md) (T02 + parte de T04) | P1 | M | 001, 002, 003, 004 | TODO |
-| 006 | [IQB completo nos derivados](006-iqb-completo-nos-derivados.md) (T01) | P1 | M | 001, 002 | TODO |
-| 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | TODO |
-| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO |
-| 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | TODO |
-| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | TODO |
-| 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | TODO |
-| 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | TODO |
+| 001 | [Sync do design system, limpeza dos pacotes](001-baseline-sync-e-limpeza.md) (git já criado) | P1 | M | — | DONE (sync verificado; 11 skills válidas; 5 testes passaram) |
+| 002 | [`table_rows` busca por chave, não rótulo](002-table-rows-chave-rotulo.md) (T03) | P1 | S | 001 | DONE (7 casos novos e suíte com 12 testes passaram; sync verificado) |
+| 003 | [Endurecer `score.py` + CLI](003-score-py-endurecer-e-cli.md) (T04) | P1 | S | — | DONE (12 testes passaram; CLI e skill validadas) |
+| 004 | [CLI e testes do `iqb.py`](004-iqb-cli.md) | P1 | S | — | DONE (8 testes passaram; CLI e skill validadas; cálculo preservado) |
+| 005 | [Validador semântico por tipo: IQB, potencial, citações aninhadas](005-validador-semantico-por-tipo.md) (T02 + parte de T04) | P1 | M | 001, 002, 003, 004 | DONE (51 testes passaram; amostras regeneradas; sync verificado) |
+| 006 | [IQB completo nos derivados](006-iqb-completo-nos-derivados.md) (T01) | P1 | M | 001, 002 | DONE (54 testes passaram; PDF sem corte; amostra regenerada; sync verificado) |
+| 007 | [PDF sem pango: entregar o resto e avisar](007-fallback-pdf-sem-pango.md) | P2 | S | 001 | DONE (57 testes passaram; sem pango: 33 passaram/4 skips; sync verificado) |
+| 008 | [Descriptions + eval de acionamento](008-descriptions-e-eval-de-acionamento.md) | P1 | M | — | TODO (implementação pronta; bateria antes/depois adiada pelo operador; não bloqueia a execução do 009) |
+| 009 | [Evals comportamentais (2 por skill)](009-evals-comportamentais.md) | P1 | M | — | DONE (11 conjuntos, 22 casos, 35 fixtures fictícias; integridade e contas verificadas; linha de base não rodada) |
+| 010 | [Enxugar os SKILL.md (piloto → rollout)](010-enxugar-skill-md.md) | P2 | L | 001, 003, 004, 007, 008, 009 | DONE (11 skills reestruturadas; grilling unificado; checks locais passaram; evals comportamentais não executados) |
+| 011 | [Learning Card ligado ao Test Card](011-learning-card-ligado-ao-test-card.md) | P3 | S | 001, 005 | DONE (vínculo e derivados verificados; 62 testes e 36 subtestes passaram; sync consistente) |
+| 012 | [Manifesto de fontes e vigência](012-manifesto-de-fontes.md) | P3 | S | 001 | DONE (27 fontes, 11 páginas; hashes e 5 negativos verificados; 20 testes e 9 subtestes passaram) |
+| 013 | [Calcular total e classe com as mesmas notas publicadas](013-potencial-precisao-consistente.md) (A01) | P1 | S | 012; 003 e 005 | DONE (65 testes e 54 subtestes passaram; precisão e exportação consistentes; sync e fontes verificados) |
+| 014 | [Rejeitar evidências nulas ou de tipo inadequado no IQB](014-iqb-evidencia-textual.md) (A02) | P1 | S | 012; 004 | DONE (68 testes e 87 subtestes passaram; API e CLI rejeitam evidência inválida; fontes e sync verificados) |
+| 015 | [Exigir que seções obrigatórias apareçam nos arquivos entregues](015-secoes-obrigatorias-visiveis.md) (A03) | P1 | M | 012; 001 e 005 | DONE (71 testes e 311 subtestes passaram; 96 casos antes aceitos agora rejeitados; textos preservados em cinco formatos; sync e fontes verificados) |
+| 016 | [Manter os quatro campos em cards parciais e inconclusivos](016-cards-parciais-quatro-campos.md) (A04) | P1 | S | 012; 015; 001 e 005 | DONE (73 testes e 385 subtestes passaram; quatro campos obrigatórios preservados nos cards completos, parciais e inconclusivos; sincronização, fontes e diff verificados.) |
+| 017 | [Preservar fontes individuais dos cards em Markdown e TXT](017-citacoes-dos-cards-em-md-txt.md) (A05) | P1 | S | 012; 001 e 005 | DONE (74 testes e 387 subtestes passaram; fontes individuais preservadas em MD/TXT, associação HTML/DOCX e referências desconhecidas verificadas; sync, fontes e diff sem divergências.) |
+| 018 | [Mostrar estado, ID e versão em todos os formatos de leitura](018-estado-e-versao-nos-editaveis.md) (A06) | P1 | S | 012; 017; 001 e 007 | DONE (78 testes e 425 subtestes passaram; identificação nos formatos e slides, contrato completo para ausência/null, data informada, vínculo TC/LC e card de uma página verificados; sync e fontes consistentes.) |
+| 019 | [Permitir até três forças e perguntas sem exigir preenchimento artificial](019-iqb-quantidades-sem-preenchimento-artificial.md) (A07) | P2 | S | 012; 014; 001 e 005 | DONE (81 testes e 437 subtestes passaram; listas de 0–3, rejeição de quatro e de seção ausente, nota de ausência e IQB real com 40 false verificados; schemas iguais, 602 palavras e sync/fontes consistentes.) |
+| 020 | [Alinhar o contrato da one-page à orientação paisagem](020-one-page-paisagem-consistente.md) (A08) | P2 | S | 012; 001 | DONE (rejeição de retrato reproduzida e corrigida nos dois schemas; três modos preservados; 79 testes e 442 subtestes passaram, 4 PDF skips por falta de Pango; sync, fontes e diff verificados) |
+| 021 | [Separar natureza da mudança e complexidade no mural 4D](021-4d-natureza-separada-do-esforco.md) (A09) | P2 | S | 012; nenhuma | DONE (zonas descrevem natureza; complexidade e justificativa registradas por proposta; checagem estrutural, fontes e diff passaram; avaliação com modelo não rodada) |
+| 022 | [Manter quatro perguntas em cada fase da jornada 4D](022-4d-jornada-quatro-perguntas.md) (A10) | P2 | S | 012; 021 (mesmo arquivo; execução sequencial) | DONE (quatro perguntas conferidas nas fases antes, durante e depois; complementos antigos e ajuste do 021 preservados; fontes e diff verificados; avaliação com modelo não rodada) |
+| 023 | [Distinguir critério local atingido de aprovação para expansão](023-experimentacao-criterio-local-e-limites.md) (A11) | P2 | S | 012; 009; 016 recomendado antes de exportar os cards | DONE (referências distinguem atingido, não atingido e inconclusivo; quatro casos fictícios adicionais validados estruturalmente; conjunto original preservado; fontes e diff verificados; avaliação com modelo não rodada) |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
+
+Retomada do plano 008 (28/09/2026): o operador pediu para deixar o plano como
+`TODO` e continuará com Claude quando o limite liberar. Preserve os conjuntos e
+as descriptions já implementados. A revisão local em `_EVALS/triggers/resultados.md`
+não substitui a medição real. Para medir antes/depois, use as descriptions do commit
+`ae5e211` como linha de base e as de `ee8e9f1` como versão nova, em checkouts separados,
+seguindo `_EVALS/triggers/README.md`. Confirme a autorização antes das chamadas,
+conforme o plano. O plano 009 permanece `TODO`; apenas sua branch foi criada,
+sem arquivos implementados naquele momento. A implementação posterior do 009
+está registrada no status atual acima.
+
+Auditoria da retomada com Claude: sessão `609c5081-03a7-4c59-8e06-7671f031a322`.
+Correção adicional do plano 005 preservada em `5ec6644`; suíte revalidada com
+58 testes passando e 25 subtestes. A medição do 008 não foi concluída e seus
+8/16 são inválidos: erros de limite foram contados como não acionamento.
+Diagnóstico e requisitos para uma nova execução em `_EVALS/triggers/resultados.md`
+e `_EVALS/triggers/README.md`. Não repetir a bateria original automaticamente.
+
+O operador autorizou adiar a bateria de acionamento do plano 008 e continuar os
+planos em sequência. A medição permanece pendente para execução posterior com
+runner corrigido e nova autorização de custo; nenhuma nova chamada de diagnóstico
+ou bateria será disparada nesta retomada. O plano 009 pode prosseguir, pois não
+depende do 008. A criação e validação estrutural de seus casos não exige chamadas
+de modelo; sua linha de base opcional ficará registrada como não rodada.
+
+Piloto do plano 010: o operador autorizou seu início. Apenas o corpo de
+`potencial-inovacao/SKILL.md` foi reestruturado; frontmatter, cálculo, referências
+e design system preservados. O arquivo passou de 839 para 650 palavras
+(corpo: 740 para 551). O texto prescrito no Step 3, expandido com os blocos
+obrigatórios e o contrato `scores`, somava 723 palavras com frontmatter; os
+passos específicos foram condensados para cumprir também o `wc -w` ≤650,
+mantendo os quatro blocos padrão exatos e as regras do método. A instrução
+adicional do plano 005 registrada em `5ec6644` foi mantida no contrato `scores`.
+Validador da skill, links locais, frontmatter, orçamento e blocos padrão
+verificados; 12 testes de potencial e 7 subtestes passaram; sync verificado.
+Nenhuma chamada de modelo foi feita nessa etapa; o rollout aguardou a revisão
+do operador, conforme o Step 3.
+
+Fechamento do plano 010: o operador aprovou o piloto e autorizou o rollout.
+As outras dez skills foram reestruturadas, com um commit por skill, preservando
+frontmatter e regras específicas nos textos principais ou referências linkadas.
+Planejamento e análise da experimentação foram movidos integralmente para duas
+referências locais, com ajuste apenas dos caminhos relativos dos links.
+O levantamento documental foi incorporado ao grilling comum e suas nove cópias
+aposentadas foram removidas pela sincronização.
+
+As 11 skills passaram no validador, na checagem de links, na estrutura de seções
+e no orçamento: até 650 palavras nas skills comuns, 900 no scorecard e 1.400 na
+experimentação. Os quatro blocos padrão foram conferidos; frontmatter, scripts,
+assets, design system e contexto ERIC foram preservados. A suíte local passou
+com 58 testes e 25 subtestes; `sync_shared.py --check` e `git diff --check` passaram.
+As evals comportamentais do plano 009 contra a linha de base não foram executadas:
+as chamadas de modelo seguem adiadas, sem autorização específica de custo nesta
+etapa. Os checks locais não comprovam ausência de regressão comportamental.
+O plano permite o fechamento com esse registro; a comparação permanece pendente.
+
+Ajuste posterior solicitado pelo operador: linguagem simples e direta nas onze
+skills, tanto no chat quanto nos entregáveis. A orientação comum está em
+`_SHARED/linguagem-dos-entregaveis.md`, distribuída por sync e linkada em cada
+SKILL.md. Ela atualiza o bloco padrão de entrega do plano 010 para exigir clareza
+ao leitor, preservando os métodos. Cabeçalhos e estados visíveis do renderizador
+foram traduzidos para português; os campos canônicos continuam preservados.
+Validação local: onze skills válidas, links e orçamentos conferidos, sync consistente;
+59 testes e 28 subtestes passaram. Nenhuma avaliação com modelo foi disparada.
+
+Em 29 set 2026, o operador pediu explicitar o afunilamento briefing → 4D → 3E.
+A skill de experimentação e sua triagem agora usam as decisões vigentes do 3E
+como referência principal, sem reabrir dúvidas resolvidas ou retiradas do escopo.
+Contexto ERIC e grilling comum foram alinhados e sincronizados. Lacunas relevantes,
+evidências contrárias e critérios anteriores à coleta continuam preservados.
+Onze skills passaram no validador, com links e orçamentos conferidos; sync consistente.
+A verificação foi documental e estrutural, sem nova avaliação comportamental de modelo.
 
 ## Notas de dependência
 
@@ -64,3 +147,61 @@ Achados novos, fora de MELHORIAS: scripts sem CLI (003, 004), descriptions/acion
 - **Teste de equivalência de conteúdo para os 18 tipos agora** (MELHORIAS §8): só o IQB tinha perda de dados comprovada. Reavaliar depois de 006, se aparecer outro tipo com estrutura composta em `data`.
 - **Tirar o design system de dentro das skills para evitar 11 cópias**: rejeitado — a independência de cada skill é requisito explícito do mantenedor. O custo das cópias é resolvido pelo sync (001).
 - **Traduzir SKILL.md para inglês**: os usuários e as fontes são em português; as descriptions em português acionam melhor para pedidos em português.
+
+## Revisão individual de 29/09/2026
+
+Auditoria contra `3404a5c`, com as onze skills revisadas separadamente:
+[achados, evidências e recomendações](REVISAO_SKILLS_2026-09-29.md).
+Foram encontrados onze grupos de correções, incluindo problemas compartilhados
+que não devem virar onze implementações repetidas. A suíte existente passou com
+59 testes e 28 subtestes; reproduções locais revelaram caminhos não cobertos.
+A implementação foi preservada. Nenhuma bateria de modelos foi executada.
+O operador selecionou todos os achados para planejamento. Os novos planos
+013–023 estão em TODO; os TODOs 008, 011 e 012 permanecem preservados.
+Nenhuma correção foi implementada nesta etapa.
+
+## Execução dos planos da revisão de 29/09/2026
+
+Onze novos planos cobrem A01–A11, um por grupo de correção. Os problemas comuns
+são corrigidos na fonte e distribuídos por sync, sem onze implementações manuais.
+Todos foram escritos contra `3404a5c`; conferir deriva antes de executar.
+
+Ordem recomendada: **013 → 014 → 015 → 016 → 017 → 018 → 019 → 020 → 021 → 022 → 023**.
+A ordem evita conflitos em contratos, renderizador e testes compartilhados.
+Os planos não dependem da bateria adiada do 008. Não executar chamadas de modelo
+para concluir as verificações locais. O 023 prepara casos adicionais, mas deixa
+sua execução comportamental para uma etapa posterior com autorização de custo.
+
+Dependências novas:
+
+- 016 vem após 015 para manter a mesma distinção entre síntese textual e bloco visual.
+- 018 vem após 017 para preservar o vínculo das fontes durante a mudança dos editáveis.
+- 019 vem após 014: avaliação sem forças comprovadas continua exigindo texto de evidência ou ausência em cada critério.
+- 022 vem após 021 porque ambos alteram subseções do mesmo mural; preservar a mudança anterior.
+- 023 não depende da execução de 016 para corrigir o texto/criar casos; 016 é recomendado antes de exportar cards desses casos.
+- 011 continua sendo vínculo Learning↔Test Card; 016 é estrutura de quatro campos, e 018 é identificação visível. Não duplicar ou fundir esses escopos.
+- 012 continua sendo manifesto de fontes/vigência; 018 não substitui esse manifesto.
+
+### Cobertura por skill
+
+| Skill | Planos novos que cobrem os achados |
+| --- | --- |
+| briefing-inovacao | 018, 020 |
+| avaliacao-briefing-iqb | 014, 018, 019 |
+| potencial-inovacao | 013, 018 |
+| workshop-4d | 015, 018, 021, 022 |
+| relatorio-4d | 017, 018 |
+| workshop-3e | 015, 016, 018 |
+| relatorio-3e | 015, 016, 018 |
+| workshop-5c | 015, 018 |
+| relatorio-5c | 015, 018 |
+| experimentacao-inovacao | 016, 018, 023 |
+| scorecard-inovacao | 015, 018 |
+
+A antiga decisão de adiar equivalência de formatos permanece para uma cobertura
+indiscriminada de todos os tipos. As perdas agora comprovadas são tratadas de forma
+restrita em 015 e 017; identificação em 018. Não ampliar para igualdade binária.
+
+Manutenção após 012: planos 013–023 também conferem `build_sources.py --check`.
+Quando modificarem fonte registrada no manifesto, regeneram somente as páginas
+`references/fontes.md` afetadas e as incluem no commit daquela correção.

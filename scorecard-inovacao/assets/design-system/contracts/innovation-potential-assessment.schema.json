@@ -161,6 +161,89 @@
                 }
               },
               "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "table"
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "columns",
+                      "rows",
+                      "overall_score",
+                      "classification"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "scores"
+                      },
+                      "columns": {
+                        "type": "array"
+                      },
+                      "rows": {
+                        "type": "array",
+                        "minItems": 5,
+                        "maxItems": 5,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "criterion",
+                            "score",
+                            "weight",
+                            "justification"
+                          ],
+                          "properties": {
+                            "criterion": {
+                              "enum": [
+                                "impact",
+                                "viability",
+                                "strategic_alignment",
+                                "urgency",
+                                "innovation"
+                              ]
+                            },
+                            "score": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 100
+                            },
+                            "weight": {
+                              "type": "number"
+                            },
+                            "justification": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      },
+                      "overall_score": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                      },
+                      "classification": {
+                        "enum": [
+                          "priorizar",
+                          "monitorar",
+                          "arquivar"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1,
+              "maxContains": 1
             }
           ]
         }

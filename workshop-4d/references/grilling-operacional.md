@@ -22,6 +22,13 @@ Preserve página, parágrafo, slide, célula, evento ou timestamp. Para PDF visu
 
 Pesquise nos arquivos as respostas acessíveis antes de transferir uma pergunta ao usuário. Se um documento citar outra fonte relevante acessível, examine-a. Mantenha conflitos em aberto até encontrar a versão ou definição aplicável; não use automaticamente o documento mais recente ou a resposta mais conveniente.
 
+Distinga conflito factual de evolução do projeto. Uma decisão posterior registrada
+pode resolver uma pergunta anterior, substituir uma escolha ou reduzir o escopo.
+Nesses casos, use a decisão vigente e registre sua fonte; não reabra a questão só
+porque ela aparece como dúvida em um documento antigo. A data, sozinha, não prova
+essa mudança. Mantenha riscos e evidências contrárias que ainda afetem a entrega;
+uma decisão não comprova uma hipótese nem muda critérios depois da coleta.
+
 ## 2. Mantenha um registro verificável
 
 Para cada questão relevante, registre:
@@ -59,3 +66,17 @@ Antes de declarar uma entrega completa, confira que cada requisito decisivo est�
 Se houver uma dependência externa ou o usuário limitar o esforço, produza o que for possível como `parcial` ou `inconclusivo`, indicando o requisito afetado e como resolvê-lo. Uma lacuna pode ser encerrada como investigação desta rodada e continuar pendente para a decisão: esses estados não são equivalentes. Não repita perguntas sem informação nova, não peça dados que os arquivos já contêm e não exija requisitos de outra fase para encerrar a tarefa atual.
 
 O limite de perguntas de um entregável específico, como um questionário de briefing, não encerra a entrevista nem elimina lacunas restantes. A completude depende da evidência para a finalidade solicitada, não do número de perguntas, da extensão do arquivo ou da presença de títulos no template.
+
+## 5. Complementos de levantamento documental
+
+Leia primeiro a definição vigente de escopo e confronte suas afirmações com fontes
+primárias. Monte o mapa `afirmação → fonte/localização → natureza → limite → campo afetado`;
+distinga observação, relato, hipótese, decisão, proposta e inferência. Cópias,
+resumos e apresentações derivados não são confirmações independentes.
+
+Use cenários concretos para esclarecer termos ambíguos; guarde no glossário somente
+termos recorrentes e próprios do projeto. Respostas pontuais ficam no registro de
+questões, com respondente, data, natureza e fonte que confirma ou contradiz.
+
+Em trabalho ao vivo, não interrompa uma dinâmica para perguntar algo que possa ser
+checado depois nos documentos; registre a lacuna para a próxima fronteira.
