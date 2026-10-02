@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Layout Studio — ERIC</title>
+<style>
+  :root {
+    --bg: #f3f5fa;
+    --panel: #ffffff;
+    --border: #d2d9e8;
+    --border-strong: #acb7d0;
+    --text: #30343b;
+    --text-muted: #586ea4;
+    --accent: #193c8e;
+    --accent-soft: #e8eefb;
+    --danger: #cd665b;
+    --font-brand: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-body: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --page-bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 15px;
+    margin: 0 16px 0 0;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  header label { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+  input, select, button {
+    font: inherit;
+    padding: 5px 8px;
+    border: 1px solid var(--border-strong);
+    border-radius: 5px;
+    background: white;
+  }
+  input[type="number"] { width: 70px; }
+  input[type="text"] { width: 150px; }
+  button {
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  button.secondary { background: white; color: var(--accent); }
+  button.danger { background: var(--danger); border-color: var(--danger); }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  main {
+    display: flex;
+    height: calc(100vh - 54px);
+  }
+  #canvas-wrap {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px;
+  }
+  #page {
+    position: relative;
+    background: var(--page-bg);
+    box-shadow: 0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,.08);
+    background-image:
+      linear-gradient(to right, rgba(76,115,209,.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(76,115,209,.08) 1px, transparent 1px);
+  }
+  .slot {
+    position: absolute;
+    border: 2px solid var(--accent);
+    background: var(--accent-soft);
+    opacity: .85;
+    cursor: move;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+  }
+  .slot.selected { border-color: var(--danger); background: #fbecec; z-index: 999 !important; }
+  .slot .label {
+    font-family: var(--font-brand);
+    font-weight: 600;
+    font-size: 11px;
+    padding: 3px 5px;
+    color: var(--accent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+  .slot.selected .label { color: var(--danger); }
+  .slot .hint {
+    font-family: var(--font-body);
+    font-size: 9px;
+    padding: 0 5px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .handle {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: nwse-resize;
+  }
+  .slot.selected .handle { background: var(--danger); }
+  aside {
+    width: 340px;
+    border-left: 1px solid var(--border);
+    background: var(--panel);
+    overflow-y: auto;
+    padding: 12px;
+  }
+  aside h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); margin: 14px 0 6px; }
+  aside h2:first-child { margin-top: 0; }
+  .slot-row {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: #fbfbfd;
+  }
+  .slot-row.selected { border-color: var(--danger); background: #fff6f5; }
+  .slot-row .row1 { display: flex; gap: 6px; margin-bottom: 6px; }
+  .slot-row .row1 input[type="text"] { flex: 1; width: auto; }
+  .slot-row .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 6px; }
+  .slot-row .grid4 label { font-size: 10px; color: var(--text-muted); display: block; }
+  .slot-row .grid4 input { width: 100%; padding: 3px 4px; }
+  .slot-row select { width: 100%; margin-bottom: 4px; }
+  .slot-row .row-actions { display: flex; justify-content: space-between; align-items: center; }
+  .slot-row .row-actions button { padding: 3px 8px; font-size: 11px; }
+  .muted { color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+  .swatch { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border); }
+  .hint-text { font-size: 10px; color: var(--text-muted); margin-top: -2px; }
+  #status { font-size: 11px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
+  .file-btn { position: relative; overflow: hidden; display: inline-block; }
+  .file-btn input[type="file"] { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 38, 97, .45);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-panel {
+    background: white;
+    border-radius: 10px;
+    width: min(760px, 92vw);
+    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  .modal-panel header {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .modal-panel header strong { color: var(--accent); font-size: 14px; }
+  .modal-body { padding: 0; overflow: auto; flex: 1; }
+  .modal-body pre {
+    margin: 0;
+    padding: 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Layout Studio</h1>
+
+  <label>Tipo de entregável
+    <select id="deliverableType"></select>
+  </label>
+
+  <label>Canvas
+    <select id="preset">
+      <optgroup label="ISO A — retrato">
+        <option value="a6_portrait">A6 retrato (105×148mm)</option>
+        <option value="a5_portrait">A5 retrato (148×210mm)</option>
+        <option value="a4_portrait">A4 retrato (210×297mm)</option>
+        <option value="a3_portrait">A3 retrato (297×420mm)</option>
+        <option value="a2_portrait">A2 retrato (420×594mm)</option>
+        <option value="a1_portrait">A1 retrato (594×841mm)</option>
+        <option value="a0_portrait">A0 retrato (841×1189mm)</option>
+      </optgroup>
+      <optgroup label="ISO A — paisagem">
+        <option value="a6_landscape">A6 paisagem (148×105mm)</option>
+        <option value="a5_landscape">A5 paisagem (210×148mm)</option>
+        <option value="a4_landscape">A4 paisagem (297×210mm)</option>
+        <option value="a3_landscape">A3 paisagem (420×297mm)</option>
+        <option value="a2_landscape">A2 paisagem (594×420mm)</option>
+        <option value="a1_landscape">A1 paisagem (841×594mm)</option>
+        <option value="a0_landscape">A0 paisagem (1189×841mm)</option>
+      </optgroup>
+      <optgroup label="Padrões US/ANSI">
+        <option value="letter_portrait">Letter retrato (215.9×279.4mm)</option>
+        <option value="letter_landscape">Letter paisagem (279.4×215.9mm)</option>
+        <option value="legal_portrait">Legal retrato (215.9×355.6mm)</option>
+        <option value="legal_landscape">Legal paisagem (355.6×215.9mm)</option>
+        <option value="tabloid_portrait">Tabloid/Ledger retrato (279.4×431.8mm)</option>
+        <option value="tabloid_landscape">Tabloid/Ledger paisagem (431.8×279.4mm)</option>
+      </optgroup>
+      <optgroup label="PowerPoint">
+        <option value="slide_16_9">Widescreen 16:9 — padrão PowerPoint (338.67×190.5mm)</option>
+        <option value="slide_4_3">Standard 4:3 — PowerPoint clássico (254×190.5mm)</option>
+      </optgroup>
+      <option value="custom">Personalizado…</option>
+    </select>
+  </label>
+
+  <label id="customWrap" style="display:none">
+    <input type="number" id="customW" placeholder="largura mm" style="width:90px" />
+    ×
+    <input type="number" id="customH" placeholder="altura mm" style="width:90px" />
+    mm
+  </label>
+
+  <label>Grade
+    <input type="number" id="gridSize" value="5" min="1" style="width:55px" /> mm
+    <input type="checkbox" id="snapToggle" checked />
+  </label>
+
+  <button id="drawModeBtn" class="secondary">+ Novo slot</button>
+  <button id="loadTokensBtn" class="secondary">Carregar tokens.json</button>
+
+  <button id="pickFolderBtn" class="secondary">📁 Selecionar pasta de layouts…</button>
+  <label id="existingWrap" style="display:none">
+    <select id="existingLayouts"><option value="">Carregar layout existente…</option></select>
+  </label>
+
+  <span class="file-btn secondary" style="display:inline-block;">
+    <button class="secondary" type="button">Importar JSON (de outro lugar)</button>
+    <input type="file" id="importFile" accept="application/json" />
+  </span>
+  <button id="previewBtn" class="secondary">Visualizar JSON</button>
+  <button id="exportBtn">Exportar JSON</button>
+
+  <span id="status"></span>
+</header>
+
+<main>
+  <div id="canvas-wrap">
+    <div id="page"></div>
+  </div>
+
+  <aside>
+    <h2>Paleta (opcional, só referência)</h2>
+    <div class="swatches" id="swatches"><span class="muted">Carregue um tokens.json para ver as cores aqui.</span></div>
+
+    <h2>Slots (<span id="slotCount">0</span>)</h2>
+    <p class="hint-text">Clique "+ Novo slot" e depois desenhe no canvas arrastando. Arraste o corpo para mover, o círculo no canto para redimensionar. "Fonte de dados" lista os <code>section_key</code> reais do schema do tipo escolhido acima.</p>
+    <div id="slotList"></div>
+  </aside>
+</main>
+
+<div class="modal-overlay" id="previewModal">
+  <div class="modal-panel">
+    <header><strong>Preview do JSON final</strong> — exatamente o que "Exportar JSON" vai salvar</header>
+    <div class="modal-body"><pre id="previewContent"></pre></div>
+    <div class="modal-footer">
+      <button class="secondary" id="previewCloseBtn">Fechar</button>
+      <button id="previewDownloadBtn">Baixar agora</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const PRESETS = {
+    a6_portrait:  { w: 105,    h: 148 },
+    a6_landscape: { w: 148,    h: 105 },
+    a5_portrait:  { w: 148,    h: 210 },
+    a5_landscape: { w: 210,    h: 148 },
+    a4_portrait:  { w: 210,    h: 297 },
+    a4_landscape: { w: 297,    h: 210 },
+    a3_portrait:  { w: 297,    h: 420 },
+    a3_landscape: { w: 420,    h: 297 },
+    a2_portrait:  { w: 420,    h: 594 },
+    a2_landscape: { w: 594,    h: 420 },
+    a1_portrait:  { w: 594,    h: 841 },
+    a1_landscape: { w: 841,    h: 594 },
+    a0_portrait:  { w: 841,    h: 1189 },
+    a0_landscape: { w: 1189,   h: 841 },
+    letter_portrait:   { w: 215.9, h: 279.4 },
+    letter_landscape:  { w: 279.4, h: 215.9 },
+    legal_portrait:    { w: 215.9, h: 355.6 },
+    legal_landscape:   { w: 355.6, h: 215.9 },
+    tabloid_portrait:  { w: 279.4, h: 431.8 },
+    tabloid_landscape: { w: 431.8, h: 279.4 },
+    // Valores exatos do PowerPoint (Design > Tamanho do Slide): Widescreen 13.333x7.5in,
+    // Standard 10x7.5in — os mesmos números hardcoded em render_pptx (Inches(13.333), Inches(7.5)).
+    slide_16_9: { w: 338.67, h: 190.5 },
+    slide_4_3:  { w: 254,    h: 190.5 },
+  };
+
+  // Extraído diretamente dos arquivos reais em _DESIGN_SYSTEM/contracts/*.schema.json
+  // (campo deliverable_type e os "section_key" com "const" em cada schema).
+  // Se um schema novo for adicionado ou um existente mudar de seções, atualize aqui.
+  const SECTION_KEYS_BY_TYPE = {
+    briefing: ["challenge_title", "challenge", "problem_opportunity", "business_relevance", "expected_outcomes", "responsible", "sponsor"],
+    briefing_one_page: ["hmw", "problem_opportunity", "business_relevance", "expected_outcomes", "people"],
+    briefing_improvement_questionnaire: ["questions"],
+    briefing_validation: ["challenge", "hmw", "scores", "iqb", "strengths", "gaps", "provocations"],
+    evidence_recommendation: ["question", "evidence", "options", "recommendation", "conditions"],
+    executive_presentation: ["context", "method", "findings", "recommendation", "next_steps"],
+    experiment_plan: ["hypothesis", "method", "population", "measures", "protocol", "guardrails"],
+    experiment_report: ["scope", "method", "evidence", "results", "limits", "recommendation"],
+    five_c_report: ["c1", "c2", "c3", "c4", "c5"],
+    five_c_workshop_record: ["c1", "c2", "c3", "c4", "c5"],
+    four_d_report: ["cover", "d1_d2_diagnosis", "d2_process_journey", "d3_strategic_consolidation", "d4_prioritization", "conclusion"],
+    four_d_workshop_record: ["d1", "d2", "d3", "d4"],
+    innovation_potential_assessment: ["impact", "feasibility", "alignment", "urgency", "novelty", "scores", "recommendation"],
+    innovation_scorecard: ["alignment_opportunity", "risk_reduction", "next_gate"],
+    learning_card: ["hypothesis", "observations", "learning", "action"],
+    test_card: ["hypothesis", "test", "measure", "criteria"],
+    three_e_report: ["e1", "e2", "e3", "route"],
+    three_e_workshop_record: ["e1", "e2", "e3"],
+  };
+  const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE).sort();
+  // Opções estruturais que não vêm de um section_key específico do conteúdo.
+  const STRUCTURAL_SOURCES = ["titulo_documento", "identificacao_versao", "rodape", "logo", "outro"];
+  // Como o conteúdo daquela fonte de dados deve ser exibido dentro do slot —
+  // independente de QUAL dado é (section_key); isso é COMO ele aparece.
+  const DISPLAY_MODES = [
+    { value: "", label: "(não definido)" },
+    { value: "title_and_content", label: "Título e conteúdo" },
+    { value: "content_only", label: "Somente conteúdo" },
+    { value: "tabular_list", label: "Listagem tabular" },
+  ];
+
+  const MAX_CANVAS_PX = 760; // maior lado do canvas em tela, independente do tamanho real em mm
+
+  let state = {
+    deliverableType: DELIVERABLE_TYPES[0],
+    canvas: { unit: "mm", width: PRESETS.a4_portrait.w, height: PRESETS.a4_portrait.h },
+    grid_mm: 5,
+    slots: [], // {id, name, x, y, width, height, z, section_key}
+  };
+  let selectedId = null;
+  let nextId = 1;
+  let scale = 1; // px por mm
+  let drawMode = false;
+
+  const $ = (id) => document.getElementById(id);
+  const page = $("page");
+  const slotList = $("slotList");
+  const statusEl = $("status");
+  const deliverableSelect = $("deliverableType");
+
+  function setStatus(msg) {
+    statusEl.textContent = msg;
+    if (msg) setTimeout(() => { if (statusEl.textContent === msg) statusEl.textContent = ""; }, 3500);
+  }
+
+  function sourceOptionsForCurrentType() {
+    const real = SECTION_KEYS_BY_TYPE[state.deliverableType] || [];
+    return ["", ...STRUCTURAL_SOURCES, ...real];
+  }
+
+  function ensureDeliverableOption(type) {
+    if (!type) return;
+    if (![...deliverableSelect.options].some((o) => o.value === type)) {
+      const opt = document.createElement("option");
+      opt.value = type;
+      opt.textContent = type + " (não reconhecido — confira o nome)";
+      deliverableSelect.appendChild(opt);
+    }
+  }
+
+  function populateDeliverableSelect() {
+    deliverableSelect.innerHTML = "";
+    DELIVERABLE_TYPES.forEach((t) => {
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      deliverableSelect.appendChild(opt);
+    });
+    deliverableSelect.value = state.deliverableType;
+  }
+
+  function snap(value) {
+    if (!$("snapToggle").checked) return Math.round(value * 10) / 10;
+    const g = state.grid_mm || 5;
+    return Math.round(value / g) * g;
+  }
+
+  function mmToPx(mm) { return mm * scale; }
+  function pxToMm(px) { return px / scale; }
+
+  function recomputeScale() {
+    const { width, height } = state.canvas;
+    scale = MAX_CANVAS_PX / Math.max(width, height);
+  }
+
+  function renderPage() {
+    recomputeScale();
+    page.style.width = mmToPx(state.canvas.width) + "px";
+    page.style.height = mmToPx(state.canvas.height) + "px";
+    const g = mmToPx(state.grid_mm || 5);
+    page.style.backgroundSize = g + "px " + g + "px";
+    page.innerHTML = "";
+    state.slots
+      .slice()
+      .sort((a, b) => (a.z || 1) - (b.z || 1))
+      .forEach(renderSlotEl);
+  }
+
+  function renderSlotEl(slot) {
+    const el = document.createElement("div");
+    el.className = "slot" + (slot.id === selectedId ? " selected" : "");
+    el.style.left = mmToPx(slot.x) + "px";
+    el.style.top = mmToPx(slot.y) + "px";
+    el.style.width = mmToPx(slot.width) + "px";
+    el.style.height = mmToPx(slot.height) + "px";
+    el.style.zIndex = slot.z || 1;
+    el.dataset.id = slot.id;
+
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = slot.name || "(sem nome)";
+    el.appendChild(label);
+
+    if (slot.section_key || slot.display_mode) {
+      const hint = document.createElement("div");
+      hint.className = "hint";
+      const modeLabel = (DISPLAY_MODES.find((m) => m.value === slot.display_mode) || {}).label;
+      hint.textContent = [slot.section_key, slot.display_mode ? modeLabel : null].filter(Boolean).join(" · ");
+      el.appendChild(hint);
+    }
+
+    const handle = document.createElement("div");
+    handle.className = "handle";
+    el.appendChild(handle);
+
+    el.addEventListener("mousedown", (e) => {
+      if (e.target === handle) return; // tratado separadamente
+      e.stopPropagation();
+      selectSlot(slot.id);
+      startDragMove(e, slot);
+    });
+    handle.addEventListener("mousedown", (e) => {
+      e.stopPropagation();
+      selectSlot(slot.id);
+      startDragResize(e, slot);
+    });
+
+    page.appendChild(el);
+  }
+
+  function startDragMove(e, slot) {
+    const startX = e.clientX, startY = e.clientY;
+    const origX = slot.x, origY = slot.y;
+    function onMove(ev) {
+      const dxMm = pxToMm(ev.clientX - startX);
+      const dyMm = pxToMm(ev.clientY - startY);
+      slot.x = Math.max(0, snap(origX + dxMm));
+      slot.y = Math.max(0, snap(origY + dyMm));
+      renderPage();
+      renderSlotList();
+    }
+    function onUp() {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    }
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  }
+
+  function startDragResize(e, slot) {
+    const startX = e.clientX, startY = e.clientY;
+    const origW = slot.width, origH = slot.height;
+    function onMove(ev) {
+      const dwMm = pxToMm(ev.clientX - startX);
+      const dhMm = pxToMm(ev.clientY - startY);
+      slot.width = Math.max(state.grid_mm || 5, snap(origW + dwMm));
+      slot.height = Math.max(state.grid_mm || 5, snap(origH + dhMm));
+      renderPage();
+      renderSlotList();
+    }
+    function onUp() {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    }
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  }
+
+  // Criar slot novo desenhando no canvas vazio
+  page.addEventListener("mousedown", (e) => {
+    if (!drawMode) return;
+    if (e.target !== page) return;
+    const rect = page.getBoundingClientRect();
+    const startXmm = snap(pxToMm(e.clientX - rect.left));
+    const startYmm = snap(pxToMm(e.clientY - rect.top));
+    const slot = {
+      id: "s" + (nextId++),
+      name: "slot_" + state.slots.length,
+      x: startXmm, y: startYmm, width: state.grid_mm || 5, height: state.grid_mm || 5,
+      z: 1, section_key: "", display_mode: "",
+    };
+    state.slots.push(slot);
+
+    function onMove(ev) {
+      const curXmm = pxToMm(ev.clientX - rect.left);
+      const curYmm = pxToMm(ev.clientY - rect.top);
+      slot.width = Math.max(state.grid_mm || 5, snap(curXmm - startXmm));
+      slot.height = Math.max(state.grid_mm || 5, snap(curYmm - startYmm));
+      renderPage();
+    }
+    function onUp() {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+      selectSlot(slot.id);
+      drawMode = false;
+      $("drawModeBtn").textContent = "+ Novo slot";
+      renderPage();
+      renderSlotList();
+    }
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  });
+
+  function selectSlot(id) {
+    selectedId = id;
+    renderPage();
+    renderSlotList();
+    const row = document.querySelector('.slot-row[data-id="' + id + '"]');
+    if (row) row.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  function deleteSlot(id) {
+    state.slots = state.slots.filter((s) => s.id !== id);
+    if (selectedId === id) selectedId = null;
+    renderPage();
+    renderSlotList();
+  }
+
+  function renderSlotList() {
+    $("slotCount").textContent = state.slots.length;
+    slotList.innerHTML = "";
+    const sourceOptions = sourceOptionsForCurrentType();
+    state.slots.forEach((slot) => {
+      const row = document.createElement("div");
+      row.className = "slot-row" + (slot.id === selectedId ? " selected" : "");
+      row.dataset.id = slot.id;
+      // Só seleciona pelo clique na área do card, nunca pelos próprios controles
+      // (sem isso, abrir o <select> ou clicar num input disparava um re-render
+      // completo da lista e fechava o dropdown / tirava o foco do campo).
+      row.addEventListener("click", (e) => {
+        const tag = e.target.tagName;
+        if (tag === "INPUT" || tag === "SELECT" || tag === "OPTION" || tag === "BUTTON") return;
+        selectSlot(slot.id);
+      });
+
+      const row1 = document.createElement("div");
+      row1.className = "row1";
+      const nameInput = document.createElement("input");
+      nameInput.type = "text";
+      nameInput.value = slot.name;
+      nameInput.addEventListener("input", () => { slot.name = nameInput.value; renderPage(); });
+      row1.appendChild(nameInput);
+      row.appendChild(row1);
+
+      const grid4 = document.createElement("div");
+      grid4.className = "grid4";
+      [["x", "X"], ["y", "Y"], ["width", "Larg."], ["height", "Alt."]].forEach(([key, label]) => {
+        const wrap = document.createElement("div");
+        const lab = document.createElement("label");
+        lab.textContent = label + " (mm)";
+        const inp = document.createElement("input");
+        inp.type = "number";
+        inp.step = "0.5";
+        inp.value = slot[key];
+        inp.addEventListener("change", () => {
+          slot[key] = Math.max(0, parseFloat(inp.value) || 0);
+          renderPage();
+        });
+        wrap.appendChild(lab);
+        wrap.appendChild(inp);
+        grid4.appendChild(wrap);
+      });
+      row.appendChild(grid4);
+
+      const sourceLabel = document.createElement("label");
+      sourceLabel.className = "muted";
+      sourceLabel.textContent = "Fonte de dados (section_key do schema)";
+      row.appendChild(sourceLabel);
+
+      const select = document.createElement("select");
+      sourceOptions.forEach((h) => {
+        const opt = document.createElement("option");
+        opt.value = h;
+        opt.textContent = h ? h : "(nenhuma / estrutural)";
+        if (h === slot.section_key) opt.selected = true;
+        select.appendChild(opt);
+      });
+      // o slot pode ter sido salvo com um section_key de outro tipo (import antigo
+      // ou troca de "Tipo de entregável" depois de editar) — preserva o valor e
+      // avisa em vez de apagar silenciosamente.
+      if (slot.section_key && !sourceOptions.includes(slot.section_key)) {
+        const opt = document.createElement("option");
+        opt.value = slot.section_key;
+        opt.textContent = slot.section_key + " (não existe no tipo atual)";
+        opt.selected = true;
+        select.appendChild(opt);
+      }
+      select.addEventListener("change", () => { slot.section_key = select.value; renderPage(); });
+      row.appendChild(select);
+
+      const modeLabel = document.createElement("label");
+      modeLabel.className = "muted";
+      modeLabel.textContent = "Como exibir";
+      row.appendChild(modeLabel);
+
+      const modeSelect = document.createElement("select");
+      DISPLAY_MODES.forEach(({ value, label }) => {
+        const opt = document.createElement("option");
+        opt.value = value;
+        opt.textContent = label;
+        if (value === (slot.display_mode || "")) opt.selected = true;
+        modeSelect.appendChild(opt);
+      });
+      modeSelect.addEventListener("change", () => { slot.display_mode = modeSelect.value; renderPage(); });
+      row.appendChild(modeSelect);
+
+      const actions = document.createElement("div");
+      actions.className = "row-actions";
+      const zWrap = document.createElement("label");
+      zWrap.className = "muted";
+      zWrap.textContent = "z: ";
+      const zInput = document.createElement("input");
+      zInput.type = "number";
+      zInput.value = slot.z || 1;
+      zInput.style.width = "40px";
+      zInput.addEventListener("change", () => { slot.z = parseInt(zInput.value) || 1; renderPage(); });
+      zWrap.appendChild(zInput);
+      actions.appendChild(zWrap);
+      const delBtn = document.createElement("button");
+      delBtn.className = "danger";
+      delBtn.textContent = "Excluir";
+      delBtn.addEventListener("click", (e) => { e.stopPropagation(); deleteSlot(slot.id); });
+      actions.appendChild(delBtn);
+      row.appendChild(actions);
+
+      slotList.appendChild(row);
+    });
+  }
+
+  // --- controles de topo ---
+  populateDeliverableSelect();
+  deliverableSelect.addEventListener("change", async () => {
+    const newType = deliverableSelect.value;
+
+    // Se há uma pasta conectada e já existe um layout salvo para esse tipo,
+    // carrega automaticamente em vez de só trocar a lista de "fonte de dados".
+    if (layoutsDirHandle) {
+      const filename = newType + ".layout.json";
+      try {
+        const fileHandle = await layoutsDirHandle.getFileHandle(filename);
+        if (state.slots.length > 0) {
+          const ok = confirm(
+            'Já existe um layout salvo para "' + newType + '". Carregar e substituir os ' +
+            state.slots.length + " slot(s) atuais na tela?"
+          );
+          if (!ok) {
+            state.deliverableType = newType;
+            renderSlotList();
+            return;
+          }
+        }
+        const file = await fileHandle.getFile();
+        importPayload(JSON.parse(await file.text()), filename);
+        return;
+      } catch (err) {
+        if (err.name !== "NotFoundError") {
+          console.warn("Falha ao tentar carregar layout existente automaticamente:", err);
+        }
+        // NotFoundError = não existe layout salvo ainda para esse tipo; segue o fluxo normal abaixo.
+      }
+    }
+
+    state.deliverableType = newType;
+    renderSlotList(); // as opções de "fonte de dados" dependem do tipo selecionado
+  });
+
+  $("preset").addEventListener("change", (e) => {
+    const val = e.target.value;
+    $("customWrap").style.display = val === "custom" ? "inline-flex" : "none";
+    if (val !== "custom") {
+      state.canvas.width = PRESETS[val].w;
+      state.canvas.height = PRESETS[val].h;
+      renderPage();
+    }
+  });
+  $("customW").addEventListener("input", () => {
+    state.canvas.width = parseFloat($("customW").value) || state.canvas.width;
+    renderPage();
+  });
+  $("customH").addEventListener("input", () => {
+    state.canvas.height = parseFloat($("customH").value) || state.canvas.height;
+    renderPage();
+  });
+  $("gridSize").addEventListener("input", () => {
+    state.grid_mm = parseFloat($("gridSize").value) || 5;
+    renderPage();
+  });
+  $("drawModeBtn").addEventListener("click", () => {
+    drawMode = !drawMode;
+    $("drawModeBtn").textContent = drawMode ? "Desenhando… (clique e arraste no canvas)" : "+ Novo slot";
+  });
+
+  $("loadTokensBtn").addEventListener("click", () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json";
+    input.onchange = () => {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const tokens = JSON.parse(reader.result);
+          renderSwatches(tokens.color || {});
+          applyTokens(tokens);
+          setStatus("Tokens aplicados ao canvas a partir de " + file.name);
+        } catch (err) {
+          alert("Não consegui ler esse tokens.json: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  });
+
+  function applyTokens(tokens) {
+    const root = document.documentElement.style;
+    const color = tokens.color || {};
+    const typo = tokens.typography || {};
+    // Mapeia os tokens reais do design system para as mesmas variáveis CSS que
+    // já controlam a aparência dos slots — sem isso, "Carregar tokens.json" só
+    // pintava os quadradinhos de referência ao lado e não mudava o desenho.
+    if (color.document_primary) root.setProperty("--accent", color.document_primary);
+    if (color.document_accent_soft) root.setProperty("--accent-soft", color.document_accent_soft);
+    if (color.border) root.setProperty("--border", color.border);
+    if (color.border_strong) root.setProperty("--border-strong", color.border_strong);
+    if (color.text_body) root.setProperty("--text", color.text_body);
+    if (color.text_muted) root.setProperty("--text-muted", color.text_muted);
+    if (color.danger) root.setProperty("--danger", color.danger);
+    if (color.canvas || color.surface) root.setProperty("--page-bg", color.canvas || color.surface);
+    if (typo.font_brand) root.setProperty("--font-brand", '"' + typo.font_brand + '", -apple-system, sans-serif');
+    if (typo.font_body) root.setProperty("--font-body", '"' + typo.font_body + '", -apple-system, sans-serif');
+    renderPage();
+  }
+
+  function renderSwatches(colors) {
+    const wrap = $("swatches");
+    wrap.innerHTML = "";
+    const keys = Object.keys(colors);
+    if (!keys.length) {
+      wrap.innerHTML = '<span class="muted">Nenhuma cor encontrada em "color" no arquivo.</span>';
+      return;
+    }
+    keys.forEach((key) => {
+      const sw = document.createElement("div");
+      sw.className = "swatch";
+      sw.style.background = colors[key];
+      sw.title = key + " — " + colors[key];
+      wrap.appendChild(sw);
+    });
+  }
+
+  function importPayload(data, sourceLabel) {
+    if (!data.canvas || !Array.isArray(data.slots)) throw new Error("JSON não tem o formato esperado (canvas + slots).");
+    state.deliverableType = data.deliverable_type || DELIVERABLE_TYPES[0];
+    ensureDeliverableOption(state.deliverableType);
+    state.canvas = { unit: "mm", width: data.canvas.width, height: data.canvas.height };
+    state.grid_mm = data.grid_mm || 5;
+    state.slots = data.slots.map((s) => ({
+      id: s.id || ("s" + (nextId++)),
+      name: s.name || "",
+      x: s.x || 0, y: s.y || 0,
+      width: s.width || 10, height: s.height || 10,
+      z: s.z || 1,
+      section_key: s.section_key || s.content_hint || "", // content_hint = formato antigo (compatibilidade)
+      display_mode: s.display_mode || "",
+    }));
+    deliverableSelect.value = state.deliverableType;
+    $("preset").value = "custom";
+    $("customWrap").style.display = "inline-flex";
+    $("customW").value = state.canvas.width;
+    $("customH").value = state.canvas.height;
+    $("gridSize").value = state.grid_mm;
+    selectedId = null;
+    renderPage();
+    renderSlotList();
+    setStatus("Layout importado de " + sourceLabel);
+  }
+
+  $("importFile").addEventListener("change", () => {
+    const file = $("importFile").files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        importPayload(JSON.parse(reader.result), file.name);
+      } catch (err) {
+        alert("Erro ao importar: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+    $("importFile").value = "";
+  });
+
+  // --- pasta real de layouts (_DESIGN_SYSTEM/layouts/), via File System Access API ---
+  // Só Chrome/Edge suportam; em outros navegadores o botão fica desabilitado e
+  // "Importar JSON (de outro lugar)" + "Exportar JSON" (download) continuam funcionando.
+  let layoutsDirHandle = null;
+  const pickFolderBtn = $("pickFolderBtn");
+  const existingWrap = $("existingWrap");
+  const existingSelect = $("existingLayouts");
+
+  if (!window.showDirectoryPicker) {
+    pickFolderBtn.disabled = true;
+    pickFolderBtn.title = "Seu navegador não suporta acesso a pastas (funciona no Chrome/Edge). Use \"Importar JSON (de outro lugar)\" e o download normal.";
+  }
+
+  pickFolderBtn.addEventListener("click", async () => {
+    try {
+      layoutsDirHandle = await window.showDirectoryPicker({ id: "eric-layouts", startIn: "documents", mode: "readwrite" });
+      await scanLayoutsFolder();
+      setStatus("Pasta conectada — exportar agora salva direto nela.");
+    } catch (err) {
+      if (err.name !== "AbortError") alert("Não consegui abrir a pasta: " + err.message);
+    }
+  });
+
+  async function scanLayoutsFolder() {
+    if (!layoutsDirHandle) return;
+    const found = [];
+    for await (const [name, handle] of layoutsDirHandle.entries()) {
+      if (handle.kind === "file" && name.endsWith(".layout.json")) found.push(name);
+    }
+    found.sort();
+    existingSelect.innerHTML = '<option value="">Carregar layout existente… (' + found.length + ')</option>';
+    found.forEach((name) => {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name.replace(/\.layout\.json$/, "");
+      existingSelect.appendChild(opt);
+    });
+    existingWrap.style.display = "inline-flex";
+  }
+
+  existingSelect.addEventListener("change", async () => {
+    const name = existingSelect.value;
+    if (!name || !layoutsDirHandle) return;
+    try {
+      const fileHandle = await layoutsDirHandle.getFileHandle(name);
+      const file = await fileHandle.getFile();
+      const text = await file.text();
+      importPayload(JSON.parse(text), name);
+    } catch (err) {
+      alert("Não consegui carregar " + name + ": " + err.message);
+    }
+  });
+
+  function buildPayload() {
+    return {
+      schema_version: "1.2.0",
+      deliverable_type: state.deliverableType,
+      canvas: { unit: "mm", width: state.canvas.width, height: state.canvas.height },
+      grid_mm: state.grid_mm,
+      slots: state.slots.map(({ id, name, x, y, width, height, z, section_key, display_mode }) => ({
+        id, name, x, y, width, height, z, section_key, display_mode,
+      })),
+    };
+  }
+
+  async function downloadPayload(payload) {
+    const filename = payload.deliverable_type + ".layout.json";
+    const text = JSON.stringify(payload, null, 2);
+
+    if (layoutsDirHandle) {
+      try {
+        const fileHandle = await layoutsDirHandle.getFileHandle(filename, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(text);
+        await writable.close();
+        await scanLayoutsFolder();
+        setStatus("Salvo direto em _DESIGN_SYSTEM/layouts/" + filename);
+        return;
+      } catch (err) {
+        alert("Não consegui salvar na pasta (" + err.message + "). Baixando o arquivo normalmente.");
+      }
+    }
+
+    const blob = new Blob([text], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    setStatus("Exportado — salve em my_skills/_DESIGN_SYSTEM/layouts/" + filename);
+  }
+
+  $("exportBtn").addEventListener("click", () => downloadPayload(buildPayload()));
+
+  const previewModal = $("previewModal");
+  $("previewBtn").addEventListener("click", () => {
+    $("previewContent").textContent = JSON.stringify(buildPayload(), null, 2);
+    previewModal.classList.add("open");
+  });
+  $("previewCloseBtn").addEventListener("click", () => previewModal.classList.remove("open"));
+  previewModal.addEventListener("click", (e) => { if (e.target === previewModal) previewModal.classList.remove("open"); });
+  $("previewDownloadBtn").addEventListener("click", () => {
+    downloadPayload(buildPayload());
+    previewModal.classList.remove("open");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && previewModal.classList.contains("open")) previewModal.classList.remove("open");
+  });
+
+  // deselecionar clicando em área vazia
+  page.addEventListener("click", (e) => {
+    if (e.target === page && !drawMode) {
+      selectedId = null;
+      renderPage();
+      renderSlotList();
+    }
+  });
+
+  // atalho: Delete remove o slot selecionado
+  document.addEventListener("keydown", (e) => {
+    if ((e.key === "Delete" || e.key === "Backspace") && selectedId && document.activeElement.tagName !== "INPUT") {
+      deleteSlot(selectedId);
+    }
+  });
+
+  renderPage();
+  renderSlotList();
+})();
+</script>
+</body>
+</html>
