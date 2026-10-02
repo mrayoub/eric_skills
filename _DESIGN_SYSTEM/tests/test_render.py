@@ -901,5 +901,26 @@ class VisualTokenContractTests(unittest.TestCase):
             self.assertEqual(footer_paragraph.font.name, self.tokens["typography"]["font_body"])
 
 
+class PdfIdempotencyTests(unittest.TestCase):
+    def test_same_json_produces_same_pdf_text(self):
+        if not pdf_available():
+            self.skipTest("pango indisponível neste ambiente")
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra ausente")
+        texts = []
+        for _ in range(2):
+            with tempfile.TemporaryDirectory() as temp:
+                out = Path(temp)
+                result = subprocess.run([sys.executable, str(SCRIPT), str(path),
+                                         "--out-dir", str(out), "--formats", "pdf"],
+                                        capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                pdf_file = next(out.glob("*.pdf"))
+                reader = PdfReader(str(pdf_file))
+                texts.append("\n".join(page.extract_text() or "" for page in reader.pages))
+        self.assertEqual(texts[0], texts[1], "Mesmo JSON produziu texto diferente entre duas execuções")
+
+
 if __name__ == "__main__":
     unittest.main()
