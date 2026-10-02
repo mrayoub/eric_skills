@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 from docx import Document
@@ -19,6 +20,13 @@ from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "render.py"
+
+
+def load_render_module():
+    spec = importlib.util.spec_from_file_location("render_module", SCRIPT)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def pdf_available() -> bool:
@@ -990,6 +998,41 @@ class PdfIdempotencyTests(unittest.TestCase):
                 reader = PdfReader(str(pdf_file))
                 texts.append("\n".join(page.extract_text() or "" for page in reader.pages))
         self.assertEqual(texts[0], texts[1], "Mesmo JSON produziu texto diferente entre duas execuções")
+
+
+class PresentationLayoutJsonTests(unittest.TestCase):
+    """Garante que o caminho 'presentation' de render_html usa
+    _DESIGN_SYSTEM/layouts/<tipo>.layout.json quando existe, e não muda nada
+    quando o arquivo não existe (fallback idêntico ao comportamento anterior).
+    Chama render_html direto (sem subprocess, sem WeasyPrint) -- mais rápido e
+    não depende de `pango`, ao contrário de testes que convertem para PDF de
+    verdade."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.render = load_render_module()
+
+    def setUp(self):
+        self.content = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json").read_text(encoding="utf-8"))
+        self.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+        self.profile = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))["types"]["executive_presentation"]
+
+    def test_uses_real_layout_positions(self):
+        out = self.render.render_html(self.content, self.tokens, self.profile)
+        self.assertIn("left: 281.94mm; top: 8.89mm", out)
+        self.assertIn(".slide { position: relative; }", out)
+
+    def test_falls_back_without_layout_file(self):
+        # DELIVERABLE_LABELS[content["deliverable_type"]] é resolvido em
+        # render_html antes do ramo "presentation", então um deliverable_type
+        # inventado (sem entrada em DELIVERABLE_LABELS) gera KeyError antes de
+        # chegar a exercitar o fallback -- por isso simulamos "sem arquivo de
+        # layout" fazendo load_presentation_layout devolver None, em vez de
+        # trocar o deliverable_type.
+        with unittest.mock.patch.object(self.render, "load_presentation_layout", return_value=None):
+            out = self.render.render_html(self.content, self.tokens, self.profile)
+        self.assertNotIn("position: absolute", out)
+        self.assertNotIn(".slide { position: relative; }", out)
 
 
 if __name__ == "__main__":
