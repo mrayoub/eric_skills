@@ -8,3 +8,6 @@ _OUTPUTS/
 
 # Pacotes gerados por _TOOLS/package_skills.py
 _DIST/
+
+# Worktrees e estado local de agentes
+.claude/
