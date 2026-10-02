@@ -29,7 +29,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-1. Identifique briefing, versão, HMW, sete campos e fontes/localizadores. Transcrição é reconstrução, não aprovação; pergunte apenas por fontes, versões ou definições decisivas. Intenção não substitui evidência.
+1. Identifique briefing, versão, HMW, sete campos e fontes/localizadores. Transcrição é reconstrução, não aprovação; pergunte apenas por fontes, versões ou definições decisivas. Intenção não substitui evidência. Se o pedido não deixar claro que o usuário quer a nota formal do IQB, e não apenas uma leitura geral, confirme isso antes de aplicar os 40 critérios.
 2. Responda `yes`/`no` aos dez itens de cada família `CLA`, `EVI`, `OUT`, `ACT`, inclusive vetos. Ausência ou ambiguidade contam `no`; registre lacuna, evidência e localização, sem inventar itens.
 3. Grave as 40 respostas booleanas justificadas em JSON (formato em `scripts/iqb.py`); rode `python3 scripts/iqb.py respostas.json`. Copie contagens, notas brutas/finais, tetos, média e classificação; não recalcule nem ajuste editorialmente.
 4. Com amplitude das quatro notas finais ≤1, reaudite cada resposta e evidência. Notas próximas podem estar corretas; não force dispersão.
