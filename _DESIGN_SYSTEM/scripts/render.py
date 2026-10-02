@@ -468,6 +468,17 @@ def html_block(block: dict[str, Any]) -> str:
     return f'<p class="{status}">{label}{refs}</p>'
 
 
+def load_presentation_layout(deliverable_type: str) -> dict[str, dict[str, Any]] | None:
+    """Lê _DESIGN_SYSTEM/layouts/<tipo>.layout.json e devolve os slots por nome,
+    em milímetros (CSS aceita mm nativamente — sem conversão de unidade).
+    None se o arquivo não existir."""
+    path = ROOT / "layouts" / f"{deliverable_type}.layout.json"
+    if not path.is_file():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {s["name"]: s for s in data.get("slots", []) if s.get("name")}
+
+
 def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
     logo = ROOT / "assets" / "logo_ccee.png"
     if not logo.is_file():
@@ -491,22 +502,42 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             current_blocks.append(block)
         if current_blocks:
             sections.append((current_title, current_blocks))
+        layout_slots = load_presentation_layout(content["deliverable_type"])
+
+        def slot_css(selector: str, slot_name: str) -> str:
+            slot = layout_slots.get(slot_name) if layout_slots else None
+            if not slot or not all(k in slot for k in ("x", "y", "width", "height")):
+                return ""
+            return (f"{selector} {{ position: absolute; left: {slot['x']}mm; top: {slot['y']}mm; "
+                     f"width: {slot['width']}mm; height: {slot['height']}mm; }} ")
+
+        def wrap_slide_content(inner_html: str) -> str:
+            return f'<div class="slide-content">{inner_html}</div>' if layout_slots else inner_html
+
         masthead = f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
-        slides = [f'<section class="slide">{masthead}<h1>{title}</h1><p class="summary">{html.escape(content.get("summary", ""))}</p></section>']
+        first_summary = f'<p class="summary">{html.escape(content.get("summary", ""))}</p>'
+        slides = [f'<section class="slide">{masthead}<h1>{title}</h1>{wrap_slide_content(first_summary)}</section>']
         for section_title, section_blocks in sections:
+            body_html = "\n".join(html_block(block) for block in section_blocks)
             slides.append(f'<section class="slide">{masthead}<h1>{html.escape(section_title)}</h1>'
-                          + "\n".join(html_block(block) for block in section_blocks) + '</section>')
+                          + wrap_slide_content(body_html) + '</section>')
         if content["citations"]:
             refs = ''.join(f'<li><strong>{html.escape(c["id"])}</strong> — {html.escape(c["source_id"])}'
                            + (f', {html.escape(c["locator"])}' if c.get("locator") else '') + '</li>'
                            for c in content["citations"])
-            slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1><ol>{refs}</ol></section>')
+            slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1>' + wrap_slide_content(f'<ol>{refs}</ol>') + '</section>')
         slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
         slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
         slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
         slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: Roboto; '
                       f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
                       f'color: {tokens["color"]["text_muted"]}; }}')
+        if layout_slots:
+            slide_css += " .slide { position: relative; }"
+            slide_css += slot_css(".slide .masthead", "logo")
+            slide_css += slot_css(".slide h1", "titulo_slide")
+            slide_css += slot_css(".slide .slide-content", "corpo_slide")
+            slide_css += slot_css(".slide .meta", "rodape_slide")
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
