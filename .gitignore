@@ -5,3 +5,6 @@ __pycache__/
 # Material real de projeto: sensível e grande; nunca versionar
 _SAMPLE/
 _OUTPUTS/
+
+# Pacotes gerados por _TOOLS/package_skills.py
+_DIST/

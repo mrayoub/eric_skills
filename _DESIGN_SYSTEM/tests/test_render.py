@@ -508,13 +508,37 @@ class RenderTests(unittest.TestCase):
             self.assertTrue((out / "LC-write-failure-v1.0.0.md").exists())
             self.assertTrue((out / "LC-write-failure-v1.0.0.docx").exists())
 
+    def test_card_field_over_limit_is_rejected_in_any_state(self):
+        for completeness in ("complete", "partial"):
+            item = content("test_card", "TC-long")
+            item["metadata"]["completeness"] = completeness
+            item["blocks"][3]["data"]["text"] = "x" * 281
+            with tempfile.TemporaryDirectory() as temp:
+                folder = Path(temp)
+                source = folder / "input.json"
+                source.write_text(json.dumps(item), encoding="utf-8")
+                result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                         "--formats", "md"], capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("test_card.criteria: 281 caracteres", result.stderr)
+                self.assertFalse((folder / "TC-long-v1.0.0.md").exists())
+
+    def test_card_field_at_limit_is_accepted(self):
+        item = content("test_card", "TC-limit")
+        item["blocks"][3]["data"]["text"] = "x" * 280
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            source = folder / "input.json"
+            source.write_text(json.dumps(item), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                     "--formats", "md"], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
     def test_oversized_card_remains_fatal(self):
+        # Os campos já têm limite de caracteres; o título longo exercita a checagem de página única.
         item = content("test_card", "TC-oversized")
-        item["blocks"] = [
-            {"id": key, "type": "paragraph", "data": {"section_key": key, "text": "Conteúdo longo para verificar o limite do card. " * 80}}
-            for key in ("hypothesis", "test", "measure", "criteria")
-        ]
+        item["title"] = "Título longo para verificar o limite do card. " * 120
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
             source = folder / "input.json"
