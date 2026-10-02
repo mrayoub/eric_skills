@@ -11,7 +11,7 @@ Consolida solução, construção, experimentos e rota; separa plano, execução
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md) — estrutura do relatório.
 - [Test Card](assets/test-card.md) — quatro campos por teste.
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 
 ## Grilling
 
@@ -33,7 +33,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 1. **Entrada:** identifique fontes, versões, participantes e decisões de hipótese, problema, 4D, BP1, E1–E3 e experimentação que existirem. Não exija documentos alheios ao projeto. Em modo assíncrono, indique registros substitutos e deliberações ausentes; etapas incompletas exigem parcial. Não atribua aprovação a ausentes nem reescreva decisões anteriores.
 2. **Solução/valor:** problema focal, população, hipótese master, escopo, componentes `agora/futuro/fora`, riscos e limites. Expectativa não é resultado observado.
 3. **Construção:** recursos, itens a desenvolver, dependências, responsável, apoio e prazo por ação; exponha lacunas antes de declarar MVP pronto.
-4. **Experimento:** suposições prioritárias, público elegível, método, intervenção, medida, fonte e critério. Entregue Test Card individual por teste com hipótese, teste, medida e critério; tabela é só índice. Critérios/limiares sem baseline ficam `a fechar antes da coleta`. Preserve originais; cards reconstruídos são retrospectivos. Resultados existentes precisam de fontes/data; Learning Cards somente após execução, nunca achados antes do teste.
+4. **Experimento:** suposições prioritárias, público elegível, método, intervenção, medida, fonte e critério. Entregue Test Card individual por teste com hipótese, teste, medida e critério, uma frase objetiva por campo (até 280 caracteres); tabela é só índice. Critérios/limiares sem baseline ficam `a fechar antes da coleta`. Preserve originais; cards reconstruídos são retrospectivos. Resultados existentes precisam de fontes/data; Learning Cards somente após execução, nunca achados antes do teste.
 5. **Rota:** registre `internal`, `external`, `hybrid` ou `undecided` com fonte e decisão efetiva. Externa/híbrida: o que buscar; interna: o que construir; indefinida: dependências abertas. Rota não valida solução.
 6. Confira relatório/cards/fontes; indique decisões, dados e autorizações necessários ao próximo uso. `experimentacao-inovacao` pode detalhar protocolo/analisar resultados, mas o pacote funciona isoladamente.
 
