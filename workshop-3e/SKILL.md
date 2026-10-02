@@ -11,7 +11,7 @@ Prepara, conduz ou registra a solução candidata em E1–E3; preserva decisões
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md) — dinâmicas e tempos.
 - [Test Card](assets/test-card.md) — quatro campos individuais.
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
 [Blueprint Mural](references/mural-board-3e-template.md) opcional: ferramenta autorizada ou registro manual.
 
 ## Grilling
@@ -35,7 +35,7 @@ Prepare hipótese, problema, 4D, BP1, resultados e restrições existentes; não
 
 1. **E1 — Esclarecer:** explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
 2. **E2 — Estruturar:** classifique `precisa ter`, `pode evoluir`, `fora deste recorte`. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
-3. **E3 — Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
+3. **E3 — Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério, uma frase objetiva por campo (até 280 caracteres); detalhes ficam no plano. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
 
 Registre quem assumiu dependências e quando, separando decisão de sugestão. Tempos são sugestões, não prova de conclusão; etapa ausente mantém registro parcial e impacto da lacuna. `relatorio-3e` compila; `experimentacao-inovacao` pode detalhar/analisar testes, sem ser dependência obrigatória.
 

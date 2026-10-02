@@ -167,15 +167,17 @@ Exemplos:
 
 ### Parte 2: Test Card
 
-Produzir um card individual para cada hipótese focal, com os quatro campos da Strategyzer:
+Produzir um card individual para cada hipótese focal, com os quatro campos da Strategyzer, cada um em uma frase objetiva de até 280 caracteres:
 
-- **Hipótese:** acreditamos que...;
+- **Hipótese:** acreditamos que... (quem faz ou percebe o quê);
 
-- **Teste:** para verificar, vamos... (método, público, exposição e duração);
+- **Teste:** para verificar, vamos... (método, público e quantidade);
 
-- **Medida:** vamos observar ou medir... (unidade, fonte e janela);
+- **Medida:** e medir... (uma medida principal);
 
-- **Critério:** estaremos certos se... (condição definida antes da coleta, ou lacuna que mantém o card em rascunho).
+- **Critério:** estaremos certos se... (limiar definido antes da coleta, ou `a fechar antes da coleta: [o que falta]`).
+
+Fonte, janela, duração, guardrails e leituras contrárias ficam no plano de experimentos, ligados ao ID do card.
 
 > Orientação: Desenvolver o protótipo
 

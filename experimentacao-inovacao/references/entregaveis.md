@@ -14,12 +14,12 @@ Adapte formato e nível de detalhe à organização. Mantenha IDs estáveis para
 
 Entregue um card individual por teste; a linha da tabela do caderno serve só como índice. A [Strategyzer](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) define quatro perguntas, que o [modelo](../assets/test-card.md) organiza como:
 
-1. **Hipótese:** o que precisa ser verdade, com subhipótese focal, vínculo com a master e resultado que a colocaria em dúvida.
-2. **Teste:** como verificar, com método, tarefa/cenário, elegibilidade, versão do MVP, fonte independente quando necessária e riscos.
-3. **Medida:** o que observar/medir; em teste quantitativo, unidade, numerador, denominador, janela e fonte; em teste qualitativo, tarefa, observações previstas, forma de registro e limites.
-4. **Critério:** como reconhecer o sucesso antes da coleta; limiar justificado ou condição prática de decisão, leituras contrária e inconclusiva, e guardrails.
+1. **Hipótese:** uma subhipótese focal e falsificável — quem faz ou percebe o quê, em qual versão.
+2. **Teste:** método, público e quantidade, e o que será exposto ou executado.
+3. **Medida:** uma medida principal; quantitativa como numerador / denominador, qualitativa como o comportamento observado.
+4. **Critério:** um limiar ou condição observável definido antes da coleta, ou `a fechar antes da coleta: [o que falta]`.
 
-Metadados fora dos quatro campos: `id`, versão, data, origem, responsável e estado. Um card sem critério decisivo pode ser entregue como rascunho, mas não como teste verificatório pronto. Preserve alterações datadas sem sobrescrever a versão prévia.
+Cada campo é uma frase objetiva de até 280 caracteres (o renderizador rejeita textos maiores). Um card testa uma hipótese com uma medida principal; dois resultados independentes viram dois cards. Riscos, guardrails, leituras contrária e inconclusiva, justificativa do limiar, medidas secundárias, janela, fonte e protocolo ficam no plano do experimento ou no caderno, ligados ao ID do card. Metadados fora dos quatro campos: `id`, versão, data, origem, responsável e estado. Um card sem critério decisivo pode ser entregue como rascunho, mas não como teste verificatório pronto. Preserve alterações datadas sem sobrescrever a versão prévia.
 
 ## Registro de execução; sessão quando aplicável
 
@@ -36,12 +36,12 @@ Metadados fora dos quatro campos: `id`, versão, data, origem, responsável e es
 
 Entregue um card individual para cada Test Card executado. A [Strategyzer](https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card) define quatro etapas, que o [modelo](../assets/learning-card.md) organiza como:
 
-1. **Hipótese testada:** retome o TC e seu critério original; identifique adaptações sem reescrever a previsão.
-2. **Observações:** descreva dados e comportamentos de campo, com `evidencia_id`, localização, medida/denominador, cobertura e contraexemplos. Ausência de dados também deve ser explícita.
-3. **Aprendizado:** diga o que se pode deduzir dessas observações, se o critério foi atingido, não atingido, é inconclusivo ou ficou fora do escopo, e qual incerteza permanece. Separe inferência de observação.
-4. **Ação:** indique ajuste, decisão ou próximo teste, responsável e condição de avanço, proporcional à força da evidência.
+1. **Hipótese testada:** a hipótese e o critério do TC, sem reescrever a previsão.
+2. **Observações:** o resultado medido com número e denominador e o principal contraexemplo, citando `evidencia_id`. Ausência de dados também é explícita.
+3. **Aprendizado:** status do critério (atingido, não atingido, inconclusivo ou fora do escopo) e o principal aprendizado, sem repetir os números.
+4. **Ação:** uma decisão ou próximo teste, com responsável e prazo ou condição, proporcional à força da evidência.
 
-Metadados fora dos quatro campos: `id`, vínculo com TC, versão, data e estado. Um card pode produzir aprendizado útil e continuar formalmente inconclusivo. Não produza Learning Card como resultado de teste ainda não executado.
+Cada campo é uma frase objetiva de até 280 caracteres. Adaptações datadas, cobertura completa, demais contraexemplos, explicações alternativas e incerteza detalhada ficam no relatório ou no caderno, ligados ao ID do card. Metadados fora dos quatro campos: `id`, vínculo com TC, versão, data e estado. Um card pode produzir aprendizado útil e continuar formalmente inconclusivo. Não produza Learning Card como resultado de teste ainda não executado.
 
 ## Síntese de evidências e recomendação
 

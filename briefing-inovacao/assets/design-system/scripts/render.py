@@ -89,6 +89,10 @@ def identity_line(content: dict[str, Any]) -> str:
     return label
 
 
+# Campos dos cards Strategyzer: uma frase objetiva cada.
+CARD_FIELD_MAX_CHARS = 280
+
+
 def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any]:
     try:
         from jsonschema import Draft202012Validator
@@ -135,6 +139,9 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
                 raise ValueError(f"{kind}.{key}: campo deve usar um bloco textual visível")
             if not isinstance(text, str) or not text.strip():
                 raise ValueError(f"{kind}.{key}: exige texto ou indicação explícita de pendência")
+            if len(text.strip()) > CARD_FIELD_MAX_CHARS:
+                raise ValueError(f"{kind}.{key}: {len(text.strip())} caracteres; o campo do card aceita até "
+                                 f"{CARD_FIELD_MAX_CHARS}. Escreva uma frase objetiva e mova detalhes ao plano ou caderno")
 
     ids = [block["id"] for block in content["blocks"]]
     if len(ids) != len(set(ids)):
