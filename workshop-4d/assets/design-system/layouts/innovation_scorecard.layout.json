@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "innovation_scorecard",
+  "canvas": {
+    "unit": "mm",
+    "width": 297,
+    "height": 210
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 12,
+      "y": 12,
+      "width": 273,
+      "height": 16,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "alignment_opportunity",
+      "x": 12,
+      "y": 28,
+      "width": 273,
+      "height": 53.33,
+      "z": 1,
+      "section_key": "alignment_opportunity",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "risk_reduction",
+      "x": 12,
+      "y": 81.33,
+      "width": 273,
+      "height": 53.33,
+      "z": 1,
+      "section_key": "risk_reduction",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "next_gate",
+      "x": 12,
+      "y": 134.66,
+      "width": 273,
+      "height": 53.33,
+      "z": 1,
+      "section_key": "next_gate",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "identificacao_versao",
+      "x": 12,
+      "y": 188,
+      "width": 273,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py — esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}
