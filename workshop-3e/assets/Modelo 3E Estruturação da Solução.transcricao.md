@@ -1,6 +1,6 @@
 # Transcrição integral — Modelo 3E Estruturação da Solução
 
-Fonte: `Modelo 3E Estruturação da Solução.docx`. SHA-256: `530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34`. Importado em 28 set 2026.
+Fonte: `Modelo 3E Estruturação da Solução.docx`. SHA-256: `530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34`. Importado em 28 set 2026.
 
 O texto e a ordem dos parágrafos e tabelas foram preservados. Marcadores automáticos de listas são apresentados como listas Markdown; consulte o DOCX original para a aparência e a numeração de apresentação. Expressões incompletas como “x min” foram mantidas. Nenhum conteúdo foi corrigido ou adaptado nesta transcrição.
 
