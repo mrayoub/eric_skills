@@ -44,6 +44,8 @@ Convenções comuns a todos os planos:
 | 026 | [Scanner de objetividade (vocabulário absoluto + número sem citação)](026-scanner-de-objetividade.md) | P2 | M | — | DONE (revisão 1/2: `ABSOLUTE_TERMS` corrigido para match com limite de palavra via regex, eliminando os 2 falsos positivos sem perder detecção real; varredura das 18 amostras em `_SAMPLES_ENTREGAVEIS/` sem nenhum erro; 27 testes passaram — revisado em worktree isolado, branch `advisor/026-scanner-objetividade`, 4 commits, não mesclado) |
 | 027 | [Contrato estrutural de fonte/cor DOCX/PPTX](027-contrato-estrutural-docx-pptx.md) | P2 | S | — | DONE (render_pptx corrigido para ler tokens.json em vez de literais hardcoded; 2 testes novos + suíte completa de 39 testes/4 skips passaram; `grep` confirma zero literais "Montserrat"/"Roboto" restantes — revisado em worktree isolado, branch `advisor/027-contrato-docx-pptx`, não mesclado) |
 | 028 | [Idempotência do PDF (Fase 1) + fidelidade visual (Fase 2, aguarda autorização)](028-idempotencia-e-fidelidade-visual-pdf.md) | P3 | Fase 1: S / Fase 2: L | — | DONE (Fase 1: teste criado, pula corretamente sem `pango` — não pôde validar o caminho de sucesso ponta a ponta nesta máquina, só o de skip; suíte completa 38 testes, 5 skips, sem falhas; escopo limpo, só `tests/test_render.py` — revisado em worktree isolado, branch `advisor/028-idempotencia-pdf-fase1`, não mesclado). Fase 2 não iniciada, aguarda autorização do operador |
+| 029 | [`render_pptx` lê posição de `_DESIGN_SYSTEM/layouts/<tipo>.layout.json`](029-render-pptx-le-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado | TODO — aguardando revisão do operador antes de executar |
+| 030 | [`render_html` (caminho "presentation") posiciona masthead/título/rodapé/conteúdo por `layout.json`](030-render-html-presentation-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado (independente do Plano 029, loader próprio) | TODO — aguardando revisão do operador antes de executar |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
 
@@ -184,6 +186,29 @@ Documento completo em `~/skills-research/relatorio/analise-fidelidade-visual-obj
 - O manifesto de hash que `render.py` já grava (`content_sha256`/`profile_sha256`/`tokens_sha256`/
   hash por arquivo) foi avaliado e descartado como base para idempotência: o próprio README já
   avisa que bytes de PDF/DOCX/PPTX variam por metadado interno das bibliotecas.
+
+## Planos 029-030 — origem
+
+Gerados a partir de uma ferramenta nova de autoria visual (`_LAYOUT_STUDIO/`, fora do git
+de skills) que define, por `deliverable_type`, a posição/tamanho de cada "slot" de um
+entregável — exportando `_DESIGN_SYSTEM/layouts/<tipo>.layout.json`. Hoje `render.py` não
+lê esses arquivos; os Planos 029/030 são os primeiros passos de integração, escolhendo
+`executive_presentation` como piloto (PPTX no 029, PDF/HTML no 030) porque é o único tipo
+com posição absoluta no código atual (tanto em `render_pptx` quanto no sub-caminho
+`"presentation"` de `render_html`) — os outros 17 tipos são renderizados em fluxo e
+exigiriam uma abordagem diferente (aproximação por caixa de margem CSS, não posição
+livre), avaliada só depois que este piloto for validado em dois formatos. Os dois planos
+têm loaders independentes (029 converte mm→polegadas para `python-pptx`; 030 usa mm direto,
+já que CSS aceita a unidade nativamente) — decisão deliberada para não acoplar os dois
+planos um ao outro. Os outros 17 `*.layout.json` existem (rascunho, com `_draft_note`) mas
+não têm efeito em nada ainda, em nenhum dos dois planos.
+
+Regra decidida para quando (e se) os 14 tipos genuinamente multi-página forem endereçados
+no futuro: posição fixa só vale para slots **estruturais** (`logo`, `titulo_documento`,
+`identificacao_versao`/`rodape`) — nunca para slots cujo `section_key` é uma seção de
+conteúdo real do schema. Seções de conteúdo continuam em fluxo, sem risco de corte. Essa
+regra ainda não tem plano escrito; fica registrada aqui para a próxima vez que o assunto
+for retomado.
 
 ## Achados considerados e rejeitados
 
