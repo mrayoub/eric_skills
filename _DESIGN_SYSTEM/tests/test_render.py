@@ -859,5 +859,47 @@ class RenderTests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0, kind)
 
 
+class VisualTokenContractTests(unittest.TestCase):
+    """Garante que DOCX/PPTX herdam fonte/cor de tokens.json, não de literais soltos."""
+
+    def setUp(self):
+        self.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+
+    def test_docx_normal_and_title_follow_tokens(self):
+        from docx import Document
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra ausente")
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            subprocess.run([sys.executable, str(SCRIPT), str(path), "--out-dir", str(out), "--formats", "docx"],
+                           check=True, capture_output=True, text=True)
+            docx_file = next(out.glob("*.docx"))
+            doc = Document(str(docx_file))
+            self.assertEqual(doc.styles["Normal"].font.name, self.tokens["typography"]["font_body"])
+            self.assertEqual(doc.styles["Title"].font.name, self.tokens["typography"]["font_brand"])
+            expected_rgb = self.tokens["color"]["document_primary"].lstrip("#").upper()
+            self.assertEqual(str(doc.styles["Title"].font.color.rgb), expected_rgb)
+
+    def test_pptx_title_and_body_follow_tokens(self):
+        from pptx import Presentation
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra ausente")
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            subprocess.run([sys.executable, str(SCRIPT), str(path), "--out-dir", str(out), "--formats", "pptx"],
+                           check=True, capture_output=True, text=True)
+            pptx_file = next(out.glob("*.pptx"))
+            prs = Presentation(str(pptx_file))
+            slide = prs.slides[0]
+            title_run = slide.shapes[1].text_frame.paragraphs[0].runs[0]
+            self.assertEqual(title_run.font.name, self.tokens["typography"]["font_brand"])
+            body_paragraph = slide.shapes[2].text_frame.paragraphs[0]
+            self.assertEqual(body_paragraph.font.name, self.tokens["typography"]["font_body"])
+            footer_paragraph = slide.shapes[3].text_frame.paragraphs[0]
+            self.assertEqual(footer_paragraph.font.name, self.tokens["typography"]["font_body"])
+
+
 if __name__ == "__main__":
     unittest.main()
