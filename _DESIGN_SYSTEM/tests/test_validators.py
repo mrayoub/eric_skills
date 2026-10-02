@@ -294,5 +294,31 @@ class PotentialValidationTests(unittest.TestCase):
                 self.assertFalse((folder / "output").exists())
 
 
+class ObjectivityValidatorTests(unittest.TestCase):
+    def test_absolute_vocabulary_flagged(self):
+        content = {"deliverable_type": "x", "citations": [], "blocks": [
+            {"id": "b1", "type": "paragraph", "data": {"text": "Isso comprovadamente funciona."}},
+        ]}
+        self.assertTrue(any("vocabulário absoluto" in e for e in validators.run(content)))
+
+    def test_numeric_claim_without_citation_flagged(self):
+        content = {"deliverable_type": "x", "citations": [], "blocks": [
+            {"id": "b1", "type": "metric", "data": {"value": "Redução de 42% no tempo médio"}},
+        ]}
+        self.assertTrue(any("sem citation_ids" in e for e in validators.run(content)))
+
+    def test_numeric_claim_with_citation_passes(self):
+        content = {"deliverable_type": "x", "citations": [{"id": "c1", "source": "planilha.xlsx"}],
+                   "blocks": [{"id": "b1", "type": "metric", "citation_ids": ["c1"],
+                               "data": {"value": "Redução de 42% no tempo médio"}}]}
+        self.assertEqual(validators.run(content), [])
+
+    def test_heading_and_table_not_in_scope(self):
+        content = {"deliverable_type": "x", "citations": [], "blocks": [
+            {"id": "b1", "type": "heading", "data": {"text": "Resultados de 2026"}},
+        ]}
+        self.assertEqual(validators.run(content), [])
+
+
 if __name__ == "__main__":
     unittest.main()
