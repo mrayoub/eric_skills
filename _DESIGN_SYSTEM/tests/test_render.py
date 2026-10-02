@@ -901,6 +901,76 @@ class VisualTokenContractTests(unittest.TestCase):
             self.assertEqual(footer_paragraph.font.name, self.tokens["typography"]["font_body"])
 
 
+class PptxLayoutJsonTests(unittest.TestCase):
+    """Garante que render_pptx usa _DESIGN_SYSTEM/layouts/<tipo>.layout.json quando existe,
+    e cai para as posições hardcoded quando o arquivo não existe."""
+
+    def test_existing_layout_matches_hardcoded_positions(self):
+        from pptx import Presentation
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json"
+        if not path.exists():
+            self.skipTest("Amostra ausente")
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            subprocess.run([sys.executable, str(SCRIPT), str(path), "--out-dir", str(out), "--formats", "pptx"],
+                           check=True, capture_output=True, text=True)
+            prs = Presentation(str(next(out.glob("*.pptx"))))
+            self.assertAlmostEqual(prs.slide_width.inches, 13.333, places=2)
+            self.assertAlmostEqual(prs.slide_height.inches, 7.5, places=2)
+            title_shape = prs.slides[0].shapes[1]
+            self.assertAlmostEqual(title_shape.left.inches, 0.5, places=2)
+            self.assertAlmostEqual(title_shape.top.inches, 0.5, places=2)
+
+    def test_custom_layout_file_moves_the_title_box(self):
+        # Desvio documentado em relação ao plano 029: um deliverable_type inventado
+        # (__plan029_fake__) falha antes de chegar em render_pptx, em validate()
+        # (render.py:106 — "deliverable_type sem perfil visual"), porque profiles.json
+        # não tem entrada para tipos fictícios. Confirmado empiricamente rodando
+        # scripts/render.py via subprocess com deliverable_type="__plan029_fake__":
+        # ValueError: deliverable_type sem perfil visual: '__plan029_fake__'.
+        # Por isso, como o próprio plano antecipa, usamos um deliverable_type real
+        # ("executive_presentation") e fazemos mock.patch.object em
+        # render.load_pptx_layout para devolver o layout fake (já convertido para
+        # polegadas, no formato que load_pptx_layout devolveria), chamando
+        # render.render_pptx diretamente em processo (não via subprocess, já que o
+        # patch só vale no processo atual).
+        from unittest.mock import patch
+        from pptx import Presentation
+        sample_path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json"
+        if not sample_path.exists():
+            self.skipTest("Amostra ausente")
+        content = json.loads(sample_path.read_text(encoding="utf-8"))
+        tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+        mm_to_in = 1 / 25.4
+        fake_layout = {
+            "width_in": 338.66 * mm_to_in,
+            "height_in": 190.5 * mm_to_in,
+            "slots": {
+                "logo": {"x": 281.94 * mm_to_in, "y": 8.89 * mm_to_in,
+                         "width": 43.18 * mm_to_in, "height": 16.19 * mm_to_in},
+                "titulo_slide": {"x": 50.0 * mm_to_in, "y": 60.0 * mm_to_in,
+                                 "width": 200.0 * mm_to_in, "height": 20.32 * mm_to_in},
+                "corpo_slide": {"x": 15.24 * mm_to_in, "y": 39.37 * mm_to_in,
+                                "width": 307.34 * mm_to_in, "height": 135.89 * mm_to_in},
+                "rodape_slide": {"x": 15.24 * mm_to_in, "y": 178.31 * mm_to_in,
+                                 "width": 307.34 * mm_to_in, "height": 8.38 * mm_to_in},
+            },
+        }
+        spec = importlib.util.spec_from_file_location("pptx_layout_json_render", SCRIPT)
+        render_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(render_module)
+        with tempfile.TemporaryDirectory() as temp:
+            out_path = Path(temp) / "output.pptx"
+            with patch.object(render_module, "load_pptx_layout", return_value=fake_layout):
+                render_module.render_pptx(content, tokens, out_path)
+            prs = Presentation(str(out_path))
+            title_shape = prs.slides[0].shapes[1]
+            # 50mm / 25.4 ~= 1.9685 pol -- bem diferente dos 0.5 pol hardcoded;
+            # prova que a posição veio do layout.json, não do fallback.
+            self.assertAlmostEqual(title_shape.left.inches, 50.0 / 25.4, places=2)
+            self.assertAlmostEqual(title_shape.top.inches, 60.0 / 25.4, places=2)
+
+
 class PdfIdempotencyTests(unittest.TestCase):
     def test_same_json_produces_same_pdf_text(self):
         if not pdf_available():
