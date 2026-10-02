@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "test_card",
+  "canvas": {
+    "unit": "mm",
+    "width": 148,
+    "height": 210
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 116,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "1. Acreditamos que — hipótese",
+      "x": 16,
+      "y": 30,
+      "width": 116,
+      "height": 38.5,
+      "z": 1,
+      "section_key": "hypothesis",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "2. Para verificar, vamos — teste",
+      "x": 16,
+      "y": 68.5,
+      "width": 116,
+      "height": 38.5,
+      "z": 1,
+      "section_key": "test",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "3. Vamos medir — medida",
+      "x": 16,
+      "y": 107,
+      "width": 116,
+      "height": 38.5,
+      "z": 1,
+      "section_key": "measure",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "4. Estaremos certos se — critério",
+      "x": 16,
+      "y": 145.5,
+      "width": 116,
+      "height": 38.5,
+      "z": 1,
+      "section_key": "criteria",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "identificacao_versao",
+      "x": 16,
+      "y": 184,
+      "width": 116,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ]
+}

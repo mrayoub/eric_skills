@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "briefing_improvement_questionnaire",
+  "canvas": {
+    "unit": "mm",
+    "width": 210,
+    "height": 297
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 178,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "questions",
+      "x": 16,
+      "y": 30,
+      "width": 178,
+      "height": 241.0,
+      "z": 1,
+      "section_key": "questions",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "identificacao_versao",
+      "x": 16,
+      "y": 271,
+      "width": 178,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py — esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

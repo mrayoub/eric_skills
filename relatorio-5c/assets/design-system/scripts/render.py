@@ -468,6 +468,17 @@ def html_block(block: dict[str, Any]) -> str:
     return f'<p class="{status}">{label}{refs}</p>'
 
 
+def load_presentation_layout(deliverable_type: str) -> dict[str, dict[str, Any]] | None:
+    """Lê _DESIGN_SYSTEM/layouts/<tipo>.layout.json e devolve os slots por nome,
+    em milímetros (CSS aceita mm nativamente — sem conversão de unidade).
+    None se o arquivo não existir."""
+    path = ROOT / "layouts" / f"{deliverable_type}.layout.json"
+    if not path.is_file():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {s["name"]: s for s in data.get("slots", []) if s.get("name")}
+
+
 def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
     logo = ROOT / "assets" / "logo_ccee.png"
     if not logo.is_file():
@@ -491,22 +502,42 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             current_blocks.append(block)
         if current_blocks:
             sections.append((current_title, current_blocks))
+        layout_slots = load_presentation_layout(content["deliverable_type"])
+
+        def slot_css(selector: str, slot_name: str) -> str:
+            slot = layout_slots.get(slot_name) if layout_slots else None
+            if not slot or not all(k in slot for k in ("x", "y", "width", "height")):
+                return ""
+            return (f"{selector} {{ position: absolute; left: {slot['x']}mm; top: {slot['y']}mm; "
+                     f"width: {slot['width']}mm; height: {slot['height']}mm; }} ")
+
+        def wrap_slide_content(inner_html: str) -> str:
+            return f'<div class="slide-content">{inner_html}</div>' if layout_slots else inner_html
+
         masthead = f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
-        slides = [f'<section class="slide">{masthead}<h1>{title}</h1><p class="summary">{html.escape(content.get("summary", ""))}</p></section>']
+        first_summary = f'<p class="summary">{html.escape(content.get("summary", ""))}</p>'
+        slides = [f'<section class="slide">{masthead}<h1>{title}</h1>{wrap_slide_content(first_summary)}</section>']
         for section_title, section_blocks in sections:
+            body_html = "\n".join(html_block(block) for block in section_blocks)
             slides.append(f'<section class="slide">{masthead}<h1>{html.escape(section_title)}</h1>'
-                          + "\n".join(html_block(block) for block in section_blocks) + '</section>')
+                          + wrap_slide_content(body_html) + '</section>')
         if content["citations"]:
             refs = ''.join(f'<li><strong>{html.escape(c["id"])}</strong> — {html.escape(c["source_id"])}'
                            + (f', {html.escape(c["locator"])}' if c.get("locator") else '') + '</li>'
                            for c in content["citations"])
-            slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1><ol>{refs}</ol></section>')
+            slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1>' + wrap_slide_content(f'<ol>{refs}</ol>') + '</section>')
         slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
         slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
         slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
         slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: Roboto; '
                       f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
                       f'color: {tokens["color"]["text_muted"]}; }}')
+        if layout_slots:
+            slide_css += " .slide { position: relative; }"
+            slide_css += slot_css(".slide .masthead", "logo")
+            slide_css += slot_css(".slide h1", "titulo_slide")
+            slide_css += slot_css(".slide .slide-content", "corpo_slide")
+            slide_css += slot_css(".slide .meta", "rodape_slide")
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
@@ -737,6 +768,28 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     doc.save(path)
 
 
+def load_pptx_layout(deliverable_type: str) -> dict[str, Any] | None:
+    """Lê _DESIGN_SYSTEM/layouts/<tipo>.layout.json, se existir, e converte mm -> polegadas.
+    Retorna None quando o arquivo não existe (render_pptx usa as posições hardcoded nesse caso)."""
+    path = ROOT / "layouts" / f"{deliverable_type}.layout.json"
+    if not path.is_file():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    mm_to_in = 1 / 25.4
+    canvas = data.get("canvas", {})
+    slots = {}
+    for slot in data.get("slots", []):
+        name = slot.get("name")
+        if not name:
+            continue
+        slots[name] = {k: slot[k] * mm_to_in for k in ("x", "y", "width", "height") if k in slot}
+    return {
+        "width_in": canvas.get("width", 0) * mm_to_in,
+        "height_in": canvas.get("height", 0) * mm_to_in,
+        "slots": slots,
+    }
+
+
 def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> None:
     try:
         from pptx import Presentation
@@ -745,18 +798,32 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         from pptx.enum.shapes import MSO_SHAPE
     except ImportError as exc:
         raise RuntimeError("PPTX requer python-pptx: pip install python-pptx") from exc
+    layout = load_pptx_layout(content["deliverable_type"])
+
+    def box(name: str, fx: float, fy: float, fw: float, fh: float) -> tuple[Any, Any, Any, Any]:
+        slot = layout["slots"].get(name) if layout else None
+        if slot and all(k in slot for k in ("x", "y", "width", "height")):
+            return Inches(slot["x"]), Inches(slot["y"]), Inches(slot["width"]), Inches(slot["height"])
+        return Inches(fx), Inches(fy), Inches(fw), Inches(fh)
+
     prs = Presentation()
-    prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+    if layout:
+        prs.slide_width, prs.slide_height = Inches(layout["width_in"]), Inches(layout["height_in"])
+    else:
+        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
     primary = RGBColor.from_string(tokens["color"]["document_primary"].lstrip("#"))
     logo = ROOT / "assets" / "logo_ccee.png"
 
     def slide(title: str, body: str) -> None:
         s = prs.slides.add_slide(prs.slide_layouts[6])
-        s.shapes.add_picture(str(logo), Inches(11.1), Inches(0.35), width=Inches(1.7))
-        title_box = s.shapes.add_textbox(Inches(.5), Inches(.5), Inches(10.3), Inches(.8))
+        logo_x, logo_y, logo_w, _ = box("logo", 11.1, 0.35, 1.7, 0)
+        s.shapes.add_picture(str(logo), logo_x, logo_y, width=logo_w)
+        title_x, title_y, title_w, title_h = box("titulo_slide", .5, .5, 10.3, .8)
+        title_box = s.shapes.add_textbox(title_x, title_y, title_w, title_h)
         run = title_box.text_frame.paragraphs[0].add_run()
         run.text, run.font.name, run.font.size, run.font.color.rgb = title, tokens["typography"]["font_brand"], Pt(28), primary
-        body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(.6), Inches(1.55), Inches(12.1), Inches(5.35))
+        body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
+        body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, body_x, body_y, body_w, body_h)
         body_box.fill.solid()
         body_box.fill.fore_color.rgb = RGBColor.from_string(tokens["color"]["document_accent_soft"].lstrip("#"))
         body_box.line.color.rgb = RGBColor.from_string(tokens["color"]["border"].lstrip("#"))
@@ -767,7 +834,8 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
             para.text = line
             para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(17)
-        footer = s.shapes.add_textbox(Inches(.6), Inches(7.02), Inches(12.1), Inches(.33))
+        footer_x, footer_y, footer_w, footer_h = box("rodape_slide", .6, 7.02, 12.1, .33)
+        footer = s.shapes.add_textbox(footer_x, footer_y, footer_w, footer_h)
         footer.text_frame.word_wrap = True
         paragraph = footer.text_frame.paragraphs[0]
         paragraph.text = identity_line(content)
