@@ -39,6 +39,11 @@ Convenções comuns a todos os planos:
 | 021 | [Separar natureza da mudança e complexidade no mural 4D](021-4d-natureza-separada-do-esforco.md) (A09) | P2 | S | 012; nenhuma | DONE (zonas descrevem natureza; complexidade e justificativa registradas por proposta; checagem estrutural, fontes e diff passaram; avaliação com modelo não rodada) |
 | 022 | [Manter quatro perguntas em cada fase da jornada 4D](022-4d-jornada-quatro-perguntas.md) (A10) | P2 | S | 012; 021 (mesmo arquivo; execução sequencial) | DONE (quatro perguntas conferidas nas fases antes, durante e depois; complementos antigos e ajuste do 021 preservados; fontes e diff verificados; avaliação com modelo não rodada) |
 | 023 | [Distinguir critério local atingido de aprovação para expansão](023-experimentacao-criterio-local-e-limites.md) (A11) | P2 | S | 012; 009; 016 recomendado antes de exportar os cards | DONE (referências distinguem atingido, não atingido e inconclusivo; quatro casos fictícios adicionais validados estruturalmente; conjunto original preservado; fontes e diff verificados; avaliação com modelo não rodada) |
+| 024 | [Confirmar intenção antes de pontuação formal (IQB, potencial, scorecard)](024-confirmar-intencao-antes-de-pontuacao-formal.md) | P3 | S | — | DONE (IQB 631/650 e Scorecard 868/900 palavras, frase adicionada; potencial-inovacao intocado — sem folga de orçamento, decisão correta pelo plano; validador passou; escopo limpo — revisado em worktree isolado, branch `advisor/024-confirmar-intencao-pontuacao`, não mesclado) |
+| 025 | [Tratar conteúdo lido como dado, nunca como instrução (grilling)](025-conteudo-lido-como-dado-nao-instrucao.md) | P2 | S | 001 | DONE (cláusula em `_SHARED/grilling-operacional.md`, sincronizada para as 11 cópias com MD5 idêntico; validador passou nas 11; escopo exatamente os 12 arquivos esperados — revisado em worktree isolado, branch `advisor/025-dado-nao-instrucao`, não mesclado) |
+| 026 | [Scanner de objetividade (vocabulário absoluto + número sem citação)](026-scanner-de-objetividade.md) | P2 | M | — | DONE (revisão 1/2: `ABSOLUTE_TERMS` corrigido para match com limite de palavra via regex, eliminando os 2 falsos positivos sem perder detecção real; varredura das 18 amostras em `_SAMPLES_ENTREGAVEIS/` sem nenhum erro; 27 testes passaram — revisado em worktree isolado, branch `advisor/026-scanner-objetividade`, 4 commits, não mesclado) |
+| 027 | [Contrato estrutural de fonte/cor DOCX/PPTX](027-contrato-estrutural-docx-pptx.md) | P2 | S | — | DONE (render_pptx corrigido para ler tokens.json em vez de literais hardcoded; 2 testes novos + suíte completa de 39 testes/4 skips passaram; `grep` confirma zero literais "Montserrat"/"Roboto" restantes — revisado em worktree isolado, branch `advisor/027-contrato-docx-pptx`, não mesclado) |
+| 028 | [Idempotência do PDF (Fase 1) + fidelidade visual (Fase 2, aguarda autorização)](028-idempotencia-e-fidelidade-visual-pdf.md) | P3 | Fase 1: S / Fase 2: L | — | DONE (Fase 1: teste criado, pula corretamente sem `pango` — não pôde validar o caminho de sucesso ponta a ponta nesta máquina, só o de skip; suíte completa 38 testes, 5 skips, sem falhas; escopo limpo, só `tests/test_render.py` — revisado em worktree isolado, branch `advisor/028-idempotencia-pdf-fase1`, não mesclado). Fase 2 não iniciada, aguarda autorização do operador |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
 
@@ -138,6 +143,47 @@ A verificação foi documental e estrutural, sem nova avaliação comportamental
 | 10 Comandos de verificação | corrigidos nos planos: validador do skill-creator da Anthropic (não o do Codex); testes pulam sem pango (007) |
 
 Achados novos, fora de MELHORIAS: scripts sem CLI (003, 004), descriptions/acionamento (008), SKILL.md prolixos e repetidos (010), `levantamento-documental` sobreposto ao grilling (010), lixo nos pacotes e `tests/` distribuído (001), PDF quebrando todos os formatos sem pango (007), chaves do `score.py` diferentes das `section_key` do schema do potencial (tratado em 005), "nove skills" no contexto ERIC (001).
+
+## Achados da revisão externa de 02/10/2026 (comparação com 7 repositórios de skills)
+
+Auditoria feita fora deste fluxo, comparando as 11 skills com padrões extraídos de
+`anthropics/skills`, `obra/superpowers`, `mattpocock/skills`, `vercel-labs/agent-skills`,
+`andrej-karpathy-skills`, `coreyhaines31/marketingskills` e 3 skills locais do operador
+(relatório completo fora deste repositório, em `~/skills-research/relatorio/`). A maioria
+dos achados dessa comparação já estava coberta pelo que este backlog tinha implementado
+(sync de fonte única via `001`, evals via `008`/`009`, manifesto de proveniência via `012`)
+— **a independente nunca viu `plans/` nem `_SHARED/`/`_TOOLS/` antes de comparar**, então
+o achado inicial de "duplicação sem fonte única" estava incorreto para este repositório e
+foi descartado após a leitura de `_TOOLS/README.md` e `plans/README.md`. Dos 6 achados
+originais, só 2 eram genuinamente novos; viraram os planos 024 e 025 acima, com escopo
+corrigido para caber no schema real validado por `quick_validate.py` (`disable-model-invocation`
+não existe em `ALLOWED_PROPERTIES` — por isso o 024 vira confirmação em prosa, não campo
+de frontmatter).
+
+## Achados da análise de fidelidade visual + objetividade de 02/10/2026
+
+Documento completo em `~/skills-research/relatorio/analise-fidelidade-visual-objetividade.md`
+(fora deste repositório). Investigou `_DESIGN_SYSTEM/` a fundo e gerou os planos 026-028:
+
+- **026** (scanner de objetividade): achado de design corrigido durante a escrita do plano —
+  `scripts/validators/__init__.py:run()` despacha **um único** arquivo por `deliverable_type`,
+  não uma lista de validators; um scanner cross-cutting exige alterar o dispatcher para sempre
+  chamar um módulo comum (`_common.py`) além do validator específico, não só "adicionar um 4º
+  arquivo" como a análise original sugeriu.
+- **027** (contrato estrutural DOCX/PPTX): achou um bug real e verificado por render direto —
+  `render_pptx`/`slide()` usa `"Montserrat"`/`"Roboto"` como literais hardcoded em vez de ler
+  `tokens["typography"]["font_brand"/"font_body"]` (só o rodapé lê o token corretamente). Hoje
+  os valores coincidem por acaso; sem teste, uma mudança futura de marca quebraria silenciosamente
+  só no PPTX, não no DOCX.
+- **028** (idempotência/fidelidade visual de PDF): dividido em Fase 1 (teste de idempotência por
+  texto extraído via `pypdf`, já é dependência, autônomo) e Fase 2 (comparação visual com limiar
+  contra golden image, explicitamente **não autorizada** — exige dependência nova e aprovação
+  humana da primeira imagem por orientação). Verificado nesta máquina que `pango`/WeasyPrint não
+  está disponível no ambiente de autoria, então a Fase 1 foi especificada mas não pôde ser
+  executada ponta a ponta — o executor deve confirmar o ambiente antes de rodar.
+- O manifesto de hash que `render.py` já grava (`content_sha256`/`profile_sha256`/`tokens_sha256`/
+  hash por arquivo) foi avaliado e descartado como base para idempotência: o próprio README já
+  avisa que bytes de PDF/DOCX/PPTX variam por metadado interno das bibliotecas.
 
 ## Achados considerados e rejeitados
 
