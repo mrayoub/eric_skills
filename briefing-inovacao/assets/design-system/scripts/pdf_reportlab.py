@@ -8,7 +8,7 @@ from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 FONT_DIR = ROOT / "assets" / "fonts" / "static"
-SUPPORTED_LAYOUTS = ("card_portrait", "executive_one_page", "report_portrait", "report_landscape")
+SUPPORTED_LAYOUTS = ("card_portrait", "executive_one_page", "report_portrait", "report_landscape", "presentation")
 
 
 class PdfOverflow(ValueError):
@@ -444,12 +444,179 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
     path.write_bytes(buffer.getvalue())
 
 
+def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: Path, *,
+                         deliverable_label: str,
+                         block_text: Callable[[dict[str, Any]], str],
+                         table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
+                         load_layout: Callable[[str], dict[str, dict[str, Any]] | None],
+                         identity: str) -> None:
+    from reportlab.lib import colors
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.lib.units import inch, mm
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfgen.canvas import Canvas
+    from reportlab.platypus import KeepInFrame, Paragraph, Spacer
+
+    slots = load_layout(content["deliverable_type"]) or {}
+    for name in ("logo", "titulo_slide", "corpo_slide", "rodape_slide"):
+        if name not in slots or any(key not in slots[name] for key in ("x", "y", "width", "height")):
+            raise ValueError(f"layout.json da apresentação sem o slot {name}")
+    if float(slots["titulo_slide"]["height"]) < 19:
+        raise ValueError("layout.json da apresentação: titulo_slide precisa de pelo menos 19 mm")
+    page = tokens["page"]["presentation_16_9"]
+    page_width, page_height = float(page["width_in"]) * inch, float(page["height_in"]) * inch
+    palette = {key: colors.HexColor(value) for key, value in tokens["color"].items()}
+    styles = make_styles(tokens, "presentation")
+    definitions = tokens["typography"]["styles"]
+
+    def slide_style(name: str, token: str, color: str, *, size: float | None = None) -> Any:
+        spec = definitions[token]
+        font_size = size or float(spec["size"])
+        font = "Montserrat-Bold" if spec["family"] == "font_brand" else (
+            "Roboto-Bold" if spec["weight"] >= 600 else "Roboto-Medium" if spec["weight"] >= 500 else "Roboto-Regular")
+        return ParagraphStyle(name, fontName=font, fontSize=font_size,
+                              leading=font_size * float(spec["line_height"]),
+                              textColor=palette[color], splitLongWords=1)
+
+    styles["cover"] = slide_style("slide_cover", "slide_cover_title", "document_primary")
+    styles["slide_title"] = slide_style("slide_title", "slide_title", "document_primary")
+    styles["body"] = slide_style("slide_body", "slide_body", "text_body")
+    styles["body_inverse"] = slide_style("slide_body_inverse", "slide_body", "inverse")
+    styles["metric"] = slide_style("slide_metric", "slide_metric", "document_primary")
+    styles["source"] = slide_style("slide_source", "slide_body", "text_body", size=12)
+    styles["table_header"] = slide_style("slide_table_header", "slide_body", "inverse", size=12)
+    styles["table_body"] = slide_style("slide_table_body", "slide_body", "text_body", size=12)
+    styles["card_title"] = slide_style("slide_card_title", "slide_body", "document_primary", size=12)
+    footer = slide_style("slide_footer", "slide_footer", "text_muted")
+    eyebrow = slide_style("slide_eyebrow", "cover_eyebrow", "document_accent")
+
+    def rectangle(name: str) -> tuple[float, float, float, float]:
+        slot = slots[name]
+        x, y, width, height = (float(slot[key]) * mm for key in ("x", "y", "width", "height"))
+        if min(x, y, width, height) < 0 or x + width > page_width + .1 or y + height > page_height + .1:
+            raise ValueError(f"layout.json da apresentação: slot {name} fora da página")
+        return x, page_height - y - height, width, height
+
+    title_rect, body_rect = rectangle("titulo_slide"), rectangle("corpo_slide")
+    logo_rect, footer_rect = rectangle("logo"), rectangle("rodape_slide")
+
+    sections = _sections(content["blocks"], block_text)
+    slides: list[tuple[str, Any]] = [("cover", None)]
+    slides.extend(("section", section) for section in sections)
+    if content["citations"]:
+        # Preserve uma linha de fonte por item e abra continuação quando necessário.
+        source_lines = []
+        for citation in content["citations"]:
+            line = f"{citation['id']} — {citation['source_id']}"
+            if citation.get("locator"):
+                line += f", {citation['locator']}"
+            source_lines.append(line)
+        current: list[str] = []
+        for line in source_lines:
+            candidate = current + [line]
+            flow = [Paragraph(_markup(item), styles["source"]) for item in candidate]
+            if current and sum(item.wrap(body_rect[2], body_rect[3])[1] + 12 for item in flow) > body_rect[3]:
+                slides.append(("sources", current))
+                current = [line]
+            else:
+                current = candidate
+        if current:
+            slides.append(("sources", current))
+
+    buffer = io.BytesIO()
+    canvas = Canvas(buffer, pagesize=(page_width, page_height), invariant=1,
+                    pageCompression=1, bottomup=1)
+    canvas.setTitle(content["title"])
+    canvas.setSubject(deliverable_label)
+    canvas.setCreator("my_skills render.py")
+    image = ImageReader(str(ROOT / "assets" / "logo_ccee.png"))
+    image_width, image_height = image.getSize()
+    scale = min(logo_rect[2] / image_width, logo_rect[3] / image_height)
+
+    def draw_frame(flowables: list[Any], rect: tuple[float, float, float, float],
+                   number: int, title: str) -> None:
+        x, y, width, height = rect
+        if not flowables:
+            return
+        try:
+            frame = KeepInFrame(width, height, flowables, mode="error", hAlign="LEFT", vAlign="TOP")
+            frame.canv = canvas
+            _, used_height = frame.wrap(width, height)
+            if used_height > height + .1:
+                raise ValueError("altura excedida")
+            frame.drawOn(canvas, x, y + height - used_height)
+        except Exception as exc:
+            raise PdfOverflow(f"slide {number} ({title}) excede a área; divida o conteúdo em mais slides") from exc
+
+    total = len(slides)
+    for number, (kind, payload) in enumerate(slides, 1):
+        canvas.setFillColor(palette["surface"])
+        canvas.rect(0, 0, page_width, page_height, fill=1, stroke=0)
+        canvas.drawImage(image, logo_rect[0], logo_rect[1] + (logo_rect[3] - image_height * scale) / 2,
+                         width=image_width * scale, height=image_height * scale, mask="auto")
+        if kind == "cover":
+            canvas.setFillColor(palette["document_accent"])
+            canvas.rect(0, 0, 6 * mm, page_height, fill=1, stroke=0)
+            cover_rect = (title_rect[0], title_rect[1] - 34 * mm, title_rect[2], title_rect[3] + 34 * mm)
+            cover_items = [Paragraph(_markup(deliverable_label.upper()), eyebrow), Spacer(1, 16),
+                           Paragraph(_markup(content["title"]), styles["cover"])]
+            draw_frame(cover_items, cover_rect, number, content["title"])
+            summary_rect = (body_rect[0], body_rect[1] + 20 * mm, body_rect[2], body_rect[3] - 40 * mm)
+            draw_frame([Paragraph(_markup(content.get("summary", "")), styles["body"])],
+                       summary_rect, number, content["title"])
+        elif kind == "section":
+            title, blocks = payload
+            draw_frame([Paragraph(_markup(title), styles["slide_title"])], title_rect, number, title)
+            items: list[Any] = []
+            for block in blocks:
+                data = block.get("data", {})
+                if block["type"] == "metric":
+                    value = data.get("value") or data.get("text") or block_text(block)
+                    metric = Paragraph(_cited(value, block), styles["metric"])
+                    support = data.get("description") or data.get("title")
+                    items.append(metric)
+                    if support:
+                        items.extend([Spacer(1, 8), Paragraph(_markup(support), styles["body"])])
+                elif block["type"] == "card_grid":
+                    card = dict(block)
+                    card["data"] = {**data, "columns": min(3, int(data.get("columns", 2)))}
+                    items.extend(_report_card_grid(card, styles, body_rect[2]))
+                else:
+                    items.extend(block_flowables(block, styles, body_rect[2], block_text, table_rows))
+                items.append(Spacer(1, 12))
+            draw_frame(items, body_rect, number, title)
+        else:
+            title = "Fontes" if not any(item[0] == "sources" for item in slides[:number - 1]) else "Fontes (cont.)"
+            draw_frame([Paragraph(title, styles["slide_title"])], title_rect, number, title)
+            items = []
+            for line in payload:
+                items.extend([Paragraph(_markup(line), styles["source"]), Spacer(1, 12)])
+            draw_frame(items, body_rect, number, title)
+
+        x, y, width, height = footer_rect
+        footer_y = y + (height - footer.fontSize) / 2
+        right = f"{number} / {total}"
+        if pdfmetrics.stringWidth(identity, footer.fontName, footer.fontSize) + 20 + pdfmetrics.stringWidth(
+                right, footer.fontName, footer.fontSize) > width:
+            raise PdfOverflow(f"slide {number} (rodapé) excede a área; reduza a identificação")
+        canvas.setFont(footer.fontName, footer.fontSize)
+        canvas.setFillColor(footer.textColor)
+        canvas.drawString(x, footer_y, identity)
+        canvas.drawRightString(x + width, footer_y, right)
+        canvas.showPage()
+    canvas.save()
+    path.write_bytes(buffer.getvalue())
+
+
 def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any], path: Path, *,
                deliverable_label: str, footer_label: str, field_labels: dict[str, str] | None,
                block_text: Callable[[dict[str, Any]], str],
                table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
                table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]] | None = None,
-               iqb_widths: dict[str, list[int]] | None = None) -> None:
+               iqb_widths: dict[str, list[int]] | None = None,
+               load_presentation_layout: Callable[[str], dict[str, dict[str, Any]] | None] | None = None,
+               identity_line: Callable[[dict[str, Any]], str] | None = None) -> None:
     from reportlab.lib import colors
     from reportlab.lib.units import mm
     from reportlab.lib.utils import ImageReader
@@ -461,6 +628,14 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
     if layout not in SUPPORTED_LAYOUTS:
         raise ValueError(f"ReportLab ainda não suporta o layout {layout}")
     _register_fonts()
+    if layout == "presentation":
+        if load_presentation_layout is None or identity_line is None:
+            raise ValueError("Apresentação requer layout e identificação")
+        _render_presentation(content, tokens, path, deliverable_label=deliverable_label,
+                             block_text=block_text, table_rows=table_rows,
+                             load_layout=load_presentation_layout,
+                             identity=identity_line(content))
+        return
     if layout in ("report_portrait", "report_landscape"):
         if table_views is None or iqb_widths is None:
             raise ValueError("Relatórios requerem table_views e iqb_widths")
