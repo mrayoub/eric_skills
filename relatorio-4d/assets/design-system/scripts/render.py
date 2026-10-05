@@ -15,7 +15,8 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "1.3.1"
+RENDERER_VERSION = "1.4.0"
+REPORTLAB_LAYOUTS = ("card_portrait", "executive_one_page")
 DELIVERABLE_LABELS = {
     "briefing": "Briefing",
     "briefing_one_page": "Resumo do briefing",
@@ -86,6 +87,14 @@ def identity_line(content: dict[str, Any]) -> str:
     label = f'ID {meta["artifact_id"]} · versão {meta["content_version"]} · {state}'
     if isinstance(meta.get("date"), str) and meta["date"].strip():
         label += f' · data {meta["date"]}'
+    return label
+
+
+def footer_label(content: dict[str, Any]) -> str:
+    label = identity_line(content)
+    meta = content["metadata"]
+    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
+        label += f' · Test Card {meta["test_card_id"]} v{meta.get("test_card_version", "")}'
     return label
 
 
@@ -586,10 +595,8 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                        "h2 { margin: 10pt 0 5pt; } "
                        ".summary { margin-bottom: 9pt; } "
                        ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
-    footer_label = identity_line(content)
-    if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
-        footer_label += f' · Test Card {meta["test_card_id"]} v{meta.get("test_card_version", "")}'
-    css_footer_label = json.dumps(footer_label, ensure_ascii=False).replace("<", "\\003c ")
+    label = footer_label(content)
+    css_footer_label = json.dumps(label, ensure_ascii=False).replace("<", "\\003c ")
     footer_css = (f'@page {{ @bottom-right {{ content: {css_footer_label}; '
                   f'font-family: Roboto; font-size: 7.5pt; color: {tokens["color"]["text_muted"]}; }} }} '
                   '@media print { footer.meta { display: none; } }')
@@ -597,7 +604,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"
             f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
             f"<h1>{title}</h1>{summary}{blocks}{refs}"
-            f'<footer class="meta">{html.escape(footer_label)}</footer>'
+            f'<footer class="meta">{html.escape(label)}</footer>'
             "</article></body></html>\n")
 
 
@@ -898,11 +905,27 @@ def write_csv_tables(content: dict[str, Any], out: Path, stem: str) -> list[Path
     return written
 
 
+def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
+                         profile: dict[str, Any], path: Path) -> None:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("pdf_reportlab", ROOT / "scripts/pdf_reportlab.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.render_pdf(content, tokens, profile, path,
+                      deliverable_label=DELIVERABLE_LABELS[content["deliverable_type"]],
+                      footer_label=footer_label(content),
+                      field_labels=CARD_LABELS.get(content["deliverable_type"]),
+                      block_text=block_text, table_rows=table_rows)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--formats", help="json,pdf,docx,md,txt; pptx só para apresentação; csv só para tabelas exportáveis")
+    parser.add_argument("--pdf-engine", choices=("weasyprint", "reportlab"), default="weasyprint",
+                        help="motor do PDF; reportlab dispensa Pango (prova: cards e one-page)")
     args = parser.parse_args()
     content = read_json(args.input)
     tokens = read_json(ROOT / "tokens.json")
@@ -914,6 +937,8 @@ def main() -> None:
     invalid = set(requested) - set(allowed)
     if invalid:
         raise ValueError(f"Formatos incompatíveis com {content['deliverable_type']}: {sorted(invalid)}")
+    if "pdf" in requested and args.pdf_engine == "reportlab" and profile["layout"] not in REPORTLAB_LAYOUTS:
+        raise ValueError(f"--pdf-engine reportlab ainda não suporta o layout {profile['layout']}; use weasyprint")
     out = args.out_dir
     out.mkdir(parents=True, exist_ok=True)
     stem = safe_name(content["metadata"]["artifact_id"]) + "-v" + safe_name(content["metadata"]["content_version"])
@@ -923,7 +948,7 @@ def main() -> None:
     path.write_bytes(canonical)
     files.append(path)
     source_html: str | None = None
-    if "html" in requested or "pdf" in requested:
+    if "html" in requested or ("pdf" in requested and args.pdf_engine == "weasyprint"):
         source_html = render_html(content, tokens, profile)
     if "html" in requested:
         path = out / f"{stem}.html"
@@ -933,15 +958,21 @@ def main() -> None:
     if "pdf" in requested:
         path = out / f"{stem}.pdf"
         try:
-            from weasyprint import HTML
-            HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
+            if args.pdf_engine == "reportlab":
+                render_pdf_reportlab(content, tokens, profile, path)
+            else:
+                from weasyprint import HTML
+                HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
         except (ImportError, OSError) as exc:
             import sys
 
             path.unlink(missing_ok=True)
             unavailable["pdf"] = f"{type(exc).__name__}: {exc}"[:300]
-            print(f"AVISO: PDF não gerado ({unavailable['pdf']}). No macOS: brew install pango; "
-                  "no Debian/Ubuntu: apt-get install libpango-1.0-0 libpangoft2-1.0-0.", file=sys.stderr)
+            if args.pdf_engine == "reportlab":
+                print(f"AVISO: PDF não gerado ({unavailable['pdf']}). Instale: pip install reportlab.", file=sys.stderr)
+            else:
+                print(f"AVISO: PDF não gerado ({unavailable['pdf']}). No macOS: brew install pango; "
+                      "no Debian/Ubuntu: apt-get install libpango-1.0-0 libpangoft2-1.0-0.", file=sys.stderr)
         else:
             if profile["layout"] in ("executive_one_page", "card_portrait"):
                 try:
@@ -988,6 +1019,8 @@ def main() -> None:
         "files": {path.name: sha(path.read_bytes()) for path in files},
         "unavailable": unavailable,
     }
+    if any(file.suffix == ".pdf" for file in files):
+        manifest["pdf_engine"] = args.pdf_engine
     (out / f"{stem}.manifest.json").write_bytes(canonical_bytes(manifest))
     print(json.dumps({"manifest": f"{stem}.manifest.json", "files": list(manifest["files"]),
                       "unavailable": unavailable}, ensure_ascii=False))
