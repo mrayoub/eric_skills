@@ -12,7 +12,8 @@ from fontTools.varLib.instancer import instantiateVariableFont
 
 ROOT = Path(__file__).resolve().parents[1]
 FONTS = ROOT / "_DESIGN_SYSTEM" / "assets" / "fonts"
-INSTANCES = (("Montserrat", 700, "Bold"), ("Roboto", 400, "Regular"), ("Roboto", 700, "Bold"))
+INSTANCES = (("Montserrat", 700, "Bold"), ("Roboto", 400, "Regular"),
+             ("Roboto", 500, "Medium"), ("Roboto", 700, "Bold"))
 
 
 def main() -> None:
