@@ -10,7 +10,7 @@
       "type": "heading",
       "data": {
         "section_key": "context_heading",
-        "text": "Contexto"
+        "text": "A jornada fictícia delimita o problema e a hipótese"
       }
     },
     {
@@ -29,7 +29,7 @@
       "type": "heading",
       "data": {
         "section_key": "method_heading",
-        "text": "Método"
+        "text": "O método combina compreensão da tarefa e piloto controlado"
       }
     },
     {
@@ -48,7 +48,7 @@
       "type": "heading",
       "data": {
         "section_key": "findings_heading",
-        "text": "Achados"
+        "text": "A orientação reduziu dúvidas, mas o efeito real não foi medido"
       }
     },
     {
@@ -67,7 +67,7 @@
       "type": "heading",
       "data": {
         "section_key": "recommendation_heading",
-        "text": "Recomendação"
+        "text": "Investigar causas e volumes antes de comprometer a construção"
       }
     },
     {
@@ -86,7 +86,7 @@
       "type": "heading",
       "data": {
         "section_key": "next_steps_heading",
-        "text": "Próximos passos"
+        "text": "Uma rodada real deve preceder a decisão de escala"
       }
     },
     {
