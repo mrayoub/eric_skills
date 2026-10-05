@@ -46,6 +46,7 @@ Convenções comuns a todos os planos:
 | 028 | [Idempotência do PDF (Fase 1) + fidelidade visual (Fase 2, aguarda autorização)](028-idempotencia-e-fidelidade-visual-pdf.md) | P3 | Fase 1: S / Fase 2: L | — | DONE (Fase 1: teste criado, pula corretamente sem `pango` — não pôde validar o caminho de sucesso ponta a ponta nesta máquina, só o de skip; suíte completa 38 testes, 5 skips, sem falhas; escopo limpo, só `tests/test_render.py` — revisado em worktree isolado, branch `advisor/028-idempotencia-pdf-fase1`, não mesclado). Fase 2 não iniciada, aguarda autorização do operador |
 | 029 | [`render_pptx` lê posição de `_DESIGN_SYSTEM/layouts/<tipo>.layout.json`](029-render-pptx-le-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados; `VisualTokenContractTests` do Plano 027 intacto; executor adaptou o teste de posição customizada para usar `unittest.mock.patch.object` em vez de um `deliverable_type` fictício, que falhava em `validate()` por falta de perfil — desvio documentado e aprovado, mesmo padrão já visto no Plano 030 — revisado em worktree isolado, branch `advisor/029-pptx-layout-json`, não mesclado) |
 | 030 | [`render_html` (caminho "presentation") posiciona masthead/título/rodapé/conteúdo por `layout.json`](030-render-html-presentation-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado (independente do Plano 029, loader próprio) | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados sem `pango`; executor corrigiu um bug real no próprio teste do plano — `deliverable_type` fictício colidia com `DELIVERABLE_LABELS` antes de chegar no código novo — via `unittest.mock.patch.object`, desvio documentado e aprovado — revisado em worktree isolado, branch `advisor/030-html-presentation-layout-json`, não mesclado) |
+| 032 | [Chromium (Playwright) como motor de PDF de reserva, só quando WeasyPrint/Pango não estiver disponível](032-pdf-fallback-chromium-playwright.md) | P2 | M | nenhuma (independente do 031) | TODO |
 | 031 | [Corrige offset de `@page margin` no caminho "presentation" e estende `layout.json` para `executive_one_page`/`card_portrait`](031-render-html-offset-fix-e-one-page-card-layout-json.md) | P1 | M | nenhuma (029/030 já mesclados; corrige um defeito no que o 030 entregou) | BLOCKED (executor completou os 6 passos e todos os critérios do próprio plano no ambiente dele — sem Pango, 5 skips esperados; revisor tinha Pango disponível nesta sessão e achou uma regressão real que o executor não podia ver: `RenderTests.test_oversized_card_remains_fatal`, teste pré-existente, passa em `main` e falha depois das mudanças do plano — `position: absolute` com altura fixa remove o título/seções do fluxo normal, então um título gigante não empurra o PDF para 2 páginas; `pypdf` conta 1 página, a checagem de `render.py:946-954` passa, e o conteúdo sai sobreposto/corrompido silenciosamente em vez de travar com erro — confirmado com `pdfplumber`: o texto do título vai de top=6.8mm a top=295.9mm, cobrindo a página inteira por cima de todo o resto do card. Isso invalida a premissa central do plano ("não há risco de corte silencioso"). Branch `advisor/031-html-offset-fix-one-page-card-layout` preservada, não mesclada; plano precisa ser revisado com um mecanismo de detecção de overflow que não dependa só de contagem de páginas antes de reexecutar) |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
@@ -238,6 +239,35 @@ desde a extração feita em sessão anterior (corrigidos nesta sessão: `test_ca
 e `learning_card.layout.json` tinham canvas 148×210mm, tamanho A5, incompatível com o
 perfil real `a4_portrait` — 210×297mm — usado por `render.py`; `briefing_one_page.layout.json`
 já estava correto, 297×210mm batendo com `a4_landscape`).
+
+## Plano 032 — origem e desvio do pedido original
+
+O operador pediu a implementação de "Opção B" de uma conversa anterior: substituir
+WeasyPrint por Chromium (via Playwright) como motor de PDF, para eliminar a dependência
+de bibliotecas nativas do sistema (Pango/Cairo/GDK-pixbuf) — problema real de
+portabilidade entre Linux/Mac/Windows, especialmente Windows, onde WeasyPrint exige
+instalar o runtime do GTK3 ou MSYS2 manualmente.
+
+Ao investigar para escrever o plano, encontramos um defeito concreto que mudou a
+recomendação: renderizando o HTML real de `executive_presentation` (com as fontes
+variáveis Montserrat/Roboto incorporadas via `@font-face` em base64) através do
+Chromium/Playwright, a camada de texto do PDF resultante sai corrompida — texto extraído
+com `pdfplumber` mostra cada caractere repetido ~7 vezes (`'APRESENTAÇÃO'` vira
+`'AAAAAAAPPPPPPPRRRRRRR...'`), embora um screenshot do mesmo HTML no navegador mostre o
+texto visualmente correto. Ou seja: o PDF gerado por Chromium é visualmente válido mas
+tem a camada de texto (usada por seleção, copiar/colar, leitores de tela e qualquer
+verificação de fidelidade baseada em texto, como as deste próprio projeto — Plano 028)
+não confiável.
+
+Por isso o Plano 032 implementa Chromium como **motor de reserva** (só quando
+`import weasyprint` falhar), não substituição do motor principal — isso evita a
+re-certificação visual dos 18 tipos que uma substituição total exigiria (WeasyPrint
+continua gerando a saída exatamente como hoje em qualquer máquina onde já funciona) e
+ainda resolve o problema real de portabilidade: uma máquina sem Pango (tipicamente
+Windows sem o runtime do GTK3) passa a ter um PDF funcional em vez de nenhum, com a
+limitação da camada de texto documentada e registrada no manifest (`pdf_engine`). Se o
+operador quiser promover Chromium a motor principal depois de revisar essa limitação,
+isso é uma decisão nova, não uma extensão trivial deste plano.
 
 ## Achados considerados e rejeitados
 
