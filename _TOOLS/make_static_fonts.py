@@ -22,6 +22,8 @@ def main() -> None:
     for family, weight, style in INSTANCES:
         variable = TTFont(FONTS / f"{family}-Variable.ttf")
         instance = instantiateVariableFont(variable, {"wght": weight}, static=True, updateFontNames=True)
+        instance.recalcTimestamp = False
+        instance["head"].modified = 0
         instance.save(target / f"{family}-{style}.ttf")
         print(f"OK {family}-{style}.ttf")
 
