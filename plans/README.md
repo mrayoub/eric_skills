@@ -46,7 +46,11 @@ Convenções comuns a todos os planos:
 | 028 | [Idempotência do PDF (Fase 1) + fidelidade visual (Fase 2, aguarda autorização)](028-idempotencia-e-fidelidade-visual-pdf.md) | P3 | Fase 1: S / Fase 2: L | — | DONE (Fase 1: teste criado, pula corretamente sem `pango` — não pôde validar o caminho de sucesso ponta a ponta nesta máquina, só o de skip; suíte completa 38 testes, 5 skips, sem falhas; escopo limpo, só `tests/test_render.py` — revisado em worktree isolado, branch `advisor/028-idempotencia-pdf-fase1`, não mesclado). Fase 2 não iniciada, aguarda autorização do operador |
 | 029 | [`render_pptx` lê posição de `_DESIGN_SYSTEM/layouts/<tipo>.layout.json`](029-render-pptx-le-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados; `VisualTokenContractTests` do Plano 027 intacto; executor adaptou o teste de posição customizada para usar `unittest.mock.patch.object` em vez de um `deliverable_type` fictício, que falhava em `validate()` por falta de perfil — desvio documentado e aprovado, mesmo padrão já visto no Plano 030 — revisado em worktree isolado, branch `advisor/029-pptx-layout-json`, não mesclado) |
 | 030 | [`render_html` (caminho "presentation") posiciona masthead/título/rodapé/conteúdo por `layout.json`](030-render-html-presentation-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado (independente do Plano 029, loader próprio) | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados sem `pango`; executor corrigiu um bug real no próprio teste do plano — `deliverable_type` fictício colidia com `DELIVERABLE_LABELS` antes de chegar no código novo — via `unittest.mock.patch.object`, desvio documentado e aprovado — revisado em worktree isolado, branch `advisor/030-html-presentation-layout-json`, não mesclado) |
-| 032 | [Chromium (Playwright) como motor de PDF de reserva, só quando WeasyPrint/Pango não estiver disponível](032-pdf-fallback-chromium-playwright.md) | P2 | M | nenhuma (independente do 031) | TODO |
+| 032 | [Gerar PDF com ReportLab, sem Pango — prova em `test_card`, `learning_card` e `briefing_one_page`](032-pdf-reportlab-portatil.md) | P1 | M | nenhuma (independente do 031) | DONE (executado pelo Codex em `advisor/032-pdf-reportlab`; revisado em 05/10/2026: 10 testes novos, suíte 101 passou sem Pango e 106 com Pango, sync consistente, código fiel ao plano; mesclado no `main`. Aprovação visual do operador pendente junto com a do 034) |
+| 033 | [Reprovar todo PDF com defeito visual (portão de qualidade) e criar a folha de comparação entre motores](033-verificador-de-qualidade-do-pdf.md) | P1 | M | 032 | IN PROGRESS (executado pelo Codex; revisão reprovou: STOP condition ignorada — apresentação executiva reprovada pelo portão e aceita num teste. Correção em [033-correcao-pos-revisao.md](033-correcao-pos-revisao.md)) |
+| 034 | [Gerar os 14 relatórios (A4 retrato e paisagem) em PDF com ReportLab, em nível profissional](034-pdf-reportlab-relatorios.md) | P1 | L | 032, 033 + aprovação visual do 032 | IN PROGRESS (executado pelo Codex sem a aprovação visual do 032; revisão achou citações de grades perdidas, legenda órfã, cartões desalinhados e passo 9 não feito. Correção em [034-correcao-pos-revisao.md](034-correcao-pos-revisao.md), depois da do 033) |
+| 035 | [Apresentação executiva 16:9 *state of the art*: PDF em ReportLab, regras de conteúdo e tipografia de slide nos tokens](035-apresentacao-executiva-soap.md) | P1 | L | 034 + aprovação visual do 034 | TODO |
+| 036 | [Tornar o ReportLab o motor único de PDF e remover WeasyPrint, Pango e `pydyf`](036-reportlab-padrao-remove-weasyprint.md) | P1 | M | 035 + aprovações visuais de 032, 034 e 035 | TODO |
 | 031 | [Corrige offset de `@page margin` no caminho "presentation" e estende `layout.json` para `executive_one_page`/`card_portrait`](031-render-html-offset-fix-e-one-page-card-layout-json.md) | P1 | M | nenhuma (029/030 já mesclados; corrige um defeito no que o 030 entregou) | BLOCKED (executor completou os 6 passos e todos os critérios do próprio plano no ambiente dele — sem Pango, 5 skips esperados; revisor tinha Pango disponível nesta sessão e achou uma regressão real que o executor não podia ver: `RenderTests.test_oversized_card_remains_fatal`, teste pré-existente, passa em `main` e falha depois das mudanças do plano — `position: absolute` com altura fixa remove o título/seções do fluxo normal, então um título gigante não empurra o PDF para 2 páginas; `pypdf` conta 1 página, a checagem de `render.py:946-954` passa, e o conteúdo sai sobreposto/corrompido silenciosamente em vez de travar com erro — confirmado com `pdfplumber`: o texto do título vai de top=6.8mm a top=295.9mm, cobrindo a página inteira por cima de todo o resto do card. Isso invalida a premissa central do plano ("não há risco de corte silencioso"). Branch `advisor/031-html-offset-fix-one-page-card-layout` preservada, não mesclada; plano precisa ser revisado com um mecanismo de detecção de overflow que não dependa só de contagem de páginas antes de reexecutar) |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
@@ -240,34 +244,45 @@ e `learning_card.layout.json` tinham canvas 148×210mm, tamanho A5, incompatíve
 perfil real `a4_portrait` — 210×297mm — usado por `render.py`; `briefing_one_page.layout.json`
 já estava correto, 297×210mm batendo com `a4_landscape`).
 
-## Plano 032 — origem e desvio do pedido original
+## Plano 032 — origem e reescrita (ReportLab)
 
-O operador pediu a implementação de "Opção B" de uma conversa anterior: substituir
-WeasyPrint por Chromium (via Playwright) como motor de PDF, para eliminar a dependência
-de bibliotecas nativas do sistema (Pango/Cairo/GDK-pixbuf) — problema real de
-portabilidade entre Linux/Mac/Windows, especialmente Windows, onde WeasyPrint exige
-instalar o runtime do GTK3 ou MSYS2 manualmente.
+A primeira versão do Plano 032 propunha o Chromium (Playwright) como motor de PDF de
+reserva. O operador a rejeitou: o PDF do Chromium saía com a camada de texto corrompida
+(cada caractere repetido ~7 vezes na extração), o que não resolve o uso real. Contexto
+completo em [PROBLEMA_MOTOR_PDF_CROSS_PLATFORM.md](PROBLEMA_MOTOR_PDF_CROSS_PLATFORM.md).
 
-Ao investigar para escrever o plano, encontramos um defeito concreto que mudou a
-recomendação: renderizando o HTML real de `executive_presentation` (com as fontes
-variáveis Montserrat/Roboto incorporadas via `@font-face` em base64) através do
-Chromium/Playwright, a camada de texto do PDF resultante sai corrompida — texto extraído
-com `pdfplumber` mostra cada caractere repetido ~7 vezes (`'APRESENTAÇÃO'` vira
-`'AAAAAAAPPPPPPPRRRRRRR...'`), embora um screenshot do mesmo HTML no navegador mostre o
-texto visualmente correto. Ou seja: o PDF gerado por Chromium é visualmente válido mas
-tem a camada de texto (usada por seleção, copiar/colar, leitores de tela e qualquer
-verificação de fidelidade baseada em texto, como as deste próprio projeto — Plano 028)
-não confiável.
+Em 05/10/2026 o plano foi reescrito com foco no **ReportLab**: Python puro, instalado só
+com `pip`, sem Pango/Cairo. Antes de escrever, uma prova fora do repositório confirmou:
+fontes estáticas geradas das variáveis do projeto com nomes internos corretos; Test Card
+em uma página A4 com acentos extraídos corretamente; bytes idênticos entre execuções;
+transbordo detectado como erro (sem a sobreposição silenciosa que bloqueou o 031);
+one-page em duas colunas com logo em uma página A4 paisagem. O plano entrega o motor
+atrás de `--pdf-engine reportlab`, sem mudar o padrão, para 3 tipos; a migração dos
+demais e a troca do padrão dependem da revisão visual do operador (Passo 8).
 
-Por isso o Plano 032 implementa Chromium como **motor de reserva** (só quando
-`import weasyprint` falhar), não substituição do motor principal — isso evita a
-re-certificação visual dos 18 tipos que uma substituição total exigiria (WeasyPrint
-continua gerando a saída exatamente como hoje em qualquer máquina onde já funciona) e
-ainda resolve o problema real de portabilidade: uma máquina sem Pango (tipicamente
-Windows sem o runtime do GTK3) passa a ter um PDF funcional em vez de nenhum, com a
-limitação da camada de texto documentada e registrada no manifest (`pdf_engine`). Se o
-operador quiser promover Chromium a motor principal depois de revisar essa limitação,
-isso é uma decisão nova, não uma extensão trivial deste plano.
+## Planos 033–036 — caminho até remover o WeasyPrint, com qualidade *state of the art*
+
+Em 05/10/2026 o operador aprovou o caminho: provar o ReportLab (032), estender aos
+relatórios e à apresentação e, por fim, remover o WeasyPrint. No meio do planejamento,
+definiu o nível de qualidade: entregáveis *state of the art*. Por isso foi acrescentado
+um plano antes dos relatórios:
+
+- **033 — portão de qualidade**: todo PDF, de qualquer motor, é reprovado se tiver texto
+  fora da página, fonte abaixo de 7,5 pt ou caracteres sobrepostos (regras que já estavam
+  em `tokens.json` → `density`, mas não eram verificadas). Validado nas 18 amostras:
+  nenhum falso positivo e um defeito real (citações de 7,2 pt no resumo do briefing).
+  Inclui a ferramenta de comparação visual lado a lado usada nas aprovações do operador.
+- **034 — relatórios**: os 14 tipos, com acabamento além do HTML atual (página X de Y,
+  marcadores de navegação, faixa de seção nunca órfã, cabeçalho de tabela repetido).
+- **035 — apresentação**: títulos-mensagem, uma ideia por slide e limites de texto
+  verificados pelo validador; tipografia de slide nos tokens, compartilhada por PDF e PPTX;
+  slide que não cabe vira erro, nunca sobreposição.
+- **036 — troca**: ReportLab como motor único, remoção de WeasyPrint/Pango/`pydyf`,
+  testes de PDF sem pular, amostras regeneradas e CI em Windows, macOS e Linux.
+
+Cada plano de 032 a 035 termina numa aprovação visual do operador; o seguinte não começa
+sem ela. Com o 036, o Plano 031 (BLOCKED) perde o motivo original (PDF gerado do HTML) e
+deve ser reavaliado só para o formato HTML.
 
 ## Achados considerados e rejeitados
 
