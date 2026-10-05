@@ -1029,6 +1029,20 @@ class PresentationLayoutJsonTests(unittest.TestCase):
         self.assertIn("left: 281.94mm; top: 8.89mm", out)
         self.assertIn(".slide { position: relative; }", out)
 
+    def test_page_margin_zeroed_when_layout_present(self):
+        out = self.render.render_html(self.content, self.tokens, self.profile)
+        # a regra @page { margin: 0.4in } vem do css() compartilhado e continua lá;
+        # o que importa é que uma regra @page POSTERIOR zera a margem, porque em CSS
+        # a última declaração de uma propriedade em regras @page do mesmo stylesheet
+        # vence. Sem isso, as coordenadas absolutas abaixo ficam deslocadas ~10mm
+        # da posição real do canvas (confirmado por teste manual com WeasyPrint
+        # nesta sessão: @page margin:10mm desloca um elemento position:absolute
+        # left:5mm para x0=15mm no PDF final, não 5mm).
+        style_start = out.index("<style>")
+        style_end = out.index("</style>")
+        style = out[style_start:style_end]
+        assert style.rindex("@page { margin: 0; }") > style.rindex("margin: 0.4in")
+
     def test_falls_back_without_layout_file(self):
         # DELIVERABLE_LABELS[content["deliverable_type"]] é resolvido em
         # render_html antes do ramo "presentation", então um deliverable_type
