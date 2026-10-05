@@ -220,7 +220,9 @@ class RenderTests(unittest.TestCase):
                     before = copy.deepcopy(item)
                     self.renderer.validate(item, self.profiles)
                     folder = Path(temp)
-                    has_pdf = pdf_available()
+                    # O PDF legado da apresentação tem rodapé fora da página;
+                    # o portão o reprova até o motor ReportLab cobrir esse tipo.
+                    has_pdf = pdf_available() and kind != "executive_presentation"
                     editable = "pptx" if kind == "executive_presentation" else "docx"
                     self.render(item, "md,txt,html," + editable + (",pdf" if has_pdf else ""), folder)
                     stem = item["metadata"]["artifact_id"] + "-v" + item["metadata"]["content_version"]
@@ -250,8 +252,6 @@ class RenderTests(unittest.TestCase):
                         if kind == "learning_card":
                             self.assertEqual(len(pdf.pages), 1)
                             self.assertIn("Test Card sample-test-card v1.0.0", pdf.pages[0].extract_text())
-                        if kind == "executive_presentation":
-                            self.assertEqual(len(pdf.pages), len(presentation.slides))
                     canonical = json.loads((folder / f"{stem}.json").read_text())
                     self.assertEqual(canonical, before)
                     self.assertEqual(item, before)
@@ -468,10 +468,9 @@ class RenderTests(unittest.TestCase):
             self.assertEqual(len(PdfReader(str(folder / "TC-01-v1.0.0.pdf")).pages), 1)
             self.assertIn("Acreditamos que", (folder / "TC-01-v1.0.0.md").read_text())
             presentation = content("executive_presentation", "apresentacao-01")
-            self.render(presentation, "pptx,pdf", folder)
+            self.render(presentation, "pptx", folder)
             prs = Presentation(folder / "apresentacao-01-v1.0.0.pptx")
             self.assertGreaterEqual(len(prs.slides), 2)
-            self.assertEqual(len(PdfReader(str(folder / "apresentacao-01-v1.0.0.pdf")).pages), len(prs.slides))
             self.assertTrue(any("Seção principal" in shape.text for slide in prs.slides for shape in slide.shapes if shape.has_text_frame))
             self.assertTrue(any("Fontes" in shape.text for shape in prs.slides[-1].shapes if shape.has_text_frame))
 
@@ -1184,6 +1183,87 @@ class ReportLabPdfTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             manifest = json.loads(next(out.glob("*.manifest.json")).read_text(encoding="utf-8"))
             self.assertNotIn("pdf_engine", manifest)
+
+
+class PdfQualityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        try:
+            import pdfminer  # noqa: F401
+            import reportlab  # noqa: F401
+        except ImportError as exc:
+            raise unittest.SkipTest(f"dependência de PDF ausente: {exc}") from exc
+        cls.render_module = load_render_module()
+
+    def test_detects_each_defect(self):
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfgen.canvas import Canvas
+
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "defective.pdf"
+            canvas = Canvas(str(path), pagesize=A4)
+            canvas.setFont("Helvetica", 12)
+            canvas.drawString(580, 400, "Saindo da pagina")
+            canvas.setFont("Helvetica", 6)
+            canvas.drawString(50, 100, "miudo")
+            canvas.setFont("Helvetica", 12)
+            canvas.drawString(50, 700, "Texto sobreposto aqui")
+            canvas.drawString(55, 702, "Outra linha por cima")
+            canvas.save()
+            problems = self.render_module.check_pdf_quality(path, json.loads((ROOT / "tokens.json").read_text()))
+            self.assertEqual(len(problems), 3, problems)
+            self.assertTrue(any("fora da página" in problem for problem in problems))
+            self.assertTrue(any("abaixo de 7.5" in problem for problem in problems))
+            self.assertTrue(any("sobrepostos" in problem for problem in problems))
+
+    def test_kerning_is_not_overlap(self):
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfgen.canvas import Canvas
+
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "kerning.pdf"
+            canvas = Canvas(str(path), pagesize=A4)
+            canvas.setFont("Helvetica", 8)
+            canvas.drawString(50, 700, "OUT-01 AVA-02 TT-TT")
+            canvas.save()
+            tokens = json.loads((ROOT / "tokens.json").read_text())
+            self.assertEqual(self.render_module.check_pdf_quality(path, tokens), [])
+
+    def test_reportlab_outputs_pass(self):
+        for kind in ("test_card", "learning_card", "briefing_one_page"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json"
+                result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", temp,
+                                         "--formats", "pdf", "--pdf-engine", "reportlab"],
+                                        capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
+    def test_weasyprint_samples_gate_known_defect(self):
+        # O layout de apresentação já coloca o rodapé fora da página no PDF
+        # atual; o portão o recusa até que o ReportLab o substitua no Plano 035.
+        for sample in sorted((ROOT.parent / "_SAMPLES_ENTREGAVEIS").glob("*/input.json")):
+            kind = sample.parent.name
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", temp,
+                                         "--formats", "pdf"], capture_output=True, text=True)
+                if kind == "executive_presentation":
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("texto fora da página", result.stderr)
+                    self.assertFalse(list(Path(temp).glob("*.pdf")))
+                else:
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_gate_removes_pdf_and_fails(self):
+        sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/test_card/input.json"
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            with unittest.mock.patch.object(self.render_module, "check_pdf_quality", return_value=["página 1: teste"]):
+                with unittest.mock.patch.object(sys, "argv", [str(SCRIPT), str(sample), "--out-dir", str(out),
+                                                            "--formats", "pdf,md", "--pdf-engine", "reportlab"]):
+                    with self.assertRaisesRegex(ValueError, "reprovado na verificação de qualidade"):
+                        self.render_module.main()
+            self.assertFalse(list(out.glob("*.pdf")))
 
 
 if __name__ == "__main__":
