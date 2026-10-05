@@ -1043,6 +1043,93 @@ class PresentationLayoutJsonTests(unittest.TestCase):
 
 
 @unittest.skipUnless(reportlab_available(), "reportlab indisponível")
+class ReportLabPresentationTests(unittest.TestCase):
+    def setUp(self):
+        self.sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json").read_text(encoding="utf-8"))
+        self.render_module = load_render_module()
+
+    def render(self, folder: Path, item: dict | None = None, formats: str = "pdf,pptx") -> subprocess.CompletedProcess[str]:
+        source = folder / "input.json"
+        source.write_text(json.dumps(item or self.sample, ensure_ascii=False), encoding="utf-8")
+        return subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder / "out"),
+                               "--formats", formats, "--pdf-engine", "reportlab"],
+                              capture_output=True, text=True)
+
+    def test_page_count_and_size_match_pptx(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render(folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            pdf = PdfReader(str(next((folder / "out").glob("*.pdf"))))
+            slides = Presentation(str(next((folder / "out").glob("*.pptx"))))
+            self.assertEqual(len(pdf.pages), len(slides.slides))
+            self.assertAlmostEqual(float(pdf.pages[0].mediabox.width) * 25.4 / 72, 338.66, delta=.5)
+            self.assertAlmostEqual(float(pdf.pages[0].mediabox.height) * 25.4 / 72, 190.5, delta=.5)
+
+    def test_every_page_has_identity_and_number(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.assertEqual(self.render(folder, formats="pdf").returncode, 0)
+            pages = PdfReader(str(next((folder / "out").glob("*.pdf")))).pages
+            for number, page in enumerate(pages, 1):
+                with self.subTest(page=number):
+                    text = page.extract_text()
+                    self.assertIn(self.render_module.identity_line(self.sample), text)
+                    self.assertIn(f"{number} / {len(pages)}", text)
+
+    def test_sample_text_is_present(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self.assertEqual(self.render(folder, formats="pdf").returncode, 0)
+            pages = PdfReader(str(next((folder / "out").glob("*.pdf")))).pages
+            text = " ".join(" ".join(page.extract_text().split()) for page in pages)
+            self.assertIn(self.sample["title"], text)
+            self.assertIn(self.sample["summary"], text)
+            for block in self.sample["blocks"]:
+                self.assertIn(block["data"]["text"], text)
+
+    def test_overflow_fails_without_pdf(self):
+        item = copy.deepcopy(self.sample)
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"][1:1] = [{"id": f"long-{n}", "type": "paragraph",
+                                "data": {"text": " ".join(["extraordinariamente"] * 60)}}
+                               for n in range(4)]
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render(folder, item, formats="pdf")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("excede a área", result.stderr)
+            self.assertFalse(list((folder / "out").glob("*.pdf")))
+
+    def test_deterministic_pdf_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            outputs = []
+            for name in ("a", "b"):
+                current = folder / name
+                current.mkdir()
+                result = self.render(current, formats="pdf")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                outputs.append(next((current / "out").glob("*.pdf")).read_bytes())
+            self.assertEqual(*outputs)
+
+    def test_pptx_uses_shared_slide_sizes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render(folder, formats="pptx")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            slides = Presentation(str(next((folder / "out").glob("*.pptx"))))
+            title = self.sample["blocks"][0]["data"]["text"]
+            body = self.sample["blocks"][1]["data"]["text"]
+            title_run = next(run for shape in slides.slides[1].shapes if shape.has_text_frame
+                             for para in shape.text_frame.paragraphs for run in para.runs if run.text == title)
+            body_para = next(para for shape in slides.slides[1].shapes if shape.has_text_frame
+                             for para in shape.text_frame.paragraphs if para.text.startswith(body))
+            self.assertEqual(title_run.font.size.pt, 24)
+            self.assertEqual(body_para.font.size.pt, 17)
+
+
+@unittest.skipUnless(reportlab_available(), "reportlab indisponível")
 class ReportLabPdfTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1137,17 +1224,12 @@ class ReportLabPdfTests(unittest.TestCase):
 
     def test_unsupported_layout_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as temp:
-            folder = Path(temp)
-            item = content("executive_presentation", "PRES-1")
-            source = folder / "input.json"
-            source.write_text(json.dumps(item), encoding="utf-8")
-            out = folder / "out"
-            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(out),
-                                     "--formats", "pdf,md", "--pdf-engine", "reportlab"],
-                                    capture_output=True, text=True)
-            self.assertNotEqual(result.returncode, 0)
-            self.assertIn("ainda não suporta", result.stderr)
-            self.assertFalse(out.exists())
+            output = Path(temp) / "unsupported.pdf"
+            tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+            with self.assertRaisesRegex(ValueError, "ainda não suporta"):
+                self.render_module.render_pdf_reportlab(content("test_card", "TC-1"), tokens,
+                                                        {"layout": "unsupported"}, output)
+            self.assertFalse(output.exists())
 
     def test_deterministic_bytes(self):
         with tempfile.TemporaryDirectory() as temp:
