@@ -46,6 +46,7 @@ Convenções comuns a todos os planos:
 | 028 | [Idempotência do PDF (Fase 1) + fidelidade visual (Fase 2, aguarda autorização)](028-idempotencia-e-fidelidade-visual-pdf.md) | P3 | Fase 1: S / Fase 2: L | — | DONE (Fase 1: teste criado, pula corretamente sem `pango` — não pôde validar o caminho de sucesso ponta a ponta nesta máquina, só o de skip; suíte completa 38 testes, 5 skips, sem falhas; escopo limpo, só `tests/test_render.py` — revisado em worktree isolado, branch `advisor/028-idempotencia-pdf-fase1`, não mesclado). Fase 2 não iniciada, aguarda autorização do operador |
 | 029 | [`render_pptx` lê posição de `_DESIGN_SYSTEM/layouts/<tipo>.layout.json`](029-render-pptx-le-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados; `VisualTokenContractTests` do Plano 027 intacto; executor adaptou o teste de posição customizada para usar `unittest.mock.patch.object` em vez de um `deliverable_type` fictício, que falhava em `validate()` por falta de perfil — desvio documentado e aprovado, mesmo padrão já visto no Plano 030 — revisado em worktree isolado, branch `advisor/029-pptx-layout-json`, não mesclado) |
 | 030 | [`render_html` (caminho "presentation") posiciona masthead/título/rodapé/conteúdo por `layout.json`](030-render-html-presentation-layout-json.md) | P2 | M | requer `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` commitado (independente do Plano 029, loader próprio) | DONE (2 testes novos + suíte completa de 42 testes passaram, 5 skips esperados sem `pango`; executor corrigiu um bug real no próprio teste do plano — `deliverable_type` fictício colidia com `DELIVERABLE_LABELS` antes de chegar no código novo — via `unittest.mock.patch.object`, desvio documentado e aprovado — revisado em worktree isolado, branch `advisor/030-html-presentation-layout-json`, não mesclado) |
+| 031 | [Corrige offset de `@page margin` no caminho "presentation" e estende `layout.json` para `executive_one_page`/`card_portrait`](031-render-html-offset-fix-e-one-page-card-layout-json.md) | P1 | M | nenhuma (029/030 já mesclados; corrige um defeito no que o 030 entregou) | TODO |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
 
@@ -209,6 +210,34 @@ no futuro: posição fixa só vale para slots **estruturais** (`logo`, `titulo_d
 conteúdo real do schema. Seções de conteúdo continuam em fluxo, sem risco de corte. Essa
 regra ainda não tem plano escrito; fica registrada aqui para a próxima vez que o assunto
 for retomado.
+
+## Plano 031 — origem e correção de bug encontrado no 030
+
+Ao gerar amostras de antes/depois do `executive_presentation` para o operador conferir,
+descobrimos empiricamente (teste controlado com WeasyPrint, não suposição) que o `@page
+{ margin: 0.4in }` definido em `css()` para `presentation_16_9` desloca todo elemento
+`position: absolute` do sub-caminho `"presentation"` (Plano 030) em ~10,16mm da posição
+real do canvas — porque CSS mede `position: absolute` a partir da área de conteúdo da
+página, já descontada a margem do `@page`, enquanto o `layout.json`/PPTX usa coordenadas
+relativas à página inteira. Ou seja: o PDF e o PPTX de `executive_presentation` **não
+batem pixel a pixel** hoje, apesar de lerem o mesmo arquivo — o objetivo declarado do
+Plano 030 ("fechar os dois formatos na mesma fonte de verdade") não foi atingido na
+prática. O Plano 031 corrige isso (regra `@page { margin: 0; }` adicional, só quando
+`layout_slots` existe) como primeiro passo, antes de estender a mesma técnica para
+`briefing_one_page` (perfil `executive_one_page`) e `test_card`/`learning_card` (perfil
+`card_portrait`).
+
+Esses 3 tipos ficaram de fora da regra "só slots estruturais" registrada acima — e isso é
+deliberado, não uma inconsistência: diferente dos 14 tipos genuinamente multi-página,
+`render.py:946-954` já rejeita com `ValueError` qualquer PDF desses 3 tipos (mais
+`executive_presentation`, que também está nessa lista) que saia de uma página, contando
+páginas de verdade via `pypdf` depois de gerar o PDF. Não há risco de corte silencioso de
+conteúdo — por isso o Plano 031 posiciona cada seção de conteúdo individualmente (não só
+os slots estruturais), usando os rascunhos de `layout.json` que já existem para os 3 tipos
+desde a extração feita em sessão anterior (corrigidos nesta sessão: `test_card.layout.json`
+e `learning_card.layout.json` tinham canvas 148×210mm, tamanho A5, incompatível com o
+perfil real `a4_portrait` — 210×297mm — usado por `render.py`; `briefing_one_page.layout.json`
+já estava correto, 297×210mm batendo com `a4_landscape`).
 
 ## Achados considerados e rejeitados
 
