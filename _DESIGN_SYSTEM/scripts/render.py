@@ -829,7 +829,7 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         title_x, title_y, title_w, title_h = box("titulo_slide", .5, .5, 10.3, .8)
         title_box = s.shapes.add_textbox(title_x, title_y, title_w, title_h)
         run = title_box.text_frame.paragraphs[0].add_run()
-        run.text, run.font.name, run.font.size, run.font.color.rgb = title, tokens["typography"]["font_brand"], Pt(28), primary
+        run.text, run.font.name, run.font.size, run.font.color.rgb = title, tokens["typography"]["font_brand"], Pt(tokens["typography"]["styles"]["slide_title"]["size"]), primary
         body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
         body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, body_x, body_y, body_w, body_h)
         body_box.fill.solid()
@@ -841,14 +841,14 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         for line in body.splitlines() or [""]:
             para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
             para.text = line
-            para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(17)
+            para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(tokens["typography"]["styles"]["slide_body"]["size"])
         footer_x, footer_y, footer_w, footer_h = box("rodape_slide", .6, 7.02, 12.1, .33)
         footer = s.shapes.add_textbox(footer_x, footer_y, footer_w, footer_h)
         footer.text_frame.word_wrap = True
         paragraph = footer.text_frame.paragraphs[0]
         paragraph.text = identity_line(content)
         paragraph.font.name = tokens["typography"]["font_body"]
-        paragraph.font.size = Pt(10)
+        paragraph.font.size = Pt(tokens["typography"]["styles"]["slide_footer"]["size"])
         paragraph.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
 
     slide(content["title"], content.get("summary", ""))
