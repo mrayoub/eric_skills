@@ -63,6 +63,8 @@ Este é um entregável próprio da skill para consolidar a decisão da rodada; n
 
 Estruture a narrativa como `problema e hipótese → pergunta → método e amostra → evidências e problemas prioritários → status dos cards → recomendação → próximo gate`. Uma apresentação executiva pode mostrar um scorecard descritivo, 3 a 5 achados principais, exemplos verificáveis e as condições para a próxima rodada; adapte o número de slides ao público. Use números somente com unidade, denominador, cobertura e nome correto. Nas notas ou apêndice, inclua um índice que permita voltar de cada afirmação relevante ao livro de evidências. Compare a versão final com os registros antes de apresentar; relatório, cards e slides devem expressar a mesma decisão e o mesmo recorte.
 
+Na apresentação, escreva na capa a mensagem principal em até 35 palavras. Cada slide deve ter um título-mensagem de 4 a 12 palavras que diga sua conclusão e desenvolver uma ideia em até 4 blocos e 60 palavras. Destaque números-chave em blocos `metric`; deixe detalhes e evidências completas no relatório ou apêndice. O renderizador recusa versões completas que ultrapassem esses limites.
+
 ## Passagem para a próxima fase
 
 Entregue um resumo de uma página ou seção equivalente com decisão efetiva, hipóteses sustentadas e ainda abertas, riscos aceitos, ações e donos, critérios de avanço, evidências que precisarão ser coletadas e localização dos registros originais. Identifique a versão do MVP a que a decisão se refere para que a próxima rodada não herde uma conclusão de versão anterior sem revisão.
