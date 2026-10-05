@@ -1138,7 +1138,7 @@ class ReportLabPdfTests(unittest.TestCase):
     def test_unsupported_layout_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
-            item = content("briefing", "BR-1")
+            item = content("executive_presentation", "PRES-1")
             source = folder / "input.json"
             source.write_text(json.dumps(item), encoding="utf-8")
             out = folder / "out"
@@ -1264,6 +1264,147 @@ class PdfQualityTests(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "reprovado na verificação de qualidade"):
                         self.render_module.main()
             self.assertFalse(list(out.glob("*.pdf")))
+
+
+@unittest.skipUnless(reportlab_available(), "reportlab indisponível")
+class ReportLabReportTests(unittest.TestCase):
+    TYPES = {
+        "briefing": 1, "briefing_improvement_questionnaire": 1,
+        "briefing_validation": 5, "innovation_potential_assessment": 2,
+        "experiment_plan": 1, "four_d_workshop_record": 2,
+        "four_d_report": 5, "three_e_workshop_record": 1,
+        "three_e_report": 2, "innovation_scorecard": 1,
+        "experiment_report": 2, "evidence_recommendation": 2,
+        "five_c_workshop_record": 2, "five_c_report": 2,
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        spec = importlib.util.spec_from_file_location("pdf_reportlab_tests", ROOT / "scripts/pdf_reportlab.py")
+        cls.pdf_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.pdf_module)
+
+    def _render(self, kind: str, folder: Path) -> PdfReader:
+        source = ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json"
+        result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                 "--formats", "pdf", "--pdf-engine", "reportlab"],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return PdfReader(str(next(folder.glob("*.pdf"))))
+
+    def test_group_sections_matches_html_rules(self):
+        blocks = [
+            {"type": "paragraph", "data": {"text": "intro"}},
+            {"type": "heading", "data": {"text": "h1"}},
+            {"type": "paragraph", "data": {"text": "body"}},
+            {"type": "table", "data": {"rows": []}},
+            {"type": "heading", "data": {"text": "h2"}},
+            {"type": "paragraph", "data": {"text": "body2"}},
+            {"type": "page_break", "data": {}},
+            {"type": "heading", "data": {"text": "h3"}},
+            {"type": "paragraph", "data": {"text": "body3"}},
+        ]
+        sections = self.pdf_module.group_sections(blocks, self.renderer.block_text)
+        self.assertEqual([(item[0], item[1] if item[0] == "section" else "") for item in sections],
+                         [("section", "Notas"), ("section", "h1"), ("section", "h2"),
+                          ("page_break", ""), ("section", "h3")])
+        self.assertFalse(sections[0][3])
+        self.assertTrue(sections[1][3])
+
+    def test_all_report_samples_render(self):
+        for kind, reference_pages in self.TYPES.items():
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                reader = self._render(kind, Path(temp))
+                self.assertLessEqual(len(reader.pages), reference_pages + 1)
+
+    def test_report_text_is_complete(self):
+        for kind in self.TYPES:
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                reader = self._render(kind, Path(temp))
+                extracted = " ".join(" ".join(page.extract_text().split()) for page in reader.pages)
+                expected = [item["title"], item.get("summary", "")]
+                for block in item["blocks"]:
+                    data = block.get("data", {})
+                    expected.extend(str(data[key]) for key in ("text", "title", "description")
+                                    if isinstance(data.get(key), str) and data[key].strip())
+                    expected.extend(str(value) for value in data.get("items", []) if isinstance(value, str))
+                    if block["type"] == "table":
+                        for _, _, headings, rows in self.renderer.table_views(block):
+                            expected.extend(headings)
+                            expected.extend(cell for row in rows for cell in row if cell)
+                    if block["type"] == "card_grid":
+                        for card in data.get("cards", []):
+                            expected.extend(str(card[key]) for key in ("title", "value", "text")
+                                            if card.get(key) is not None)
+                            expected.extend(str(value) for value in card.get("items", []))
+                expected.extend(citation["id"] for citation in item["citations"])
+                for phrase in expected:
+                    if phrase:
+                        self.assertIn(" ".join(str(phrase).split()).casefold(), extracted.casefold(),
+                                      f"{kind}: {phrase!r}")
+
+    def test_long_table_repeats_header(self):
+        item = content("briefing", "BR-long")
+        item["blocks"] = [{"id": "large", "type": "table", "data": {
+            "headers": ["Código", "Medida", "Valor"],
+            "rows": [[f"L-{index:03d}", "Contagem", str(index)] for index in range(120)],
+        }}]
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            source = folder / "input.json"
+            source.write_text(json.dumps(item, ensure_ascii=False), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                     "--formats", "pdf", "--pdf-engine", "reportlab"],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            pages = PdfReader(str(next(folder.glob("*.pdf")))).pages
+            self.assertGreaterEqual(len(pages), 3)
+            for page in pages:
+                text = page.extract_text()
+                if "L-" in text:
+                    self.assertIn("Código", text)
+                    self.assertIn("Medida", text)
+                    self.assertIn("Valor", text)
+
+    def test_footer_page_numbers(self):
+        with tempfile.TemporaryDirectory() as temp:
+            reader = self._render("four_d_report", Path(temp))
+            item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/four_d_report/input.json").read_text())
+            identity = self.renderer.identity_line(item)
+            for index, page in enumerate(reader.pages, 1):
+                text = page.extract_text()
+                self.assertIn(identity, text)
+                self.assertIn(f"página {index} de {len(reader.pages)}", text)
+
+    def test_outline_has_sections(self):
+        with tempfile.TemporaryDirectory() as temp:
+            reader = self._render("four_d_report", Path(temp))
+            item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/four_d_report/input.json").read_text())
+            headings = [self.renderer.block_text(block) for block in item["blocks"] if block["type"] == "heading"]
+            self.assertEqual([entry.title for entry in reader.outline], headings)
+
+    def test_report_deterministic_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            outputs = []
+            for name in ("first", "second"):
+                target = folder / name
+                self._render("briefing_validation", target)
+                outputs.append(next(target.glob("*.pdf")).read_bytes())
+            self.assertEqual(outputs[0], outputs[1])
+
+    def test_section_band_never_orphan(self):
+        for kind in ("four_d_report", "briefing_validation"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                reader = self._render(kind, Path(temp))
+                item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                headings = {self.renderer.block_text(block).upper() for block in item["blocks"]
+                            if block["type"] == "heading"}
+                for page in reader.pages:
+                    lines = [line.strip() for line in page.extract_text().splitlines() if line.strip()]
+                    self.assertNotIn(lines[-2], headings)
 
 
 if __name__ == "__main__":
