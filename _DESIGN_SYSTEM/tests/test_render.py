@@ -37,6 +37,14 @@ def pdf_available() -> bool:
         return False
 
 
+def reportlab_available() -> bool:
+    try:
+        import reportlab
+        return True
+    except ImportError:
+        return False
+
+
 def content(kind: str, artifact: str) -> dict:
     blocks = [
         {"id": "h-1", "type": "heading", "data": {"text": "Seção principal", "level": 2}},
@@ -1033,6 +1041,149 @@ class PresentationLayoutJsonTests(unittest.TestCase):
             out = self.render.render_html(self.content, self.tokens, self.profile)
         self.assertNotIn("position: absolute", out)
         self.assertNotIn(".slide { position: relative; }", out)
+
+
+@unittest.skipUnless(reportlab_available(), "reportlab indisponível")
+class ReportLabPdfTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.render_module = load_render_module()
+
+    def render_sample(self, kind: str, folder: Path, formats: str = "pdf") -> subprocess.CompletedProcess[str]:
+        sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json"
+        return subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", str(folder),
+                               "--formats", formats, "--pdf-engine", "reportlab"],
+                              capture_output=True, text=True)
+
+    def test_test_card_sample_one_page_a4_portrait(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render_sample("test_card", folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            reader = PdfReader(str(next(folder.glob("*.pdf"))))
+            self.assertEqual(len(reader.pages), 1)
+            self.assertAlmostEqual(float(reader.pages[0].mediabox.width) * 25.4 / 72, 210, delta=0.5)
+            self.assertAlmostEqual(float(reader.pages[0].mediabox.height) * 25.4 / 72, 297, delta=0.5)
+            text = " ".join(reader.pages[0].extract_text().split())
+            item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/test_card/input.json").read_text(encoding="utf-8"))
+            self.assertIn(item["title"], text)
+            for label in self.render_module.CARD_LABELS["test_card"].values():
+                self.assertIn(label, text)
+            for block in item["blocks"]:
+                self.assertIn(block["data"]["text"], text)
+            self.assertIn(self.render_module.identity_line(item), text)
+
+    def test_learning_card_footer_links_test_card(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render_sample("learning_card", folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = PdfReader(str(next(folder.glob("*.pdf")))).pages[0].extract_text()
+            self.assertIn("Test Card sample-test-card v1.0.0", text)
+
+    def test_one_page_sample_landscape(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render_sample("briefing_one_page", folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            reader = PdfReader(str(next(folder.glob("*.pdf"))))
+            self.assertEqual(len(reader.pages), 1)
+            self.assertAlmostEqual(float(reader.pages[0].mediabox.width) * 25.4 / 72, 297, delta=0.5)
+            self.assertAlmostEqual(float(reader.pages[0].mediabox.height) * 25.4 / 72, 210, delta=0.5)
+            self.assertIn("Como podemos tornar as solicitações mais claras e rastreáveis?", reader.pages[0].extract_text())
+
+    def test_oversized_card_fails_without_partial_files(self):
+        item = content("test_card", "TC-big")
+        item["title"] = "Título longo para verificar o limite do card. " * 120
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            source = folder / "input.json"
+            source.write_text(json.dumps(item), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                     "--formats", "pdf,md", "--pdf-engine", "reportlab"],
+                                    capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("excedeu uma página", result.stderr)
+            self.assertFalse(list(folder.glob("*.pdf")))
+            self.assertFalse(list(folder.glob("*.manifest.json")))
+
+    def test_one_page_overflow_fails(self):
+        item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json").read_text(encoding="utf-8"))
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"] = [{**block, "id": f'{block["id"]}-{i}'} for i in range(12) for block in item["blocks"]]
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            source = folder / "input.json"
+            source.write_text(json.dumps(item), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(folder),
+                                     "--formats", "pdf", "--pdf-engine", "reportlab"],
+                                    capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("excedeu uma página", result.stderr)
+            self.assertFalse(list(folder.glob("*.pdf")))
+
+    def test_works_when_weasyprint_is_broken(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            fake = folder / "fake"
+            fake.mkdir()
+            (fake / "weasyprint.py").write_text('raise OSError("pango ausente (simulado)")\n', encoding="utf-8")
+            sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json"
+            result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", str(folder),
+                                     "--formats", "pdf", "--pdf-engine", "reportlab"],
+                                    env={**os.environ, "PYTHONPATH": str(fake)}, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(result.stdout)["unavailable"], {})
+            self.assertTrue(list(folder.glob("*.pdf")))
+
+    def test_unsupported_layout_rejected_before_writing(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            item = content("briefing", "BR-1")
+            source = folder / "input.json"
+            source.write_text(json.dumps(item), encoding="utf-8")
+            out = folder / "out"
+            result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(out),
+                                     "--formats", "pdf,md", "--pdf-engine", "reportlab"],
+                                    capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("ainda não suporta", result.stderr)
+            self.assertFalse(out.exists())
+
+    def test_deterministic_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            outputs = []
+            for name in ("a", "b"):
+                out = folder / name
+                result = self.render_sample("test_card", out)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                outputs.append(next(out.glob("*.pdf")).read_bytes())
+            self.assertEqual(outputs[0], outputs[1])
+
+    def test_embeds_static_fonts(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render_sample("test_card", folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            page = PdfReader(str(next(folder.glob("*.pdf")))).pages[0]
+            names = [str(value.get_object().get("/BaseFont", "")) for value in page["/Resources"]["/Font"].get_object().values()]
+            self.assertTrue(any(name.endswith("Montserrat-Bold") for name in names), names)
+            self.assertTrue(any(name.endswith("Roboto-Regular") for name in names), names)
+            self.assertFalse(any("Thin" in name or "Variable" in name for name in names), names)
+
+    def test_manifest_records_engine(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            result = self.render_sample("test_card", folder)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            manifest = json.loads(next(folder.glob("*.manifest.json")).read_text(encoding="utf-8"))
+            self.assertEqual(manifest["pdf_engine"], "reportlab")
+            out = folder / "md"
+            result = self.render_sample("test_card", out, formats="md")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            manifest = json.loads(next(out.glob("*.manifest.json")).read_text(encoding="utf-8"))
+            self.assertNotIn("pdf_engine", manifest)
 
 
 if __name__ == "__main__":
