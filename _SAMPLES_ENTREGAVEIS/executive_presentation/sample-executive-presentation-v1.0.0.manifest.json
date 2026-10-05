@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-executive-presentation",
-  "branding_version": "1.0.0",
-  "content_sha256": "f6ddc9c490dbdc15a1d68cc300f62942a330b660840efa916fec64fe629c67d7",
+  "branding_version": "1.1.0",
+  "content_sha256": "174ad50cff29c3b18fa59505a52fa26205c3984255adbfa521a88012afa1d01f",
   "content_version": "1.0.0",
   "deliverable_type": "executive_presentation",
   "files": {
-    "sample-executive-presentation-v1.0.0.html": "f7c982095e6b85aff8b4dbc7830b6d5f0915667aaeffaaaaef397c93ea0c82a5",
-    "sample-executive-presentation-v1.0.0.json": "f6ddc9c490dbdc15a1d68cc300f62942a330b660840efa916fec64fe629c67d7",
-    "sample-executive-presentation-v1.0.0.md": "a022db22b45432164ae2a33e9a7ed0f99b1d0b0faafc6889ddcf4dc024d9b48b",
-    "sample-executive-presentation-v1.0.0.pdf": "d25d5bd6b060d49b9d7168891c2b37ef7a54fbcf8f2bd01cc99621ea6d33ce81",
-    "sample-executive-presentation-v1.0.0.pptx": "5f8d93968b2e98a3de3e50669d6e2e2d9d22a653e9a36da04b5054d14020217c",
-    "sample-executive-presentation-v1.0.0.txt": "a5fc6a30ec9baff238cf4bb9992d33eb9b527a31cf564d2d4ebdc26e1c6f8f1e"
+    "sample-executive-presentation-v1.0.0.json": "174ad50cff29c3b18fa59505a52fa26205c3984255adbfa521a88012afa1d01f",
+    "sample-executive-presentation-v1.0.0.md": "39f602e1502ee9a30cb2a918f5e96231caac61dae3c7010dc60cdb422092dcbf",
+    "sample-executive-presentation-v1.0.0.pdf": "b9d0789af027671edb3861f7f55ca0e895ecea85026745880f3d8215401837fb",
+    "sample-executive-presentation-v1.0.0.pptx": "49dba99eb41e32efd4993e436f91900a3d392a98ff31a8f37288748d3107bf46",
+    "sample-executive-presentation-v1.0.0.txt": "fc552175bf5618bf611f9532b8dfa206d547775c0e223747cf722dc262227bfc"
   },
   "layout": "presentation",
   "paper": "presentation_16_9",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "1.4.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }
