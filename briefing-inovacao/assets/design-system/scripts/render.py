@@ -16,7 +16,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER_VERSION = "1.4.0"
-REPORTLAB_LAYOUTS = ("card_portrait", "executive_one_page")
+REPORTLAB_LAYOUTS = ("card_portrait", "executive_one_page", "report_portrait", "report_landscape")
 DELIVERABLE_LABELS = {
     "briefing": "Briefing",
     "briefing_one_page": "Resumo do briefing",
@@ -926,7 +926,8 @@ def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
                       deliverable_label=DELIVERABLE_LABELS[content["deliverable_type"]],
                       footer_label=footer_label(content),
                       field_labels=CARD_LABELS.get(content["deliverable_type"]),
-                      block_text=block_text, table_rows=table_rows)
+                      block_text=block_text, table_rows=table_rows,
+                      table_views=table_views, iqb_widths=IQB_TABLE_WIDTHS)
 
 
 def main() -> None:
