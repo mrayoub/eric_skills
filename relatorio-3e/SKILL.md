@@ -16,7 +16,7 @@ Consolida solução, construção, experimentos e rota; separa plano, execução
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md) — estrutura do relatório.
 - [Test Card](assets/test-card.md) — quatro campos por teste.
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 
 ## Grilling
 

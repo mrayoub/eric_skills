@@ -103,7 +103,7 @@
     "id": "3e-docx",
     "titulo": "Fonte fornecida 3E",
     "tipo": "original",
-    "arquivo": "assets/Modelo 3E Estruturação da Solução.docx",
+    "arquivo": "assets/Modelo 3E Estruturacao da Solucao.docx",
     "skills": [
       "workshop-3e",
       "relatorio-3e"
@@ -123,7 +123,7 @@
     "id": "3e-transcricao",
     "titulo": "Transcrição integral 3E",
     "tipo": "transcricao",
-    "arquivo": "assets/Modelo 3E Estruturação da Solução.transcricao.md",
+    "arquivo": "assets/Modelo 3E Estruturacao da Solucao.transcricao.md",
     "skills": [
       "workshop-3e",
       "relatorio-3e"

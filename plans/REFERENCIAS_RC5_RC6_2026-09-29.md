@@ -413,7 +413,7 @@ Preserva critérios, pesos e faixas do ERIC_RC6 1.0.0. A regra de ausência foi 
 Linha 14:
 
 ```text
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 ```
 
 Linha 70:
@@ -839,7 +839,7 @@ Síntese metodológica da **Especificação da Esteira de Inovação**, §§2 e 
 Linha 14:
 
 ```text
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
 ```
 
 Linha 72:

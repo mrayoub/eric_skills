@@ -17,7 +17,7 @@ TYPES = {"original", "transcricao", "adaptacao", "historico", "rubrica", "script
 STATUS = {"confirmada", "historica", "desconhecida"}
 PINNED = {
     "assets/Modelo 4D de Aprofundamento.docx": "d5071f2ab0d62e153b8f0bb7e89108a10bca6980d807dbd43c90bbd80fd115e3",
-    "assets/Modelo 3E Estruturação da Solução.docx": "530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34",
+    "assets/Modelo 3E Estruturacao da Solucao.docx": "530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34",
     "assets/Playbook_Modelo_5C_Centralidade_Cliente.docx": "3b793187dccd6691e124e61b9a407e6f383513d55de255c1049deae31df4e3c7",
 }
 
