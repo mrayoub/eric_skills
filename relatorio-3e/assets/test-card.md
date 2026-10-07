@@ -1,3 +1,4 @@
+<!-- Adaptação do Test Card © Strategyzer AG (https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card). O nome e o modelo original pertencem à Strategyzer; esta adaptação não é endossada por ela. -->
 # Test Card — TC[ID]: [pergunta focal]
 
 **Hipótese master:** [ID e fonte]  

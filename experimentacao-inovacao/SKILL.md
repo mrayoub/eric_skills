@@ -83,4 +83,4 @@ com `deliverable_type` `experiment_plan`, `test_card`, `learning_card`, `experim
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
 `metadata.completeness: "partial"` — nunca contorne o schema.
 
-**Proveniência:** skill própria desta pasta; cards seguem os modelos oficiais Strategyzer 2023 em `assets/`.
+**Proveniência:** skill própria desta pasta; cards seguem os modelos Test Card e Learning Card da Strategyzer AG (links em `references/fontes.md`); os modelos em `assets/` são adaptações locais.
