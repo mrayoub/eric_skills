@@ -1,6 +1,11 @@
 ---
 name: potencial-inovacao
 description: "Pontua e classifica o potencial de uma dor ou oportunidade de inovação com a rubrica interna do ERIC (impacto 30%, viabilidade 25%, alinhamento estratégico 20%, urgência 15%, novidade 10%), resultando em priorizar, monitorar ou arquivar, com justificativa e fonte por critério e cálculo por script. Use quando o usuário quiser priorizar, ranquear, triar ou comparar oportunidades, ideias ou dores, decidir se vale investir nelas ou revisar uma priorização já feita. Não use para dar nota a um briefing (use avaliacao-briefing-iqb) nem para avaliar a força das evidências de um projeto em andamento (use scorecard-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+metadata:
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Potencial de inovação

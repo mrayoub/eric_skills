@@ -1,6 +1,11 @@
 ---
 name: scorecard-inovacao
 description: "Avalia a maturidade das evidências de um projeto de inovação com o Innovation Project Scorecard da Strategyzer, oficial ou em adaptação institucional declarada, gerando um retrato datado, sem média geral, com lacunas decisivas e próximos testes. Use quando o usuário perguntar quão validado ou maduro está um projeto, se há evidência suficiente para passar um gate, ou quiser comparar retratos ao longo da esteira. Não use para dar nota a um briefing (use avaliacao-briefing-iqb) nem para priorizar oportunidades novas (use potencial-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+metadata:
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Scorecard de evidências para inovação

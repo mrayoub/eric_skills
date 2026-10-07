@@ -66,6 +66,10 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
             continue
         if not dst.is_file() or digest(src) != digest(dst):
             result.append(("copy", dst, src))
+    # A licença acompanha cada skill, que pode ser instalada sem o restante do repositório.
+    license_src, license_dst = ROOT / "LICENSE", skill / "LICENSE"
+    if not license_dst.is_file() or digest(license_src) != digest(license_dst):
+        result.append(("copy", license_dst, license_src))
     # Referência incorporada ao grilling no plano 010; remove só a cópia aposentada.
     retired = skill / "references/levantamento-documental-e-grilling.md"
     if retired.exists():
@@ -90,7 +94,7 @@ def main() -> int:
     try:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
                     ROOT / "_SHARED/grilling-operacional.md",
-                    ROOT / "_SHARED/linguagem-dos-entregaveis.md"]
+                    ROOT / "_SHARED/linguagem-dos-entregaveis.md", ROOT / "LICENSE"]
         for path in required:
             if not path.exists():
                 raise FileNotFoundError(f"Fonte ausente: {path.relative_to(ROOT)}")

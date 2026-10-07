@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:my-skills:schemas:three-e-report",
+  "title": "Three E Report response schema",
+  "description": "Contrato mínimo das seções obrigatórias para uma versão completa. Versões parciais usam o envelope comum e declaram as lacunas.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "three_e_report"
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "e1"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "e2"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "e3"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "route"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

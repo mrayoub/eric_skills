@@ -454,5 +454,37 @@
     "deriva_de": "strategyzer-scorecard",
     "vigencia": "desconhecida",
     "notas": "Adaptação local; não implica aprovação institucional nem notas demonstradas."
+  },
+  {
+    "id": "pitch-canvas-company",
+    "titulo": "The Pitch Canvas — Company Edition",
+    "tipo": "original",
+    "arquivo": "assets/ThePitchCanvas.pdf",
+    "skills": [
+      "relatorio-final-inovacao"
+    ],
+    "origem": "PDF fornecido pelo usuário em 2026-10-07; Best 3 Minutes.",
+    "autor": "Best 3 Minutes; desenvolvido a partir de ideia original de David Beckett",
+    "versao_declarada": "Company Edition",
+    "data_importacao": "2026-10-07",
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Licença CC BY-SA 4.0 declarada no PDF; requer referência a Best3minutes.com. O canvas não contém dados do projeto."
+  },
+  {
+    "id": "pitch-canvas-adaptacao",
+    "titulo": "Pitch Canvas aplicado à decisão interna",
+    "tipo": "adaptacao",
+    "arquivo": "references/pitch-canvas-executivo.md",
+    "skills": [
+      "relatorio-final-inovacao"
+    ],
+    "origem": "Adaptação local para a apresentação de recomendações da esteira ERIC.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-10-07",
+    "deriva_de": "pitch-canvas-company",
+    "vigencia": "desconhecida",
+    "notas": "Os blocos do canvas foram traduzidos para perguntas da gestão; não constituem aprovação institucional."
   }
 ]

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workshop 3E"
+  short_description: "Prepara ou registra a estruturação da solução"
+  brand_color: "#193C8E"
+  default_prompt: "Use $workshop-3e para preparar ou registrar o workshop de estruturação da solução."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Potencial de inovação"
+  short_description: "Prioriza oportunidades pela rubrica ERIC"
+  brand_color: "#193C8E"
+  default_prompt: "Use $potencial-inovacao para avaliar o potencial desta oportunidade."

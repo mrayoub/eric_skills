@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workshop 5C"
+  short_description: "Prepara ou registra a cocriação com clientes"
+  brand_color: "#193C8E"
+  default_prompt: "Use $workshop-5c para preparar ou registrar o encontro de cocriação com clientes."

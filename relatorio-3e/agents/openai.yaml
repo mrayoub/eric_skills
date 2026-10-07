@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relatório 3E"
+  short_description: "Consolida solução, escopo e plano de testes 3E"
+  brand_color: "#193C8E"
+  default_prompt: "Use $relatorio-3e para compilar o relatório dos registros E1 a E3."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Experimentação de inovação"
+  short_description: "Planeja testes e analisa resultados observados"
+  brand_color: "#193C8E"
+  default_prompt: "Use $experimentacao-inovacao para planejar ou analisar os testes deste projeto."
