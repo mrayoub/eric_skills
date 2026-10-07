@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat ab2594d..HEAD -- LICENSE _FONTES _TOOLS experimentacao-inovacao scorecard-inovacao relatorio-final-inovacao`
+> `git diff --stat befa189..HEAD -- LICENSE _FONTES _TOOLS experimentacao-inovacao scorecard-inovacao relatorio-final-inovacao`
 > Se o Plano 037 já foi mesclado, haverá `build_catalog.py`/`catalog.json`: siga a nota do Step 7.
 > Qualquer outra divergência nos arquivos citados em "Current state" é STOP.
 
@@ -18,7 +18,7 @@
 - **Risk**: MED (retira arquivos de duas skills e muda o esquema do manifesto de fontes; não altera scripts de entregáveis)
 - **Depends on**: nenhum. Compatível com o 037 em qualquer ordem.
 - **Category**: conformidade / licenciamento
-- **Planned at**: commit `ab2594d`, 2026-10-07
+- **Planned at**: commit `befa189`, 2026-10-07
 
 ## Why this matters
 
@@ -37,7 +37,7 @@ outros titulares sendo **redistribuído** em todos os canais (GitHub, `npx skill
 O `LICENSE` precisa valer só para o que é da CCEE e apontar para um inventário de terceiros, gerado
 do manifesto para não depender de manutenção manual.
 
-## Current state (em `ab2594d`; confira)
+## Current state (em `befa189`; confira)
 
 - `LICENSE` na raiz; `_TOOLS/sync_shared.py` copia para `<skill>/LICENSE` (bloco "A licença acompanha cada skill…").
 - Cada `SKILL.md`: `license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."`.

@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 8472652..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/pdf_reportlab.py _DESIGN_SYSTEM/tests/test_render.py _TOOLS/make_static_fonts.py`
+> `git diff --stat 0eac9a9..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/pdf_reportlab.py _DESIGN_SYSTEM/tests/test_render.py _TOOLS/make_static_fonts.py`
 > Os Planos 032 e 033 terão mudado esses arquivos. Confira que o que eles
 > descrevem está presente; qualquer outra divergência dos trechos abaixo é STOP.
 
@@ -18,7 +18,7 @@
 - **Risk**: MED (código novo atrás de `--pdf-engine reportlab`; o padrão continua WeasyPrint)
 - **Depends on**: `plans/032-pdf-reportlab-portatil.md` e `plans/033-verificador-de-qualidade-do-pdf.md`, ambos DONE **e** com a aprovação visual do operador registrada no 032.
 - **Category**: dependências / qualidade dos entregáveis
-- **Planned at**: commit `8472652`, 2026-10-05
+- **Planned at**: commit `0eac9a9`, 2026-10-05
 
 ## Why this matters
 

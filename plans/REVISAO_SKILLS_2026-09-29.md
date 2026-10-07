@@ -1,6 +1,6 @@
 # Revisão individual das onze skills — 29/09/2026
 
-Base: commit `3404a5c`, branch `advisor/010-skill-md`. Auditoria com a skill `improve`, somente leitura da implementação. As recomendações abaixo ainda não foram implementadas.
+Base: commit `32a103a`, branch `advisor/010-skill-md`. Auditoria com a skill `improve`, somente leitura da implementação. As recomendações abaixo ainda não foram implementadas.
 
 Foram examinados os onze SKILL.md, referências específicas, contratos de conteúdo, cálculos próprios, renderizador compartilhado e testes/evals relacionados. Os achados foram confrontados com os arquivos citados. Reproduções locais usam dados fictícios, em memória. A suíte local passou: **59 testes e 28 subtestes**. A sincronização das cópias passou.
 

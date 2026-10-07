@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 8472652..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/requirements.txt _DESIGN_SYSTEM/README.md _DESIGN_SYSTEM/assets/fonts _TOOLS`
+> `git diff --stat 0eac9a9..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/requirements.txt _DESIGN_SYSTEM/README.md _DESIGN_SYSTEM/assets/fonts _TOOLS`
 > Se algum desses arquivos mudou desde que este plano foi escrito, compare os
 > trechos de "Estado atual" com o código real antes de prosseguir; em caso de
 > divergência, trate como STOP condition.
@@ -19,7 +19,7 @@
 - **Risk**: MED (código novo isolado atrás de uma opção; o caminho padrão WeasyPrint não muda)
 - **Depends on**: nenhum. Independente do Plano 031 (BLOCKED), que trata posicionamento por `layout.json` no HTML — não use `layout.json` aqui.
 - **Category**: dependências / portabilidade
-- **Planned at**: commit `8472652`, 2026-10-05
+- **Planned at**: commit `0eac9a9`, 2026-10-05
 - **Substitui**: a versão anterior deste plano (Chromium/Playwright como reserva), rejeitada pelo operador porque o Chromium corrompia a camada de texto do PDF.
 
 ## Por que isso importa

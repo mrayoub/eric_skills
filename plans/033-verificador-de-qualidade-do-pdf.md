@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 8472652..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/requirements.txt _DESIGN_SYSTEM/README.md _TOOLS`
+> `git diff --stat 0eac9a9..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/requirements.txt _DESIGN_SYSTEM/README.md _TOOLS`
 > O Plano 032 já terá mudado esses arquivos (é dependência). Confira que as
 > mudanças descritas no 032 estão lá; qualquer outra divergência dos trechos
 > abaixo é STOP condition.
@@ -19,7 +19,7 @@
 - **Risk**: MED (o portão pode reprovar PDFs que hoje saem com defeito — é o objetivo, mas muda comportamento)
 - **Depends on**: `plans/032-pdf-reportlab-portatil.md` (DONE) — usa o `reportlab` do `requirements.txt` e o `--pdf-engine reportlab`.
 - **Category**: tests / qualidade dos entregáveis
-- **Planned at**: commit `8472652`, 2026-10-05
+- **Planned at**: commit `0eac9a9`, 2026-10-05
 
 ## Why this matters
 

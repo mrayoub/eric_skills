@@ -71,7 +71,7 @@ que um modelo cumpre as expectativas.
 
 Para conferir a estrutura sem chamadas de modelo, carregue esse JSON, exija `skill_name: experimentacao-inovacao`, IDs 1–4, quatro a sete expectativas por caso e verifique que cada arquivo listado existe, começa com o marcador de material fictício e tem no máximo 60 linhas. Isso confere os insumos; **não mede o comportamento**. A execução comportamental permanece **não rodada** e exige autorização específica de custo.
 
-Em uma comparação futura, use os mesmos quatro casos e fixtures em contextos novos contra a versão-base `3404a5c` e a versão corrigida. Forneça ao agente somente o pedido e os arquivos do caso; guarde `expectations` para avaliação posterior. Registre versão, modelo, configuração, saída e evidência por expectativa antes de comparar. Não trate a existência dos casos como benchmark aprovado.
+Em uma comparação futura, use os mesmos quatro casos e fixtures em contextos novos contra a versão-base `32a103a` e a versão corrigida. Forneça ao agente somente o pedido e os arquivos do caso; guarde `expectations` para avaliação posterior. Registre versão, modelo, configuração, saída e evidência por expectativa antes de comparar. Não trate a existência dos casos como benchmark aprovado.
 
 ## Executar os casos e comparar versões
 

@@ -1,6 +1,6 @@
 # Planos de implementação — skills de inovação
 
-Gerados pela skill `improve` em 2026-09-28, contra o commit `35c3b75` (tag
+Gerados pela skill `improve` em 2026-09-28, contra o commit `967749d` (tag
 `improve-baseline-2026-09-28`). Base: auditoria das 11 skills e revisão crítica de
 `MELHORIAS_SKILLS.md`. Execute na ordem abaixo, salvo o que as dependências permitirem
 paralelizar. Cada executor: leia o plano inteiro antes de começar, respeite as STOP
@@ -61,14 +61,14 @@ Retomada do plano 008 (28/09/2026): o operador pediu para deixar o plano como
 `TODO` e continuará com Claude quando o limite liberar. Preserve os conjuntos e
 as descriptions já implementados. A revisão local em `_EVALS/triggers/resultados.md`
 não substitui a medição real. Para medir antes/depois, use as descriptions do commit
-`ae5e211` como linha de base e as de `ee8e9f1` como versão nova, em checkouts separados,
+`21cef5b` como linha de base e as de `9ac08f3` como versão nova, em checkouts separados,
 seguindo `_EVALS/triggers/README.md`. Confirme a autorização antes das chamadas,
 conforme o plano. O plano 009 permanece `TODO`; apenas sua branch foi criada,
 sem arquivos implementados naquele momento. A implementação posterior do 009
 está registrada no status atual acima.
 
 Auditoria da retomada com Claude: sessão `609c5081-03a7-4c59-8e06-7671f031a322`.
-Correção adicional do plano 005 preservada em `5ec6644`; suíte revalidada com
+Correção adicional do plano 005 preservada em `7344bb7`; suíte revalidada com
 58 testes passando e 25 subtestes. A medição do 008 não foi concluída e seus
 8/16 são inválidos: erros de limite foram contados como não acionamento.
 Diagnóstico e requisitos para uma nova execução em `_EVALS/triggers/resultados.md`
@@ -88,7 +88,7 @@ e design system preservados. O arquivo passou de 839 para 650 palavras
 obrigatórios e o contrato `scores`, somava 723 palavras com frontmatter; os
 passos específicos foram condensados para cumprir também o `wc -w` ≤650,
 mantendo os quatro blocos padrão exatos e as regras do método. A instrução
-adicional do plano 005 registrada em `5ec6644` foi mantida no contrato `scores`.
+adicional do plano 005 registrada em `7344bb7` foi mantida no contrato `scores`.
 Validador da skill, links locais, frontmatter, orçamento e blocos padrão
 verificados; 12 testes de potencial e 7 subtestes passaram; sync verificado.
 Nenhuma chamada de modelo foi feita nessa etapa; o rollout aguardou a revisão
@@ -297,7 +297,7 @@ deve ser reavaliado só para o formato HTML.
 
 ## Revisão individual de 29/09/2026
 
-Auditoria contra `3404a5c`, com as onze skills revisadas separadamente:
+Auditoria contra `32a103a`, com as onze skills revisadas separadamente:
 [achados, evidências e recomendações](REVISAO_SKILLS_2026-09-29.md).
 Foram encontrados onze grupos de correções, incluindo problemas compartilhados
 que não devem virar onze implementações repetidas. A suíte existente passou com
@@ -311,7 +311,7 @@ Nenhuma correção foi implementada nesta etapa.
 
 Onze novos planos cobrem A01–A11, um por grupo de correção. Os problemas comuns
 são corrigidos na fonte e distribuídos por sync, sem onze implementações manuais.
-Todos foram escritos contra `3404a5c`; conferir deriva antes de executar.
+Todos foram escritos contra `32a103a`; conferir deriva antes de executar.
 
 Ordem recomendada: **013 → 014 → 015 → 016 → 017 → 018 → 019 → 020 → 021 → 022 → 023**.
 A ordem evita conflitos em contratos, renderizador e testes compartilhados.

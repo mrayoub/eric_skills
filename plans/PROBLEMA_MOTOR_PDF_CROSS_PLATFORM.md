@@ -6,7 +6,7 @@
 > evidências citadas foram verificadas de fato (comandos rodados, resultados reais), não
 > são suposições. Onde algo não foi verificado, isso está dito explicitamente.
 >
-> **Commit em que este documento foi escrito**: `8472652` (branch `main`).
+> **Commit em que este documento foi escrito**: `0eac9a9` (branch `main`).
 
 ## Resumo do problema
 
@@ -25,7 +25,7 @@ ainda não estão bem definidos):
 ## Onde o código vive
 
 ```python
-# _DESIGN_SYSTEM/scripts/render.py, dentro de main(), linhas ~932-955 (commit 8472652)
+# _DESIGN_SYSTEM/scripts/render.py, dentro de main(), linhas ~932-955 (commit 0eac9a9)
 unavailable: dict[str, str] = {}
 if "pdf" in requested:
     path = out / f"{stem}.pdf"
@@ -48,7 +48,7 @@ if "pdf" in requested:
         files.append(path)
 ```
 
-`_DESIGN_SYSTEM/requirements.txt` (pins exatos, commit `8472652`):
+`_DESIGN_SYSTEM/requirements.txt` (pins exatos, commit `0eac9a9`):
 ```
 jsonschema==4.26.0
 referencing==0.36.2

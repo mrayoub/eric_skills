@@ -20,8 +20,8 @@ ser gerado pelo motor padrão até o Plano 035.
 O defeito é real e anterior ao 033 (vem do Plano 030). A causa e a correção já existem no
 branch do Plano 031 (BLOCKED por outro motivo):
 
-- `38d17de` — "Corrige offset de @page margin no branch presentation": acrescenta `@page { margin: 0; }` quando o layout de slots existe (1 linha em `render.py`).
-- `d05eb02` — "Adiciona teste de regressão do offset de @page margin" (14 linhas em `test_render.py`).
+- `ef2bf7e` — "Corrige offset de @page margin no branch presentation": acrescenta `@page { margin: 0; }` quando o layout de slots existe (1 linha em `render.py`).
+- `9d284d5` — "Adiciona teste de regressão do offset de @page margin" (14 linhas em `test_render.py`).
 
 O revisor verificou: os dois commits entram sem conflito em `advisor/033-verificador-qualidade-pdf`;
 com eles, a apresentação passa no portão, o teste de regressão passa e o **único** teste que
@@ -42,10 +42,10 @@ a correção pulam. Se não conseguir carregar o WeasyPrint, STOP.
 
 ## Scope
 
-**In scope**: `_DESIGN_SYSTEM/scripts/render.py` (só o que vem do `38d17de`),
+**In scope**: `_DESIGN_SYSTEM/scripts/render.py` (só o que vem do `ef2bf7e`),
 `_DESIGN_SYSTEM/tests/test_render.py`, cópias do sync.
 **Out of scope**: `pdf_quality.py` (não afrouxe o portão); qualquer outra parte do branch do
-Plano 031 (`d0248d6`, `77dd4d7`, `288b08a`, `cff0229` — são a parte BLOCKED); `layout.json`.
+Plano 031 (`0ae66f9`, `4db9026`, `2e46997`, `7e61643` — são a parte BLOCKED); `layout.json`.
 
 ## Steps
 
@@ -53,7 +53,7 @@ Plano 031 (`d0248d6`, `77dd4d7`, `288b08a`, `cff0229` — são a parte BLOCKED);
 
 ```
 git switch advisor/033-verificador-qualidade-pdf
-git cherry-pick 38d17de d05eb02
+git cherry-pick ef2bf7e 9d284d5
 ```
 **Verify**: `git log --oneline -2` mostra os dois commits; `git show --stat HEAD~1 HEAD` só toca `_DESIGN_SYSTEM/scripts/render.py` e `_DESIGN_SYSTEM/tests/test_render.py`. Conflito → STOP.
 
@@ -79,7 +79,7 @@ Um commit para o Step 2: "Exige que as 18 amostras passem no portão de qualidad
 
 ## Done criteria
 
-- [ ] `38d17de` e `d05eb02` no branch, sem outros commits do 031
+- [ ] `ef2bf7e` e `9d284d5` no branch, sem outros commits do 031
 - [ ] `grep -n "known_defect" _DESIGN_SYSTEM/tests/test_render.py` → nada
 - [ ] Suíte completa `0 failed`, com WeasyPrint carregando (testes de PDF não pulam)
 - [ ] Sync e fontes → exit 0
