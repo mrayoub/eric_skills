@@ -14,7 +14,10 @@
     "data_importacao": "2026-09-28",
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "4d-transcricao",
@@ -31,7 +34,10 @@
     "data_importacao": "2026-09-28",
     "deriva_de": "4d-docx",
     "vigencia": "desconhecida",
-    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "4d-rc6",
@@ -48,7 +54,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "historica",
-    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido."
+    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "4d-adaptacao",
@@ -65,7 +74,10 @@
     "data_importacao": null,
     "deriva_de": "4d-docx",
     "vigencia": "desconhecida",
-    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX."
+    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "4d-comparacao",
@@ -82,7 +94,10 @@
     "data_importacao": null,
     "deriva_de": "4d-docx",
     "vigencia": "desconhecida",
-    "notas": "Registra diferenças; não declara aprovação institucional."
+    "notas": "Registra diferenças; não declara aprovação institucional.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "3e-docx",
@@ -99,7 +114,10 @@
     "data_importacao": "2026-09-28",
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "3e-transcricao",
@@ -116,7 +134,10 @@
     "data_importacao": "2026-09-28",
     "deriva_de": "3e-docx",
     "vigencia": "desconhecida",
-    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada."
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original. Data de importação registrada explicitamente no cabeçalho da transcrição preservada.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "3e-rc6",
@@ -133,7 +154,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "historica",
-    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido."
+    "notas": "Contexto histórico; não substitui automaticamente o DOCX fornecido.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "3e-adaptacao",
@@ -150,7 +174,10 @@
     "data_importacao": null,
     "deriva_de": "3e-docx",
     "vigencia": "desconhecida",
-    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX."
+    "notas": "Também utiliza contexto histórico RC6; regras operacionais adicionais não são exigências literais do DOCX.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "3e-comparacao",
@@ -167,7 +194,10 @@
     "data_importacao": null,
     "deriva_de": "3e-docx",
     "vigencia": "desconhecida",
-    "notas": "Registra diferenças; não declara aprovação institucional."
+    "notas": "Registra diferenças; não declara aprovação institucional.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "5c-docx",
@@ -184,7 +214,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Playbook de um encontro de Centralidade no Cliente; não comprova uma norma institucional geral."
+    "notas": "Playbook de um encontro de Centralidade no Cliente; não comprova uma norma institucional geral.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "5c-transcricao",
@@ -201,7 +234,10 @@
     "data_importacao": null,
     "deriva_de": "5c-docx",
     "vigencia": "desconhecida",
-    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original."
+    "notas": "Transcrição auxilia a leitura; o DOCX permanece a fonte original.",
+    "titular": null,
+    "licenca": "A confirmar",
+    "distribuido": true
   },
   {
     "id": "5c-adaptacao",
@@ -218,7 +254,10 @@
     "data_importacao": null,
     "deriva_de": "5c-docx",
     "vigencia": "desconhecida",
-    "notas": "Separa parâmetros do encontro original de regras para novas aplicações."
+    "notas": "Separa parâmetros do encontro original de regras para novas aplicações.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "4d-pdf",
@@ -234,7 +273,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "O nome do arquivo não comprova aprovação institucional; autoria e versão não confirmadas."
+    "notas": "O nome do arquivo não comprova aprovação institucional; autoria e versão não confirmadas.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "3e-test-card",
@@ -251,55 +293,67 @@
     "data_importacao": null,
     "deriva_de": "strategyzer-test",
     "vigencia": "desconhecida",
-    "notas": "Adapta os quatro campos Strategyzer por orientação do usuário. O DOCX 3e-docx fornece o contexto E3 e um formulário simplificado; não é a origem literal dos quatro campos adotados."
+    "notas": "Adapta os quatro campos Strategyzer por orientação do usuário. O DOCX 3e-docx fornece o contexto E3 e um formulário simplificado; não é a origem literal dos quatro campos adotados.",
+    "titular": "CCEE (adaptação de método da Strategyzer AG)",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "strategyzer-test",
     "titulo": "Test Card Strategyzer 2023",
     "tipo": "original",
-    "arquivo": "assets/strategyzer-test-card-2023.pdf",
+    "arquivo": "https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card",
     "skills": [
       "experimentacao-inovacao"
     ],
-    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "origem": "Publicação oficial Strategyzer, referenciada pelo link; o PDF não é redistribuído.",
     "autor": "Strategyzer AG",
     "versao_declarada": "2023",
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "confirmada",
-    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+    "notas": "Copyright Strategyzer AG; os termos de uso proíbem a redistribuição sem autorização, por isso o PDF foi retirado do pacote em 2026-10-07. Adoção institucional não confirmada.",
+    "titular": "Strategyzer AG",
+    "licenca": "Todos os direitos reservados — Strategyzer AG",
+    "distribuido": false
   },
   {
     "id": "strategyzer-learning",
     "titulo": "Learning Card Strategyzer 2023",
     "tipo": "original",
-    "arquivo": "assets/strategyzer-learning-card-2023.pdf",
+    "arquivo": "https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card",
     "skills": [
       "experimentacao-inovacao"
     ],
-    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "origem": "Publicação oficial Strategyzer, referenciada pelo link; o PDF não é redistribuído.",
     "autor": "Strategyzer AG",
     "versao_declarada": "2023",
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "confirmada",
-    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+    "notas": "Copyright Strategyzer AG; os termos de uso proíbem a redistribuição sem autorização, por isso o PDF foi retirado do pacote em 2026-10-07. Adoção institucional não confirmada.",
+    "titular": "Strategyzer AG",
+    "licenca": "Todos os direitos reservados — Strategyzer AG",
+    "distribuido": false
   },
   {
     "id": "strategyzer-scorecard",
     "titulo": "Innovation Project Scorecard Strategyzer 2023",
     "tipo": "original",
-    "arquivo": "assets/strategyzer-innovation-project-scorecard-2023.pdf",
+    "arquivo": "https://www.strategyzer.com/library/innovation-project-scorecard",
     "skills": [
       "scorecard-inovacao"
     ],
-    "origem": "Publicação oficial Strategyzer preservada em PDF no pacote.",
+    "origem": "Publicação oficial Strategyzer, referenciada pelo link; o PDF não é redistribuído.",
     "autor": "Strategyzer AG",
     "versao_declarada": "2023",
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "confirmada",
-    "notas": "Publicação oficial Strategyzer 2023; licença conforme o PDF. Esta confirmação refere-se à publicação: adoção institucional não confirmada."
+    "notas": "Copyright Strategyzer AG; os termos de uso proíbem a redistribuição sem autorização, por isso o PDF foi retirado do pacote em 2026-10-07. Adoção institucional não confirmada.",
+    "titular": "Strategyzer AG",
+    "licenca": "Todos os direitos reservados — Strategyzer AG",
+    "distribuido": false
   },
   {
     "id": "iqb-rubrica",
@@ -315,7 +369,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "A origem RC6 não comprova norma institucional vigente."
+    "notas": "A origem RC6 não comprova norma institucional vigente.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "potencial-rubrica",
@@ -331,7 +388,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "A origem RC6 não comprova norma institucional vigente."
+    "notas": "A origem RC6 não comprova norma institucional vigente.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "iqb-script",
@@ -347,7 +407,10 @@
     "data_importacao": null,
     "deriva_de": "iqb-rubrica",
     "vigencia": "desconhecida",
-    "notas": "Automatiza cálculo e estrutura; não confirma adequação das evidências."
+    "notas": "Automatiza cálculo e estrutura; não confirma adequação das evidências.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "potencial-script",
@@ -363,7 +426,10 @@
     "data_importacao": null,
     "deriva_de": "potencial-rubrica",
     "vigencia": "desconhecida",
-    "notas": "Automatiza cálculo; não substitui avaliação fundamentada dos critérios."
+    "notas": "Automatiza cálculo; não substitui avaliação fundamentada dos critérios.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "briefing-template",
@@ -379,7 +445,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Não apresentar como modelo oficialmente aprovado."
+    "notas": "Não apresentar como modelo oficialmente aprovado.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "eric-esteira",
@@ -405,7 +474,10 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py."
+    "notas": "Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "experimento-test-template",
@@ -421,7 +493,10 @@
     "data_importacao": null,
     "deriva_de": "strategyzer-test",
     "vigencia": "desconhecida",
-    "notas": "Inclui controles operacionais locais; não é reprodução literal do PDF."
+    "notas": "Inclui controles operacionais locais; não é reprodução literal do PDF.",
+    "titular": "CCEE (adaptação de método da Strategyzer AG)",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "experimento-learning-template",
@@ -437,7 +512,10 @@
     "data_importacao": null,
     "deriva_de": "strategyzer-learning",
     "vigencia": "desconhecida",
-    "notas": "Inclui vínculo ao teste executado; não é reprodução literal do PDF."
+    "notas": "Inclui vínculo ao teste executado; não é reprodução literal do PDF.",
+    "titular": "CCEE (adaptação de método da Strategyzer AG)",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "scorecard-adaptacao",
@@ -453,7 +531,10 @@
     "data_importacao": null,
     "deriva_de": "strategyzer-scorecard",
     "vigencia": "desconhecida",
-    "notas": "Adaptação local; não implica aprovação institucional nem notas demonstradas."
+    "notas": "Adaptação local; não implica aprovação institucional nem notas demonstradas.",
+    "titular": "CCEE (adaptação de método da Strategyzer AG)",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
   },
   {
     "id": "pitch-canvas-company",
@@ -469,7 +550,10 @@
     "data_importacao": "2026-10-07",
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Licença CC BY-SA 4.0 declarada no PDF; requer referência a Best3minutes.com. O canvas não contém dados do projeto."
+    "notas": "Licença CC BY-SA 4.0 declarada no PDF; requer referência a Best3minutes.com. O canvas não contém dados do projeto.",
+    "titular": "Best 3 Minutes (David Beckett); ilustrações de Birgit Smit",
+    "licenca": "CC BY-SA 4.0",
+    "distribuido": true
   },
   {
     "id": "pitch-canvas-adaptacao",
@@ -485,6 +569,9 @@
     "data_importacao": "2026-10-07",
     "deriva_de": "pitch-canvas-company",
     "vigencia": "desconhecida",
-    "notas": "Os blocos do canvas foram traduzidos para perguntas da gestão; não constituem aprovação institucional."
+    "notas": "Os blocos do canvas foram traduzidos para perguntas da gestão; não constituem aprovação institucional.",
+    "titular": "CCEE (usa a estrutura do The Pitch Canvas)",
+    "licenca": "A confirmar (CC BY-SA 4.0 se for adaptação)",
+    "distribuido": true
   }
 ]
