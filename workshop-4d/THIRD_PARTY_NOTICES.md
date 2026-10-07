@@ -36,10 +36,4 @@ Distribuídas em `assets/design-system/assets/fonts/` de cada skill, sob a SIL O
 
 Itens que a Licença de Uso Restrito CCEE não reivindica até que a titularidade seja confirmada.
 
-- Fonte fornecida 3E (3e-docx): licença A confirmar; skills `workshop-3e`, `relatorio-3e`.
-- Transcrição integral 3E (3e-transcricao): licença A confirmar; skills `workshop-3e`, `relatorio-3e`.
-- Fonte fornecida 4D (4d-docx): licença A confirmar; skills `workshop-4d`, `relatorio-4d`.
-- Transcrição integral 4D (4d-transcricao): licença A confirmar; skills `workshop-4d`, `relatorio-4d`.
-- Fonte fornecida 5C (5c-docx): licença A confirmar; skills `workshop-5c`, `relatorio-5c`.
-- Transcrição integral 5C (5c-transcricao): licença A confirmar; skills `workshop-5c`, `relatorio-5c`.
 - Pitch Canvas aplicado à decisão interna (pitch-canvas-adaptacao): licença A confirmar (CC BY-SA 4.0 se for adaptação); skills `relatorio-final-inovacao`.
