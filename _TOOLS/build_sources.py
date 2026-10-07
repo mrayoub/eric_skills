@@ -28,6 +28,13 @@ RETIRED = {
     "strategyzer-innovation-project-scorecard-2023.pdf",
 }
 
+# Fontes tipográficas distribuídas em assets/design-system/assets/fonts/ de cada skill.
+FONT_NOTICES = [
+    ("Montserrat", "Montserrat-OFL.txt"),
+    ("Roboto", "Roboto-OFL.txt"),
+]
+FONTS_DIR = ROOT / "_DESIGN_SYSTEM/assets/fonts"
+
 
 def relative_path(value: str) -> bool:
     path = Path(value)
@@ -159,6 +166,50 @@ def page(skill: str, entries: list[dict], hashes: dict[tuple[str, str], str]) ->
     return "\n".join(lines) + "\n"
 
 
+def notices(entries: list[dict]) -> str:
+    def skills_of(entry: dict) -> str:
+        return ", ".join(f"`{skill}`" for skill in entry["skills"])
+
+    third = sorted((e for e in entries if e["titular"] not in (None, "CCEE")
+                    and not e["titular"].startswith("CCEE")), key=lambda e: e["id"])
+    adapted = sorted((e for e in entries if e["titular"] and e["titular"].startswith("CCEE (")),
+                     key=lambda e: e["id"])
+    pending = sorted((e for e in entries if e["titular"] is None or e["licenca"].startswith("A confirmar")),
+                     key=lambda e: e["id"])
+    lines = ["# Avisos de material de terceiros", "",
+             "Gerado de `_FONTES/manifest.json` por `_TOOLS/build_sources.py`. Não edite manualmente.", "",
+             "A Licença de Uso Restrito CCEE (`LICENSE`) não se aplica aos itens abaixo, que permanecem sob a "
+             "titularidade e as licenças indicadas.", "",
+             "## Material de terceiros", "",
+             "| Fonte | Titular | Licença | Skills | Distribuição |", "|---|---|---|---|---|"]
+    for e in third:
+        where = (f"arquivo `{e['arquivo']}`" if e["distribuido"]
+                 else f"não incluído; referência em {e['arquivo']}")
+        lines.append("| " + " | ".join([cell(e["titulo"]), cell(e["titular"]), cell(e["licenca"]),
+                     skills_of(e), cell(where)]) + " |")
+    lines += ["", "## Adaptações de métodos de terceiros", "",
+              "Conteúdo escrito pela CCEE a partir de métodos de terceiros. Os nomes e os modelos originais "
+              "pertencem aos respectivos titulares, que não endossam estas adaptações.", "",
+              "| Adaptação | Titular | Licença | Skills | Arquivo |", "|---|---|---|---|---|"]
+    for e in adapted:
+        lines.append("| " + " | ".join([cell(e["titulo"]), cell(e["titular"]), cell(e["licenca"]),
+                     skills_of(e), f"`{cell(e['arquivo'])}`"]) + " |")
+    lines += ["", "## Fontes tipográficas", "",
+              "Distribuídas em `assets/design-system/assets/fonts/` de cada skill, sob a SIL Open Font License 1.1, "
+              "cujo texto acompanha as fontes.", ""]
+    for family, license_file in FONT_NOTICES:
+        path = FONTS_DIR / license_file
+        if not path.is_file():
+            raise ValueError(f"Licença de fonte ausente: {path.relative_to(ROOT)}")
+        copyright_line = path.read_text(encoding="utf-8").splitlines()[0].strip()
+        lines.append(f"- **{family}**: {copyright_line}. Licença: SIL Open Font License 1.1 (`{license_file}`).")
+    lines += ["", "## Titularidade a confirmar", "",
+              "Itens que a Licença de Uso Restrito CCEE não reivindica até que a titularidade seja confirmada.", ""]
+    lines += [f"- {cell(e['titulo'])} ({e['id']}): licença {cell(e['licenca'])}; skills {skills_of(e)}."
+              for e in pending] or ["Nenhum item pendente."]
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="verifica fontes e páginas sem escrever")
@@ -168,6 +219,7 @@ def main() -> int:
         hashes = validate_sources(entries)
         skills = sorted({skill for entry in entries for skill in entry["skills"]})
         pages = {ROOT / skill / "references/fontes.md": page(skill, entries, hashes) for skill in skills}
+        pages[ROOT / "THIRD_PARTY_NOTICES.md"] = notices(entries)
         failures = []
         for path, text in pages.items():
             if args.check:
