@@ -1,7 +1,7 @@
 ---
 name: relatorio-final-inovacao
 description: "Produz ou revisa o relatório final e a apresentação executiva de um projeto de inovação, com recomendação defensável para gerentes e tomadores de decisão. Usa o Pitch Canvas — Company Edition para narrar problema, solução, evidências, alternativas, valor estratégico, capacidade de execução e pedido de decisão. Use em qualquer momento da esteira, inclusive para preparação ou versão parcial. Não use para planejar ou analisar uma rodada específica de experimento (use experimentacao-inovacao), nem para redigir o relatório de um workshop 3E, 4D ou 5C."
-license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+license: "Licença de Uso Restrito CCEE, exceto o material do Pitch Canvas (assets/ThePitchCanvas.pdf e references/pitch-canvas-executivo.md), sob CC BY-SA 4.0. Termos em LICENSE e THIRD_PARTY_NOTICES.md."
 compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
 metadata:
   author: "GEIN-CCEE"
@@ -65,4 +65,4 @@ Use [linguagem simples](references/linguagem-dos-entregaveis.md). Em arquivo, si
 
 Se faltarem elementos decisivos, marque `metadata.completeness` como `partial` ou `inconclusive` e identifique exatamente o que a gestão ainda não pode concluir; não contorne o schema nem fabrique fatos para preenchê-lo. Inspecione visualmente PDF/PPTX gerados antes da entrega e corrija cortes, excesso de texto e legibilidade.
 
-**Proveniência:** adaptação da metodologia ERIC deste repositório e de *The Pitch Canvas©: Company Edition*, Best 3 Minutes, arquivo fornecido pelo usuário, licenciado em CC BY-SA 4.0. O canvas estrutura a comunicação; não fornece evidências de um projeto.
+**Proveniência:** adaptação da metodologia ERIC deste repositório e de *The Pitch Canvas©: Company Edition*, Best 3 Minutes, arquivo fornecido pelo usuário, licenciado em CC BY-SA 4.0; a adaptação em `references/pitch-canvas-executivo.md` segue a mesma licença. O canvas estrutura a comunicação; não fornece evidências de um projeto.
