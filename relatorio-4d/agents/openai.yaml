@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relatório 4D"
+  short_description: "Consolida diagnóstico e decisões do 4D"
+  brand_color: "#193C8E"
+  default_prompt: "Use $relatorio-4d para compilar o relatório dos registros D1 a D4."

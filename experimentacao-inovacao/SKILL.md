@@ -1,6 +1,11 @@
 ---
 name: experimentacao-inovacao
 description: "Planeja e analisa experimentos de inovação com pessoas ou operação: escolhe o método pela hipótese (entrevista, think aloud, MVP manual, piloto, comparação A/B e outros), escreve Test Cards e protocolo antes da coleta e, depois da execução, produz Learning Cards, síntese de evidências, recomendação, relatório e apresentação rastreáveis. Use quando o usuário falar em testar uma hipótese, piloto, MVP, teste de usabilidade, análise de sessões, resultados de experimento, Test Card ou Learning Card. Não use para testes automatizados de software nem apenas para o E3 de um workshop 3E (use workshop-3e)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+metadata:
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Experimentação de inovação

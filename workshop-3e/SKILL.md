@@ -1,6 +1,11 @@
 ---
 name: workshop-3e
 description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+metadata:
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Facilitar o 3E

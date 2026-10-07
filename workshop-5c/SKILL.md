@@ -1,6 +1,11 @@
 ---
 name: workshop-5c
 description: "Prepara, facilita ou reconstrói um workshop 5C de cocriação com clientes: C1 contextualizar, C2 compreender a experiência atual, C3 confirmar a experiência desejada, C4 cocriar propostas e C5 conduzir com pitches e créditos de votação. Use para montar roteiro, convite, regras de voto, dinâmicas ou o registro de um encontro com clientes ou agentes. Não use para escrever o relatório consolidado depois do encontro (use relatorio-5c)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+metadata:
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Facilitar o workshop 5C
