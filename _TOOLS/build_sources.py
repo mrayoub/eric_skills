@@ -11,13 +11,21 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 FIELDS = {"id", "titulo", "tipo", "arquivo", "skills", "origem", "autor",
-          "versao_declarada", "data_importacao", "deriva_de", "vigencia", "notas"}
+          "versao_declarada", "data_importacao", "deriva_de", "vigencia", "notas",
+          "titular", "licenca", "distribuido"}
 TYPES = {"original", "transcricao", "adaptacao", "historico", "rubrica", "script"}
 STATUS = {"confirmada", "historica", "desconhecida"}
 PINNED = {
     "assets/Modelo 4D de Aprofundamento.docx": "d5071f2ab0d62e153b8f0bb7e89108a10bca6980d807dbd43c90bbd80fd115e3",
     "assets/Modelo 3E Estruturação da Solução.docx": "530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34",
     "assets/Playbook_Modelo_5C_Centralidade_Cliente.docx": "3b793187dccd6691e124e61b9a407e6f383513d55de255c1049deae31df4e3c7",
+}
+
+# Material de terceiros cuja licença não permite redistribuição; nunca pode voltar a uma skill.
+RETIRED = {
+    "strategyzer-test-card-2023.pdf",
+    "strategyzer-learning-card-2023.pdf",
+    "strategyzer-innovation-project-scorecard-2023.pdf",
 }
 
 
@@ -48,8 +56,17 @@ def load_manifest() -> list[dict]:
         for key in ("autor", "versao_declarada", "data_importacao", "deriva_de"):
             if entry[key] is not None and (not isinstance(entry[key], str) or not entry[key].strip()):
                 raise ValueError(f"{label}: {key} deve ser texto não vazio ou null")
-        if not relative_path(entry["arquivo"]):
-            raise ValueError(f"{label}: arquivo deve ser caminho relativo dentro da skill")
+        if entry["titular"] is not None and (not isinstance(entry["titular"], str) or not entry["titular"].strip()):
+            raise ValueError(f"{label}: titular deve ser texto não vazio ou null")
+        if not isinstance(entry["licenca"], str) or not entry["licenca"].strip():
+            raise ValueError(f"{label}: licenca deve ser texto não vazio")
+        if not isinstance(entry["distribuido"], bool):
+            raise ValueError(f"{label}: distribuido deve ser booleano")
+        if entry["distribuido"]:
+            if not relative_path(entry["arquivo"]):
+                raise ValueError(f"{label}: arquivo deve ser caminho relativo dentro da skill")
+        elif not entry["arquivo"].startswith("https://"):
+            raise ValueError(f"{label}: fonte não distribuída deve apontar para uma URL https://")
         skills = entry["skills"]
         if not isinstance(skills, list) or not skills:
             raise ValueError(f"{label}: skills deve ser lista não vazia")
@@ -82,10 +99,22 @@ def load_manifest() -> list[dict]:
 
 
 def validate_sources(entries: list[dict]) -> dict[tuple[str, str], str]:
+    skill_dirs = [d for d in ROOT.iterdir() if d.is_dir() and (d / "SKILL.md").is_file()]
+    for path in sorted(p for d in skill_dirs for p in d.rglob("*")):
+        if path.name in RETIRED:
+            raise ValueError(f"Material de terceiros não redistribuível presente: {path.relative_to(ROOT)}")
     hashes: dict[tuple[str, str], str] = {}
     copies: dict[str, tuple[str, str]] = {}
     for entry in entries:
         file = entry["arquivo"]
+        if not entry["distribuido"]:
+            name = file.rstrip("/").rsplit("/", 1)[-1]
+            for skill in entry["skills"]:
+                present = [p for p in (ROOT / skill).rglob("*") if name and p.name == name]
+                if present:
+                    raise ValueError(f"Fonte não distribuída presente na skill: {present[0].relative_to(ROOT)}")
+                hashes[entry["id"], skill] = "—"
+            continue
         for skill in entry["skills"]:
             path = ROOT / skill / file
             if not path.is_file():
@@ -112,14 +141,18 @@ def page(skill: str, entries: list[dict], hashes: dict[tuple[str, str], str]) ->
     selected = sorted((entry for entry in entries if skill in entry["skills"]), key=lambda entry: entry["id"])
     lines = ["# Fontes metodológicas", "", "Página gerada de `_FONTES/manifest.json` por `_TOOLS/build_sources.py`. Não edite manualmente.", "",
              "A vigência indica o que está confirmado sobre a fonte. Publicação oficial não equivale a adoção institucional; confira as notas.", "",
-             "| Fonte | Tipo | Arquivo | Deriva de | Vigência | SHA-256 (12 caracteres) | Notas |",
-             "|---|---|---|---|---|---|---|"]
+             "| Fonte | Tipo | Arquivo | Deriva de | Vigência | Titular | Licença | SHA-256 (12 caracteres) | Notas |",
+             "|---|---|---|---|---|---|---|---|---|"]
     for entry in selected:
         parent = lookup.get(entry["deriva_de"])
         derives = f"{parent['titulo']} ({parent['id']})" if parent else "—"
-        link = f"[{cell(entry['arquivo'])}](<../{entry['arquivo']}>)"
+        if entry["distribuido"]:
+            link = f"[{cell(entry['arquivo'])}](<../{entry['arquivo']}>)"
+        else:
+            link = f"[link externo, não incluído]({entry['arquivo']})"
         lines.append("| " + " | ".join([cell(entry["titulo"]), entry["tipo"], link,
-                     cell(derives), entry["vigencia"], hashes[entry["id"], skill][:12], cell(entry["notas"])]) + " |")
+                     cell(derives), entry["vigencia"], cell(entry["titular"] or "a confirmar"),
+                     cell(entry["licenca"]), hashes[entry["id"], skill][:12], cell(entry["notas"])]) + " |")
     lines += ["", "## Vigência a confirmar", ""]
     pending = [entry for entry in selected if entry["vigencia"] == "desconhecida"]
     lines += [f"- {entry['titulo']} ({entry['id']})." for entry in pending] or ["Nenhuma fonte com vigência desconhecida no manifesto."]
