@@ -934,8 +934,21 @@ class PptxLayoutJsonTests(unittest.TestCase):
             self.assertAlmostEqual(prs.slide_width.inches, 13.333, places=2)
             self.assertAlmostEqual(prs.slide_height.inches, 7.5, places=2)
             title_shape = prs.slides[0].shapes[1]
-            self.assertAlmostEqual(title_shape.left.inches, 0.5, places=2)
-            self.assertAlmostEqual(title_shape.top.inches, 0.5, places=2)
+            # executive_presentation.layout.json: titulo_slide em x=16 mm, y=32 mm.
+            self.assertAlmostEqual(title_shape.left.inches, 16 / 25.4, places=2)
+            self.assertAlmostEqual(title_shape.top.inches, 32 / 25.4, places=2)
+            # O logo cabe no slot "logo" (16, 16, 307 x 16 mm) e em 38 x 11 mm, alinhado à direita.
+            logo_shape = prs.slides[0].shapes[0]
+            self.assertLessEqual(logo_shape.width.mm, 38.01)
+            self.assertLessEqual(logo_shape.height.mm, 11.01)
+            self.assertAlmostEqual(logo_shape.left.mm + logo_shape.width.mm, 16 + 307, places=1)
+            self.assertGreaterEqual(logo_shape.top.mm, 16 - 0.01)
+            self.assertLessEqual(logo_shape.top.mm + logo_shape.height.mm, 16 + 16 + 0.01)
+            self.assertLessEqual(logo_shape.top.mm + logo_shape.height.mm, title_shape.top.mm + 0.01)
+            # O texto do corpo usa text_body; sem cor explícita ficaria branco sobre fundo claro.
+            body_shape = prs.slides[0].shapes[2]
+            colors = {str(p.font.color.rgb) for p in body_shape.text_frame.paragraphs if p.text}
+            self.assertEqual(colors, {"30343B"})
 
     def test_custom_layout_file_moves_the_title_box(self):
         # Desvio documentado em relação ao plano 029: um deliverable_type inventado
@@ -1027,7 +1040,7 @@ class PresentationLayoutJsonTests(unittest.TestCase):
 
     def test_uses_real_layout_positions(self):
         out = self.render.render_html(self.content, self.tokens, self.profile)
-        self.assertIn("left: 281.94mm; top: 8.89mm", out)
+        self.assertIn("left: 16mm; top: 16mm", out)  # slot "logo" (faixa do cabeçalho)
         self.assertIn(".slide { position: relative; }", out)
 
     def test_falls_back_without_layout_file(self):

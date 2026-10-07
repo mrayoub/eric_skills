@@ -800,7 +800,7 @@ def load_pptx_layout(deliverable_type: str) -> dict[str, Any] | None:
 def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> None:
     try:
         from pptx import Presentation
-        from pptx.util import Inches, Pt
+        from pptx.util import Inches, Mm, Pt
         from pptx.dml.color import RGBColor
         from pptx.enum.shapes import MSO_SHAPE
     except ImportError as exc:
@@ -823,8 +823,16 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
 
     def slide(title: str, body: str) -> None:
         s = prs.slides.add_slide(prs.slide_layouts[6])
-        logo_x, logo_y, logo_w, _ = box("logo", 11.1, 0.35, 1.7, 0)
-        s.shapes.add_picture(str(logo), logo_x, logo_y, width=logo_w)
+        # O slot "logo" é a faixa do cabeçalho: como no HTML e no PDF, o logo cabe no
+        # slot e em 38 x 11 mm, alinhado à direita e centrado na altura.
+        logo_x, logo_y, logo_w, logo_h = box("logo", 11.1, 0.35, 1.7, 0)
+        picture = s.shapes.add_picture(str(logo), logo_x, logo_y)
+        max_w = min(logo_w, Mm(38))
+        max_h = min(logo_h, Mm(11)) if logo_h else Mm(11)
+        scale = min(max_w / picture.width, max_h / picture.height)
+        picture.width, picture.height = int(picture.width * scale), int(picture.height * scale)
+        picture.left = logo_x + logo_w - picture.width
+        picture.top = logo_y + (logo_h - picture.height) // 2 if logo_h else logo_y
         title_x, title_y, title_w, title_h = box("titulo_slide", .5, .5, 10.3, .8)
         title_box = s.shapes.add_textbox(title_x, title_y, title_w, title_h)
         run = title_box.text_frame.paragraphs[0].add_run()
@@ -841,6 +849,8 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
             para.text = line
             para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(17)
+            # Sem cor explícita, o texto de uma forma herda o branco do tema e some no fundo claro.
+            para.font.color.rgb = RGBColor.from_string(tokens["color"]["text_body"].lstrip("#"))
         footer_x, footer_y, footer_w, footer_h = box("rodape_slide", .6, 7.02, 12.1, .33)
         footer = s.shapes.add_textbox(footer_x, footer_y, footer_w, footer_h)
         footer.text_frame.word_wrap = True
