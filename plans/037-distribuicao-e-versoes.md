@@ -44,13 +44,14 @@ atualização que o usuário roda quando quiser.
 - Cada `SKILL.md` tem no frontmatter (padrão Agent Skills, https://agentskills.io/specification):
   ```yaml
   license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
-  compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   metadata:
+    requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
     author: "GEIN-CCEE"
     version: "1.0.0"
   ```
-  O validador do skill-creator do Claude aceita; o do Codex (`~/.codex/skills/.system/skill-creator/scripts/quick_validate.py`)
-  rejeita `compatibility` por ter lista de campos antiga — decisão do operador: **manter** o campo.
+  Os requisitos ficam em `metadata.requirements`, e não no campo `compatibility` da especificação: o ChatGPT e o
+  validador do Codex aceitam só `name`, `description`, `license`, `allowed-tools` e `metadata` (o upload no ChatGPT
+  recusou `compatibility` em 2026-10-07). Os dois validadores passam nas 12 skills.
 - Cada skill tem `agents/openai.yaml` (só Codex) com `interface.display_name`, `short_description`,
   `brand_color: "#193C8E"` (= `color.document_primary` de `_DESIGN_SYSTEM/tokens.json`) e `default_prompt`.
 - `LICENSE` na raiz; `_TOOLS/sync_shared.py` copia para `<skill>/LICENSE` (cada skill pode ser instalada sozinha).
@@ -122,7 +123,7 @@ Mesmo estilo dos outros scripts de `_TOOLS` (argparse, `--check`, exit 0/1, mens
 - Antes de empacotar, rode (importando ou via subprocess) `sync_shared --check`, `build_sources --check` e
   `build_catalog --check`; se algum falhar, exit 1 sem gerar nada.
 - Valide cada `SKILL.md` com uma checagem própria (não dependa de validador fora do repo): `name` = nome da
-  pasta e no padrão da especificação; `description` 1–1024 caracteres; `compatibility` ≤ 500; `metadata`
+  pasta e no padrão da especificação; `description` 1–1024 caracteres; nenhum campo além de `name`, `description`, `license`, `allowed-tools` e `metadata`; `metadata`
   só com valores string; `license` presente.
 - Gere `_DIST/<skill>.skill` (**nome sem versão** — mantém compatível com quem já usa esses arquivos) como
   ZIP com a pasta da skill na raiz, usando `distributable_files()` do Step 1. Use datas fixas nas entradas

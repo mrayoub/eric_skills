@@ -2,8 +2,8 @@
 name: relatorio-final-inovacao
 description: "Produz ou revisa o relatório final e a apresentação executiva de um projeto de inovação, com recomendação defensável para gerentes e tomadores de decisão. Usa o Pitch Canvas — Company Edition para narrar problema, solução, evidências, alternativas, valor estratégico, capacidade de execução e pedido de decisão. Use em qualquer momento da esteira, inclusive para preparação ou versão parcial. Não use para planejar ou analisar uma rodada específica de experimento (use experimentacao-inovacao), nem para redigir o relatório de um workshop 3E, 4D ou 5C."
 license: "Licença de Uso Restrito CCEE, exceto o material do Pitch Canvas (assets/ThePitchCanvas.pdf e references/pitch-canvas-executivo.md), sob CC BY-SA 4.0. Termos em LICENSE e THIRD_PARTY_NOTICES.md."
-compatibility: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
 metadata:
+  requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
   version: "1.0.0"
 ---
