@@ -42,7 +42,7 @@ Originais e derivados relevantes (confira com `ls`):
 |---|---|
 | `assets/Modelo 4D de Aprofundamento.docx` + `.transcricao.md`; `assets/4d-workshop-playbook-original-rc6.md`; `references/4d-workshop-playbook.md` (adaptação); `references/fonte-4d-e-divergencias.md` | workshop-4d, relatorio-4d |
 | `assets/official-four-d-report.pdf` | relatorio-4d |
-| `assets/Modelo 3E Estruturação da Solução.docx` + `.transcricao.md`; `assets/3e-solution-structuring-playbook-original-rc6.md`; `references/3e-solution-structuring-playbook.md`; `references/fonte-3e-e-divergencias.md`; `assets/test-card.md` | workshop-3e, relatorio-3e |
+| `assets/Modelo 3E Estruturacao da Solucao.docx` + `.transcricao.md`; `assets/3e-solution-structuring-playbook-original-rc6.md`; `references/3e-solution-structuring-playbook.md`; `references/fonte-3e-e-divergencias.md`; `assets/test-card.md` | workshop-3e, relatorio-3e |
 | `assets/Playbook_Modelo_5C_Centralidade_Cliente.docx` + `.transcricao.md`; `references/metodo-5c.md` | workshop-5c, relatorio-5c |
 | `assets/strategyzer-test-card-2023.pdf`, `assets/strategyzer-learning-card-2023.pdf` | experimentacao-inovacao |
 | `assets/strategyzer-innovation-project-scorecard-2023.pdf` | scorecard-inovacao |

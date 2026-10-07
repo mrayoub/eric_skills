@@ -25,7 +25,7 @@
 As 11 skills leem, via o protocolo comum de grilling (`_SHARED/grilling-operacional.md`),
 uma quantidade grande de material fornecido por terceiros: DOCX/PDF de origem (ex.
 `relatorio-4d/assets/official-four-d-report.pdf`, `relatorio-3e/assets/Modelo 3E
-Estruturação da Solução.docx`), transcrições, planilhas, atas e, em alguns casos,
+Estruturacao da Solucao.docx`), transcrições, planilhas, atas e, em alguns casos,
 gravações transcritas de encontros com clientes externos (5C). Nenhuma dessas 11 skills
 nem o protocolo compartilhado contém uma cláusula explícita dizendo que esse conteúdo deve
 ser tratado como **dado a analisar**, nunca como **instrução a seguir** — uma skill que lê
