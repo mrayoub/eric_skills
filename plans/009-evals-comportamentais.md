@@ -15,7 +15,7 @@
 - **Risk**: LOW
 - **Depends on**: none
 - **Category**: tests
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

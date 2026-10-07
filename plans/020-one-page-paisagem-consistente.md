@@ -2,7 +2,7 @@
 
 > **Instruções ao executor:** leia o plano inteiro, execute os passos na ordem e confira os resultados. Na fase de regressão, a falha antiga esperada deve ser demonstrada; depois da correção todos os casos devem passar. Se ocorrer uma condição de parada, reporte o impedimento e não amplie o escopo. Atualize apenas a linha deste plano em `plans/README.md` ao concluir.
 >
-> **Conferência inicial de versão:** `git diff --stat 3404a5c..HEAD -- _DESIGN_SYSTEM/contracts/briefing-one-page.schema.json briefing-inovacao/references/briefing-one-page.schema.json _DESIGN_SYSTEM/tests/test_render.py`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
+> **Conferência inicial de versão:** `git diff --stat 32a103a..HEAD -- _DESIGN_SYSTEM/contracts/briefing-one-page.schema.json briefing-inovacao/references/briefing-one-page.schema.json _DESIGN_SYSTEM/tests/test_render.py`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
 
 ## Status
 
@@ -12,7 +12,7 @@
 - **Risco da correção:** LOW
 - **Depende de:** 012 (fontes geradas); 001 (DONE)
 - **Categoria:** bug
-- **Planejado contra:** commit `3404a5c`, 2026-09-29
+- **Planejado contra:** commit `32a103a`, 2026-09-29
 - **Achado coberto:** A08; seleção de todos os achados autorizada pelo operador
 
 ## Por que importa

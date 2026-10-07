@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat bc8d23b..HEAD -- '*/SKILL.md' '*/agents' _TOOLS _DESIGN_SYSTEM/scripts LICENSE .github`
+> `git diff --stat dabd0e2..HEAD -- '*/SKILL.md' '*/agents' _TOOLS _DESIGN_SYSTEM/scripts LICENSE .github`
 > Qualquer mudança nesses caminhos depois do commit de planejamento precisa ser
 > conferida contra a seção "Current state"; divergência que mude uma premissa é STOP.
 
@@ -18,7 +18,7 @@
 - **Risk**: LOW (não altera instruções nem scripts de entregáveis; acrescenta ferramentas, testes, CI e documentação)
 - **Depends on**: nenhum plano. Independente do 036 — se o 036 já tiver criado `.github/workflows/tests.yml`, não edite esse arquivo; este plano cria um workflow separado.
 - **Category**: distribuição / DX
-- **Planned at**: commit `bc8d23b`, 2026-10-07
+- **Planned at**: commit `dabd0e2`, 2026-10-07
 
 ## Why this matters
 
@@ -26,7 +26,7 @@ As 12 skills são independentes e atualizadas uma a uma, mas hoje os usuários n
 como saber que a cópia deles está desatualizada, e os canais de distribuição divergem:
 
 - `npx skills` (skills.sh) já funciona sem mudança: `npx skills add mrayoub/eric_skills --list`
-  encontra as 12 skills (verificado em 2026-10-07 após o push de `bc8d23b`), e
+  encontra as 12 skills (verificado em 2026-10-07 após o push de `dabd0e2`), e
   `npx skills update` atualiza por skill comparando o hash da pasta. Falta documentar.
 - Os pacotes `.skill` (upload no Claude.ai e instalação manual) são gerados à mão em
   `_DIST/` (no `.gitignore`), estão velhos (`relatorio-4d.skill` tem 46 arquivos; a pasta
@@ -39,7 +39,7 @@ Objetivo: **um único conteúdo, três canais que não quebram um ao outro** —
 `.skill` e clone —, com a versão de cada skill travada pelo CI e um verificador de
 atualização que o usuário roda quando quiser.
 
-## Current state (em `bc8d23b`; confira)
+## Current state (em `dabd0e2`; confira)
 
 - Cada `SKILL.md` tem no frontmatter (padrão Agent Skills, https://agentskills.io/specification):
   ```yaml

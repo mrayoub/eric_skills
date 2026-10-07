@@ -49,7 +49,7 @@ Para retomar, prepare um runner que:
 - Só amplie a amostra após validar o diagnóstico e obter autorização para o
   novo número de chamadas. Não repita automaticamente a bateria de 1.056.
 
-Compare as descriptions de `ae5e211` (antes) e `ee8e9f1` (depois), sem alterar
+Compare as descriptions de `21cef5b` (antes) e `9ac08f3` (depois), sem alterar
 a árvore de trabalho atual. Mesmo o diagnóstico de quatro chamadas não
 substitui a comparação completa nem atende sozinho à meta por skill do plano.
 

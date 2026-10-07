@@ -2,7 +2,7 @@
 
 > **Instruções ao executor:** leia o plano inteiro, execute os passos na ordem e confira os resultados. Na fase de regressão, a falha antiga esperada deve ser demonstrada; depois da correção todos os casos devem passar. Se ocorrer uma condição de parada, reporte o impedimento e não amplie o escopo. Atualize apenas a linha deste plano em `plans/README.md` ao concluir.
 >
-> **Conferência inicial de versão:** `git diff --stat 3404a5c..HEAD -- experimentacao-inovacao/references/analise-da-execucao.md experimentacao-inovacao/references/base-metodologica.md _EVALS/experimentacao-inovacao/casos-criterio-local.json _EVALS/experimentacao-inovacao/files/sessoes-criterio-atingido.md _EVALS/experimentacao-inovacao/files/plano-sem-criterio.md _EVALS/experimentacao-inovacao/files/sessoes-coleta-incompleta.md _EVALS/README.md`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
+> **Conferência inicial de versão:** `git diff --stat 32a103a..HEAD -- experimentacao-inovacao/references/analise-da-execucao.md experimentacao-inovacao/references/base-metodologica.md _EVALS/experimentacao-inovacao/casos-criterio-local.json _EVALS/experimentacao-inovacao/files/sessoes-criterio-atingido.md _EVALS/experimentacao-inovacao/files/plano-sem-criterio.md _EVALS/experimentacao-inovacao/files/sessoes-coleta-incompleta.md _EVALS/README.md`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
 
 ## Status
 
@@ -12,7 +12,7 @@
 - **Risco da correção:** LOW
 - **Depende de:** 012 (fontes geradas); 009 (DONE); 016 recomendado antes de exportar os cards
 - **Categoria:** docs
-- **Planejado contra:** commit `3404a5c`, 2026-09-29
+- **Planejado contra:** commit `32a103a`, 2026-09-29
 - **Achado coberto:** A11; seleção de todos os achados autorizada pelo operador
 
 ## Por que importa
@@ -106,7 +106,7 @@ CHECK
 
 ### Passo 3: Documentar execução posterior e limites da validação local
 
-Em _EVALS/README.md, adicione seção do conjunto complementar e caminho explícito. Mantenha intacta a checagem dos 11 conjuntos/22 casos originais. Informe que a validação acima confere só estrutura e insumos; comportamento requer execução posterior, com autorização específica de custo. Descreva comparação da versão-base 3404a5c e versão corrigida com os mesmos casos, em contextos novos e sem fornecer expectativas ao agente. Não criar benchmark fictício nem marcar comportamento como aprovado.
+Em _EVALS/README.md, adicione seção do conjunto complementar e caminho explícito. Mantenha intacta a checagem dos 11 conjuntos/22 casos originais. Informe que a validação acima confere só estrutura e insumos; comportamento requer execução posterior, com autorização específica de custo. Descreva comparação da versão-base 32a103a e versão corrigida com os mesmos casos, em contextos novos e sem fornecer expectativas ao agente. Não criar benchmark fictício nem marcar comportamento como aprovado.
 
 **Verificar**:
 

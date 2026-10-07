@@ -6,7 +6,7 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 80b17a5..HEAD -- '*/assets' '*/references/fonte-*' _TOOLS`
+> `git diff --stat 452dda4..HEAD -- '*/assets' '*/references/fonte-*' _TOOLS`
 > Os originais em `assets/` não deveriam ter mudado; se mudaram, STOP.
 
 ## Status
@@ -18,7 +18,7 @@
 - **Risk**: LOW
 - **Depends on**: 001 (`_TOOLS/sync_shared.py`)
 - **Category**: docs
-- **Planned at**: commit `80b17a5`, reconciliado em 2026-09-29
+- **Planned at**: commit `452dda4`, reconciliado em 2026-09-29
 
 ## Why this matters
 

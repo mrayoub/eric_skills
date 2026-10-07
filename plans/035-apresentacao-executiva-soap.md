@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 8472652..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/pdf_reportlab.py _DESIGN_SYSTEM/tokens.json _DESIGN_SYSTEM/layouts/executive_presentation.layout.json _DESIGN_SYSTEM/scripts/validators _DESIGN_SYSTEM/tests/test_render.py experimentacao-inovacao/references/entregaveis.md _SAMPLES_ENTREGAVEIS/executive_presentation`
+> `git diff --stat 0eac9a9..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/pdf_reportlab.py _DESIGN_SYSTEM/tokens.json _DESIGN_SYSTEM/layouts/executive_presentation.layout.json _DESIGN_SYSTEM/scripts/validators _DESIGN_SYSTEM/tests/test_render.py experimentacao-inovacao/references/entregaveis.md _SAMPLES_ENTREGAVEIS/executive_presentation`
 > Os Planos 032–034 terão mudado parte desses arquivos. Em especial, confira o
 > `layout.json` da apresentação (ver STOP conditions).
 
@@ -18,7 +18,7 @@
 - **Risk**: MED (regras novas de conteúdo podem recusar apresentações que hoje passam — é o objetivo)
 - **Depends on**: `plans/034-pdf-reportlab-relatorios.md` DONE com aprovação visual do operador.
 - **Category**: qualidade dos entregáveis
-- **Planned at**: commit `8472652`, 2026-10-05
+- **Planned at**: commit `0eac9a9`, 2026-10-05
 
 ## Why this matters
 
@@ -40,7 +40,7 @@ tipografia de slide nos tokens e faz os dois formatos lerem dali.
 
 ## Current state
 
-### Slot do layout (versão commitada em `8472652`)
+### Slot do layout (versão commitada em `0eac9a9`)
 
 `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` — tela 338,66 × 190,5 mm, coordenadas a partir do **topo**:
 

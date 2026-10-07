@@ -7,7 +7,7 @@
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 8472652..HEAD -- _DESIGN_SYSTEM _TOOLS _SAMPLES_ENTREGAVEIS`
+> `git diff --stat 0eac9a9..HEAD -- _DESIGN_SYSTEM _TOOLS _SAMPLES_ENTREGAVEIS`
 > Os Planos 032–035 terão mudado esses caminhos. Confira que o que eles
 > descrevem está presente (`pdf_reportlab.py` cobrindo os 5 layouts, portão
 > `pdf_quality.py`, `--pdf-engine`); qualquer outra divergência é STOP.
@@ -19,7 +19,7 @@
 - **Risk**: MED (muda o padrão de todos os PDFs; aprovado tipo a tipo nos gates dos Planos 032–035)
 - **Depends on**: `plans/035-apresentacao-executiva-soap.md` DONE, com as aprovações visuais do operador registradas nos Planos 032, 034 e 035.
 - **Category**: dependências / portabilidade
-- **Planned at**: commit `8472652`, 2026-10-05
+- **Planned at**: commit `0eac9a9`, 2026-10-05
 
 ## Why this matters
 

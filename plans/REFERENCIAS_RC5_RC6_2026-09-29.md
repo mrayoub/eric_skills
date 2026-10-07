@@ -8,7 +8,7 @@ As cópias compartilhadas estão listadas individualmente para registrar todas a
 
 ## Comparação antes e depois
 
-O levantamento acima é o estado **antes**, registrado em 29/09/2026. O estado **depois** foi conferido na mesma data, sobre o commit `e5bdf3d`, antes de iniciar os planos 020–023. Não houve limpeza ou edição das referências entre as duas leituras. A varredura atual dos pacotes confirmou os mesmos totais; as alterações não relacionadas já presentes no workspace estão fora das onze skills.
+O levantamento acima é o estado **antes**, registrado em 29/09/2026. O estado **depois** foi conferido na mesma data, sobre o commit `d7e5caf`, antes de iniciar os planos 020–023. Não houve limpeza ou edição das referências entre as duas leituras. A varredura atual dos pacotes confirmou os mesmos totais; as alterações não relacionadas já presentes no workspace estão fora das onze skills.
 
 | Medida | Antes | Depois | Variação |
 | --- | ---: | ---: | ---: |

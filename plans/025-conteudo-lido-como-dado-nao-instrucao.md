@@ -6,7 +6,7 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 2cb5c96..HEAD -- _SHARED/grilling-operacional.md`
+> `git diff --stat 857d0b7..HEAD -- _SHARED/grilling-operacional.md`
 > Se o arquivo mudou desde que este plano foi escrito, compare o trecho de
 > "Current state" abaixo com o arquivo atual antes de prosseguir; em caso de
 > divergência, trate como condição de STOP.
@@ -18,7 +18,7 @@
 - **Risk**: LOW
 - **Depends on**: 001 (`_TOOLS/sync_shared.py`)
 - **Category**: security
-- **Planned at**: commit `2cb5c96`, 2026-10-02
+- **Planned at**: commit `857d0b7`, 2026-10-02
 
 ## Por que isto importa
 
