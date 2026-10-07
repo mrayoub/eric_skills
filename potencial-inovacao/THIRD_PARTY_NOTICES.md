@@ -22,7 +22,7 @@ Conteúdo escrito pela CCEE a partir de métodos de terceiros. Os nomes e os mod
 | Test Card adaptado para o 3E | CCEE (adaptação de método da Strategyzer AG) | Licença de Uso Restrito CCEE | `workshop-3e`, `relatorio-3e` | `assets/test-card.md` |
 | Learning Card operacional | CCEE (adaptação de método da Strategyzer AG) | Licença de Uso Restrito CCEE | `experimentacao-inovacao` | `assets/learning-card.md` |
 | Test Card operacional | CCEE (adaptação de método da Strategyzer AG) | Licença de Uso Restrito CCEE | `experimentacao-inovacao` | `assets/test-card.md` |
-| Pitch Canvas aplicado à decisão interna | CCEE (usa a estrutura do The Pitch Canvas) | A confirmar (CC BY-SA 4.0 se for adaptação) | `relatorio-final-inovacao` | `references/pitch-canvas-executivo.md` |
+| Pitch Canvas aplicado à decisão interna | CCEE (adaptação de The Pitch Canvas©, Best 3 Minutes) | CC BY-SA 4.0 | `relatorio-final-inovacao` | `references/pitch-canvas-executivo.md` |
 | Estrutura e adaptação do scorecard | CCEE (adaptação de método da Strategyzer AG) | Licença de Uso Restrito CCEE | `scorecard-inovacao` | `references/estrutura-e-adaptacao.md` |
 
 ## Fontes tipográficas
@@ -36,4 +36,4 @@ Distribuídas em `assets/design-system/assets/fonts/` de cada skill, sob a SIL O
 
 Itens que a Licença de Uso Restrito CCEE não reivindica até que a titularidade seja confirmada.
 
-- Pitch Canvas aplicado à decisão interna (pitch-canvas-adaptacao): licença A confirmar (CC BY-SA 4.0 se for adaptação); skills `relatorio-final-inovacao`.
+Nenhum item pendente.
