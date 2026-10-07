@@ -61,15 +61,14 @@ atualização que o usuário roda quando quiser.
 - Repositório **privado** (`mrayoub/eric_skills`). Pode ficar público depois (decisão da GEIN/jurídico);
   tudo neste plano tem de funcionar nos dois casos.
 - Não há `README.md` na raiz nem `.github/`.
-- **Pendência alheia a este plano**: `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` e as 12 cópias
-  estão modificados e não commitados no diretório de trabalho do operador; essa versão quebra 2 testes de
-  `_DESIGN_SYSTEM/tests/test_render.py`. **Não commite esses arquivos** nem os reverta.
+- O layout novo da apresentação executiva foi commitado em `28bcdb4` (com correção do logo e da cor do
+  texto no PPTX); o diretório de trabalho está limpo e a suíte passa inteira.
 
 ## Commands you will need
 
 | Purpose | Command | Expected |
 |---|---|---|
-| Testes | `python3 -m pytest -q -p no:cacheprovider _DESIGN_SYSTEM/tests _TESTS` | `0 failed` (com o layout do `HEAD`; veja Current state) |
+| Testes | `python3 -m pytest -q -p no:cacheprovider _DESIGN_SYSTEM/tests _TESTS` | `0 failed` |
 | Sync e fontes | `python3 _TOOLS/sync_shared.py --check && python3 _TOOLS/build_sources.py --check` | exit 0 |
 | Catálogo | `python3 _TOOLS/build_catalog.py --check` | exit 0 |
 | Pacotes | `python3 _TOOLS/build_dist.py` | 12 arquivos em `_DIST/`, exit 0 |
@@ -232,7 +231,6 @@ push do operador — registre no status que ela ficou pendente.
 
 - A especificação do Agent Skills ou o `npx skills` mudaram de forma que `metadata.version` não seja mais
   aceito, ou o `npx skills add . --list` deixar de achar as 12 skills.
-- Algum teste só passa commitando o `executive_presentation.layout.json` modificado do diretório de trabalho.
 - Para documentar o upload no Claude.ai ou a pasta do Codex, a documentação oficial não confirma o caminho.
   Escreva "confira a documentação da ferramenta" em vez de inventar.
 - O job `release` precisaria de um segredo além do `GITHUB_TOKEN` padrão.
