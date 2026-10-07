@@ -2,6 +2,8 @@
 
 Fonte: *The Pitch Canvas©: Company Edition*, Best 3 Minutes, desenvolvido a partir de ideia original de David Beckett; ilustrações de Birgit Smit. PDF em `../assets/ThePitchCanvas.pdf`, uma página, fornecido pelo usuário. Licença CC BY-SA 4.0. Credite **Best3minutes.com** na apresentação e na referência metodológica. Os rótulos abaixo traduzem os blocos do original; esta adaptação para decisão interna é nossa.
 
+*The Pitch Canvas©* é licenciado sob CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); referência obrigatória a Best3minutes.com. Se esta orientação for considerada adaptação do canvas — a tradução dos blocos, por exemplo —, ela também fica sob CC BY-SA 4.0, e não sob a licença da CCEE. Veja `THIRD_PARTY_NOTICES.md`.
+
 ## Tradução dos blocos
 
 | Bloco do canvas | Pergunta para a gestão | Evidência ou visual que pode sustentar |
