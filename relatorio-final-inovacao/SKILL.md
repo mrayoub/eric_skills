@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE, exceto o material do Pitch Canvas (asse
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Relatório final e apresentação da esteira
