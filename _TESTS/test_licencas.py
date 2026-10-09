@@ -83,7 +83,7 @@ class AvisosTests(unittest.TestCase):
 
     def test_nenhum_arquivo_distribuido_com_placeholder(self) -> None:
         for skill in SKILLS:
-            for path in skill.rglob("*"):
+            for path in (ROOT / skill).rglob("*"):
                 if path.is_file() and path.suffix in {".md", ".txt", ".json", ".yaml", ".py", ""}:
                     with self.subTest(file=str(path.relative_to(ROOT))):
                         self.assertNotIn("PREENCHER", path.read_text(encoding="utf-8", errors="ignore"))
