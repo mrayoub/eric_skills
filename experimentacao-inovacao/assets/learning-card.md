@@ -1,5 +1,5 @@
 <!-- Adaptação do Learning Card © Strategyzer AG (https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card). O nome e o modelo original pertencem à Strategyzer; esta adaptação não é endossada por ela. -->
-# Learning Card — LC[ID]: [aprendizado focal]
+# LC[ID]: [aprendizado focal]
 
 **Test Card executado:** TC[ID], versão [versão]  
 **Versão e data:** [data da análise]  
