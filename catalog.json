@@ -1,0 +1,66 @@
+{
+  "repository": "mrayoub/eric_skills",
+  "schema_version": "1.0.0",
+  "skills": {
+    "avaliacao-briefing-iqb": {
+      "files": 73,
+      "sha256": "53fe6719cc4667a5f28cbd63305ed2b77823703b3c7980bffbef1d9f8fdc2a93",
+      "version": "1.0.0"
+    },
+    "briefing-inovacao": {
+      "files": 74,
+      "sha256": "3b9341360412f18f820c2000186b285097558d2602a763ecaa752c38d19e2dfb",
+      "version": "1.0.0"
+    },
+    "experimentacao-inovacao": {
+      "files": 83,
+      "sha256": "b288d05fdf85deb5159fdf171e6903f1f9cc97f5b8d92c781256d5c2c66776ed",
+      "version": "1.1.0"
+    },
+    "potencial-inovacao": {
+      "files": 72,
+      "sha256": "20b0601bad726ddb40d1ddb788b11f62bb02ba7ca6af3d2e1259869590a95d29",
+      "version": "1.0.0"
+    },
+    "relatorio-3e": {
+      "files": 76,
+      "sha256": "5cd1d2076d21aff64eadfb0bce360d9ae061efff2a9168db8688c6cbd324a82a",
+      "version": "1.0.0"
+    },
+    "relatorio-4d": {
+      "files": 77,
+      "sha256": "0f20bc7428d309f881d34d5283db3e43885f83d2d005357d9aa381c644108cee",
+      "version": "1.0.0"
+    },
+    "relatorio-5c": {
+      "files": 73,
+      "sha256": "73625d0a0717332b24ab555af2edb3b11af6f77a7e355f86c308c1911fcf1f5c",
+      "version": "1.0.0"
+    },
+    "relatorio-final-inovacao": {
+      "files": 73,
+      "sha256": "bc4b6b80167be9630d41a737d747199bdc2bf0179842c321f9268e18ce78f272",
+      "version": "1.0.0"
+    },
+    "scorecard-inovacao": {
+      "files": 74,
+      "sha256": "d11ff7e7ae1df6fbff40ad3ed9c08890fe5b96103a36ea934c09e7394661daaa",
+      "version": "1.0.0"
+    },
+    "workshop-3e": {
+      "files": 77,
+      "sha256": "7aaf2adb14a81f9edc8f2a82567050a9b1c5231d5b0135c36b305fce18dc6379",
+      "version": "1.0.0"
+    },
+    "workshop-4d": {
+      "files": 76,
+      "sha256": "d4b35b811970a2e45289678ad81a663f7d988c72f578c865735c4ec0c94916cd",
+      "version": "1.0.0"
+    },
+    "workshop-5c": {
+      "files": 73,
+      "sha256": "76719148cec8018dda8b8b417611a6c696eebe4954a5e67c4ab5ba399668c7aa",
+      "version": "1.0.0"
+    }
+  }
+}

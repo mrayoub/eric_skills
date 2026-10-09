@@ -40,3 +40,13 @@ Material de terceiros cuja licença não permite redistribuição entra no manif
 PDFs da Strategyzer (Test Card, Learning Card, Innovation Project Scorecard) estão na lista
 `RETIRED` de `build_sources.py`: se voltarem a qualquer skill, a verificação falha. Material
 produzido por empregados da CCEE no exercício da função tem `titular: "CCEE"`.
+
+## Versões e pacotes
+
+`catalog.json` (raiz) guarda a versão (`metadata.version` do `SKILL.md`) e o hash do conteúdo
+distribuível de cada skill. `python3 _TOOLS/build_catalog.py --check` falha se o conteúdo de uma skill
+mudou sem subir a versão; `--bump [patch|minor|major]` sobe a versão de quem mudou e regrava o catálogo.
+`python3 _TOOLS/build_dist.py` roda as checagens, valida o frontmatter (só `name`, `description`,
+`license`, `allowed-tools` e `metadata`) e gera `_DIST/<skill>.skill` reprodutíveis, `catalog.json` e
+`SHA256SUMS`. O pacote tem exatamente os arquivos que entram no hash, os mesmos que o `npx skills` instala.
+O verificador para usuários fica em `_DESIGN_SYSTEM/scripts/check_updates.py` e é copiado para cada skill.
