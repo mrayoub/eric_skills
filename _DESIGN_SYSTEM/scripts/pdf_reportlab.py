@@ -1,4 +1,4 @@
-"""PDF portátil em ReportLab para cards e resumo do briefing em uma página."""
+"""PDF portátil em ReportLab para cards, resumo do briefing e relatórios."""
 from __future__ import annotations
 
 import html
