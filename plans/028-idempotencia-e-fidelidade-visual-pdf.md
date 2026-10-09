@@ -248,3 +248,17 @@ tipo.
 - Este plano não cobre DOCX/PPTX — isso é o Plano 027 (contrato estrutural,
   mecanismo completamente diferente, já que esses formatos não são
   rasterizados).
+
+## Atualização após os planos 033–036 (2026-10-09)
+
+A revisão visual humana foi realizada para os 18 tipos: `_TOOLS/compare_pdf_engines.py`
+gerou a página de comparação lado a lado, preservada localmente em
+`~/.cache/my_skills-check/cmp-034/index.html`, e o operador aprovou a aparência
+após os ajustes do plano 034 (registro em `plans/README.md`). Os PDFs atuais são
+gerados por ReportLab; a premissa antiga sobre Pango/WeasyPrint não descreve mais
+o motor em produção. O plano 033 também acrescentou uma verificação automática
+de texto fora da página, fonte pequena e caracteres sobrepostos.
+
+Essa revisão manual cobre a necessidade de aprovar a aparência inicial. O
+mecanismo específico proposto acima — imagens golden versionadas e comparação
+automática por similaridade estrutural com limiar calibrado — não foi implementado.
