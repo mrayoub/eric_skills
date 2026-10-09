@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Não gera arquivos nem requer Python; encaminha para as demais skills da esteira."
   author: "GEIN-CCEE"
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Esteira ERIC
@@ -18,6 +18,12 @@ qualquer momento; a etapa é contexto, nunca pré-requisito.
 
 Leia [o protocolo de grilling](references/grilling-operacional.md). Resolva nos arquivos tudo que for pesquisável e
 pergunte só o que decide o encaminhamento. Nunca pergunte o resultado ou a nota desejada.
+
+## Preferências do usuário
+
+No início, leia as preferências locais do usuário conforme [o guia](references/preferencias-do-usuario.md) e aplique-as
+abaixo das regras do método. Quando o usuário pedir uma mudança permanente de comportamento, proponha gravá-la (só esta
+skill ou todas; usuário ou projeto) e só grave com confirmação. "Resetar" volta ao padrão de fábrica.
 
 ## Passos
 

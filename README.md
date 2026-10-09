@@ -59,6 +59,21 @@ nenhum arquivo. Com o repositório privado, defina `GITHUB_TOKEN` para ler o cat
 
 Uma mudança no design system altera o pacote das 12 skills e, portanto, a versão de todas.
 
+## Preferências do usuário
+
+Cada skill aceita ajustes de comportamento do próprio usuário, guardados só na máquina dele e nunca enviados para
+outro lugar. Quando você pede uma mudança permanente ("sempre", "nunca", "daqui para frente"), a skill propõe gravá-la,
+mostra o texto e o alcance (só ela ou todas as skills; você em todos os projetos ou só o projeto atual) e grava com o
+seu "sim". As regras do método continuam valendo acima de qualquer preferência.
+
+- Arquivos: `~/.config/eric-skills/<skill>.md` e `todas.md`; no projeto, `.eric/preferencias/`.
+- Ver: `python3 <skill>/scripts/preferencias.py listar`.
+- Padrão de fábrica: `python3 <skill>/scripts/preferencias.py resetar <skill>` ou `resetar --todas-as-skills`
+  (guarda uma cópia `.bak`).
+
+Funciona no Claude Code e no Codex locais. No Claude.ai e no ChatGPT, que não guardam arquivos entre conversas,
+cole a preferência nas instruções do Projeto ou na memória do app.
+
 ## Licença
 
 Conteúdo da CCEE sob a Licença de Uso Restrito CCEE ([`LICENSE`](LICENSE)). Material de terceiros está

@@ -63,6 +63,7 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
         (ROOT / "_ERIC_CONTEXT/README.md", "eric-esteira.md", False),
         (ROOT / "_SHARED/grilling-operacional.md", "grilling-operacional.md", False),
         (ROOT / "_SHARED/linguagem-dos-entregaveis.md", "linguagem-dos-entregaveis.md", False),
+        (ROOT / "_SHARED/preferencias-do-usuario.md", "preferencias-do-usuario.md", False),
     ]
     for src, name, optional in references:
         dst = skill / "references" / name
@@ -70,6 +71,10 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
             continue
         if not dst.is_file() or digest(src) != digest(dst):
             result.append(("copy", dst, src))
+    # Script de preferências locais do usuário (plano 043): igual em todas as skills.
+    prefs_src, prefs_dst = ROOT / "_SHARED/preferencias.py", skill / "scripts/preferencias.py"
+    if not prefs_dst.is_file() or digest(prefs_src) != digest(prefs_dst):
+        result.append(("copy", prefs_dst, prefs_src))
     # Licença e avisos de terceiros acompanham cada skill, que pode ser instalada sem o restante do repositório.
     for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
         src, dst = ROOT / name, skill / name
@@ -100,6 +105,7 @@ def main() -> int:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
                     ROOT / "_SHARED/grilling-operacional.md",
                     ROOT / "_SHARED/linguagem-dos-entregaveis.md", ROOT / "LICENSE",
+                    ROOT / "_SHARED/preferencias.py", ROOT / "_SHARED/preferencias-do-usuario.md",
                     ROOT / "THIRD_PARTY_NOTICES.md"]
         for path in required:
             if not path.exists():
