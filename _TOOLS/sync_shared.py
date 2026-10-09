@@ -76,6 +76,9 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
     prefs_src, prefs_dst = ROOT / "_SHARED/preferencias.py", skill / "scripts/preferencias.py"
     if not prefs_dst.is_file() or digest(prefs_src) != digest(prefs_dst):
         result.append(("copy", prefs_dst, prefs_src))
+    updates_src, updates_dst = ROOT / "_DESIGN_SYSTEM/scripts/check_updates.py", skill / "scripts/check_updates.py"
+    if not updates_dst.is_file() or digest(updates_src) != digest(updates_dst):
+        result.append(("copy", updates_dst, updates_src))
     # Licença e avisos de terceiros acompanham cada skill, que pode ser instalada sem o restante do repositório.
     for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
         src, dst = ROOT / name, skill / name

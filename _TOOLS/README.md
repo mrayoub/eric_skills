@@ -13,7 +13,7 @@ use `python3 _TOOLS/sync_shared.py --dry-run`.
 A sincronização remove arquivos excedentes do design system e lixo dos pacotes.
 O levantamento documental foi incorporado ao protocolo comum de grilling.
 A sincronização também remove as cópias aposentadas dessa referência, mantendo
-`grilling-operacional.md` como fonte única nas doze skills.
+`grilling-operacional.md` como fonte única nas treze skills.
 
 As fontes em `_DESIGN_SYSTEM/assets/fonts/static/` são geradas a partir das fontes
 variáveis por `python3 _TOOLS/make_static_fonts.py` (requer `fonttools` apenas na
@@ -49,7 +49,8 @@ mudou sem subir a versão; `--bump [patch|minor|major]` sobe a versão de quem m
 `python3 _TOOLS/build_dist.py` roda as checagens, valida o frontmatter (só `name`, `description`,
 `license`, `allowed-tools` e `metadata`) e gera `_DIST/<skill>.skill` reprodutíveis, `catalog.json` e
 `SHA256SUMS`. O pacote tem exatamente os arquivos que entram no hash, os mesmos que o `npx skills` instala.
-O verificador para usuários fica em `_DESIGN_SYSTEM/scripts/check_updates.py` e é copiado para cada skill.
+O verificador para usuários fica em `_DESIGN_SYSTEM/scripts/check_updates.py` e é copiado para
+`<skill>/scripts/check_updates.py` nas treze skills, inclusive `esteira-eric`.
 
 ## CI e publicação
 

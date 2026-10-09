@@ -70,6 +70,41 @@ class PreferencesTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertFalse((ROOT / "relatorio-4d" / "prefs").exists())
 
+    def test_project_preferences_require_confirmation_and_change_invalidates_it(self) -> None:
+        add = self.run_prefs("adicionar", "relatorio-4d", "Prefira tabelas curtas.", "--versao", "1.1.0",
+                             "--projeto", str(self.project))
+        self.assertEqual(add.returncode, 0, add.stderr)
+        before = self.run_prefs("ler", "relatorio-4d", "--projeto", str(self.project)).stdout
+        self.assertIn("NÃO CONFIRMADA", before)
+        self.assertEqual(self.run_prefs("confirmar", "--projeto", str(self.project)).returncode, 0)
+        confirmed = self.run_prefs("ler", "relatorio-4d", "--projeto", str(self.project)).stdout
+        self.assertIn("[CONFIRMADA]", confirmed)
+        self.assertNotIn("NÃO CONFIRMADA", confirmed)
+        path = self.project / ".eric/preferencias/relatorio-4d.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\n- [P99] 2026-10-09 · v1.1.0 · Nova opção.\n", encoding="utf-8")
+        changed = self.run_prefs("ler", "relatorio-4d", "--projeto", str(self.project)).stdout
+        self.assertIn("NÃO CONFIRMADA", changed)
+        self.assertTrue((self.base / "usuario/projetos-aceitos.json").is_file())
+
+    def test_symlink_file_or_directory_is_rejected_without_overwriting_target(self) -> None:
+        outside = self.base / "outside.md"
+        outside.write_text("Não modificar", encoding="utf-8")
+        prefs = self.project / ".eric/preferencias"
+        prefs.mkdir(parents=True)
+        (prefs / "todas.md").symlink_to(outside)
+        result = self.run_prefs("adicionar", "relatorio-4d", "Teste", "--versao", "1.1.0",
+                                "--todas", "--projeto", str(self.project))
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("link simbólico recusado", result.stderr)
+        self.assertEqual(outside.read_text(encoding="utf-8"), "Não modificar")
+        (prefs / "todas.md").unlink()
+        prefs.rmdir()
+        prefs.symlink_to(self.base)
+        result = self.run_prefs("adicionar", "relatorio-4d", "Teste", "--versao", "1.1.0",
+                                "--projeto", str(self.project))
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("link simbólico recusado", result.stderr)
+
 
 class DistributionTests(unittest.TestCase):
     def test_every_skill_ships_script_reference_and_section(self) -> None:
@@ -80,6 +115,8 @@ class DistributionTests(unittest.TestCase):
                 self.assertEqual((skill / "scripts/preferencias.py").read_bytes(), script)
                 self.assertEqual((skill / "references/preferencias-do-usuario.md").read_bytes(), guide)
                 self.assertIn("## Preferências do usuário", (skill / "SKILL.md").read_text(encoding="utf-8"))
+                self.assertEqual((skill / "scripts/check_updates.py").read_bytes(),
+                                 (ROOT / "_DESIGN_SYSTEM/scripts/check_updates.py").read_bytes())
 
     def test_script_has_no_network_access(self) -> None:
         source = SCRIPT.read_text(encoding="utf-8")

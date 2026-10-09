@@ -46,7 +46,7 @@ Clone o repositório e crie links simbólicos de cada pasta de skill em `~/.clau
 ## 4. Verificar atualizações
 
 ```bash
-python3 <pasta-da-skill>/assets/design-system/scripts/check_updates.py
+python3 <pasta-da-skill>/scripts/check_updates.py
 ```
 
 Lista cada skill como `atualizada`, `instalada X; disponível Y` ou `alterada localmente`. Não altera
@@ -68,6 +68,8 @@ Cada skill aceita ajustes de comportamento do próprio usuário, guardados só n
 outro lugar. Quando você pede uma mudança permanente ("sempre", "nunca", "daqui para frente"), a skill propõe gravá-la,
 mostra o texto e o alcance (só ela ou todas as skills; você em todos os projetos ou só o projeto atual) e grava com o
 seu "sim". As regras do método continuam valendo acima de qualquer preferência.
+Preferências vindas da pasta do projeto aparecem como não confirmadas até você aprovar o conjunto; qualquer mudança
+nesses arquivos exige nova confirmação.
 
 - Arquivos: `~/.config/eric-skills/<skill>.md` e `todas.md`; no projeto, `.eric/preferencias/`.
 - Ver: `python3 <skill>/scripts/preferencias.py listar`.

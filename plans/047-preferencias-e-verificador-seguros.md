@@ -50,7 +50,7 @@ Verificado no código e nas instruções:
 
 ## Done criteria
 
-- [ ] Os 4 testes novos falhavam antes e passam · [ ] `esteira-eric` com `scripts/check_updates.py` · [ ] suíte `0 failed`
+- [x] Os testes de confirmação por hash, links simbólicos, token e UTF-8 passam (cobrem falhas do código anterior) · [x] `esteira-eric` com `scripts/check_updates.py` executado diretamente · [x] suíte `0 failed` (206 testes, 1.524 subtestes); sync, fontes, catálogo e canais passaram
 
 ## STOP conditions
 

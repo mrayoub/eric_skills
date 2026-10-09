@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -161,6 +162,49 @@ class CheckUpdatesTests(unittest.TestCase):
             result = self.run_check(ROOT, Path(temp) / "ausente.json")
         self.assertEqual(result.returncode, 0)
         self.assertIn("Não foi possível ler o catálogo", result.stdout)
+
+    def test_token_stays_on_trusted_https_hosts(self) -> None:
+        requests = []
+
+        class Response:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                return b'{"skills": {}}'
+
+        class Opener:
+            def open(self, request, timeout):
+                requests.append(request)
+                return Response()
+
+        with mock.patch.dict(os.environ, {"GITHUB_TOKEN": "test-token"}), mock.patch.object(
+                CHECK.urllib.request, "build_opener", return_value=Opener()):
+            with self.assertRaisesRegex(ValueError, "HTTPS"):
+                CHECK.load_catalog("http://api.github.com/test", refresh=True)
+            CHECK.load_catalog("https://example.test/catalog.json", refresh=True)
+            CHECK.load_catalog("https://api.github.com/repos/example/catalog", refresh=True)
+        self.assertIsNone(requests[0].get_header("Authorization"))
+        self.assertEqual(requests[1].get_header("Authorization"), "Bearer test-token")
+        original = CHECK.urllib.request.Request("https://api.github.com/repos/example/catalog",
+                                                headers={"Authorization": "Bearer test-token"})
+        redirected = CHECK.SafeRedirectHandler().redirect_request(
+            original, None, 302, "Found", {}, "https://example.test/redirect")
+        self.assertIsNone(redirected.get_header("Authorization"))
+
+    def test_non_utf8_sibling_is_skipped(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            valid = root / "relatorio-4d"
+            invalid = root / "third-party"
+            valid.mkdir()
+            invalid.mkdir()
+            shutil.copyfile(ROOT / "relatorio-4d/SKILL.md", valid / "SKILL.md")
+            (invalid / "SKILL.md").write_bytes(b"\xff\xfe")
+            self.assertEqual(list(CHECK.installed([root])), ["relatorio-4d"])
 
 
 class PackageContentTests(unittest.TestCase):

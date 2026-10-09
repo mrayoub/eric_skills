@@ -3,9 +3,9 @@ name: esteira-eric
 description: "Porta de entrada da Esteira Robusta de Inovação Colaborativa (ERIC) da CCEE: lê os arquivos e decisões do projeto, identifica em que etapa ele está, mostra o que já existe e o que falta e indica a próxima skill — potencial, briefing, IQB, workshops e relatórios 4D, 3E e 5C, experimentação, scorecard ou relatório final. Use quando o usuário pedir orientação geral sobre a esteira ou o projeto: por onde começar, qual o próximo passo, o que falta, em que etapa estamos, que skill usar. Não use quando o pedido já indicar o entregável ou a skill (por exemplo, \"faça o relatório 4D\" ou \"avalie o IQB\"): nesse caso, use diretamente a skill específica."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
-  requirements: "Não gera arquivos nem requer Python; encaminha para as demais skills da esteira."
+  requirements: "Não gera entregáveis; Python opcional, só para preferências locais e aviso de atualização."
   author: "GEIN-CCEE"
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Esteira ERIC
