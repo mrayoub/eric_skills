@@ -25,4 +25,4 @@ Bloco 1 da skill (aprofundamento e planejamento). O entregável é **Hipóteses 
 
 ## Entregável: Hipóteses com Test Cards
 
-Tipo do design system: um `test_card` por teste, com a hipótese master, as suposições priorizadas e o escopo no conteúdo de apoio ou no caderno. Card sem critério decisivo vai como rascunho, e o conjunto como parcial. O desenho executável (método detalhado, roteiro, registros e cronograma operacional) vai para o Modelo de experimentação.
+Tipo do design system: um `test_card` por teste, com a hipótese master, as suposições priorizadas e o escopo no conteúdo de apoio ou no caderno. Card sem critério decisivo vai como rascunho, e o conjunto como parcial. O desenho executável (método detalhado, roteiro, registros e cronograma operacional) vai para o Modelo de experimentação. Como o `test_card` só tem os quatro campos, suposições priorizadas, hipótese master e escopo saem num `experiment_plan` parcial (`metadata.completeness: "partial"`, sem `content_profile`) quando o pedido for só o bloco 1; o escopo registrado aqui é a fonte da seção `scope` do Modelo de experimentação no bloco 2.

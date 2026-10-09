@@ -1,5 +1,17 @@
 # Modelo 4D: Aprofundamento e Ideacao
 
+## Índice
+
+- [Objetivo](#objetivo)
+- [Integração opcional com a esteira ERIC](#integração-opcional-com-a-esteira-eric)
+- [Visão geral da estrutura](#visão-geral-da-estrutura)
+- [D1: Descongelar (20–25 min)](#d1-descongelar-2025-min)
+- [D2: Diagnosticar (60–70 min)](#d2-diagnosticar-6070-min)
+- [Pausa (10 min)](#pausa-10-min)
+- [D3: Desenhar (45–50 min)](#d3-desenhar-4550-min)
+- [D4: Decidir (25–30 min)](#d4-decidir-2530-min)
+- [Entregáveis obrigatórios do Modelo 4D](#entregáveis-obrigatórios-do-modelo-4d)
+
 _Playbook | Versão 3h_
 
 > Adaptação da referência textual do ERIC_RC6. A ordem D1–D4 é do método; a fase citada na origem é contexto, não condição de uso.

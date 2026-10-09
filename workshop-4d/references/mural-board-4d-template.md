@@ -1,5 +1,18 @@
 # Template Mural — Workshop 4D de Aprofundamento e Ideacao
 
+## Índice
+
+- [Visao geral do board](#visao-geral-do-board)
+- [Area 1 — Abertura](#area-1--abertura)
+- [Area 2 — D1: Percepcao (Unfreeze)](#area-2--d1-percepcao-unfreeze)
+- [Area 3 — D2: Diagnostico (Diagnose)](#area-3--d2-diagnostico-diagnose)
+- [Area 4 — D3: Desenho (Design)](#area-4--d3-desenho-design)
+- [Area 5 — D4: Decisao (Decide)](#area-5--d4-decisao-decide)
+- [Area 6 — Fechamento](#area-6--fechamento)
+- [Convencoes visuais](#convencoes-visuais)
+- [Notas de implementacao](#notas-de-implementacao)
+- [Fonte e adaptações](#fonte-e-adaptações)
+
 > **Nota:** este template nao utiliza emojis, em conformidade com a politica zero emojis do ERIC (ADR-012). As dimensoes sao identificadas por codigos de cor e nomes.
 
 Este documento descreve a estrutura do board Mural a ser criado automaticamente pela skill `facilitate_4d_workshop`. O board segue a metodologia 4D e serve como suporte visual e colaborativo para o workshop.
