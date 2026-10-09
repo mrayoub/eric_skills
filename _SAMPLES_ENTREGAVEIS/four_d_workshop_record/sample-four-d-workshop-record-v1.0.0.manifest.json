@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-four-d-workshop-record",
-  "branding_version": "1.0.0",
-  "content_sha256": "4fda01f2fa50c2d9f3750e0640306700a147d51ee8ec6e23821a2f1a6fa3642b",
+  "branding_version": "1.1.0",
+  "content_sha256": "eb7fa584e3cbee649e404786d2eb9ad704a89ecd31e20112b38bd04799e6225e",
   "content_version": "1.0.0",
   "deliverable_type": "four_d_workshop_record",
   "files": {
-    "sample-four-d-workshop-record-v1.0.0.docx": "2777908ecf34e1c62b49916ad7f2894dd51e2753a0bcec12d8e13a3cd5d51aae",
-    "sample-four-d-workshop-record-v1.0.0.html": "801afad7ef156b247777fa1eeb4ca1116eee7cfc1ba69e90004015bab5c7c333",
-    "sample-four-d-workshop-record-v1.0.0.json": "4fda01f2fa50c2d9f3750e0640306700a147d51ee8ec6e23821a2f1a6fa3642b",
-    "sample-four-d-workshop-record-v1.0.0.md": "6b4deda6989aa4fac52050d1c2d213be77e7452b7a535aad5fdd934feb3eb406",
-    "sample-four-d-workshop-record-v1.0.0.pdf": "7eb2042b0ac55775ab993a75996e1ad638f18856d140e737c56a14f758be7508",
-    "sample-four-d-workshop-record-v1.0.0.txt": "c2ffdf62e46d75899592772858cfa314cd943ba925e1fce3fe5b2eadc6daed97"
+    "sample-four-d-workshop-record-v1.0.0.docx": "17babf6e6898d5d86a7877b50671c93dfcdb2ff4166c2a6ac3241d1d5fa508ba",
+    "sample-four-d-workshop-record-v1.0.0.json": "eb7fa584e3cbee649e404786d2eb9ad704a89ecd31e20112b38bd04799e6225e",
+    "sample-four-d-workshop-record-v1.0.0.md": "e7f00950b25444a215ba02afd8e9e0a47104f3979d191836eef72fc236e36f28",
+    "sample-four-d-workshop-record-v1.0.0.pdf": "db6f6c61e35ba890cddb9b609aba2bce670faa2cf87bac353af676182f815b66",
+    "sample-four-d-workshop-record-v1.0.0.txt": "0bd85422b89f481f93b451c90e43a95613a60d4853e1b2785dd774aa0471dab4"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

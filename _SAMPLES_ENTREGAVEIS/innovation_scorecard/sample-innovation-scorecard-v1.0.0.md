@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Scorecard de maturidade das evidências
+# EXEMPLO FICTÍCIO — Portal de solicitações: maturidade das evidências
+
+ID sample-innovation-scorecard · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -19,6 +21,8 @@ Fontes: FIC-01
 Antes de avançar, obter linha de base, testar o fluxo com público elegível e confirmar dependências operacionais.
 
 Fontes: FIC-01
+
+### Força das evidências — exemplo
 
 | Dimensão | Estado | Lacuna |
 | --- | --- | --- |

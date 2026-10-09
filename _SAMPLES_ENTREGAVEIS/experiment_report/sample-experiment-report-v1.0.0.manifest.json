@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-experiment-report",
-  "branding_version": "1.0.0",
-  "content_sha256": "37d780772a126c50a8e7f631d68aa27e91ae00eb63d0198b335667fde567f993",
+  "branding_version": "1.1.0",
+  "content_sha256": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_report",
   "files": {
-    "sample-experiment-report-v1.0.0.docx": "3357579210444c530f7103e3e49d354e6bc9938349e41bae8f2274d460dc7270",
-    "sample-experiment-report-v1.0.0.html": "26d268c5d1787390bde98891bc4ce558b9722ae9c9ec9cffa28ce747bd275848",
-    "sample-experiment-report-v1.0.0.json": "37d780772a126c50a8e7f631d68aa27e91ae00eb63d0198b335667fde567f993",
-    "sample-experiment-report-v1.0.0.md": "acb444edb2414f0a245780f390da55ab8355f91aaabf2f2eab9e7a0500286910",
-    "sample-experiment-report-v1.0.0.pdf": "259ec1ccaa70d091842856f3c19ae6d1d988f00be084e4fb7fb7ae02c0c9da2a",
-    "sample-experiment-report-v1.0.0.txt": "31ffaee7cbc3951d15fc602218032745206f1cf7403a0f1a45cd3be3afdba574"
+    "sample-experiment-report-v1.0.0.docx": "cb4e721e7491907bc820929e14eb991b1f6bc82588eddcd3e21a4bafb1e3cf0e",
+    "sample-experiment-report-v1.0.0.json": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
+    "sample-experiment-report-v1.0.0.md": "0cd57a70e00b4904135998b66d11a3dccbe936b5425748b6c3edd4dd68ea6485",
+    "sample-experiment-report-v1.0.0.pdf": "5e620227336227f3c6ec961d57f572356b5c9fc4f210ea3b3fcd3449cdab26d5",
+    "sample-experiment-report-v1.0.0.txt": "9523cc0044c0ee817497bf26b2a1f6e207629205e198eb2f0c8b7e9da51966f8"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-four-d-report",
-  "branding_version": "1.0.0",
-  "content_sha256": "5a2f80694a819e5fa5c3db006891b98f77128a4930b25cd419d66c0ee850e08f",
+  "branding_version": "1.1.0",
+  "content_sha256": "93d2d76e2685170a376005dd5fb7dd15cc883ef8d466f5c30b553631b4785768",
   "content_version": "1.0.0",
   "deliverable_type": "four_d_report",
   "files": {
-    "sample-four-d-report-v1.0.0.docx": "d021463269e6e37096a916f901e0c41b8bdccee9f73d3a2c7d75ddd44ad7e0ae",
-    "sample-four-d-report-v1.0.0.html": "ac3d464d47289b3bb7baa5290e1f57603c4f843dc9effdd199ff7f6488542c64",
-    "sample-four-d-report-v1.0.0.json": "5a2f80694a819e5fa5c3db006891b98f77128a4930b25cd419d66c0ee850e08f",
-    "sample-four-d-report-v1.0.0.md": "dc88e63e892fe8e8ac291190bdd74ab9c1cdcbd173179990cb92e5dd3da46cd9",
-    "sample-four-d-report-v1.0.0.pdf": "e7837562e93ede325e3586def7e35021f6b2cb92ee7a317137968e055c4b79dc",
-    "sample-four-d-report-v1.0.0.txt": "82a7e1982e60444f2834043f66e17d55fb02d23ec35c8461ae0ea1379467574f"
+    "sample-four-d-report-v1.0.0.docx": "aaa6bb4325c8b19c0b16c2e98d956f906e981baac319670d6868294237c88e65",
+    "sample-four-d-report-v1.0.0.json": "93d2d76e2685170a376005dd5fb7dd15cc883ef8d466f5c30b553631b4785768",
+    "sample-four-d-report-v1.0.0.md": "5635dde0b1599e24414498060d31ac97210428fb43138ad68ff4d04b3acef837",
+    "sample-four-d-report-v1.0.0.pdf": "8e660f8048e1cd93aa0a43267ea03ad47b2672616e8c44577b69f5ca50fb33c4",
+    "sample-four-d-report-v1.0.0.txt": "8c28a6776c8491120a544cf87437ddb6ab82a019345da987fdb1b72729fa4ee2"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

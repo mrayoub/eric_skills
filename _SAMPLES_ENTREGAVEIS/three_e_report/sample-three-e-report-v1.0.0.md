@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Relatório 3E
+# EXEMPLO FICTÍCIO — Entrada guiada para reduzir solicitações incompletas
+
+ID sample-three-e-report · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -25,6 +27,8 @@ Fontes: FIC-01
 Rota ilustrativa: undecided. A escolha interna, externa ou híbrida depende de capacidade, custo e requisitos ainda não verificados.
 
 Fontes: FIC-01
+
+### Componentes fictícios do MVP
 
 | Componente | Recorte | Dependência |
 | --- | --- | --- |

@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Síntese de evidências e recomendação
+EXEMPLO FICTÍCIO — Verificar volumes e causas antes de ampliar a solução
+
+ID sample-evidence-recommendation · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -31,6 +33,8 @@ Condições
 Avançar somente após critérios verificatórios, guardrails, responsáveis e evidências de operação serem documentados.
 
 Fontes: FIC-01
+
+Alternativas ilustrativas
 
 | Opção | Evidência necessária | Decisão demonstrativa |
 | --- | --- | --- |

@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-experiment-plan",
-  "branding_version": "1.0.0",
-  "content_sha256": "bddf2a5ffdba915c082cbc3f4a9aff51defe0c85b5fa9e20b423469c50c027cb",
+  "branding_version": "1.1.0",
+  "content_sha256": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_plan",
   "files": {
-    "sample-experiment-plan-v1.0.0.docx": "f7f674b48ccf72cfdebeaa8d40085032101626cf956988dccc0b183fd981119c",
-    "sample-experiment-plan-v1.0.0.html": "853653d39708eea8d2c80239b88bc275d159d8cafddd244bf41547d381160cfa",
-    "sample-experiment-plan-v1.0.0.json": "bddf2a5ffdba915c082cbc3f4a9aff51defe0c85b5fa9e20b423469c50c027cb",
-    "sample-experiment-plan-v1.0.0.md": "65c259daac93dd6414352f279147f416333d9c28f64b02fdfa9632e3046e6907",
-    "sample-experiment-plan-v1.0.0.pdf": "01e88c21d4595eda36b1867b5a8a7e06b67eb92f6da27ae3874816ec370dcf86",
-    "sample-experiment-plan-v1.0.0.txt": "45a03a32ddd91cda633df62463883ed7fa60631cebe46177d466342de146e08f"
+    "sample-experiment-plan-v1.0.0.docx": "874e3eca9f62312ddaecc73dd958c9576d9c7d4ea5e6b4d6dd998f093c66c22d",
+    "sample-experiment-plan-v1.0.0.json": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
+    "sample-experiment-plan-v1.0.0.md": "1cb9a94c0363e00a2e82d76eba56743b41d51fbdd924149d54a33b98c3c32ecf",
+    "sample-experiment-plan-v1.0.0.pdf": "772fa9b99c3a4f41fbd0fb27cf1410f9c310901839bf0c26b3d49cafd8e07c13",
+    "sample-experiment-plan-v1.0.0.txt": "96bd28c4da57aeca2dea770d619573f6d636867dba9ee6616e90479eb43ca218"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

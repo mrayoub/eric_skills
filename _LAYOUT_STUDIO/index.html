@@ -355,7 +355,29 @@
     three_e_report: ["e1", "e2", "e3", "route"],
     three_e_workshop_record: ["e1", "e2", "e3"],
   };
-  const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE).sort();
+  // Rótulos em português, iguais a DELIVERABLE_LABELS de _DESIGN_SYSTEM/scripts/render.py.
+  const DELIVERABLE_LABELS = {
+      "briefing": "Briefing",
+      "briefing_one_page": "Resumo do briefing",
+      "briefing_improvement_questionnaire": "Perguntas para melhorar o briefing",
+      "briefing_validation": "Avaliação do briefing",
+      "innovation_potential_assessment": "Avaliação do potencial de inovação",
+      "four_d_workshop_record": "Registro do workshop 4D",
+      "four_d_report": "Relatório 4D",
+      "three_e_workshop_record": "Registro do workshop 3E",
+      "three_e_report": "Relatório 3E",
+      "innovation_scorecard": "Avaliação das evidências de inovação",
+      "experiment_plan": "Plano de experimentação",
+      "test_card": "Cartão de teste",
+      "learning_card": "Cartão de aprendizado",
+      "experiment_report": "Relatório de experimentação",
+      "evidence_recommendation": "Evidências e recomendação",
+      "executive_presentation": "Apresentação executiva",
+      "five_c_workshop_record": "Registro do workshop 5C",
+      "five_c_report": "Relatório 5C"
+  };
+  const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE)
+    .sort((a, b) => (DELIVERABLE_LABELS[a] || a).localeCompare(DELIVERABLE_LABELS[b] || b, "pt-BR"));
   // Opções estruturais que não vêm de um section_key específico do conteúdo.
   const STRUCTURAL_SOURCES = ["titulo_documento", "identificacao_versao", "rodape", "logo", "outro"];
   // Como o conteúdo daquela fonte de dados deve ser exibido dentro do slot —
@@ -411,7 +433,7 @@
     DELIVERABLE_TYPES.forEach((t) => {
       const opt = document.createElement("option");
       opt.value = t;
-      opt.textContent = t;
+      opt.textContent = DELIVERABLE_LABELS[t] || t;
       deliverableSelect.appendChild(opt);
     });
     deliverableSelect.value = state.deliverableType;

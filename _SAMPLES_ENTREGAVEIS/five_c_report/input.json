@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "five_c_report",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO — Relatório 5C de cocriação com clientes",
+  "title": "EXEMPLO FICTÍCIO — Cocriação com clientes sobre solicitações de dados",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
