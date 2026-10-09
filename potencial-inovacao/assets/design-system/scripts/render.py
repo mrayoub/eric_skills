@@ -385,6 +385,7 @@ h1 {{ font-size: 30pt; line-height: 1.1; margin: 6pt 0 16pt; }}
 h2 {{ font-size: 13pt; line-height: 1.15; border-bottom: .75pt solid {color['border']}; margin: 16pt 0 8pt; padding-bottom: 4pt; }}
 h3 {{ font-size: 11pt; line-height: 1.2; margin: 12pt 0 5pt; }}
 p, li {{ orphans: 2; widows: 2; }}
+sup {{ font-size: {tokens['density']['minimum_font_size']}pt; line-height: 0; }}
 .summary {{ font-size: 10.5pt; color: {color['text_strong']}; margin: 0 0 16pt; }}
 .block {{ margin: 8pt 0; break-inside: avoid; }}
 .block.long {{ break-inside: auto; }}
@@ -547,6 +548,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             slide_css += slot_css(".slide h1", "titulo_slide")
             slide_css += slot_css(".slide .slide-content", "corpo_slide")
             slide_css += slot_css(".slide .meta", "rodape_slide")
+            slide_css += " @page { margin: 0; }"
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
@@ -915,6 +917,15 @@ def write_csv_tables(content: dict[str, Any], out: Path, stem: str) -> list[Path
     return written
 
 
+def check_pdf_quality(path: Path, tokens: dict[str, Any]) -> list[str]:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("pdf_quality", ROOT / "scripts/pdf_quality.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.check_pdf(path, min_size=float(tokens["density"]["minimum_font_size"]))
+
+
 def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
                          profile: dict[str, Any], path: Path) -> None:
     import importlib.util
@@ -993,6 +1004,15 @@ def main() -> None:
                 if count != 1:
                     path.unlink(missing_ok=True)
                     raise ValueError(f"{profile['layout']} excedeu uma página ({count}); revise ou divida o conteúdo sem reduzir a fonte")
+            try:
+                problems = check_pdf_quality(path, tokens)
+            except ImportError as exc:
+                path.unlink(missing_ok=True)
+                raise RuntimeError("Verificação de qualidade do PDF requer pdfminer.six: pip install pdfminer.six") from exc
+            if problems:
+                path.unlink(missing_ok=True)
+                raise ValueError("PDF reprovado na verificação de qualidade: " + "; ".join(problems[:5])
+                                 + ". Divida o conteúdo ou mude a variante; não reduza a fonte")
             files.append(path)
     if "md" in requested or "txt" in requested:
         markdown = render_md(content)
