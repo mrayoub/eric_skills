@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.0.1"
+  version: "1.1.0"
 ---
 
 # Compilar o Relatório 5C
@@ -25,6 +25,12 @@ nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões de
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
 resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+
+## Preferências do usuário
+
+No início, leia as preferências locais do usuário conforme [o guia](references/preferencias-do-usuario.md) e aplique-as
+abaixo das regras do método. Quando o usuário pedir uma mudança permanente de comportamento, proponha gravá-la (só esta
+skill ou todas; usuário ou projeto) e só grave com confirmação. "Resetar" volta ao padrão de fábrica.
 
 ## Quando usar
 
