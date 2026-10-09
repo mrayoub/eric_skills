@@ -1,8 +1,10 @@
 # Skills de inovação da GEIN-CCEE
 
-Doze skills no padrão aberto [Agent Skills](https://agentskills.io/specification) para a Esteira
+Treze skills no padrão aberto [Agent Skills](https://agentskills.io/specification) para a Esteira
 Robusta de Inovação Colaborativa (ERIC) da CCEE: briefing, avaliação IQB, potencial, workshops e
-relatórios 4D, 3E e 5C, experimentação, scorecard e relatório final. Funcionam no Claude (app e
+relatórios 4D, 3E e 5C, experimentação, scorecard e relatório final, mais a `esteira-eric`, porta de entrada
+que diagnostica a etapa do projeto e indica a próxima skill. Pedidos diretos (por exemplo, "faça o relatório 4D")
+continuam indo direto para a skill específica. Funcionam no Claude (app e
 Claude Code), no ChatGPT/Codex e em outras ferramentas compatíveis.
 
 Cada skill tem versão própria (`metadata.version` no `SKILL.md`) e é atualizada de forma independente.
@@ -11,7 +13,7 @@ O [`catalog.json`](catalog.json) registra a versão publicada de cada uma.
 ## 1. Instalar com `npx skills` (Claude Code, Codex, Cursor, Copilot e outras)
 
 ```bash
-npx skills add mrayoub/eric_skills --all                 # as 12 skills em todas as ferramentas detectadas
+npx skills add mrayoub/eric_skills --all                 # as 13 skills em todas as ferramentas detectadas
 npx skills add mrayoub/eric_skills --skill relatorio-4d  # só uma skill
 npx skills add mrayoub/eric_skills --all -g              # instalação global (todos os projetos)
 npx skills add mrayoub/eric_skills --skill relatorio-4d -a claude-code codex  # ferramentas específicas
