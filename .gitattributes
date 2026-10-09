@@ -1,0 +1,13 @@
+# Texto sempre com LF em qualquer sistema: o hash das skills (catalog.json) não pode mudar no checkout do Windows.
+* text=auto eol=lf
+*.pdf binary
+*.docx binary
+*.pptx binary
+*.png binary
+*.jpg binary
+*.ttf binary
+*.otf binary
+*.skill binary
+*.zip binary
+# CSV usa CRLF pelo padrão do formato (RFC 4180), como o módulo csv do Python grava.
+*.csv -text
