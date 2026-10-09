@@ -81,6 +81,13 @@ class AvisosTests(unittest.TestCase):
         self.assertIn("NÃO se aplica", text)
         self.assertIn("THIRD_PARTY_NOTICES.md", text)
 
+    def test_nenhum_arquivo_distribuido_com_placeholder(self) -> None:
+        for skill in SKILLS:
+            for path in (ROOT / skill).rglob("*"):
+                if path.is_file() and path.suffix in {".md", ".txt", ".json", ".yaml", ".py", ""}:
+                    with self.subTest(file=str(path.relative_to(ROOT))):
+                        self.assertNotIn("PREENCHER", path.read_text(encoding="utf-8", errors="ignore"))
+
     def test_cada_skill_leva_licenca_e_avisos(self) -> None:
         for skill in SKILLS:
             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):

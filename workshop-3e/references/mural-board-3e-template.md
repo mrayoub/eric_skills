@@ -1,5 +1,16 @@
 # Template Mural — Workshop 3E de Estruturacao da Solucao
 
+## Índice
+
+- [Visao geral do board](#visao-geral-do-board)
+- [Area 1 — Abertura](#area-1--abertura)
+- [Area 2 — E1: Esclarecer](#area-2--e1-esclarecer)
+- [Area 3 — E2: Estruturar](#area-3--e2-estruturar)
+- [Area 4 — E3: Experimentar](#area-4--e3-experimentar)
+- [Area 5 — Fechamento](#area-5--fechamento)
+- [Convencoes visuais](#convencoes-visuais)
+- [Notas de implementacao](#notas-de-implementacao)
+
 > **Nota:** este template nao utiliza emojis, em conformidade com a politica zero emojis do ERIC (ADR-012). As etapas sao identificadas por codigos de cor e nomes.
 
 Este documento descreve a estrutura do board Mural a ser criado automaticamente pela skill `facilitate_3e_workshop`. O board segue a metodologia 3E e serve como suporte visual e colaborativo para o workshop.

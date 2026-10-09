@@ -1,5 +1,19 @@
 # Rubrica IQB — adaptação portátil 1.1.0
 
+## Índice
+
+- [Sumario](#sumario)
+- [1. Principios](#1-principios)
+- [2. Escala e calculo](#2-escala-e-calculo)
+- [3. Clareza do problema](#3-clareza-do-problema)
+- [4. Forca das evidencias](#4-forca-das-evidencias)
+- [5. Definicao dos resultados](#5-definicao-dos-resultados)
+- [6. Acionabilidade](#6-acionabilidade)
+- [7. Vetos](#7-vetos)
+- [8. Auditoria de agrupamento](#8-auditoria-de-agrupamento)
+- [9. Casos especiais](#9-casos-especiais)
+- [10. Contrato de avaliacao](#10-contrato-de-avaliacao)
+
 Preserva os 40 critérios, vetos e faixas do ERIC_RC6 1.0.0. O cálculo portátil exige todos os itens com resposta e justificativa explícitas; a auditoria de agrupamento é tarefa do avaliador, não algo que o script pode declarar como concluído sozinho.
 
 ## Sumario

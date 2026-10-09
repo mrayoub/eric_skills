@@ -10,7 +10,7 @@ Por instrução do operador, o plano 008 foi avaliado nesta sessão de Codex ant
 e depois de editar as descriptions, sem chamadas ao Claude Opus. Consulte
 [resultados.md](resultados.md) para as escolhas por consulta e os limites do método.
 
-Para repetir essa revisão, apresente o catálogo de `name` e `description` das onze
+Para repetir essa revisão, apresente o catálogo de `name` e `description` das treze
 skills e cada consulta a um avaliador, peça uma escolha primária ou `nenhuma`,
 registre todas as escolhas antes de compará-las com `should_trigger` e calcule
 `(escolha == skill do conjunto) == should_trigger`. Salve a linha de base antes
@@ -32,7 +32,7 @@ um comando substituto, em vez de observar diretamente a skill nativa.
 
 Para retomar, prepare um runner que:
 
-- Instale as onze skills nativas, incluindo a avaliada, sem um comando duplicado
+- Instale as treze skills nativas, incluindo a avaliada, sem um comando duplicado
   ou substituto. Registre o catálogo recebido por cada sessão e detecte o nome
   real em `Skill` ou a leitura do `SKILL.md` correspondente.
 - Execute sequencialmente, começando com no máximo quatro chamadas autorizadas:
@@ -54,7 +54,7 @@ a árvore de trabalho atual. Mesmo o diagnóstico de quatro chamadas não
 substitui a comparação completa nem atende sozinho à meta por skill do plano.
 
 Rode novamente estes conjuntos sempre que uma `description` mudar. O procedimento
-empírico abaixo mede a competição entre estas onze skills e exige Claude CLI autenticado.
+empírico abaixo mede a competição entre estas treze skills e exige Claude CLI autenticado.
 Peça autorização antes das chamadas de modelo: cada medição completa usa
 11 × 16 × 3 = 528 chamadas; antes e depois somam 1.056 chamadas.
 
