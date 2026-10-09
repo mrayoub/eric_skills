@@ -207,11 +207,26 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     return profile
 
 
+# Rótulos em português para campos técnicos exibidos ao leitor; os demais viram "Nome do campo".
+FIELD_LABELS = {
+    "points": "Pontos", "responsibles": "Responsáveis", "sponsor": "Patrocinador",
+    "owner": "Responsável", "name": "Nome", "score": "Nota", "overall_score": "Nota geral",
+    "classification": "Classificação", "diagnosis": "Diagnóstico", "original": "Original",
+    "analysis": "Análise", "suggestion": "Sugestão", "anti_clustering": "Verificação de notas agrupadas",
+    "triggered": "Acionada", "original_scores": "Notas originais", "span": "Amplitude",
+    "re_evaluation_notes": "Notas da reavaliação",
+}
+
+
+def field_label(key: str) -> str:
+    return FIELD_LABELS.get(key, key.replace("_", " ").capitalize())
+
+
 def block_text(block: dict[str, Any]) -> str:
     data = block.get("data", {})
     def value_text(value: Any) -> str:
         if isinstance(value, dict):
-            return "; ".join(f"{key}: {value_text(item)}" for key, item in value.items())
+            return "; ".join(f"{field_label(key)}: {value_text(item)}" for key, item in value.items())
         if isinstance(value, list):
             return "; ".join(value_text(item) for item in value)
         return "" if value is None else str(value)
@@ -224,7 +239,7 @@ def block_text(block: dict[str, Any]) -> str:
         if key in {"title", "label", "text", "description", "content", "value", "section_key", "layout", "level", "ordered", "headers", "columns", "rows", "tone"}:
             continue
         if value not in (None, "", []):
-            parts.append(f"{key.replace('_', ' ').capitalize()}: {value_text(value)}")
+            parts.append(f"{field_label(key)}: {value_text(value)}")
     return "\n".join(parts) or json.dumps(data, ensure_ascii=False, sort_keys=True)
 
 
@@ -249,7 +264,7 @@ def table_rows(block: dict[str, Any]) -> tuple[list[str], list[list[str]]]:
         else:
             rows.append([str(row)])
     if not headers and not rows:
-        rows = [[key.replace("_", " ").capitalize(), "; ".join(map(str, value)) if isinstance(value, list) else str(value)]
+        rows = [[field_label(key), "; ".join(map(str, value)) if isinstance(value, list) else str(value)]
                 for key, value in data.items() if key not in ("section_key", "layout")]
         headers = ["Campo", "Valor"]
     return headers, rows
