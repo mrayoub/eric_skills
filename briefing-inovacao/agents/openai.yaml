@@ -1,0 +1,5 @@
+interface:
+  display_name: "Briefing de inovação"
+  short_description: "Cria ou revisa o briefing de um desafio"
+  brand_color: "#193C8E"
+  default_prompt: "Use $briefing-inovacao para criar ou revisar o briefing deste desafio."

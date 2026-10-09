@@ -17,7 +17,7 @@
 - **Risk**: LOW
 - **Depends on**: none
 - **Category**: dx
-- **Planned at**: commit `35c3b75` (tag `improve-baseline-2026-09-28`), 2026-09-28
+- **Planned at**: commit `967749d` (tag `improve-baseline-2026-09-28`), 2026-09-28
 
 ## Why this matters
 
@@ -32,7 +32,7 @@ seguros.
 
 ## Current state
 
-- `/Users/mayoub/Desktop/workspaces/my_skills/` — raiz. Repositório git criado em 2026-09-28 (commit `35c3b75`, tag `improve-baseline-2026-09-28`), com `.gitignore` excluindo `_SAMPLE/`, `_OUTPUTS/`, `__pycache__/`, `.DS_Store`.
+- `/Users/mayoub/Desktop/workspaces/my_skills/` — raiz. Repositório git criado em 2026-09-28 (commit `967749d`, tag `improve-baseline-2026-09-28`), com `.gitignore` excluindo `_SAMPLE/`, `_OUTPUTS/`, `__pycache__/`, `.DS_Store`.
 - Skills (pastas com `SKILL.md`): `avaliacao-briefing-iqb`, `briefing-inovacao`,
   `experimentacao-inovacao`, `potencial-inovacao`, `relatorio-3e`, `relatorio-4d`,
   `relatorio-5c`, `scorecard-inovacao`, `workshop-3e`, `workshop-4d`, `workshop-5c`.
@@ -101,7 +101,7 @@ def main() -> None:
 
 ### Step 1: Repositório git — JÁ CONCLUÍDO pelo advisor
 
-`.gitignore`, `git init`, commit `35c3b75` e tag `improve-baseline-2026-09-28` já existem.
+`.gitignore`, `git init`, commit `967749d` e tag `improve-baseline-2026-09-28` já existem.
 Apenas confirme.
 
 **Verify**: `git tag` → contém `improve-baseline-2026-09-28`; `git ls-files | grep -c "^_SAMPLE/"` → `0`.

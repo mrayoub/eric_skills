@@ -1,0 +1,5 @@
+interface:
+  display_name: "Scorecard de inovação"
+  short_description: "Retrata a maturidade das evidências do projeto"
+  brand_color: "#193C8E"
+  default_prompt: "Use $scorecard-inovacao para avaliar a maturidade das evidências deste projeto."

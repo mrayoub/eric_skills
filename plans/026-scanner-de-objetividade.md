@@ -6,7 +6,7 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 2cb5c96..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/validators`
+> `git diff --stat 857d0b7..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/scripts/validators`
 > Se algum desses arquivos mudou desde que este plano foi escrito, compare os
 > trechos de "Current state" abaixo com o código atual antes de prosseguir; em
 > caso de divergência, trate como condição de STOP.
@@ -18,7 +18,7 @@
 - **Risk**: LOW
 - **Depends on**: none
 - **Category**: tech-debt
-- **Planned at**: commit `2cb5c96`, 2026-10-02
+- **Planned at**: commit `857d0b7`, 2026-10-02
 
 ## Por que isto importa
 

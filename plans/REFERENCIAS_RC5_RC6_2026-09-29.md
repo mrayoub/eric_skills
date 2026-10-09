@@ -8,7 +8,7 @@ As cópias compartilhadas estão listadas individualmente para registrar todas a
 
 ## Comparação antes e depois
 
-O levantamento acima é o estado **antes**, registrado em 29/09/2026. O estado **depois** foi conferido na mesma data, sobre o commit `e5bdf3d`, antes de iniciar os planos 020–023. Não houve limpeza ou edição das referências entre as duas leituras. A varredura atual dos pacotes confirmou os mesmos totais; as alterações não relacionadas já presentes no workspace estão fora das onze skills.
+O levantamento acima é o estado **antes**, registrado em 29/09/2026. O estado **depois** foi conferido na mesma data, sobre o commit `d7e5caf`, antes de iniciar os planos 020–023. Não houve limpeza ou edição das referências entre as duas leituras. A varredura atual dos pacotes confirmou os mesmos totais; as alterações não relacionadas já presentes no workspace estão fora das onze skills.
 
 | Medida | Antes | Depois | Variação |
 | --- | ---: | ---: | ---: |
@@ -413,7 +413,7 @@ Preserva critérios, pesos e faixas do ERIC_RC6 1.0.0. A regra de ausência foi 
 Linha 14:
 
 ```text
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 ```
 
 Linha 70:
@@ -839,7 +839,7 @@ Síntese metodológica da **Especificação da Esteira de Inovação**, §§2 e 
 Linha 14:
 
 ```text
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
 ```
 
 Linha 72:

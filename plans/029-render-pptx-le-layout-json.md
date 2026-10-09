@@ -16,7 +16,7 @@
 > pasta primeiro (fora do escopo deste plano decidir isso sozinho).
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat b4bfedd..HEAD -- _DESIGN_SYSTEM/scripts/render.py`
+> `git diff --stat 063841f..HEAD -- _DESIGN_SYSTEM/scripts/render.py`
 > Se o arquivo mudou desde que este plano foi escrito, compare o trecho de
 > "Current state" abaixo com o código atual antes de prosseguir; em caso de
 > divergência, trate como condição de STOP.
@@ -30,7 +30,7 @@
   `_DESIGN_SYSTEM/layouts/executive_presentation.layout.json` existir e estar
   commitado (ver aviso acima)
 - **Category**: tech-debt
-- **Planned at**: commit `b4bfedd`, 2026-10-02
+- **Planned at**: commit `063841f`, 2026-10-02
 
 ## Por que isto importa
 

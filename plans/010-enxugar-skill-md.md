@@ -17,7 +17,7 @@
 - **Risk**: MED (muda o comportamento das skills; mitigado pelas evals do 009)
 - **Depends on**: 001 (sync + `_SHARED/`), 003, 004 (frases de CLI), 007 (README do DS fala do fallback de PDF), 008 (descriptions), 009 (evals — rede de segurança)
 - **Category**: tech-debt
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

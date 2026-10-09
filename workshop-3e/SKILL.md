@@ -1,6 +1,11 @@
 ---
 name: workshop-3e
 description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+metadata:
+  requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Facilitar o 3E
@@ -11,7 +16,7 @@ Prepara, conduz ou registra a solução candidata em E1–E3; preserva decisões
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md) — dinâmicas e tempos.
 - [Test Card](assets/test-card.md) — quatro campos individuais.
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
 [Blueprint Mural](references/mural-board-3e-template.md) opcional: ferramenta autorizada ou registro manual.
 
 ## Grilling

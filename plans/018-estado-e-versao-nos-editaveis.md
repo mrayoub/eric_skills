@@ -2,7 +2,7 @@
 
 > **Instruções ao executor:** leia o plano inteiro, execute os passos na ordem e confira os resultados. Na fase de regressão, a falha antiga esperada deve ser demonstrada; depois da correção todos os casos devem passar. Se ocorrer uma condição de parada, reporte o impedimento e não amplie o escopo. Atualize apenas a linha deste plano em `plans/README.md` ao concluir.
 >
-> **Conferência inicial de versão:** `git diff --stat 3404a5c..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/README.md`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
+> **Conferência inicial de versão:** `git diff --stat 32a103a..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/tests/test_render.py _DESIGN_SYSTEM/README.md`. Compare os trechos abaixo com os arquivos atuais. Alterações das dependências declaradas são esperadas: confira os trechos e registre seu novo commit-base. Diferenças de comportamento não explicadas exigem parar e reportar.
 
 ## Status
 
@@ -12,7 +12,7 @@
 - **Risco da correção:** LOW
 - **Depende de:** 012 (fontes geradas); 017; 001 e 007 (DONE)
 - **Categoria:** bug
-- **Planejado contra:** commit `3404a5c`, 2026-09-29; reconciliado em `ec43e58` após 011–017
+- **Planejado contra:** commit `32a103a`, 2026-09-29; reconciliado em `a7ee9fa` após 011–017
 - **Achado coberto:** A06; seleção de todos os achados autorizada pelo operador
 
 ## Por que importa
@@ -69,7 +69,7 @@ Se esse ambiente temporário não existir, use `PLAN_PYTHON=python3` **somente s
 
 ### Passo 0: Alinhar o estado validado ao estado apresentado
 
-Na revisão em `ec43e58`, `metadata.completeness: null` foi aceito como completo
+Na revisão em `a7ee9fa`, `metadata.completeness: null` foi aceito como completo
 pelo HTML, mas pulou o contrato especializado e a validação semântica. Reproduzido
 com Learning Card sem vínculo e relatório 3E sem seções: `null` aceito, `complete`
 rejeitado. Normalize o estado efetivo em `validate` com

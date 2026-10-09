@@ -1,4 +1,4 @@
-"""PDF portátil em ReportLab para cards e resumo do briefing em uma página."""
+"""PDF portátil em ReportLab para cards, resumo do briefing e relatórios."""
 from __future__ import annotations
 
 import html
@@ -180,15 +180,17 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
                   table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
                   table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]],
                   iqb_widths: dict[str, list[int]]) -> list[Any]:
+    from reportlab.lib.styles import ParagraphStyle
     from reportlab.platypus import Paragraph, Spacer, Table, TableStyle
 
+    caption_style = ParagraphStyle("table_caption", parent=styles["card_title"], spaceAfter=4, keepWithNext=1)
     views = table_views(block) if isinstance(block.get("data", {}).get("dimensions"), dict) else [
         ("", block.get("data", {}).get("title", ""), *table_rows(block))]
     result: list[Any] = []
     palette = styles["_colors"]
     for slug, caption, headings, rows in views:
         if caption:
-            result.extend([Paragraph(_markup(caption), styles["card_title"]), Spacer(1, 4)])
+            result.append(Paragraph(_markup(caption), caption_style))
         ncols = max(1, len(headings))
         matrix = [[Paragraph(_markup(headings[index] if index < len(headings) else ""),
                              styles["table_header"]) for index in range(ncols)]]
@@ -218,7 +220,8 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
 
 def _report_card_grid(block: dict[str, Any], styles: dict[str, Any], width: float) -> list[Any]:
     from reportlab.lib import colors
-    from reportlab.platypus import KeepTogether, Paragraph, Spacer, Table, TableStyle
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.platypus import KeepTogether, Paragraph, Table, TableStyle
 
     data = block.get("data", {})
     cards = data.get("cards", [])
@@ -233,41 +236,56 @@ def _report_card_grid(block: dict[str, Any], styles: dict[str, Any], width: floa
     }
     result: list[Any] = []
     if data.get("title"):
-        result.extend([Paragraph(_markup(data["title"]), styles["card_title"]), Spacer(1, 5)])
+        title_style = ParagraphStyle("grid_title", parent=styles["card_title"], spaceAfter=5, keepWithNext=1)
+        result.append(Paragraph(_markup(data["title"]), title_style))
     gap = 6
     card_width = (width - gap * (columns - 1)) / columns
+    # Uma Table por linha, com cartões nas colunas pares e espaçadores nas ímpares: todas as
+    # células da linha recebem a mesma altura e a soma das larguras é exatamente `width`.
+    col_widths: list[float] = []
+    for index in range(columns):
+        col_widths.append(card_width)
+        if index < columns - 1:
+            col_widths.append(gap)
     for start in range(0, len(cards), columns):
         row = cards[start:start + columns]
         cells: list[Any] = []
-        for card in row:
-            lines: list[Any] = [Paragraph(_markup(card.get("title", "")).upper(), styles["card_title"])]
-            if card.get("value") is not None:
-                lines.append(Paragraph(_markup(card["value"]), styles["metric"]))
-            if card.get("text"):
-                lines.append(Paragraph(_markup(card["text"]), styles["body"]))
-            for item in card.get("items", []):
-                lines.append(Paragraph(_markup("• " + str(item)), styles["body"]))
-            if card.get("citation_ids"):
-                lines.append(Paragraph("".join(f'<super size="7.5" rise="3">[{_markup(ref)}]</super>'
-                                               for ref in card["citation_ids"]), styles["source"]))
-            background, accent = tones.get(card.get("tone", "blue"), tones["blue"])
-            cell = Table([[lines]], colWidths=[card_width])
-            cell.setStyle(TableStyle([
-                ("BACKGROUND", (0, 0), (-1, -1), background),
-                ("LINEBEFORE", (0, 0), (0, -1), 3, accent),
-                ("LEFTPADDING", (0, 0), (-1, -1), 9), ("RIGHTPADDING", (0, 0), (-1, -1), 9),
-                ("TOPPADDING", (0, 0), (-1, -1), 7), ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
-            ]))
-            cells.append(cell)
-        while len(cells) < columns:
-            cells.append("")
-        row_table = Table([cells], colWidths=[card_width] * columns,
-                          hAlign="LEFT", spaceAfter=gap)
-        row_table.setStyle(TableStyle([
-            ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), gap),
+        commands: list[Any] = [
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
             ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
-        ]))
+        ]
+        for index in range(columns):
+            column = index * 2
+            if index < len(row):
+                card = row[index]
+                lines: list[Any] = [Paragraph(_markup(card.get("title", "")).upper(), styles["card_title"])]
+                if card.get("value") is not None:
+                    lines.append(Paragraph(_markup(card["value"]), styles["metric"]))
+                if card.get("text"):
+                    lines.append(Paragraph(_markup(card["text"]), styles["body"]))
+                for item in card.get("items", []):
+                    lines.append(Paragraph(_markup("• " + str(item)), styles["body"]))
+                if card.get("citation_ids"):
+                    lines.append(Paragraph("".join(f'<super size="7.5" rise="3">[{_markup(ref)}]</super>'
+                                                   for ref in card["citation_ids"]), styles["source"]))
+                background, accent = tones.get(card.get("tone", "blue"), tones["blue"])
+                cells.append(lines)
+                commands += [
+                    ("BACKGROUND", (column, 0), (column, 0), background),
+                    ("LINEBEFORE", (column, 0), (column, 0), 3, accent),
+                    ("LEFTPADDING", (column, 0), (column, 0), 9), ("RIGHTPADDING", (column, 0), (column, 0), 9),
+                    ("TOPPADDING", (column, 0), (column, 0), 7), ("BOTTOMPADDING", (column, 0), (column, 0), 7),
+                ]
+            else:
+                cells.append("")
+            if index < columns - 1:
+                cells.append("")
+        row_table = Table([cells], colWidths=col_widths, hAlign="LEFT", spaceAfter=gap)
+        row_table.setStyle(TableStyle(commands))
         result.append(KeepTogether([row_table]))
+    if block.get("citation_ids"):
+        result.append(Paragraph(_cited("", block), styles["source"]))
     return result
 
 

@@ -933,8 +933,21 @@ class PptxLayoutJsonTests(unittest.TestCase):
             self.assertAlmostEqual(prs.slide_width.inches, 13.333, places=2)
             self.assertAlmostEqual(prs.slide_height.inches, 7.5, places=2)
             title_shape = prs.slides[0].shapes[1]
-            self.assertAlmostEqual(title_shape.left.inches, 0.5, places=2)
-            self.assertAlmostEqual(title_shape.top.inches, 0.5, places=2)
+            # executive_presentation.layout.json: titulo_slide em x=16 mm, y=32 mm.
+            self.assertAlmostEqual(title_shape.left.inches, 16 / 25.4, places=2)
+            self.assertAlmostEqual(title_shape.top.inches, 32 / 25.4, places=2)
+            # O logo cabe no slot "logo" (16, 16, 307 x 16 mm) e em 38 x 11 mm, alinhado à direita.
+            logo_shape = prs.slides[0].shapes[0]
+            self.assertLessEqual(logo_shape.width.mm, 38.01)
+            self.assertLessEqual(logo_shape.height.mm, 11.01)
+            self.assertAlmostEqual(logo_shape.left.mm + logo_shape.width.mm, 16 + 307, places=1)
+            self.assertGreaterEqual(logo_shape.top.mm, 16 - 0.01)
+            self.assertLessEqual(logo_shape.top.mm + logo_shape.height.mm, 16 + 16 + 0.01)
+            self.assertLessEqual(logo_shape.top.mm + logo_shape.height.mm, title_shape.top.mm + 0.01)
+            # O texto do corpo usa text_body; sem cor explícita ficaria branco sobre fundo claro.
+            body_shape = prs.slides[0].shapes[2]
+            colors = {str(p.font.color.rgb) for p in body_shape.text_frame.paragraphs if p.text}
+            self.assertEqual(colors, {"30343B"})
 
     def test_custom_layout_file_moves_the_title_box(self):
         # Desvio documentado em relação ao plano 029: um deliverable_type inventado
@@ -1026,8 +1039,22 @@ class PresentationLayoutJsonTests(unittest.TestCase):
 
     def test_uses_real_layout_positions(self):
         out = self.render.render_html(self.content, self.tokens, self.profile)
-        self.assertIn("left: 281.94mm; top: 8.89mm", out)
+        self.assertIn("left: 16mm; top: 16mm", out)  # slot "logo" (faixa do cabeçalho)
         self.assertIn(".slide { position: relative; }", out)
+
+    def test_page_margin_zeroed_when_layout_present(self):
+        out = self.render.render_html(self.content, self.tokens, self.profile)
+        # a regra @page { margin: 0.4in } vem do css() compartilhado e continua lá;
+        # o que importa é que uma regra @page POSTERIOR zera a margem, porque em CSS
+        # a última declaração de uma propriedade em regras @page do mesmo stylesheet
+        # vence. Sem isso, as coordenadas absolutas abaixo ficam deslocadas ~10mm
+        # da posição real do canvas (confirmado por teste manual com WeasyPrint
+        # nesta sessão: @page margin:10mm desloca um elemento position:absolute
+        # left:5mm para x0=15mm no PDF final, não 5mm).
+        style_start = out.index("<style>")
+        style_end = out.index("</style>")
+        style = out[style_start:style_end]
+        assert style.rindex("@page { margin: 0; }") > style.rindex("margin: 0.4in")
 
     def test_falls_back_without_layout_file(self):
         # DELIVERABLE_LABELS[content["deliverable_type"]] é resolvido em
@@ -1320,21 +1347,15 @@ class PdfQualityTests(unittest.TestCase):
                                         capture_output=True, text=True)
                 self.assertEqual(result.returncode, 0, result.stderr)
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
-    def test_weasyprint_samples_gate_known_defect(self):
-        # O layout de apresentação já coloca o rodapé fora da página no PDF
-        # atual; o portão o recusa até que o ReportLab o substitua no Plano 035.
+    def test_weasyprint_samples_pass(self):
+        if not pdf_available():
+            self.skipTest("WeasyPrint/pango indisponível")
         for sample in sorted((ROOT.parent / "_SAMPLES_ENTREGAVEIS").glob("*/input.json")):
             kind = sample.parent.name
             with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
                 result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", temp,
                                          "--formats", "pdf"], capture_output=True, text=True)
-                if kind == "executive_presentation":
-                    self.assertNotEqual(result.returncode, 0)
-                    self.assertIn("texto fora da página", result.stderr)
-                    self.assertFalse(list(Path(temp).glob("*.pdf")))
-                else:
-                    self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_gate_removes_pdf_and_fails(self):
         sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/test_card/input.json"
@@ -1487,6 +1508,73 @@ class ReportLabReportTests(unittest.TestCase):
                 for page in reader.pages:
                     lines = [line.strip() for line in page.extract_text().splitlines() if line.strip()]
                     self.assertNotIn(lines[-2], headings)
+
+    def test_caption_never_orphan(self):
+        for kind in ("four_d_report", "briefing_validation"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                reader = self._render(kind, Path(temp))
+                item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                captions = set()
+                for block in item["blocks"]:
+                    if block["type"] == "table":
+                        captions.update(" ".join(str(legend).split()) for _, legend, _, _ in self.renderer.table_views(block) if legend)
+                    if block["type"] in ("table", "card_grid") and block.get("data", {}).get("title"):
+                        captions.add(" ".join(str(block["data"]["title"]).split()))
+                for page in reader.pages:
+                    lines = [" ".join(line.split()) for line in page.extract_text().splitlines() if line.strip()]
+                    self.assertNotIn(lines[-2], captions)
+
+    def test_report_citation_markers_per_block(self):
+        for kind in self.TYPES:
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                expected = sum(len(block.get("citation_ids", [])) for block in item["blocks"])
+                expected += sum(len(card.get("citation_ids", [])) for block in item["blocks"]
+                                if block["type"] == "card_grid" for card in block.get("data", {}).get("cards", []))
+                reader = self._render(kind, Path(temp))
+                text = "".join(page.extract_text() for page in reader.pages)
+                found = sum(text.count(f"[{citation['id']}]") for citation in item["citations"])
+                self.assertGreaterEqual(found, expected)
+
+    def test_card_rows_equal_height(self):
+        import pdfplumber
+        tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))["color"]
+
+        def rgb(value: str) -> tuple[float, ...]:
+            value = value.lstrip("#")
+            return tuple(round(int(value[i:i + 2], 16) / 255, 2) for i in (0, 2, 4))
+
+        card_fills = {rgb(tokens[name]) for name in ("document_accent_soft", "surface_muted", "danger_soft")}
+        card_fills |= {rgb("#E8F4EE"), rgb("#FFF4D9")}
+        band_fills = {rgb(tokens["document_primary"]), rgb(tokens["document_deep"])}
+        with tempfile.TemporaryDirectory() as temp:
+            self._render("four_d_report", Path(temp))
+            with pdfplumber.open(str(next(Path(temp).glob("*.pdf")))) as pdf:
+                checked = 0
+                for page in pdf.pages:
+                    def fill(rect):
+                        color = rect.get("non_stroking_color")
+                        return tuple(round(float(c), 2) for c in color) if isinstance(color, (list, tuple)) and len(color) == 3 else None
+                    cards = [r for r in page.rects if fill(r) in card_fills and r["width"] > 40 and r["height"] > 15]
+                    bands = [r for r in page.rects if fill(r) in band_fills and r["width"] > 200]
+                    rows: dict[int, list] = {}
+                    for rect in cards:
+                        key = next((k for k in rows if abs(k - rect["top"]) <= 1), round(rect["top"]))
+                        rows.setdefault(key, []).append(rect)
+                    for row in rows.values():
+                        if len(row) < 2:
+                            continue
+                        checked += 1
+                        heights = [r["height"] for r in row]
+                        self.assertLessEqual(max(heights) - min(heights), 1, f"página {page.page_number}: {heights}")
+                        left = min(r["x0"] for r in row)
+                        above = [band for band in bands if band["top"] < row[0]["top"]
+                                 and abs(band["x0"] - left) <= 1]
+                        if above:
+                            band = max(above, key=lambda item: item["top"])
+                            self.assertLessEqual(abs(max(r["x1"] for r in row) - band["x1"]), 1,
+                                                 f"página {page.page_number}: linha não termina na borda da faixa")
+                self.assertGreater(checked, 0)
 
 
 if __name__ == "__main__":
