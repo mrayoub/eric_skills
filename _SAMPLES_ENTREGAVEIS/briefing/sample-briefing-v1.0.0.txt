@@ -12,29 +12,29 @@ Fontes: FIC-01
 
 Descricao detalhada do problema ou oportunidade
 As solicitacoes chegam por canais diferentes e sem informacoes padronizadas, gerando retrabalho para solicitantes e equipes de atendimento.
-Points: As fontes fornecidas relatam duplicidade de pedidos.; O prazo de atendimento nao e visivel para quem solicita.
+Pontos: As fontes fornecidas relatam duplicidade de pedidos.; O prazo de atendimento nao e visivel para quem solicita.
 
 Fontes: FIC-01
 
 Justificativa da relevancia
 O problema consome capacidade operacional e reduz a confianca no processo interno.
-Points: A melhoria esta ligada a eficiencia operacional descrita nas fontes.; A previsibilidade influencia a experiencia das equipes envolvidas.
+Pontos: A melhoria esta ligada a eficiencia operacional descrita nas fontes.; A previsibilidade influencia a experiencia das equipes envolvidas.
 
 Fontes: FIC-01
 
 Resultados esperados
 Reduzir retrabalho e tornar o andamento das solicitacoes compreensivel.
-Points: Diminuir solicitacoes devolvidas por falta de informacao.; Permitir acompanhamento de status pelo solicitante.
+Pontos: Diminuir solicitacoes devolvidas por falta de informacao.; Permitir acompanhamento de status pelo solicitante.
 
 Fontes: FIC-01
 
 Responsavel ainda nao identificado nas fontes.
-Name: Nao informado
+Nome: Nao informado
 
 Fontes: FIC-01
 
 Sponsor ainda nao identificado nas fontes.
-Name: Nao informado
+Nome: Nao informado
 
 Fontes: FIC-01
 

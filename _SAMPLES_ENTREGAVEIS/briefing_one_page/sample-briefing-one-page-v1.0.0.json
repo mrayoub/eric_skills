@@ -16,10 +16,10 @@
         "FIC-01"
       ],
       "data": {
-        "description": "Solicitacoes chegam por canais diferentes e sem informacoes padronizadas.",
+        "description": "Solicitações chegam por canais diferentes e sem informações padronizadas.",
         "layout": "column",
         "points": [
-          "Ha devolucoes por falta de informacao."
+          "Há devoluções por falta de informação."
         ],
         "section_key": "problem_opportunity",
         "title": "Problema ou oportunidade"
@@ -32,13 +32,13 @@
         "FIC-01"
       ],
       "data": {
-        "description": "O problema reduz a eficiencia operacional e a confianca no processo interno.",
+        "description": "O problema reduz a eficiência operacional e a confiança no processo interno.",
         "layout": "column",
         "points": [
           "O retrabalho consome capacidade das equipes."
         ],
         "section_key": "business_relevance",
-        "title": "Relevancia"
+        "title": "Relevância"
       },
       "id": "business-relevance",
       "type": "callout"
@@ -48,10 +48,10 @@
         "FIC-01"
       ],
       "data": {
-        "description": "Tornar as solicitacoes completas, rastreaveis e previsiveis.",
+        "description": "Tornar as solicitações completas, rastreáveis e previsíveis.",
         "layout": "column",
         "points": [
-          "Reduzir devolucoes por falta de informacao."
+          "Reduzir devoluções por falta de informação."
         ],
         "section_key": "expected_outcomes",
         "title": "Resultados esperados"
@@ -65,10 +65,10 @@
       ],
       "data": {
         "responsibles": [
-          "Nao informado"
+          "Não informado"
         ],
         "section_key": "people",
-        "sponsor": "Nao informado"
+        "sponsor": "Não informado"
       },
       "id": "people",
       "type": "table"
