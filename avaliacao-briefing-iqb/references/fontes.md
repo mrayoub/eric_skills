@@ -6,8 +6,8 @@ A vigência indica o que está confirmado sobre a fonte. Publicação oficial n�
 
 | Fonte | Tipo | Arquivo | Deriva de | Vigência | Titular | Licença | SHA-256 (12 caracteres) | Notas |
 |---|---|---|---|---|---|---|---|---|
-| Contexto da esteira ERIC | adaptacao | [references/eric-esteira.md](<../references/eric-esteira.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | dd45108bc5ff | Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py. |
-| Rubrica IQB | rubrica | [references/iqb-rubric.md](<../references/iqb-rubric.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | 0c2358afc007 | A origem RC6 não comprova norma institucional vigente. |
+| Contexto da esteira ERIC | adaptacao | [references/eric-esteira.md](<../references/eric-esteira.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | d963f5ee58f1 | Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py. |
+| Rubrica IQB | rubrica | [references/iqb-rubric.md](<../references/iqb-rubric.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | 384f08f395b0 | A origem RC6 não comprova norma institucional vigente. |
 | Cálculo portátil do IQB | script | [scripts/iqb.py](<../scripts/iqb.py>) | Rubrica IQB (iqb-rubrica) | desconhecida | CCEE | Licença de Uso Restrito CCEE | 257440b81baa | Automatiza cálculo e estrutura; não confirma adequação das evidências. |
 
 ## Vigência a confirmar

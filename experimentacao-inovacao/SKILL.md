@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.2"
+  version: "1.3.3"
 ---
 
 # Experimentação de inovação
@@ -59,7 +59,7 @@ não comprova a hipótese nem autoriza mudar critérios após a coleta.
 2. **Escopo da experimentação:** preserve a hipótese master e o recorte do MVP do 3E; registre versão, público e elegibilidade, objetivos, métricas, denominadores, limiares, amostra, duração e o que fica fora. Efeito do pacote não prova componentes nem causa suposta; contexto de descoberta não é amostra experimental. Adaptações em separado, com data, motivo e responsável.
 3. **Estratégia e cronograma:** ordene os testes pela capacidade de reduzir a incerteza com custo e prazo proporcionais; compare evidência, custo, prazo, risco e limites das opções de método. Monte o cronograma com marcos de construção do MVP e de teste, datas, responsáveis e dependências; prepare protocolo, guardrails, interrupções proporcionais e o gate de início.
 
-**Hipóteses com Test Cards** reúne as suposições priorizadas, as hipóteses e um Test Card individual por teste, com o escopo que delimita a rodada. Critérios verificatórios precedem exposição e coleta. Estratégia e cronograma são a base do modelo de experimentação do bloco 2.
+**Hipóteses com Test Cards** reúne as suposições priorizadas, as hipóteses e um Test Card individual por teste, com o escopo que delimita a rodada. Critérios verificatórios precedem exposição e coleta. Estratégia e cronograma são a base do modelo de experimentação do bloco 2. Quando o pedido for só o bloco 1, as suposições, a hipótese master e o escopo saem num `experiment_plan` parcial (`metadata.completeness: "partial"`, sem perfil) junto dos Test Cards; esse escopo é a fonte da seção `scope` do Modelo de experimentação.
 
 ## Bloco 2 — Execução → entregável **Modelo de experimentação**
 

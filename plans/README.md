@@ -63,7 +63,7 @@ Convenções comuns a todos os planos:
 | 046 | [Publicar só após os testes; publicação idempotente; dependências fixadas](046-ci-e-publicacao-seguros.md) | P1 | S | 041 | TODO |
 | 047 | [Preferências locais e verificador de updates blindados](047-preferencias-e-verificador-seguros.md) | P1 | M | — | TODO |
 | 048 | [Relatório 4D real e metadados pessoais fora dos pacotes](048-material-real-fora-dos-pacotes.md) | P1 | M | — | BLOCKED (decisões do operador) |
-| 049 | [Índice nas referências longas, contato da licença, contagem de skills, bloco 1 da experimentação](049-documentacao-e-pendencias.md) | P2 | S | — | TODO (itens 2 e 3 dependem do operador) |
+| 049 | [Índice nas referências longas, contato da licença, contagem de skills, bloco 1 da experimentação](049-documentacao-e-pendencias.md) | P2 | S | — | DONE (executado em 2026-10-09: índice nas 7 referências longas; contato da licença preenchido (decisão do operador) e teste contra placeholder; "treze skills" no contexto ERIC e no README dos evals (autorizado pelo operador); bloco 1 da experimentação com `experiment_plan` parcial; versões patch nas 13 skills) |
 | 031 | [Corrige offset de `@page margin` no caminho "presentation" e estende `layout.json` para `executive_one_page`/`card_portrait`](031-render-html-offset-fix-e-one-page-card-layout-json.md) | P1 | M | nenhuma (029/030 já mesclados; corrige um defeito no que o 030 entregou) | SUPERSEDED (2026-10-09: a correção do offset de `@page` entrou no 033; o resto tratava sobreposição no PDF gerado do HTML, que o 036 eliminou — o PDF agora sai do ReportLab) |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)

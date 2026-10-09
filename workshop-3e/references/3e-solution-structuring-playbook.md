@@ -1,5 +1,14 @@
 # Modelo 3E: Estruturação da Solução
 
+## Índice
+
+- [Objetivo](#objetivo)
+- [Integração opcional com a esteira ERIC](#integração-opcional-com-a-esteira-eric)
+- [Visão geral da estrutura](#visão-geral-da-estrutura)
+- [E1: Esclarecer](#e1-esclarecer)
+- [E2: Estruturar](#e2-estruturar)
+- [E3: Experimentar](#e3-experimentar)
+
 _Playbook | Versão 3h_
 
 > Adaptação da referência textual do ERIC_RC6. A ordem E1–E3 pertence ao método; a fase da esteira é contexto, não condição de uso.

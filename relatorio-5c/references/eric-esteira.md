@@ -1,6 +1,6 @@
 # ERIC — Esteira Robusta de Inovação Colaborativa
 
-Esta é a referência metodológica comum das onze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
+Esta é a referência metodológica comum das treze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
 
 ## Contexto institucional
 

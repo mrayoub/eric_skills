@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Não gera arquivos nem requer Python; encaminha para as demais skills da esteira."
   author: "GEIN-CCEE"
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Esteira ERIC
