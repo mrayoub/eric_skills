@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Perfis opcionais (metadata.content_profile) que exigem seções além do contrato do tipo, só em versões completas.",
+  "profiles": {
+    "experimentation_model": {
+      "label": "Modelo de experimentação",
+      "deliverable_type": "experiment_plan",
+      "required_sections": {
+        "mvp_build": "MVP a construir",
+        "scope": "Escopo da experimentação",
+        "schedule": "Cronograma de execução",
+        "start_gate": "Gate de início"
+      }
+    },
+    "experimentation_presentation": {
+      "label": "Apresentação da experimentação e direcionamento",
+      "deliverable_type": "executive_presentation",
+      "required_sections": {
+        "mvp_evaluation": "Avaliação do MVP",
+        "direction": "Direcionamento"
+      }
+    },
+    "final_report": {
+      "label": "Relatório final",
+      "deliverable_type": "evidence_recommendation",
+      "required_sections": {
+        "history": "Histórico e recorte vigente",
+        "feasibility": "Viabilidade e execução",
+        "decision": "Parecer e decisão"
+      }
+    }
+  }
+}
