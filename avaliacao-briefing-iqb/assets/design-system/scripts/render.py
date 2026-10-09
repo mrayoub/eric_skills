@@ -10,6 +10,7 @@ import hashlib
 import html
 import io
 import json
+import textwrap
 import re
 from pathlib import Path
 from typing import Any
@@ -132,6 +133,24 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     errors = sorted(Draft202012Validator(schema, registry=registry).iter_errors(content), key=lambda e: str(e.path))
     if errors:
         raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
+
+    # Perfil de conteúdo opcional: exige seções além do contrato do tipo nas versões completas.
+    content_profile = meta.get("content_profile")
+    if content_profile is not None:
+        profiles_file = read_json(ROOT / "content-profiles.json")["profiles"]
+        definition = profiles_file.get(content_profile)
+        if definition is None:
+            raise ValueError(f"metadata.content_profile desconhecido: {content_profile!r}; "
+                             f"use um de {sorted(profiles_file)}")
+        if definition["deliverable_type"] != kind:
+            raise ValueError(f"{content_profile}: perfil de {definition['deliverable_type']}, não de {kind}")
+        if meta.get("completeness") == "complete":
+            present = {block.get("data", {}).get("section_key") for block in content.get("blocks", [])
+                       if block.get("type") != "page_break" and block_text(block).strip()}
+            for key, label in definition["required_sections"].items():
+                if key not in present:
+                    raise ValueError(f"{content_profile}: falta a seção {key} ({label}); "
+                                     "acrescente-a ou marque a versão como parcial")
 
     # O tipo do entregável já aparece no cabeçalho, acima do título; o título diz o assunto.
     title_key = " ".join(str(content.get("title", "")).casefold().split())
@@ -844,7 +863,41 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
     primary = RGBColor.from_string(tokens["color"]["document_primary"].lstrip("#"))
     logo = ROOT / "assets" / "logo_ccee.png"
 
-    def slide(title: str, body: str) -> None:
+    def color(name: str) -> Any:
+        return RGBColor.from_string(tokens["color"][name].lstrip("#"))
+
+    table_size = Pt(max(12, min(14, tokens["typography"]["styles"]["slide_body"]["size"])))
+
+    def add_table(s: Any, table: tuple[str, list[str], list[list[str]]], x: Any, y: Any, width: Any, height: Any) -> None:
+        caption, heads, rows = table
+        top = y
+        if caption:
+            caption_box = s.shapes.add_textbox(x, y, width, Inches(.45))
+            caption_box.text_frame.word_wrap = True
+            run = caption_box.text_frame.paragraphs[0].add_run()
+            run.text = caption
+            run.font.name, run.font.size, run.font.bold = tokens["typography"]["font_brand"], table_size, True
+            run.font.color.rgb = primary
+            top = y + Inches(.5)
+        columns = max(1, len(heads), *(len(row) for row in rows)) if rows else max(1, len(heads))
+        frame = s.shapes.add_table(len(rows) + 1, columns, x, top, width, Inches(.45) * (len(rows) + 1))
+        grid = frame.table
+        for index in range(columns):
+            grid.columns[index].width = int(width / columns)
+        for row_index, values in enumerate([heads, *rows]):
+            for column in range(columns):
+                cell = grid.cell(row_index, column)
+                cell.text = str(values[column]) if column < len(values) else ""
+                cell.fill.solid()
+                cell.fill.fore_color.rgb = color("document_primary") if row_index == 0 else (
+                    color("surface") if row_index % 2 else color("surface_muted"))
+                for paragraph in cell.text_frame.paragraphs:
+                    paragraph.font.name = tokens["typography"]["font_body"]
+                    paragraph.font.size = table_size
+                    paragraph.font.bold = row_index == 0
+                    paragraph.font.color.rgb = color("inverse") if row_index == 0 else color("text_body")
+
+    def slide(title: str, body: str = "", table: tuple[str, list[str], list[list[str]]] | None = None) -> None:
         s = prs.slides.add_slide(prs.slide_layouts[6])
         # O slot "logo" é a faixa do cabeçalho: como no HTML e no PDF, o logo cabe no
         # slot e em 38 x 11 mm, alinhado à direita e centrado na altura.
@@ -861,19 +914,22 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         run = title_box.text_frame.paragraphs[0].add_run()
         run.text, run.font.name, run.font.size, run.font.color.rgb = title, tokens["typography"]["font_brand"], Pt(tokens["typography"]["styles"]["slide_title"]["size"]), primary
         body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
-        body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, body_x, body_y, body_w, body_h)
-        body_box.fill.solid()
-        body_box.fill.fore_color.rgb = RGBColor.from_string(tokens["color"]["document_accent_soft"].lstrip("#"))
-        body_box.line.color.rgb = RGBColor.from_string(tokens["color"]["border"].lstrip("#"))
-        body_box.text_frame.margin_left = Inches(.2)
-        body_box.text_frame.margin_top = Inches(.2)
-        body_box.text_frame.word_wrap = True
-        for line in body.splitlines() or [""]:
-            para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
-            para.text = line
-            para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(tokens["typography"]["styles"]["slide_body"]["size"])
-            # Sem cor explícita, o texto de uma forma herda o branco do tema e some no fundo claro.
-            para.font.color.rgb = RGBColor.from_string(tokens["color"]["text_body"].lstrip("#"))
+        if table is not None:
+            add_table(s, table, body_x, body_y, body_w, body_h)
+        else:
+            body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, body_x, body_y, body_w, body_h)
+            body_box.fill.solid()
+            body_box.fill.fore_color.rgb = color("document_accent_soft")
+            body_box.line.color.rgb = color("border")
+            body_box.text_frame.margin_left = Inches(.2)
+            body_box.text_frame.margin_top = Inches(.2)
+            body_box.text_frame.word_wrap = True
+            for line in body.splitlines() or [""]:
+                para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
+                para.text = line
+                para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(tokens["typography"]["styles"]["slide_body"]["size"])
+                # Sem cor explícita, o texto de uma forma herda o branco do tema e some no fundo claro.
+                para.font.color.rgb = color("text_body")
         footer_x, footer_y, footer_w, footer_h = box("rodape_slide", .6, 7.02, 12.1, .33)
         footer = s.shapes.add_textbox(footer_x, footer_y, footer_w, footer_h)
         footer.text_frame.word_wrap = True
@@ -894,19 +950,29 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             if block["type"] == "heading":
                 title = block_text(block)
             continue
-        line = block_text(block)
         if block["type"] == "table":
-            views = []
+            # Tabela nativa: o texto acumulado sai antes; até 8 linhas por lâmina, cabeçalho repetido.
+            if lines:
+                slide(title, "\n".join(lines))
+                lines = []
+            refs = " [" + ", ".join(block["citation_ids"]) + "]" if block.get("citation_ids") else ""
             for _, legend, heads, rows in table_views(block):
-                text = " | ".join(heads) + "\n" + "\n".join(" | ".join(row) for row in rows)
-                views.append((str(legend) + "\n" if legend else "") + text)
-            line = "\n\n".join(views)
+                for start in range(0, max(len(rows), 1), 8):
+                    slide(title, table=((str(legend) if legend else "") + refs, heads, rows[start:start + 8]))
+                    if not title.endswith("(continuação)"):
+                        title += " (continuação)"
+            continue
+        line = block_text(block)
         if block.get("citation_ids"):
             line += " [" + ", ".join(block["citation_ids"]) + "]"
-        for chunk in [line[i:i+650] for i in range(0, len(line), 650)] or [""]:
-            if sum(len(x) for x in lines) + len(chunk) > 650 or len(lines) >= 8:
+        # Divide em limites de palavra: nenhuma palavra fica partida entre lâminas.
+        chunks = [piece for paragraph in line.split("\n")
+                  for piece in (textwrap.wrap(paragraph, 650, break_long_words=False, break_on_hyphens=False) or [""])]
+        for chunk in chunks:
+            if lines and (sum(len(x) for x in lines) + len(chunk) > 650 or len(lines) >= 8):
                 slide(title, "\n".join(lines))
-                title += " (continuação)"
+                if not title.endswith("(continuação)"):
+                    title += " (continuação)"
                 lines = []
             lines.append(chunk)
     if lines:

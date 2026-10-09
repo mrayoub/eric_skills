@@ -1610,5 +1610,94 @@ class ReportLabReportTests(unittest.TestCase):
                 self.assertGreater(checked, 0)
 
 
+
+class ContentProfileTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        cls.profiles = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))
+
+    def sample(self, kind: str) -> dict:
+        return json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
+
+    def test_without_profile_nothing_changes(self):
+        self.renderer.validate(self.sample("experiment_plan"), self.profiles)
+
+    def test_complete_model_without_required_section_fails(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "experimentation_model"
+        with self.assertRaisesRegex(ValueError, "experimentation_model: falta a seção mvp_build"):
+            self.renderer.validate(item, self.profiles)
+
+    def test_complete_model_with_all_sections_passes(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "experimentation_model"
+        for index, key in enumerate(("mvp_build", "scope", "schedule", "start_gate")):
+            item["blocks"].append({"id": f"extra-{index}", "type": "paragraph",
+                                   "data": {"section_key": key, "text": f"Conteúdo fictício de {key}."},
+                                   "citation_ids": ["FIC-01"]})
+        self.renderer.validate(item, self.profiles)
+
+    def test_partial_version_is_not_blocked(self):
+        item = self.sample("experiment_plan")
+        item["metadata"].update({"content_profile": "experimentation_model", "completeness": "partial"})
+        self.renderer.validate(item, self.profiles)
+
+    def test_profile_of_other_type_or_unknown_fails(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "final_report"
+        with self.assertRaisesRegex(ValueError, "perfil de evidence_recommendation"):
+            self.renderer.validate(item, self.profiles)
+        item["metadata"]["content_profile"] = "inexistente"
+        with self.assertRaisesRegex(ValueError, "content_profile desconhecido"):
+            self.renderer.validate(item, self.profiles)
+
+
+class PptxTablesAndWrapTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        cls.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+
+    def presentation(self, blocks: list[dict]) -> dict:
+        item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json").read_text(encoding="utf-8"))
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"] = [{"id": "h", "type": "heading", "data": {"text": "Seção de teste com conteúdo extenso"}}] + blocks
+        return item
+
+    def render(self, item: dict):
+        from pptx import Presentation
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "out.pptx"
+            self.renderer.render_pptx(item, self.tokens, path)
+            return Presentation(str(path))
+
+    def test_table_is_native_with_repeated_header(self):
+        rows = [[f"L-{index:02d}", f"valor {index}"] for index in range(20)]
+        prs = self.render(self.presentation([{"id": "t", "type": "table", "citation_ids": ["FIC-01"],
+                                              "data": {"title": "Tabela fictícia", "headers": ["Código", "Valor"], "rows": rows}}]))
+        tables = [shape.table for slide in prs.slides for shape in slide.shapes if shape.has_table]
+        self.assertEqual(len(tables), 3)
+        for table in tables:
+            self.assertEqual([table.cell(0, 0).text, table.cell(0, 1).text], ["Código", "Valor"])
+        codes = [table.cell(row, 0).text for table in tables for row in range(1, len(table.rows))]
+        self.assertEqual(codes, [row[0] for row in rows])
+        texts = [shape.text_frame.text for slide in prs.slides for shape in slide.shapes if shape.has_text_frame]
+        self.assertFalse([text for text in texts if "Código | Valor" in text])
+
+    def test_long_text_is_split_between_words(self):
+        words = [f"palavra{index:04d}" for index in range(220)]
+        prs = self.render(self.presentation([{"id": "p", "type": "paragraph", "data": {"text": " ".join(words)}}]))
+        bodies = []
+        for slide in list(prs.slides)[1:]:
+            shapes = [shape for shape in slide.shapes if shape.has_text_frame]
+            if len(shapes) >= 3 and "palavra" in shapes[1].text_frame.text:
+                bodies.append(shapes[1].text_frame.text)
+        self.assertGreater(len(bodies), 1)
+        self.assertEqual(" ".join(" ".join(bodies).split()), " ".join(words))
+        for body in bodies:
+            for token in body.split():
+                self.assertRegex(token, r"^palavra\d{4}$")
+
 if __name__ == "__main__":
     unittest.main()

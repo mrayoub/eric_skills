@@ -14,7 +14,12 @@ Um modelo executável por rodada, ligado aos Test Cards do bloco 1. Quem o receb
 | `measures` | medidas, numeradores, denominadores, janelas e critérios já fixados nos cards; registros e instrumentos de coleta |
 | `protocol` | roteiro passo a passo de cada teste: preparação, exposição ou tarefa, moderação, registro, encerramento e desvios |
 | `guardrails` | riscos, limites de exposição, monitoramento, regra de interrupção e quem decide |
-| seções extras | MVP a construir (componentes, critério de pronto, versão, responsáveis), escopo, cronograma operacional e gate de início |
+| `mvp_build` | MVP a construir: componentes, critério de pronto, versão e responsáveis |
+| `scope` | escopo da experimentação e o que fica fora |
+| `schedule` | cronograma operacional: marcos de construção e de teste, datas e responsáveis |
+| `start_gate` | gate de início: o que precisa estar pronto e quem autoriza |
+
+Declare `metadata.content_profile: "experimentation_model"`: em versão completa, o renderizador recusa o modelo sem as quatro últimas seções.
 
 Se algum card ainda não tiver critério decisivo, o modelo sai como parcial (`metadata.completeness: "partial"`) e o teste correspondente não entra no gate de início.
 

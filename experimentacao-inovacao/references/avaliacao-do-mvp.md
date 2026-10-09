@@ -23,4 +23,4 @@ Na consolidação, avalie o MVP como produto, **separado da avaliação das hip�
 
 ## No entregável
 
-Inclua a avaliação do MVP na **Apresentação da experimentação e direcionamento** como seção própria, ao lado dos resultados das hipóteses, e use-a no direcionamento: por exemplo, iterar o MVP quando a hipótese se sustentou mas a construção limitou a evidência, ou investigar quando a hipótese não se sustentou com um MVP que funcionou.
+Inclua a avaliação do MVP na **Apresentação da experimentação e direcionamento** como seção própria (`section_key: mvp_evaluation`), ao lado dos resultados das hipóteses, e termine com o direcionamento (`section_key: direction`); com `metadata.content_profile: "experimentation_presentation"`, o renderizador exige as duas seções na versão completa. Use a avaliação no direcionamento: por exemplo, iterar o MVP quando a hipótese se sustentou mas a construção limitou a evidência, ou investigar quando a hipótese não se sustentou com um MVP que funcionou.
