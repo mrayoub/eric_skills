@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Validacao do briefing: solicitacoes internas
+EXEMPLO FICTÍCIO — Solicitações internas de dados
+
+ID sample-briefing-validation · versão 1.0.0 · Completo
 
 Amostra fictícia do formato original RC6. Não descreve um projeto real. Exemplo neutro da validacao IQB auditavel consolidada a partir dos ERIC RC1 e RC5.
 

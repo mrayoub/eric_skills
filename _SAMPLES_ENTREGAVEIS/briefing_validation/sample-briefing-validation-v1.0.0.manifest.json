@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-briefing-validation",
-  "branding_version": "1.0.0",
-  "content_sha256": "d6013fe777b101465407116326473ee806e95eb1f8e99e326a6aaaa175efa24a",
+  "branding_version": "1.1.0",
+  "content_sha256": "aead87a67fc72e6ae54193abd74e3b669612a48c7f7136d509bd7335abe71c5b",
   "content_version": "1.0.0",
   "deliverable_type": "briefing_validation",
   "files": {
-    "sample-briefing-validation-v1.0.0.docx": "b55af22eef291d98a56b49ad0534f4cc57a041a8b4ae1880ac63e1ea24acdfc6",
-    "sample-briefing-validation-v1.0.0.html": "d5807f6eec821dd90133ae05951621d83f20e1e1cbbabadd6d168c739eafcdea",
-    "sample-briefing-validation-v1.0.0.json": "d6013fe777b101465407116326473ee806e95eb1f8e99e326a6aaaa175efa24a",
-    "sample-briefing-validation-v1.0.0.md": "1288daef2e16bf8580bb429a55168f6ff496c380dcc12d22b3893cf8919695ea",
-    "sample-briefing-validation-v1.0.0.pdf": "ccb5378d23c720915616a816ef541fea00ab3f6a3565e5656e6ec1fd5ba27509",
-    "sample-briefing-validation-v1.0.0.txt": "e297846ab7128372b7f9f6a0dbe05fb877776f5a8abded51e756657991dd26ec"
+    "sample-briefing-validation-v1.0.0.docx": "26bcb7865bef835d4dc4e97b9bb7d33218daaf0431dd5ef17de1728f4dc6fa2b",
+    "sample-briefing-validation-v1.0.0.json": "aead87a67fc72e6ae54193abd74e3b669612a48c7f7136d509bd7335abe71c5b",
+    "sample-briefing-validation-v1.0.0.md": "f97327c272eea7e01fe2bd12c5e7f6b71340b69cdd83f6bf32b271fdaf18a76a",
+    "sample-briefing-validation-v1.0.0.pdf": "e2a00535de7c0287ffd4d8c14331c31c464819ea2bcd5ab64cf051f470132e75",
+    "sample-briefing-validation-v1.0.0.txt": "972c872618f06667c872ccb3865955dec9124035015c69546cba3d60a123cb62"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.3.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

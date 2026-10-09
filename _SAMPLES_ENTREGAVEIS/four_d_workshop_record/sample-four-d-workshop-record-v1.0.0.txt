@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Registro do workshop 4D
+EXEMPLO FICTÍCIO — Incerteza sobre o andamento das solicitações
+
+ID sample-four-d-workshop-record · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -25,6 +27,8 @@ D4 — Decidir
 O grupo fictício priorizou investigar o formulário guiado. O voto exemplifica preferência do grupo, não valida eficácia.
 
 Fontes: FIC-01
+
+D3/D4 — alternativas fictícias
 
 | Alternativa | Dor | Prioridade do grupo |
 | --- | --- | --- |

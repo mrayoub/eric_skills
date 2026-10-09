@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Four D Report
+# EXEMPLO FICTÍCIO — Solicitações com informações incompletas
+
+ID sample-four-d-report · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -94,6 +96,8 @@ Fontes: FIC-01
 | Não demonstrado | Não demonstrado — Adoção, eficácia e impacto não foram testados. |
 
 Fontes: FIC-01
+
+### O que a priorização permite concluir
 
 | Dimensão | Registro | Limite |
 | --- | --- | --- |

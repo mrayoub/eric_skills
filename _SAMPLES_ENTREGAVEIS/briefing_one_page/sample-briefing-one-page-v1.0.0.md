@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Síntese do briefing
+# EXEMPLO FICTÍCIO — Solicitações com menos devoluções
+
+ID sample-briefing-one-page · versão 1.0.0 · Completo
 
 Dados fictícios.
 

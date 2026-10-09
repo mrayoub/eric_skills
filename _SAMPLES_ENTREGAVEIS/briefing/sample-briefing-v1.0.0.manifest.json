@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-briefing",
-  "branding_version": "1.0.0",
+  "branding_version": "1.1.0",
   "content_sha256": "cadb4fe807b96fd7eee516f35568b676f65fbaf53acc1629b8a103ec1c599c9a",
   "content_version": "1.0.0",
   "deliverable_type": "briefing",
   "files": {
-    "sample-briefing-v1.0.0.docx": "ed502beade3122bd5c1766a75f958c62fc6fea993d638393a41ca2fdc72afbf7",
-    "sample-briefing-v1.0.0.html": "11048a58fd9780a545283497697bfdde4815e9d76dfc86ffa49ae20e10d557b6",
+    "sample-briefing-v1.0.0.docx": "c3dcb27cd6cca628cc2611b0a3c3217ea01e0958c78811670c6139f254c25161",
     "sample-briefing-v1.0.0.json": "cadb4fe807b96fd7eee516f35568b676f65fbaf53acc1629b8a103ec1c599c9a",
-    "sample-briefing-v1.0.0.md": "31a47d521247f083c04c1a0158c0795bd4e24c2fe756f30514db870156312a8a",
-    "sample-briefing-v1.0.0.pdf": "fd625fb0c12ebb99cf51bc245eadeba7fb3bcfc2b4cdf5612cf02199a3cc3b3d",
-    "sample-briefing-v1.0.0.txt": "36cec2b59a033634a059592477773b41c45911a86d332bfa055f971a6c1fa004"
+    "sample-briefing-v1.0.0.md": "e8cda97a63d12b841ba9cd2093b4708626e337de12a7062f9f0fd838914e4d77",
+    "sample-briefing-v1.0.0.pdf": "a8e3efb287cc350f5021c9ffde31b6a2bc59044100a60009006d7e48fbe5755b",
+    "sample-briefing-v1.0.0.txt": "186cd6980f62779e61dd73c2c86a46a572f75b88ef4762e0374550f836702e78"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }
