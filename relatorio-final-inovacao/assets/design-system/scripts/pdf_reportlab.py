@@ -633,6 +633,144 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
     path.write_bytes(buffer.getvalue())
 
 
+ONE_PAGE_SLOTS = ("titulo_documento", "identificacao_versao")
+
+
+def _render_one_page_layout(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any], path: Path, *,
+                            deliverable_label: str, slots: dict[str, dict[str, Any]],
+                            block_text: Callable[[dict[str, Any]], str], identity: str) -> None:
+    """Resumo de uma página desenhado nos slots do layout.json do Layout Studio.
+
+    Cada slot recebe os blocos com o mesmo section_key. O HMW aparece sem subtítulo; os
+    demais blocos mostram o subtítulo (data.title) e o conteúdo. Nada fica fora dos slots.
+    """
+    from reportlab.lib import colors
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.lib.units import mm
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfgen.canvas import Canvas
+    from reportlab.platypus import KeepInFrame, Paragraph, Spacer
+    from reportlab.platypus.doctemplate import LayoutError
+
+    page = tokens["page"][profile["paper"]]
+    page_width, page_height = float(page["width"]) * mm, float(page["height"]) * mm
+    palette = {key: colors.HexColor(value) for key, value in tokens["color"].items()}
+    styles = make_styles(tokens, "executive_one_page")
+    hmw_style = ParagraphStyle("one_page_hmw", parent=styles["field"], fontSize=15, leading=19,
+                               textColor=palette["inverse"])
+    subtitle = ParagraphStyle("one_page_subtitle", parent=styles["field"], fontSize=11, leading=14, spaceAfter=5)
+    body = ParagraphStyle("one_page_body", parent=styles["body"], fontSize=10, leading=13.5, spaceAfter=4)
+    small = ParagraphStyle("one_page_small", parent=styles["footer"])
+    gap = 1.5 * mm
+
+    def rectangle(name: str) -> tuple[float, float, float, float]:
+        slot = slots[name]
+        x, y, width, height = (float(slot[key]) * mm for key in ("x", "y", "width", "height"))
+        if min(x, y, width, height) < 0 or x + width > page_width + .1 or y + height > page_height + .1:
+            raise ValueError(f"layout.json do resumo: slot {name} fora da página")
+        return x, page_height - y - height, width, height
+
+    buffer = io.BytesIO()
+    canvas = Canvas(buffer, pagesize=(page_width, page_height), invariant=1, pageCompression=1, bottomup=1)
+    canvas.setTitle(content["title"])
+    canvas.setSubject(deliverable_label)
+    canvas.setCreator("my_skills render.py")
+    canvas.setFillColor(palette["surface"])
+    canvas.rect(0, 0, page_width, page_height, fill=1, stroke=0)
+
+    def draw(flowables: list[Any], rect: tuple[float, float, float, float], name: str, *,
+             background: Any = None, accent: Any = None, padding: float = 0, middle: bool = False) -> None:
+        x, y, width, height = rect
+        if background is not None:
+            x, y, width, height = x + gap, y + gap, width - 2 * gap, height - 2 * gap
+            canvas.setFillColor(background)
+            canvas.rect(x, y, width, height, fill=1, stroke=0)
+            if accent is not None:
+                canvas.setFillColor(accent)
+                canvas.rect(x, y, 3, height, fill=1, stroke=0)
+        inner_width, inner_height = width - 2 * padding, height - 2 * padding
+        frame = KeepInFrame(inner_width, inner_height, flowables, mode="error", hAlign="LEFT", vAlign="TOP")
+        frame.canv = canvas
+        try:
+            _, used = frame.wrap(inner_width, inner_height)
+        except LayoutError as exc:
+            raise PdfOverflow(f"executive_one_page excedeu uma página: o bloco {name} não cabe na área do layout; "
+                              "resuma o conteúdo sem reduzir a fonte") from exc
+        if used > inner_height + .1:
+            raise PdfOverflow(f"executive_one_page excedeu uma página: o bloco {name} não cabe na área do layout; "
+                              "resuma o conteúdo sem reduzir a fonte")
+        top_offset = (inner_height - used) / 2 if middle else 0
+        frame.drawOn(canvas, x + padding, y + padding + inner_height - used - top_offset)
+
+    # Cabeçalho na faixa acima do slot de título: rótulo do tipo à esquerda, logo à direita e
+    # linha; o slot titulo_documento fica só com o título.
+    tx, ty, tw, th = rectangle("titulo_documento")
+    band_top = page_height - 3 * mm
+    image = ImageReader(str(ROOT / "assets" / "logo_ccee.png"))
+    image_width, image_height = image.getSize()
+    available = band_top - (ty + th) - 2 * mm
+    if available < 5 * mm:
+        raise ValueError("layout.json do resumo: titulo_documento precisa de ao menos 10 mm livres acima")
+    scale = min(38 * mm / image_width, min(11 * mm, available) / image_height)
+    logo_width, logo_height = image_width * scale, image_height * scale
+    canvas.drawImage(image, tx + tw - logo_width, band_top - logo_height, width=logo_width,
+                     height=logo_height, mask="auto")
+    canvas.setFont(styles["eyebrow"].fontName, styles["eyebrow"].fontSize)
+    canvas.setFillColor(styles["eyebrow"].textColor)
+    canvas.drawString(tx, band_top - logo_height / 2 - styles["eyebrow"].fontSize / 3, deliverable_label.upper())
+    canvas.setStrokeColor(palette["document_primary"])
+    canvas.setLineWidth(1.5)
+    line_y = band_top - logo_height - 1.5 * mm
+    canvas.line(tx, line_y, tx + tw, line_y)
+    draw([Paragraph(_markup(content["title"]), styles["title"])], (tx, ty, tw, th), "titulo_documento", middle=True)
+
+    by_key: dict[str, list[dict[str, Any]]] = {}
+    for block in content["blocks"]:
+        by_key.setdefault(block.get("data", {}).get("section_key"), []).append(block)
+    for name, slot in slots.items():
+        key = slot.get("section_key") or name
+        if name in ONE_PAGE_SLOTS or key in ONE_PAGE_SLOTS or key not in by_key:
+            continue
+        rect = rectangle(name)
+        blocks = by_key[key]
+        if key == "hmw":
+            items = [Paragraph(_cited(block_text(block), block), hmw_style) for block in blocks]
+            draw(items, rect, name, background=palette["document_deep"], accent=palette["document_accent"],
+                 padding=5 * mm, middle=True)
+            continue
+        items = []
+        for block in blocks:
+            data = block.get("data", {})
+            if data.get("title"):
+                items.append(Paragraph(_markup(data["title"]), subtitle))
+            if data.get("description") or data.get("text"):
+                items.append(Paragraph(_cited(data.get("description") or data.get("text"), block), body))
+            for point in data.get("points", []) or data.get("items", []):
+                items.append(Paragraph(_markup("• " + str(point)), body))
+            if block["type"] == "table" and not data.get("rows"):
+                # Campos nomeados (ex.: responsáveis e patrocinador) viram linhas "Rótulo: valor".
+                lines = [line for line in block_text(block).splitlines() if line.strip()]
+                items.extend(Paragraph(_markup(line), body) for line in lines)
+                if block.get("citation_ids"):
+                    items.append(Paragraph(_cited("", block), body))
+        draw(items, rect, name, background=palette["document_accent_soft"] if key != "people" else palette["surface_muted"],
+             accent=palette["document_accent"] if key != "people" else palette["border_strong"], padding=4 * mm)
+
+    # Rodapé: fontes e identificação.
+    fx, fy, fw, fh = rectangle("identificacao_versao")
+    footer_items: list[Any] = []
+    if content["citations"]:
+        sources = "; ".join(f"{citation['id']} — {citation['source_id']}"
+                            + (f", {citation['locator']}" if citation.get("locator") else "")
+                            for citation in content["citations"])
+        footer_items.append(Paragraph(_markup("Fontes: " + sources), small))
+    footer_items.append(Paragraph(_markup(identity), small))
+    draw(footer_items, (fx, fy, fw, fh), "identificacao_versao")
+    canvas.showPage()
+    canvas.save()
+    path.write_bytes(buffer.getvalue())
+
+
 def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any], path: Path, *,
                deliverable_label: str, footer_label: str, field_labels: dict[str, str] | None,
                block_text: Callable[[dict[str, Any]], str],
@@ -660,6 +798,12 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
                              load_layout=load_presentation_layout,
                              identity=identity_line(content))
         return
+    if layout == "executive_one_page" and load_presentation_layout is not None and identity_line is not None:
+        one_page_slots = load_presentation_layout(content["deliverable_type"]) or {}
+        if all(name in one_page_slots for name in ONE_PAGE_SLOTS):
+            _render_one_page_layout(content, tokens, profile, path, deliverable_label=deliverable_label,
+                                    slots=one_page_slots, block_text=block_text, identity=identity_line(content))
+            return
     if layout in ("report_portrait", "report_landscape"):
         if table_views is None or iqb_widths is None:
             raise ValueError("Relatórios requerem table_views e iqb_widths")
