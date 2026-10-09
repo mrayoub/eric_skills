@@ -64,9 +64,11 @@ A regra do repositório é que material real fica em `_SAMPLE/` (fora do git e d
   foram excluídas junto com os tags. O workflow `release.yml` publicou as 12 novas versões e a Release
   `pacotes` (run `37975334678`, sucesso). O arquivo `relatorio-4d.skill` baixado dessa Release foi conferido:
   contém o PDF fictício e o DOCX sem metadados pessoais.
-- Branches e worktrees locais antigos, fora dos refs publicados, ainda podem guardar os objetos anteriores;
-  não devem ser enviados ao remoto sem nova reescrita. O GitHub também pode reter objetos inalcançáveis em
-  caches internos até sua coleta de lixo.
+- Os 40 refs locais antigos também foram reescritos. Os dez worktrees ligados a eles receberam apenas os oito
+  arquivos corrigidos; as alterações não commitadas preexistentes de um worktree foram preservadas. Após expirar
+  os reflogs e executar `git gc --prune=now`, os quatro blobs antigos não são mais acessíveis no Git local.
+  Os bundles de backup temporários ainda preservam o histórico anterior. O GitHub pode reter objetos
+  inalcançáveis em caches internos até sua coleta de lixo.
 
 ## STOP conditions
 
