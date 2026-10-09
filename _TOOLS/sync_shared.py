@@ -115,6 +115,9 @@ def main() -> int:
             if not path.exists():
                 raise FileNotFoundError(f"Fonte ausente: {path.relative_to(ROOT)}")
         pending = [action for skill in skills() for action in actions(skill)]
+        if args.check:
+            # Caches locais (__pycache__, .DS_Store) não são versionados nem empacotados: não contam como divergência.
+            pending = [action for action in pending if action[1].name not in {"__pycache__", ".DS_Store"}]
         for kind, dst, src in pending:
             rel = dst.relative_to(ROOT)
             if args.check:

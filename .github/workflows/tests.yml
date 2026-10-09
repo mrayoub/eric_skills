@@ -1,12 +1,68 @@
 name: Testes
 
-# Acionamento manual por enquanto: em repositório privado o GitHub Actions consome minutos.
-# Para rodar a cada push e pull request, acrescente `push:` e `pull_request:` abaixo de `on:`.
+# Em todo push e pull request: versionamento e canais (rápido) e a suíte em Linux/Python 3.12.
+# Matriz completa (Windows, macOS e Linux x Python 3.10 e 3.12) só toda segunda e sob demanda:
+# em repositório privado o GitHub Actions consome minutos (macOS conta 10x, Windows 2x).
 on:
+  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
 
 jobs:
-  tests:
+  versionamento:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: _TESTS/requirements-dev.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: python -m pip install -r _TESTS/requirements-dev.txt
+      - run: python _TOOLS/sync_shared.py --check
+      - run: python _TOOLS/build_sources.py --check
+      - name: Versão de cada skill em dia com o conteúdo
+        run: |
+          python _TOOLS/build_catalog.py --check || {
+            echo "::error::O conteúdo de alguma skill mudou sem subir a versão. Rode: python _TOOLS/build_catalog.py --bump"
+            exit 1
+          }
+      - name: Canais npx, .skill e clone
+        run: python _TOOLS/check_channels.py
+
+  testes:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: _TESTS/requirements-dev.txt
+      - run: python -m pip install -r _TESTS/requirements-dev.txt
+      - run: python -m pytest -q -p no:cacheprovider _DESIGN_SYSTEM/tests _TESTS
+
+  matriz:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -18,7 +74,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m pip install -r _DESIGN_SYSTEM/requirements.txt pytest pyyaml pdfplumber pypdfium2
+          cache: pip
+          cache-dependency-path: _TESTS/requirements-dev.txt
+      - run: python -m pip install -r _TESTS/requirements-dev.txt
       - run: python -m pytest -q -p no:cacheprovider _DESIGN_SYSTEM/tests _TESTS
       - run: python _TOOLS/sync_shared.py --check
       - run: python _TOOLS/build_sources.py --check
+      - run: python _TOOLS/build_catalog.py --check
