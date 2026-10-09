@@ -550,7 +550,9 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
     canvas.setCreator("my_skills render.py")
     image = ImageReader(str(ROOT / "assets" / "logo_ccee.png"))
     image_width, image_height = image.getSize()
-    scale = min(logo_rect[2] / image_width, logo_rect[3] / image_height)
+    # Como no HTML e no PPTX: o logo cabe no slot e em 38 x 11 mm, alinhado à direita.
+    scale = min(min(logo_rect[2], 38 * mm) / image_width, min(logo_rect[3], 11 * mm) / image_height)
+    logo_x = logo_rect[0] + logo_rect[2] - image_width * scale
 
     def draw_frame(flowables: list[Any], rect: tuple[float, float, float, float],
                    number: int, title: str) -> None:
@@ -571,7 +573,7 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
     for number, (kind, payload) in enumerate(slides, 1):
         canvas.setFillColor(palette["surface"])
         canvas.rect(0, 0, page_width, page_height, fill=1, stroke=0)
-        canvas.drawImage(image, logo_rect[0], logo_rect[1] + (logo_rect[3] - image_height * scale) / 2,
+        canvas.drawImage(image, logo_x, logo_rect[1] + (logo_rect[3] - image_height * scale) / 2,
                          width=image_width * scale, height=image_height * scale, mask="auto")
         if kind == "cover":
             canvas.setFillColor(palette["document_accent"])
