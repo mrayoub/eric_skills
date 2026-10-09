@@ -548,6 +548,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             slide_css += slot_css(".slide h1", "titulo_slide")
             slide_css += slot_css(".slide .slide-content", "corpo_slide")
             slide_css += slot_css(".slide .meta", "rodape_slide")
+            slide_css += " @page { margin: 0; }"
         return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
                 f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
                 f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
