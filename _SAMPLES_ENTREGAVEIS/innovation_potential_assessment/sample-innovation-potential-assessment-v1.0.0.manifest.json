@@ -1,22 +1,22 @@
 {
   "artifact_id": "sample-innovation-potential-assessment",
-  "branding_version": "1.0.0",
-  "content_sha256": "c308fe8289e11d8282e4b0c09747819b71de68053affac992dec06953521a1a7",
+  "branding_version": "1.1.0",
+  "content_sha256": "3c3b0c8665c2c98e7f313e030760c255695b4b52543d35f4b31ed8db738d3a32",
   "content_version": "1.0.0",
   "deliverable_type": "innovation_potential_assessment",
   "files": {
-    "sample-innovation-potential-assessment-v1.0.0-pontuacoes.csv": "c7f467b46d192662191d780e61d28355a851641dc4c7d7d45fc4635410b695a3",
-    "sample-innovation-potential-assessment-v1.0.0.docx": "394ae5d7e52a9a07256bcaadda31f8b4716bd602eeff5b450afd4254eea98ab9",
-    "sample-innovation-potential-assessment-v1.0.0.html": "c183614c54a8b0d6e1f54e76194ae456ae39ef5244cde8c8a9719490ce92fa4a",
-    "sample-innovation-potential-assessment-v1.0.0.json": "c308fe8289e11d8282e4b0c09747819b71de68053affac992dec06953521a1a7",
-    "sample-innovation-potential-assessment-v1.0.0.md": "6972967e28a3dd94789f507c27f906ffe0d5537c8e7aa9d6e09a5e100575ab95",
-    "sample-innovation-potential-assessment-v1.0.0.pdf": "af449f3e058954dce393fa1ee05a2a0601a29ce030b778c92533543f9fa80a6b",
-    "sample-innovation-potential-assessment-v1.0.0.txt": "585699f090aa46ec4f98cef4af4b79df823a64a8d717936b715ba392c93abb4d"
+    "sample-innovation-potential-assessment-v1.0.0.docx": "e8e700ceca1d083ac86445c8e0fe4fba27ba9c2aa7115676d144703941653ca6",
+    "sample-innovation-potential-assessment-v1.0.0.json": "3c3b0c8665c2c98e7f313e030760c255695b4b52543d35f4b31ed8db738d3a32",
+    "sample-innovation-potential-assessment-v1.0.0.md": "4c798b5288b7fa3746c65e06ce6a77d4a002c4007074849338d5195802b531a0",
+    "sample-innovation-potential-assessment-v1.0.0.pdf": "545f84bd71185169f04b35c2df500e84a136e731110eabb68c10eb7761e5c3ea",
+    "sample-innovation-potential-assessment-v1.0.0.txt": "a11c91c4201f8ea28e77ca53d91c19b77fe92c9ff209ed56e42a4bb395f7f726"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.3.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

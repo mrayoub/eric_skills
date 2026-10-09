@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Test Card TC-01
+# EXEMPLO FICTÍCIO — TC-01: conclusão sem ajuda no fluxo guiado
+
+ID sample-test-card · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 

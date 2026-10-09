@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import io
+import contextlib
 import json
 import copy
 import importlib.util
@@ -31,9 +33,9 @@ def load_render_module():
 
 def pdf_available() -> bool:
     try:
-        import weasyprint
+        import reportlab  # noqa: F401
         return True
-    except (ImportError, OSError):
+    except ImportError:
         return False
 
 
@@ -222,7 +224,7 @@ class RenderTests(unittest.TestCase):
                     folder = Path(temp)
                     # O PDF legado da apresentação tem rodapé fora da página;
                     # o portão o reprova até o motor ReportLab cobrir esse tipo.
-                    has_pdf = pdf_available() and kind != "executive_presentation"
+                    has_pdf = pdf_available()
                     editable = "pptx" if kind == "executive_presentation" else "docx"
                     self.render(item, "md,txt,html," + editable + (",pdf" if has_pdf else ""), folder)
                     stem = item["metadata"]["artifact_id"] + "-v" + item["metadata"]["content_version"]
@@ -414,7 +416,7 @@ class RenderTests(unittest.TestCase):
             self.render(item, "md", folder)
             self.assertIn(r"a\|b", (folder / "pipe-test-v1.0.0.md").read_text(encoding="utf-8"))
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
+    @unittest.skipUnless(pdf_available(), "reportlab indisponível")
     def test_iqb_pdf_keeps_wide_table_columns(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
         if not path.exists():
@@ -432,7 +434,7 @@ class RenderTests(unittest.TestCase):
             for detail in scores["dimensions"].values():
                 self.assertTrue(detail["justification"] in text, "PDF: justificativa cortada")
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
+    @unittest.skipUnless(pdf_available(), "reportlab indisponível")
     def test_portrait_and_landscape_and_semantic_identity(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
@@ -454,7 +456,7 @@ class RenderTests(unittest.TestCase):
             page = PdfReader(str(folder / "workshop-4d-01-v1.0.0.pdf")).pages[0]
             self.assertGreater(float(page.mediabox.width), float(page.mediabox.height))
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
+    @unittest.skipUnless(pdf_available(), "reportlab indisponível")
     def test_card_is_one_page_and_presentation_is_editable(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
@@ -474,12 +476,16 @@ class RenderTests(unittest.TestCase):
             self.assertTrue(any("Seção principal" in shape.text for slide in prs.slides for shape in slide.shapes if shape.has_text_frame))
             self.assertTrue(any("Fontes" in shape.text for shape in prs.slides[-1].shapes if shape.has_text_frame))
 
+    def _fake_reportlab(self, folder: Path, error: str) -> Path:
+        package = folder / "backend" / "reportlab"
+        package.mkdir(parents=True)
+        (package / "__init__.py").write_text(f"raise {error}\n", encoding="utf-8")
+        return folder / "backend"
+
     def test_missing_pdf_backend_still_renders_other_formats(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
-            backend = folder / "backend"
-            backend.mkdir()
-            (backend / "weasyprint.py").write_text('raise OSError("pango ausente (simulado)")\n', encoding="utf-8")
+            backend = self._fake_reportlab(folder, 'ImportError("reportlab ausente (simulado)")')
             source = folder / "input.json"
             source.write_text(json.dumps(content("learning_card", "LC-fallback")), encoding="utf-8")
             out = folder / "output"
@@ -488,9 +494,9 @@ class RenderTests(unittest.TestCase):
                                      "--formats", "pdf,md,docx"], env=env, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             output = json.loads(result.stdout)
-            self.assertEqual(output["unavailable"], {"pdf": "OSError: pango ausente (simulado)"})
+            self.assertIn("reportlab ausente", output["unavailable"]["pdf"])
             self.assertIn("AVISO: PDF não gerado", result.stderr)
-            self.assertIn("brew install pango", result.stderr)
+            self.assertIn("pip install -r requirements.txt", result.stderr)
             self.assertTrue((out / "LC-fallback-v1.0.0.md").is_file())
             self.assertTrue((out / "LC-fallback-v1.0.0.docx").is_file())
             manifest = json.loads((out / output["manifest"]).read_text())
@@ -498,30 +504,45 @@ class RenderTests(unittest.TestCase):
             self.assertNotIn("LC-fallback-v1.0.0.pdf", output["files"])
             self.assertFalse((out / "LC-fallback-v1.0.0.pdf").exists())
 
-    def test_pdf_write_failure_removes_partial_pdf(self):
+    def test_unexpected_engine_error_keeps_other_formats(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
-            backend = folder / "backend"
-            backend.mkdir()
-            (backend / "weasyprint.py").write_text(
-                "from pathlib import Path\n"
-                "class HTML:\n"
-                "    def __init__(self, **kwargs): pass\n"
-                "    def write_pdf(self, path):\n"
-                "        Path(path).write_bytes(b'PDF incompleto')\n"
-                "        raise OSError('x' * 400)\n", encoding="utf-8")
+            backend = self._fake_reportlab(folder, 'TypeError("versão incompatível (simulado)")')
             source = folder / "input.json"
-            source.write_text(json.dumps(content("learning_card", "LC-write-failure")), encoding="utf-8")
+            source.write_text(json.dumps(content("learning_card", "LC-type-error")), encoding="utf-8")
             out = folder / "output"
             result = subprocess.run([sys.executable, str(SCRIPT), str(source), "--out-dir", str(out),
                                      "--formats", "pdf,md,docx"],
                                     env={**os.environ, "PYTHONPATH": str(backend)}, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             output = json.loads(result.stdout)
+            self.assertTrue(output["unavailable"]["pdf"].startswith("TypeError"))
+            self.assertTrue((out / "LC-type-error-v1.0.0.md").is_file())
+            self.assertTrue((out / "LC-type-error-v1.0.0.docx").is_file())
+            self.assertFalse(list(out.glob("*.pdf")))
+
+    def test_pdf_write_failure_removes_partial_pdf(self):
+        renderer = load_render_module()
+
+        def broken_engine(content_, tokens, profile, path):
+            Path(path).write_bytes(b"PDF incompleto")
+            raise OSError("x" * 400)
+
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            source = folder / "input.json"
+            source.write_text(json.dumps(content("learning_card", "LC-write-failure")), encoding="utf-8")
+            out = folder / "output"
+            stdout = io.StringIO()
+            with unittest.mock.patch.object(renderer, "render_pdf_reportlab", side_effect=broken_engine), \
+                    unittest.mock.patch.object(sys, "argv", [str(SCRIPT), str(source), "--out-dir", str(out),
+                                                            "--formats", "pdf,md,docx"]), \
+                    contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(io.StringIO()):
+                renderer.main()
+            output = json.loads(stdout.getvalue())
             self.assertEqual(len(output["unavailable"]["pdf"]), 300)
             self.assertFalse((out / "LC-write-failure-v1.0.0.pdf").exists())
-            self.assertTrue((out / "LC-write-failure-v1.0.0.md").exists())
-            self.assertTrue((out / "LC-write-failure-v1.0.0.docx").exists())
+            self.assertTrue((out / "LC-write-failure-v1.0.0.md").is_file())
 
     def test_card_field_over_limit_is_rejected_in_any_state(self):
         for completeness in ("complete", "partial"):
@@ -549,7 +570,7 @@ class RenderTests(unittest.TestCase):
                                      "--formats", "md"], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
+    @unittest.skipUnless(pdf_available(), "reportlab indisponível")
     def test_oversized_card_remains_fatal(self):
         # Os campos já têm limite de caracteres; o título longo exercita a checagem de página única.
         item = content("test_card", "TC-oversized")
@@ -1002,7 +1023,7 @@ class PptxLayoutJsonTests(unittest.TestCase):
 class PdfIdempotencyTests(unittest.TestCase):
     def test_same_json_produces_same_pdf_text(self):
         if not pdf_available():
-            self.skipTest("pango indisponível neste ambiente")
+            self.skipTest("reportlab indisponível neste ambiente")
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
         if not path.exists():
             self.skipTest("Amostra ausente")
@@ -1024,9 +1045,7 @@ class PresentationLayoutJsonTests(unittest.TestCase):
     """Garante que o caminho 'presentation' de render_html usa
     _DESIGN_SYSTEM/layouts/<tipo>.layout.json quando existe, e não muda nada
     quando o arquivo não existe (fallback idêntico ao comportamento anterior).
-    Chama render_html direto (sem subprocess, sem WeasyPrint) -- mais rápido e
-    não depende de `pango`, ao contrário de testes que convertem para PDF de
-    verdade."""
+    Chama render_html direto, sem subprocess, porque testa só o HTML."""
 
     @classmethod
     def setUpClass(cls):
@@ -1048,9 +1067,8 @@ class PresentationLayoutJsonTests(unittest.TestCase):
         # o que importa é que uma regra @page POSTERIOR zera a margem, porque em CSS
         # a última declaração de uma propriedade em regras @page do mesmo stylesheet
         # vence. Sem isso, as coordenadas absolutas abaixo ficam deslocadas ~10mm
-        # da posição real do canvas (confirmado por teste manual com WeasyPrint
-        # nesta sessão: @page margin:10mm desloca um elemento position:absolute
-        # left:5mm para x0=15mm no PDF final, não 5mm).
+        # da posição real do canvas quando o HTML é impresso (@page margin:10mm
+        # desloca um elemento position:absolute left:5mm para x0=15mm).
         style_start = out.index("<style>")
         style_end = out.index("</style>")
         style = out[style_start:style_end]
@@ -1235,20 +1253,6 @@ class ReportLabPdfTests(unittest.TestCase):
             self.assertIn("excedeu uma página", result.stderr)
             self.assertFalse(list(folder.glob("*.pdf")))
 
-    def test_works_when_weasyprint_is_broken(self):
-        with tempfile.TemporaryDirectory() as temp:
-            folder = Path(temp)
-            fake = folder / "fake"
-            fake.mkdir()
-            (fake / "weasyprint.py").write_text('raise OSError("pango ausente (simulado)")\n', encoding="utf-8")
-            sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json"
-            result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", str(folder),
-                                     "--formats", "pdf", "--pdf-engine", "reportlab"],
-                                    env={**os.environ, "PYTHONPATH": str(fake)}, capture_output=True, text=True)
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(json.loads(result.stdout)["unavailable"], {})
-            self.assertTrue(list(folder.glob("*.pdf")))
-
     def test_unsupported_layout_rejected_before_writing(self):
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "unsupported.pdf"
@@ -1347,9 +1351,7 @@ class PdfQualityTests(unittest.TestCase):
                                         capture_output=True, text=True)
                 self.assertEqual(result.returncode, 0, result.stderr)
 
-    def test_weasyprint_samples_pass(self):
-        if not pdf_available():
-            self.skipTest("WeasyPrint/pango indisponível")
+    def test_default_engine_samples_pass(self):
         for sample in sorted((ROOT.parent / "_SAMPLES_ENTREGAVEIS").glob("*/input.json")):
             kind = sample.parent.name
             with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:

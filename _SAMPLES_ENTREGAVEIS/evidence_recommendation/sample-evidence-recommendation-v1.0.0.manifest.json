@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-evidence-recommendation",
-  "branding_version": "1.0.0",
-  "content_sha256": "539f037cc5998ae052a36d5f4506bf1c4282d082fb27b7913101d6338da6ccb1",
+  "branding_version": "1.1.0",
+  "content_sha256": "0b30caf1c2b21c0c991adef8de5dbf41372a1518b6a4979e09062bf7f3079a1e",
   "content_version": "1.0.0",
   "deliverable_type": "evidence_recommendation",
   "files": {
-    "sample-evidence-recommendation-v1.0.0.docx": "5b5352c5dd66f59b3e7738c78d9ec7920c994c6190f5f1984e43aa890e77172b",
-    "sample-evidence-recommendation-v1.0.0.html": "0ecaa6ad3bfa2b6ce59f9fd028c7f937dbbbfebea82eb1c0a7eda56e48a764a1",
-    "sample-evidence-recommendation-v1.0.0.json": "539f037cc5998ae052a36d5f4506bf1c4282d082fb27b7913101d6338da6ccb1",
-    "sample-evidence-recommendation-v1.0.0.md": "8445e17c2f91f3c97540025714ec2639be0de84aef7554a4e5b2e770c09a6765",
-    "sample-evidence-recommendation-v1.0.0.pdf": "affefc8f686f4208eb49565f23f9e4e1e9a9d0205f303a5271c4faec598becf5",
-    "sample-evidence-recommendation-v1.0.0.txt": "50f9aa7c23735f27ba41342f12f1246e54b7fbbf999ffb88d86d18645152ce26"
+    "sample-evidence-recommendation-v1.0.0.docx": "75b8fe113cd146088294701a20e8824c6f127a4989395c9a41f89b0ed92040d1",
+    "sample-evidence-recommendation-v1.0.0.json": "0b30caf1c2b21c0c991adef8de5dbf41372a1518b6a4979e09062bf7f3079a1e",
+    "sample-evidence-recommendation-v1.0.0.md": "5a184400a5c5059cec8b61622c1dce40c67570089aed44bfc29df8428c437e30",
+    "sample-evidence-recommendation-v1.0.0.pdf": "7585a2c384e2d451c03c429dab939e40e7d3843d1c3b5ea886f8849e8818a4f8",
+    "sample-evidence-recommendation-v1.0.0.txt": "6de957f69dff5a385d34af1adc7b3509d15be31ad671d63ef9b6b18509e1b4e9"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

@@ -1,21 +1,22 @@
 {
   "artifact_id": "sample-briefing-one-page",
-  "branding_version": "1.0.0",
-  "content_sha256": "ffc00d719a357baceacceb27b1d7e10b5f47d7f0ab4cd5075d1a0a175d260809",
+  "branding_version": "1.1.0",
+  "content_sha256": "9eceb296b7cb5225423dd8c9f545854d9bfc288b6881d00450470669c63b7a57",
   "content_version": "1.0.0",
   "deliverable_type": "briefing_one_page",
   "files": {
-    "sample-briefing-one-page-v1.0.0.docx": "ca2f3bc60e44e51a0252ca2c2da6c19bcdc3563b997b6e86592f4501d1d9d561",
-    "sample-briefing-one-page-v1.0.0.html": "12b1742ae55adde96bfd57ff419479a6c3f9a1982e2a2f92d6d7a8b0825034d7",
-    "sample-briefing-one-page-v1.0.0.json": "ffc00d719a357baceacceb27b1d7e10b5f47d7f0ab4cd5075d1a0a175d260809",
-    "sample-briefing-one-page-v1.0.0.md": "6d8f50b1323d60ec93382f9225dd52b4d9256b760f1b3d7d3628ba6906766dbb",
-    "sample-briefing-one-page-v1.0.0.pdf": "d1fc2a2ca2ae970d4b31c576b8818e6176d6f6900dd193b473582f108937adcf",
-    "sample-briefing-one-page-v1.0.0.txt": "78f9b180dfbab0073859d3c51556c5eedcec63f4bb06ffa6f872ee211048bb01"
+    "sample-briefing-one-page-v1.0.0.docx": "7c82afa403bb53cdf3bd88057931beedeac14583fdcbff9da052b2df938033fd",
+    "sample-briefing-one-page-v1.0.0.json": "9eceb296b7cb5225423dd8c9f545854d9bfc288b6881d00450470669c63b7a57",
+    "sample-briefing-one-page-v1.0.0.md": "695ff9e87bc980d58909b810ae55c209a501437b001be67af8cd4761a815f0af",
+    "sample-briefing-one-page-v1.0.0.pdf": "8d933c71271b8a3295fbca8bec9badf1a8edf3099da1c5066e9a781ce2d00d1c",
+    "sample-briefing-one-page-v1.0.0.txt": "8150278ec5a9413d6344b611bd3a2b225b1ba1fdc92d6da56e40be20e986a732"
   },
   "layout": "executive_one_page",
   "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
-  "renderer_version": "1.2.0",
-  "tokens_sha256": "a849114ae3ae3305fdefe573ab6ce6679da4822bdb0a294a6983a46d0eecb0fc"
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "unavailable": {}
 }

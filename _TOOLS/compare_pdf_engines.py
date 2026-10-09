@@ -19,6 +19,10 @@ def compare(out: Path, kinds: list[str], engines: list[str]) -> None:
     import pypdfium2
     from PIL import Image, ImageDraw
 
+    render_spec = importlib.util.spec_from_file_location("render_labels", SCRIPT)
+    render_module = importlib.util.module_from_spec(render_spec)
+    render_spec.loader.exec_module(render_module)
+    labels = render_module.DELIVERABLE_LABELS
     spec = importlib.util.spec_from_file_location("pdf_quality", ROOT / "_DESIGN_SYSTEM/scripts/pdf_quality.py")
     quality = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(quality)
@@ -27,7 +31,7 @@ def compare(out: Path, kinds: list[str], engines: list[str]) -> None:
     for kind in kinds:
         source = SAMPLES / kind / "input.json"
         if not source.is_file():
-            entries.append(f"<section><h2>{html.escape(kind)}</h2><p>Amostra não encontrada.</p></section>")
+            entries.append(f"<section><h2>{html.escape(labels.get(kind, kind))}</h2><p>Amostra não encontrada.</p></section>")
             continue
         columns: list[tuple[str, list[Image.Image], str]] = []
         for engine in engines:
@@ -69,7 +73,7 @@ def compare(out: Path, kinds: list[str], engines: list[str]) -> None:
         canvas.save(out / image_name)
         details = "".join(f"<li><strong>{html.escape(engine)}</strong>: {html.escape(status)}</li>"
                           for engine, _, status in columns)
-        entries.append(f'<section><h2>{html.escape(kind)}</h2><ul>{details}</ul>'
+        entries.append(f'<section><h2>{html.escape(labels.get(kind, kind))} <small>({html.escape(kind)})</small></h2><ul>{details}</ul>'
                        f'<img src="{html.escape(image_name)}" alt="Comparação de PDF para {html.escape(kind)}"></section>')
     (out / "index.html").write_text(
         '<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Comparação de PDFs</title>'
@@ -83,7 +87,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--types", help="tipos separados por vírgula; padrão: todas as amostras")
-    parser.add_argument("--engines", default="weasyprint,reportlab", help="motores separados por vírgula")
+    parser.add_argument("--engines", default="reportlab", help="motores separados por vírgula (só reportlab)")
     args = parser.parse_args()
     kinds = args.types.split(",") if args.types else sorted(path.parent.name for path in SAMPLES.glob("*/input.json"))
     compare(args.out, kinds, args.engines.split(","))
