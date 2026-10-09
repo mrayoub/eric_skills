@@ -947,7 +947,7 @@ def main() -> None:
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--formats", help="json,pdf,docx,md,txt; pptx só para apresentação; csv só para tabelas exportáveis")
     parser.add_argument("--pdf-engine", choices=("weasyprint", "reportlab"), default="weasyprint",
-                        help="motor do PDF; reportlab dispensa Pango (prova: cards e one-page)")
+                        help="motor do PDF; reportlab dispensa Pango (todos os tipos, exceto apresentação executiva)")
     args = parser.parse_args()
     content = read_json(args.input)
     tokens = read_json(ROOT / "tokens.json")
