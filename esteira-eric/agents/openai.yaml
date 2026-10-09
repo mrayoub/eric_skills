@@ -1,0 +1,5 @@
+interface:
+  display_name: "Esteira ERIC"
+  short_description: "Diagnostica o projeto e indica a próxima skill"
+  brand_color: "#193C8E"
+  default_prompt: "Use $esteira-eric para ver em que etapa está este projeto de inovação e qual o próximo passo."

@@ -78,6 +78,17 @@ class CatalogTests(unittest.TestCase):
             self.assertEqual(version(root / "relatorio-4d"), next_patch(current))
             self.assertEqual(run_catalog(root, "--check").returncode, 0)
 
+    def test_new_skill_is_added_by_write_but_flagged_by_check(self) -> None:
+        with RepoCopy() as root:
+            catalog = json.loads((root / "catalog.json").read_text(encoding="utf-8"))
+            catalog["skills"].pop("workshop-3e")
+            (root / "catalog.json").write_text(json.dumps(catalog), encoding="utf-8")
+            check = run_catalog(root, "--check")
+            self.assertEqual(check.returncode, 1)
+            self.assertIn("workshop-3e: ausente do catálogo", check.stderr)
+            self.assertEqual(run_catalog(root).returncode, 0)
+            self.assertEqual(run_catalog(root, "--check").returncode, 0)
+
     def test_version_line_does_not_change_hash(self) -> None:
         with RepoCopy() as root:
             skill = root / "workshop-4d"

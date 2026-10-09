@@ -1,0 +1,12 @@
+[
+  {"query": "Tenho um projeto de inovação começando. Por onde eu começo na esteira?", "should_trigger": true},
+  {"query": "Olhe os arquivos deste projeto e me diga em que etapa da ERIC estamos e o que falta.", "should_trigger": true},
+  {"query": "Já fizemos o briefing e o workshop 4D. Qual é o próximo passo?", "should_trigger": true},
+  {"query": "Qual skill eu uso para preparar a decisão do BP2?", "should_trigger": true},
+  {"query": "Faça um diagnóstico do status do projeto do portal antes da reunião com o sponsor.", "should_trigger": true},
+  {"query": "Faça o relatório 4D com as notas do D1 ao D4 que anexei.", "should_trigger": false},
+  {"query": "Avalie este briefing pela rubrica IQB.", "should_trigger": false},
+  {"query": "Monte os Test Cards da próxima rodada de testes.", "should_trigger": false},
+  {"query": "Escreva o relatório final e o pitch para a diretoria.", "should_trigger": false},
+  {"query": "Priorize estas cinco oportunidades pela rubrica de potencial.", "should_trigger": false}
+]
