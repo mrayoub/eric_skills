@@ -51,7 +51,7 @@ Problemas relacionados, todos verificados:
 
 ## Done criteria
 
-- [ ] Um push com testes falhando não publica (simule em PR de teste) · [ ] `--dry-run` local lista 0 Releases pendentes no estado atual · [ ] `pacotes` só com os assets atuais e tag no HEAD · [ ] suíte `0 failed`
+- [x] O push `c0b2939` falhou nos testes e a publicação `37981661152` foi ignorada · [x] `--dry-run` local lista 0 Releases pendentes após a publicação · [x] `pacotes` tem 13 `.skill` + catálogo + checksums, e a tag aponta para o HEAD validado `6123e99` · [x] suíte `0 failed` (202 testes, 1.511 subtestes; CI do commit `6123e99` passou)
 
 ## STOP conditions
 
