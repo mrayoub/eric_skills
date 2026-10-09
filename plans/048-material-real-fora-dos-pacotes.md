@@ -13,7 +13,7 @@
 ## Status
 
 - **Priority**: P1 · **Effort**: M · **Risk**: MED (muda arquivos fixados por hash) · **Depends on**: none · **Category**: security / privacidade
-- **Planned at**: commit `595f3b0`, 2026-10-09 · **Requer decisões do operador** (ver abaixo)
+- **Planned at**: commit `595f3b0`, 2026-10-09 · **Concluído em 2026-10-09**, com as decisões do operador abaixo.
 
 ## Why this matters
 
@@ -46,7 +46,27 @@ A regra do repositório é que material real fica em `_SAMPLE/` (fora do git e d
 
 ## Done criteria
 
-- [ ] `git grep -l "_SAMPLE/GEIN"` → vazio · [ ] nenhum DOCX distribuído com nome pessoal nos metadados · [ ] suíte `0 failed`; fontes e catálogo em dia
+- [x] `git grep -l "_SAMPLE/GEIN" -- ':!plans/**'` → vazio · [x] nenhum DOCX distribuído com nome pessoal nos metadados · [x] suíte `0 failed`; fontes e catálogo em dia
+
+## Execução e verificação
+
+- O PDF distribuído foi substituído byte a byte pelo exemplo fictício gerado de
+  `_SAMPLES_ENTREGAVEIS/four_d_report/input.json`; o guia e o manifesto identificam essa origem.
+- Os seis DOCX distribuídos tiveram `creator` e `lastModifiedBy` esvaziados; todos os membros do ZIP fora de
+  `docProps/core.xml` permaneceram idênticos. Os três hashes fixados foram atualizados.
+- `build_sources.py --check`, `sync_shared.py --check`, `build_catalog.py --check` e `check_channels.py` passaram;
+  a suíte completa passou com 183 testes e 1.511 subtestes. Doze skills receberam versão patch.
+- Antes da reescrita, foi criado backup local em `/private/tmp/plan048-before.bundle`. Um clone espelho isolado
+  substituiu os quatro blobs antigos e o guia que citava a pasta real. Todos os branches e tags publicados foram
+  atualizados atomicamente no GitHub. Um clone novo confirmou que os blobs antigos não são alcançáveis pelos refs
+  publicados e que os DOCX da versão atual não contêm os metadados pessoais.
+- As 19 Releases antigas com anexos afetados (3 versões de cada uma das seis skills 3E/4D/5C e `pacotes`)
+  foram excluídas junto com os tags. O workflow `release.yml` publicou as 12 novas versões e a Release
+  `pacotes` (run `37975334678`, sucesso). O arquivo `relatorio-4d.skill` baixado dessa Release foi conferido:
+  contém o PDF fictício e o DOCX sem metadados pessoais.
+- Branches e worktrees locais antigos, fora dos refs publicados, ainda podem guardar os objetos anteriores;
+  não devem ser enviados ao remoto sem nova reescrita. O GitHub também pode reter objetos inalcançáveis em
+  caches internos até sua coleta de lixo.
 
 ## STOP conditions
 
