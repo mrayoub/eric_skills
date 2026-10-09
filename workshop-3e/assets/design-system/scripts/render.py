@@ -15,8 +15,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "1.4.0"
-REPORTLAB_LAYOUTS = ("card_portrait", "executive_one_page", "report_portrait", "report_landscape", "presentation")
+RENDERER_VERSION = "2.0.0"
 DELIVERABLE_LABELS = {
     "briefing": "Briefing",
     "briefing_one_page": "Resumo do briefing",
@@ -133,6 +132,13 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     errors = sorted(Draft202012Validator(schema, registry=registry).iter_errors(content), key=lambda e: str(e.path))
     if errors:
         raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
+
+    # O tipo do entregável já aparece no cabeçalho, acima do título; o título diz o assunto.
+    title_key = " ".join(str(content.get("title", "")).casefold().split())
+    for name in (DELIVERABLE_LABELS.get(kind, ""), kind.replace("_", " ")):
+        if name and name.casefold() in title_key:
+            raise ValueError(f"title: não repita o tipo do entregável ({name}), que já aparece no "
+                             "cabeçalho; escreva o assunto ou a mensagem do documento")
 
     if kind in ("test_card", "learning_card"):
         keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
@@ -948,8 +954,8 @@ def main() -> None:
     parser.add_argument("input", type=Path)
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--formats", help="json,pdf,docx,md,txt; pptx só para apresentação; csv só para tabelas exportáveis")
-    parser.add_argument("--pdf-engine", choices=("weasyprint", "reportlab"), default="weasyprint",
-                        help="motor do PDF; reportlab dispensa Pango (todos os tipos, exceto apresentação executiva)")
+    parser.add_argument("--pdf-engine", choices=("reportlab",), default="reportlab",
+                        help="motor do PDF (só reportlab; opção mantida por compatibilidade)")
     args = parser.parse_args()
     content = read_json(args.input)
     tokens = read_json(ROOT / "tokens.json")
@@ -961,8 +967,6 @@ def main() -> None:
     invalid = set(requested) - set(allowed)
     if invalid:
         raise ValueError(f"Formatos incompatíveis com {content['deliverable_type']}: {sorted(invalid)}")
-    if "pdf" in requested and args.pdf_engine == "reportlab" and profile["layout"] not in REPORTLAB_LAYOUTS:
-        raise ValueError(f"--pdf-engine reportlab ainda não suporta o layout {profile['layout']}; use weasyprint")
     out = args.out_dir
     out.mkdir(parents=True, exist_ok=True)
     stem = safe_name(content["metadata"]["artifact_id"]) + "-v" + safe_name(content["metadata"]["content_version"])
@@ -972,7 +976,7 @@ def main() -> None:
     path.write_bytes(canonical)
     files.append(path)
     source_html: str | None = None
-    if "html" in requested or ("pdf" in requested and args.pdf_engine == "weasyprint"):
+    if "html" in requested:
         source_html = render_html(content, tokens, profile)
     if "html" in requested:
         path = out / f"{stem}.html"
@@ -982,21 +986,19 @@ def main() -> None:
     if "pdf" in requested:
         path = out / f"{stem}.pdf"
         try:
-            if args.pdf_engine == "reportlab":
-                render_pdf_reportlab(content, tokens, profile, path)
-            else:
-                from weasyprint import HTML
-                HTML(string=source_html or "", base_url=str(ROOT)).write_pdf(str(path))
-        except (ImportError, OSError) as exc:
+            render_pdf_reportlab(content, tokens, profile, path)
+        except ValueError:
+            # Conteúdo que não cabe (PdfOverflow) continua fatal: corrija o conteúdo.
+            path.unlink(missing_ok=True)
+            raise
+        except Exception as exc:
             import sys
 
+            # Dependência ausente ou falha inesperada do motor: entrega os demais formatos.
             path.unlink(missing_ok=True)
             unavailable["pdf"] = f"{type(exc).__name__}: {exc}"[:300]
-            if args.pdf_engine == "reportlab":
-                print(f"AVISO: PDF não gerado ({unavailable['pdf']}). Instale: pip install reportlab.", file=sys.stderr)
-            else:
-                print(f"AVISO: PDF não gerado ({unavailable['pdf']}). No macOS: brew install pango; "
-                      "no Debian/Ubuntu: apt-get install libpango-1.0-0 libpangoft2-1.0-0.", file=sys.stderr)
+            print(f"AVISO: PDF não gerado ({unavailable['pdf']}). Instale: pip install -r requirements.txt.",
+                  file=sys.stderr)
         else:
             if profile["layout"] in ("executive_one_page", "card_portrait"):
                 try:

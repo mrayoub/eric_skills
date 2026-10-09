@@ -133,6 +133,13 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     if errors:
         raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
 
+    # O tipo do entregável já aparece no cabeçalho, acima do título; o título diz o assunto.
+    title_key = " ".join(str(content.get("title", "")).casefold().split())
+    for name in (DELIVERABLE_LABELS.get(kind, ""), kind.replace("_", " ")):
+        if name and name.casefold() in title_key:
+            raise ValueError(f"title: não repita o tipo do entregável ({name}), que já aparece no "
+                             "cabeçalho; escreva o assunto ou a mensagem do documento")
+
     if kind in ("test_card", "learning_card"):
         keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
         blocks = content["blocks"]

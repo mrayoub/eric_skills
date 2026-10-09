@@ -9,6 +9,9 @@ padrão; ajuste o detalhe quando o usuário pedir uma explicação especializada
 
 - Comece pelo objetivo, pelo que foi observado ou pelo que falta decidir. Diga
   qual é a consequência prática para o projeto.
+- O título diz o assunto ou a mensagem do documento. Não repita o tipo do
+  entregável (“Relatório 4D”, “Plano de experimentação”, “Test Card”): ele já
+  aparece no cabeçalho, acima do título, e o renderizador recusa a repetição.
 - Use frases curtas, verbos diretos e uma ideia por frase. Prefira “o que vamos
   testar”, “como vamos medir” e “o que falta definir” a títulos abstratos.
 - Troque o jargão por uma expressão comum. Quando um termo técnico for necessário,

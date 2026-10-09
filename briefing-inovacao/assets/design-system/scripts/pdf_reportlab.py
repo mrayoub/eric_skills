@@ -154,18 +154,22 @@ def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str,
     result: list[tuple[Any, ...]] = []
     title = "Notas"
     body: list[dict[str, Any]] = []
+    titled = False  # o título veio de um heading e ainda não foi emitido
 
     def flush() -> None:
-        nonlocal body
-        if body:
+        nonlocal body, titled
+        # Como no HTML, um heading aparece mesmo sem conteúdo até o próximo heading ou quebra.
+        if body or titled:
             wide = any(block["type"] in ("table", "card_grid", "canvas", "chart") for block in body)
             result.append(("section", title, body, wide))
             body = []
+        titled = False
 
     for block in blocks:
         if block["type"] == "heading":
             flush()
             title = block_text(block)
+            titled = True
         elif block["type"] == "page_break":
             flush()
             result.append(("page_break",))
@@ -707,8 +711,10 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
             key = block.get("data", {}).get("section_key")
             if field_labels and key in field_labels:
                 inner_width = usable_width - 24
+                # Um campo do card pode vir como heading; dentro do card ele é texto do campo.
+                field_block = {**block, "type": "paragraph"} if block["type"] == "heading" else block
                 field = Table([[Paragraph(_markup(field_labels[key]), styles["field"])],
-                               [*block_flowables(block, styles, inner_width, block_text, table_rows)]],
+                               [*block_flowables(field_block, styles, inner_width, block_text, table_rows)]],
                               colWidths=[usable_width])
                 field.setStyle(TableStyle([
                     ("BOX", (0, 0), (-1, -1), 0.75, palette["border"]),
