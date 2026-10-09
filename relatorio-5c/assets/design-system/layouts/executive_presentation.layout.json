@@ -25,7 +25,7 @@
       "x": 16,
       "y": 32,
       "width": 307,
-      "height": 20,
+      "height": 24,
       "z": 1,
       "section_key": "titulo_documento",
       "display_mode": "title_and_content"
@@ -34,9 +34,9 @@
       "id": "s3",
       "name": "corpo_slide",
       "x": 16,
-      "y": 52,
+      "y": 56,
       "width": 307,
-      "height": 112,
+      "height": 108,
       "z": 1,
       "section_key": "",
       "display_mode": "content_only"

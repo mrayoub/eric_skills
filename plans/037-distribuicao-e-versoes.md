@@ -200,7 +200,7 @@ Use cópias temporárias do repositório (`tmp_path`) — nunca altere o reposit
 ### Step 6: `.github/workflows/distribution.yml`
 
 - `on: push` (main) e `pull_request`. Job `check` (ubuntu, Python 3.12, Node 20): instala
-  `_DESIGN_SYSTEM/requirements.txt` + pytest; roda sync `--check`, `build_sources --check`,
+  `_DESIGN_SYSTEM/requirements.txt` + pytest + pyyaml (usado por `_TESTS/test_frontmatter.py`); roda sync `--check`, `build_sources --check`,
   `build_catalog --check`, a suíte, e `npx -y skills add . --list` conferindo `Found 12 skills`
   (derive o 12 de `catalog.json`, não fixe no YAML).
 - Job `release` (só `push` em `main`, depois de `check`, `permissions: contents: write`): roda `build_dist.py`;
