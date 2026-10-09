@@ -27,7 +27,9 @@ EXCLUDED_FILES = {".DS_Store"}
 # Mesma regra de _TOOLS/build_catalog.py (este script é distribuído sem _TOOLS).
 def distributable_files(skill_dir: Path) -> list[Path]:
     files = []
-    for path in sorted(skill_dir.rglob("*")):
+    # Ordena pelas partes do caminho, com maiúsculas distintas: o Windows compara caminhos sem diferenciar
+    # maiúsculas, o que mudaria a ordem e o hash. Assim a ordem é a mesma em qualquer sistema.
+    for path in sorted(skill_dir.rglob("*"), key=lambda item: item.relative_to(skill_dir).parts):
         rel = path.relative_to(skill_dir)
         if not path.is_file() or path.name in EXCLUDED_FILES or path.suffix == ".pyc":
             continue

@@ -68,7 +68,7 @@ class CatalogTests(unittest.TestCase):
         with RepoCopy() as root:
             current = version(root / "relatorio-4d")
             reference = root / "relatorio-4d/references/relatorio-4d-layout.md"
-            reference.write_text(reference.read_text(encoding="utf-8") + "\nAlteração de teste.\n", encoding="utf-8")
+            reference.write_text(reference.read_text(encoding="utf-8") + "\nAlteração de teste.\n", encoding="utf-8", newline="")
             result = run_catalog(root, "--check")
             self.assertEqual(result.returncode, 1)
             self.assertIn("relatorio-4d: conteúdo mudou sem subir a versão", result.stderr)
@@ -82,7 +82,7 @@ class CatalogTests(unittest.TestCase):
         with RepoCopy() as root:
             catalog = json.loads((root / "catalog.json").read_text(encoding="utf-8"))
             catalog["skills"].pop("workshop-3e")
-            (root / "catalog.json").write_text(json.dumps(catalog), encoding="utf-8")
+            (root / "catalog.json").write_text(json.dumps(catalog), encoding="utf-8", newline="")
             check = run_catalog(root, "--check")
             self.assertEqual(check.returncode, 1)
             self.assertIn("workshop-3e: ausente do catálogo", check.stderr)
@@ -95,7 +95,7 @@ class CatalogTests(unittest.TestCase):
             before = CATALOG.skill_hash(skill)
             path = skill / "SKILL.md"
             text = path.read_text(encoding="utf-8")
-            path.write_text(text.replace(f'version: "{version(skill)}"', 'version: "9.9.9"'), encoding="utf-8")
+            path.write_text(text.replace(f'version: "{version(skill)}"', 'version: "9.9.9"'), encoding="utf-8", newline="")
             self.assertEqual(version(skill), "9.9.9")
             self.assertEqual(CATALOG.skill_hash(skill), before)
 
@@ -145,9 +145,9 @@ class CheckUpdatesTests(unittest.TestCase):
             newer = next_patch(installed_5c)
             catalog["skills"]["relatorio-5c"]["version"] = newer
             changed = root / "workshop-5c/references/metodo-5c.md"
-            changed.write_text(changed.read_text(encoding="utf-8") + "\nNota local.\n", encoding="utf-8")
+            changed.write_text(changed.read_text(encoding="utf-8") + "\nNota local.\n", encoding="utf-8", newline="")
             path = root / "custom.json"
-            path.write_text(json.dumps(catalog), encoding="utf-8")
+            path.write_text(json.dumps(catalog), encoding="utf-8", newline="")
             result = self.run_check(root, path)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn(f"relatorio-5c: instalada {installed_5c}; disponível {newer}", result.stdout)
@@ -181,7 +181,7 @@ class ChannelTests(unittest.TestCase):
     def test_link_outside_skill_is_flagged(self) -> None:
         with RepoCopy() as root:
             guide = root / "relatorio-4d/references/relatorio-4d-layout.md"
-            guide.write_text(guide.read_text(encoding="utf-8") + "\n[fora](../../_SHARED/x.md)\n", encoding="utf-8")
+            guide.write_text(guide.read_text(encoding="utf-8") + "\n[fora](../../_SHARED/x.md)\n", encoding="utf-8", newline="")
             problems = CHANNELS.check_links(root / "relatorio-4d")
             self.assertTrue(any("link para fora da skill" in problem for problem in problems), problems)
 
@@ -189,7 +189,7 @@ class ChannelTests(unittest.TestCase):
         with RepoCopy() as root:
             skill = root / "workshop-4d"
             tracked = [path.relative_to(skill).as_posix() for path in CATALOG.distributable_files(skill)]
-            (skill / "rascunho-local.md").write_text("não versionado", encoding="utf-8")
+            (skill / "rascunho-local.md").write_text("não versionado", encoding="utf-8", newline="")
             problems = CHANNELS.check_parity(skill, tracked, CATALOG.distributable_files(skill))
             self.assertTrue(problems)
             self.assertIn("rascunho-local.md", problems[0])
