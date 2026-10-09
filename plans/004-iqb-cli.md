@@ -16,7 +16,7 @@
 - **Risk**: LOW
 - **Depends on**: none (usa `_TESTS/` criado no plano 003; crie a pasta se não existir)
 - **Category**: dx
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

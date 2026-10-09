@@ -1,0 +1,40 @@
+{
+  "skill_name": "experimentacao-inovacao",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Com o Test Card já aprovado, monte o modelo de experimentação que a equipe vai executar.",
+      "expected_output": "Modelo de experimentação executável ligado ao TC-01; nenhum resultado, status de critério ou Learning Card.",
+      "files": [
+        "files/plano-previo.md",
+        "files/hipotese-e-mvp.md"
+      ],
+      "expectations": [
+        "Entrega o Modelo de experimentação como entregável do bloco de execução, ligado ao TC-01 v1 sem reescrever hipótese, medida ou critério aprovados.",
+        "Especifica o MVP a testar: checklist v1 dentro do escopo e acompanhamento fora, sem prometer testar acompanhamento.",
+        "Traz roteiro passo a passo da sessão, público elegível, registros a coletar por pessoa, guardrails e regra para ajuda da moderadora.",
+        "Inclui cronograma das sessões de 26 e 27/10/2026, responsáveis e um gate de início com quem autoriza.",
+        "Não gera resultados, taxas, status de critério nem Learning Cards.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Consolide a rodada: resultados, avaliação do MVP e direcionamento para a próxima fase.",
+      "expected_output": "Critério de quatro de cinco não atingido; avaliação do MVP separada das hipóteses; direcionamento com condições.",
+      "files": [
+        "files/plano-previo.md",
+        "files/sessoes.md",
+        "files/registro-construcao-mvp.md"
+      ],
+      "expectations": [
+        "Calcula três de cinco sucessos sem ajuda e declara o critério prévio de quatro de cinco não atingido no Learning Card.",
+        "Avalia o MVP em seção própria, separada dos resultados da hipótese, e não usa o funcionamento do checklist como validação da hipótese.",
+        "Registra o acompanhamento como componente precisa ter adiado e o recarregamento em P04 como evidência de funcionamento.",
+        "Marca como não avaliado o que não tem evidência, como custo de operação, segurança e acessibilidade, sem preencher por impressão.",
+        "Termina com direcionamento para a próxima fase (avançar, iterar, investigar ou encerrar), com condições verificáveis e responsável.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

@@ -16,7 +16,7 @@
 - **Risk**: LOW
 - **Depends on**: none (pode rodar em paralelo ao 001; se o 001 já rodou, não há sync envolvido — `scripts/` da skill não é copiado)
 - **Category**: bug
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

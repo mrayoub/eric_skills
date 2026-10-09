@@ -6,7 +6,7 @@
 > terminar, atualize a linha de status deste plano em `plans/README.md`
 > (a menos que quem te despachou tenha dito que cuida disso).
 >
-> **Drift check (rode primeiro)**: `git diff --stat 232a026..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/layouts/`
+> **Drift check (rode primeiro)**: `git diff --stat 4ab1a7c..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/layouts/`
 > Se algum arquivo no escopo mudou desde que este plano foi escrito, compare
 > os trechos de "Estado atual" abaixo contra o código real antes de prosseguir;
 > em caso de divergência, trate como condição de STOP.
@@ -18,7 +18,7 @@
 - **Risk**: MED
 - **Depends on**: none (os planos 029 e 030 já estão mesclados em `main`; este plano corrige um defeito no que o plano 030 entregou e estende a mesma técnica)
 - **Category**: bug + direction
-- **Planned at**: commit `232a026`, 2026-10-05
+- **Planned at**: commit `4ab1a7c`, 2026-10-05
 
 ## Por que isso importa
 

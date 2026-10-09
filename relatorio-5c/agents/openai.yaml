@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relatório 5C"
+  short_description: "Consolida cocriação, votos e propostas do 5C"
+  brand_color: "#193C8E"
+  default_prompt: "Use $relatorio-5c para compilar o relatório do encontro de cocriação."

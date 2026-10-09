@@ -1,0 +1,5 @@
+interface:
+  display_name: "Experimentação de inovação"
+  short_description: "Hipóteses, modelo de experimentação e direcionamento"
+  brand_color: "#193C8E"
+  default_prompt: "Use $experimentacao-inovacao para conduzir a experimentação deste projeto: hipóteses com Test Cards, modelo de experimentação e apresentação com direcionamento."

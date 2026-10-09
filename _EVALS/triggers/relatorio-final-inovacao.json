@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Prepare o relatório final da esteira e o pitch para a diretoria com base nos materiais do projeto.",
+    "should_trigger": true
+  },
+  {
+    "query": "Preciso defender aos gerentes por que o time de inovação recomenda um novo piloto em vez de escala.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use o Pitch Canvas para apresentar a decisão de implementação e os riscos documentados.",
+    "should_trigger": true
+  },
+  {
+    "query": "Só temos briefing e 4D, mas monte uma versão provisória da apresentação para o sponsor.",
+    "should_trigger": true
+  },
+  {
+    "query": "Revise o relatório e os slides finais: números, fontes e recomendação estão coerentes?",
+    "should_trigger": true
+  },
+  {
+    "query": "Planeje Test Cards e protocolo para o piloto da próxima semana.",
+    "should_trigger": false
+  },
+  {
+    "query": "Consolide as notas de D1 a D4 no Relatório 4D.",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalie a maturidade das evidências deste projeto pelo scorecard.",
+    "should_trigger": false
+  }
+]
