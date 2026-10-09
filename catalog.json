@@ -1,0 +1,66 @@
+{
+  "repository": "mrayoub/eric_skills",
+  "schema_version": "1.0.0",
+  "skills": {
+    "avaliacao-briefing-iqb": {
+      "files": 72,
+      "sha256": "cc58ba76c47481e1529c541df94e6d929ed752a80020a361f82d839a25fe7120",
+      "version": "1.0.0"
+    },
+    "briefing-inovacao": {
+      "files": 73,
+      "sha256": "91824e78b0b523426fcc095cd40490eed7e5fb1741214e7916e4f5385c4f13b7",
+      "version": "1.0.0"
+    },
+    "experimentacao-inovacao": {
+      "files": 82,
+      "sha256": "f13e74fe71cdb154ef436e29287b6b163e67977bd783487a4ef1dadd1e77fed6",
+      "version": "1.1.0"
+    },
+    "potencial-inovacao": {
+      "files": 71,
+      "sha256": "d267a7c0fdc1128d9cf7d9423ac55cb530e08d0911b66e43159f9a6c637292b6",
+      "version": "1.0.0"
+    },
+    "relatorio-3e": {
+      "files": 75,
+      "sha256": "b780a778dd8554bf5f8e634719ce42bf0a8a9f56082614658e073a90bb280ac9",
+      "version": "1.0.0"
+    },
+    "relatorio-4d": {
+      "files": 76,
+      "sha256": "3657d6d7c5b02586ae09e871be80303934f92bffa09000289d219aeeb15003bb",
+      "version": "1.0.0"
+    },
+    "relatorio-5c": {
+      "files": 72,
+      "sha256": "454ea94b5c7df71f6f8e0184d12413c8ac53a4db54078217bedf4b46dc2e1079",
+      "version": "1.0.0"
+    },
+    "relatorio-final-inovacao": {
+      "files": 72,
+      "sha256": "082c391721096bbc58dff693ba1bda6b238bd73eec33182fa680c361b60750b3",
+      "version": "1.0.0"
+    },
+    "scorecard-inovacao": {
+      "files": 73,
+      "sha256": "656059ca4b28b249dfbbdf925cb2021f7a56cada67b8116a6cd49e94c181d2c3",
+      "version": "1.0.0"
+    },
+    "workshop-3e": {
+      "files": 76,
+      "sha256": "6e9ab7202ad880f987ecf3b57962149df954e5c5de11167eb8c4b3ebe460a491",
+      "version": "1.0.0"
+    },
+    "workshop-4d": {
+      "files": 75,
+      "sha256": "c28c6ca9456121e4b602b59d4fd7703796078f87ea07b0ee7d788f56f3108875",
+      "version": "1.0.0"
+    },
+    "workshop-5c": {
+      "files": 72,
+      "sha256": "a1c4e7d91d231a3a624eb9d224b771adc920294445a014685792dfb0114a3966",
+      "version": "1.0.0"
+    }
+  }
+}
