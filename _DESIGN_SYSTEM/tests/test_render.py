@@ -1252,21 +1252,15 @@ class PdfQualityTests(unittest.TestCase):
                                         capture_output=True, text=True)
                 self.assertEqual(result.returncode, 0, result.stderr)
 
-    @unittest.skipUnless(pdf_available(), "WeasyPrint/pango indisponível")
-    def test_weasyprint_samples_gate_known_defect(self):
-        # O layout de apresentação já coloca o rodapé fora da página no PDF
-        # atual; o portão o recusa até que o ReportLab o substitua no Plano 035.
+    def test_weasyprint_samples_pass(self):
+        if not pdf_available():
+            self.skipTest("WeasyPrint/pango indisponível")
         for sample in sorted((ROOT.parent / "_SAMPLES_ENTREGAVEIS").glob("*/input.json")):
             kind = sample.parent.name
             with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
                 result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", temp,
                                          "--formats", "pdf"], capture_output=True, text=True)
-                if kind == "executive_presentation":
-                    self.assertNotEqual(result.returncode, 0)
-                    self.assertIn("texto fora da página", result.stderr)
-                    self.assertFalse(list(Path(temp).glob("*.pdf")))
-                else:
-                    self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_gate_removes_pdf_and_fails(self):
         sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/test_card/input.json"
