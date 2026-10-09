@@ -31,7 +31,7 @@ Os DOCX 4D e 3E foram importados para suas duas skills, preservando os arquivos 
 | Fonte | Conteúdo textual conferido | Tabelas | SHA-256 do DOCX |
 | --- | --- | --- | --- |
 | Modelo 4D de Aprofundamento.docx | 137 parágrafos não vazios, incluindo células | 1 | `d5071f2ab0d62e153b8f0bb7e89108a10bca6980d807dbd43c90bbd80fd115e3` |
-| Modelo 3E Estruturação da Solução.docx | 111 parágrafos não vazios, incluindo células | 1 | `530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34` |
+| Modelo 3E Estruturacao da Solucao.docx | 111 parágrafos não vazios, incluindo células | 1 | `530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34` |
 | Playbook_Modelo_5C_Centralidade_Cliente.docx | 171 parágrafos não vazios, incluindo células | 3 | `3b793187dccd6691e124e61b9a407e6f383513d55de255c1049deae31df4e3c7` |
 
 A transcrição integral do 5C já existia em ambas as skills. Nesta revisão, seu conteúdo foi confrontado integralmente com o DOCX e recebeu o hash da fonte e o registro da conferência.

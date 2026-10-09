@@ -1,6 +1,11 @@
 ---
 name: avaliacao-briefing-iqb
 description: "Avalia a qualidade de um briefing de inovação pela rubrica IQB do ERIC: 40 critérios binários em clareza, evidências, resultados e acionabilidade, com vetos, nota por dimensão, IQB de 1 a 5 e classificação calculados por script. Use quando o usuário pedir nota, IQB, validação, auditoria, checklist ou comparação de versões de um briefing, ou perguntar se o briefing está bom o suficiente para seguir. Não use para escrever ou melhorar o briefing (use briefing-inovacao), para priorizar a oportunidade (use potencial-inovacao) nem para medir a maturidade das evidências do projeto (use scorecard-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+metadata:
+  requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Avaliação de briefing pelo IQB

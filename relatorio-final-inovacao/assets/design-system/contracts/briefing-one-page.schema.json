@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eric:schemas:briefing-one-page",
+  "title": "ERIC Briefing One-page",
+  "description": "Contrato especializado da sintese executiva em uma pagina do briefing.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "briefing_one_page"
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "briefing_version_id",
+            "layout_variant",
+            "page_size",
+            "orientation"
+          ],
+          "properties": {
+            "phase_key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Contexto opcional da fase registrada; não controla o uso da skill."
+            },
+            "briefing_version_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_version_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "layout_variant": {
+              "const": "executive_one_page"
+            },
+            "page_size": {
+              "const": "A4"
+            },
+            "orientation": {
+              "const": "landscape",
+              "description": "A4 paisagem, conforme o perfil executive_one_page."
+            }
+          }
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing-one-page#/$defs/hmwBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing-one-page#/$defs/problemBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing-one-page#/$defs/relevanceBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing-one-page#/$defs/outcomesBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing-one-page#/$defs/peopleBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hmwBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "properties": {
+        "type": {
+          "const": "callout"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "section_key",
+            "text"
+          ],
+          "properties": {
+            "section_key": {
+              "const": "hmw"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "highlightBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "properties": {
+        "type": {
+          "const": "callout"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "section_key",
+            "title",
+            "description",
+            "points"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "points": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 5,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Bullets adicionais da coluna; vazio quando a seção não tem pontos próprios (UXR-17)."
+            },
+            "layout": {
+              "const": "column",
+              "description": "Marcador de layout: os três tópicos finais do one-page são exibidos em colunas de mesma altura."
+            }
+          }
+        }
+      }
+    },
+    "problemBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing-one-page#/$defs/highlightBlock"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "problem_opportunity"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "relevanceBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing-one-page#/$defs/highlightBlock"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "business_relevance"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "outcomesBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing-one-page#/$defs/highlightBlock"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "expected_outcomes"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "peopleBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "properties": {
+        "type": {
+          "const": "table"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "section_key",
+            "responsibles",
+            "sponsor"
+          ],
+          "properties": {
+            "section_key": {
+              "const": "people"
+            },
+            "responsibles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "sponsor": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

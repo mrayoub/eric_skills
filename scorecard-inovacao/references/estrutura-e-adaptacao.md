@@ -2,6 +2,8 @@
 
 ## Proveniência
 
+O Innovation Project Scorecard é © Strategyzer AG; o nome e o instrumento original pertencem à Strategyzer, e a adaptação institucional abaixo não é endossada por ela. O PDF oficial não acompanha a skill: use os links abaixo.
+
 - [Ferramenta oficial da Strategyzer](https://www.strategyzer.com/library/innovation-project-scorecard), com link para o PDF do instrumento.
 - [Explicação da Strategyzer](https://www.strategyzer.com/library/innovation-project-scorecard-evidence-trumps-opinion): uso em apresentações para investimento, acompanhamento de sprints e avaliação do projeto a qualquer momento; alinhamento estratégico, redução de riscos e potencial da oportunidade.
 - [Força da evidência](https://www.strategyzer.com/library/business-testing-is-your-hypothesis-really-validated): o tipo e a quantidade de evidência importam; relatos e ações reais têm forças diferentes.

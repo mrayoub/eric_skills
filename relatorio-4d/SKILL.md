@@ -1,6 +1,11 @@
 ---
 name: relatorio-4d
 description: "Compila ou revisa o Relatório 4D a partir dos registros de D1 a D4 (mural, notas, transcrições, votos, snapshot D2): diagnóstico, alternativas, priorização com denominadores, dissensos, evidências e lacunas rastreáveis. Use quando houver material de um workshop 4D ou fontes equivalentes e o usuário quiser o relatório, a síntese para o BP1 ou a revisão de um relatório existente. Não use para preparar ou facilitar o encontro (use workshop-4d)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+metadata:
+  requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Compilar o Relatório 4D
