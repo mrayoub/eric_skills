@@ -28,6 +28,50 @@ def section(content, key):
     return next(block["data"] for block in content["blocks"] if block["data"].get("section_key") == key)
 
 
+class ExecutivePresentationRulesTests(unittest.TestCase):
+    def setUp(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json"
+        self.content = json.loads(path.read_text(encoding="utf-8"))
+
+    def test_complete_sample_is_valid(self):
+        self.assertEqual(validators.run(self.content), [])
+
+    def test_generic_heading_is_rejected(self):
+        self.content["blocks"][0]["data"]["text"] = "Contexto"
+        self.assertTrue(any("título de slide" in error for error in validators.run(self.content)))
+
+    def test_long_heading_is_rejected(self):
+        self.content["blocks"][0]["data"]["text"] = " ".join(["palavra"] * 15)
+        self.assertTrue(any("título de slide" in error for error in validators.run(self.content)))
+
+    def test_dense_section_is_rejected(self):
+        for count, words in ((5, 1), (4, 18)):
+            with self.subTest(count=count, words=words):
+                item = copy.deepcopy(self.content)
+                extra = [{"id": f"extra-{i}", "type": "paragraph",
+                          "data": {"text": " ".join(["texto"] * words)}} for i in range(count)]
+                item["blocks"][1:1] = extra
+                self.assertTrue(any("divida em mais slides" in error for error in validators.run(item)))
+
+    def test_missing_or_long_summary_is_rejected(self):
+        for summary in ("", " ".join(["palavra"] * 40)):
+            with self.subTest(summary=summary):
+                item = copy.deepcopy(self.content)
+                item["summary"] = summary
+                self.assertTrue(any("summary:" in error for error in validators.run(item)))
+
+    def test_partial_presentation_bypasses_semantic_rules(self):
+        self.content["metadata"]["completeness"] = "partial"
+        self.content["blocks"][0]["data"]["text"] = "Contexto"
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            path = folder / "input.json"
+            path.write_text(json.dumps(self.content), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(SCRIPT), str(path), "--out-dir", str(folder / "out"),
+                                     "--formats", "md"], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+
 class BriefingValidationTests(unittest.TestCase):
     def setUp(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json"
