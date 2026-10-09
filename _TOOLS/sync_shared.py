@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 import hashlib
 import shutil
 from pathlib import Path
@@ -96,6 +97,9 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true", help="verifica sem escrever")
@@ -111,6 +115,9 @@ def main() -> int:
             if not path.exists():
                 raise FileNotFoundError(f"Fonte ausente: {path.relative_to(ROOT)}")
         pending = [action for skill in skills() for action in actions(skill)]
+        if args.check:
+            # Caches locais (__pycache__, .DS_Store) não são versionados nem empacotados: não contam como divergência.
+            pending = [action for action in pending if action[1].name not in {"__pycache__", ".DS_Store"}]
         for kind, dst, src in pending:
             rel = dst.relative_to(ROOT)
             if args.check:

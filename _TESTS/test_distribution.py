@@ -173,5 +173,36 @@ class PackageContentTests(unittest.TestCase):
                 self.assertEqual(interface["brand_color"], primary)
 
 
+
+CHANNELS = load("check_channels", ROOT / "_TOOLS/check_channels.py")
+
+
+class ChannelTests(unittest.TestCase):
+    def test_link_outside_skill_is_flagged(self) -> None:
+        with RepoCopy() as root:
+            guide = root / "relatorio-4d/references/relatorio-4d-layout.md"
+            guide.write_text(guide.read_text(encoding="utf-8") + "\n[fora](../../_SHARED/x.md)\n", encoding="utf-8")
+            problems = CHANNELS.check_links(root / "relatorio-4d")
+            self.assertTrue(any("link para fora da skill" in problem for problem in problems), problems)
+
+    def test_untracked_file_breaks_parity(self) -> None:
+        with RepoCopy() as root:
+            skill = root / "workshop-4d"
+            tracked = [path.relative_to(skill).as_posix() for path in CATALOG.distributable_files(skill)]
+            (skill / "rascunho-local.md").write_text("não versionado", encoding="utf-8")
+            problems = CHANNELS.check_parity(skill, tracked, CATALOG.distributable_files(skill))
+            self.assertTrue(problems)
+            self.assertIn("rascunho-local.md", problems[0])
+
+    def test_npx_mismatch_is_flagged(self) -> None:
+        catalog = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
+        catalog["skills"]["skill-inexistente"] = {"version": "1.0.0", "sha256": "x", "files": 1}
+        from unittest import mock
+        with mock.patch.object(CHANNELS, "npx_names", return_value=sorted(s.name for s in SKILLS)):
+            problems = CHANNELS.check_npx(ROOT, catalog)
+        self.assertTrue(problems)
+        self.assertIn("skill-inexistente", problems[0])
+
+
 if __name__ == "__main__":
     unittest.main()

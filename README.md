@@ -27,8 +27,10 @@ Enquanto o repositório for privado, é preciso ter acesso a ele no GitHub, com 
 <!-- Fontes: https://support.claude.com/en/articles/12512180-use-skills-in-claude (consultado em 2026-10-09);
      https://learn.chatgpt.com/docs/build-skills (pasta $HOME/.agents/skills do Codex). -->
 
-Os pacotes ficam em [`_DIST/`](_DIST) (gerados por `python3 _TOOLS/build_dist.py`) e, quando publicados,
-na página de Releases. Cada `.skill` é um ZIP com a pasta da skill na raiz.
+Baixe na Release [`pacotes`](https://github.com/mrayoub/eric_skills/releases/tag/pacotes), que sempre tem a versão
+mais recente das 13 skills (mais `catalog.json` e `SHA256SUMS`); cada versão também tem sua própria Release
+(`<skill>-v<versão>`). Localmente, `python3 _TOOLS/build_dist.py` gera os mesmos pacotes em `_DIST/`. Cada `.skill`
+é um ZIP com a pasta da skill na raiz.
 
 - **Claude.ai ou app do Claude:** Customize → Skills → *Upload a skill*. Se a interface não aceitar a
   extensão `.skill`, renomeie uma cópia para `.zip`.
@@ -55,7 +57,8 @@ nenhum arquivo. Com o repositório privado, defina `GITHUB_TOKEN` para ler o cat
 1. Edite a skill ou a fonte compartilhada (`_DESIGN_SYSTEM/`, `_SHARED/`, `_ERIC_CONTEXT/`).
 2. `python3 _TOOLS/sync_shared.py` e `python3 _TOOLS/build_sources.py`.
 3. `python3 _TOOLS/build_catalog.py --bump` sobe a versão das skills cujo conteúdo mudou (`--bump minor` ou `major` quando couber).
-4. Rode os testes, faça o commit e o push. `python3 _TOOLS/build_dist.py` gera os pacotes.
+4. Rode os testes e abra um pull request. A CI recusa conteúdo de skill alterado sem `--bump` e confere os três
+   canais (`python3 _TOOLS/check_channels.py`). Depois do merge, a CI publica as Releases das versões novas.
 
 Uma mudança no design system altera o pacote das 12 skills e, portanto, a versão de todas.
 
