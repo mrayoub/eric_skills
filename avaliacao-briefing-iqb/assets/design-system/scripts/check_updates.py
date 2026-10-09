@@ -83,6 +83,9 @@ def as_tuple(version: str) -> tuple[int, ...]:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--path", action="append", type=Path, default=[],
                         help="pasta com skills instaladas (pode repetir); padrão: a pasta desta skill")
