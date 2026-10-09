@@ -78,7 +78,7 @@ instruções das skills que as usam induzem o agente a falhar nelas:
 
 ## Done criteria
 
-- [ ] Os 6 casos do Step 6 passam e falhavam antes · [ ] as 18 amostras renderizam · [ ] suíte `0 failed` · [ ] catálogo em dia
+- [x] Os 6 casos do Step 6 passam e falhavam antes · [x] as 18 amostras renderizam · [x] suíte `0 failed` (189 testes, 1.511 subtestes) · [x] catálogo em dia
 
 ## STOP conditions
 

@@ -12,6 +12,7 @@ import io
 import json
 import textwrap
 import re
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -102,6 +103,39 @@ def footer_label(content: dict[str, Any]) -> str:
 CARD_FIELD_MAX_CHARS = 280
 
 
+def header_label(content: dict[str, Any]) -> str:
+    kind = content["deliverable_type"]
+    profile_name = content.get("metadata", {}).get("content_profile")
+    if profile_name:
+        definition = read_json(ROOT / "content-profiles.json")["profiles"].get(profile_name)
+        if definition and definition["deliverable_type"] == kind:
+            return definition["label"]
+    return DELIVERABLE_LABELS[kind]
+
+
+def has_section_content(block: dict[str, Any]) -> bool:
+    if block.get("type") in ("heading", "page_break"):
+        return False
+    data = block.get("data", {})
+
+    def populated(value: Any) -> bool:
+        if isinstance(value, str):
+            return bool(value.strip())
+        if isinstance(value, (list, dict)):
+            values = value.values() if isinstance(value, dict) else value
+            return any(populated(item) for item in values)
+        return value is not None
+
+    return any(populated(data.get(key)) for key in
+               ("text", "description", "value", "content", "items", "rows", "cards"))
+
+
+def normalized_title(value: str) -> str:
+    decomposed = unicodedata.normalize("NFD", value.casefold())
+    return " ".join("".join(char for char in decomposed
+                            if unicodedata.category(char) != "Mn").split())
+
+
 def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any]:
     try:
         from jsonschema import Draft202012Validator
@@ -144,18 +178,19 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
                              f"use um de {sorted(profiles_file)}")
         if definition["deliverable_type"] != kind:
             raise ValueError(f"{content_profile}: perfil de {definition['deliverable_type']}, não de {kind}")
-        if meta.get("completeness") == "complete":
+        if effective_completeness == "complete":
             present = {block.get("data", {}).get("section_key") for block in content.get("blocks", [])
-                       if block.get("type") != "page_break" and block_text(block).strip()}
+                       if has_section_content(block)}
             for key, label in definition["required_sections"].items():
                 if key not in present:
                     raise ValueError(f"{content_profile}: falta a seção {key} ({label}); "
                                      "acrescente-a ou marque a versão como parcial")
 
     # O tipo do entregável já aparece no cabeçalho, acima do título; o título diz o assunto.
-    title_key = " ".join(str(content.get("title", "")).casefold().split())
-    for name in (DELIVERABLE_LABELS.get(kind, ""), kind.replace("_", " ")):
-        if name and name.casefold() in title_key:
+    title_key = normalized_title(str(content.get("title", "")))
+    for name in (header_label(content), DELIVERABLE_LABELS[kind], kind.replace("_", " ")):
+        normalized_name = normalized_title(name)
+        if normalized_name and re.search(rf"(?<!\w){re.escape(normalized_name)}(?!\w)", title_key):
             raise ValueError(f"title: não repita o tipo do entregável ({name}), que já aparece no "
                              "cabeçalho; escreva o assunto ou a mensagem do documento")
 
@@ -536,7 +571,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     uri = "data:image/png;base64," + base64.b64encode(logo.read_bytes()).decode("ascii")
     meta = content["metadata"]
     title = html.escape(content["title"])
-    deliverable_label = html.escape(DELIVERABLE_LABELS[content["deliverable_type"]])
+    deliverable_label = html.escape(header_label(content))
     if profile["layout"] == "presentation":
         sections: list[tuple[str, list[dict[str, Any]]]] = []
         current_title = "Conteúdo"
@@ -735,6 +770,7 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         doc.styles[key].font.color.rgb = RGBColor.from_string(tokens["color"]["document_primary"].lstrip("#"))
     header = section.header.paragraphs[0]
     header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    header.add_run(header_label(content).upper() + "    ")
     header.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.2))
     doc.add_heading(content["title"], 0)
     identity = doc.add_paragraph(identity_line(content))
@@ -938,6 +974,12 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         paragraph.font.name = tokens["typography"]["font_body"]
         paragraph.font.size = Pt(tokens["typography"]["styles"]["slide_footer"]["size"])
         paragraph.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
+        eyebrow = s.shapes.add_textbox(logo_x, logo_y, logo_w - Mm(42), logo_h or Mm(11))
+        eyebrow_run = eyebrow.text_frame.paragraphs[0].add_run()
+        eyebrow_run.text = header_label(content).upper()
+        eyebrow_run.font.name = tokens["typography"]["font_body"]
+        eyebrow_run.font.size = Pt(tokens["typography"]["styles"]["cover_eyebrow"]["size"])
+        eyebrow_run.font.color.rgb = color("document_accent")
 
     slide(content["title"], content.get("summary", ""))
     title = "Conteúdo"
@@ -1021,7 +1063,7 @@ def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     module.render_pdf(content, tokens, profile, path,
-                      deliverable_label=DELIVERABLE_LABELS[content["deliverable_type"]],
+                      deliverable_label=header_label(content),
                       footer_label=footer_label(content),
                       field_labels=CARD_LABELS.get(content["deliverable_type"]),
                       block_text=block_text, table_rows=table_rows,

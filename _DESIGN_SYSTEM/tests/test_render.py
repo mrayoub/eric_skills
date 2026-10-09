@@ -1638,6 +1638,69 @@ class ContentProfileTests(unittest.TestCase):
                                    "citation_ids": ["FIC-01"]})
         self.renderer.validate(item, self.profiles)
 
+    def test_missing_completeness_still_requires_profile_sections(self):
+        item = self.sample("experiment_plan")
+        item["metadata"].pop("completeness", None)
+        item["metadata"]["content_profile"] = "experimentation_model"
+        with self.assertRaisesRegex(ValueError, "falta a seção mvp_build"):
+            self.renderer.validate(item, self.profiles)
+
+    def test_heading_alone_does_not_satisfy_section(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "experimentation_model"
+        for index, key in enumerate(("mvp_build", "scope", "schedule", "start_gate")):
+            item["blocks"].append({"id": f"heading-extra-{index}", "type": "heading",
+                                   "data": {"section_key": key, "text": f"Título de {key}"}})
+        with self.assertRaisesRegex(ValueError, "falta a seção mvp_build"):
+            self.renderer.validate(item, self.profiles)
+
+    def test_empty_text_does_not_satisfy_section(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "experimentation_model"
+        for index, key in enumerate(("mvp_build", "scope", "schedule", "start_gate")):
+            item["blocks"].append({"id": f"empty-extra-{index}", "type": "paragraph",
+                                   "data": {"section_key": key, "text": ""}})
+        with self.assertRaisesRegex(ValueError, "falta a seção mvp_build"):
+            self.renderer.validate(item, self.profiles)
+
+    def test_profile_label_appears_in_html_and_pdf(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "experimentation_model"
+        for index, key in enumerate(("mvp_build", "scope", "schedule", "start_gate")):
+            item["blocks"].append({"id": f"label-extra-{index}", "type": "paragraph",
+                                   "data": {"section_key": key, "text": f"Conteúdo fictício de {key}."}})
+        profile = self.renderer.validate(item, self.profiles)
+        tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+        html_output = self.renderer.render_html(item, tokens, profile)
+        self.assertIn('<span class="eyebrow">Modelo de experimentação</span>', html_output)
+        if reportlab_available():
+            with tempfile.TemporaryDirectory() as temp:
+                path = Path(temp) / "model.pdf"
+                self.renderer.render_pdf_reportlab(item, tokens, profile, path)
+                pdf_text = "\n".join(page.extract_text() for page in PdfReader(path).pages)
+                self.assertIn("MODELO DE EXPERIMENTAÇÃO", pdf_text)
+
+
+class TitleRuleTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        cls.profiles = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))
+
+    def sample(self, kind: str) -> dict:
+        return json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
+
+    def test_debriefing_is_not_briefing(self):
+        item = self.sample("briefing")
+        item["title"] = "Debriefing das operações de liquidação"
+        self.renderer.validate(item, self.profiles)
+
+    def test_unaccented_deliverable_type_is_rejected(self):
+        item = self.sample("four_d_report")
+        item["title"] = "Relatorio 4D do portal"
+        with self.assertRaisesRegex(ValueError, "não repita o tipo"):
+            self.renderer.validate(item, self.profiles)
+
     def test_partial_version_is_not_blocked(self):
         item = self.sample("experiment_plan")
         item["metadata"].update({"content_profile": "experimentation_model", "completeness": "partial"})

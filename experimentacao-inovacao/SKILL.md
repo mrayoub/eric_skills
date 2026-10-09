@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.4"
+  version: "1.4.0"
 ---
 
 # Experimentação de inovação
@@ -118,7 +118,7 @@ Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos a
 |---|---|
 | Hipóteses com Test Cards | um `test_card` por teste |
 | Modelo de experimentação | `experiment_plan` com `metadata.content_profile: "experimentation_model"` e as seções `mvp_build`, `scope`, `schedule` e `start_gate` |
-| Apresentação da experimentação e direcionamento | `executive_presentation` com `metadata.content_profile: "experimentation_presentation"` e as seções `mvp_evaluation` e `direction`, e `evidence_recommendation`; um `learning_card` por card executado; `experiment_report` quando um relatório detalhado for pedido |
+| Apresentação da experimentação e direcionamento | `executive_presentation` com `metadata.content_profile: "experimentation_presentation"`, as seções do schema `context`, `method`, `findings`, `recommendation` e `next_steps`, e as seções do perfil `mvp_evaluation` e `direction`; `direction` vem depois de `recommendation` e `next_steps`, sem substituí-las. Use títulos-mensagem de 4 a 12 palavras por slide (ex.: "O MVP funcionou, mas a economia de tempo não foi medida") e coloque a `section_key` no bloco de conteúdo. Entregue também `evidence_recommendation`, um `learning_card` por card executado e `experiment_report` quando um relatório detalhado for pedido |
 
 Monte o JSON canônico, rode `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
