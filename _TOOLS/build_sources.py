@@ -211,6 +211,9 @@ def notices(entries: list[dict]) -> str:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="verifica fontes e páginas sem escrever")
     args = parser.parse_args()

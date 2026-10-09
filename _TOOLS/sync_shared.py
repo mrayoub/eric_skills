@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 import hashlib
 import shutil
 from pathlib import Path
@@ -96,6 +97,9 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true", help="verifica sem escrever")

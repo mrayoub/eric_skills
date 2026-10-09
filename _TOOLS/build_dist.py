@@ -72,6 +72,9 @@ def package(skill: Path, files: list[Path], destination: Path) -> None:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skill", help="empacota só esta skill")
     args = parser.parse_args()
