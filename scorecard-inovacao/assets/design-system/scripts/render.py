@@ -789,7 +789,10 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         if card_label:
             doc.add_heading(card_label, 1)
         if kind == "heading":
-            band(doc.add_heading(block_text(block), 1))
+            if card_label:
+                doc.add_paragraph(block_text(block))
+            else:
+                band(doc.add_heading(block_text(block), 1))
         elif kind == "card_grid":
             cards = block["data"]["cards"]
             columns = block["data"].get("columns", 2)
@@ -883,6 +886,10 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         from pptx.enum.shapes import MSO_SHAPE
     except ImportError as exc:
         raise RuntimeError("PPTX requer python-pptx: pip install python-pptx") from exc
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("pdf_reportlab", ROOT / "scripts/pdf_reportlab.py")
+    pdf_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pdf_module)
     layout = load_pptx_layout(content["deliverable_type"])
 
     def box(name: str, fx: float, fy: float, fw: float, fh: float) -> tuple[Any, Any, Any, Any]:
@@ -904,8 +911,8 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
 
     table_size = Pt(max(12, min(14, tokens["typography"]["styles"]["slide_body"]["size"])))
 
-    def add_table(s: Any, table: tuple[str, list[str], list[list[str]]], x: Any, y: Any, width: Any, height: Any) -> None:
-        caption, heads, rows = table
+    def add_table(s: Any, table: tuple[str, list[str], list[list[str]], list[float]], x: Any, y: Any, width: Any, height: Any) -> None:
+        caption, heads, rows, heights = table
         top = y
         if caption:
             caption_box = s.shapes.add_textbox(x, y, width, Inches(.45))
@@ -916,8 +923,10 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             run.font.color.rgb = primary
             top = y + Inches(.5)
         columns = max(1, len(heads), *(len(row) for row in rows)) if rows else max(1, len(heads))
-        frame = s.shapes.add_table(len(rows) + 1, columns, x, top, width, Inches(.45) * (len(rows) + 1))
+        frame = s.shapes.add_table(len(rows) + 1, columns, x, top, width, Pt(sum(heights)))
         grid = frame.table
+        for index, row_height in enumerate(heights):
+            grid.rows[index].height = Pt(row_height)
         for index in range(columns):
             grid.columns[index].width = int(width / columns)
         for row_index, values in enumerate([heads, *rows]):
@@ -933,7 +942,7 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
                     paragraph.font.bold = row_index == 0
                     paragraph.font.color.rgb = color("inverse") if row_index == 0 else color("text_body")
 
-    def slide(title: str, body: str = "", table: tuple[str, list[str], list[list[str]]] | None = None) -> None:
+    def slide(title: str, body: str = "", table: tuple[str, list[str], list[list[str]], list[float]] | None = None) -> None:
         s = prs.slides.add_slide(prs.slide_layouts[6])
         # O slot "logo" é a faixa do cabeçalho: como no HTML e no PDF, o logo cabe no
         # slot e em 38 x 11 mm, alinhado à direita e centrado na altura.
@@ -999,8 +1008,10 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
                 lines = []
             refs = " [" + ", ".join(block["citation_ids"]) + "]" if block.get("citation_ids") else ""
             for _, legend, heads, rows in table_views(block):
-                for start in range(0, max(len(rows), 1), 8):
-                    slide(title, table=((str(legend) if legend else "") + refs, heads, rows[start:start + 8]))
+                body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
+                chunks = pdf_module.paginate_table_rows(heads, rows, body_w / 12700, body_h / 12700)
+                for chunk, heights in chunks:
+                    slide(title, table=((str(legend) if legend else "") + refs, heads, chunk, heights))
                     if not title.endswith("(continuação)"):
                         title += " (continuação)"
             continue

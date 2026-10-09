@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import io
+import math
 from pathlib import Path
 from typing import Any, Callable
 
@@ -149,6 +150,39 @@ def _sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str, Any]
     return result
 
 
+def paginate_table_rows(headings: list[str], rows: list[list[str]], width_pt: float,
+                        height_pt: float, font_pt: float = 14) -> list[tuple[list[list[str]], list[float]]]:
+    """Divide linhas com um orçamento conservador comum ao PDF e ao PPTX."""
+    columns = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
+    chars_per_line = max(8, int((width_pt / columns - 16) / (font_pt * .56)))
+
+    def row_height(cells: list[str]) -> float:
+        lines = max(1, *(math.ceil(len(str(cell)) / chars_per_line) for cell in cells)) if cells else 1
+        return max(27, lines * font_pt * 1.3 + 12)
+
+    budget = height_pt - 42  # legenda e folga para bordas/medição dos dois motores
+    header_height = row_height(headings)
+    if header_height >= budget:
+        raise PdfOverflow("tabela da apresentação: cabeçalho não cabe na área do slide")
+    chunks: list[tuple[list[list[str]], list[float]]] = []
+    current: list[list[str]] = []
+    heights: list[float] = []
+    used = header_height
+    for row in rows:
+        height = row_height(row)
+        if height + header_height > budget:
+            raise PdfOverflow("tabela da apresentação: uma linha não cabe no slide; resuma a célula")
+        if current and (len(current) >= 8 or used + height > budget):
+            chunks.append((current, [header_height, *heights]))
+            current, heights, used = [], [], header_height
+        current.append(row)
+        heights.append(height)
+        used += height
+    if current or not chunks:
+        chunks.append((current, [header_height, *heights]))
+    return chunks
+
+
 def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str, Any]], str]) -> list[tuple[Any, ...]]:
     """Agrupa blocos pelas mesmas fronteiras de heading/page_break do HTML."""
     result: list[tuple[Any, ...]] = []
@@ -195,13 +229,14 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
     for slug, caption, headings, rows in views:
         if caption:
             result.append(Paragraph(_markup(caption), caption_style))
-        ncols = max(1, len(headings))
+        ncols = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
         matrix = [[Paragraph(_markup(headings[index] if index < len(headings) else ""),
                              styles["table_header"]) for index in range(ncols)]]
         matrix.extend([Paragraph(_markup(row[index] if index < len(row) else ""),
                                  styles["table_body"]) for index in range(ncols)] for row in rows)
         proportions = iqb_widths.get(slug)
-        col_widths = [width * proportion / 100 for proportion in proportions] if proportions else [width / ncols] * ncols
+        col_widths = ([width * proportion / 100 for proportion in proportions]
+                      if proportions and len(proportions) == ncols else [width / ncols] * ncols)
         table = Table(matrix, colWidths=col_widths, repeatRows=1, splitByRow=1)
         padding = 4 if proportions else 6
         commands = [
@@ -470,6 +505,7 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
                          deliverable_label: str,
                          block_text: Callable[[dict[str, Any]], str],
                          table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
+                         table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]] | None,
                          load_layout: Callable[[str], dict[str, dict[str, Any]] | None],
                          identity: str) -> None:
     from reportlab.lib import colors
@@ -525,7 +561,26 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
 
     sections = _sections(content["blocks"], block_text)
     slides: list[tuple[str, Any]] = [("cover", None)]
-    slides.extend(("section", section) for section in sections)
+    for section_title, blocks in sections:
+        pending: list[dict[str, Any]] = []
+        for block in blocks:
+            if block["type"] != "table":
+                pending.append(block)
+                continue
+            if pending:
+                slides.append(("section", (section_title, pending)))
+                pending = []
+            views = table_views(block) if table_views else [("", "", *table_rows(block))]
+            continued = False
+            for _, legend, heads, rows in views:
+                for chunk, _ in paginate_table_rows(heads, rows, body_rect[2], body_rect[3]):
+                    table_block = {**block, "data": {"headers": heads, "rows": chunk,
+                                                      "title": legend or block.get("data", {}).get("title", "")}}
+                    slide_title = section_title + (" (continuação)" if continued else "")
+                    slides.append(("section", (slide_title, [table_block])))
+                    continued = True
+        if pending:
+            slides.append(("section", (section_title, pending)))
     if content["citations"]:
         # Preserve uma linha de fonte por item e abra continuação quando necessário.
         source_lines = []
@@ -638,7 +693,8 @@ ONE_PAGE_SLOTS = ("titulo_documento", "identificacao_versao")
 
 def _render_one_page_layout(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any], path: Path, *,
                             deliverable_label: str, slots: dict[str, dict[str, Any]],
-                            block_text: Callable[[dict[str, Any]], str], identity: str) -> None:
+                            block_text: Callable[[dict[str, Any]], str],
+                            table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]], identity: str) -> None:
     """Resumo de uma página desenhado nos slots do layout.json do Layout Studio.
 
     Cada slot recebe os blocos com o mesmo section_key. O HMW aparece sem subtítulo; os
@@ -727,6 +783,12 @@ def _render_one_page_layout(content: dict[str, Any], tokens: dict[str, Any], pro
     by_key: dict[str, list[dict[str, Any]]] = {}
     for block in content["blocks"]:
         by_key.setdefault(block.get("data", {}).get("section_key"), []).append(block)
+    mapped_keys = {slot.get("section_key") or name for name, slot in slots.items()
+                   if name not in ONE_PAGE_SLOTS}
+    unmapped = [block["id"] for block in content["blocks"]
+                if block["type"] != "page_break" and block.get("data", {}).get("section_key") not in mapped_keys]
+    if unmapped:
+        raise ValueError("executive_one_page: blocos sem slot no layout: " + ", ".join(unmapped))
     for name, slot in slots.items():
         key = slot.get("section_key") or name
         if name in ONE_PAGE_SLOTS or key in ONE_PAGE_SLOTS or key not in by_key:
@@ -743,16 +805,22 @@ def _render_one_page_layout(content: dict[str, Any], tokens: dict[str, Any], pro
             data = block.get("data", {})
             if data.get("title"):
                 items.append(Paragraph(_markup(data["title"]), subtitle))
-            if data.get("description") or data.get("text"):
-                items.append(Paragraph(_cited(data.get("description") or data.get("text"), block), body))
-            for point in data.get("points", []) or data.get("items", []):
-                items.append(Paragraph(_markup("• " + str(point)), body))
-            if block["type"] == "table" and not data.get("rows"):
-                # Campos nomeados (ex.: responsáveis e patrocinador) viram linhas "Rótulo: valor".
+            if block["type"] == "table" and data.get("rows"):
+                headers, rows = table_rows(block)
+                lines = ([" | ".join(headers)] if headers else []) + [" | ".join(row) for row in rows]
+                items.extend(Paragraph(_markup(line), body) for line in lines)
+            elif data.get("description") or data.get("text"):
+                items.append(Paragraph(_markup(data.get("description") or data.get("text")), body))
+            elif data.get("value") is not None or data.get("content"):
+                items.append(Paragraph(_markup(data.get("value") if data.get("value") is not None
+                                               else data["content"]), body))
+            elif block["type"] == "table" or data.get("cards") or not (data.get("points") or data.get("items") or data.get("title")):
                 lines = [line for line in block_text(block).splitlines() if line.strip()]
                 items.extend(Paragraph(_markup(line), body) for line in lines)
-                if block.get("citation_ids"):
-                    items.append(Paragraph(_cited("", block), body))
+            for point in data.get("points", []) or data.get("items", []):
+                items.append(Paragraph(_markup("• " + str(point)), body))
+            if block.get("citation_ids"):
+                items.append(Paragraph(_cited("", block), body))
         draw(items, rect, name, background=palette["document_accent_soft"] if key != "people" else palette["surface_muted"],
              accent=palette["document_accent"] if key != "people" else palette["border_strong"], padding=4 * mm)
 
@@ -794,16 +862,19 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
         if load_presentation_layout is None or identity_line is None:
             raise ValueError("Apresentação requer layout e identificação")
         _render_presentation(content, tokens, path, deliverable_label=deliverable_label,
-                             block_text=block_text, table_rows=table_rows,
+                             block_text=block_text, table_rows=table_rows, table_views=table_views,
                              load_layout=load_presentation_layout,
                              identity=identity_line(content))
         return
     if layout == "executive_one_page" and load_presentation_layout is not None and identity_line is not None:
         one_page_slots = load_presentation_layout(content["deliverable_type"]) or {}
-        if all(name in one_page_slots for name in ONE_PAGE_SLOTS):
-            _render_one_page_layout(content, tokens, profile, path, deliverable_label=deliverable_label,
-                                    slots=one_page_slots, block_text=block_text, identity=identity_line(content))
-            return
+        missing = [name for name in ONE_PAGE_SLOTS if name not in one_page_slots]
+        if missing:
+            raise ValueError("layout.json do resumo sem slots obrigatórios: " + ", ".join(missing))
+        _render_one_page_layout(content, tokens, profile, path, deliverable_label=deliverable_label,
+                                slots=one_page_slots, block_text=block_text,
+                                table_rows=table_rows, identity=identity_line(content))
+        return
     if layout in ("report_portrait", "report_landscape"):
         if table_views is None or iqb_widths is None:
             raise ValueError("Relatórios requerem table_views e iqb_widths")

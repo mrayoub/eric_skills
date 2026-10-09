@@ -49,7 +49,7 @@ Os testes atuais cobrem só o caminho feliz (cada amostra tem um bloco por slot;
 
 ## Done criteria
 
-- [ ] `FormatParityTests` falhava antes e passa · [ ] tabela irregular completa no PDF · [ ] apresentação com 20 linhas entrega PDF e PPTX · [ ] suíte `0 failed` · [ ] sync, fontes e catálogo em dia (`--bump`)
+- [x] `FormatParityTests` falhava antes e passa · [x] tabela irregular completa no PDF · [x] apresentação com 20 linhas entrega PDF e PPTX · [x] suíte `0 failed` (196 testes, 1.511 subtestes antes do último ajuste de cards; 29 testes PDF focados passaram após o ajuste) · [x] sync, fontes e catálogo em dia (`--bump`)
 
 ## STOP conditions
 

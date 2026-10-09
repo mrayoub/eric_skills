@@ -21,12 +21,15 @@ def _words(value: Any) -> int:
         return len(value.split())
     if isinstance(value, list):
         return sum(_words(item) for item in value)
+    if isinstance(value, dict):
+        return sum(_words(item) for item in value.values())
     return 0
 
 
 def _block_words(block: dict[str, Any]) -> int:
     data = block.get("data", {})
-    return sum(_words(data.get(key)) for key in ("text", "title", "description", "items"))
+    return sum(_words(data.get(key)) for key in
+               ("text", "title", "description", "value", "content", "items", "headers", "columns", "rows", "cards"))
 
 
 def validate(content: dict[str, Any]) -> list[str]:

@@ -1681,6 +1681,21 @@ class ContentProfileTests(unittest.TestCase):
                 self.assertIn("MODELO DE EXPERIMENTAÇÃO", pdf_text)
 
 
+    def test_partial_version_is_not_blocked(self):
+        item = self.sample("experiment_plan")
+        item["metadata"].update({"content_profile": "experimentation_model", "completeness": "partial"})
+        self.renderer.validate(item, self.profiles)
+
+    def test_profile_of_other_type_or_unknown_fails(self):
+        item = self.sample("experiment_plan")
+        item["metadata"]["content_profile"] = "final_report"
+        with self.assertRaisesRegex(ValueError, "perfil de evidence_recommendation"):
+            self.renderer.validate(item, self.profiles)
+        item["metadata"]["content_profile"] = "inexistente"
+        with self.assertRaisesRegex(ValueError, "content_profile desconhecido"):
+            self.renderer.validate(item, self.profiles)
+
+
 class TitleRuleTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1701,20 +1716,130 @@ class TitleRuleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "não repita o tipo"):
             self.renderer.validate(item, self.profiles)
 
-    def test_partial_version_is_not_blocked(self):
-        item = self.sample("experiment_plan")
-        item["metadata"].update({"content_profile": "experimentation_model", "completeness": "partial"})
-        self.renderer.validate(item, self.profiles)
 
-    def test_profile_of_other_type_or_unknown_fails(self):
-        item = self.sample("experiment_plan")
-        item["metadata"]["content_profile"] = "final_report"
-        with self.assertRaisesRegex(ValueError, "perfil de evidence_recommendation"):
-            self.renderer.validate(item, self.profiles)
-        item["metadata"]["content_profile"] = "inexistente"
-        with self.assertRaisesRegex(ValueError, "content_profile desconhecido"):
+class FormatParityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        cls.profiles = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))
+        cls.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+
+    def sample(self, kind: str) -> dict:
+        return json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
+
+    def test_one_page_rejects_unmapped_block_by_id(self):
+        item = self.sample("briefing_one_page")
+        item["blocks"].append({"id": "extra-unmapped", "type": "paragraph",
+                               "data": {"text": "Texto extra sem slot."}})
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "extra-unmapped"):
+                self.renderer.render_pdf_reportlab(item, self.tokens, profile, Path(temp) / "one-page.pdf")
+
+    def test_one_page_preserves_value_rows_cards_and_citations(self):
+        item = self.sample("briefing_one_page")
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"] = [block for block in item["blocks"] if block["id"] != "people"]
+        item["blocks"].extend([
+            {"id": "metric-extra", "type": "metric", "data": {"section_key": "expected_outcomes", "value": "VALOR-UNICO-045"}, "citation_ids": ["FIC-01"]},
+            {"id": "table-extra", "type": "table", "data": {"section_key": "people", "headers": ["Perfil"], "rows": [["LINHA-UNICA-045"]]}},
+        ])
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "one-page.pdf"
+            self.renderer.render_pdf_reportlab(item, self.tokens, profile, path)
+            output = "\n".join(page.extract_text() for page in PdfReader(path).pages)
+            for marker in ("VALOR-UNICO-045", "LINHA-UNICA-045", "FIC-01"):
+                self.assertIn(marker, output)
+
+    def test_report_irregular_table_keeps_extra_cells(self):
+        item = self.sample("four_d_report")
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"].append({"id": "irregular-045", "type": "table",
+                               "data": {"headers": ["Primeira"], "rows": [["A", "COLUNA-EXTRA-045"]]}})
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "report.pdf"
+            self.renderer.render_pdf_reportlab(item, self.tokens, profile, path)
+            output = "\n".join(page.extract_text() for page in PdfReader(path).pages)
+            self.assertIn("COLUNA-EXTRA-045", output)
+
+    def test_one_page_preserves_card_text(self):
+        item = self.sample("briefing_one_page")
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"] = [block for block in item["blocks"] if block["id"] != "expected-outcomes"]
+        item["blocks"].append({"id": "card-extra-045", "type": "card_grid", "data": {
+            "section_key": "expected_outcomes", "cards": [{"title": "CARD-UNICO-045", "text": "Texto curto."}]}})
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "cards.pdf"
+            self.renderer.render_pdf_reportlab(item, self.tokens, profile, path)
+            output = "\n".join(page.extract_text() for page in PdfReader(path).pages)
+            self.assertIn("CARD-UNICO-045", output)
+
+    def test_presentation_twenty_rows_in_pdf_and_pptx(self):
+        item = self.sample("executive_presentation")
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"].append({"id": "many-rows-045", "type": "table", "data": {
+            "headers": ["Caso", "Resultado"],
+            "rows": [[f"CASO-{index:02d}-045", f"Resultado {index}"] for index in range(20)]}})
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            pdf_path, pptx_path = Path(temp) / "slides.pdf", Path(temp) / "slides.pptx"
+            self.renderer.render_pdf_reportlab(item, self.tokens, profile, pdf_path)
+            self.renderer.render_pptx(item, self.tokens, pptx_path)
+            pdf = PdfReader(pdf_path)
+            slides = Presentation(pptx_path)
+            self.assertEqual(len(pdf.pages), len(slides.slides))
+            pdf_text = "\n".join(page.extract_text() for page in pdf.pages)
+            pptx_text = "\n".join(
+                shape.text if shape.has_text_frame else
+                "\n".join(cell.text for row in shape.table.rows for cell in row.cells) if shape.has_table else ""
+                for slide in slides.slides for shape in slide.shapes)
+            for index in range(20):
+                marker = f"CASO-{index:02d}-045"
+                self.assertIn(marker, pdf_text)
+                self.assertIn(marker, pptx_text)
+
+    def test_card_heading_is_body_text_in_docx(self):
+        item = self.sample("test_card")
+        item["blocks"][0]["type"] = "heading"
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "card.docx"
+            self.renderer.render_docx(item, self.tokens, profile, path)
+            doc = Document(path)
+            label = self.renderer.CARD_LABELS["test_card"]["hypothesis"]
+            self.assertEqual(sum(paragraph.text == label for paragraph in doc.paragraphs), 1)
+            self.assertEqual(sum(paragraph.style.name.startswith("Heading")
+                                 for paragraph in doc.paragraphs if "Evidência resumida" in paragraph.text), 0)
+
+    def test_table_cells_count_toward_slide_word_limit(self):
+        item = self.sample("executive_presentation")
+        item["blocks"].append({"id": "wordy-table-045", "type": "table", "data": {
+            "headers": ["Coluna", "Valor"], "rows": [[" ".join(["palavra"] * 65), "texto"]]}})
+        with self.assertRaisesRegex(ValueError, "slide com"):
             self.renderer.validate(item, self.profiles)
 
+    def test_long_table_cells_fit_in_pptx_area(self):
+        item = self.sample("executive_presentation")
+        item["metadata"]["completeness"] = "partial"
+        item["blocks"].append({"id": "long-cells-045", "type": "table", "data": {
+            "headers": ["Código", "Descrição"],
+            "rows": [[f"LONG-{index:02d}-045", "descrição " * 16] for index in range(9)]}})
+        profile = self.renderer.validate(item, self.profiles)
+        with tempfile.TemporaryDirectory() as temp:
+            pdf_path, pptx_path = Path(temp) / "slides.pdf", Path(temp) / "slides.pptx"
+            self.renderer.render_pdf_reportlab(item, self.tokens, profile, pdf_path)
+            self.renderer.render_pptx(item, self.tokens, pptx_path)
+            pdf = PdfReader(pdf_path)
+            slides = Presentation(pptx_path)
+            self.assertEqual(len(pdf.pages), len(slides.slides))
+            tables = [shape for slide in slides.slides for shape in slide.shapes if shape.has_table]
+            self.assertGreater(len(tables), 1)
+            layout = self.renderer.load_pptx_layout("executive_presentation")["slots"]["corpo_slide"]
+            bottom = (layout["y"] + layout["height"]) * 914400
+            self.assertTrue(all(shape.top + shape.height <= bottom + 1000 for shape in tables))
 
 class PptxTablesAndWrapTests(unittest.TestCase):
     @classmethod
