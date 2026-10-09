@@ -46,6 +46,15 @@ class RepoCopy:
         self.tmp.cleanup()
 
 
+def version(skill: Path) -> str:
+    return CATALOG.read_version(skill)
+
+
+def next_patch(value: str) -> str:
+    major, minor, patch = (int(part) for part in value.split("."))
+    return f"{major}.{minor}.{patch + 1}"
+
+
 def run_catalog(root: Path, *args: str) -> subprocess.CompletedProcess:
     return subprocess.run([sys.executable, str(root / "_TOOLS/build_catalog.py"), *args], capture_output=True, text=True)
 
@@ -57,6 +66,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_changed_content_requires_bump(self) -> None:
         with RepoCopy() as root:
+            current = version(root / "relatorio-4d")
             reference = root / "relatorio-4d/references/relatorio-4d-layout.md"
             reference.write_text(reference.read_text(encoding="utf-8") + "\nAlteração de teste.\n", encoding="utf-8")
             result = run_catalog(root, "--check")
@@ -65,7 +75,7 @@ class CatalogTests(unittest.TestCase):
             bumped = run_catalog(root, "--bump")
             self.assertEqual(bumped.returncode, 0, bumped.stderr)
             self.assertEqual(bumped.stdout.count("OK versão"), 1)
-            self.assertIn('version: "1.0.1"', (root / "relatorio-4d/SKILL.md").read_text(encoding="utf-8"))
+            self.assertEqual(version(root / "relatorio-4d"), next_patch(current))
             self.assertEqual(run_catalog(root, "--check").returncode, 0)
 
     def test_version_line_does_not_change_hash(self) -> None:
@@ -73,13 +83,16 @@ class CatalogTests(unittest.TestCase):
             skill = root / "workshop-4d"
             before = CATALOG.skill_hash(skill)
             path = skill / "SKILL.md"
-            path.write_text(path.read_text(encoding="utf-8").replace('version: "1.0.0"', 'version: "1.2.0"'), encoding="utf-8")
+            text = path.read_text(encoding="utf-8")
+            path.write_text(text.replace(f'version: "{version(skill)}"', 'version: "9.9.9"'), encoding="utf-8")
+            self.assertEqual(version(skill), "9.9.9")
             self.assertEqual(CATALOG.skill_hash(skill), before)
 
     def test_lower_version_fails(self) -> None:
         with RepoCopy() as root:
             path = root / "experimentacao-inovacao/SKILL.md"
-            path.write_text(path.read_text(encoding="utf-8").replace('version: "1.1.0"', 'version: "1.0.9"'), encoding="utf-8")
+            path.write_text(path.read_text(encoding="utf-8").replace(
+                f'version: "{version(root / "experimentacao-inovacao")}"', 'version: "0.0.1"'), encoding="utf-8")
             result = run_catalog(root, "--check")
             self.assertEqual(result.returncode, 1)
             self.assertIn("versão menor que a publicada", result.stderr)
@@ -117,16 +130,18 @@ class CheckUpdatesTests(unittest.TestCase):
     def test_reports_updated_outdated_and_local_changes(self) -> None:
         with RepoCopy() as root:
             catalog = json.loads((root / "catalog.json").read_text(encoding="utf-8"))
-            catalog["skills"]["relatorio-5c"]["version"] = "1.1.0"
+            installed_5c = version(root / "relatorio-5c")
+            newer = next_patch(installed_5c)
+            catalog["skills"]["relatorio-5c"]["version"] = newer
             changed = root / "workshop-5c/references/metodo-5c.md"
             changed.write_text(changed.read_text(encoding="utf-8") + "\nNota local.\n", encoding="utf-8")
             path = root / "custom.json"
             path.write_text(json.dumps(catalog), encoding="utf-8")
             result = self.run_check(root, path)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn("relatorio-5c: instalada 1.0.0; disponível 1.1.0", result.stdout)
-            self.assertIn("workshop-5c: 1.0.0 alterada localmente", result.stdout)
-            self.assertIn("relatorio-4d: atualizada (1.0.0)", result.stdout)
+            self.assertIn(f"relatorio-5c: instalada {installed_5c}; disponível {newer}", result.stdout)
+            self.assertIn(f"workshop-5c: {version(root / 'workshop-5c')} alterada localmente", result.stdout)
+            self.assertIn(f"relatorio-4d: atualizada ({version(root / 'relatorio-4d')})", result.stdout)
             self.assertIn("npx skills update", result.stdout)
 
     def test_unreachable_catalog_is_not_an_error(self) -> None:

@@ -10,6 +10,7 @@ Esta pasta é o contrato compartilhado das doze skills. O `content_json` validad
 - `profiles.json`: tipo de entrega, variante, orientação, formatos e seções esperadas. A orientação é determinada pelo perfil; só muda por variante explicitamente aceita.
 - `contracts/deliverable-content.schema.json`: envelope de conteúdo comum do ERIC_RC6.
 - `contracts/*.schema.json`: contrato específico para **cada um dos 18 tipos** de entregável. Os schemas de briefing e 4D preservam os contratos adaptados do RC6; os demais exigem as seções decisivas do respectivo método.
+- `content-profiles.json`: perfis opcionais (`metadata.content_profile`) que exigem seções além do contrato do tipo nas versões completas — `experimentation_model`, `experimentation_presentation` e `final_report`. Sem o campo, nada muda.
 - `response-sections.json`: nomes canônicos de `data.section_key` exigidos nas versões completas dos tipos que usam contratos por seção.
 - `contracts/five-c-workshop-record.schema.json` e `contracts/five-c-report.schema.json`: exigem síntese rastreável de C1 a C5 em versões completas.
 - `contracts/test-card.schema.json` e `contracts/learning-card.schema.json`: exigem os quatro campos individuais, em ordem. O Learning Card completo exige citação nas observações.
