@@ -1,3 +1,5 @@
+> Material fictício para avaliação de skill.
+
 # Projeto fictício — atendimento de solicitações
 
 Briefing, 12 agosto: a equipe ainda perguntava se o público seria todos os agentes ou somente novos agentes.

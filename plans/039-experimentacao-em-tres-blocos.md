@@ -25,9 +25,11 @@ em três blocos, cada um com um entregável:
 
 | Bloco | Atividades | Entregável |
 |---|---|---|
-| **Aprofundamento / Planejamento** | aprofundamento da fundamentação (Test Card); escopo da experimentação; estratégia e cronograma de execução | **Hipóteses** |
-| **Execução** | construção/desenvolvimento do MVP; realização dos testes | **Implementação do MVP** |
-| **Consolidação** | avaliação dos resultados, aprendizados e recomendação; avaliação do MVP | **Apresentação e direcionamento** |
+| **Aprofundamento / Planejamento** | aprofundamento da fundamentação (Test Card); escopo da experimentação; estratégia e cronograma de execução | **Hipóteses com Test Cards** |
+| **Execução** | construção/desenvolvimento do MVP; realização dos testes | **Modelo de experimentação** a ser executado |
+| **Consolidação** | avaliação dos resultados, aprendizados e recomendação; avaliação do MVP | **Apresentação da experimentação e direcionamento**, que serve à próxima fase da esteira |
+
+> Redefinição do operador (2026-10-09, durante a execução): os entregáveis da imagem original (Hipóteses, Implementação do MVP, Apresentação e direcionamento) passam a ser, por enquanto, os três acima.
 
 Hoje a skill tem o conteúdo de planejamento e de consolidação espalhado em 8 passos, não trata a construção
 do MVP (pressupõe o MVP pronto), não avalia o MVP como produto separado das hipóteses e não nomeia os três
@@ -39,8 +41,9 @@ entregáveis.
   nem nenhuma outra skill. Os três blocos são o processo interno da skill na fase Experimentar; não os
   apresente como etapas novas da esteira nem use "Materialização" como nome de etapa ERIC.
 - **Reusar os tipos atuais do design system** (nenhum schema, perfil ou layout novo):
-  *Hipóteses* = `experiment_plan` + um `test_card` por card; *Implementação do MVP* = `experiment_report`;
-  *Apresentação e direcionamento* = `executive_presentation` + `evidence_recommendation`. Os schemas exigem só
+  *Hipóteses com Test Cards* = um `test_card` por teste; *Modelo de experimentação* = `experiment_plan`
+  (+ MVP a construir, escopo, cronograma e gate de início); *Apresentação da experimentação e direcionamento* =
+  `executive_presentation` + `evidence_recommendation`. `experiment_report` fica para relatório detalhado, quando pedido. Os schemas exigem só
   as seções mínimas (`experiment_plan`: hypothesis, method, population, measures, protocol, guardrails;
   `experiment_report`: scope, method, evidence, results, limits, recommendation) e aceitam seções extras.
 - **Construção do MVP**: a skill planeja, acompanha e registra; quem constrói é a equipe.

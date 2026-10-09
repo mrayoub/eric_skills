@@ -1,3 +1,5 @@
+> Material fictício para avaliação de skill.
+
 # Teste fictício — TC-01
 
 Registro de sessão, 18 setembro: seis novos agentes tentaram concluir uma solicitação no protótipo v1. Quatro concluíram sem ajuda; dois precisaram de intervenção. O teste observou usabilidade, não tempo ou custo da operação.
