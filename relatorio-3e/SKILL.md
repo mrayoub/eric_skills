@@ -1,6 +1,11 @@
 ---
 name: relatorio-3e
 description: "Compila ou revisa o Relatório 3E: solução e escopo, plano de construção com responsáveis e prazos, Test Cards individuais prospectivos e decisão de rota (interna, externa, híbrida ou indefinida), separando plano de evidência observada. Use quando houver registros de E1 a E3 ou material equivalente e o usuário quiser o relatório ou os Test Cards consolidados. Não use para facilitar o workshop (use workshop-3e) nem para analisar resultados de testes já executados (use experimentacao-inovacao)."
+license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
+metadata:
+  requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
+  author: "GEIN-CCEE"
+  version: "1.0.0"
 ---
 
 # Compilar o Relatório 3E
@@ -11,7 +16,7 @@ Consolida solução, construção, experimentos e rota; separa plano, execução
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md) — estrutura do relatório.
 - [Test Card](assets/test-card.md) — quatro campos por teste.
-Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturação da Solução.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturação da Solução.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
+Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 
 ## Grilling
 

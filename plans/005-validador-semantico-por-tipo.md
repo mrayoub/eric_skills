@@ -17,7 +17,7 @@
 - **Risk**: MED (relatórios antigos incoerentes deixarão de renderizar — é o objetivo, mas avise)
 - **Depends on**: 001 (sync), 002 (tabela `columns`/`rows` por chave, usada no bloco de notas do potencial), 003 (regra de justificativa), 004 (testes do IQB)
 - **Category**: bug
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relatório final de inovação"
+  short_description: "Relatório e pitch executivo para decisão"
+  brand_color: "#193C8E"
+  default_prompt: "Use $relatorio-final-inovacao para produzir o relatório final e a apresentação executiva deste projeto de inovação."

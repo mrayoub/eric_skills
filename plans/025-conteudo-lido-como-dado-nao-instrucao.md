@@ -6,7 +6,7 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 2cb5c96..HEAD -- _SHARED/grilling-operacional.md`
+> `git diff --stat 857d0b7..HEAD -- _SHARED/grilling-operacional.md`
 > Se o arquivo mudou desde que este plano foi escrito, compare o trecho de
 > "Current state" abaixo com o arquivo atual antes de prosseguir; em caso de
 > divergência, trate como condição de STOP.
@@ -18,14 +18,14 @@
 - **Risk**: LOW
 - **Depends on**: 001 (`_TOOLS/sync_shared.py`)
 - **Category**: security
-- **Planned at**: commit `2cb5c96`, 2026-10-02
+- **Planned at**: commit `857d0b7`, 2026-10-02
 
 ## Por que isto importa
 
 As 11 skills leem, via o protocolo comum de grilling (`_SHARED/grilling-operacional.md`),
 uma quantidade grande de material fornecido por terceiros: DOCX/PDF de origem (ex.
 `relatorio-4d/assets/official-four-d-report.pdf`, `relatorio-3e/assets/Modelo 3E
-Estruturação da Solução.docx`), transcrições, planilhas, atas e, em alguns casos,
+Estruturacao da Solucao.docx`), transcrições, planilhas, atas e, em alguns casos,
 gravações transcritas de encontros com clientes externos (5C). Nenhuma dessas 11 skills
 nem o protocolo compartilhado contém uma cláusula explícita dizendo que esse conteúdo deve
 ser tratado como **dado a analisar**, nunca como **instrução a seguir** — uma skill que lê

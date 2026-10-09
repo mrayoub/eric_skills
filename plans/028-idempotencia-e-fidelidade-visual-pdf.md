@@ -15,7 +15,7 @@
 > ambiente consegue gerar PDF antes de seguir.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 2cb5c96..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/requirements.txt`
+> `git diff --stat 857d0b7..HEAD -- _DESIGN_SYSTEM/scripts/render.py _DESIGN_SYSTEM/requirements.txt`
 
 ## Status
 
@@ -24,7 +24,7 @@
 - **Risk**: LOW (Fase 1) | MED (Fase 2 — nova dependência + curadoria manual)
 - **Depends on**: nenhum dos planos 026/027 (independente, mas pode rodar depois deles)
 - **Category**: tests
-- **Planned at**: commit `2cb5c96`, 2026-10-02
+- **Planned at**: commit `857d0b7`, 2026-10-02
 
 ## Por que isto importa
 

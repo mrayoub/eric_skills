@@ -18,7 +18,7 @@
 - **Risk**: LOW
 - **Depends on**: 005 (gancho `validators/`), 001 (sync)
 - **Category**: bug
-- **Planned at**: commit `35c3b75`, 2026-09-28
+- **Planned at**: commit `967749d`, 2026-09-28
 
 ## Why this matters
 

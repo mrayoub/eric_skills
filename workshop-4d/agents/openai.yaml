@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workshop 4D"
+  short_description: "Prepara ou registra o aprofundamento do desafio"
+  brand_color: "#193C8E"
+  default_prompt: "Use $workshop-4d para preparar ou registrar o workshop de aprofundamento do desafio."

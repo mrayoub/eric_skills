@@ -6,7 +6,7 @@
 > atualize a linha deste plano em `plans/README.md`.
 >
 > **Drift check (rode primeiro)**:
-> `git diff --stat 2cb5c96..HEAD -- avaliacao-briefing-iqb/SKILL.md potencial-inovacao/SKILL.md scorecard-inovacao/SKILL.md`
+> `git diff --stat 857d0b7..HEAD -- avaliacao-briefing-iqb/SKILL.md potencial-inovacao/SKILL.md scorecard-inovacao/SKILL.md`
 > Se algum desses três arquivos mudou desde que este plano foi escrito, compare
 > os trechos de "Current state" abaixo com o arquivo atual antes de prosseguir;
 > em caso de divergência, trate como condição de STOP.
@@ -18,7 +18,7 @@
 - **Risk**: LOW
 - **Depends on**: none
 - **Category**: dx
-- **Planned at**: commit `2cb5c96`, 2026-10-02
+- **Planned at**: commit `857d0b7`, 2026-10-02
 
 ## Por que isto importa (e por que a ideia original mudou)
 

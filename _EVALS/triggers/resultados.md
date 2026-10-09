@@ -7,7 +7,7 @@ continua pendente de medição real válida; os resultados locais abaixo são
 preservados como revisão, sem substituí-la.
 
 O Claude revisou os planos 001–007 e registrou uma correção de paridade do
-potencial no commit `5ec6644`: a soma do validador agora acumula os pesos na
+potencial no commit `7344bb7`: a soma do validador agora acumula os pesos na
 mesma ordem e forma de `score.py`, evitando divergência de arredondamento no
 Python 3.12. Na auditoria posterior, a suíte passou com **58 testes e 25
 subtestes**, incluindo PDF, usando o ambiente isolado preparado na sessão.
@@ -60,7 +60,7 @@ Na consulta 11 de briefing-inovacao, escrever apenas um e-mail de convite foi co
 
 ## Antes e depois
 
-Catálogo antes: descriptions do commit `ae5e211`. A linha de base foi registrada no commit `c83d4de`. Catálogo depois: os onze textos exatos do Step 3 do plano 008, sem ajustes adicionais. As mesmas 176 consultas foram revistas com o novo catálogo; as escolhas primárias permaneceram iguais. Os registros individuais estão abaixo.
+Catálogo antes: descriptions do commit `21cef5b`. A linha de base foi registrada no commit `013ee55`. Catálogo depois: os onze textos exatos do Step 3 do plano 008, sem ajustes adicionais. As mesmas 176 consultas foram revistas com o novo catálogo; as escolhas primárias permaneceram iguais. Os registros individuais estão abaixo.
 
 | Skill | True antes | False antes | True depois | False depois | Consultas erradas |
 |---|---:|---:|---:|---:|---|
