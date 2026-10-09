@@ -1,0 +1,39 @@
+name: Publicar pacotes
+
+# Quando o catalog.json muda no main (alguma skill subiu de versão), publica o canal .skill:
+# uma Release por versão nova (<skill>-v<versão>) e a Release fixa "pacotes" com os 13 .skill.
+on:
+  push:
+    branches: [main]
+    paths: [catalog.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: _TESTS/requirements-dev.txt
+      - run: python -m pip install -r _TESTS/requirements-dev.txt
+      - run: python _TOOLS/build_catalog.py --check
+      - run: python _TOOLS/build_dist.py
+      - run: python _TOOLS/publish_releases.py
+        env:
+          GH_TOKEN: ${{ github.token }}
