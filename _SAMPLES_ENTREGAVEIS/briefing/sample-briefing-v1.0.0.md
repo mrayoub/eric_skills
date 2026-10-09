@@ -1,5 +1,7 @@
 # EXEMPLO FICTÍCIO — Melhorar a experiencia de solicitacoes internas
 
+ID sample-briefing · versão 1.0.0 · Completo
+
 Amostra fictícia do formato original RC6. Não descreve um projeto real. Briefing estruturado do desafio usado como exemplo neutro do contrato canonico.
 
 ## Melhorar a experiencia de solicitacoes internas

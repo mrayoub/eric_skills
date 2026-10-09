@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Registro do workshop 3E
+# EXEMPLO FICTÍCIO — Estruturação da entrada guiada
+
+ID sample-three-e-workshop-record · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 

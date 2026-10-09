@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Avaliação de potencial de inovação
+EXEMPLO FICTÍCIO — Retrabalho nas solicitações de dados
+
+ID sample-innovation-potential-assessment · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -37,6 +39,8 @@ Recomendação
 Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo.
 
 Fontes: FIC-01
+
+Pontuação ilustrativa, sem avaliação real
 
 | Critério | Nota | Peso | Justificativa |
 | --- | --- | --- | --- |

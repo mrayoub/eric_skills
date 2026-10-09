@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Relatório de experimentação
+EXEMPLO FICTÍCIO — Rodada de testes do formulário guiado
+
+ID sample-experiment-report · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -37,6 +39,8 @@ Recomendação
 Investigar volumes e causas antes de comprometer construção. Nenhuma decisão real foi tomada neste exemplo.
 
 Fontes: FIC-01
+
+Matriz ilustrativa de evidências
 
 | Teste | Observação fictícia | Limite |
 | --- | --- | --- |

@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Apresentação executiva da rodada
+# EXEMPLO FICTÍCIO — Entrada guiada nas solicitações de dados
 
 ID sample-executive-presentation · versão 1.0.0 · Completo
 

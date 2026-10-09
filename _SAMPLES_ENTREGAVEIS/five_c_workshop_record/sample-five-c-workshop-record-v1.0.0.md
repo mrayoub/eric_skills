@@ -1,4 +1,6 @@
-# EXEMPLO FICTÍCIO — Registro do workshop 5C
+# EXEMPLO FICTÍCIO — Encontro com clientes sobre solicitações de dados
+
+ID sample-five-c-workshop-record · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
@@ -32,6 +34,8 @@ Cinco participantes fictícios distribuíram dez créditos cada, totalizando 50.
 
 Fontes: FIC-01
 
+### C2 — temas priorizados, exemplo fictício
+
 | Tema | Votos |
 | --- | --- |
 | Acompanhamento | 6 |
@@ -39,6 +43,8 @@ Fontes: FIC-01
 | Devoluções | 4 |
 
 Fontes: FIC-01
+
+### C5 — distribuição de 50 créditos fictícios
 
 | Proposta | Créditos | Próxima verificação |
 | --- | --- | --- |

@@ -1,4 +1,6 @@
-EXEMPLO FICTÍCIO — Learning Card LC-01
+EXEMPLO FICTÍCIO — LC-01: conclusão sem ajuda no fluxo guiado
+
+ID sample-learning-card · versão 1.0.0 · Completo
 
 Test Card: sample-test-card v1.0.0
 
