@@ -33,7 +33,9 @@ class FrontmatterTests(unittest.TestCase):
                 self.assertTrue(all(isinstance(value, str) for value in metadata.values()))
                 self.assertEqual(metadata["author"], "GEIN-CCEE")
                 self.assertRegex(metadata["version"], r"^\d+\.\d+\.\d+$")
-                self.assertIn("requirements.txt", metadata["requirements"])
+                self.assertTrue(metadata["requirements"].strip())
+                if (skill / "assets/design-system").is_dir():
+                    self.assertIn("requirements.txt", metadata["requirements"])
 
 
 if __name__ == "__main__":

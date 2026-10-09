@@ -1,0 +1,31 @@
+{
+  "skill_name": "esteira-eric",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Estes são os arquivos do projeto. Em que etapa estamos e o que faço agora?",
+      "expected_output": "Aprofundamento concluído com relatório 4D; falta o parecer do BP1; próximo passo workshop-3e para a alternativa priorizada.",
+      "files": ["files/projeto-com-4d.md"],
+      "expectations": [
+        "Situa o projeto no aprofundamento concluído, citando o relatório 4D de 12/09/2026 como evidência.",
+        "Aponta a ausência do parecer do BP1 como o que falta para a próxima decisão.",
+        "Indica uma única próxima skill, workshop-3e, com o motivo (tornar testável o formulário guiado priorizado no D4) e os insumos a levar.",
+        "Não produz relatório, Test Card ou outro entregável, nem reabre a prioridade decidida no D4.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Quero começar um projeto de inovação. Como funciona?",
+      "expected_output": "Sem arquivos: pergunta em uma frase o que o projeto já tem e orienta o início pela oportunidade e pelo briefing.",
+      "files": [],
+      "expectations": [
+        "Pergunta, em uma frase, o que o projeto já tem antes de diagnosticar.",
+        "Orienta o início pela etapa de garimpar ou conhecer, indicando potencial-inovacao ou briefing-inovacao conforme o caso.",
+        "Explica que qualquer skill pode ser usada a qualquer momento e que um pedido direto vai à skill específica.",
+        "Não inventa arquivos, decisões ou resultados do projeto.",
+        "Não pergunta ao usuário qual resultado, nota ou conclusão ele deseja"
+      ]
+    }
+  ]
+}

@@ -9,6 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_DIRS = {"tests", "__pycache__", ".pytest_cache"}
+# Skills que só orientam e não renderizam entregáveis: não recebem o design system.
+WITHOUT_DESIGN_SYSTEM = {"esteira-eric"}
 
 
 def digest(path: Path) -> bytes:
@@ -40,6 +42,8 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
     result: list[tuple[str, Path, Path | None]] = []
     base = skill / "assets/design-system"
     files, dirs = source_tree(ROOT / "_DESIGN_SYSTEM")
+    if skill.name in WITHOUT_DESIGN_SYSTEM:
+        files, dirs = {}, set()
     for rel in sorted(dirs):
         if not (base / rel).exists():
             result.append(("mkdir", base / rel, None))

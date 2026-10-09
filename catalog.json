@@ -12,6 +12,11 @@
       "sha256": "70129bb814f3851984403b02f9f441c95e7dad8f2a56408c756e468a20642772",
       "version": "1.0.1"
     },
+    "esteira-eric": {
+      "files": 9,
+      "sha256": "4761ade4157c92ec381b4f41d7f0683688e08d485d6cb57d4b95b87fdd6400c2",
+      "version": "1.0.0"
+    },
     "experimentacao-inovacao": {
       "files": 84,
       "sha256": "b89b251b8ac918c6ee64be73f274bdde7ca16c65f91970261f21c0217c55e010",

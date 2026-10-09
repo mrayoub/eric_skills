@@ -67,14 +67,15 @@ def dump(catalog: dict) -> str:
     return json.dumps(catalog, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
 
-def problems(current: dict, previous: dict | None) -> list[str]:
+def problems(current: dict, previous: dict | None, *, check: bool = False) -> list[str]:
     result = []
     published = (previous or {}).get("skills", {})
     for name, entry in current["skills"].items():
         old = published.get(name)
         if old is None:
-            if previous is not None:
-                result.append(f"{name}: ausente do catálogo")
+            # Skill nova: a escrita a registra; só a verificação acusa que o catálogo não a conhece.
+            if check and previous is not None:
+                result.append(f"{name}: ausente do catálogo; rode python _TOOLS/build_catalog.py")
             continue
         if as_tuple(entry["version"]) < as_tuple(old["version"]):
             result.append(f"{name}: versão menor que a publicada ({entry['version']} < {old['version']})")
@@ -117,7 +118,7 @@ def main() -> int:
             for line in bump(args.bump, previous):
                 print(f"OK versão {line}")
         current = build()
-        issues = problems(current, previous)
+        issues = problems(current, previous, check=args.check)
         if args.check:
             if previous is None:
                 issues.append("catalog.json ausente")
