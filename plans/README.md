@@ -58,6 +58,12 @@ Convenções comuns a todos os planos:
 | 041 | [CI que garante o versionamento das skills nos três canais de update (npx, `.skill`, clone)](041-ci-versionamento-tres-canais.md) | P1 | M | 037 | DONE (executado em 2026-10-09: `.gitattributes` LF (CSV mantém CRLF do padrão RFC 4180, desvio documentado); saída UTF-8 nos scripts; `_TESTS/requirements-dev.txt` fixo; `check_channels.py` (npx, paridade git×pacote, links, reprodutibilidade, verificador) com 3 testes; `tests.yml` com versionamento+testes em todo push/PR e matriz semanal; `release.yml` + `publish_releases.py` (Releases por versão e `pacotes`); autorizado pelo operador) |
 | 042 | [Skill-mestra `esteira-eric`: porta de entrada que diagnostica o projeto e encaminha para a skill certa](042-skill-mestra-esteira-eric.md) | P1 | M | 037 | DONE (executado em 2026-10-09: skill `esteira-eric` 1.0.0 sem design system, com mapa das 12 skills e acionamento direto preservado; sync e manifesto ajustados; `build_catalog.py` passou a aceitar skill nova (defeito do 037); 3 testes novos + 1 de catálogo; evals e triggers sem rodar com modelo; suíte 169 passou em 3.10 e 3.12) |
 | 043 | [Preferências locais do usuário em cada skill (C2 local, sem envio para fora)](043-preferencias-locais-do-usuario.md) | P1 | M | 042 | DONE (executado em 2026-10-09: `_SHARED/preferencias.py` (sem rede, nunca grava dentro de skill) e guia `preferencias-do-usuario.md` copiados às 13 skills; seção nos 13 `SKILL.md`; níveis usuário/projeto, arquivo `todas.md`, confirmação antes de gravar, recusa do que contraria o método, aviso de versão, reset com `.bak`; 8 testes; versões minor nas 13 skills; suíte 177 passou em 3.10 e 3.12) |
+| 044 | [Regra do título e perfis de conteúdo confiáveis; instruções alinhadas ao validador](044-regras-de-perfil-e-titulo.md) | P1 | S | — | TODO |
+| 045 | [PDF e PPTX com todo o conteúdo dos demais formatos (one-page, tabelas, apresentação)](045-paridade-pdf-pptx.md) | P1 | M | — | TODO |
+| 046 | [Publicar só após os testes; publicação idempotente; dependências fixadas](046-ci-e-publicacao-seguros.md) | P1 | S | 041 | TODO |
+| 047 | [Preferências locais e verificador de updates blindados](047-preferencias-e-verificador-seguros.md) | P1 | M | — | TODO |
+| 048 | [Relatório 4D real e metadados pessoais fora dos pacotes](048-material-real-fora-dos-pacotes.md) | P1 | M | — | BLOCKED (decisões do operador) |
+| 049 | [Índice nas referências longas, contato da licença, contagem de skills, bloco 1 da experimentação](049-documentacao-e-pendencias.md) | P2 | S | — | TODO (itens 2 e 3 dependem do operador) |
 | 031 | [Corrige offset de `@page margin` no caminho "presentation" e estende `layout.json` para `executive_one_page`/`card_portrait`](031-render-html-offset-fix-e-one-page-card-layout-json.md) | P1 | M | nenhuma (029/030 já mesclados; corrige um defeito no que o 030 entregou) | SUPERSEDED (2026-10-09: a correção do offset de `@page` entrou no 033; o resto tratava sobreposição no PDF gerado do HTML, que o 036 eliminou — o PDF agora sai do ReportLab) |
 
 Status: TODO | IN PROGRESS | DONE | BLOCKED (motivo em uma linha) | REJECTED (motivo em uma linha)
@@ -357,3 +363,11 @@ restrita em 015 e 017; identificação em 018. Não ampliar para igualdade biná
 Manutenção após 012: planos 013–023 também conferem `build_sources.py --check`.
 Quando modificarem fonte registrada no manifesto, regeneram somente as páginas
 `references/fontes.md` afetadas e as incluem no commit daquela correção.
+
+### Auditoria de 2026-10-09 (commit `595f3b0`) — considerado e rejeitado
+
+- Lógica de hash duplicada entre `build_catalog.py` e `check_updates.py`: idêntica e protegida por teste; mudar a regra força bump.
+- `.gitattributes` sem `.webp/.xlsx/.woff`: nenhum desses tipos é versionado.
+- `--bump` duas vezes no mesmo PR pula um número de versão: cosmético.
+- Mapa da `esteira-eric`, comandos do guia de preferências, nomes antigos da experimentação, WeasyPrint/Strategyzer: conferidos, sem problema.
+
