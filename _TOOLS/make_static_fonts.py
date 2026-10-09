@@ -12,7 +12,8 @@ from fontTools.varLib.instancer import instantiateVariableFont
 
 ROOT = Path(__file__).resolve().parents[1]
 FONTS = ROOT / "_DESIGN_SYSTEM" / "assets" / "fonts"
-INSTANCES = (("Montserrat", 700, "Bold"), ("Roboto", 400, "Regular"), ("Roboto", 700, "Bold"))
+INSTANCES = (("Montserrat", 700, "Bold"), ("Roboto", 400, "Regular"),
+             ("Roboto", 500, "Medium"), ("Roboto", 700, "Bold"))
 
 
 def main() -> None:
@@ -21,6 +22,8 @@ def main() -> None:
     for family, weight, style in INSTANCES:
         variable = TTFont(FONTS / f"{family}-Variable.ttf")
         instance = instantiateVariableFont(variable, {"wght": weight}, static=True, updateFontNames=True)
+        instance.recalcTimestamp = False
+        instance["head"].modified = 0
         instance.save(target / f"{family}-{style}.ttf")
         print(f"OK {family}-{style}.ttf")
 
