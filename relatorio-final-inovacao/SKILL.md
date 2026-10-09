@@ -52,7 +52,7 @@ Saída (trecho):
 - [ ] Afirmações, números e limites ligados a fontes e localizadores
 - [ ] Alternativas, custo/recursos, riscos e condições proporcionais à evidência
 - [ ] Todos os blocos relevantes do Pitch Canvas cobertos; slides leves e com narrativa
-- [ ] Apresentação credita o canvas, por exemplo no rodapé do último slide: “Estrutura baseada em The Pitch Canvas© — Best3minutes.com (CC BY-SA 4.0)”
+- [ ] Apresentação credita o canvas como fonte em `citations`, que o renderizador mostra no slide final “Fontes”: “Estrutura baseada em The Pitch Canvas© — Best3minutes.com (CC BY-SA 4.0)”
 - [ ] Relatório, apresentação e JSON coerentes; arquivos validados e revisados visualmente
 
 ## Contexto ERIC

@@ -1,6 +1,6 @@
 # Sistema visual dos entregáveis de `my_skills`
 
-Esta pasta é o contrato compartilhado das onze skills. O `content_json` validado por schema é a fonte canônica; HTML, PDF, DOCX, PPTX e Markdown são derivados. O conteúdo e as fontes não mudam quando se troca o formato.
+Esta pasta é o contrato compartilhado das doze skills. O `content_json` validado por schema é a fonte canônica; HTML, PDF, DOCX, PPTX e Markdown são derivados. O conteúdo e as fontes não mudam quando se troca o formato.
 
 **Regra obrigatória:** nenhum arquivo é uma entrega final apenas por ter a aparência correta. Antes de renderizar, valide a resposta contra `contracts/deliverable-content.schema.json`, o perfil do seu `deliverable_type` e o schema específico quando existir. Falha de validação exige correção do conteúdo ou uma entrega parcial marcada como tal; não ignore o erro nem altere silenciosamente o schema para acomodar a resposta. Todos os formatos de uma mesma versão devem derivar do mesmo JSON validado. Esta regra preserva campos, ordem lógica, rastreabilidade e identidade visual entre skills.
 

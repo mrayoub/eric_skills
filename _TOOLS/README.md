@@ -13,7 +13,7 @@ use `python3 _TOOLS/sync_shared.py --dry-run`.
 A sincronização remove arquivos excedentes do design system e lixo dos pacotes.
 O levantamento documental foi incorporado ao protocolo comum de grilling.
 A sincronização também remove as cópias aposentadas dessa referência, mantendo
-`grilling-operacional.md` como fonte única nas onze skills.
+`grilling-operacional.md` como fonte única nas doze skills.
 
 As fontes em `_DESIGN_SYSTEM/assets/fonts/static/` são geradas a partir das fontes
 variáveis por `python3 _TOOLS/make_static_fonts.py` (requer `fonttools` apenas na
