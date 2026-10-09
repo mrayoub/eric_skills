@@ -3,6 +3,11 @@
 > **Executor instructions**: Siga passo a passo; pare nas STOP conditions; **não reescreva o histórico do git** sem
 > autorização expressa do operador registrada neste arquivo; atualize `plans/README.md`.
 >
+> **Autorização registrada (2026-10-09):** o operador escolheu 048a = substituir o PDF real, 048b = limpar os
+> metadados pessoais e 048c = substituir os arquivos pelos corrigidos no histórico do git. Se a substituição
+> histórica não for possível, autorizou somente limpar o histórico do cache. Essa decisão supera as STOP
+> conditions relativas às escolhas 1–3; preserve um backup antes da reescrita.
+>
 > **Drift check**: `git diff --stat 595f3b0..HEAD -- relatorio-4d workshop-4d relatorio-3e workshop-3e relatorio-5c workshop-5c _FONTES _TOOLS/build_sources.py`
 
 ## Status
@@ -26,9 +31,9 @@ A regra do repositório é que material real fica em `_SAMPLE/` (fora do git e d
 ## Decisões do operador (preencha antes de executar)
 
 1. O PDF real deve **sair** (substituído por uma versão fictícia gerada pelo renderizador a partir de
-   `_SAMPLES_ENTREGAVEIS/four_d_report/input.json`) ou **ficar** por ser material institucional autorizado? → ______
-2. Remover os nomes dos metadados dos DOCX? (muda o hash fixado em `_TOOLS/build_sources.py`, constante `PINNED`) → ______
-3. Reescrever o histórico do git para tirar o PDF real dos commits antigos (como foi feito com os PDFs da Strategyzer)? → ______
+   `_SAMPLES_ENTREGAVEIS/four_d_report/input.json`) ou **ficar** por ser material institucional autorizado? → **Substituir.**
+2. Remover os nomes dos metadados dos DOCX? (muda o hash fixado em `_TOOLS/build_sources.py`, constante `PINNED`) → **Limpar.**
+3. Reescrever o histórico do git para tirar o PDF real dos commits antigos (como foi feito com os PDFs da Strategyzer)? → **Substituir pelos arquivos corrigidos, se possível; caso contrário, limpar o histórico do cache.**
 
 ## Steps (conforme as decisões)
 

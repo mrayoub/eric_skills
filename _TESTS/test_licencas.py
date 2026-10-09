@@ -8,6 +8,8 @@ import sys
 import unittest
 from pathlib import Path
 import tempfile
+import zipfile
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = sorted(p.name for p in ROOT.iterdir() if p.is_dir() and (p / "SKILL.md").is_file())
@@ -71,6 +73,23 @@ class ManifestoTests(unittest.TestCase):
 
 
 class AvisosTests(unittest.TestCase):
+    def test_referencia_4d_e_ficticia(self) -> None:
+        sample = ROOT / "_SAMPLES_ENTREGAVEIS/four_d_report/sample-four-d-report-v1.0.0.pdf"
+        distributed = ROOT / "relatorio-4d/assets/official-four-d-report.pdf"
+        self.assertEqual(distributed.read_bytes(), sample.read_bytes())
+
+    def test_docx_distribuidos_sem_metadados_pessoais(self) -> None:
+        names = ("Modelo 4D de Aprofundamento.docx", "Modelo 3E Estruturacao da Solucao.docx",
+                 "Playbook_Modelo_5C_Centralidade_Cliente.docx")
+        for name in names:
+            for path in ROOT.glob(f"*/assets/{name}"):
+                with self.subTest(file=str(path.relative_to(ROOT))), zipfile.ZipFile(path) as docx:
+                    core = ET.fromstring(docx.read("docProps/core.xml"))
+                    app = ET.fromstring(docx.read("docProps/app.xml"))
+                    for element in (*core.iter(), *app.iter()):
+                        if element.tag.rsplit("}", 1)[-1] in {"creator", "lastModifiedBy", "Company"}:
+                            self.assertFalse((element.text or "").strip())
+
     def test_avisos_listam_terceiros(self) -> None:
         text = (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
         for expected in ("Strategyzer AG", "CC BY-SA 4.0", "SIL Open Font License 1.1", "Montserrat", "Roboto"):

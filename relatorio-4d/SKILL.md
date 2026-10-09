@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.3"
+  version: "1.1.4"
 ---
 
 # Compilar o Relatório 4D
@@ -16,7 +16,7 @@ Consolida registros de D1–D4; playbook e referências visuais não fornecem re
 
 - [Playbook 4D](references/4d-workshop-playbook.md) — sequência metodológica.
 - [Layout de cards](references/relatorio-4d-layout.md) — grades tabuladas e comparações citadas.
-Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md), [PDF de referência](assets/official-four-d-report.pdf). Preserve originais; registre diferenças e datas; não copie conteúdo de outro projeto.
+Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md) e [PDF fictício de referência visual](assets/official-four-d-report.pdf). Preserve originais; registre diferenças e datas; não copie conteúdo de outro projeto.
 
 ## Grilling
 

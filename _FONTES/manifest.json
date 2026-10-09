@@ -14,7 +14,7 @@
     "data_importacao": "2026-09-28",
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07).",
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07). Metadados pessoais de autoria do DOCX removidos em 2026-10-09, sem alterar o corpo do documento.",
     "titular": "CCEE",
     "licenca": "Licença de Uso Restrito CCEE",
     "distribuido": true
@@ -114,7 +114,7 @@
     "data_importacao": "2026-09-28",
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07).",
+    "notas": "Autoria e aprovação institucional não confirmadas. Data de importação registrada explicitamente no cabeçalho da transcrição preservada. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07). Metadados pessoais de autoria do DOCX removidos em 2026-10-09, sem alterar o corpo do documento.",
     "titular": "CCEE",
     "licenca": "Licença de Uso Restrito CCEE",
     "distribuido": true
@@ -214,7 +214,7 @@
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "Playbook de um encontro de Centralidade no Cliente; não comprova uma norma institucional geral. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07).",
+    "notas": "Playbook de um encontro de Centralidade no Cliente; não comprova uma norma institucional geral. Titularidade: CCEE — material produzido por empregada da CCEE no exercício de suas atribuições (confirmado pelo operador em 2026-10-07). Metadados pessoais de autoria do DOCX removidos em 2026-10-09, sem alterar o corpo do documento.",
     "titular": "CCEE",
     "licenca": "Licença de Uso Restrito CCEE",
     "distribuido": true
@@ -261,19 +261,19 @@
   },
   {
     "id": "4d-pdf",
-    "titulo": "PDF de referência do relatório 4D",
-    "tipo": "original",
+    "titulo": "Exemplo fictício de relatório 4D",
+    "tipo": "adaptacao",
     "arquivo": "assets/official-four-d-report.pdf",
     "skills": [
       "relatorio-4d"
     ],
-    "origem": "PDF de referência preservado junto da skill originada de compile-4d-report/ (RC6).",
+    "origem": "Gerado pelo renderizador local a partir de _SAMPLES_ENTREGAVEIS/four_d_report/input.json; conteúdo fictício.",
     "autor": null,
     "versao_declarada": null,
     "data_importacao": null,
     "deriva_de": null,
     "vigencia": "desconhecida",
-    "notas": "O nome do arquivo não comprova aprovação institucional; autoria e versão não confirmadas.",
+    "notas": "Substitui o relatório de um workshop real que antes acompanhava a skill; serve apenas de referência visual e não representa dados ou decisões reais.",
     "titular": "CCEE",
     "licenca": "Licença de Uso Restrito CCEE",
     "distribuido": true

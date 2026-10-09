@@ -16,9 +16,9 @@ FIELDS = {"id", "titulo", "tipo", "arquivo", "skills", "origem", "autor",
 TYPES = {"original", "transcricao", "adaptacao", "historico", "rubrica", "script"}
 STATUS = {"confirmada", "historica", "desconhecida"}
 PINNED = {
-    "assets/Modelo 4D de Aprofundamento.docx": "d5071f2ab0d62e153b8f0bb7e89108a10bca6980d807dbd43c90bbd80fd115e3",
-    "assets/Modelo 3E Estruturacao da Solucao.docx": "530cc4691c6cf5b5f093ba972b05d08649b4000a1fd077ee6020c94b00637e34",
-    "assets/Playbook_Modelo_5C_Centralidade_Cliente.docx": "3b793187dccd6691e124e61b9a407e6f383513d55de255c1049deae31df4e3c7",
+    "assets/Modelo 4D de Aprofundamento.docx": "4c9a71f74feeef9957ad08ed2cb354bf8dbd731540622ec4680c247f816a6716",
+    "assets/Modelo 3E Estruturacao da Solucao.docx": "291155873d767ae4f04f2b4234878f7de0a9b9c3f74852e3a440e676942ad90c",
+    "assets/Playbook_Modelo_5C_Centralidade_Cliente.docx": "375d70d5c6c876735ac7a8ecdc89ec112facbdd1dce31ce2724b69b93c9a55d7",
 }
 
 # Material de terceiros cuja licença não permite redistribuição; nunca pode voltar a uma skill.
