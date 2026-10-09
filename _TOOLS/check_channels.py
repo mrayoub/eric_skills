@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LINK = re.compile(r"\]\(<?([^)>\s]+)>?\)")
+SKILLS_CLI_VERSION = "1.7.2"
 
 
 def load(name: str, path: Path):
@@ -28,10 +29,15 @@ def npx_names(root: Path) -> list[str]:
     """Skills que o `npx skills` descobre no repositório."""
     if not shutil.which("npx"):
         raise RuntimeError("npx não encontrado; instale o Node.js ou rode com --sem-npx")
-    result = subprocess.run(["npx", "-y", "skills", "add", str(root), "--list"], capture_output=True, text=True,
+    result = subprocess.run(["npx", "-y", f"skills@{SKILLS_CLI_VERSION}", "add", str(root), "--list"], capture_output=True, text=True,
                             encoding="utf-8", timeout=300)
+    if result.returncode:
+        raise RuntimeError(f"npx skills@{SKILLS_CLI_VERSION} falhou: {result.stderr.strip()}")
     text = re.sub(r"\x1b\[[0-9;?]*[A-Za-z]", "", result.stdout + result.stderr)
-    return sorted(set(re.findall(r"^│ {4}([a-z0-9]+(?:-[a-z0-9]+)*)\s*$", text, re.M)))
+    names = sorted(set(re.findall(r"^│ {4}([a-z0-9]+(?:-[a-z0-9]+)*)\s*$", text, re.M)))
+    if not names:
+        raise RuntimeError("não foi possível ler a saída do npx skills")
+    return names
 
 
 def check_npx(root: Path, catalog: dict) -> list[str]:

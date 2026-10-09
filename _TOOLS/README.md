@@ -58,7 +58,9 @@ catálogo; o pacote `.skill` tem os mesmos arquivos que o git distribui; nenhum 
 pacotes são reprodutíveis; e o `check_updates.py` reconhece todas como atualizadas (`--sem-npx` pula o npx).
 `.github/workflows/tests.yml` roda, em todo push e pull request, as checagens de versionamento e canais e a suíte
 em Linux; a matriz Windows/macOS/Linux x Python 3.10/3.12 roda toda segunda e sob demanda.
-`.github/workflows/release.yml` roda quando o `catalog.json` muda no `main`: gera os pacotes e, com
-`_TOOLS/publish_releases.py`, cria uma Release por versão nova e atualiza a Release fixa `pacotes`
-(`--dry-run` mostra o que faria). Dependências de teste com versão fixa em `_TESTS/requirements-dev.txt`.
+`.github/workflows/release.yml` roda depois que o workflow `Testes` conclui com sucesso no push ao
+`main` e o `catalog.json` mudou: gera os pacotes e, com `_TOOLS/publish_releases.py`, cria uma Release
+por versão nova e atualiza a Release fixa `pacotes` (`--dry-run` mostra o que faria).
+As dependências distribuídas usam faixas em `_DESIGN_SYSTEM/requirements.txt`; o CI instala os pins de
+`_TESTS/requirements-lock.txt` por `_TESTS/requirements-dev.txt`.
 Recomendação: em Settings → Branches, exigir o check `versionamento` antes do merge no `main`.

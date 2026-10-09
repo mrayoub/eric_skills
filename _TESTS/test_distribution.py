@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 from pathlib import Path
 
@@ -175,6 +176,59 @@ class PackageContentTests(unittest.TestCase):
 
 
 CHANNELS = load("check_channels", ROOT / "_TOOLS/check_channels.py")
+PUBLISH = load("publish_releases", ROOT / "_TOOLS/publish_releases.py")
+
+
+class ReleaseSafetyTests(unittest.TestCase):
+    def test_remote_tags_drive_dry_run(self) -> None:
+        catalog = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
+        tags = {f"{skill}-v{entry['version']}" for skill, entry in catalog["skills"].items()}
+        remote = "\n".join(f"abc123\trefs/tags/{tag}" for tag in tags)
+        with mock.patch.object(PUBLISH, "run", return_value=subprocess.CompletedProcess([], 0, remote, "")):
+            self.assertEqual(PUBLISH.existing_tags(), tags)
+        self.assertEqual(PUBLISH.plan(catalog, tags), [])
+
+    def test_rolling_removes_stale_assets_and_moves_tag(self) -> None:
+        head = "a" * 40
+        files = [Path("_DIST/briefing-inovacao.skill"), Path("_DIST/catalog.json"), Path("_DIST/SHA256SUMS")]
+        calls = []
+
+        def fake_run(*args, **kwargs):
+            calls.append(args)
+            if args[:3] == ("gh", "release", "view"):
+                return subprocess.CompletedProcess(args, 0, json.dumps({"assets": [
+                    {"name": "old.skill"}, {"name": "briefing-inovacao.skill"}]}), "")
+            if args[:3] == ("git", "ls-remote", "--tags"):
+                return subprocess.CompletedProcess(args, 0, f"{head}\trefs/tags/pacotes\n", "")
+            return subprocess.CompletedProcess(args, 0, "", "")
+
+        with mock.patch.object(PUBLISH, "run", side_effect=fake_run):
+            PUBLISH.publish_rolling({"skills": {"briefing-inovacao": {}}}, files, head)
+        self.assertIn(("gh", "release", "delete-asset", "pacotes", "old.skill", "--yes"), calls)
+        self.assertTrue(any(call[:4] == ("gh", "api", "-X", "PATCH") for call in calls))
+        self.assertTrue(any(call[:3] == ("gh", "release", "upload") for call in calls))
+
+    def test_gh_failure_includes_stderr(self) -> None:
+        with mock.patch.object(PUBLISH.subprocess, "run", return_value=subprocess.CompletedProcess(
+                ["gh"], 1, "", "permissão negada")):
+            with self.assertRaisesRegex(RuntimeError, "permissão negada"):
+                PUBLISH.run("gh", "release", "view", "pacotes")
+
+    def test_empty_npx_parse_is_a_diagnostic(self) -> None:
+        with mock.patch.object(CHANNELS.shutil, "which", return_value="/usr/bin/npx"), mock.patch.object(
+                CHANNELS.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "Available Skills", "")):
+            with self.assertRaisesRegex(RuntimeError, "não foi possível ler a saída"):
+                CHANNELS.npx_names(ROOT)
+
+    def test_release_workflow_waits_for_successful_push_tests(self) -> None:
+        release = yaml.load((ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        tests = yaml.load((ROOT / ".github/workflows/tests.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        self.assertEqual(release["on"]["workflow_run"]["workflows"], ["Testes"])
+        self.assertIn("workflow_run.conclusion == 'success'", release["jobs"]["publicar"]["if"])
+        self.assertIn("workflow_run.event == 'push'", release["jobs"]["publicar"]["if"])
+        self.assertEqual(release["permissions"]["contents"], "read")
+        self.assertEqual(release["jobs"]["publicar"]["permissions"]["contents"], "write")
+        self.assertIn("github.event_name", tests["concurrency"]["group"])
 
 
 class ChannelTests(unittest.TestCase):
