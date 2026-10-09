@@ -1238,6 +1238,37 @@ class ReportLabPdfTests(unittest.TestCase):
             self.assertFalse(list(folder.glob("*.pdf")))
             self.assertFalse(list(folder.glob("*.manifest.json")))
 
+    def test_one_page_follows_layout_segments(self):
+        import pdfplumber
+        sample = ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json"
+        item = json.loads(sample.read_text(encoding="utf-8"))
+        subtitles = [block["data"]["title"] for block in item["blocks"]
+                     if block["data"].get("section_key") in ("problem_opportunity", "business_relevance", "expected_outcomes")]
+        with tempfile.TemporaryDirectory() as temp:
+            result = subprocess.run([sys.executable, str(SCRIPT), str(sample), "--out-dir", temp, "--formats", "pdf"],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with pdfplumber.open(str(next(Path(temp).glob("*.pdf")))) as pdf:
+                self.assertEqual(len(pdf.pages), 1)
+                page = pdf.pages[0]
+                text = page.extract_text()
+                found = {subtitle: page.search(subtitle, regex=False) for subtitle in subtitles}
+                hmw = next(block for block in item["blocks"] if block["data"]["section_key"] == "hmw")["data"]["text"]
+                hmw_hits = page.search(hmw[:30], regex=False)
+        self.assertNotIn("NOTAS", text.upper().split())
+        for english in ("Points", "Responsibles", "Sponsor", "Campo"):
+            self.assertNotIn(english, text)
+        self.assertIn("Responsáveis", text)
+        self.assertIn("Patrocinador", text)
+        self.assertEqual(len(hmw_hits), 1)
+        self.assertNotIn("HMW", text.upper().split(), "o HMW aparece sem subtítulo")
+        tops = [found[subtitle][0]["top"] for subtitle in subtitles]
+        lefts = [found[subtitle][0]["x0"] for subtitle in subtitles]
+        self.assertLessEqual(max(tops) - min(tops), 1, "os três blocos devem ficar na mesma linha")
+        self.assertGreater(min(tops), hmw_hits[0]["bottom"], "as colunas ficam abaixo do HMW")
+        self.assertEqual(sorted(lefts), lefts)
+        self.assertGreater(min(b - a for a, b in zip(lefts, lefts[1:])), 200, "um bloco por coluna")
+
     def test_one_page_overflow_fails(self):
         item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_one_page/input.json").read_text(encoding="utf-8"))
         item["metadata"]["completeness"] = "partial"

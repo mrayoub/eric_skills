@@ -9,27 +9,27 @@ Como podemos tornar as solicitações mais claras e rastreáveis?
 Fontes: FIC-01
 
 Problema ou oportunidade
-Solicitacoes chegam por canais diferentes e sem informacoes padronizadas.
-Points: Ha devolucoes por falta de informacao.
+Solicitações chegam por canais diferentes e sem informações padronizadas.
+Pontos: Há devoluções por falta de informação.
 
 Fontes: FIC-01
 
-Relevancia
-O problema reduz a eficiencia operacional e a confianca no processo interno.
-Points: O retrabalho consome capacidade das equipes.
+Relevância
+O problema reduz a eficiência operacional e a confiança no processo interno.
+Pontos: O retrabalho consome capacidade das equipes.
 
 Fontes: FIC-01
 
 Resultados esperados
-Tornar as solicitacoes completas, rastreaveis e previsiveis.
-Points: Reduzir devolucoes por falta de informacao.
+Tornar as solicitações completas, rastreáveis e previsíveis.
+Pontos: Reduzir devoluções por falta de informação.
 
 Fontes: FIC-01
 
 | Campo | Valor |
 | --- | --- |
-| Responsibles | Nao informado |
-| Sponsor | Nao informado |
+| Responsáveis | Não informado |
+| Patrocinador | Não informado |
 
 Fontes: FIC-01
 

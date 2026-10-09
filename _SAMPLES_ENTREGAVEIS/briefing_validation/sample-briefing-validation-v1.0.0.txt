@@ -9,15 +9,15 @@ Melhorar a experiencia de solicitacoes internas
 | Campo | Valor |
 | --- | --- |
 | Title | Melhorar a experiencia de solicitacoes internas |
-| Sponsor | {'name': 'Nao informado'} |
-| Owner | {'name': 'Nao informado'} |
+| Patrocinador | {'name': 'Nao informado'} |
+| Responsável | {'name': 'Nao informado'} |
 
 Fontes: FIC-01
 
 Status: attention
 Original: Como podemos reduzir o esforco de quem solicita e de quem atende?
-Analysis: A formulacao identifica as pessoas e o efeito desejado, mas ainda nao explicita o contexto em que o problema ocorre.
-Suggestion: Como podemos reduzir o esforco de quem solicita e de quem atende para que as demandas sejam resolvidas com clareza de modo que o processo seja previsivel?
+Análise: A formulacao identifica as pessoas e o efeito desejado, mas ainda nao explicita o contexto em que o problema ocorre.
+Sugestão: Como podemos reduzir o esforco de quem solicita e de quem atende para que as demandas sejam resolvidas com clareza de modo que o processo seja previsivel?
 
 Fontes: FIC-01
 
@@ -86,9 +86,9 @@ Auditoria de agrupamento
 
 Fontes: FIC-01
 
-Score: 2.8
-Classification: Adequado
-Diagnosis: O briefing permite iniciar a descoberta, mas ainda depende de evidencias mensuraveis e definicoes de governanca e escopo. A clareza e o principal ponto forte. Evidencias e acionabilidade concentram as lacunas prioritarias.
+Nota: 2.8
+Classificação: Adequado
+Diagnóstico: O briefing permite iniciar a descoberta, mas ainda depende de evidencias mensuraveis e definicoes de governanca e escopo. A clareza e o principal ponto forte. Evidencias e acionabilidade concentram as lacunas prioritarias.
 
 Fontes: FIC-01
 
