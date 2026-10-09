@@ -25,7 +25,9 @@ def skills() -> list[Path]:
 def distributable_files(skill_dir: Path) -> list[Path]:
     """Arquivos que vão para o pacote e para o hash: a mesma regra no catálogo e no .skill."""
     files = []
-    for path in sorted(skill_dir.rglob("*")):
+    # Ordena pelas partes do caminho, com maiúsculas distintas: o Windows compara caminhos sem diferenciar
+    # maiúsculas, o que mudaria a ordem e o hash. Assim a ordem é a mesma em qualquer sistema.
+    for path in sorted(skill_dir.rglob("*"), key=lambda item: item.relative_to(skill_dir).parts):
         rel = path.relative_to(skill_dir)
         if not path.is_file() or path.name in EXCLUDED_FILES or path.suffix == ".pyc":
             continue
@@ -98,7 +100,8 @@ def bump(level: str, previous: dict) -> list[str]:
                                "patch": (major, minor, patch + 1)}[level]
         path = skill / "SKILL.md"
         text = path.read_text(encoding="utf-8")
-        path.write_text(VERSION_LINE.sub(f'  version: "{major}.{minor}.{patch}"', text, count=1), encoding="utf-8")
+        path.write_text(VERSION_LINE.sub(f'  version: "{major}.{minor}.{patch}"', text, count=1), encoding="utf-8",
+                        newline="")  # preserva LF também no Windows
         changed.append(f"{skill.name}: {old['version']} → {major}.{minor}.{patch}")
     return changed
 
@@ -135,7 +138,7 @@ def main() -> int:
             print("\n".join(issues), file=sys.stderr)
             print("Suba a versão com --bump ou corrija o conteúdo.", file=sys.stderr)
             return 1
-        CATALOG.write_text(dump(current), encoding="utf-8")
+        CATALOG.write_text(dump(current), encoding="utf-8", newline="")
         print(f"OK catalog.json ({len(current['skills'])} skills)")
         return 0
     except (OSError, ValueError) as exc:
