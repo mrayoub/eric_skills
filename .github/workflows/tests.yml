@@ -35,7 +35,7 @@ jobs:
           cache-dependency-path: _TESTS/requirements-lock.txt
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "20"
+          node-version: "22.20.0"
       - run: python -m pip install -r _TESTS/requirements-dev.txt
       - run: python _TOOLS/sync_shared.py --check
       - run: python _TOOLS/build_sources.py --check

@@ -229,6 +229,9 @@ class ReleaseSafetyTests(unittest.TestCase):
         self.assertEqual(release["permissions"]["contents"], "read")
         self.assertEqual(release["jobs"]["publicar"]["permissions"]["contents"], "write")
         self.assertIn("github.event_name", tests["concurrency"]["group"])
+        node_step = next(step for step in tests["jobs"]["versionamento"]["steps"]
+                         if step.get("uses", "").startswith("actions/setup-node@"))
+        self.assertEqual(node_step["with"]["node-version"], "22.20.0")
 
 
 class ChannelTests(unittest.TestCase):
