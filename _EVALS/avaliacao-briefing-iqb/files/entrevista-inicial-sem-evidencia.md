@@ -1,6 +1,6 @@
 > Material fictício para avaliação de skill.
 
-# Briefing v0 — Portal de Solicitações de Dados
+# Entrevista Inicial v0 — Portal de Solicitações de Dados
 Área: Gerência de Atendimento a Agentes. Redigido por Ana Souza em 28/09/2026.
 ## Título e desafio
 Portal de Solicitações de Dados. HMW: Como podemos implantar o portal que já escolhemos?

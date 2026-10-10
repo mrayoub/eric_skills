@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:eric:schemas:briefing",
-  "title": "ERIC Briefing",
-  "description": "Contrato especializado do briefing de sete itens da fase de conhecimento do problema ou oportunidade.",
+  "title": "ERIC Entrevista Inicial de sete campos",
+  "description": "Contrato especializado da Entrevista Inicial de sete campos da fase de conhecimento do problema ou oportunidade.",
   "allOf": [
     {
       "$ref": "urn:eric:schemas:deliverable-content"

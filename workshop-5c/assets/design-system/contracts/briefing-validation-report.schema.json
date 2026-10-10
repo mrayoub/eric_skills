@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:eric:schemas:briefing-validation-report",
-  "title": "ERIC Briefing Validation Report",
-  "description": "Contrato especializado do relatorio de validacao e IQB do briefing.",
+  "title": "ERIC Avaliação IQB da Entrevista Inicial ou do Briefing",
+  "description": "Contrato especializado do relatório IQB da Entrevista Inicial de sete campos ou do Briefing de uma página.",
   "allOf": [
     {
       "$ref": "urn:eric:schemas:deliverable-content"
@@ -218,8 +218,10 @@
         },
         "evidence_source": {
           "enum": [
+            "initial_interview",
             "briefing",
             "transcription",
+            "initial_interview_model",
             "briefing_model",
             "absent"
           ]

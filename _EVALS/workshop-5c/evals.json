@@ -6,7 +6,7 @@
       "prompt": "Monte o roteiro 5C com o briefing, os perfis convidados e a agenda proposta.",
       "expected_output": "Roteiro adaptado ao encontro de 120 minutos, com regras prospectivas.",
       "files": [
-        "files/briefing.md",
+        "files/entrevista-inicial.md",
         "files/perfis-e-agenda.md"
       ],
       "expectations": [

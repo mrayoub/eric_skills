@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:eric:schemas:briefing-one-page",
-  "title": "ERIC Briefing One-page",
-  "description": "Contrato especializado da sintese executiva em uma pagina do briefing.",
+  "title": "ERIC Briefing",
+  "description": "Contrato especializado do Briefing de uma página, sintetizado a partir da Entrevista Inicial.",
   "allOf": [
     {
       "$ref": "urn:eric:schemas:deliverable-content"

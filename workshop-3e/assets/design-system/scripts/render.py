@@ -19,10 +19,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER_VERSION = "2.0.0"
 DELIVERABLE_LABELS = {
-    "briefing": "Briefing",
-    "briefing_one_page": "Resumo do briefing",
-    "briefing_improvement_questionnaire": "Perguntas para melhorar o briefing",
-    "briefing_validation": "Avaliação do briefing",
+    "briefing": "Entrevista Inicial de sete campos",
+    "briefing_one_page": "Briefing",
+    "briefing_improvement_questionnaire": "Perguntas para fechar lacunas",
+    "briefing_validation": "Avaliação IQB",
     "innovation_potential_assessment": "Avaliação do potencial de inovação",
     "four_d_workshop_record": "Registro do workshop 4D",
     "four_d_report": "Relatório 4D",
@@ -47,6 +47,14 @@ IQB_TABLE_WIDTHS = {
     "criterios": [14, 15, 10, 41, 10, 10],
     "dimensoes": [14, 7, 10, 12, 9, 10, 10, 28],
     "agrupamento": [35, 65],
+}
+IQB_SOURCE_LABELS = {
+    "initial_interview": "Entrevista Inicial",
+    "briefing": "Briefing",
+    "transcription": "Transcrição",
+    "initial_interview_model": "Modelo da Entrevista Inicial",
+    "briefing_model": "Modelo da Entrevista Inicial (legado)",
+    "absent": "Ausente",
 }
 CARD_LABELS = {
     "test_card": {
@@ -338,8 +346,9 @@ def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[l
             criterion = str(item.get("criterion_id", ""))
             if criterion == detail.get("veto_item_id"):
                 criterion += " (veto)"
+            source = str(item.get("evidence_source", ""))
             criteria.append([label, criterion, "Sim" if item.get("answer") is True else "Não",
-                             str(item.get("evidence", "")), str(item.get("evidence_source", "")),
+                             str(item.get("evidence", "")), IQB_SOURCE_LABELS.get(source, source),
                              str(item.get("citation_id") or "")])
         veto = f"Disparado: {detail.get('veto_detail') or '—'}" if detail.get("veto_triggered") else "Não disparado"
         dimensions.append([label, str(detail.get("yes_count", "")), str(detail.get("raw_score", "")),

@@ -1,4 +1,4 @@
-# ESTRUTURAÇÃO DO DESAFIO
+# ENTREVISTA INICIAL DE SETE CAMPOS — ESTRUTURAÇÃO DO DESAFIO
 
 1. **TÍTULO DO DESAFIO:** (nome ou breve descrição que deixe claro o desafio para a organização)
 

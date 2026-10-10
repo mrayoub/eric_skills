@@ -10,7 +10,7 @@ e começa com `> Material fictício para avaliação de skill.`
 
 | Pasta | Objeto avaliado |
 | --- | --- |
-| `briefing-inovacao/` | Sete campos, rastreabilidade, sponsor ausente e meta não aprovada |
+| `briefing-inovacao/` | Entrevista Inicial de sete campos, rastreabilidade, sponsor ausente e meta não aprovada |
 | `avaliacao-briefing-iqb/` | Quarenta critérios, cálculo por script e veto de evidências |
 | `potencial-inovacao/` | Cinco notas, cálculo ponderado e ausência de viabilidade |
 | `workshop-4d/` | Preparação D1–D4 e registro de D4 não realizado |

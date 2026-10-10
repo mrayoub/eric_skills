@@ -44,11 +44,11 @@
     "should_trigger": false
   },
   {
-    "query": "Transforme a transcrição da conversa com o sponsor em um briefing de sete campos com lacunas explícitas.",
+    "query": "Transforme a transcrição da conversa com o sponsor em uma Entrevista Inicial de sete campos com lacunas explícitas.",
     "should_trigger": false
   },
   {
-    "query": "Monte a one-page do desafio de cadastro para a reunião do comitê, usando o briefing v2 como fonte.",
+    "query": "Monte o Briefing de uma página do desafio de cadastro para a reunião do comitê, usando a Entrevista Inicial v2 como fonte.",
     "should_trigger": false
   },
   {

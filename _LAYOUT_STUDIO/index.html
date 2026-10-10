@@ -25,7 +25,7 @@
     font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 13px;
+    font-size: 14px;
   }
   header {
     display: flex;
@@ -96,7 +96,7 @@
   .slot .label {
     font-family: var(--font-brand);
     font-weight: 600;
-    font-size: 11px;
+    font-size: 14px;
     padding: 3px 5px;
     color: var(--accent);
     white-space: nowrap;
@@ -107,7 +107,7 @@
   .slot.selected .label { color: var(--danger); }
   .slot .hint {
     font-family: var(--font-body);
-    font-size: 9px;
+    font-size: 14px;
     padding: 0 5px;
     color: var(--text-muted);
     pointer-events: none;
@@ -131,7 +131,7 @@
     overflow-y: auto;
     padding: 12px;
   }
-  aside h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); margin: 14px 0 6px; }
+  aside h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); margin: 14px 0 6px; }
   aside h2:first-child { margin-top: 0; }
   .slot-row {
     border: 1px solid var(--border);
@@ -144,16 +144,16 @@
   .slot-row .row1 { display: flex; gap: 6px; margin-bottom: 6px; }
   .slot-row .row1 input[type="text"] { flex: 1; width: auto; }
   .slot-row .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 6px; }
-  .slot-row .grid4 label { font-size: 10px; color: var(--text-muted); display: block; }
+  .slot-row .grid4 label { font-size: 14px; color: var(--text-muted); display: block; }
   .slot-row .grid4 input { width: 100%; padding: 3px 4px; }
   .slot-row select { width: 100%; margin-bottom: 4px; }
   .slot-row .row-actions { display: flex; justify-content: space-between; align-items: center; }
-  .slot-row .row-actions button { padding: 3px 8px; font-size: 11px; }
-  .muted { color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+  .slot-row .row-actions button { padding: 3px 8px; font-size: 14px; }
+  .muted { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
   .swatches { display: flex; flex-wrap: wrap; gap: 6px; }
   .swatch { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border); }
-  .hint-text { font-size: 10px; color: var(--text-muted); margin-top: -2px; }
-  #status { font-size: 11px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
+  .hint-text { font-size: 14px; color: var(--text-muted); margin-top: -2px; }
+  #status { font-size: 14px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
   .file-btn { position: relative; overflow: hidden; display: inline-block; }
   .file-btn input[type="file"] { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 
@@ -185,7 +185,7 @@
   .modal-body pre {
     margin: 0;
     padding: 16px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
     white-space: pre-wrap;
     word-break: break-word;
@@ -357,10 +357,10 @@
   };
   // Rótulos em português, iguais a DELIVERABLE_LABELS de _DESIGN_SYSTEM/scripts/render.py.
   const DELIVERABLE_LABELS = {
-      "briefing": "Briefing",
-      "briefing_one_page": "Resumo do briefing",
-      "briefing_improvement_questionnaire": "Perguntas para melhorar o briefing",
-      "briefing_validation": "Avaliação do briefing",
+      "briefing": "Entrevista Inicial de sete campos",
+      "briefing_one_page": "Briefing",
+      "briefing_improvement_questionnaire": "Perguntas para fechar lacunas",
+      "briefing_validation": "Avaliação IQB",
       "innovation_potential_assessment": "Avaliação do potencial de inovação",
       "four_d_workshop_record": "Registro do workshop 4D",
       "four_d_report": "Relatório 4D",

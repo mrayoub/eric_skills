@@ -433,13 +433,13 @@
   },
   {
     "id": "briefing-template",
-    "titulo": "Modelo operacional de briefing",
+    "titulo": "Modelo operacional da Entrevista Inicial de sete campos",
     "tipo": "adaptacao",
     "arquivo": "references/briefing_template.md",
     "skills": [
       "briefing-inovacao"
     ],
-    "origem": "Modelo local preservado na skill; modelo institucional oficial ainda a confirmar.",
+    "origem": "Modelo local da Entrevista Inicial preservado na skill; modelo institucional oficial ainda a confirmar.",
     "autor": null,
     "versao_declarada": null,
     "data_importacao": null,

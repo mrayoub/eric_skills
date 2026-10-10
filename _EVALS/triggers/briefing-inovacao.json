@@ -1,14 +1,14 @@
 [
   {
-    "query": "Transforma essa transcrição da conversa com a área de adimplemento num briefing do desafio",
+    "query": "Transforma essa transcrição da conversa com a área de adimplemento numa Entrevista Inicial de sete campos",
     "should_trigger": true
   },
   {
-    "query": "Preciso de uma one-page do briefing v2 pra levar pro comitê amanhã",
+    "query": "Preciso do Briefing de uma página da Entrevista Inicial v2 pra levar pro comitê amanhã",
     "should_trigger": true
   },
   {
-    "query": "Quais perguntas eu deveria mandar pro sponsor pra fechar as lacunas desse briefing?",
+    "query": "Quais Perguntas para fechar lacunas eu deveria mandar pro sponsor sobre essa Entrevista Inicial?",
     "should_trigger": true
   },
   {
@@ -20,15 +20,15 @@
     "should_trigger": true
   },
   {
-    "query": "Revise nosso briefing v3 com base na nova conversa com a responsável e registre as mudanças em relação à versão anterior.",
+    "query": "Revise nossa Entrevista Inicial v3 com base na nova conversa com a responsável e registre as mudanças em relação à versão anterior.",
     "should_trigger": true
   },
   {
-    "query": "Ajude a formular o how might we dessa dor de cadastro e complete a proposta de briefing sem antecipar a solução.",
+    "query": "Ajude a formular o how might we dessa dor de cadastro e complete a Entrevista Inicial sem antecipar a solução.",
     "should_trigger": true
   },
   {
-    "query": "Monte um resumo executivo de uma página e perguntas para o sponsor a partir deste briefing com escopo e resultados ainda incompletos.",
+    "query": "Monte o Briefing de uma página e Perguntas para fechar lacunas a partir desta Entrevista Inicial com escopo e resultados ainda incompletos.",
     "should_trigger": true
   },
   {

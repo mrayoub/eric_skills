@@ -4,6 +4,11 @@ Cada JSON contém 16 consultas em português: oito devem acionar a skill e oito
 não devem. As negativas testam fronteiras com skills vizinhas; as sementes do
 plano 008 foram preservadas. As consultas são fictícias e não usam `_SAMPLE/`.
 
+Os conjuntos de `briefing-inovacao` e das skills vizinhas agora usam os nomes
+Entrevista Inicial de sete campos, Briefing e Perguntas para fechar lacunas.
+As escolhas históricas em `resultados.md` foram registradas com consultas anteriores
+à mudança de nomenclatura; devem ser medidas novamente antes de comparar taxas.
+
 ## Revisão local nesta implementação
 
 Por instrução do operador, o plano 008 foi avaliado nesta sessão de Codex antes

@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-briefing-validation",
   "branding_version": "1.1.0",
-  "content_sha256": "aead87a67fc72e6ae54193abd74e3b669612a48c7f7136d509bd7335abe71c5b",
+  "content_sha256": "315ac0ebf567084c67924341326f4a150fa0900b5e863ed46dc47a26e16afe56",
   "content_version": "1.0.0",
   "deliverable_type": "briefing_validation",
   "files": {
-    "sample-briefing-validation-v1.0.0.docx": "3b36a5e72c57d952144a0bb04392c8941da4f6d9708a381346e215d777159ee2",
-    "sample-briefing-validation-v1.0.0.json": "aead87a67fc72e6ae54193abd74e3b669612a48c7f7136d509bd7335abe71c5b",
-    "sample-briefing-validation-v1.0.0.md": "c1f471e64175b17f29cdddcde9b639703964e2cb37dbcc32e7ab29adf55982a0",
-    "sample-briefing-validation-v1.0.0.pdf": "bf4fa08325be1e6939958fb95121616bd787a3ee5119abeda29f1a3d556ed500",
-    "sample-briefing-validation-v1.0.0.txt": "edf95addf378b2f08a17833210aeee23ee7754f5ea7ce54a1649aceb7007fe6e"
+    "sample-briefing-validation-v1.0.0.docx": "bc473928902d1eacf3ba2bc5960a84248fe067882b817275f0610dddba29875b",
+    "sample-briefing-validation-v1.0.0.html": "1cdf7eecdefb90abbdff615593add11497a54c2f6078b2155d83fc67dae3d194",
+    "sample-briefing-validation-v1.0.0.json": "315ac0ebf567084c67924341326f4a150fa0900b5e863ed46dc47a26e16afe56",
+    "sample-briefing-validation-v1.0.0.md": "c7d5ca5f8c23f68a79b2584725473cc30f1923d3ca1c04f397e9d596f4efee6d",
+    "sample-briefing-validation-v1.0.0.pdf": "c964c48b9bddba9d8107e248f0f7464992950f7460c714f70e75ce981f26806b",
+    "sample-briefing-validation-v1.0.0.txt": "75b1a3a323c53bb314128c910705ee68148b8aa864808314d0cea46ce9574ff3"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",
@@ -17,6 +18,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "c007cff27a5c7d7f8bc3b067a287d76540dfa758c197fe7ca31f2354e9fd45c2",
   "unavailable": {}
 }

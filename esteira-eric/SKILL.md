@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Não gera entregáveis; Python opcional, só para preferências locais e aviso de atualização."
   author: "GEIN-CCEE"
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Esteira ERIC

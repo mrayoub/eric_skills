@@ -1,6 +1,6 @@
 > Material fictício para avaliação de skill.
 
-# Briefing v1 — Portal de Solicitações de Dados
+# Entrevista Inicial v1 — Portal de Solicitações de Dados
 Área: Gerência de Atendimento a Agentes. Versão aprovada em 01/10/2026.
 ## 1. Título
 Portal de Solicitações de Dados.

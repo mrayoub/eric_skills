@@ -2,7 +2,7 @@
   "blocks": [
     {
       "data": {
-        "text": "Perguntas para fechar lacunas do briefing fictício antes de atribuir escala ao problema."
+        "text": "Perguntas para fechar lacunas da Entrevista Inicial fictícia antes de atribuir escala ao problema."
       },
       "id": "intro",
       "type": "paragraph"

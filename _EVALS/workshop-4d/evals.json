@@ -6,7 +6,7 @@
       "prompt": "Prepare o workshop 4D com briefing e dados; inclua facilitação e regras de votação.",
       "expected_output": "Roteiro prospectivo D1–D4, com créditos acordados antes do voto.",
       "files": [
-        "files/briefing.md",
+        "files/entrevista-inicial.md",
         "files/dados-e-preparacao.md"
       ],
       "expectations": [

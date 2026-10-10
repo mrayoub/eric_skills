@@ -1,5 +1,5 @@
 interface:
-  display_name: "Briefing de inovação"
-  short_description: "Cria ou revisa o briefing de um desafio"
+  display_name: "Entrevista Inicial e Briefing"
+  short_description: "Entrevista Inicial, Briefing e Perguntas para fechar lacunas"
   brand_color: "#193C8E"
-  default_prompt: "Use $briefing-inovacao para criar ou revisar o briefing deste desafio."
+  default_prompt: "Use $briefing-inovacao para criar a Entrevista Inicial de sete campos deste desafio."

@@ -60,7 +60,7 @@
     "should_trigger": false
   },
   {
-    "query": "Produza uma one-page do briefing para o sponsor com resultados esperados e lacunas decisivas.",
+    "query": "Produza o Briefing de uma página para o sponsor a partir da Entrevista Inicial, com resultados esperados e lacunas decisivas.",
     "should_trigger": false
   }
 ]

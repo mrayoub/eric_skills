@@ -6,7 +6,7 @@ A vigência indica o que está confirmado sobre a fonte. Publicação oficial n�
 
 | Fonte | Tipo | Arquivo | Deriva de | Vigência | Titular | Licença | SHA-256 (12 caracteres) | Notas |
 |---|---|---|---|---|---|---|---|---|
-| Contexto da esteira ERIC | adaptacao | [references/eric-esteira.md](<../references/eric-esteira.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | d963f5ee58f1 | Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py. |
+| Contexto da esteira ERIC | adaptacao | [references/eric-esteira.md](<../references/eric-esteira.md>) | — | desconhecida | CCEE | Licença de Uso Restrito CCEE | dd331d3e8416 | Há trechos de origem em draft; decisões institucionais posteriores podem prevalecer. A cópia é sincronizada por sync_shared.py. |
 
 ## Vigência a confirmar
 

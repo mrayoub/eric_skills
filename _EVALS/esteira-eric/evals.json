@@ -17,7 +17,7 @@
     {
       "id": 2,
       "prompt": "Quero começar um projeto de inovação. Como funciona?",
-      "expected_output": "Sem arquivos: pergunta em uma frase o que o projeto já tem e orienta o início pela oportunidade e pelo briefing.",
+      "expected_output": "Sem arquivos: pergunta em uma frase o que o projeto já tem e orienta o início pela oportunidade e pela Entrevista Inicial de sete campos.",
       "files": [],
       "expectations": [
         "Pergunta, em uma frase, o que o projeto já tem antes de diagnosticar.",

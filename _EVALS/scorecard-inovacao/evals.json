@@ -6,7 +6,7 @@
       "prompt": "Produza o scorecard do projeto em 28/10/2026 usando briefing, relatório 4D e Learning Card.",
       "expected_output": "Retrato datado por dimensão, modalidade declarada e evidência contrária ou ausente distinta de inaplicabilidade.",
       "files": [
-        "files/briefing.md",
+        "files/entrevista-inicial.md",
         "files/relatorio-4d.md",
         "files/learning-card.md"
       ],

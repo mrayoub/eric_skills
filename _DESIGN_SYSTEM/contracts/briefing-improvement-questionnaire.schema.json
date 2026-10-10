@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:eric:schemas:briefing-improvement-questionnaire",
-  "title": "ERIC Briefing Improvement Questionnaire",
-  "description": "Perguntas priorizadas para preencher lacunas e refinar um briefing existente.",
+  "title": "ERIC Perguntas para fechar lacunas",
+  "description": "Perguntas priorizadas para fechar lacunas da Entrevista Inicial ou do Briefing.",
   "allOf": [
     {
       "$ref": "urn:eric:schemas:deliverable-content"

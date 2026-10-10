@@ -6,6 +6,12 @@ Gerados pela skill `improve` em 2026-09-28, contra o commit `967749d` (tag
 paralelizar. Cada executor: leia o plano inteiro antes de começar, respeite as STOP
 conditions e atualize sua linha aqui ao terminar.
 
+Nomenclatura atual da `briefing-inovacao`: **Entrevista Inicial de sete campos**,
+**Briefing** de uma página e **Perguntas para fechar lacunas**. Os planos antigos
+registram os nomes usados quando foram escritos; seus contratos técnicos
+`briefing`, `briefing_one_page` e `briefing_improvement_questionnaire` continuam
+válidos para os arquivos JSON existentes.
+
 Convenções comuns a todos os planos:
 - **Fonte x cópia:** para recursos compartilhados, edite só `_DESIGN_SYSTEM/`, `_ERIC_CONTEXT/`, `_SHARED/`; as cópias dentro das skills são geradas por `python3 _TOOLS/sync_shared.py` (plano 001). Scripts e referências específicos podem ser alterados quando listados no escopo do plano; schemas especializados em `references/` não são atualizados pelo sync.
 - **Testes de manutenção** ficam fora das skills: `_DESIGN_SYSTEM/tests/` e `_TESTS/`. **Evals** em `_EVALS/`.

@@ -1,5 +1,5 @@
 interface:
-  display_name: "Avaliação de briefing IQB"
-  short_description: "Pontua a qualidade do briefing pela rubrica IQB"
+  display_name: "Avaliação IQB"
+  short_description: "Avalia a Entrevista Inicial ou o Briefing"
   brand_color: "#193C8E"
-  default_prompt: "Use $avaliacao-briefing-iqb para avaliar este briefing pela rubrica IQB."
+  default_prompt: "Use $avaliacao-briefing-iqb para avaliar esta Entrevista Inicial pela rubrica IQB."

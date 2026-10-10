@@ -122,7 +122,7 @@ IQB = round((clarity + evidence + outcomes + actionability) / 4, 1)
 | `ACT-06` | Registra recursos disponiveis ou a necessidade de defini-los. |
 | `ACT-07` | Identifica dependencias ou condicoes para comecar. |
 | `ACT-08` | Define ou reconhece como pendente o nivel de autonomia da equipe. |
-| `ACT-09` | As sete secoes obrigatorias estao preenchidas ao menos com uma lacuna explicita. |
+| `ACT-09` | Os sete campos da Entrevista Inicial são identificáveis no documento avaliado, inclusive quando condensados no Briefing, ao menos com uma lacuna explícita. |
 | `ACT-10` | **VETO:** ha informacao minima para iniciar a descoberta: problema e pessoa afetada. |
 
 ## 7. Vetos
@@ -150,11 +150,11 @@ Notas iguais continuam validas. A auditoria nao pode fabricar diferencas entre d
 
 ## 9. Casos especiais
 
-- **Briefing vazio ou ilegivel:** todos os criterios `no`, notas 1 e gap de conteudo minimo.
+- **Entrevista Inicial ou Briefing vazio ou ilegivel:** todos os criterios `no`, notas 1 e gap de conteudo minimo.
 - **Transcricao:** marcar evidencia como `transcription` e registrar a necessidade de formalizacao sem invalidar fatos explicitamente ditos.
 - **Modelo fornecido:** usar o modelo como referencia estrutural e registrar discrepancias em Acionabilidade.
 - **Secao vazia:** marcar criterios dependentes como `no` e identificar a secao ausente.
-- **Multiplos briefings:** avaliar cada briefing e cada versao de forma independente.
+- **Múltiplas Entrevistas Iniciais ou Briefings:** avaliar cada documento e cada versão de forma independente.
 
 ## 10. Contrato de avaliacao
 
@@ -170,6 +170,8 @@ Cada item deve conter:
 }
 ```
 
-Valores de `evidence_source`: `briefing`, `transcription`, `briefing_model` ou `absent`.
+Valores de `evidence_source`: `initial_interview` (Entrevista Inicial),
+`briefing` (Briefing), `transcription`, `initial_interview_model` ou `absent`.
+O valor histórico `briefing_model` continua aceito em arquivos anteriores.
 
 Cada dimensao deve conter `items`, `veto_item_id`, `veto_max_score`, `veto_triggered`, `veto_detail`, `yes_count`, `raw_score`, `final_score`, `label` e `justification`.

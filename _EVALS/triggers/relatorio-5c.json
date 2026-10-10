@@ -60,7 +60,7 @@
     "should_trigger": false
   },
   {
-    "query": "Transforme a transcrição da entrevista com o sponsor em briefing de sete campos e perguntas de esclarecimento.",
+    "query": "Transforme a transcrição da entrevista com o sponsor em Entrevista Inicial de sete campos e Perguntas para fechar lacunas.",
     "should_trigger": false
   }
 ]

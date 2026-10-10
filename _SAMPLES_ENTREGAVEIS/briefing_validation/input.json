@@ -47,14 +47,14 @@
               {
                 "criterion_id": "CLA-01",
                 "answer": true,
-                "evidence": "O briefing identifica quem solicita e as equipes que atendem.",
-                "evidence_source": "briefing"
+                "evidence": "A Entrevista Inicial identifica quem solicita e as equipes que atendem.",
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-02",
                 "answer": true,
                 "evidence": "O texto delimita o problema de solicitacoes incompletas e pouco rastreaveis.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-03",
@@ -66,19 +66,19 @@
                 "criterion_id": "CLA-04",
                 "answer": true,
                 "evidence": "O problema ocorre na entrada e no acompanhamento das solicitacoes internas.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-05",
                 "answer": true,
                 "evidence": "O fluxo e os atores podem ser compreendidos sem contexto organizacional adicional.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-06",
                 "answer": true,
-                "evidence": "O briefing descreve esforco, retrabalho e previsibilidade, sem prescrever tecnologia.",
-                "evidence_source": "briefing"
+                "evidence": "A Entrevista Inicial descreve esforço, retrabalho e previsibilidade, sem prescrever tecnologia.",
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-07",
@@ -89,20 +89,20 @@
               {
                 "criterion_id": "CLA-08",
                 "answer": false,
-                "evidence": "O briefing nao registra tentativas anteriores nem declara que nada foi tentado.",
+                "evidence": "A Entrevista Inicial não registra tentativas anteriores nem declara que nada foi tentado.",
                 "evidence_source": "absent"
               },
               {
                 "criterion_id": "CLA-09",
                 "answer": true,
                 "evidence": "A descricao apresenta contexto, atores e impacto operacional suficientes para iniciar a investigacao.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "CLA-10",
                 "answer": true,
                 "evidence": "Existe um problema real de retrabalho e falta de visibilidade, sem solucao predefinida.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               }
             ],
             "veto_item_id": "CLA-10",
@@ -120,7 +120,7 @@
               {
                 "criterion_id": "EVI-01",
                 "answer": false,
-                "evidence": "Nao ha dado quantitativo no briefing.",
+                "evidence": "Não há dado quantitativo na Entrevista Inicial.",
                 "evidence_source": "absent"
               },
               {
@@ -133,13 +133,13 @@
                 "criterion_id": "EVI-03",
                 "answer": true,
                 "evidence": "As fontes relatam devolucoes e repeticao de triagens.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "EVI-04",
                 "answer": true,
                 "evidence": "Os relatos tratam especificamente das solicitacoes internas descritas.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "EVI-05",
@@ -151,7 +151,7 @@
                 "criterion_id": "EVI-06",
                 "answer": true,
                 "evidence": "Os relatos de devolucoes e triagens repetidas demonstram que o problema ocorre.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "EVI-07",
@@ -194,7 +194,7 @@
                 "criterion_id": "OUT-01",
                 "answer": true,
                 "evidence": "Reduzir retrabalho e tornar o processo previsivel descrevem mudancas de resultado.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "OUT-02",
@@ -212,7 +212,7 @@
                 "criterion_id": "OUT-04",
                 "answer": true,
                 "evidence": "Devolucoes e visibilidade de status podem ser verificadas objetivamente.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "OUT-05",
@@ -224,13 +224,13 @@
                 "criterion_id": "OUT-06",
                 "answer": true,
                 "evidence": "O estado futuro inclui solicitacoes completas, rastreaveis e previsiveis.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "OUT-07",
                 "answer": true,
                 "evidence": "Os resultados nao prescrevem uma funcionalidade ou ferramenta especifica.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "OUT-08",
@@ -248,7 +248,7 @@
                 "criterion_id": "OUT-10",
                 "answer": true,
                 "evidence": "Existe pelo menos um outcome definido alem de funcionalidades.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               }
             ],
             "veto_item_id": "OUT-10",
@@ -259,7 +259,7 @@
             "raw_score": 3,
             "final_score": 3,
             "label": "Adequado",
-            "justification": "O briefing descreve um estado futuro verificavel, mas ainda nao define meta, prazo, baseline ou conexao estrategica."
+            "justification": "A Entrevista Inicial descreve um estado futuro verificável, mas ainda não define meta, prazo, baseline ou conexão estratégica."
           },
           "actionability": {
             "items": [
@@ -267,7 +267,7 @@
                 "criterion_id": "ACT-01",
                 "answer": true,
                 "evidence": "Uma equipe externa consegue compreender o problema e os atores principais.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "ACT-02",
@@ -314,14 +314,14 @@
               {
                 "criterion_id": "ACT-09",
                 "answer": true,
-                "evidence": "As sete secoes existem e as pessoas ausentes foram marcadas como nao informadas.",
-                "evidence_source": "briefing"
+                "evidence": "Os sete campos da Entrevista Inicial estão identificados; as pessoas ausentes foram marcadas como não informadas.",
+                "evidence_source": "initial_interview"
               },
               {
                 "criterion_id": "ACT-10",
                 "answer": true,
                 "evidence": "Ha problema e pessoas afetadas suficientes para iniciar a descoberta.",
-                "evidence_source": "briefing"
+                "evidence_source": "initial_interview"
               }
             ],
             "veto_item_id": "ACT-10",
@@ -353,7 +353,7 @@
         "section_key": "iqb",
         "score": 2.8,
         "classification": "Adequado",
-        "diagnosis": "O briefing permite iniciar a descoberta, mas ainda depende de evidencias mensuraveis e definicoes de governanca e escopo. A clareza e o principal ponto forte. Evidencias e acionabilidade concentram as lacunas prioritarias."
+        "diagnosis": "A Entrevista Inicial permite iniciar a descoberta, mas ainda depende de evidências mensuráveis e definições de governança e escopo. A clareza é o principal ponto forte. Evidências e acionabilidade concentram as lacunas prioritárias."
       },
       "citation_ids": [
         "FIC-01"

@@ -25,46 +25,46 @@ Critérios avaliados
 
 | Dimensão | Critério | Resposta | Evidência | Fonte | Citação |
 | --- | --- | --- | --- | --- | --- |
-| Clareza | CLA-01 | Sim | O briefing identifica quem solicita e as equipes que atendem. | briefing |  |
-| Clareza | CLA-02 | Sim | O texto delimita o problema de solicitacoes incompletas e pouco rastreaveis. | briefing |  |
-| Clareza | CLA-03 | Não | As causas ainda nao foram diferenciadas dos sintomas. | absent |  |
-| Clareza | CLA-04 | Sim | O problema ocorre na entrada e no acompanhamento das solicitacoes internas. | briefing |  |
-| Clareza | CLA-05 | Sim | O fluxo e os atores podem ser compreendidos sem contexto organizacional adicional. | briefing |  |
-| Clareza | CLA-06 | Sim | O briefing descreve esforco, retrabalho e previsibilidade, sem prescrever tecnologia. | briefing |  |
-| Clareza | CLA-07 | Não | Nao ha volume, frequencia ou abrangencia quantificada. | absent |  |
-| Clareza | CLA-08 | Não | O briefing nao registra tentativas anteriores nem declara que nada foi tentado. | absent |  |
-| Clareza | CLA-09 | Sim | A descricao apresenta contexto, atores e impacto operacional suficientes para iniciar a investigacao. | briefing |  |
-| Clareza | CLA-10 (veto) | Sim | Existe um problema real de retrabalho e falta de visibilidade, sem solucao predefinida. | briefing |  |
-| Evidências | EVI-01 | Não | Nao ha dado quantitativo no briefing. | absent |  |
-| Evidências | EVI-02 | Não | Nao existe fonte de dado quantitativo identificada. | absent |  |
-| Evidências | EVI-03 | Sim | As fontes relatam devolucoes e repeticao de triagens. | briefing |  |
-| Evidências | EVI-04 | Sim | Os relatos tratam especificamente das solicitacoes internas descritas. | briefing |  |
-| Evidências | EVI-05 | Não | Nao ha prazo, perda ou risco que demonstre urgencia. | absent |  |
-| Evidências | EVI-06 (veto) | Sim | Os relatos de devolucoes e triagens repetidas demonstram que o problema ocorre. | briefing |  |
-| Evidências | EVI-07 | Não | As fontes ou perspectivas dos relatos nao estao identificadas individualmente. | absent |  |
-| Evidências | EVI-08 | Não | Os relatos nao possuem periodo de referencia. | absent |  |
-| Evidências | EVI-09 | Não | O impacto operacional nao foi medido. | absent |  |
-| Evidências | EVI-10 | Não | As evidencias nao permitem comparar a prioridade com outros problemas. | absent |  |
-| Resultados | OUT-01 | Sim | Reduzir retrabalho e tornar o processo previsivel descrevem mudancas de resultado. | briefing |  |
-| Resultados | OUT-02 | Não | Nao existe meta quantificada. | absent |  |
-| Resultados | OUT-03 | Não | Nao existe prazo ou horizonte de verificacao. | absent |  |
-| Resultados | OUT-04 | Sim | Devolucoes e visibilidade de status podem ser verificadas objetivamente. | briefing |  |
-| Resultados | OUT-05 | Não | A conexao com uma prioridade estrategica nao foi declarada. | absent |  |
-| Resultados | OUT-06 | Sim | O estado futuro inclui solicitacoes completas, rastreaveis e previsiveis. | briefing |  |
-| Resultados | OUT-07 | Sim | Os resultados nao prescrevem uma funcionalidade ou ferramenta especifica. | briefing |  |
-| Resultados | OUT-08 | Não | Premissas e restricoes de viabilidade nao foram registradas. | absent |  |
-| Resultados | OUT-09 | Não | Nao ha baseline nem metodo de verificacao formalizado. | absent |  |
-| Resultados | OUT-10 (veto) | Sim | Existe pelo menos um outcome definido alem de funcionalidades. | briefing |  |
-| Acionabilidade | ACT-01 | Sim | Uma equipe externa consegue compreender o problema e os atores principais. | briefing |  |
-| Acionabilidade | ACT-02 | Não | A pessoa responsavel nao foi identificada; a ausencia de cargo nao seria penalizada. | absent |  |
-| Acionabilidade | ACT-03 | Não | O sponsor nao foi identificado; a ausencia de cargo nao seria penalizada. | absent |  |
-| Acionabilidade | ACT-04 | Não | Restricoes conhecidas ou pendentes nao foram registradas. | absent |  |
-| Acionabilidade | ACT-05 | Não | O que esta fora do escopo nao foi definido. | absent |  |
-| Acionabilidade | ACT-06 | Não | Recursos disponiveis ou pendentes nao foram registrados. | absent |  |
-| Acionabilidade | ACT-07 | Não | Dependencias para iniciar nao foram identificadas. | absent |  |
-| Acionabilidade | ACT-08 | Não | O nivel de autonomia da equipe nao foi definido nem marcado como pendente. | absent |  |
-| Acionabilidade | ACT-09 | Sim | As sete secoes existem e as pessoas ausentes foram marcadas como nao informadas. | briefing |  |
-| Acionabilidade | ACT-10 (veto) | Sim | Ha problema e pessoas afetadas suficientes para iniciar a descoberta. | briefing |  |
+| Clareza | CLA-01 | Sim | A Entrevista Inicial identifica quem solicita e as equipes que atendem. | Entrevista Inicial |  |
+| Clareza | CLA-02 | Sim | O texto delimita o problema de solicitacoes incompletas e pouco rastreaveis. | Entrevista Inicial |  |
+| Clareza | CLA-03 | Não | As causas ainda nao foram diferenciadas dos sintomas. | Ausente |  |
+| Clareza | CLA-04 | Sim | O problema ocorre na entrada e no acompanhamento das solicitacoes internas. | Entrevista Inicial |  |
+| Clareza | CLA-05 | Sim | O fluxo e os atores podem ser compreendidos sem contexto organizacional adicional. | Entrevista Inicial |  |
+| Clareza | CLA-06 | Sim | A Entrevista Inicial descreve esforço, retrabalho e previsibilidade, sem prescrever tecnologia. | Entrevista Inicial |  |
+| Clareza | CLA-07 | Não | Nao ha volume, frequencia ou abrangencia quantificada. | Ausente |  |
+| Clareza | CLA-08 | Não | A Entrevista Inicial não registra tentativas anteriores nem declara que nada foi tentado. | Ausente |  |
+| Clareza | CLA-09 | Sim | A descricao apresenta contexto, atores e impacto operacional suficientes para iniciar a investigacao. | Entrevista Inicial |  |
+| Clareza | CLA-10 (veto) | Sim | Existe um problema real de retrabalho e falta de visibilidade, sem solucao predefinida. | Entrevista Inicial |  |
+| Evidências | EVI-01 | Não | Não há dado quantitativo na Entrevista Inicial. | Ausente |  |
+| Evidências | EVI-02 | Não | Nao existe fonte de dado quantitativo identificada. | Ausente |  |
+| Evidências | EVI-03 | Sim | As fontes relatam devolucoes e repeticao de triagens. | Entrevista Inicial |  |
+| Evidências | EVI-04 | Sim | Os relatos tratam especificamente das solicitacoes internas descritas. | Entrevista Inicial |  |
+| Evidências | EVI-05 | Não | Nao ha prazo, perda ou risco que demonstre urgencia. | Ausente |  |
+| Evidências | EVI-06 (veto) | Sim | Os relatos de devolucoes e triagens repetidas demonstram que o problema ocorre. | Entrevista Inicial |  |
+| Evidências | EVI-07 | Não | As fontes ou perspectivas dos relatos nao estao identificadas individualmente. | Ausente |  |
+| Evidências | EVI-08 | Não | Os relatos nao possuem periodo de referencia. | Ausente |  |
+| Evidências | EVI-09 | Não | O impacto operacional nao foi medido. | Ausente |  |
+| Evidências | EVI-10 | Não | As evidencias nao permitem comparar a prioridade com outros problemas. | Ausente |  |
+| Resultados | OUT-01 | Sim | Reduzir retrabalho e tornar o processo previsivel descrevem mudancas de resultado. | Entrevista Inicial |  |
+| Resultados | OUT-02 | Não | Nao existe meta quantificada. | Ausente |  |
+| Resultados | OUT-03 | Não | Nao existe prazo ou horizonte de verificacao. | Ausente |  |
+| Resultados | OUT-04 | Sim | Devolucoes e visibilidade de status podem ser verificadas objetivamente. | Entrevista Inicial |  |
+| Resultados | OUT-05 | Não | A conexao com uma prioridade estrategica nao foi declarada. | Ausente |  |
+| Resultados | OUT-06 | Sim | O estado futuro inclui solicitacoes completas, rastreaveis e previsiveis. | Entrevista Inicial |  |
+| Resultados | OUT-07 | Sim | Os resultados nao prescrevem uma funcionalidade ou ferramenta especifica. | Entrevista Inicial |  |
+| Resultados | OUT-08 | Não | Premissas e restricoes de viabilidade nao foram registradas. | Ausente |  |
+| Resultados | OUT-09 | Não | Nao ha baseline nem metodo de verificacao formalizado. | Ausente |  |
+| Resultados | OUT-10 (veto) | Sim | Existe pelo menos um outcome definido alem de funcionalidades. | Entrevista Inicial |  |
+| Acionabilidade | ACT-01 | Sim | Uma equipe externa consegue compreender o problema e os atores principais. | Entrevista Inicial |  |
+| Acionabilidade | ACT-02 | Não | A pessoa responsavel nao foi identificada; a ausencia de cargo nao seria penalizada. | Ausente |  |
+| Acionabilidade | ACT-03 | Não | O sponsor nao foi identificado; a ausencia de cargo nao seria penalizada. | Ausente |  |
+| Acionabilidade | ACT-04 | Não | Restricoes conhecidas ou pendentes nao foram registradas. | Ausente |  |
+| Acionabilidade | ACT-05 | Não | O que esta fora do escopo nao foi definido. | Ausente |  |
+| Acionabilidade | ACT-06 | Não | Recursos disponiveis ou pendentes nao foram registrados. | Ausente |  |
+| Acionabilidade | ACT-07 | Não | Dependencias para iniciar nao foram identificadas. | Ausente |  |
+| Acionabilidade | ACT-08 | Não | O nivel de autonomia da equipe nao foi definido nem marcado como pendente. | Ausente |  |
+| Acionabilidade | ACT-09 | Sim | Os sete campos da Entrevista Inicial estão identificados; as pessoas ausentes foram marcadas como não informadas. | Entrevista Inicial |  |
+| Acionabilidade | ACT-10 (veto) | Sim | Ha problema e pessoas afetadas suficientes para iniciar a descoberta. | Entrevista Inicial |  |
 
 Notas por dimensão
 
@@ -72,7 +72,7 @@ Notas por dimensão
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Clareza | 6 | 4 | Não disparado | 2 | 4 | Saudavel | O problema e compreensivel e centrado nas pessoas, mas ainda nao possui dimensionamento nem registro das causas e tentativas anteriores. |
 | Evidências | 2 | 2 | Não disparado | 1 | 2 | Fragil | Os relatos confirmam a existencia do problema, mas nao ha dados quantitativos, fontes identificadas, periodo ou impacto mensuravel. |
-| Resultados | 4 | 3 | Não disparado | 2 | 3 | Adequado | O briefing descreve um estado futuro verificavel, mas ainda nao define meta, prazo, baseline ou conexao estrategica. |
+| Resultados | 4 | 3 | Não disparado | 2 | 3 | Adequado | A Entrevista Inicial descreve um estado futuro verificável, mas ainda não define meta, prazo, baseline ou conexão estratégica. |
 | Acionabilidade | 2 | 2 | Não disparado | 2 | 2 | Fragil | A equipe pode iniciar a descoberta, mas responsavel, sponsor, escopo, restricoes, recursos, dependencias e autonomia ainda precisam ser definidos. |
 
 Auditoria de agrupamento
@@ -88,7 +88,7 @@ Fontes: FIC-01
 
 Nota: 2.8
 Classificação: Adequado
-Diagnóstico: O briefing permite iniciar a descoberta, mas ainda depende de evidencias mensuraveis e definicoes de governanca e escopo. A clareza e o principal ponto forte. Evidencias e acionabilidade concentram as lacunas prioritarias.
+Diagnóstico: A Entrevista Inicial permite iniciar a descoberta, mas ainda depende de evidências mensuráveis e definições de governança e escopo. A clareza é o principal ponto forte. Evidências e acionabilidade concentram as lacunas prioritárias.
 
 Fontes: FIC-01
 

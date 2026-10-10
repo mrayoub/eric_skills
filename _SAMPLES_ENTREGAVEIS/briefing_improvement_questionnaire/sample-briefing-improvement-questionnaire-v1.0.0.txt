@@ -4,7 +4,7 @@ ID sample-briefing-improvement-questionnaire · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
-Perguntas para fechar lacunas do briefing fictício antes de atribuir escala ao problema.
+Perguntas para fechar lacunas da Entrevista Inicial fictícia antes de atribuir escala ao problema.
 
 - Qual o volume de solicitações elegíveis por mês e qual é a fonte?
 - Que proporção exige devolução por informação ausente, em qual período?

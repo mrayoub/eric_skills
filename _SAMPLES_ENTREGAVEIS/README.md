@@ -4,11 +4,11 @@ Todos os dados, participantes, votos, números e resultados são **fictícios**.
 
 Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com hashes e os derivados. Edite uma cópia do JSON e renderize novamente com o script incluído na skill correspondente. Entregas completas passam pelo schema específico de seu tipo; versões parciais devem declarar `metadata.completeness`.
 
-| Tipo | Skill(s) | Layout | Pasta |
+| Tipo e nome apresentado | Skill(s) | Layout | Pasta |
 |---|---|---|---|
-| `briefing` | briefing-inovacao | `report_portrait` | [briefing](./briefing/) |
-| `briefing_one_page` | briefing-inovacao | `executive_one_page` | [briefing_one_page](./briefing_one_page/) |
-| `briefing_improvement_questionnaire` | briefing-inovacao | `report_portrait` | [briefing_improvement_questionnaire](./briefing_improvement_questionnaire/) |
+| `briefing` — Entrevista Inicial de sete campos | briefing-inovacao | `report_portrait` | [briefing](./briefing/) |
+| `briefing_one_page` — Briefing | briefing-inovacao | `executive_one_page` | [briefing_one_page](./briefing_one_page/) |
+| `briefing_improvement_questionnaire` — Perguntas para fechar lacunas | briefing-inovacao | `report_portrait` | [briefing_improvement_questionnaire](./briefing_improvement_questionnaire/) |
 | `briefing_validation` | avaliacao-briefing-iqb | `report_portrait` | [briefing_validation](./briefing_validation/) |
 | `innovation_potential_assessment` | potencial-inovacao | `report_portrait` | [innovation_potential_assessment](./innovation_potential_assessment/) |
 | `four_d_workshop_record` | workshop-4d | `report_landscape` | [four_d_workshop_record](./four_d_workshop_record/) |

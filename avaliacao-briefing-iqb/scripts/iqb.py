@@ -1,4 +1,4 @@
-"""Cálculo determinístico e portátil do Índice de Qualidade do Briefing.
+"""Cálculo determinístico e portátil do IQB para Entrevista Inicial ou Briefing.
 
 Este módulo é a fonte de verdade executável da skill ``avaliacao-briefing-iqb``
 (adaptada de ``validate-briefing`` do ERIC_RC6).
@@ -290,7 +290,7 @@ def _generate_diagnosis(scores: dict, iqb_score: float, classification: str) -> 
     gaps = [dim_labels[key] for key in ordered if scores[key]["final_score"] <= 2]
     parts = [
         f"IQB {iqb_score} — {classification}. "
-        f"O briefing {_classification_to_verb(classification)}."
+        f"O documento avaliado {_classification_to_verb(classification)}."
     ]
     if strengths:
         parts.append(f"Pontos fortes: {', '.join(strengths)}.")
@@ -309,7 +309,7 @@ def _generate_diagnosis(scores: dict, iqb_score: float, classification: str) -> 
     elif classification == "Saudavel":
         parts.append("Recomendam-se ajustes rapidos nos gaps antes do kick-off.")
     elif classification == "Excelente":
-        parts.append("Briefing pronto para execucao.")
+        parts.append("Documento avaliado pronto para execução.")
     return " ".join(parts)
 
 
