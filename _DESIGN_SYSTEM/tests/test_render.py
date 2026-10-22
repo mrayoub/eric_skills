@@ -1459,14 +1459,17 @@ class ReportLabReportTests(unittest.TestCase):
                     expected.extend(str(data[key]) for key in ("text", "title", "description")
                                     if isinstance(data.get(key), str) and data[key].strip())
                     expected.extend(str(value) for value in data.get("items", []) if isinstance(value, str))
-                    if self.renderer.pdf_module().is_score_panel(block):
-                        # O painel de notas mostra os mesmos dados formatados: peso em %, ponderado, total e classe.
-                        panel = self.renderer.pdf_module().score_panel_data(block)
+                    pdf = self.renderer.pdf_module()
+                    if pdf.is_score_panel(block) or isinstance(data.get("dimensions"), dict):
+                        # O painel de notas mostra os mesmos dados formatados (peso em %, ponderado, veto e teto),
+                        # com total e classe; no IQB, as demais vistas continuam em tabela.
+                        panel = pdf.score_panel_data(pdf.with_panel_totals(item)["blocks"][item["blocks"].index(block)])
                         expected.extend([panel["total"], panel["badge"]])
-                        for row in panel["rows"]:
-                            expected.extend([row["label"], row["weight"], row["score_text"], row["weighted"], row["justification"]])
-                    elif block["type"] == "table":
-                        for _, _, headings, rows in self.renderer.table_views(block):
+                        expected.extend(cell for row in panel["rows"] for cell in row["cells"] if cell)
+                    if block["type"] == "table" and not pdf.is_score_panel(block):
+                        for slug, _, headings, rows in self.renderer.table_views(block):
+                            if slug == "dimensoes":
+                                continue
                             expected.extend(headings)
                             expected.extend(cell for row in rows for cell in row if cell)
                     if block["type"] == "card_grid":
@@ -1933,3 +1936,20 @@ class FlowLayoutTests(unittest.TestCase):
         out = self.render.render_html(partial, self.tokens, self.profile)
         self.assertIn("PENDENTE", out)
         self.assertIn("Total: —", out)
+
+
+class IqbPanelTests(unittest.TestCase):
+    """As notas por dimensão do IQB aparecem no painel, com o IQB validado e a classificação."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.render = load_render_module()
+
+    def test_panel_shows_iqb_classification_and_veto_ceiling(self):
+        content = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/briefing_validation/input.json").read_text(encoding="utf-8"))
+        tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+        profile = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))["types"]["briefing_validation"]
+        out = self.render.render_html(content, tokens, profile)
+        for text in ("NOTAS POR DIMENSÃO", "IQB: 2.8", "ADEQUADO", "Não disparado (teto 2)", "score-bar"):
+            self.assertIn(text, out)
+        self.assertIn("Critérios avaliados", out)

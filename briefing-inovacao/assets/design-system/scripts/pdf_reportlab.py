@@ -269,8 +269,14 @@ SCORE_LABELS = {"impact": "Impacto", "viability": "Viabilidade", "strategic_alig
                 "urgency": "Urgência", "innovation": "Novidade"}
 # Selo da classificação: (fundo, texto) do tokens.json; o rótulo sempre aparece por extenso.
 SCORE_PANEL_SHARES = (.19, .08, .19, .14, .40)
+IQB_PANEL_SHARES = (.14, .08, .08, .14, .16, .11, .29)
+IQB_DIMENSION_LABELS = {"clarity": "Clareza", "evidence": "Evidências", "outcomes": "Resultados",
+                        "actionability": "Acionabilidade"}
 BADGE_TONES = {"priorizar": ("document_accent", "inverse"), "monitorar": ("document_accent_soft", "document_primary"),
                "arquivar": ("surface_muted", "text_muted"), "": ("surface_muted", "text_muted")}
+IQB_BADGE_TONES = {"Excelente": ("document_accent", "inverse"), "Saudavel": ("document_accent", "inverse"),
+                   "Adequado": ("document_accent_soft", "document_primary"), "Fragil": ("danger_soft", "danger"),
+                   "Insuficiente": ("danger", "inverse")}
 
 
 def plan_flow(content: dict[str, Any], slots: dict[str, dict[str, Any]]) -> tuple[list[list[dict[str, Any]]], list[dict[str, Any]]]:
@@ -316,25 +322,64 @@ def _number_text(value: float) -> str:
 
 
 def score_panel_data(block: dict[str, Any]) -> dict[str, Any]:
-    """Valores exibidos no painel de notas; o ponderado não é arredondado para a soma fechar com o total."""
+    """Conteúdo do painel de notas: colunas, linhas (com o valor da barra), total e selo.
+
+    Potencial: peso em %, nota 0–100 e ponderado sem arredondar (a soma fecha com o total).
+    IQB: notas por dimensão de 1 a 5, com veto e teto; o total é o IQB validado do bloco "iqb".
+    """
     data = block.get("data", {})
+    if isinstance(data.get("dimensions"), dict):
+        rows = []
+        for dimension, detail in data["dimensions"].items():
+            final = detail.get("final_score")
+            numeric = isinstance(final, (int, float)) and not isinstance(final, bool)
+            ceiling = detail.get("veto_max_score")
+            if detail.get("veto_triggered"):
+                veto = f"Disparado (teto {ceiling}): {detail.get('veto_detail') or '—'}"
+            else:
+                veto = f"Não disparado (teto {ceiling})" if ceiling is not None else "Não disparado"
+            rows.append({"cells": [IQB_DIMENSION_LABELS.get(dimension, dimension), str(detail.get("yes_count", "")),
+                                   str(detail.get("raw_score", "")), _number_text(final) if numeric else "—", veto,
+                                   str(detail.get("label", "")), str(detail.get("justification", ""))],
+                         "bar": max(0.0, min(100.0, float(final) * 20)) if numeric else None})
+        summary = data.get("panel_total") or {}
+        total, classification = summary.get("score"), str(summary.get("classification") or "")
+        return {"title": "Notas por dimensão", "rows": rows, "total_prefix": "IQB",
+                "heads": ["Dimensão", "Sim (de 9)", "Nota bruta", "Nota final (1–5)", "Veto", "Rótulo", "Justificativa"],
+                "shares": IQB_PANEL_SHARES, "bar": 3, "strong": (0, 5), "value": 3, "badge_column": 5,
+                "total_label": "IQB (média das quatro dimensões)",
+                "total": _number_text(total) if isinstance(total, (int, float)) else "—",
+                "badge": (classification or "pendente").upper(),
+                "tone": IQB_BADGE_TONES.get(classification, BADGE_TONES[""])}
     rows = []
     for row in data.get("rows", []):
         score, weight = row.get("score"), row.get("weight")
         numeric = isinstance(score, (int, float)) and not isinstance(score, bool)
-        rows.append({
-            "label": str(row.get("label") or SCORE_LABELS.get(row.get("criterion", ""), row.get("criterion", ""))),
-            "weight": f"{_number_text(weight * 100)}%" if isinstance(weight, (int, float)) else "—",
-            "score": max(0.0, min(100.0, float(score))) if numeric else None,
-            "score_text": _number_text(score) if numeric else "—",
-            "weighted": _number_text(score * weight) if numeric and isinstance(weight, (int, float)) else "—",
-            "justification": str(row.get("justification") or ""),
-        })
+        rows.append({"cells": [str(row.get("label") or SCORE_LABELS.get(row.get("criterion", ""), row.get("criterion", ""))),
+                               f"{_number_text(weight * 100)}%" if isinstance(weight, (int, float)) else "—",
+                               _number_text(score) if numeric else "—",
+                               _number_text(score * weight) if numeric and isinstance(weight, (int, float)) else "—",
+                               str(row.get("justification") or "")],
+                     "bar": max(0.0, min(100.0, float(score))) if numeric else None})
     total = data.get("overall_score")
     classification = data.get("classification") if data.get("classification") in BADGE_TONES else ""
-    return {"title": str(data.get("title") or "Pontuação por critério"), "rows": rows,
+    return {"title": str(data.get("title") or "Pontuação por critério"), "rows": rows, "total_prefix": "Total",
+            "heads": ["Critério", "Peso", "Nota (0–100)", "Ponderado", "Justificativa"],
+            "shares": SCORE_PANEL_SHARES, "bar": 2, "strong": (0, 3), "value": 3, "badge_column": 4,
+            "total_label": "Total ponderado",
             "total": _number_text(total) if isinstance(total, (int, float)) else "—",
-            "classification": classification, "badge": (classification or "pendente").upper()}
+            "badge": (classification or "pendente").upper(), "tone": BADGE_TONES[classification]}
+
+
+def panel_widths(panel: dict[str, Any], styles: dict[str, Any], width: float) -> list[float]:
+    """Larguras do painel: as proporções do tipo, alargando a coluna em que a palavra mais longa não cabe."""
+    column_styles = ["score_value" if index == panel["bar"] else "card_title" if index in panel["strong"] else "table_body"
+                     for index in range(len(panel["heads"]))]
+    total = [""] * len(panel["heads"])
+    total[panel["value"]], total[panel["badge_column"]] = panel["total"], panel["badge"]
+    lines = [panel["heads"], *(row["cells"] for row in panel["rows"]), total]
+    return _content_widths(lines, len(panel["heads"]), width, 7, styles, [share * 100 for share in panel["shares"]],
+                           column_styles=column_styles, header_style="score_head")
 
 
 def is_score_panel(block: dict[str, Any]) -> bool:
@@ -343,10 +388,21 @@ def is_score_panel(block: dict[str, Any]) -> bool:
             and all(isinstance(row, dict) and "score" in row for row in data["rows"]))
 
 
+def with_panel_totals(content: dict[str, Any]) -> dict[str, Any]:
+    """Leva o IQB validado (bloco "iqb") ao bloco de notas por dimensão, para o painel mostrar total e selo."""
+    iqb = next((block["data"] for block in content["blocks"] if block.get("data", {}).get("section_key") == "iqb"), None)
+    if iqb is None:
+        return content
+    blocks = [{**block, "data": {**block["data"], "panel_total": {"score": iqb.get("score"),
+                                                                   "classification": iqb.get("classification")}}}
+              if isinstance(block.get("data", {}).get("dimensions"), dict) else block for block in content["blocks"]]
+    return {**content, "blocks": blocks}
+
+
 def _score_panel(block: dict[str, Any], styles: dict[str, Any], width: float) -> list[Any]:
-    """Painel de notas: faixa com título, total e selo; tabela com peso, barra, ponderado e justificativa."""
+    """Painel de notas: faixa com título, total e selo; tabela com barra e linha de total."""
     from reportlab.lib.styles import ParagraphStyle
-    from reportlab.platypus import Flowable, Paragraph, Spacer, Table, TableStyle
+    from reportlab.platypus import Flowable, KeepTogether, Paragraph, Spacer, Table, TableStyle
 
     palette = styles["_colors"]
     panel = score_panel_data(block)
@@ -367,36 +423,41 @@ def _score_panel(block: dict[str, Any], styles: dict[str, Any], width: float) ->
                 self.canv.setFillColor(palette["document_accent"])
                 self.canv.roundRect(0, 3, self.width * self.value / 100, 4, 2, fill=1, stroke=0)
 
-    background, foreground = BADGE_TONES[panel["classification"]]
+    background, foreground = panel["tone"]
     badge_style = ParagraphStyle("score_badge", parent=styles["badge"], textColor=palette[foreground], alignment=1)
     badge = Table([[Paragraph(_markup(panel["badge"]), badge_style)]], colWidths=[74], cornerRadii=[8, 8, 8, 8])
     badge.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), palette[background]),
                                ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
     total_style = ParagraphStyle("score_total", parent=styles["section"], alignment=2)
     header = Table([[Paragraph(_markup(panel["title"].upper()), styles["section"]),
-                     Paragraph(_markup(f"Total: {panel['total']}"), total_style), badge]],
+                     Paragraph(_markup(f"{panel['total_prefix']}: {panel['total']}"), total_style), badge]],
                    colWidths=[width - 172, 90, 82])
     header.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), palette["document_deep"]),
                                 ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
                                 ("LEFTPADDING", (0, 0), (-1, -1), 9), ("RIGHTPADDING", (0, 0), (-1, -1), 9),
                                 ("RIGHTPADDING", (1, 0), (1, 0), 4), ("LEFTPADDING", (2, 0), (2, 0), 4),
                                 ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
-    heads = ["Critério", "Peso", "Nota (0–100)", "Ponderado", "Justificativa"]
-    matrix: list[list[Any]] = [[Paragraph(_markup(head.upper()), styles["score_head"]) for head in heads]]
+    columns = len(panel["heads"])
+    matrix: list[list[Any]] = [[Paragraph(_markup(head), styles["score_head"]) for head in panel["heads"]]]
     for row in panel["rows"]:
-        matrix.append([Paragraph(_markup(row["label"]), styles["card_title"]),
-                       Paragraph(_markup(row["weight"]), styles["table_body"]),
-                       [ScoreBar(row["score"]), Paragraph(_markup(row["score_text"]), styles["score_value"])],
-                       Paragraph(_markup(row["weighted"]), styles["card_title"]),
-                       Paragraph(_markup(row["justification"]), styles["table_body"])])
-    matrix.append([Paragraph("Total ponderado", styles["card_title"]), "", "",
-                   Paragraph(_markup(panel["total"]), styles["card_title"]),
-                   Paragraph(_markup(panel["badge"]), styles["score_value"])])
-    table = Table(matrix, colWidths=[width * share for share in SCORE_PANEL_SHARES], repeatRows=1)
+        cells: list[Any] = []
+        for index, value in enumerate(row["cells"]):
+            if index == panel["bar"]:
+                cells.append([ScoreBar(row["bar"]), Paragraph(_markup(value), styles["score_value"])])
+            else:
+                style = styles["card_title"] if index in panel["strong"] else styles["table_body"]
+                cells.append(Paragraph(_markup(value), style))
+        matrix.append(cells)
+    total_row: list[Any] = [""] * columns
+    total_row[0] = Paragraph(_markup(panel["total_label"]), styles["card_title"])
+    total_row[panel["value"]] = Paragraph(_markup(panel["total"]), styles["card_title"])
+    total_row[panel["badge_column"]] = Paragraph(_markup(panel["badge"]), styles["score_value"])
+    matrix.append(total_row)
+    table = Table(matrix, colWidths=panel_widths(panel, styles, width), repeatRows=1)
     table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), palette["surface_muted"]),
         ("BACKGROUND", (0, -1), (-1, -1), palette["surface_muted"]),
-        ("SPAN", (0, -1), (2, -1)),
+        ("SPAN", (0, -1), (panel["value"] - 1, -1)),
         ("LINEBELOW", (0, 0), (-1, -2), .75, palette["border"]),
         ("LINEABOVE", (0, -1), (-1, -1), 1.5, palette["border_strong"]),
         ("BOX", (0, 0), (-1, -1), .75, palette["border"]),
@@ -404,7 +465,8 @@ def _score_panel(block: dict[str, Any], styles: dict[str, Any], width: float) ->
         ("LEFTPADDING", (0, 0), (-1, -1), 7), ("RIGHTPADDING", (0, 0), (-1, -1), 7),
         ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
     ]))
-    result: list[Any] = [header, table]
+    # O painel inteiro vai para a página seguinte quando não cabe; se for maior que a página, divide.
+    result: list[Any] = [KeepTogether([header, table])]
     if block.get("citation_ids"):
         result.extend([Spacer(1, 3), Paragraph(_cited("", block), styles["source"])])
     return result
@@ -503,6 +565,10 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
     result: list[Any] = []
     palette = styles["_colors"]
     for slug, caption, headings, rows in views:
+        if slug == "dimensoes":
+            # Notas por dimensão do IQB no painel de notas, com o IQB e a classificação.
+            result.extend([*_score_panel({**block, "citation_ids": []}, styles, width), Spacer(1, 7)])
+            continue
         if caption:
             result.append(Paragraph(_markup(caption), caption_style))
         ncols = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
@@ -534,7 +600,8 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
 
 
 def _content_widths(lines: list[list[str]], ncols: int, width: float, padding: float,
-                    styles: dict[str, Any], proportions: list[int] | None = None) -> list[float]:
+                    styles: dict[str, Any], proportions: list[float] | None = None,
+                    column_styles: list[str] | None = None, header_style: str = "table_header") -> list[float]:
     """Larguras em que cada coluna cabe sua palavra mais longa. Com proporções fixas, mantém-nas e
     só alarga as colunas estreitas demais, tirando a diferença das que têm folga; sem proporções,
     divide o espaço que sobra pela quantidade de texto. Sem espaço para isso, mantém a base."""
@@ -542,8 +609,8 @@ def _content_widths(lines: list[list[str]], ncols: int, width: float, padding: f
 
     minimum, amount = [0.0] * ncols, [0.0] * ncols
     for number, line in enumerate(lines):
-        style = styles["table_header" if number == 0 else "table_body"]
         for index in range(ncols):
+            style = styles[header_style if number == 0 else column_styles[index] if column_styles else "table_body"]
             text = str(line[index]) if index < len(line) else ""
             words = [stringWidth(word, style.fontName, style.fontSize) for word in text.split()]
             minimum[index] = max(minimum[index], max(words, default=0) + 2 * padding + 1)
@@ -672,6 +739,7 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
                                    PageBreak, PageTemplate, Paragraph, Spacer, Table, TableStyle)
     from reportlab.platypus.doctemplate import LayoutError
 
+    content = with_panel_totals(content)
     layout = profile["layout"]
     page = tokens["page"][profile["paper"]]
     paper_width, paper_height = float(page["width"]) * mm, float(page["height"]) * mm

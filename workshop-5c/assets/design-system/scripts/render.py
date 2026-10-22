@@ -539,12 +539,16 @@ def html_card_grid(block: dict[str, Any], inset: float = 0, max_columns: int = 4
     return result
 
 
-def html_report_table(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None) -> str:
+def html_report_table(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None,
+                      tokens: dict[str, Any]) -> str:
     """Espelha _report_table do PDF, com as mesmas larguras de coluna quando o ReportLab está instalado."""
     data = block.get("data", {})
     views = table_views(block) if isinstance(data.get("dimensions"), dict) else [("", data.get("title", ""), *table_rows(block))]
     result = ""
     for slug, caption, headings, rows in views:
+        if slug == "dimensoes":
+            result += html_score_panel({**block, "citation_ids": []}, tokens, measure, width_pt) + _gap(7)
+            continue
         if caption:
             result += f'<p class="st-card_title" style="margin-bottom: 4pt;">{_text(caption)}</p>'
         ncols = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
@@ -567,10 +571,11 @@ def html_report_table(block: dict[str, Any], inset: float, width_pt: float, meas
     return result
 
 
-def html_report_block(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None) -> str:
+def html_report_block(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None,
+                      tokens: dict[str, Any]) -> str:
     """Espelha _report_block do PDF."""
     if block["type"] == "table":
-        return html_report_table(block, inset, width_pt, measure)
+        return html_report_table(block, inset, width_pt, measure, tokens)
     if block["type"] == "card_grid":
         return html_card_grid(block, inset)
     items = html_flowables(block, inset)
@@ -587,28 +592,38 @@ def score_summary(block: dict[str, Any]) -> str:
     return f"Total ponderado: {panel['total']} · Classificação: {panel['badge']}"
 
 
-def html_score_panel(block: dict[str, Any], tokens: dict[str, Any]) -> str:
-    """Espelha _score_panel do PDF."""
-    pdf = pdf_module()
-    panel = pdf.score_panel_data(block)
-    background, foreground = pdf.BADGE_TONES[panel["classification"]]
+def html_score_panel(block: dict[str, Any], tokens: dict[str, Any], measure: dict[str, Any] | None, width_pt: float) -> str:
+    """Espelha _score_panel do PDF, com as mesmas larguras de coluna quando o ReportLab está instalado."""
+    panel = pdf_module().score_panel_data(block)
+    widths = pdf_module().panel_widths(panel, measure, width_pt) if measure is not None else list(panel["shares"])
+    background, foreground = panel["tone"]
     color = tokens["color"]
     badge = (f'<span class="score-badge st-badge" style="background: {color[background]}; color: {color[foreground]};">'
              f'{html.escape(panel["badge"])}</span>')
-    columns = "".join(f'<col style="width: {_number(share * 100)}%">' for share in pdf.SCORE_PANEL_SHARES)
-    heads = "".join(f'<th class="st-score_head">{head}</th>'
-                    for head in ("CRITÉRIO", "PESO", "NOTA (0–100)", "PONDERADO", "JUSTIFICATIVA"))
+    columns = "".join(f'<col style="width: {_number(100 * width / sum(widths))}%">' for width in widths)
+    heads = "".join(f'<th class="st-score_head">{_text(head)}</th>' for head in panel["heads"])
     rows = ""
     for row in panel["rows"]:
-        bar = (f'<div class="score-bar"><div style="width: {_number(row["score"])}%"></div></div>'
-               if row["score"] is not None else '<div class="score-bar"></div>')
-        rows += (f'<tr><td class="st-card_title">{_text(row["label"])}</td><td class="st-table_body">{_text(row["weight"])}</td>'
-                 f'<td>{bar}<p class="st-score_value">{_text(row["score_text"])}</p></td>'
-                 f'<td class="st-card_title">{_text(row["weighted"])}</td><td class="st-table_body">{_text(row["justification"])}</td></tr>')
-    rows += (f'<tr class="score-total"><td class="st-card_title" colspan="3">Total ponderado</td>'
-             f'<td class="st-card_title">{_text(panel["total"])}</td><td class="st-score_value">{_text(panel["badge"])}</td></tr>')
+        cells = ""
+        for index, value in enumerate(row["cells"]):
+            if index == panel["bar"]:
+                bar = f'<div style="width: {_number(row["bar"])}%"></div>' if row["bar"] is not None else ""
+                cells += f'<td><div class="score-bar">{bar}</div><p class="st-score_value">{_text(value)}</p></td>'
+            else:
+                style = "st-card_title" if index in panel["strong"] else "st-table_body"
+                cells += f'<td class="{style}">{_text(value)}</td>'
+        rows += f"<tr>{cells}</tr>"
+    total = [f'<td class="st-card_title" colspan="{panel["value"]}">{_text(panel["total_label"])}</td>']
+    for index in range(panel["value"], len(panel["heads"])):
+        if index == panel["value"]:
+            total.append(f'<td class="st-card_title">{_text(panel["total"])}</td>')
+        elif index == panel["badge_column"]:
+            total.append(f'<td class="st-score_value">{_text(panel["badge"])}</td>')
+        else:
+            total.append("<td></td>")
+    rows += f'<tr class="score-total">{"".join(total)}</tr>'
     result = (f'<div class="score-panel"><div class="score-header"><span class="st-section">{_text(panel["title"].upper())}</span>'
-              f'<span class="st-section">Total: {_text(panel["total"])}</span>{badge}</div>'
+              f'<span class="st-section">{_text(panel["total_prefix"])}: {_text(panel["total"])}</span>{badge}</div>'
               f'<table class="score-table"><colgroup>{columns}</colgroup><thead><tr>{heads}</tr></thead><tbody>{rows}</tbody></table></div>')
     if block.get("citation_ids"):
         result += _gap(3) + f'<p class="st-source">{_refs(block["citation_ids"])}</p>'
@@ -622,8 +637,8 @@ def html_flow_row(row: list[dict[str, Any]], tokens: dict[str, Any], width_pt: f
     if len(row) == 1 and row[0]["mode"] == "tabular_list":
         cell = row[0]
         cell_pt = half_pt if cell["half"] else width_pt
-        inner = "".join(html_score_panel(block, tokens) if pdf.is_score_panel(block)
-                        else html_report_block(block, 0, cell_pt, measure) for block in cell["blocks"])
+        inner = "".join(html_score_panel(block, tokens, measure, cell_pt) if pdf.is_score_panel(block)
+                        else html_report_block(block, 0, cell_pt, measure, tokens) for block in cell["blocks"])
         return f'<div style="width: {"calc(50% - 4pt)" if cell["half"] else "100%"};">{inner}</div>'
     cells = []
     for cell in row:
@@ -637,7 +652,7 @@ def html_flow_row(row: list[dict[str, Any]], tokens: dict[str, Any], width_pt: f
             if dark and block["type"] not in ("table", "card_grid"):
                 items.append(f'<p class="st-body_inverse">{_text(block_text(block))}{_refs(block.get("citation_ids", []))}</p>')
             else:
-                items.append(html_report_block(block, 0, cell_pt, measure))
+                items.append(html_report_block(block, 0, cell_pt, measure, tokens))
         body = label + _gap(4).join(items)
         has_band = cell["mode"] == "title_and_content" and cell["heading"] is not None
         band = f'<h2 class="flow-band st-section">{_text(block_text(cell["heading"]))}</h2>' if has_band else ""
@@ -704,6 +719,7 @@ def html_document(content: dict[str, Any], css_text: str, body: str) -> str:
 
 def render_report_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
     """Relatórios em retrato e paisagem com a mesma sequência de blocos e medidas de _render_report."""
+    content = pdf_module().with_panel_totals(content)
     layout, page = profile["layout"], tokens["page"][profile["paper"]]
     usable_pt = (page["width"] - page["margin_left"] - page["margin_right"]) * PT_PER_MM
     column_pt = (usable_pt - 10) / 2
@@ -736,14 +752,14 @@ def render_report_html(content: dict[str, Any], tokens: dict[str, Any], profile:
                 and sections[position + 1][0] == "section" and not sections[position + 1][3]):
             cells = []
             for _, title, blocks, _ in sections[position:position + 2]:
-                inner = "".join(html_report_block(block, 22, column_pt - 22, measure) + _gap(7) for block in blocks)
+                inner = "".join(html_report_block(block, 22, column_pt - 22, measure, tokens) + _gap(7) for block in blocks)
                 cells.append(f'<section class="report-section">{band(title)}{_gap(7)}{inner}</section>')
             parts.append('<div class="section-pair" style="display: grid; grid-template-columns: minmax(0, 1fr) 10pt minmax(0, 1fr); '
                          f'break-inside: avoid;">{cells[0]}<div></div>{cells[1]}</div>' + _gap(10))
             position += 2
             continue
         _, title, blocks, _ = item
-        inner = "".join(html_report_block(block, 0, usable_pt - 22, measure) + _gap(7) for block in blocks)
+        inner = "".join(html_report_block(block, 0, usable_pt - 22, measure, tokens) + _gap(7) for block in blocks)
         parts.append(f'<section class="report-section">{band(title)}{_gap(7)}'
                      f'<div style="padding: 0 11pt;">{inner}</div></section>' + _gap(10))
         position += 1
