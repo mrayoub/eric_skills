@@ -579,6 +579,94 @@ def html_report_block(block: dict[str, Any], inset: float, width_pt: float, meas
     return items
 
 
+def score_summary(block: dict[str, Any]) -> str:
+    """Total e classe do painel de notas por extenso, para os formatos sem o painel visual."""
+    if not pdf_module().is_score_panel(block):
+        return ""
+    panel = pdf_module().score_panel_data(block)
+    return f"Total ponderado: {panel['total']} · Classificação: {panel['badge']}"
+
+
+def html_score_panel(block: dict[str, Any], tokens: dict[str, Any]) -> str:
+    """Espelha _score_panel do PDF."""
+    pdf = pdf_module()
+    panel = pdf.score_panel_data(block)
+    background, foreground = pdf.BADGE_TONES[panel["classification"]]
+    color = tokens["color"]
+    badge = (f'<span class="score-badge st-badge" style="background: {color[background]}; color: {color[foreground]};">'
+             f'{html.escape(panel["badge"])}</span>')
+    columns = "".join(f'<col style="width: {_number(share * 100)}%">' for share in pdf.SCORE_PANEL_SHARES)
+    heads = "".join(f'<th class="st-score_head">{head}</th>'
+                    for head in ("CRITÉRIO", "PESO", "NOTA (0–100)", "PONDERADO", "JUSTIFICATIVA"))
+    rows = ""
+    for row in panel["rows"]:
+        bar = (f'<div class="score-bar"><div style="width: {_number(row["score"])}%"></div></div>'
+               if row["score"] is not None else '<div class="score-bar"></div>')
+        rows += (f'<tr><td class="st-card_title">{_text(row["label"])}</td><td class="st-table_body">{_text(row["weight"])}</td>'
+                 f'<td>{bar}<p class="st-score_value">{_text(row["score_text"])}</p></td>'
+                 f'<td class="st-card_title">{_text(row["weighted"])}</td><td class="st-table_body">{_text(row["justification"])}</td></tr>')
+    rows += (f'<tr class="score-total"><td class="st-card_title" colspan="3">Total ponderado</td>'
+             f'<td class="st-card_title">{_text(panel["total"])}</td><td class="st-score_value">{_text(panel["badge"])}</td></tr>')
+    result = (f'<div class="score-panel"><div class="score-header"><span class="st-section">{_text(panel["title"].upper())}</span>'
+              f'<span class="st-section">Total: {_text(panel["total"])}</span>{badge}</div>'
+              f'<table class="score-table"><colgroup>{columns}</colgroup><thead><tr>{heads}</tr></thead><tbody>{rows}</tbody></table></div>')
+    if block.get("citation_ids"):
+        result += _gap(3) + f'<p class="st-source">{_refs(block["citation_ids"])}</p>'
+    return result
+
+
+def html_flow_row(row: list[dict[str, Any]], tokens: dict[str, Any], width_pt: float, measure: dict[str, Any] | None) -> str:
+    """Espelha _flow_row do PDF: card compacto, caixa escura sem título ou painel de notas."""
+    pdf = pdf_module()
+    half_pt = (width_pt - 8) / 2
+    if len(row) == 1 and row[0]["mode"] == "tabular_list":
+        cell = row[0]
+        cell_pt = half_pt if cell["half"] else width_pt
+        inner = "".join(html_score_panel(block, tokens) if pdf.is_score_panel(block)
+                        else html_report_block(block, 0, cell_pt, measure) for block in cell["blocks"])
+        return f'<div style="width: {"calc(50% - 4pt)" if cell["half"] else "100%"};">{inner}</div>'
+    cells = []
+    for cell in row:
+        dark = cell["mode"] == "content_only"
+        cell_pt = (half_pt if cell["half"] else width_pt) - 18
+        items = []
+        label = ""
+        if dark and cell["heading"] is not None:
+            label = f'<p class="flow-label st-callout_label">{_text(block_text(cell["heading"]))}</p>' + _gap(3)
+        for block in cell["blocks"]:
+            if dark and block["type"] not in ("table", "card_grid"):
+                items.append(f'<p class="st-body_inverse">{_text(block_text(block))}{_refs(block.get("citation_ids", []))}</p>')
+            else:
+                items.append(html_report_block(block, 0, cell_pt, measure))
+        body = label + _gap(4).join(items)
+        has_band = cell["mode"] == "title_and_content" and cell["heading"] is not None
+        band = f'<h2 class="flow-band st-section">{_text(block_text(cell["heading"]))}</h2>' if has_band else ""
+        kind = "flow-dark" if dark else "flow-card"
+        cells.append(f'<section class="{kind}">{band}<div class="flow-body">{body}</div></section>')
+    columns = "minmax(0, 1fr) minmax(0, 1fr)" if row[0]["half"] else "minmax(0, 1fr)"
+    return f'<div class="flow-row" style="grid-template-columns: {columns};">{"".join(cells)}</div>'
+
+
+def flow_css(tokens: dict[str, Any]) -> str:
+    color = tokens["color"]
+    return f""".flow-row {{ display: grid; column-gap: 8pt; break-inside: avoid; }}
+.flow-card {{ display: flex; flex-direction: column; border: .75pt solid {color['border']}; background: {color['surface_muted']}; }}
+.flow-band {{ background: {color['document_deep']}; padding: 5pt 9pt; text-transform: uppercase; }}
+.flow-body {{ padding: 8pt 9pt; }}
+.flow-label {{ text-transform: uppercase; }}
+.flow-dark {{ background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; }}
+.score-panel {{ break-inside: avoid; }}
+.score-header {{ display: grid; grid-template-columns: 1fr auto 82pt; align-items: center; column-gap: 8pt; background: {color['document_deep']}; padding: 6pt 9pt; }}
+.score-badge {{ display: block; text-align: center; border-radius: 8pt; padding: 3pt 0; }}
+.score-table {{ width: 100%; border-collapse: collapse; table-layout: fixed; border: .75pt solid {color['border']}; }}
+.score-table th {{ background: {color['surface_muted']}; text-align: left; }}
+.score-table th, .score-table td {{ padding: 5pt 7pt; vertical-align: middle; border-bottom: .75pt solid {color['border']}; overflow-wrap: break-word; }}
+.score-table tr.score-total td {{ background: {color['surface_muted']}; border-top: 1.5pt solid {color['border_strong']}; border-bottom: 0; }}
+.score-bar {{ height: 4pt; margin: 3pt 0 0; border-radius: 2pt; background: {color['border']}; }}
+.score-bar > div {{ height: 100%; border-radius: 2pt; background: {color['document_accent']}; }}
+"""
+
+
 def html_sources(content: dict[str, Any]) -> str:
     lines = []
     for citation in content["citations"]:
@@ -628,7 +716,15 @@ def render_report_html(content: dict[str, Any], tokens: dict[str, Any], profile:
     def band(title: str) -> str:
         return f'<h2 class="band st-report_section">{_text(title)}</h2>'
 
-    sections = pdf_module().group_sections(content["blocks"], block_text)
+    remaining = content["blocks"]
+    slots = (load_presentation_layout(content["deliverable_type"])
+             if content["deliverable_type"] in pdf_module().FLOW_LAYOUT_TYPES else None)
+    if slots:
+        rows, remaining = pdf_module().plan_flow(content, slots)
+        for row in rows:
+            parts += [html_flow_row(row, tokens, usable_pt, measure), _gap(8)]
+        parts.append(_gap(4))
+    sections = pdf_module().group_sections(remaining, block_text)
     position = 0
     while position < len(sections):
         item = sections[position]
@@ -656,7 +752,7 @@ def render_report_html(content: dict[str, Any], tokens: dict[str, Any], profile:
     label = footer_label(content)
     parts.append(f'<footer class="meta st-footer">{html.escape(label)}</footer>')
     css_text = (base_css(tokens) + style_rules(tokens, pdf_module().style_specs(tokens, layout))
-                + page_css(tokens, profile["paper"], label))
+                + flow_css(tokens) + page_css(tokens, profile["paper"], label))
     return html_document(content, css_text, f'<article class="sheet document">{"".join(parts)}</article>')
 
 
@@ -972,6 +1068,8 @@ def render_md(content: dict[str, Any]) -> str:
                     lines += ["| " + " | ".join(value.replace("|", "\\|") for value in headers) + " |",
                               "| " + " | ".join("---" for _ in headers) + " |"]
                 lines += ["| " + " | ".join(value.replace("|", "\\|") for value in row) + " |" for row in rows] + [""]
+            if score_summary(block):
+                lines += [score_summary(block), ""]
         elif kind == "list":
             lines += [f"- {item}" for item in block.get("data", {}).get("items", [])] + [""]
         else:
@@ -1080,6 +1178,8 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                             for paragraph in cell.paragraphs:
                                 for run in paragraph.runs:
                                     run.font.size = Pt(8)
+            if score_summary(block):
+                doc.add_paragraph(score_summary(block))
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
                 doc.add_paragraph(str(item), style="List Bullet")

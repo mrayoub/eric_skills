@@ -1459,7 +1459,13 @@ class ReportLabReportTests(unittest.TestCase):
                     expected.extend(str(data[key]) for key in ("text", "title", "description")
                                     if isinstance(data.get(key), str) and data[key].strip())
                     expected.extend(str(value) for value in data.get("items", []) if isinstance(value, str))
-                    if block["type"] == "table":
+                    if self.renderer.pdf_module().is_score_panel(block):
+                        # O painel de notas mostra os mesmos dados formatados: peso em %, ponderado, total e classe.
+                        panel = self.renderer.pdf_module().score_panel_data(block)
+                        expected.extend([panel["total"], panel["badge"]])
+                        for row in panel["rows"]:
+                            expected.extend([row["label"], row["weight"], row["score_text"], row["weighted"], row["justification"]])
+                    elif block["type"] == "table":
                         for _, _, headings, rows in self.renderer.table_views(block):
                             expected.extend(headings)
                             expected.extend(cell for row in rows for cell in row if cell)
@@ -1882,3 +1888,48 @@ class PptxTablesAndWrapTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FlowLayoutTests(unittest.TestCase):
+    """O potencial segue a ordem e as colunas do layout.json do Studio, com painel de notas, em HTML e PDF."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.render = load_render_module()
+        cls.pdf = cls.render.pdf_module()
+
+    def setUp(self):
+        self.content = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/innovation_potential_assessment/input.json").read_text(encoding="utf-8"))
+        self.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+        self.profile = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))["types"]["innovation_potential_assessment"]
+        self.slots = self.render.load_presentation_layout("innovation_potential_assessment")
+
+    def test_rows_follow_studio_order_and_columns(self):
+        rows, rest = self.pdf.plan_flow(self.content, self.slots)
+        self.assertEqual([[cell["key"] for cell in row] for row in rows],
+                         [["scores"], ["impact", "feasibility"], ["alignment", "urgency"], ["novelty"], ["recommendation"]])
+        self.assertTrue(rows[3][0]["half"])
+        self.assertEqual(rows[4][0]["mode"], "content_only")
+        self.assertEqual(rest, [])
+
+    def test_moving_a_slot_in_studio_moves_the_section(self):
+        moved = copy.deepcopy(self.slots)
+        moved["recommendation"]["y"] = 20
+        with unittest.mock.patch.object(self.render, "load_presentation_layout", return_value=moved):
+            out = self.render.render_html(self.content, self.tokens, self.profile)
+        self.assertLess(out.index("Investigar volumes"), out.index("Total: 54.8"))
+
+    def test_panel_shows_total_class_and_weighted_without_rounding(self):
+        out = self.render.render_html(self.content, self.tokens, self.profile)
+        for text in ("Total: 54.8", "MONITORAR", "11.25", "30%", "score-bar"):
+            self.assertIn(text, out)
+        md = self.render.render_md(self.content)
+        self.assertIn("Total ponderado: 54.8 · Classificação: MONITORAR", md)
+
+    def test_partial_assessment_shows_pending_instead_of_numbers(self):
+        partial = copy.deepcopy(self.content)
+        scores = next(block for block in partial["blocks"] if block["data"].get("section_key") == "scores")
+        del scores["data"]["overall_score"], scores["data"]["classification"]
+        out = self.render.render_html(partial, self.tokens, self.profile)
+        self.assertIn("PENDENTE", out)
+        self.assertIn("Total: —", out)

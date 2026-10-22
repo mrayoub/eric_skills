@@ -50,6 +50,8 @@ Fontes: FIC-01
 | Urgência | 40 | 0.15 | Prioridade moderada, não comprovada (exemplo). |
 | Novidade | 55 | 0.1 | Novidade relativa não comparada (exemplo). |
 
+Total ponderado: 54.8 · Classificação: MONITORAR
+
 Fontes: FIC-02
 
 ## Fontes

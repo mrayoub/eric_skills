@@ -41,6 +41,25 @@ sup { font-size: 7.5pt; line-height: 0; vertical-align: 3pt; }
 .st-report_title { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 25pt; line-height: 27.5pt; color: #193C8E; }
 .st-report_section { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 11pt; line-height: 13.2pt; color: #FFFFFF; }
 .st-card_title { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 9pt; line-height: 10.8pt; color: #193C8E; }
+.st-score_head { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 7.5pt; line-height: 8.625pt; color: #586EA4; }
+.st-score_value { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 8pt; line-height: 10.4pt; color: #4C73D1; }
+.st-badge { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 7.5pt; line-height: 8.625pt; color: #193C8E; }
+.st-callout_label { font-family: Montserrat, Arial, sans-serif; font-weight: 700; font-size: 7.5pt; line-height: 8.625pt; color: #E8EEFB; }
+.flow-row { display: grid; column-gap: 8pt; break-inside: avoid; }
+.flow-card { display: flex; flex-direction: column; border: .75pt solid #D2D9E8; background: #F3F5FA; }
+.flow-band { background: #102661; padding: 5pt 9pt; text-transform: uppercase; }
+.flow-body { padding: 8pt 9pt; }
+.flow-label { text-transform: uppercase; }
+.flow-dark { background: #102661; border-left: 3pt solid #4C73D1; }
+.score-panel { break-inside: avoid; }
+.score-header { display: grid; grid-template-columns: 1fr auto 82pt; align-items: center; column-gap: 8pt; background: #102661; padding: 6pt 9pt; }
+.score-badge { display: block; text-align: center; border-radius: 8pt; padding: 3pt 0; }
+.score-table { width: 100%; border-collapse: collapse; table-layout: fixed; border: .75pt solid #D2D9E8; }
+.score-table th { background: #F3F5FA; text-align: left; }
+.score-table th, .score-table td { padding: 5pt 7pt; vertical-align: middle; border-bottom: .75pt solid #D2D9E8; overflow-wrap: break-word; }
+.score-table tr.score-total td { background: #F3F5FA; border-top: 1.5pt solid #ACB7D0; border-bottom: 0; }
+.score-bar { height: 4pt; margin: 3pt 0 0; border-radius: 2pt; background: #D2D9E8; }
+.score-bar > div { height: 100%; border-radius: 2pt; background: #4C73D1; }
 @page { size: 210mm 297mm; margin: 16mm 16mm 26mm 16mm; @bottom-right { content: "ID sample-briefing-improvement-questionnaire · versão 1.0.0 · Completo · página " counter(page) " de " counter(pages); font-family: Montserrat; font-size: 7.5pt; color: #586EA4; } }
 .sheet { width: 210mm; min-height: 297mm; padding: 16mm 16mm 26mm 16mm; }
 .sheet > footer.meta { position: absolute; right: 16mm; bottom: 8.0mm; }

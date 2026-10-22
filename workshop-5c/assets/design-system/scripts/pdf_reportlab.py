@@ -73,6 +73,10 @@ def style_specs(tokens: dict[str, Any], layout: str) -> dict[str, dict[str, Any]
                              size=24 if layout == "report_landscape" else 25),
         "report_section": spec("report_section", "section_title", "inverse", size=11, weight=700),
         "card_title": spec("card_title", "section_title", "document_primary", size=9, weight=700),
+        "score_head": spec("score_head", "label", "text_muted"),
+        "score_value": spec("score_value", "table_body", "document_accent", weight=700),
+        "badge": spec("badge", "label", "document_primary"),
+        "callout_label": spec("callout_label", "label", "document_accent_soft"),
     }
 
 
@@ -258,6 +262,234 @@ def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str,
     return result
 
 
+# Tipos cuja ordem e colunas vêm do layout.json do Layout Studio; o conteúdo continua fluindo entre páginas.
+FLOW_LAYOUT_TYPES = ("innovation_potential_assessment",)
+FLOW_FIXED_SLOTS = ("titulo_documento", "identificacao_versao", "logo", "rodape")
+SCORE_LABELS = {"impact": "Impacto", "viability": "Viabilidade", "strategic_alignment": "Alinhamento estratégico",
+                "urgency": "Urgência", "innovation": "Novidade"}
+# Selo da classificação: (fundo, texto) do tokens.json; o rótulo sempre aparece por extenso.
+SCORE_PANEL_SHARES = (.19, .08, .19, .14, .40)
+BADGE_TONES = {"priorizar": ("document_accent", "inverse"), "monitorar": ("document_accent_soft", "document_primary"),
+               "arquivar": ("surface_muted", "text_muted"), "": ("surface_muted", "text_muted")}
+
+
+def plan_flow(content: dict[str, Any], slots: dict[str, dict[str, Any]]) -> tuple[list[list[dict[str, Any]]], list[dict[str, Any]]]:
+    """Linhas de células na ordem do Studio (y, depois x) e os blocos sem slot, que seguem no fim.
+
+    Slots com a mesma altura de topo formam uma linha de duas colunas; slot mais estreito que 60% do
+    maior ocupa meia largura. display_mode define o componente: title_and_content (card com faixa),
+    content_only (caixa escura sem título) e tabular_list (tabela ou painel de notas).
+    """
+    candidates = [{**slot, "key": slot.get("section_key") or name} for name, slot in slots.items()
+                  if name not in FLOW_FIXED_SLOTS and (slot.get("section_key") or name) not in FLOW_FIXED_SLOTS]
+    candidates.sort(key=lambda slot: (float(slot["y"]), float(slot["x"])))
+    widest = max((float(slot["width"]) for slot in candidates), default=1.0)
+    used: set[int] = set()
+    rows: list[list[dict[str, Any]]] = []
+    for slot in candidates:
+        key = slot["key"]
+        heading = next((block for block in content["blocks"] if block["type"] == "heading"
+                        and block.get("data", {}).get("section_key") in (key, f"{key}_heading")), None)
+        blocks = [block for block in content["blocks"] if block["type"] != "heading"
+                  and block.get("data", {}).get("section_key") == key]
+        if not blocks and heading is None:
+            continue
+        used.update(id(block) for block in blocks)
+        if heading is not None:
+            used.add(id(heading))
+        cell = {"key": key, "heading": heading, "blocks": blocks, "y": float(slot["y"]),
+                "mode": slot.get("display_mode") or "title_and_content",
+                "half": float(slot["width"]) < .6 * widest}
+        if rows and len(rows[-1]) < 2 and abs(rows[-1][0]["y"] - cell["y"]) < 3:
+            rows[-1].append(cell)
+        else:
+            rows.append([cell])
+    for row in rows:
+        if len(row) == 2:
+            for cell in row:
+                cell["half"] = True
+    return rows, [block for block in content["blocks"] if id(block) not in used]
+
+
+def _number_text(value: float) -> str:
+    return f"{round(float(value), 4):g}"
+
+
+def score_panel_data(block: dict[str, Any]) -> dict[str, Any]:
+    """Valores exibidos no painel de notas; o ponderado não é arredondado para a soma fechar com o total."""
+    data = block.get("data", {})
+    rows = []
+    for row in data.get("rows", []):
+        score, weight = row.get("score"), row.get("weight")
+        numeric = isinstance(score, (int, float)) and not isinstance(score, bool)
+        rows.append({
+            "label": str(row.get("label") or SCORE_LABELS.get(row.get("criterion", ""), row.get("criterion", ""))),
+            "weight": f"{_number_text(weight * 100)}%" if isinstance(weight, (int, float)) else "—",
+            "score": max(0.0, min(100.0, float(score))) if numeric else None,
+            "score_text": _number_text(score) if numeric else "—",
+            "weighted": _number_text(score * weight) if numeric and isinstance(weight, (int, float)) else "—",
+            "justification": str(row.get("justification") or ""),
+        })
+    total = data.get("overall_score")
+    classification = data.get("classification") if data.get("classification") in BADGE_TONES else ""
+    return {"title": str(data.get("title") or "Pontuação por critério"), "rows": rows,
+            "total": _number_text(total) if isinstance(total, (int, float)) else "—",
+            "classification": classification, "badge": (classification or "pendente").upper()}
+
+
+def is_score_panel(block: dict[str, Any]) -> bool:
+    data = block.get("data", {})
+    return (block["type"] == "table" and data.get("section_key") == "scores" and isinstance(data.get("rows"), list)
+            and all(isinstance(row, dict) and "score" in row for row in data["rows"]))
+
+
+def _score_panel(block: dict[str, Any], styles: dict[str, Any], width: float) -> list[Any]:
+    """Painel de notas: faixa com título, total e selo; tabela com peso, barra, ponderado e justificativa."""
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.platypus import Flowable, Paragraph, Spacer, Table, TableStyle
+
+    palette = styles["_colors"]
+    panel = score_panel_data(block)
+
+    class ScoreBar(Flowable):
+        def __init__(self, value: float | None):
+            super().__init__()
+            self.value = value
+
+        def wrap(self, available_width: float, available_height: float) -> tuple[float, float]:
+            self.width = available_width
+            return available_width, 7
+
+        def draw(self) -> None:
+            self.canv.setFillColor(palette["border"])
+            self.canv.roundRect(0, 3, self.width, 4, 2, fill=1, stroke=0)
+            if self.value:
+                self.canv.setFillColor(palette["document_accent"])
+                self.canv.roundRect(0, 3, self.width * self.value / 100, 4, 2, fill=1, stroke=0)
+
+    background, foreground = BADGE_TONES[panel["classification"]]
+    badge_style = ParagraphStyle("score_badge", parent=styles["badge"], textColor=palette[foreground], alignment=1)
+    badge = Table([[Paragraph(_markup(panel["badge"]), badge_style)]], colWidths=[74], cornerRadii=[8, 8, 8, 8])
+    badge.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), palette[background]),
+                               ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
+    total_style = ParagraphStyle("score_total", parent=styles["section"], alignment=2)
+    header = Table([[Paragraph(_markup(panel["title"].upper()), styles["section"]),
+                     Paragraph(_markup(f"Total: {panel['total']}"), total_style), badge]],
+                   colWidths=[width - 172, 90, 82])
+    header.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), palette["document_deep"]),
+                                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                                ("LEFTPADDING", (0, 0), (-1, -1), 9), ("RIGHTPADDING", (0, 0), (-1, -1), 9),
+                                ("RIGHTPADDING", (1, 0), (1, 0), 4), ("LEFTPADDING", (2, 0), (2, 0), 4),
+                                ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
+    heads = ["Critério", "Peso", "Nota (0–100)", "Ponderado", "Justificativa"]
+    matrix: list[list[Any]] = [[Paragraph(_markup(head.upper()), styles["score_head"]) for head in heads]]
+    for row in panel["rows"]:
+        matrix.append([Paragraph(_markup(row["label"]), styles["card_title"]),
+                       Paragraph(_markup(row["weight"]), styles["table_body"]),
+                       [ScoreBar(row["score"]), Paragraph(_markup(row["score_text"]), styles["score_value"])],
+                       Paragraph(_markup(row["weighted"]), styles["card_title"]),
+                       Paragraph(_markup(row["justification"]), styles["table_body"])])
+    matrix.append([Paragraph("Total ponderado", styles["card_title"]), "", "",
+                   Paragraph(_markup(panel["total"]), styles["card_title"]),
+                   Paragraph(_markup(panel["badge"]), styles["score_value"])])
+    table = Table(matrix, colWidths=[width * share for share in SCORE_PANEL_SHARES], repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), palette["surface_muted"]),
+        ("BACKGROUND", (0, -1), (-1, -1), palette["surface_muted"]),
+        ("SPAN", (0, -1), (2, -1)),
+        ("LINEBELOW", (0, 0), (-1, -2), .75, palette["border"]),
+        ("LINEABOVE", (0, -1), (-1, -1), 1.5, palette["border_strong"]),
+        ("BOX", (0, 0), (-1, -1), .75, palette["border"]),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 7), ("RIGHTPADDING", (0, 0), (-1, -1), 7),
+        ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+    ]))
+    result: list[Any] = [header, table]
+    if block.get("citation_ids"):
+        result.extend([Spacer(1, 3), Paragraph(_cited("", block), styles["source"])])
+    return result
+
+
+def _flow_row(row: list[dict[str, Any]], styles: dict[str, Any], width: float,
+              block_text: Callable[[dict[str, Any]], str],
+              table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
+              table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]],
+              iqb_widths: dict[str, list[int]]) -> list[Any]:
+    """Uma linha do layout do Studio: card compacto, caixa escura ou painel de notas, em 1 ou 2 colunas."""
+    from reportlab.platypus import Paragraph, Spacer, Table, TableStyle
+
+    palette = styles["_colors"]
+    gap = 8
+    half = (width - gap) / 2
+    if len(row) == 1 and row[0]["mode"] == "tabular_list":
+        cell = row[0]
+        cell_width = half if cell["half"] else width
+        result: list[Any] = []
+        for block in cell["blocks"]:
+            result.extend(_score_panel(block, styles, cell_width) if is_score_panel(block)
+                          else _report_block(block, styles, cell_width, block_text, table_rows, table_views, iqb_widths))
+        return result
+    titled = any(cell["mode"] == "title_and_content" and cell["heading"] is not None for cell in row)
+    columns = [half, gap, half] if row[0]["half"] else [width]
+    bands: list[Any] = []
+    bodies: list[Any] = []
+    commands: list[Any] = [("VALIGN", (0, 0), (-1, -1), "TOP"),
+                           ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+                           ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 0)]
+    body_row = 1 if titled else 0
+    for index in range(len(columns)):
+        if index % 2 == 1 or index // 2 >= len(row):
+            bands.append("")
+            bodies.append("")
+            continue
+        cell, column = row[index // 2], index
+        inner_width = columns[column] - 18
+        dark = cell["mode"] == "content_only"
+        items: list[Any] = []
+        if dark and cell["heading"] is not None:
+            # Sem faixa de título: o rótulo fica dentro da caixa escura, pequeno, para o texto não se perder.
+            items += [Paragraph(_markup(block_text(cell["heading"]).upper()), styles["callout_label"]), Spacer(1, 3)]
+        for block in cell["blocks"]:
+            if dark and block["type"] not in ("table", "card_grid"):
+                items.append(Paragraph(_cited(block_text(block), block), styles["body_inverse"]))
+            else:
+                items.extend(_report_block(block, styles, inner_width, block_text, table_rows, table_views, iqb_widths))
+            items.append(Spacer(1, 4))
+        if items:
+            items.pop()
+        has_band = cell["mode"] == "title_and_content" and cell["heading"] is not None
+        bands.append(Paragraph(_markup(block_text(cell["heading"]).upper()), styles["section"]) if has_band else "")
+        bodies.append(items)
+        if titled and has_band:
+            commands += [("BACKGROUND", (column, 0), (column, 0), palette["document_deep"]),
+                         ("LEFTPADDING", (column, 0), (column, 0), 9), ("RIGHTPADDING", (column, 0), (column, 0), 9),
+                         ("TOPPADDING", (column, 0), (column, 0), 5), ("BOTTOMPADDING", (column, 0), (column, 0), 5)]
+        elif titled:
+            commands.append(("SPAN", (column, 0), (column, 1)))
+        top = 0 if titled and not has_band else body_row
+        commands += [("LEFTPADDING", (column, top), (column, body_row), 9),
+                     ("RIGHTPADDING", (column, top), (column, body_row), 9),
+                     ("TOPPADDING", (column, top), (column, body_row), 8),
+                     ("BOTTOMPADDING", (column, top), (column, body_row), 8)]
+        if dark:
+            commands += [("BACKGROUND", (column, top), (column, body_row), palette["document_deep"]),
+                         ("LINEBEFORE", (column, top), (column, body_row), 3, palette["document_accent"])]
+        else:
+            commands += [("BACKGROUND", (column, body_row), (column, body_row), palette["surface_muted"]),
+                         ("BOX", (column, 0), (column, body_row), .75, palette["border"])]
+    if titled:
+        matrix = [bands, bodies]
+        # Células escuras sem título ocupam as duas linhas: o conteúdo vai na primeira.
+        for column in range(len(columns)):
+            if column % 2 == 0 and column // 2 < len(row) and bands[column] == "":
+                matrix[0][column], matrix[1][column] = bodies[column], ""
+    else:
+        matrix = [bodies]
+    table = Table(matrix, colWidths=columns, hAlign="LEFT")
+    table.setStyle(TableStyle(commands))
+    return [table]
+
+
 def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
                   table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
                   table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]],
@@ -430,13 +662,14 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
                    block_text: Callable[[dict[str, Any]], str],
                    table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
                    table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]],
-                   iqb_widths: dict[str, list[int]]) -> None:
+                   iqb_widths: dict[str, list[int]],
+                   load_layout: Callable[[str], dict[str, dict[str, Any]] | None] | None = None) -> None:
     from reportlab.lib import colors
     from reportlab.lib.units import mm
     from reportlab.lib.utils import ImageReader
     from reportlab.pdfgen.canvas import Canvas
-    from reportlab.platypus import (BaseDocTemplate, CondPageBreak, Flowable, Frame, Indenter, PageBreak,
-                                   PageTemplate, Paragraph, Spacer, Table, TableStyle)
+    from reportlab.platypus import (BaseDocTemplate, CondPageBreak, Flowable, Frame, Indenter, KeepTogether,
+                                   PageBreak, PageTemplate, Paragraph, Spacer, Table, TableStyle)
     from reportlab.platypus.doctemplate import LayoutError
 
     layout = profile["layout"]
@@ -488,7 +721,15 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
         band.keepWithNext = True
         return band
 
-    sections = group_sections(content["blocks"], block_text)
+    remaining = content["blocks"]
+    slots = load_layout(content["deliverable_type"]) if load_layout and content["deliverable_type"] in FLOW_LAYOUT_TYPES else None
+    if slots:
+        rows, remaining = plan_flow(content, slots)
+        for row in rows:
+            story.extend(_flow_row(row, styles, usable_width, block_text, table_rows, table_views, iqb_widths))
+            story.append(Spacer(1, 8))
+        story.append(Spacer(1, 4))
+    sections = group_sections(remaining, block_text)
     section_number = 0
     position = 0
     while position < len(sections):
@@ -533,12 +774,14 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
         story.extend([Indenter(left=-11, right=-11), Spacer(1, 10)])
         position += 1
     if content["citations"]:
-        story.extend([Paragraph("Fontes", styles["field"]), Spacer(1, 4)])
+        lines = []
         for citation in content["citations"]:
             line = f"<b>{_markup(citation['id'])}</b> — {_markup(citation['source_id'])}"
             if citation.get("locator"):
                 line += f", {_markup(citation['locator'])}"
-            story.append(Paragraph(line, styles["source"]))
+            lines.append(Paragraph(line, styles["source"]))
+        # O título não fica sozinho no pé da página: acompanha a primeira fonte.
+        story.extend([KeepTogether([Paragraph("Fontes", styles["field"]), Spacer(1, 4), lines[0]]), *lines[1:]])
 
     class NumberedCanvas(Canvas):
         def __init__(self, *args: Any, **kwargs: Any):
@@ -951,7 +1194,8 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
             raise ValueError("Relatórios requerem table_views e iqb_widths")
         _render_report(content, tokens, profile, path, deliverable_label=deliverable_label,
                        footer_label=footer_label, block_text=block_text,
-                       table_rows=table_rows, table_views=table_views, iqb_widths=iqb_widths)
+                       table_rows=table_rows, table_views=table_views, iqb_widths=iqb_widths,
+                       load_layout=load_presentation_layout)
         return
     page = tokens["page"][profile["paper"]]
     paper_width, paper_height = float(page["width"]) * mm, float(page["height"]) * mm
