@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "innovation_scorecard",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO — Portal de solicitações: maturidade das evidências",
+  "title": "EXEMPLO FICTÍCIO. Portal de solicitações: maturidade das evidências",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
@@ -66,7 +66,7 @@
       "id": "risk-table",
       "type": "table",
       "data": {
-        "title": "Força das evidências — exemplo",
+        "title": "Força das evidências: exemplo",
         "headers": [
           "Dimensão",
           "Estado",

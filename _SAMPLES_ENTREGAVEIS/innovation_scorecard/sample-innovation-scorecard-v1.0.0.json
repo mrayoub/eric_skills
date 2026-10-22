@@ -79,7 +79,7 @@
             "custo e operação"
           ]
         ],
-        "title": "Força das evidências — exemplo"
+        "title": "Força das evidências: exemplo"
       },
       "export": {
         "csv": true,
@@ -112,5 +112,5 @@
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
-  "title": "EXEMPLO FICTÍCIO — Portal de solicitações: maturidade das evidências"
+  "title": "EXEMPLO FICTÍCIO. Portal de solicitações: maturidade das evidências"
 }

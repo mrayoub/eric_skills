@@ -120,7 +120,7 @@ def validate_sources(entries: list[dict]) -> dict[tuple[str, str], str]:
                 present = [p for p in (ROOT / skill).rglob("*") if name and p.name == name]
                 if present:
                     raise ValueError(f"Fonte não distribuída presente na skill: {present[0].relative_to(ROOT)}")
-                hashes[entry["id"], skill] = "—"
+                hashes[entry["id"], skill] = "não se aplica"
             continue
         for skill in entry["skills"]:
             path = ROOT / skill / file
@@ -152,7 +152,7 @@ def page(skill: str, entries: list[dict], hashes: dict[tuple[str, str], str]) ->
              "|---|---|---|---|---|---|---|---|---|"]
     for entry in selected:
         parent = lookup.get(entry["deriva_de"])
-        derives = f"{parent['titulo']} ({parent['id']})" if parent else "—"
+        derives = f"{parent['titulo']} ({parent['id']})" if parent else "não se aplica"
         if entry["distribuido"]:
             link = f"[{cell(entry['arquivo'])}](<../{entry['arquivo']}>)"
         else:

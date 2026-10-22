@@ -1,4 +1,4 @@
-EXEMPLO FICTÍCIO — Rodada de testes do formulário guiado
+EXEMPLO FICTÍCIO: Rodada de testes do formulário guiado
 
 ID sample-experiment-report · versão 1.0.0 · Completo
 

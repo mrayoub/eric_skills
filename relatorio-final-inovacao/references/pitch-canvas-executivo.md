@@ -1,8 +1,8 @@
 # Pitch Canvas para apresentação a gestores
 
-Fonte: *The Pitch Canvas©: Company Edition*, Best 3 Minutes, desenvolvido a partir de ideia original de David Beckett; ilustrações de Birgit Smit. PDF em `../assets/ThePitchCanvas.pdf`, uma página, fornecido pelo usuário. Licença CC BY-SA 4.0. Credite **Best3minutes.com** na apresentação e na referência metodológica. Os rótulos abaixo traduzem os blocos do original; esta adaptação para decisão interna foi feita pela CCEE.
+Fonte: *The Pitch Canvas© (Company Edition)*, Best 3 Minutes, desenvolvido a partir de ideia original de David Beckett; ilustrações de Birgit Smit. PDF em `../assets/ThePitchCanvas.pdf`, uma página, fornecido pelo usuário. Licença CC BY-SA 4.0. Credite **Best3minutes.com** na apresentação e na referência metodológica. Os rótulos abaixo traduzem os blocos do original; esta adaptação para decisão interna foi feita pela CCEE.
 
-*The Pitch Canvas©* é licenciado sob CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); referência obrigatória a Best3minutes.com. **Esta orientação é uma adaptação do canvas e é distribuída sob a mesma licença, CC BY-SA 4.0** — e não sob a Licença de Uso Restrito CCEE. Quem a reutilizar ou modificar deve creditar Best3minutes.com e a CCEE e manter a CC BY-SA 4.0. Veja `THIRD_PARTY_NOTICES.md`.
+*The Pitch Canvas©* é licenciado sob CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); referência obrigatória a Best3minutes.com. **Esta orientação é uma adaptação do canvas e é distribuída sob a mesma licença, CC BY-SA 4.0**, e não sob a Licença de Uso Restrito CCEE. Quem a reutilizar ou modificar deve creditar Best3minutes.com e a CCEE e manter a CC BY-SA 4.0. Veja `THIRD_PARTY_NOTICES.md`.
 
 ## Tradução dos blocos
 

@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Entrada guiada para solicitações completas
+# EXEMPLO FICTÍCIO: Entrada guiada para solicitações completas
 
 ID sample-experiment-plan · versão 1.0.0 · Completo
 

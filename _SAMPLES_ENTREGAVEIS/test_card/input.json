@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "test_card",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO — TC-01: conclusão sem ajuda no fluxo guiado",
+  "title": "EXEMPLO FICTÍCIO (TC-01): conclusão sem ajuda no fluxo guiado",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {

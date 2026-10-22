@@ -4,7 +4,7 @@ Preencha só as seções aplicáveis. Preserve o plano original ao lado das adap
 
 O caderno segue os três blocos da skill. Cada bloco alimenta um entregável: **Hipóteses com Test Cards**, **Modelo de experimentação** e **Apresentação da experimentação e direcionamento**. As seções 6 a 8 registram a execução do modelo.
 
-## Bloco 1 — Aprofundamento e planejamento → Hipóteses com Test Cards
+## Bloco 1: Aprofundamento e planejamento → Hipóteses com Test Cards
 
 ### 1. Contrato da rodada
 
@@ -68,7 +68,7 @@ Ordem dos testes e por quê: [paralelos, dependências, versão exigida do MVP]
 |---|---|---|---|
 | | | | |
 
-## Bloco 2 — Execução → Modelo de experimentação
+## Bloco 2: Execução → Modelo de experimentação
 
 ### 6. Construção do MVP
 
@@ -103,7 +103,7 @@ Ordem dos testes e por quê: [paralelos, dependências, versão exigida do MVP]
 |---|---|---|---|---|---|---|---|
 | E01 | | | | | | | |
 
-## Bloco 3 — Consolidação → Apresentação da experimentação e direcionamento
+## Bloco 3: Consolidação → Apresentação da experimentação e direcionamento
 
 ### 9. Medidas e matriz
 

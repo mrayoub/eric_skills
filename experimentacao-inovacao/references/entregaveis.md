@@ -10,7 +10,7 @@ A skill trabalha em três blocos, cada um com um entregável composto pelos mode
 | Execução | **Modelo de experimentação** | `experiment_plan` (+ MVP a construir, escopo, cronograma e gate de início) |
 | Consolidação | **Apresentação da experimentação e direcionamento** | `executive_presentation` e `evidence_recommendation`; um `learning_card` por card executado |
 
-## Bloco 1 — Hipóteses com Test Cards
+## Bloco 1: Hipóteses com Test Cards
 
 Reúne suposições priorizadas, hipóteses e um Test Card individual por teste, com o escopo da rodada ([planejamento](planejamento-dos-testes.md)).
 
@@ -26,14 +26,14 @@ Reúne suposições priorizadas, hipóteses e um Test Card individual por teste,
 
 Entregue um card individual por teste; a linha da tabela do caderno serve só como índice. A [Strategyzer](https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card) define quatro perguntas, que o [modelo](../assets/test-card.md) organiza como:
 
-1. **Hipótese:** uma subhipótese focal e falsificável — quem faz ou percebe o quê, em qual versão.
+1. **Hipótese:** uma subhipótese focal e falsificável: quem faz ou percebe o quê, em qual versão.
 2. **Teste:** método, público e quantidade, e o que será exposto ou executado.
 3. **Medida:** uma medida principal; quantitativa como numerador / denominador, qualitativa como o comportamento observado.
 4. **Critério:** um limiar ou condição observável definido antes da coleta, ou `a fechar antes da coleta: [o que falta]`.
 
 Cada campo é uma frase objetiva de até 280 caracteres (o renderizador rejeita textos maiores). Um card testa uma hipótese com uma medida principal; dois resultados independentes viram dois cards. Riscos, guardrails, leituras contrária e inconclusiva, justificativa do limiar, medidas secundárias, janela, fonte e protocolo ficam no plano do experimento ou no caderno, ligados ao ID do card. Metadados fora dos quatro campos: `id`, versão, data, origem, responsável e estado. Um card sem critério decisivo pode ser entregue como rascunho, mas não como teste verificatório pronto. Preserve alterações datadas sem sobrescrever a versão prévia.
 
-## Bloco 2 — Modelo de experimentação
+## Bloco 2: Modelo de experimentação
 
 O desenho executável da rodada: MVP a construir, protocolo e roteiro de cada teste, público, medidas e registros, guardrails, cronograma e gate de início ([execução e MVP](execucao-e-mvp.md)). Durante a execução, os registros abaixo alimentam a consolidação; não interpretam resultados.
 
@@ -48,7 +48,7 @@ O desenho executável da rodada: MVP a construir, protocolo e roteiro de cada te
 - Relacione cada unidade elegível (participante, caso, obrigação, local ou período) à exposição, ao desfecho, aos desvios e aos códigos relevantes; preserve o vínculo com a evidência primária. Em sessões moderadas, registre também tarefa e ajuda recebida.
 - Resuma problemas ou eventos por frequência na amostra, efeito no processo ou resultado, severidade justificada, casos contrários e condição para nova verificação. Use a matriz para priorizar; inferências populacionais ou causais dependem do desenho e da amostragem adequados.
 
-## Bloco 3 — Apresentação da experimentação e direcionamento
+## Bloco 3: Apresentação da experimentação e direcionamento
 
 Consolida resultados, Learning Cards, avaliação do MVP e a recomendação que serve à próxima fase da esteira (BP2). A apresentação mostra, em seções próprias, o status dos cards e a [avaliação do MVP](avaliacao-do-mvp.md), e termina no direcionamento: avançar, iterar, investigar ou encerrar, com condições, responsável e prazo.
 

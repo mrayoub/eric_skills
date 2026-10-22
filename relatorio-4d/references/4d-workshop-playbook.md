@@ -5,16 +5,16 @@
 - [Objetivo](#objetivo)
 - [Integração opcional com a esteira ERIC](#integração-opcional-com-a-esteira-eric)
 - [Visão geral da estrutura](#visão-geral-da-estrutura)
-- [D1: Descongelar (20–25 min)](#d1-descongelar-2025-min)
-- [D2: Diagnosticar (60–70 min)](#d2-diagnosticar-6070-min)
+- [D1: Descongelar (20 a 25 min)](#d1-descongelar-20-a-25-min)
+- [D2: Diagnosticar (60 a 70 min)](#d2-diagnosticar-60-a-70-min)
 - [Pausa (10 min)](#pausa-10-min)
-- [D3: Desenhar (45–50 min)](#d3-desenhar-4550-min)
-- [D4: Decidir (25–30 min)](#d4-decidir-2530-min)
+- [D3: Desenhar (45 a 50 min)](#d3-desenhar-45-a-50-min)
+- [D4: Decidir (25 a 30 min)](#d4-decidir-25-a-30-min)
 - [Entregáveis obrigatórios do Modelo 4D](#entregáveis-obrigatórios-do-modelo-4d)
 
 _Playbook | Versão 3h_
 
-> Adaptação da referência textual do ERIC_RC6. A ordem D1–D4 é do método; a fase citada na origem é contexto, não condição de uso.
+> Adaptação da referência textual do ERIC_RC6. A ordem D1 a D4 é do método; a fase citada na origem é contexto, não condição de uso.
 
 ## Objetivo
 
@@ -22,7 +22,7 @@ Conduzir um desafio estratégico por quatro dimensões considerando a percepçã
 
 ## Integração opcional com a esteira ERIC
 
-- Aplique D1–D4 onde o desafio exigir aprofundamento, inclusive como retomada ou revisão.
+- Aplique D1 a D4 onde o desafio exigir aprofundamento, inclusive como retomada ou revisão.
 - No RC6, a rodada é registrada em `problem_deepening` e o relatório pode alimentar o BP1; esses campos não bloqueiam o método fora dessa posição.
 - O snapshot D2 registra estado intermediário, enquanto a completude do relatório depende dos quatro D e de suas fontes.
 
@@ -30,13 +30,13 @@ Conduzir um desafio estratégico por quatro dimensões considerando a percepçã
 
 | **Etapa** | **Dimensão** | **Tempo** |
 |:---|:---|:---|
-| D1 | Descongelar | 20–25 min |
-| D2 | Diagnosticar | 60–70 min |
-| Pausa | — | 10 min |
-| D3 | Desenhar | 45–50 min |
-| D4 | Decidir | 25–30 min |
+| D1 | Descongelar | 20 a 25 min |
+| D2 | Diagnosticar | 60 a 70 min |
+| Pausa | não se aplica | 10 min |
+| D3 | Desenhar | 45 a 50 min |
+| D4 | Decidir | 25 a 30 min |
 
-## D1: Descongelar (20–25 min)
+## D1: Descongelar (20 a 25 min)
 
 **Objetivo:** Alinhar percepção, trazer honestidade e validar o enquadramento do desafio.
 
@@ -48,7 +48,7 @@ Conduzir um desafio estratégico por quatro dimensões considerando a percepçã
 
 - HMW
 
-- 3–5 dados críticos
+- 3 a 5 dados críticos
 
 ### D1.2 Elefante na sala (5 min)
 
@@ -56,7 +56,7 @@ Conduzir um desafio estratégico por quatro dimensões considerando a percepçã
 
 - **Formato:** Post-its anônimos ou Mentimeter
 
-### D1.3 Sentimento dominante (5–10 min)
+### D1.3 Sentimento dominante (5 a 10 min)
 
 **Pergunta**: Quando você pensa nesse tema hoje, qual palavra vem primeiro?
 
@@ -70,7 +70,7 @@ Menti com nuvem de palavras ou agrupamento de post-its
 
 - Ambiente de confiança
 
-## D2: Diagnosticar (60–70 min)
+## D2: Diagnosticar (60 a 70 min)
 
 **Objetivo:** Sair da opinião e mapear realidade operacional e estrutural.
 
@@ -102,9 +102,9 @@ Menti com nuvem de palavras ou agrupamento de post-its
 
 - Mapa real da experiência.
 
-### D2.2 Barco da Inovação (30–35 min)
+### D2.2 Barco da Inovação (30 a 35 min)
 
-- Montar grupos pequenos (3–4 pessoas).
+- Montar grupos pequenos (3 a 4 pessoas).
 
 - Cada grupo preenche:
 
@@ -128,7 +128,7 @@ Menti com nuvem de palavras ou agrupamento de post-its
 
 ## Pausa (10 min)
 
-## D3: Desenhar (45–50 min)
+## D3: Desenhar (45 a 50 min)
 
 **Objetivo:** Gerar alternativas estruturadas e ambiciosas.
 
@@ -150,7 +150,7 @@ Menti com nuvem de palavras ou agrupamento de post-its
 
   - Devolve
 
-### D3.2 Consolidação estratégica (20–25 min)
+### D3.2 Consolidação estratégica (20 a 25 min)
 
 - Formar pequenos grupos (aleatório)
 
@@ -176,7 +176,7 @@ Menti com nuvem de palavras ou agrupamento de post-its
 
 Se houver 3 grupos → 9 propostas robustas.
 
-## D4: Decidir (25–30 min)
+## D4: Decidir (25 a 30 min)
 
 **Objetivo:** Priorizar propostas com responsabilização e lógica de investimento real.
 

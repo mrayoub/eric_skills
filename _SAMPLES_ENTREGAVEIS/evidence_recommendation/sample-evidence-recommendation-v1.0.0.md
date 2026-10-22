@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Verificar volumes e causas antes de ampliar a solução
+# EXEMPLO FICTÍCIO: Verificar volumes e causas antes de ampliar a solução
 
 ID sample-evidence-recommendation · versão 1.0.0 · Completo
 

@@ -1,4 +1,4 @@
-# Scorecard de evidências — [projeto]
+# Scorecard de evidências: [projeto]
 
 **Modalidade:** [referência ao instrumento oficial / adaptação institucional]  
 **Data de corte e versão deste retrato:** [data, versão]  

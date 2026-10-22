@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-experiment-plan",
   "branding_version": "1.2.0",
-  "content_sha256": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
+  "content_sha256": "ed3e76c1d152c08f102975e7cb659b1b49b8c75cad74f12c062c0b680a6281ef",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_plan",
   "files": {
-    "sample-experiment-plan-v1.0.0.docx": "48a72866e53d91a6da934e25769855d32c72b75c5e1fd18fec6c0900d52ee478",
-    "sample-experiment-plan-v1.0.0.json": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
-    "sample-experiment-plan-v1.0.0.md": "1cb9a94c0363e00a2e82d76eba56743b41d51fbdd924149d54a33b98c3c32ecf",
-    "sample-experiment-plan-v1.0.0.pdf": "99d00ceffcb610fb2d65bc6be39d84e9d66352393e704854c0582dab36e9d018",
-    "sample-experiment-plan-v1.0.0.txt": "96bd28c4da57aeca2dea770d619573f6d636867dba9ee6616e90479eb43ca218"
+    "sample-experiment-plan-v1.0.0.docx": "a5d7fc06a1c0b9bcae7125ddbc5e4979f7ddf4022b70076388ed4140430c80d4",
+    "sample-experiment-plan-v1.0.0.html": "9cc2d27b1f56b4765a83f6d63d1de27bcad8d2e3666d45c018d041c05811e585",
+    "sample-experiment-plan-v1.0.0.json": "ed3e76c1d152c08f102975e7cb659b1b49b8c75cad74f12c062c0b680a6281ef",
+    "sample-experiment-plan-v1.0.0.md": "ee8e30837be257a93e55ffb1e203b1a192395e73a38a16da2f5f318e432167e3",
+    "sample-experiment-plan-v1.0.0.pdf": "6c5861e8f43d5f8d2467b6ef1dd712deb6e59e2b94f7c8bff33b6954891b7999",
+    "sample-experiment-plan-v1.0.0.txt": "d6dd3c035e8cc64ad1172140be17785b9c3fb107f1cba6e3b63f83e3283a0505"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",

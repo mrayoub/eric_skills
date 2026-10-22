@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-evidence-recommendation",
   "branding_version": "1.2.0",
-  "content_sha256": "0b30caf1c2b21c0c991adef8de5dbf41372a1518b6a4979e09062bf7f3079a1e",
+  "content_sha256": "e13ff0db0c603b7fd71b9002e58abff720a5507e7922f53b590f6245a7e227f5",
   "content_version": "1.0.0",
   "deliverable_type": "evidence_recommendation",
   "files": {
-    "sample-evidence-recommendation-v1.0.0.docx": "2289ccc032af78599dc8d7c78a13fc3723a26fa011f2d6cc51f93c0a423cc4fa",
-    "sample-evidence-recommendation-v1.0.0.json": "0b30caf1c2b21c0c991adef8de5dbf41372a1518b6a4979e09062bf7f3079a1e",
-    "sample-evidence-recommendation-v1.0.0.md": "5a184400a5c5059cec8b61622c1dce40c67570089aed44bfc29df8428c437e30",
-    "sample-evidence-recommendation-v1.0.0.pdf": "342115a0ae449b6925124050d1501ec3df9df647a3d086f8baea2cbf391adc03",
-    "sample-evidence-recommendation-v1.0.0.txt": "6de957f69dff5a385d34af1adc7b3509d15be31ad671d63ef9b6b18509e1b4e9"
+    "sample-evidence-recommendation-v1.0.0.docx": "ae5e539ff2c016a4a80bdd09dfff38295584e2d5afadf3be4a9fea3374eecdf8",
+    "sample-evidence-recommendation-v1.0.0.html": "e74b74f47d682e8a2c3adbec39dafa359864b490f71138ef78be11e4fbba26fd",
+    "sample-evidence-recommendation-v1.0.0.json": "e13ff0db0c603b7fd71b9002e58abff720a5507e7922f53b590f6245a7e227f5",
+    "sample-evidence-recommendation-v1.0.0.md": "e417d657eef4555eca047576a9b50d97947cf5734b61c84d9b9a3152776feb8d",
+    "sample-evidence-recommendation-v1.0.0.pdf": "67ad412a04a34c0d42e4581c42b3ab8ee6bb969434adb9bc373d5d343ee0e9ab",
+    "sample-evidence-recommendation-v1.0.0.txt": "881658ed8c9c80585474c878d3da870cc8da2c96d0ab5e45a06c0e4890fed1dd"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

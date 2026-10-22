@@ -1,14 +1,14 @@
-# Template Mural — Workshop 4D de Aprofundamento e Ideacao
+# Template Mural: Workshop 4D de Aprofundamento e Ideacao
 
 ## Índice
 
 - [Visao geral do board](#visao-geral-do-board)
-- [Area 1 — Abertura](#area-1--abertura)
-- [Area 2 — D1: Percepcao (Unfreeze)](#area-2--d1-percepcao-unfreeze)
-- [Area 3 — D2: Diagnostico (Diagnose)](#area-3--d2-diagnostico-diagnose)
-- [Area 4 — D3: Desenho (Design)](#area-4--d3-desenho-design)
-- [Area 5 — D4: Decisao (Decide)](#area-5--d4-decisao-decide)
-- [Area 6 — Fechamento](#area-6--fechamento)
+- [Area 1 · Abertura](#area-1--abertura)
+- [Area 2 · D1: Percepcao (Unfreeze)](#area-2--d1-percepcao-unfreeze)
+- [Area 3 · D2: Diagnostico (Diagnose)](#area-3--d2-diagnostico-diagnose)
+- [Area 4 · D3: Desenho (Design)](#area-4--d3-desenho-design)
+- [Area 5 · D4: Decisao (Decide)](#area-5--d4-decisao-decide)
+- [Area 6 · Fechamento](#area-6--fechamento)
 - [Convencoes visuais](#convencoes-visuais)
 - [Notas de implementacao](#notas-de-implementacao)
 - [Fonte e adaptações](#fonte-e-adaptações)
@@ -17,7 +17,7 @@
 
 Este documento descreve a estrutura do board Mural a ser criado automaticamente pela skill `facilitate_4d_workshop`. O board segue a metodologia 4D e serve como suporte visual e colaborativo para o workshop.
 
-Use o board para D1–D4 em qualquer fase. Se a rodada for retomada, registre versão e data de cada contribuição; no RC6, o relatório completo pode alimentar o BP1.
+Use o board para D1 a D4 em qualquer fase. Se a rodada for retomada, registre versão e data de cada contribuição; no RC6, o relatório completo pode alimentar o BP1.
 
 ---
 
@@ -35,7 +35,7 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 1 — Abertura
+## Area 1 · Abertura
 
 **Cor:** Cinza claro (#E0E0E0)
 **Posicao:** Canto superior esquerdo
@@ -52,13 +52,13 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 2 — D1: Percepcao (Unfreeze)
+## Area 2 · D1: Percepcao (Unfreeze)
 
 **Cor:** Amarelo (#FFF3CD)
 **Posicao:** Apos abertura, lado esquerdo
 **Tempo:** 20-25 min
 
-### Subsecao 2.1 — Elefante na Sala
+### Subsecao 2.1: Elefante na Sala
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -67,7 +67,7 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 | Zona de post-its | Area livre | Participantes arrastam post-its anonimos |
 | Pergunta-guia | Post-it fixo | "Se pudesse dizer uma coisa que ninguem esta falando, qual seria?" |
 
-### Subsecao 2.2 — Mapa Emocional
+### Subsecao 2.2: Mapa Emocional
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -78,13 +78,13 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 3 — D2: Diagnostico (Diagnose)
+## Area 3 · D2: Diagnostico (Diagnose)
 
 **Cor:** Azul claro (#CCE5FF)
 **Posicao:** Centro-esquerda
 **Tempo:** 60-70 min
 
-### Subsecao 3.1 — Jornada do Usuario
+### Subsecao 3.1: Jornada do Usuario
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -95,26 +95,26 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 | Coluna Durante | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o momento crítico? |
 | Coluna Depois | Area de post-its | O que acontece? Onde dói? Onde gera valor? Onde há retrabalho? Complemento: qual é o resultado e o que melhora ou piora? |
 
-### Subsecao 3.2 — Barco da Inovacao
+### Subsecao 3.2: Barco da Inovacao
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
 | Titulo da secao | Texto | "[D2] Barco da Inovacao" |
 | Ilustracao do barco | Desenho | Esboco de um barco com 4 areas |
-| **Ventos — Impulsionadores** | Area verde | "O que nos impulsiona? Forcas, dados, tendencias" |
+| **Ventos: Impulsionadores** | Area verde | "O que nos impulsiona? Forcas, dados, tendencias" |
 | **Ancoras** | Area vermelha | "O que nos trava? Resistencias, limitacoes" |
-| **Icebergs — Riscos** | Area laranja | "O que pode dar errado? Suposicoes nao validadas" |
-| **Porto — Futuro desejado** | Area roxa | "Onde queremos chegar? Cenario ideal" |
+| **Icebergs: Riscos** | Area laranja | "O que pode dar errado? Suposicoes nao validadas" |
+| **Porto: Futuro desejado** | Area roxa | "Onde queremos chegar? Cenario ideal" |
 
 ---
 
-## Area 4 — D3: Desenho (Design)
+## Area 4 · D3: Desenho (Design)
 
 **Cor:** Verde claro (#D4EDDA)
 **Posicao:** Centro-direita
 **Tempo:** 45-50 min
 
-### Subsecao 4.1 — Brainwriting Estruturado
+### Subsecao 4.1: Brainwriting Estruturado
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -124,7 +124,7 @@ O board e dividido em **6 areas** principais, dispostas em fluxo horizontal (da 
 | Coluna Simplificar | Post-its verdes | "O que podemos reduzir, automatizar ou melhorar?" |
 | Coluna Mudar logica | Post-its roxos | "Qual paradigma precisa ser quebrado?" |
 
-### Subsecao 4.2 — Consolidacao Estrategica
+### Subsecao 4.2: Consolidacao Estrategica
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -138,20 +138,20 @@ Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta
 
 ---
 
-## Area 5 — D4: Decisao (Decide)
+## Area 5 · D4: Decisao (Decide)
 
 **Cor:** Roxo claro (#E8D5F5)
 **Posicao:** Direita
 **Tempo:** 25-30 min
 
-### Subsecao 5.1 — Apresentacao
+### Subsecao 5.1: Apresentacao
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
 | Titulo da secao | Texto | "[D4] Decisao" |
 | Resumo consolidado | Texto | Copias das propostas da area D3 |
 
-### Subsecao 5.2 — Alocacao de Capital
+### Subsecao 5.2: Alocacao de Capital
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -160,7 +160,7 @@ Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta
 | Votos | Sticky notes numericos | Distribuicao simultanea de 10 creditos; registre participante, proposta e quantidade e confira o total alocado |
 | Totalizador | Calculo automatico | Soma dos investimentos por proposta |
 
-### Subsecao 5.3 — Verificacao de Consistencia
+### Subsecao 5.3: Verificacao de Consistencia
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -170,7 +170,7 @@ Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta
 
 ---
 
-## Area 6 — Fechamento
+## Area 6 · Fechamento
 
 **Cor:** Cinza escuro (#D3D3D3)
 **Posicao:** Canto inferior direito
@@ -190,10 +190,10 @@ Avalie a natureza da mudança e a complexidade separadamente. Para cada proposta
 | Dimensao | Cor | Codigo |
 |---|---|---|
 | Abertura | Cinza | ABERT |
-| D1 — Percepcao | Amarelo | D1 |
-| D2 — Diagnostico | Azul | D2 |
-| D3 — Desenho | Verde | D3 |
-| D4 — Decisao | Roxo | D4 |
+| D1: Percepcao | Amarelo | D1 |
+| D2: Diagnostico | Azul | D2 |
+| D3: Desenho | Verde | D3 |
+| D4: Decisao | Roxo | D4 |
 | Fechamento | Cinza escuro | FIM |
 
 ## Notas de implementacao

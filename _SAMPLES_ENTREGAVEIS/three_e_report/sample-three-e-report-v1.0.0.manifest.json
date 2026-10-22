@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-three-e-report",
   "branding_version": "1.2.0",
-  "content_sha256": "c2547b1a283ee67e8271cac8245dff9a931f34010396e45a2da24a1ff3ae4c22",
+  "content_sha256": "0a2b82164a3e6040065c2ccd8e254857ffeafa8ec721dfe8833ba60b14530187",
   "content_version": "1.0.0",
   "deliverable_type": "three_e_report",
   "files": {
-    "sample-three-e-report-v1.0.0.docx": "ed3ee7676d144bbbe636d8e0822b439f86664531a1217f600910b43f014a3dcb",
-    "sample-three-e-report-v1.0.0.json": "c2547b1a283ee67e8271cac8245dff9a931f34010396e45a2da24a1ff3ae4c22",
-    "sample-three-e-report-v1.0.0.md": "4e7f35aeb7543cb3a771069e48112e78ff840730be120263cfb16ee9473804d1",
-    "sample-three-e-report-v1.0.0.pdf": "f371b57c6cdb83c1ebc85c512815bd0d797ab0a73bec133b890f9040703c74e8",
-    "sample-three-e-report-v1.0.0.txt": "ef5e459d9a20e8ddeed0c542af94f131a0ff9706e129c7432bf485d1e6a1c3ee"
+    "sample-three-e-report-v1.0.0.docx": "34ac0218affc9c9e80eca694dc77aebdc67c3a3a53b19164f511331c6fb34907",
+    "sample-three-e-report-v1.0.0.html": "2b1ad2b1094b17ee791f977f3f2f460391e8428cbb0dacb89f1bbb790189fe10",
+    "sample-three-e-report-v1.0.0.json": "0a2b82164a3e6040065c2ccd8e254857ffeafa8ec721dfe8833ba60b14530187",
+    "sample-three-e-report-v1.0.0.md": "b5c36a34d5945071f54fe6aa4c530328d52adeebaed7c26532251ce18278f1a1",
+    "sample-three-e-report-v1.0.0.pdf": "69da021b2c80a8d7ac619a82502fe861ad0fd9497444d6f6c1f458bd879e73a5",
+    "sample-three-e-report-v1.0.0.txt": "b172844342a755eef732a4220219a373fef5adcf63ea183f855b7ff90cda3e6f"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

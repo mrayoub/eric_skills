@@ -1,4 +1,4 @@
-# Rubrica de Potencial de Inovação — adaptação portátil 1.1.0
+# Rubrica de Potencial de Inovação: adaptação portátil 1.1.0
 
 Preserva critérios, pesos e faixas do ERIC_RC6 1.0.0. A regra de ausência foi corrigida: nota faltante ou inválida não é zero; sem os cinco critérios sustentados o resultado permanece incompleto e sem classificação. Zero continua possível quando há avaliação explícita e justificada.
 

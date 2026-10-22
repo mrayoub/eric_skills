@@ -21,7 +21,7 @@
     },
     {
       "id": "s2",
-      "name": "1. Acreditávamos que — hipótese testada",
+      "name": "1. Acreditávamos que (hipótese testada)",
       "x": 16,
       "y": 30,
       "width": 178.0,
@@ -32,7 +32,7 @@
     },
     {
       "id": "s3",
-      "name": "2. Observamos que — observações",
+      "name": "2. Observamos que (observações)",
       "x": 16,
       "y": 90.25,
       "width": 178.0,
@@ -43,7 +43,7 @@
     },
     {
       "id": "s4",
-      "name": "3. Aprendemos que — inferência",
+      "name": "3. Aprendemos que (inferência)",
       "x": 16,
       "y": 150.5,
       "width": 178.0,
@@ -54,7 +54,7 @@
     },
     {
       "id": "s5",
-      "name": "4. Portanto, vamos — ação",
+      "name": "4. Portanto, vamos (ação)",
       "x": 16,
       "y": 210.75,
       "width": 178.0,

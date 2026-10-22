@@ -11,7 +11,7 @@
 
 _Playbook | Versão 3h_
 
-> Adaptação da referência textual do ERIC_RC6. A ordem E1–E3 pertence ao método; a fase da esteira é contexto, não condição de uso.
+> Adaptação da referência textual do ERIC_RC6. A ordem E1 a E3 pertence ao método; a fase da esteira é contexto, não condição de uso.
 
 ## Objetivo
 
@@ -19,7 +19,7 @@ Transformar a hipótese priorizada no Modelo 4D em uma solução mais concreta, 
 
 ## Integração opcional com a esteira ERIC
 
-- Aplique E1–E3 quando houver uma solução candidata, inclusive antes da ideação formal ou após testes para revisar o plano. No RC6, os registros costumam ficar em `ideation`.
+- Aplique E1 a E3 quando houver uma solução candidata, inclusive antes da ideação formal ou após testes para revisar o plano. No RC6, os registros costumam ficar em `ideation`.
 - E3 estrutura Test Cards; testes já executados podem ser incorporados com data e fonte, sem fingir que critérios retrospectivos foram prévios.
 - Learning Cards exigem evidência de execução, independentemente da fase registrada.
 - Registre estratégia `internal`, `external`, `hybrid` ou `undecided` conforme a decisão disponível; ausência de rota limita apenas entregas que dependam dela.
@@ -28,9 +28,9 @@ Transformar a hipótese priorizada no Modelo 4D em uma solução mais concreta, 
 
 | **Etapa** | **Dimensão** | **Pergunta central** | **Tempo sugerido** |
 |:---|:---|:---|:--:|
-| E1 | Esclarecer | O que exatamente estamos propondo? | 20–30 min |
-| E2 | Estruturar | O que precisa existir para essa solução acontecer? | 70–90 min |
-| E3 | Experimentar | O que precisamos testar antes de escalar? | 40–50 min |
+| E1 | Esclarecer | O que exatamente estamos propondo? | 20 a 30 min |
+| E2 | Estruturar | O que precisa existir para essa solução acontecer? | 70 a 90 min |
+| E3 | Experimentar | O que precisamos testar antes de escalar? | 40 a 50 min |
 
 ## E1: Esclarecer
 
@@ -148,7 +148,7 @@ Depois o grupo organiza em 3 colunas:
 
 - Apoios
 
-- Prazo estimado (0–30 dias; 30–60 dias; 60+ dias)
+- Prazo estimado (0 a 30 dias; 30 a 60 dias; 60+ dias)
 
 **Entregável:** plano inicial de construção.
 

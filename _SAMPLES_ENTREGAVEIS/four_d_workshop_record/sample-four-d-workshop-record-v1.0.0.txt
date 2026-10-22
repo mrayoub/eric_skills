@@ -1,34 +1,34 @@
-EXEMPLO FICTÍCIO — Incerteza sobre o andamento das solicitações
+EXEMPLO FICTÍCIO: Incerteza sobre o andamento das solicitações
 
 ID sample-four-d-workshop-record · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
-D1 — Descongelar
+D1: Descongelar
 
 Participantes fictícios relataram incerteza sobre o andamento das solicitações e divergiram sobre a principal causa.
 
 Fontes: FIC-01
 
-D2 — Diagnosticar
+D2: Diagnosticar
 
 A jornada simulada mostra campos incompletos na entrada, devoluções e ausência de status visível. Não há linha de base real.
 
 Fontes: FIC-01
 
-D3 — Desenhar
+D3: Desenhar
 
 Foram simuladas três alternativas: orientação prévia, formulário guiado e painel de status; cada uma responde a uma parte da dor.
 
 Fontes: FIC-01
 
-D4 — Decidir
+D4: Decidir
 
 O grupo fictício priorizou investigar o formulário guiado. O voto exemplifica preferência do grupo, não valida eficácia.
 
 Fontes: FIC-01
 
-D3/D4 — alternativas fictícias
+D3/D4: alternativas fictícias
 
 | Alternativa | Dor | Prioridade do grupo |
 | --- | --- | --- |

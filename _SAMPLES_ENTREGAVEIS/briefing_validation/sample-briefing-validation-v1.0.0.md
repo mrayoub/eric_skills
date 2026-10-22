@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Solicitações internas de dados
+# EXEMPLO FICTÍCIO: Solicitações internas de dados
 
 ID sample-briefing-validation · versão 1.0.0 · Completo
 
@@ -81,8 +81,8 @@ Fontes: FIC-01
 | --- | --- |
 | Disparada | Não |
 | Amplitude | 2 |
-| Notas originais | — |
-| Notas da reavaliação | — |
+| Notas originais | não informadas |
+| Notas da reavaliação | não informadas |
 
 Fontes: FIC-01
 

@@ -4,7 +4,7 @@ Fonte primária fornecida pelo usuário em 28 set 2026: `assets/Modelo 4D de Apr
 
 ## Conferência metodológica
 
-A fonte confirma a sequência D1–D4, as perguntas de D1, as quatro perguntas da jornada, o barco com **Ventos / Âncoras / Icebergs / Porto**, o brainwriting de três ideias e o agrupamento incremental / estrutural / radical. Confirma também **10 créditos por participante**, livre distribuição, concentração permitida, nenhuma reserva, investimento simultâneo e defesa por quem aplicou três créditos ou mais.
+A fonte confirma a sequência D1 a D4, as perguntas de D1, as quatro perguntas da jornada, o barco com **Ventos / Âncoras / Icebergs / Porto**, o brainwriting de três ideias e o agrupamento incremental / estrutural / radical. Confirma também **10 créditos por participante**, livre distribuição, concentração permitida, nenhuma reserva, investimento simultâneo e defesa por quem aplicou três créditos ou mais.
 
 A referência adaptada do RC6 reproduz esses elementos. Seus trechos de integração com a esteira e suas regras de evidência são adaptações posteriores; não constam como exigências na fonte DOCX.
 

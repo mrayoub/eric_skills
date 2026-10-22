@@ -1,40 +1,40 @@
-# EXEMPLO FICTÍCIO — Encontro com clientes sobre solicitações de dados
+# EXEMPLO FICTÍCIO: Encontro com clientes sobre solicitações de dados
 
 ID sample-five-c-workshop-record · versão 1.0.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
-## C1 — Contextualizar
+## C1: Contextualizar
 
 No encontro fictício, a equipe apresentou o desafio e registrou dúvidas sobre origem das devoluções.
 
 Fontes: FIC-01
 
-## C2 — Compreender
+## C2: Compreender
 
 Cinco participantes fictícios descreveram etapas que funcionam e dificuldades de acompanhamento. Com três votos por pessoa, foram registrados 15 votos em temas priorizados.
 
 Fontes: FIC-01
 
-## C3 — Confirmar
+## C3: Confirmar
 
 O grupo simulado descreveu experiência desejada com confirmação clara de envio e status visível, além de critérios observáveis.
 
 Fontes: FIC-01
 
-## C4 — Cocriar
+## C4: Cocriar
 
 Ideias individuais fictícias originaram propostas de orientação, formulário guiado e acompanhamento; benefícios são expectativas, não resultados.
 
 Fontes: FIC-01
 
-## C5 — Conduzir
+## C5: Conduzir
 
 Cinco participantes fictícios distribuíram dez créditos cada, totalizando 50. O ranking orienta investigação, sem comprovar viabilidade ou impacto.
 
 Fontes: FIC-01
 
-### C2 — temas priorizados, exemplo fictício
+### C2: temas priorizados, exemplo fictício
 
 | Tema | Votos |
 | --- | --- |
@@ -44,7 +44,7 @@ Fontes: FIC-01
 
 Fontes: FIC-01
 
-### C5 — distribuição de 50 créditos fictícios
+### C5: distribuição de 50 créditos fictícios
 
 | Proposta | Créditos | Próxima verificação |
 | --- | --- | --- |

@@ -24,7 +24,7 @@ Quando o encontro não ocorrer ou apenas parte dele ocorrer, produza plano ou re
 
 ## Particularidades e inconsistências da fonte
 
-O DOCX informa “duração: 6 horas” e apresenta agenda de 09h a 17h com café, almoço, pausas e um intervalo de 13h45 a 14h. Os blocos ativos C1–C5 somam 4h55; com o encerramento de 15 minutos, 5h10. Confirme a duração efetiva ao reutilizar o roteiro. O quadro de C4 prevê compartilhamentos de até 2 minutos, mas o próprio texto admite que nem todas as pessoas apresentarão; não trate esse momento como registro exaustivo das ideias sem conservar os materiais individuais. Na fonte, os quatro grupos e empresas citados são composição planejada para aquele encontro; não os reproduza como participantes reais sem ata ou presença confirmada.
+O DOCX informa “duração: 6 horas” e apresenta agenda de 09h a 17h com café, almoço, pausas e um intervalo de 13h45 a 14h. Os blocos ativos C1 a C5 somam 4h55; com o encerramento de 15 minutos, 5h10. Confirme a duração efetiva ao reutilizar o roteiro. O quadro de C4 prevê compartilhamentos de até 2 minutos, mas o próprio texto admite que nem todas as pessoas apresentarão; não trate esse momento como registro exaustivo das ideias sem conservar os materiais individuais. Na fonte, os quatro grupos e empresas citados são composição planejada para aquele encontro; não os reproduza como participantes reais sem ata ou presença confirmada.
 
 ## Relação com a esteira
 

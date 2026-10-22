@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-innovation-potential-assessment",
   "branding_version": "1.2.0",
-  "content_sha256": "3c3b0c8665c2c98e7f313e030760c255695b4b52543d35f4b31ed8db738d3a32",
+  "content_sha256": "5ef7232d5b9d75091180d97631886caed5b208ce7653aecee5a73b066e30199b",
   "content_version": "1.0.0",
   "deliverable_type": "innovation_potential_assessment",
   "files": {
-    "sample-innovation-potential-assessment-v1.0.0.docx": "661eccb863805c2ce88f6d0a13d559960a8e324654ffd58d834a85a83ea947e7",
-    "sample-innovation-potential-assessment-v1.0.0.json": "3c3b0c8665c2c98e7f313e030760c255695b4b52543d35f4b31ed8db738d3a32",
-    "sample-innovation-potential-assessment-v1.0.0.md": "3f8eafe3d2c78c8164c177a743f6ced32307e13b4a0dd807e56083a2a25cb3bb",
-    "sample-innovation-potential-assessment-v1.0.0.pdf": "0a5c8685c3b5f71c14daca666b2df81ce8b4dbe0a26d712bc069c1f678c564c2",
-    "sample-innovation-potential-assessment-v1.0.0.txt": "dde7d195a35f2787e86fbc0d1e177f9cfa54a6185a4bda067c3f373a53d47baa"
+    "sample-innovation-potential-assessment-v1.0.0.docx": "c83034bdfaf42c7894542f7de712ae7cca362bc7ada51b773fe2bbcdef86946d",
+    "sample-innovation-potential-assessment-v1.0.0.html": "217589cbbc20a986941ccff604d654fe824cf3be86a813d99404a8164ca4252a",
+    "sample-innovation-potential-assessment-v1.0.0.json": "5ef7232d5b9d75091180d97631886caed5b208ce7653aecee5a73b066e30199b",
+    "sample-innovation-potential-assessment-v1.0.0.md": "be985d77a46701375806b705b7007e31368aa3729110cb99df6820467ce839fd",
+    "sample-innovation-potential-assessment-v1.0.0.pdf": "1fe7bbf19b9bb6af5c3dc84fb880c1adcfa477689266466f05dfc0cdb34752b4",
+    "sample-innovation-potential-assessment-v1.0.0.txt": "f95d2fc29210edc3a8e4f8810016c29cfa377aac1e69882b172901fb23a39035"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",

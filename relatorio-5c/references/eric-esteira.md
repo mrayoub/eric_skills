@@ -1,10 +1,10 @@
-# ERIC — Esteira Robusta de Inovação Colaborativa
+# ERIC: Esteira Robusta de Inovação Colaborativa
 
 Esta é a referência metodológica comum das treze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
 
 ## Contexto institucional
 
-CCEE significa **Câmara de Comercialização de Energia Elétrica**. Ela viabiliza operações de comercialização de energia no Brasil e atua no registro, contabilização e liquidação de operações, entre outras atividades. Em cada desafio, identifique quais agentes de mercado, pessoas, equipes, processos e obrigações são realmente afetados. “Agente” pode designar uma organização participante do mercado; não presuma que seja um usuário individual. Fonte institucional: [CCEE — atuação na comercialização](https://www.ccee.org.br/pt/web/guest/-/entenda-a-atuacao-da-ccee-e-seu-papel-na-comercializacao-de-energia).
+CCEE significa **Câmara de Comercialização de Energia Elétrica**. Ela viabiliza operações de comercialização de energia no Brasil e atua no registro, contabilização e liquidação de operações, entre outras atividades. Em cada desafio, identifique quais agentes de mercado, pessoas, equipes, processos e obrigações são realmente afetados. “Agente” pode designar uma organização participante do mercado; não presuma que seja um usuário individual. Fonte institucional: [CCEE: atuação na comercialização](https://www.ccee.org.br/pt/web/guest/-/entenda-a-atuacao-da-ccee-e-seu-papel-na-comercializacao-de-energia).
 
 ## Lógica da esteira
 
@@ -16,7 +16,7 @@ As etapas abaixo são o arranjo metodológico de referência do RC6. O RC5 usa r
 |---|---|---|---|---|
 | 1 | **Garimpar problemas e oportunidades** | Onde surgem dores, sinais e oportunidades? | Registrar relato, origem, público, processo, abrangência e dados iniciais; distinguir sinal de causa demonstrada. | Registro de oportunidade e avaliação de potencial quando pontuável. |
 | 2 | **Conhecer o problema ou oportunidade** | O que vamos trabalhar? | Delimitar desafio, ouvir responsáveis e afetados, localizar dados, estratégias e restrições; registrar a Entrevista Inicial de sete campos. | Entrevista Inicial versionada; Briefing de uma página, IQB e Perguntas para fechar lacunas quando úteis. |
-| 3 | **Aprofundar o problema ou oportunidade** | Qual problema queremos resolver? | Examinar jornada, frequência, impacto, sintomas, causas supostas e alternativas. No método 4D: D1 descongelar percepções; D2 diagnosticar; D3 desenhar alternativas; D4 decidir prioridades do grupo. | Diagnóstico, snapshot após D2 e Relatório 4D com D1–D4 e dissensos. |
+| 3 | **Aprofundar o problema ou oportunidade** | Qual problema queremos resolver? | Examinar jornada, frequência, impacto, sintomas, causas supostas e alternativas. No método 4D: D1 descongelar percepções; D2 diagnosticar; D3 desenhar alternativas; D4 decidir prioridades do grupo. | Diagnóstico, snapshot após D2 e Relatório 4D com D1 a D4 e dissensos. |
 | BP1 | **Desafio estruturado** | O desafio está claro e relevante para idear? | Examinar clareza, público, evidência, escopo, riscos e stakeholders sobre o 4D concluído. | Avaliação com lacunas e recomendação; decisão de gestão separada. |
 | 4 | **Gerar ideias** | Como podemos resolver o problema? | Relacionar alternativas ao desafio. No método 3E: E1 esclarecer hipótese, escopo e valor; E2 estruturar componentes, dependências e MVP; E3 desenhar testes das suposições críticas. | Relatório 3E, Test Cards individuais e decisão de rota quando disponível. |
 | 5 | **Desenhar soluções de negócio** | Qual proposta testável e como obtê-la? | Detalhar proposta de valor, fluxo, MVP, viabilidade inicial, critérios de validação e estratégia de obtenção da solução. | Desenho da solução e rota `internal`, `external`, `hybrid` ou `undecided`. |
@@ -46,8 +46,8 @@ As etapas abaixo são o arranjo metodológico de referência do RC6. O RC5 usa r
 ## Dependências de conhecimento entre etapas
 
 - **Oportunidade → Entrevista Inicial → Briefing:** uma dor relatada ainda não prova sua causa nem a escala do impacto. A Entrevista Inicial distingue fato, relato, interpretação e solução sugerida; o Briefing sintetiza essa versão em uma página.
-- **Briefing → 4D:** o desafio fornece ponto de partida; o 4D pode corrigi-lo. D1–D4 são etapas internas do método. No arranjo RC6, os quatro D ocorrem no aprofundamento e BP1 examina o relatório completo; essa alocação não limita quando a skill 4D pode ser chamada.
-- **4D → 3E:** alternativas priorizadas pelo grupo são candidatas, não soluções validadas. E1–E3 tornam uma delas testável. No arranjo RC6, os três E ocorrem na geração de ideias; a skill também pode ser aplicada antes ou depois, com origem e data explícitas.
+- **Briefing → 4D:** o desafio fornece ponto de partida; o 4D pode corrigi-lo. D1 a D4 são etapas internas do método. No arranjo RC6, os quatro D ocorrem no aprofundamento e BP1 examina o relatório completo; essa alocação não limita quando a skill 4D pode ser chamada.
+- **4D → 3E:** alternativas priorizadas pelo grupo são candidatas, não soluções validadas. E1 a E3 tornam uma delas testável. No arranjo RC6, os três E ocorrem na geração de ideias; a skill também pode ser aplicada antes ou depois, com origem e data explícitas.
 - **3E → experimentação:** E3 produz Test Cards e plano. **Learning Card exige teste executado e evidência**. Uma menção a Learning Card em E3 no texto de referência do RC6 é tratada aqui como planejamento do registro futuro, nunca como achado antecipado.
 - **Experimentação → implementação:** um teste de usabilidade, reação ao protótipo, piloto operacional e comparação de efeito respondem perguntas diferentes. A recomendação deve acompanhar a força e o alcance do método realmente executado. BP2 e Scorecard avaliam prontidão; não fabricam aprovação por nota.
 

@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — LC-01: conclusão sem ajuda no fluxo guiado
+# EXEMPLO FICTÍCIO (LC-01): conclusão sem ajuda no fluxo guiado
 
 ID sample-learning-card · versão 1.0.0 · Completo
 
@@ -6,23 +6,23 @@ Test Card: sample-test-card v1.0.0
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
-## 1. Acreditávamos que — hipótese testada
+## 1. Acreditávamos que (hipótese testada)
 
 Acreditávamos que pelo menos quatro de cinco concluiriam sem ajuda, sem falha crítica, conforme TC-01 fictício.
 
 Fontes: FIC-01
 
-## 2. Observamos que — observações
+## 2. Observamos que (observações)
 
 Observamos no exemplo simulado três de cinco tarefas concluídas sem ajuda; duas exigiram ajuda no campo de classificação. Nenhuma falha crítica foi registrada.
 
 Fontes: FIC-01, FIC-02
 
-## 3. Aprendemos que — inferência
+## 3. Aprendemos que (inferência)
 
 Aprendemos que o critério fictício de quatro de cinco não foi atingido. A amostra pequena aponta problema de compreensão, sem demonstrar efeito populacional ou operacional.
 
-## 4. Portanto, vamos — ação
+## 4. Portanto, vamos (ação)
 
 Portanto, vamos revisar o rótulo e executar novo teste com critério definido antes da coleta real.
 

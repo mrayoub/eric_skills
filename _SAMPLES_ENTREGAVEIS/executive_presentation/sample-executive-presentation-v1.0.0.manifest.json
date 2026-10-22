@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-executive-presentation",
   "branding_version": "1.2.0",
-  "content_sha256": "3a933e3cba4a2ed53fb4bbdb2655a4cbd3f648b799ac78c28c1096f63b0048bd",
+  "content_sha256": "f1d45d29c9e78087cd8419fd14b7f5c7e4208cd76654858b53ef70ba6102edf5",
   "content_version": "1.0.0",
   "deliverable_type": "executive_presentation",
   "files": {
-    "sample-executive-presentation-v1.0.0.json": "3a933e3cba4a2ed53fb4bbdb2655a4cbd3f648b799ac78c28c1096f63b0048bd",
-    "sample-executive-presentation-v1.0.0.md": "14db40ce2765be9047b950d738c65eef3151d3f99c93656003295824ff8b2913",
-    "sample-executive-presentation-v1.0.0.pdf": "cf25a764b8a55231f0db7a703475c9ebb6544d61ae2a3c8eea6f41c179e738cc",
-    "sample-executive-presentation-v1.0.0.pptx": "743e98fdcf8b71d779cabef81650476f4e4db415f7c9fd6b120ff955ba9a2a53",
-    "sample-executive-presentation-v1.0.0.txt": "e034b985e438a968b8a944572822299055f9d949a54af138a5902dd8f97b7199"
+    "sample-executive-presentation-v1.0.0.html": "c254d2289979a793f125486b7a3e1aa4ed0d66499266d98c0a616500965798f4",
+    "sample-executive-presentation-v1.0.0.json": "f1d45d29c9e78087cd8419fd14b7f5c7e4208cd76654858b53ef70ba6102edf5",
+    "sample-executive-presentation-v1.0.0.md": "3b80dcfb06369d3d388a72401e4bddc5c7d330999701a56c059c7770f3e9ceaa",
+    "sample-executive-presentation-v1.0.0.pdf": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29",
+    "sample-executive-presentation-v1.0.0.pptx": "ff63129235516e7a1fe1158dda5577d5a56c18dc99f3d8276ceca27c90ad66fe",
+    "sample-executive-presentation-v1.0.0.txt": "016615d10b2f5414362f0e617ce1577bddebcb7b9782490b3605dbc0fe0ffdc5"
   },
   "layout": "presentation",
   "paper": "presentation_16_9",

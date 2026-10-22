@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Melhorar a experiencia de solicitacoes internas
+# EXEMPLO FICTÍCIO: Melhorar a experiencia de solicitacoes internas
 
 ID sample-briefing · versão 1.0.0 · Completo
 

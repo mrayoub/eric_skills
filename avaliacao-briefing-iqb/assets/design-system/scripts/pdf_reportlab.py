@@ -324,7 +324,7 @@ def _number_text(value: float) -> str:
 def score_panel_data(block: dict[str, Any]) -> dict[str, Any]:
     """Conteúdo do painel de notas: colunas, linhas (com o valor da barra), total e selo.
 
-    Potencial: peso em %, nota 0–100 e ponderado sem arredondar (a soma fecha com o total).
+    Potencial: peso em %, nota de 0 a 100 e ponderado sem arredondar (a soma fecha com o total).
     IQB: notas por dimensão de 1 a 5, com veto e teto; o total é o IQB validado do bloco "iqb".
     """
     data = block.get("data", {})
@@ -335,20 +335,20 @@ def score_panel_data(block: dict[str, Any]) -> dict[str, Any]:
             numeric = isinstance(final, (int, float)) and not isinstance(final, bool)
             ceiling = detail.get("veto_max_score")
             if detail.get("veto_triggered"):
-                veto = f"Disparado (teto {ceiling}): {detail.get('veto_detail') or '—'}"
+                veto = f"Disparado (teto {ceiling}): {detail.get('veto_detail') or 'sem detalhe'}"
             else:
                 veto = f"Não disparado (teto {ceiling})" if ceiling is not None else "Não disparado"
             rows.append({"cells": [IQB_DIMENSION_LABELS.get(dimension, dimension), str(detail.get("yes_count", "")),
-                                   str(detail.get("raw_score", "")), _number_text(final) if numeric else "—", veto,
+                                   str(detail.get("raw_score", "")), _number_text(final) if numeric else "sem nota", veto,
                                    str(detail.get("label", "")), str(detail.get("justification", ""))],
                          "bar": max(0.0, min(100.0, float(final) * 20)) if numeric else None})
         summary = data.get("panel_total") or {}
         total, classification = summary.get("score"), str(summary.get("classification") or "")
         return {"title": "Notas por dimensão", "rows": rows, "total_prefix": "IQB",
-                "heads": ["Dimensão", "Sim (de 9)", "Nota bruta", "Nota final (1–5)", "Veto", "Rótulo", "Justificativa"],
+                "heads": ["Dimensão", "Sim (de 9)", "Nota bruta", "Nota final (1 a 5)", "Veto", "Rótulo", "Justificativa"],
                 "shares": IQB_PANEL_SHARES, "bar": 3, "strong": (0, 5), "value": 3, "badge_column": 5,
                 "total_label": "IQB (média das quatro dimensões)",
-                "total": _number_text(total) if isinstance(total, (int, float)) else "—",
+                "total": _number_text(total) if isinstance(total, (int, float)) else "pendente",
                 "badge": (classification or "pendente").upper(),
                 "tone": IQB_BADGE_TONES.get(classification, BADGE_TONES[""])}
     rows = []
@@ -356,18 +356,18 @@ def score_panel_data(block: dict[str, Any]) -> dict[str, Any]:
         score, weight = row.get("score"), row.get("weight")
         numeric = isinstance(score, (int, float)) and not isinstance(score, bool)
         rows.append({"cells": [str(row.get("label") or SCORE_LABELS.get(row.get("criterion", ""), row.get("criterion", ""))),
-                               f"{_number_text(weight * 100)}%" if isinstance(weight, (int, float)) else "—",
-                               _number_text(score) if numeric else "—",
-                               _number_text(score * weight) if numeric and isinstance(weight, (int, float)) else "—",
+                               f"{_number_text(weight * 100)}%" if isinstance(weight, (int, float)) else "sem peso",
+                               _number_text(score) if numeric else "sem nota",
+                               _number_text(score * weight) if numeric and isinstance(weight, (int, float)) else "sem nota",
                                str(row.get("justification") or "")],
                      "bar": max(0.0, min(100.0, float(score))) if numeric else None})
     total = data.get("overall_score")
     classification = data.get("classification") if data.get("classification") in BADGE_TONES else ""
     return {"title": str(data.get("title") or "Pontuação por critério"), "rows": rows, "total_prefix": "Total",
-            "heads": ["Critério", "Peso", "Nota (0–100)", "Ponderado", "Justificativa"],
+            "heads": ["Critério", "Peso", "Nota (0 a 100)", "Ponderado", "Justificativa"],
             "shares": SCORE_PANEL_SHARES, "bar": 2, "strong": (0, 3), "value": 3, "badge_column": 4,
             "total_label": "Total ponderado",
-            "total": _number_text(total) if isinstance(total, (int, float)) else "—",
+            "total": _number_text(total) if isinstance(total, (int, float)) else "pendente",
             "badge": (classification or "pendente").upper(), "tone": BADGE_TONES[classification]}
 
 
@@ -844,7 +844,7 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
     if content["citations"]:
         lines = []
         for citation in content["citations"]:
-            line = f"<b>{_markup(citation['id'])}</b> — {_markup(citation['source_id'])}"
+            line = f"<b>{_markup(citation['id'])}</b>: {_markup(citation['source_id'])}"
             if citation.get("locator"):
                 line += f", {_markup(citation['locator'])}"
             lines.append(Paragraph(line, styles["source"]))
@@ -918,7 +918,7 @@ def plan_slides(content: dict[str, Any], block_text: Callable[[dict[str, Any]], 
         # Preserve uma linha de fonte por item e abra continuação quando necessário.
         source_lines = []
         for citation in content["citations"]:
-            line = f"{citation['id']} — {citation['source_id']}"
+            line = f"{citation['id']}: {citation['source_id']}"
             if citation.get("locator"):
                 line += f", {citation['locator']}"
             source_lines.append(line)
@@ -1210,7 +1210,7 @@ def _render_one_page_layout(content: dict[str, Any], tokens: dict[str, Any], pro
     fx, fy, fw, fh = rectangle("identificacao_versao")
     footer_items: list[Any] = []
     if content["citations"]:
-        sources = "; ".join(f"{citation['id']} — {citation['source_id']}"
+        sources = "; ".join(f"{citation['id']}: {citation['source_id']}"
                             + (f", {citation['locator']}" if citation.get("locator") else "")
                             for citation in content["citations"])
         footer_items.append(Paragraph(_markup("Fontes: " + sources), small))
@@ -1295,7 +1295,7 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
             return []
         result: list[Any] = [Spacer(1, 7), Paragraph("Fontes", styles["field"])]
         for citation in content["citations"]:
-            line = f"<b>{_markup(citation['id'])}</b> — {_markup(citation['source_id'])}"
+            line = f"<b>{_markup(citation['id'])}</b>: {_markup(citation['source_id'])}"
             if citation.get("locator"):
                 line += f", {_markup(citation['locator'])}"
             result.append(Paragraph(line, styles["source"]))

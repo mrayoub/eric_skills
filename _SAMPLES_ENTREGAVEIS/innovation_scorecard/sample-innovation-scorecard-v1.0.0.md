@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Portal de solicitações: maturidade das evidências
+# EXEMPLO FICTÍCIO. Portal de solicitações: maturidade das evidências
 
 ID sample-innovation-scorecard · versão 1.0.0 · Completo
 
@@ -22,7 +22,7 @@ Antes de avançar, obter linha de base, testar o fluxo com público elegível e 
 
 Fontes: FIC-01
 
-### Força das evidências — exemplo
+### Força das evidências: exemplo
 
 | Dimensão | Estado | Lacuna |
 | --- | --- | --- |

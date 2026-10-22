@@ -58,16 +58,16 @@ IQB_SOURCE_LABELS = {
 }
 CARD_LABELS = {
     "test_card": {
-        "hypothesis": "1. Acreditamos que — hipótese",
-        "test": "2. Para verificar, vamos — teste",
-        "measure": "3. Vamos medir — medida",
-        "criteria": "4. Estaremos certos se — critério",
+        "hypothesis": "1. Acreditamos que (hipótese)",
+        "test": "2. Para verificar, vamos (teste)",
+        "measure": "3. Vamos medir (medida)",
+        "criteria": "4. Estaremos certos se (critério)",
     },
     "learning_card": {
-        "hypothesis": "1. Acreditávamos que — hipótese testada",
-        "observations": "2. Observamos que — observações",
-        "learning": "3. Aprendemos que — inferência",
-        "action": "4. Portanto, vamos — ação",
+        "hypothesis": "1. Acreditávamos que (hipótese testada)",
+        "observations": "2. Observamos que (observações)",
+        "learning": "3. Aprendemos que (inferência)",
+        "action": "4. Portanto, vamos (ação)",
     },
 }
 
@@ -144,6 +144,21 @@ def normalized_title(value: str) -> str:
                             if unicodedata.category(char) != "Mn").split())
 
 
+# Os entregáveis não usam travessão nem meia-risca, nem hífen com espaços no lugar deles.
+DASH = re.compile(r"[\u2012\u2013\u2014\u2015]|(?<=\S) - (?=\S)")
+
+
+def dash_paths(value: Any, path: str = "") -> list[str]:
+    """Caminhos dos textos do conteúdo que têm travessão."""
+    if isinstance(value, str):
+        return [path or "(raiz)"] if DASH.search(value) else []
+    if isinstance(value, dict):
+        return [found for key, item in value.items() for found in dash_paths(item, f"{path}.{key}" if path else key)]
+    if isinstance(value, list):
+        return [found for index, item in enumerate(value) for found in dash_paths(item, f"{path}[{index}]")]
+    return []
+
+
 def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any]:
     try:
         from jsonschema import Draft202012Validator
@@ -201,6 +216,11 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
         if normalized_name and re.search(rf"(?<!\w){re.escape(normalized_name)}(?!\w)", title_key):
             raise ValueError(f"title: não repita o tipo do entregável ({name}), que já aparece no "
                              "cabeçalho; escreva o assunto ou a mensagem do documento")
+
+    dashed = dash_paths(content)
+    if dashed:
+        raise ValueError("travessão no texto: " + ", ".join(dashed[:8])
+                         + "; troque por dois-pontos, vírgula, parênteses ou ponto, e intervalos por \"de X a Y\"")
 
     if kind in ("test_card", "learning_card"):
         keys = ("hypothesis", "test", "measure", "criteria") if kind == "test_card" else ("hypothesis", "observations", "learning", "action")
@@ -350,7 +370,7 @@ def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[l
             criteria.append([label, criterion, "Sim" if item.get("answer") is True else "Não",
                              str(item.get("evidence", "")), IQB_SOURCE_LABELS.get(source, source),
                              str(item.get("citation_id") or "")])
-        veto = f"Disparado: {detail.get('veto_detail') or '—'}" if detail.get("veto_triggered") else "Não disparado"
+        veto = f"Disparado: {detail.get('veto_detail') or 'sem detalhe'}" if detail.get("veto_triggered") else "Não disparado"
         dimensions.append([label, str(detail.get("yes_count", "")), str(detail.get("raw_score", "")),
                            veto, str(detail.get("veto_max_score", "")), str(detail.get("final_score", "")),
                            str(detail.get("label", "")), str(detail.get("justification", ""))])
@@ -358,8 +378,8 @@ def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[l
     originals = anti.get("original_scores")
     audit = [["Disparada", "Sim" if anti.get("triggered") else "Não"],
              ["Amplitude", str(anti.get("span", ""))],
-             ["Notas originais", ", ".join(map(str, originals)) if originals is not None else "—"],
-             ["Notas da reavaliação", str(anti.get("re_evaluation_notes") or "—")]]
+             ["Notas originais", ", ".join(map(str, originals)) if originals is not None else "não informadas"],
+             ["Notas da reavaliação", str(anti.get("re_evaluation_notes") or "não informadas")]]
     return [
         ("criterios", "Critérios avaliados", ["Dimensão", "Critério", "Resposta", "Evidência", "Fonte", "Citação"], criteria),
         ("dimensoes", "Notas por dimensão", ["Dimensão", "Sim (de 9)", "Nota bruta", "Veto", "Teto do veto", "Nota final", "Rótulo", "Justificativa"], dimensions),
@@ -368,13 +388,15 @@ def table_views(block: dict[str, Any]) -> list[tuple[str, str, list[str], list[l
 
 
 def card_text(card: dict[str, Any]) -> str:
-    parts = [str(card.get("title", ""))]
+    parts = []
     if card.get("value") is not None:
         parts.append(str(card["value"]))
     if card.get("text"):
         parts.append(str(card["text"]))
     parts.extend(str(x) for x in card.get("items", []))
-    return " — ".join(x for x in parts if x)
+    body = "; ".join(x for x in parts if x)
+    title = str(card.get("title", ""))
+    return f"{title}: {body}" if title and body else title or body
 
 
 _PDF_MODULE: Any = None
@@ -685,7 +707,7 @@ def flow_css(tokens: dict[str, Any]) -> str:
 def html_sources(content: dict[str, Any]) -> str:
     lines = []
     for citation in content["citations"]:
-        line = f"<b>{html.escape(citation['id'])}</b> — {html.escape(citation['source_id'])}"
+        line = f"<b>{html.escape(citation['id'])}</b>: {html.escape(citation['source_id'])}"
         if citation.get("locator"):
             line += f", {html.escape(citation['locator'])}"
         lines.append(f'<p class="st-source">{line}</p>')
@@ -898,7 +920,7 @@ def render_presentation_html(content: dict[str, Any], tokens: dict[str, Any]) ->
 
 def load_presentation_layout(deliverable_type: str) -> dict[str, dict[str, Any]] | None:
     """Lê _DESIGN_SYSTEM/layouts/<tipo>.layout.json e devolve os slots por nome,
-    em milímetros (CSS aceita mm nativamente — sem conversão de unidade).
+    em milímetros (CSS aceita mm nativamente, sem conversão de unidade).
     None se o arquivo não existir."""
     path = ROOT / "layouts" / f"{deliverable_type}.layout.json"
     if not path.is_file():
@@ -993,7 +1015,7 @@ def render_one_page_html(content: dict[str, Any], tokens: dict[str, Any], profil
         parts.append(box(name, "".join(items), "op-people" if key == "people" else "op-field"))
     footer = []
     if content["citations"]:
-        sources = "; ".join(f"{citation['id']} — {citation['source_id']}"
+        sources = "; ".join(f"{citation['id']}: {citation['source_id']}"
                             + (f", {citation['locator']}" if citation.get("locator") else "")
                             for citation in content["citations"])
         footer.append(f"<p>{html.escape('Fontes: ' + sources)}</p>")
@@ -1261,6 +1283,11 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         return Inches(fx), Inches(fy), Inches(fw), Inches(fh)
 
     prs = Presentation()
+    # O modelo padrão usa meia-risca como marcador dos níveis 2 e 4; os entregáveis não usam travessão.
+    for master in prs.slide_masters:
+        for bullet in master.element.iter("{http://schemas.openxmlformats.org/drawingml/2006/main}buChar"):
+            if DASH.search(bullet.get("char", "")):
+                bullet.set("char", "•")
     if layout:
         prs.slide_width, prs.slide_height = Inches(layout["width_in"]), Inches(layout["height_in"])
     else:
@@ -1393,7 +1420,7 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
     if lines:
         slide(title, "\n".join(lines))
     if content["citations"]:
-        slide("Fontes", "\n".join(f"{c['id']} — {c['source_id']}" + (f", {c['locator']}" if c.get('locator') else '')
+        slide("Fontes", "\n".join(f"{c['id']}: {c['source_id']}" + (f", {c['locator']}" if c.get('locator') else '')
                                      for c in content["citations"]))
     prs.save(path)
 

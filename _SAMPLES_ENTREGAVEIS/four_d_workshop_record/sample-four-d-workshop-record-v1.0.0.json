@@ -3,7 +3,7 @@
     {
       "data": {
         "section_key": "d1_heading",
-        "text": "D1 — Descongelar"
+        "text": "D1: Descongelar"
       },
       "id": "heading-d1",
       "type": "heading"
@@ -22,7 +22,7 @@
     {
       "data": {
         "section_key": "d2_heading",
-        "text": "D2 — Diagnosticar"
+        "text": "D2: Diagnosticar"
       },
       "id": "heading-d2",
       "type": "heading"
@@ -41,7 +41,7 @@
     {
       "data": {
         "section_key": "d3_heading",
-        "text": "D3 — Desenhar"
+        "text": "D3: Desenhar"
       },
       "id": "heading-d3",
       "type": "heading"
@@ -60,7 +60,7 @@
     {
       "data": {
         "section_key": "d4_heading",
-        "text": "D4 — Decidir"
+        "text": "D4: Decidir"
       },
       "id": "heading-d4",
       "type": "heading"
@@ -103,7 +103,7 @@
             "3"
           ]
         ],
-        "title": "D3/D4 — alternativas fictícias"
+        "title": "D3/D4: alternativas fictícias"
       },
       "id": "alternatives",
       "type": "table"
@@ -132,5 +132,5 @@
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
-  "title": "EXEMPLO FICTÍCIO — Incerteza sobre o andamento das solicitações"
+  "title": "EXEMPLO FICTÍCIO: Incerteza sobre o andamento das solicitações"
 }

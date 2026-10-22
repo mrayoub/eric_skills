@@ -86,5 +86,5 @@
       "display_mode": "content_only"
     }
   ],
-  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py — esse tipo é renderizado em fluxo, sem posição fixa hoje."
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
 }

@@ -4,7 +4,7 @@ Na consolidação, avalie o MVP como produto, **separado da avaliação das hip�
 
 ## Regras
 
-- MVP que funciona não valida hipótese. Hipótese não sustentada não torna o MVP ruim — pode ser a proposta, não a construção.
+- MVP que funciona não valida hipótese. Hipótese não sustentada não torna o MVP ruim: pode ser a proposta, não a construção.
 - Cada dimensão leva evidência com ID e localizador, ou `não avaliado`. Não preencha por impressão nem pela vontade de avançar.
 - Avalie a versão efetivamente testada, registrada no caderno durante a execução; não estenda a conclusão a versões futuras.
 - Prontidão para teste não é prontidão para implantação. Implantação exige o que o BP2 pede: riscos, custo, dependências e responsáveis.

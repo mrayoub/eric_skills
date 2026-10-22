@@ -4,8 +4,8 @@ Referência visual: exemplo fictício em [`../assets/official-four-d-report.pdf`
 
 ## Gramática visual
 
-- Capa de contraste alto, título grande e metadados alinhados. Nas páginas internas, cabeçalho azul escuro para a seção D1–D4, fundo claro e rodapé consistente.
-- Primeiro mostre a pergunta ou síntese em faixa horizontal. Distribua sinais e métricas em uma fileira de 3–4 cards; use tons diferentes apenas para codificar função semântica, com rótulos textuais.
+- Capa de contraste alto, título grande e metadados alinhados. Nas páginas internas, cabeçalho azul escuro para a seção D1 a D4, fundo claro e rodapé consistente.
+- Primeiro mostre a pergunta ou síntese em faixa horizontal. Distribua sinais e métricas em uma fileira de 3 a 4 cards; use tons diferentes apenas para codificar função semântica, com rótulos textuais.
 - Para jornada, tabule etapas antes / durante / depois em colunas adjacentes e, se houver múltiplos atores, linhas separadas. Cada célula deve conter observações rastreáveis.
 - Para barco da inovação, se essa dinâmica realmente ocorreu, disponha ventos, âncoras, icebergs e porto em cards; omita categorias não usadas, sem preenchimento inventado.
 - Para ideação, use matriz de cards de ideias, seguida de agrupamento por natureza da mudança. Não transfira itens do caso de referência.

@@ -5,17 +5,17 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.15"
+  version: "1.1.16"
 ---
 
 # Compilar o Relatório 4D
 
-Consolida registros de D1–D4; playbook e referências visuais não fornecem resultados de uma execução.
+Consolida registros de D1 a D4; playbook e referências visuais não fornecem resultados de uma execução.
 
 ## Leia primeiro
 
-- [Playbook 4D](references/4d-workshop-playbook.md) — sequência metodológica.
-- [Layout de cards](references/relatorio-4d-layout.md) — grades tabuladas e comparações citadas.
+- [Playbook 4D](references/4d-workshop-playbook.md): sequência metodológica.
+- [Layout de cards](references/relatorio-4d-layout.md): grades tabuladas e comparações citadas.
 Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md) e [PDF fictício de referência visual](assets/official-four-d-report.pdf). Preserve originais; registre diferenças e datas; não copie conteúdo de outro projeto.
 
 ## Grilling
@@ -25,7 +25,7 @@ pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: 
 nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
-resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
 
 ## Preferências do usuário
 
@@ -58,7 +58,7 @@ Saída (trecho):
 
 ## Checagem final
 
-- [ ] D1–D4 em ordem, com etapas ausentes identificadas
+- [ ] D1 a D4 em ordem, com etapas ausentes identificadas
 - [ ] Texto/números, denominadores e fontes reconciliados
 - [ ] Relatos, hipóteses, propostas e decisões separados
 - [ ] Snapshot, BP1 e atualizações preservam cronologia
@@ -72,10 +72,10 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `four_d_report`: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` — nunca contorne o schema.
+`metadata.completeness: "partial"`: nunca contorne o schema.
 
-**Proveniência:** reescrita de fonte metodológica RC6 (`compile-4d-report/`); a ordem interna D1–D4 foi preservada, sem transformar a fase de origem em condição de uso.
+**Proveniência:** reescrita de fonte metodológica RC6 (`compile-4d-report/`); a ordem interna D1 a D4 foi preservada, sem transformar a fase de origem em condição de uso.

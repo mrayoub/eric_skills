@@ -1,13 +1,13 @@
-# Template Mural — Workshop 3E de Estruturacao da Solucao
+# Template Mural: Workshop 3E de Estruturacao da Solucao
 
 ## Índice
 
 - [Visao geral do board](#visao-geral-do-board)
-- [Area 1 — Abertura](#area-1--abertura)
-- [Area 2 — E1: Esclarecer](#area-2--e1-esclarecer)
-- [Area 3 — E2: Estruturar](#area-3--e2-estruturar)
-- [Area 4 — E3: Experimentar](#area-4--e3-experimentar)
-- [Area 5 — Fechamento](#area-5--fechamento)
+- [Area 1 · Abertura](#area-1--abertura)
+- [Area 2 · E1: Esclarecer](#area-2--e1-esclarecer)
+- [Area 3 · E2: Estruturar](#area-3--e2-estruturar)
+- [Area 4 · E3: Experimentar](#area-4--e3-experimentar)
+- [Area 5 · Fechamento](#area-5--fechamento)
 - [Convencoes visuais](#convencoes-visuais)
 - [Notas de implementacao](#notas-de-implementacao)
 
@@ -33,7 +33,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 1 — Abertura
+## Area 1 · Abertura
 
 **Cor:** Cinza claro (#E0E0E0)
 **Posicao:** Canto superior esquerdo
@@ -50,13 +50,13 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 2 — E1: Esclarecer
+## Area 2 · E1: Esclarecer
 
 **Cor:** Amarelo (#FFF3CD)
 **Posicao:** Apos abertura
 **Tempo:** 20-30 min
 
-### Subsecao 2.1 — Definicao da Solucao
+### Subsecao 2.1: Definicao da Solucao
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -66,7 +66,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 | Limites | Post-it | "O que esta dentro e fora do escopo?" |
 | Valor | Post-it | "Qual o valor esperado para a CCEE?" |
 
-### Subsecao 2.2 — Criterios de Sucesso
+### Subsecao 2.2: Criterios de Sucesso
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -78,13 +78,13 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 3 — E2: Estruturar
+## Area 3 · E2: Estruturar
 
 **Cor:** Azul claro (#CCE5FF)
 **Posicao:** Centro
 **Tempo:** 70-90 min
 
-### Subsecao 3.1 — Matriz de Priorizacao
+### Subsecao 3.1: Matriz de Priorizacao
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -94,7 +94,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 | **Pode evoluir depois** | Area amarela | Funcionalidades desejaveis |
 | **Nao entra agora** | Area vermelha | Fora de escopo neste momento |
 
-### Subsecao 3.2 — Levantamento
+### Subsecao 3.2: Levantamento
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -102,7 +102,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 | Coluna "Ja existe" | Area | O que ja temos internamente que pode ser aproveitado |
 | Coluna "Precisa criar" | Area | O que precisamos construir ou contratar |
 
-### Subsecao 3.3 — Plano de Acao
+### Subsecao 3.3: Plano de Acao
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -114,20 +114,20 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 4 — E3: Experimentar
+## Area 4 · E3: Experimentar
 
 **Cor:** Verde claro (#D4EDDA)
 **Posicao:** Centro-direita
 **Tempo:** 40-50 min
 
-### Subsecao 4.1 — Principal Incerteza
+### Subsecao 4.1: Principal Incerteza
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
 | Titulo da secao | Texto | "[E3] Experimentar" |
 | Maior risco | Post-it | "Qual a maior duvida que ainda temos?" |
 
-### Subsecao 4.2 — Test Card
+### Subsecao 4.2: Test Card
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -137,7 +137,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 | Medida | Post-it | "Vamos observar ou medir... (unidade e fonte)" |
 | Critério | Post-it | "Estaremos certos se... (definido antes da coleta)" |
 
-### Subsecao 4.3 — plano de evidências futuras
+### Subsecao 4.3: plano de evidências futuras
 
 | Elemento | Tipo | Conteudo |
 |---|---|---|
@@ -148,7 +148,7 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 
 ---
 
-## Area 5 — Fechamento
+## Area 5 · Fechamento
 
 **Cor:** Cinza escuro (#D3D3D3)
 **Posicao:** Canto inferior direito
@@ -168,9 +168,9 @@ O board e dividido em **5 areas** principais, dispostas em fluxo horizontal (da 
 | Etapa | Cor | Codigo |
 |---|---|---|
 | Abertura | Cinza | ABERT |
-| E1 — Esclarecer | Amarelo | E1 |
-| E2 — Estruturar | Azul | E2 |
-| E3 — Experimentar | Verde | E3 |
+| E1: Esclarecer | Amarelo | E1 |
+| E2: Estruturar | Azul | E2 |
+| E3: Experimentar | Verde | E3 |
 | Fechamento | Cinza escuro | FIM |
 
 ## Notas de implementacao

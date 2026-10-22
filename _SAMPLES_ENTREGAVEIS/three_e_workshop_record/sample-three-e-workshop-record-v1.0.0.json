@@ -3,7 +3,7 @@
     {
       "data": {
         "section_key": "e1_heading",
-        "text": "E1 — Esclarecer"
+        "text": "E1: Esclarecer"
       },
       "id": "heading-e1",
       "type": "heading"
@@ -22,7 +22,7 @@
     {
       "data": {
         "section_key": "e2_heading",
-        "text": "E2 — Estruturar"
+        "text": "E2: Estruturar"
       },
       "id": "heading-e2",
       "type": "heading"
@@ -41,7 +41,7 @@
     {
       "data": {
         "section_key": "e3_heading",
-        "text": "E3 — Experimentar"
+        "text": "E3: Experimentar"
       },
       "id": "heading-e3",
       "type": "heading"
@@ -81,5 +81,5 @@
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
-  "title": "EXEMPLO FICTÍCIO — Estruturação da entrada guiada"
+  "title": "EXEMPLO FICTÍCIO: Estruturação da entrada guiada"
 }

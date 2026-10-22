@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-experiment-report",
   "branding_version": "1.2.0",
-  "content_sha256": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
+  "content_sha256": "b0ebf04e840b1ed8547a5cb5b11ff0bfabd72a17dd27bfa7055ec718e925ee32",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_report",
   "files": {
-    "sample-experiment-report-v1.0.0.docx": "e9ad6971fadd6042adf0951f01d55e66547e633940f6909dfb5e7fd134fb77cb",
-    "sample-experiment-report-v1.0.0.json": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
-    "sample-experiment-report-v1.0.0.md": "0cd57a70e00b4904135998b66d11a3dccbe936b5425748b6c3edd4dd68ea6485",
-    "sample-experiment-report-v1.0.0.pdf": "2fb1bbade28ab0b7895ea849a64721dccc15e9e243b7c4438b190254f21231cd",
-    "sample-experiment-report-v1.0.0.txt": "9523cc0044c0ee817497bf26b2a1f6e207629205e198eb2f0c8b7e9da51966f8"
+    "sample-experiment-report-v1.0.0.docx": "84b0ca9ed190b5491d73eab45db25a6d78da2d37c070116d5345288762b85aa9",
+    "sample-experiment-report-v1.0.0.html": "d8e55c9dcb7b374316b821f87359e64c541afa73b7ef97855e2d5b03c3489c5d",
+    "sample-experiment-report-v1.0.0.json": "b0ebf04e840b1ed8547a5cb5b11ff0bfabd72a17dd27bfa7055ec718e925ee32",
+    "sample-experiment-report-v1.0.0.md": "6801c9fea4f61d9a7899a2f80cc67165d960d7ac33842057e7346f7beaafabd6",
+    "sample-experiment-report-v1.0.0.pdf": "1647b00ed28a95332a85addbd582233cd41a1c1579b0ee1534cd10340ffeffca",
+    "sample-experiment-report-v1.0.0.txt": "0211c6015db8b9d23a3dba43fff267361a713978b7b11e160ca0215757a511d3"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

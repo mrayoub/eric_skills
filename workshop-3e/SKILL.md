@@ -5,17 +5,17 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.15"
+  version: "1.1.16"
 ---
 
 # Facilitar o 3E
 
-Prepara, conduz ou registra a solução candidata em E1–E3; preserva decisões, propostas e cronologia.
+Prepara, conduz ou registra a solução candidata em E1 a E3; preserva decisões, propostas e cronologia.
 
 ## Leia primeiro
 
-- [Playbook 3E](references/3e-solution-structuring-playbook.md) — dinâmicas e tempos.
-- [Test Card](assets/test-card.md) — quatro campos individuais.
+- [Playbook 3E](references/3e-solution-structuring-playbook.md): dinâmicas e tempos.
+- [Test Card](assets/test-card.md): quatro campos individuais.
 Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
 [Blueprint Mural](references/mural-board-3e-template.md) opcional: ferramenta autorizada ou registro manual.
 
@@ -26,7 +26,7 @@ pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: 
 nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
-resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
 
 ## Preferências do usuário
 
@@ -44,9 +44,9 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 Prepare hipótese, problema, 4D, BP1, resultados e restrições existentes; não exija fase específica. Pergunte só por solução, papéis, dados e prazos não documentados; formule decisão neutra.
 
-1. **E1 — Esclarecer:** explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
-2. **E2 — Estruturar:** classifique `precisa ter`, `pode evoluir`, `fora deste recorte`. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
-3. **E3 — Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério, uma frase objetiva por campo (até 280 caracteres); detalhes ficam no plano. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
+1. **E1 Esclarecer:** explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
+2. **E2 Estruturar:** classifique `precisa ter`, `pode evoluir`, `fora deste recorte`. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
+3. **E3 Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério, uma frase objetiva por campo (até 280 caracteres); detalhes ficam no plano. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
 
 Registre quem assumiu dependências e quando, separando decisão de sugestão. Tempos são sugestões, não prova de conclusão; etapa ausente mantém registro parcial e impacto da lacuna. `relatorio-3e` compila; `experimentacao-inovacao` pode detalhar/analisar testes, sem ser dependência obrigatória.
 
@@ -60,7 +60,7 @@ Saída (trecho):
 
 ## Checagem final
 
-- [ ] E1–E3 e escopo registrados sem etapas inventadas
+- [ ] E1 a E3 e escopo registrados sem etapas inventadas
 - [ ] Ações, papéis, prazos e decisões rastreáveis
 - [ ] Um Test Card completo ou rascunho explícito por teste
 - [ ] Método pelo risco; critérios prévios preservados
@@ -74,10 +74,10 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `three_e_workshop_record` e `test_card` por teste: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` — nunca contorne o schema.
+`metadata.completeness: "partial"`: nunca contorne o schema.
 
-**Proveniência:** reescrita de fonte metodológica RC6 (`facilitate-3e-workshop/`). A ordem interna E1–E3 e a separação entre plano e evidência foram preservadas sem restringir a fase de uso.
+**Proveniência:** reescrita de fonte metodológica RC6 (`facilitate-3e-workshop/`). A ordem interna E1 a E3 e a separação entre plano e evidência foram preservadas sem restringir a fase de uso.

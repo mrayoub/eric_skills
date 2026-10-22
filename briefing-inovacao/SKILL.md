@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.15"
+  version: "1.1.16"
 ---
 
 # Entrevista Inicial, Briefing e Perguntas para fechar lacunas
@@ -14,8 +14,8 @@ Produz Entrevista Inicial de sete campos, Briefing de uma página ou Perguntas p
 
 ## Leia primeiro
 
-- [Sete campos](references/briefing_template.md) — estrutura da Entrevista Inicial.
-- [Schema](references/briefing.schema.json) — integração JSON.
+- [Sete campos](references/briefing_template.md): estrutura da Entrevista Inicial.
+- [Schema](references/briefing.schema.json): integração JSON.
 
 ## Grilling
 
@@ -24,7 +24,7 @@ pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: 
 nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
-resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
 
 ## Preferências do usuário
 
@@ -59,7 +59,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 Entrada: “Gere a Entrevista Inicial do Portal de Solicitações de Dados.”
 Saída (trecho):
-> Sponsor: pendente — entrevista-ana.md não identifica designação.
+> Sponsor: pendente; entrevista-ana.md não identifica designação.
 > Meta de 30%: proposta não aprovada, conforme email-meta-proposta.md.
 > Pergunta: quem foi designado sponsor?
 
@@ -79,11 +79,11 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `briefing` (Entrevista Inicial de sete campos), `briefing_one_page` (Briefing) ou
 `briefing_improvement_questionnaire` (Perguntas para fechar lacunas): monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` — nunca contorne o schema.
+`metadata.completeness: "partial"`: nunca contorne o schema.
 
 **Proveniência:** adaptação das três skills homônimas das fontes metodológicas do RC6, com a estrutura de briefing do ERIC_RC1 preservada nos recursos locais. Funciona sem infraestrutura da iniciativa de origem.

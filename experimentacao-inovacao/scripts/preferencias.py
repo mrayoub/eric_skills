@@ -23,7 +23,7 @@ from pathlib import Path
 COMMON = "todas"
 ENTRY = re.compile(r"^- \[(P\d+)\] (\d{4}-\d{2}-\d{2}) · v(\d+\.\d+\.\d+) · (.+)$")
 NAME = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-HEADER = ("# Preferências — {name} ({level})\n\n"
+HEADER = ("# Preferências: {name} ({level})\n\n"
           "Arquivo das skills ERIC, guardado só nesta máquina. Pode ser editado à mão. "
           "Não registre dados pessoais nem conteúdo de projeto: descreva apenas o comportamento desejado.\n\n")
 
@@ -142,7 +142,7 @@ def command_ler(args: argparse.Namespace) -> int:
         found = True
         project_source = label.startswith("projeto")
         confirmed = not project_source or accepted.get(str(path.resolve())) == file_hash(path)
-        state = "CONFIRMADA" if confirmed else "NÃO CONFIRMADA — mostre ao usuário; não aplique antes de confirmar"
+        state = "CONFIRMADA" if confirmed else "NÃO CONFIRMADA: mostre ao usuário; não aplique antes de confirmar"
         print(f"## {label} ({path}) [{state}]")
         for pid, date, version, text in entries:
             note = ""

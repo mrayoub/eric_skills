@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-test-card",
   "branding_version": "1.2.0",
-  "content_sha256": "989bf2a8cabdb4a2fd662fc82d7a5780b490c409552acd3af06afd36de9de877",
+  "content_sha256": "9d2feace3028580393cf7a463e941278327aaf6a5823494dac08d86ef45f596e",
   "content_version": "1.0.0",
   "deliverable_type": "test_card",
   "files": {
-    "sample-test-card-v1.0.0.docx": "be66e620cfc601d43810bf67fbd66e9cb23a52625b672a8564f6f2c87db4f881",
-    "sample-test-card-v1.0.0.json": "989bf2a8cabdb4a2fd662fc82d7a5780b490c409552acd3af06afd36de9de877",
-    "sample-test-card-v1.0.0.md": "82eeed5f0f05b7655248fd011ecc9c6f1b8d02826fbad9455e439892aad1391f",
-    "sample-test-card-v1.0.0.pdf": "8a1a3d2465316e8b405cf1b18336fd64e74abada048de44f41cc81b88af09d8e",
-    "sample-test-card-v1.0.0.txt": "ee04638f8a4391a1a4107617fb28276a44bc519b78c02f3ef3940e1e842c1d71"
+    "sample-test-card-v1.0.0.docx": "7454f7cb5dd51bda730b330252256fe2fdd1697d0ac35cbd0170f519fb45933e",
+    "sample-test-card-v1.0.0.html": "7abcece428223546ba9b29298b48072c7d45dca9ab88681706cdb9ab2d5c9c6a",
+    "sample-test-card-v1.0.0.json": "9d2feace3028580393cf7a463e941278327aaf6a5823494dac08d86ef45f596e",
+    "sample-test-card-v1.0.0.md": "e92fa52366484e61985b89d422f572f74796356fb97a3f6fada3ae68e19f8cda",
+    "sample-test-card-v1.0.0.pdf": "7a9993c1d472a97b970e60807a476a0c6290200b79895f6d0543d66946d36a58",
+    "sample-test-card-v1.0.0.txt": "3ca854d19bf4446aa36dd798eae5fdee57a92aee7d337145c8d9ff5ed13c1bea"
   },
   "layout": "card_portrait",
   "paper": "a4_portrait",

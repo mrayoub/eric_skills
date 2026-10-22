@@ -1,4 +1,4 @@
-# Rubrica IQB — adaptação portátil 1.1.0
+# Rubrica IQB: adaptação portátil 1.1.0
 
 ## Índice
 

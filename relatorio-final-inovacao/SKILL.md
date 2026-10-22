@@ -1,11 +1,11 @@
 ---
 name: relatorio-final-inovacao
-description: "Produz ou revisa o relatório final e a apresentação executiva de um projeto de inovação, com recomendação defensável para gerentes e tomadores de decisão. Usa o Pitch Canvas — Company Edition para narrar problema, solução, evidências, alternativas, valor estratégico, capacidade de execução e pedido de decisão. Use em qualquer momento da esteira, inclusive para preparação ou versão parcial. Não use para planejar ou analisar uma rodada específica de experimento (use experimentacao-inovacao), nem para redigir o relatório de um workshop 3E, 4D ou 5C."
+description: "Produz ou revisa o relatório final e a apresentação executiva de um projeto de inovação, com recomendação defensável para gerentes e tomadores de decisão. Usa o Pitch Canvas (Company Edition) para narrar problema, solução, evidências, alternativas, valor estratégico, capacidade de execução e pedido de decisão. Use em qualquer momento da esteira, inclusive para preparação ou versão parcial. Não use para planejar ou analisar uma rodada específica de experimento (use experimentacao-inovacao), nem para redigir o relatório de um workshop 3E, 4D ou 5C."
 license: "Licença de Uso Restrito CCEE, exceto o material do Pitch Canvas (assets/ThePitchCanvas.pdf e references/pitch-canvas-executivo.md), sob CC BY-SA 4.0. Termos em LICENSE e THIRD_PARTY_NOTICES.md."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.10"
+  version: "1.3.11"
 ---
 
 # Relatório final e apresentação da esteira
@@ -14,11 +14,11 @@ Transforme o histórico do projeto em uma recomendação explícita, proporciona
 
 ## Leia primeiro
 
-- [Pitch Canvas aplicado à decisão interna](references/pitch-canvas-executivo.md) — blocos do canvas, adaptação, narrativa e critérios dos slides. Consulte o [PDF original](assets/ThePitchCanvas.pdf) quando precisar conferir disposição e texto. Cite Best3minutes.com ao usar o canvas.
-- [Estrutura do relatório final](references/relatorio-final.md) — cadeia de evidências, comparação de alternativas, decisão e passagem para implementação.
-- [Esteira ERIC](references/eric-esteira.md) — relações entre etapas, BP1/BP2, rotas e estados reais do projeto.
-- [Grilling operacional](references/grilling-operacional.md) — leitura crítica, registro de questões e perguntas ao usuário.
-- [Fontes metodológicas](references/fontes.md) — proveniência e integridade do PDF e da adaptação.
+- [Pitch Canvas aplicado à decisão interna](references/pitch-canvas-executivo.md): blocos do canvas, adaptação, narrativa e critérios dos slides. Consulte o [PDF original](assets/ThePitchCanvas.pdf) quando precisar conferir disposição e texto. Cite Best3minutes.com ao usar o canvas.
+- [Estrutura do relatório final](references/relatorio-final.md): cadeia de evidências, comparação de alternativas, decisão e passagem para implementação.
+- [Esteira ERIC](references/eric-esteira.md): relações entre etapas, BP1/BP2, rotas e estados reais do projeto.
+- [Grilling operacional](references/grilling-operacional.md): leitura crítica, registro de questões e perguntas ao usuário.
+- [Fontes metodológicas](references/fontes.md): proveniência e integridade do PDF e da adaptação.
 
 ## Grilling
 
@@ -58,7 +58,7 @@ Saída (trecho):
 - [ ] Afirmações, números e limites ligados a fontes e localizadores
 - [ ] Alternativas, custo/recursos, riscos e condições proporcionais à evidência
 - [ ] Todos os blocos relevantes do Pitch Canvas cobertos; slides leves e com narrativa
-- [ ] Apresentação credita o canvas como fonte em `citations`, que o renderizador mostra no slide final “Fontes”: “Estrutura baseada em The Pitch Canvas© — Best3minutes.com (CC BY-SA 4.0)”
+- [ ] Apresentação credita o canvas como fonte em `citations`, que o renderizador mostra no slide final “Fontes”: “Estrutura baseada em The Pitch Canvas©, de Best3minutes.com (CC BY-SA 4.0)”
 - [ ] Relatório, apresentação e JSON coerentes; arquivos validados e revisados visualmente
 
 ## Contexto ERIC
@@ -67,8 +67,8 @@ ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comerciali
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md). Em arquivo, siga [o design system](assets/design-system/README.md): `evidence_recommendation` com `metadata.content_profile: "final_report"` (seções `history`, `feasibility` e `decision`) para o relatório final e `executive_presentation` para os slides, com blocos adicionais de contexto e decisão quando úteis. Monte JSON canônico validado e gere derivados com `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida`. Preserve JSON e fontes junto dos derivados. Para apresentação editável, gere PPTX; se o renderizador padrão não comportar o visual necessário, componha uma versão melhor a partir do mesmo conteúdo validado e confira equivalência de números, citações e decisão. A apresentação não precisa reproduzir todo o texto do relatório.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão. Em arquivo, siga [o design system](assets/design-system/README.md): `evidence_recommendation` com `metadata.content_profile: "final_report"` (seções `history`, `feasibility` e `decision`) para o relatório final e `executive_presentation` para os slides, com blocos adicionais de contexto e decisão quando úteis. Monte JSON canônico validado e gere derivados com `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida`. Preserve JSON e fontes junto dos derivados. Para apresentação editável, gere PPTX; se o renderizador padrão não comportar o visual necessário, componha uma versão melhor a partir do mesmo conteúdo validado e confira equivalência de números, citações e decisão. A apresentação não precisa reproduzir todo o texto do relatório.
 
 Se faltarem elementos decisivos, marque `metadata.completeness` como `partial` ou `inconclusive` e identifique exatamente o que a gestão ainda não pode concluir; não contorne o schema nem fabrique fatos para preenchê-lo. Inspecione visualmente PDF/PPTX gerados antes da entrega e corrija cortes, excesso de texto e legibilidade.
 
-**Proveniência:** adaptação da metodologia ERIC deste repositório e de *The Pitch Canvas©: Company Edition*, Best 3 Minutes, arquivo fornecido pelo usuário, licenciado em CC BY-SA 4.0; a adaptação em `references/pitch-canvas-executivo.md` segue a mesma licença. O canvas estrutura a comunicação; não fornece evidências de um projeto.
+**Proveniência:** adaptação da metodologia ERIC deste repositório e de *The Pitch Canvas© (Company Edition)*, Best 3 Minutes, arquivo fornecido pelo usuário, licenciado em CC BY-SA 4.0; a adaptação em `references/pitch-canvas-executivo.md` segue a mesma licença. O canvas estrutura a comunicação; não fornece evidências de um projeto.

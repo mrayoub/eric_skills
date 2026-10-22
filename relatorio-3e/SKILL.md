@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.15"
+  version: "1.1.16"
 ---
 
 # Compilar o Relatório 3E
@@ -14,8 +14,8 @@ Consolida solução, construção, experimentos e rota; separa plano, execução
 
 ## Leia primeiro
 
-- [Playbook 3E](references/3e-solution-structuring-playbook.md) — estrutura do relatório.
-- [Test Card](assets/test-card.md) — quatro campos por teste.
+- [Playbook 3E](references/3e-solution-structuring-playbook.md): estrutura do relatório.
+- [Test Card](assets/test-card.md): quatro campos por teste.
 Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 
 ## Grilling
@@ -25,7 +25,7 @@ pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: 
 nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
-resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
 
 ## Preferências do usuário
 
@@ -41,7 +41,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-1. **Entrada:** identifique fontes, versões, participantes e decisões de hipótese, problema, 4D, BP1, E1–E3 e experimentação que existirem. Não exija documentos alheios ao projeto. Em modo assíncrono, indique registros substitutos e deliberações ausentes; etapas incompletas exigem parcial. Não atribua aprovação a ausentes nem reescreva decisões anteriores.
+1. **Entrada:** identifique fontes, versões, participantes e decisões de hipótese, problema, 4D, BP1, E1 a E3 e experimentação que existirem. Não exija documentos alheios ao projeto. Em modo assíncrono, indique registros substitutos e deliberações ausentes; etapas incompletas exigem parcial. Não atribua aprovação a ausentes nem reescreva decisões anteriores.
 2. **Solução/valor:** problema focal, população, hipótese master, escopo, componentes `agora/futuro/fora`, riscos e limites. Expectativa não é resultado observado.
 3. **Construção:** recursos, itens a desenvolver, dependências, responsável, apoio e prazo por ação; exponha lacunas antes de declarar MVP pronto.
 4. **Experimento:** suposições prioritárias, público elegível, método, intervenção, medida, fonte e critério. Entregue Test Card individual por teste com hipótese, teste, medida e critério, uma frase objetiva por campo (até 280 caracteres); tabela é só índice. Critérios/limiares sem baseline ficam `a fechar antes da coleta`. Preserve originais; cards reconstruídos são retrospectivos. Resultados existentes precisam de fontes/data; Learning Cards somente após execução, nunca achados antes do teste.
@@ -72,10 +72,10 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `three_e_report` e `test_card` por teste: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` — nunca contorne o schema.
+`metadata.completeness: "partial"`: nunca contorne o schema.
 
 **Proveniência:** reescrita de fonte metodológica RC6 (`compile-3e-report/`), com separação entre plano, execução e reconstrução posterior, sem restrição por fase.

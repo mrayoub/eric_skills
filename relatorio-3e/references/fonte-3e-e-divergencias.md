@@ -4,7 +4,7 @@ Fonte primária fornecida pelo usuário em 28 set 2026: o DOCX **Modelo 3E Estru
 
 ## Elementos confirmados
 
-O DOCX confirma E1 — Esclarecer, E2 — Estruturar e E3 — Experimentar; as perguntas de definição, valor e escopo; a organização “Precisa ter / Pode evoluir depois / Não entra agora”; o levantamento “Já temos / Precisamos desenvolver”; e responsável, apoios e prazo estimado por construção.
+O DOCX confirma E1 (Esclarecer), E2 (Estruturar) e E3 (Experimentar); as perguntas de definição, valor e escopo; a organização “Precisa ter / Pode evoluir depois / Não entra agora”; o levantamento “Já temos / Precisamos desenvolver”; e responsável, apoios e prazo estimado por construção.
 
 ## Adaptações explícitas dos cards
 

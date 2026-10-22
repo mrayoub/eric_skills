@@ -1,4 +1,4 @@
-EXEMPLO FICTÍCIO — Solicitações com informações incompletas
+EXEMPLO FICTÍCIO: Solicitações com informações incompletas
 
 ID sample-four-d-report · versão 1.0.0 · Completo
 
@@ -14,22 +14,22 @@ Leitura inicial
 
 | Card | Conteúdo |
 | --- | --- |
-| Desafio | Desafio — Compreender onde a jornada perde clareza. |
-| Escopo | Escopo — Workshop simulado; sem operação real. |
-| Limite | Limite — Sem linha de base ou resultado de teste. |
+| Desafio | Desafio: Compreender onde a jornada perde clareza. |
+| Escopo | Escopo: Workshop simulado; sem operação real. |
+| Limite | Limite: Sem linha de base ou resultado de teste. |
 
 Fontes: FIC-01
 
-D1–D2 — Percepções e diagnóstico
+D1 e D2: Percepções e diagnóstico
 
 Sinais registrados
 
 | Card | Conteúdo |
 | --- | --- |
-| Percepção | Percepção — Há incerteza sobre o andamento das solicitações. |
-| Causas | Causas — Participantes divergiram sobre a causa dominante. |
-| Evidência | Evidência — Relatos do exercício simulado. |
-| Lacuna | Lacuna — Não há frequência medida no processo real. |
+| Percepção | Percepção: Há incerteza sobre o andamento das solicitações. |
+| Causas | Causas: Participantes divergiram sobre a causa dominante. |
+| Evidência | Evidência: Relatos do exercício simulado. |
+| Lacuna | Lacuna: Não há frequência medida no processo real. |
 
 Fontes: FIC-01
 
@@ -37,8 +37,8 @@ Questões para investigação
 
 | Card | Conteúdo |
 | --- | --- |
-| Entrada | Entrada — Quais campos chegam incompletos e por quê? |
-| Acompanhamento | Acompanhamento — Que informação de status falta ao solicitante? |
+| Entrada | Entrada: Quais campos chegam incompletos e por quê? |
+| Acompanhamento | Acompanhamento: Que informação de status falta ao solicitante? |
 
 Fontes: FIC-01
 
@@ -48,9 +48,9 @@ Jornada tabulada
 
 | Card | Conteúdo |
 | --- | --- |
-| Antes | Antes — Orientação prévia e preparo da solicitação. |
-| Durante | Durante — Preenchimento, conferência e possível devolução. |
-| Depois | Depois — Acompanhamento do status e conclusão. |
+| Antes | Antes: Orientação prévia e preparo da solicitação. |
+| Durante | Durante: Preenchimento, conferência e possível devolução. |
+| Depois | Depois: Acompanhamento do status e conclusão. |
 
 Fontes: FIC-01
 
@@ -58,8 +58,8 @@ Pontos de atenção
 
 | Card | Conteúdo |
 | --- | --- |
-| Entrada incompleta | Entrada incompleta — Campos ausentes geram retrabalho na narrativa simulada. |
-| Status pouco visível | Status pouco visível — A pessoa não sabe em que etapa a solicitação está. |
+| Entrada incompleta | Entrada incompleta: Campos ausentes geram retrabalho na narrativa simulada. |
+| Status pouco visível | Status pouco visível: A pessoa não sabe em que etapa a solicitação está. |
 
 Fontes: FIC-01
 
@@ -69,9 +69,9 @@ Alternativas vinculadas às dores
 
 | Card | Conteúdo |
 | --- | --- |
-| Orientação prévia | Orientação prévia — Pode esclarecer requisitos antes do pedido. |
-| Formulário guiado | Formulário guiado — Pode ajudar a preencher campos críticos. |
-| Painel de status | Painel de status — Pode dar visibilidade ao andamento. |
+| Orientação prévia | Orientação prévia: Pode esclarecer requisitos antes do pedido. |
+| Formulário guiado | Formulário guiado: Pode ajudar a preencher campos críticos. |
+| Painel de status | Painel de status: Pode dar visibilidade ao andamento. |
 
 Fontes: FIC-01
 
@@ -79,9 +79,9 @@ Leitura das alternativas
 
 | Card | Conteúdo |
 | --- | --- |
-| Incremental | Incremental — Melhorar orientação existente. |
-| Fluxo | Fluxo — Apoiar o preenchimento. |
-| Visibilidade | Visibilidade — Expor etapas e pendências. |
+| Incremental | Incremental: Melhorar orientação existente. |
+| Fluxo | Fluxo: Apoiar o preenchimento. |
+| Visibilidade | Visibilidade: Expor etapas e pendências. |
 
 Fontes: FIC-01
 
@@ -91,9 +91,9 @@ Prioridade do grupo fictício
 
 | Card | Conteúdo |
 | --- | --- |
-| Selecionada | Selecionada — Investigar formulário guiado. |
-| Critério conhecido | Critério conhecido — Preferência do grupo no exercício. |
-| Não demonstrado | Não demonstrado — Adoção, eficácia e impacto não foram testados. |
+| Selecionada | Selecionada: Investigar formulário guiado. |
+| Critério conhecido | Critério conhecido: Preferência do grupo no exercício. |
+| Não demonstrado | Não demonstrado: Adoção, eficácia e impacto não foram testados. |
 
 Fontes: FIC-01
 
@@ -117,9 +117,9 @@ Próximos passos rastreáveis
 
 | Card | Conteúdo |
 | --- | --- |
-| Medir | Medir — Levantar frequência de devoluções e campos faltantes. |
-| Testar | Testar — Desenhar experimento do formulário guiado com KPI prévio. |
-| Decidir | Decidir — Revisar a prioridade após evidência observada. |
+| Medir | Medir: Levantar frequência de devoluções e campos faltantes. |
+| Testar | Testar: Desenhar experimento do formulário guiado com KPI prévio. |
+| Decidir | Decidir: Revisar a prioridade após evidência observada. |
 
 Fontes: FIC-01
 

@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.15"
+  version: "1.1.16"
 ---
 
 # Potencial de inovação
@@ -15,8 +15,8 @@ Não avalia maturidade de evidências (Scorecard da Strategyzer) nem resultados 
 
 ## Leia primeiro
 
-- [Rubrica de potencial](references/innovation-potential-rubric.md) — critérios, pesos, faixas e a regra de ausência.
-- [Levantamento documental](references/grilling-operacional.md#5-complementos-de-levantamento-documental) — mapa afirmação → fonte.
+- [Rubrica de potencial](references/innovation-potential-rubric.md): critérios, pesos, faixas e a regra de ausência.
+- [Levantamento documental](references/grilling-operacional.md#5-complementos-de-levantamento-documental): mapa afirmação → fonte.
 
 ## Grilling
 
@@ -25,7 +25,7 @@ pontuar ou planejar, e reaplique-o a cada arquivo ou resposta novos. Em resumo: 
 nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões decisivas
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
-resultado ou a conclusão desejada — isso não é dado, e contaminaria a avaliação.
+resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
 
 ## Preferências do usuário
 
@@ -42,7 +42,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 ## Passos
 
 1. Delimite oportunidade, público, versão e decisão de priorização. Registre a fase como contexto.
-2. Para impacto, viabilidade, alinhamento, urgência e novidade, registre afirmação, evidência favorável/contrária, fonte/localizador, limite e nota 0–100 justificada. Distinga impacto esperado/medido, viabilidade percebida/recurso comprometido e urgência documentada/preferência do sponsor; essas diferenças afetam a nota.
+2. Para impacto, viabilidade, alinhamento, urgência e novidade, registre afirmação, evidência favorável/contrária, fonte/localizador, limite e nota 0 a 100 justificada. Distinga impacto esperado/medido, viabilidade percebida/recurso comprometido e urgência documentada/preferência do sponsor; essas diferenças afetam a nota.
 3. Sem base, marque `não pontuável` e investigue fonte ou responsável. Zero exige avaliação sustentada; usá-lo para lacunas muda a classe.
 4. Grave as cinco notas justificadas em JSON (formato no topo de `scripts/score.py`); rode `python3 scripts/score.py notas.json`. Use total e classe sem ajuste editorial; com status `incomplete`, entregue avaliação parcial, sem classe.
 5. Mostre notas, fontes, pesos, total, classe, sensibilidades (limiares de classe) e próximos dados. Registre a decisão tomada separada da recomendação calculada.
@@ -54,7 +54,7 @@ Saída (trecho):
 | Critério | Nota | Fonte | Limite |
 |---|---|---|---|
 | Impacto | 60 | planilha-volumes.xlsx, aba 2, C4: 120 solicitações/mês com retrabalho | redução não medida |
-| Viabilidade | não pontuável | — | sem estimativa de custo; responsável: TI (a confirmar) |
+| Viabilidade | não pontuável | não se aplica | sem estimativa de custo; responsável: TI (a confirmar) |
 Status do script: `incomplete` → sem classe; próximo dado: estimativa de custo da TI.
 
 ## Checagem final
@@ -73,11 +73,11 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
+Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
 com `deliverable_type` `innovation_potential_assessment`: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` — nunca contorne o schema.
+`metadata.completeness: "partial"`: nunca contorne o schema.
 
 Na versão completa, o bloco `table` com `data.section_key = "scores"` exige as cinco linhas com `criterion`, `score`, `weight`, `justification`, além de `overall_score` e `classification` iguais ao resultado do script.
 

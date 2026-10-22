@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "briefing_validation",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO — Solicitações internas de dados",
+  "title": "EXEMPLO FICTÍCIO: Solicitações internas de dados",
   "summary": "Amostra fictícia do formato original RC6. Não descreve um projeto real. Exemplo neutro da validacao IQB auditavel consolidada a partir dos ERIC RC1 e RC5.",
   "blocks": [
     {

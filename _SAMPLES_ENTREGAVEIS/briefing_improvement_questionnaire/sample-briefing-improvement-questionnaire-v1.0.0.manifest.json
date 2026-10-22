@@ -1,16 +1,16 @@
 {
   "artifact_id": "sample-briefing-improvement-questionnaire",
   "branding_version": "1.2.0",
-  "content_sha256": "3314af3fbf47f6af72fbbfc5c121c08918574efd06f45c9d21f851c3b6e5edc7",
+  "content_sha256": "0f3ee429ae487ad6e6143dfe235265ecf70fde709f0e89a9870f5ad1a4934802",
   "content_version": "1.0.0",
   "deliverable_type": "briefing_improvement_questionnaire",
   "files": {
-    "sample-briefing-improvement-questionnaire-v1.0.0.docx": "532a14dfa531ae8bcb479aa5e8b1c5933c1ba771b1ab5eece6a6b5cd89bab693",
-    "sample-briefing-improvement-questionnaire-v1.0.0.html": "ede1fc101b56b35d4ab77b2e1a96ee276671529af1841112fd0b6decbf78afe0",
-    "sample-briefing-improvement-questionnaire-v1.0.0.json": "3314af3fbf47f6af72fbbfc5c121c08918574efd06f45c9d21f851c3b6e5edc7",
-    "sample-briefing-improvement-questionnaire-v1.0.0.md": "5897dffc585d567ebdb1c84ee788fc1f96f3c5bce08ffb0eedd7758f803763e7",
-    "sample-briefing-improvement-questionnaire-v1.0.0.pdf": "2441c48a91a0ef96c1d704a122bf6a791bad3afd2b1d4ea55736398c4a30e113",
-    "sample-briefing-improvement-questionnaire-v1.0.0.txt": "708084ae1d9f94a8952e9359badd4bfbe32aebb56da47041ca1959abb69ebda5"
+    "sample-briefing-improvement-questionnaire-v1.0.0.docx": "ebdef263e500d352e7c8c915b6c8451fd21e616a09eb23da3cd8650bdedf5418",
+    "sample-briefing-improvement-questionnaire-v1.0.0.html": "3fdfc03f5e22065a906c0d350a62fa1cb34523a2f7520dc9f5e30df7add5fecb",
+    "sample-briefing-improvement-questionnaire-v1.0.0.json": "0f3ee429ae487ad6e6143dfe235265ecf70fde709f0e89a9870f5ad1a4934802",
+    "sample-briefing-improvement-questionnaire-v1.0.0.md": "ced0e3170adbefe8b52ccc3a0d6614b0ab9d339aae29529d51b520a539772719",
+    "sample-briefing-improvement-questionnaire-v1.0.0.pdf": "7d5304b2f8e0700fefb868e13c593c59b9f5cb70a8da3874282478bcc6168c01",
+    "sample-briefing-improvement-questionnaire-v1.0.0.txt": "f2023f23c9336a6373acc69f205e61afc9ac46254f7f1e46711de90e3ce2b061"
   },
   "layout": "report_portrait",
   "paper": "a4_portrait",

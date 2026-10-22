@@ -8,10 +8,10 @@ A Licença de Uso Restrito CCEE (`LICENSE`) não se aplica aos itens abaixo, que
 
 | Fonte | Titular | Licença | Skills | Distribuição |
 |---|---|---|---|---|
-| The Pitch Canvas — Company Edition | Best 3 Minutes (David Beckett); ilustrações de Birgit Smit | CC BY-SA 4.0 | `relatorio-final-inovacao` | arquivo `assets/ThePitchCanvas.pdf` |
-| Learning Card Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados — Strategyzer AG | `experimentacao-inovacao` | não incluído; referência em https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card |
-| Innovation Project Scorecard Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados — Strategyzer AG | `scorecard-inovacao` | não incluído; referência em https://www.strategyzer.com/library/innovation-project-scorecard |
-| Test Card Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados — Strategyzer AG | `experimentacao-inovacao` | não incluído; referência em https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card |
+| The Pitch Canvas (Company Edition) | Best 3 Minutes (David Beckett); ilustrações de Birgit Smit | CC BY-SA 4.0 | `relatorio-final-inovacao` | arquivo `assets/ThePitchCanvas.pdf` |
+| Learning Card Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados, Strategyzer AG | `experimentacao-inovacao` | não incluído; referência em https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card |
+| Innovation Project Scorecard Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados, Strategyzer AG | `scorecard-inovacao` | não incluído; referência em https://www.strategyzer.com/library/innovation-project-scorecard |
+| Test Card Strategyzer 2023 | Strategyzer AG | Todos os direitos reservados, Strategyzer AG | `experimentacao-inovacao` | não incluído; referência em https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card |
 
 ## Adaptações de métodos de terceiros
 

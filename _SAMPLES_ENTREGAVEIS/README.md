@@ -6,9 +6,9 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 
 | Tipo e nome apresentado | Skill(s) | Layout | Pasta |
 |---|---|---|---|
-| `briefing` — Entrevista Inicial de sete campos | briefing-inovacao | `report_portrait` | [briefing](./briefing/) |
-| `briefing_one_page` — Briefing | briefing-inovacao | `executive_one_page` | [briefing_one_page](./briefing_one_page/) |
-| `briefing_improvement_questionnaire` — Perguntas para fechar lacunas | briefing-inovacao | `report_portrait` | [briefing_improvement_questionnaire](./briefing_improvement_questionnaire/) |
+| `briefing`: Entrevista Inicial de sete campos | briefing-inovacao | `report_portrait` | [briefing](./briefing/) |
+| `briefing_one_page`: Briefing | briefing-inovacao | `executive_one_page` | [briefing_one_page](./briefing_one_page/) |
+| `briefing_improvement_questionnaire`: Perguntas para fechar lacunas | briefing-inovacao | `report_portrait` | [briefing_improvement_questionnaire](./briefing_improvement_questionnaire/) |
 | `briefing_validation` | avaliacao-briefing-iqb | `report_portrait` | [briefing_validation](./briefing_validation/) |
 | `innovation_potential_assessment` | potencial-inovacao | `report_portrait` | [innovation_potential_assessment](./innovation_potential_assessment/) |
 | `four_d_workshop_record` | workshop-4d | `report_landscape` | [four_d_workshop_record](./four_d_workshop_record/) |

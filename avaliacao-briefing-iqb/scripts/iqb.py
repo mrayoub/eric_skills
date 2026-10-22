@@ -289,7 +289,7 @@ def _generate_diagnosis(scores: dict, iqb_score: float, classification: str) -> 
     strengths = [dim_labels[key] for key in ordered if scores[key]["final_score"] >= 4]
     gaps = [dim_labels[key] for key in ordered if scores[key]["final_score"] <= 2]
     parts = [
-        f"IQB {iqb_score} — {classification}. "
+        f"IQB {iqb_score} ({classification}). "
         f"O documento avaliado {_classification_to_verb(classification)}."
     ]
     if strengths:

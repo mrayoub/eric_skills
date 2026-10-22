@@ -1,15 +1,16 @@
 {
   "artifact_id": "sample-three-e-workshop-record",
   "branding_version": "1.2.0",
-  "content_sha256": "3d45184ef9459a66314b5ef835ae7d0417f83966e40a3439ee7b7f4b8139121d",
+  "content_sha256": "bf85938b6d239d4a11ccf76c3af6ef933b3bfa8eaa96df2d46ba448052580f9f",
   "content_version": "1.0.0",
   "deliverable_type": "three_e_workshop_record",
   "files": {
-    "sample-three-e-workshop-record-v1.0.0.docx": "e89c4d27e8a52faf841299695f035beb23e1890b5cd8433fac54cfa10012f20c",
-    "sample-three-e-workshop-record-v1.0.0.json": "3d45184ef9459a66314b5ef835ae7d0417f83966e40a3439ee7b7f4b8139121d",
-    "sample-three-e-workshop-record-v1.0.0.md": "ec52ff54d1f01c86f8174d726d3e2e6b4280682f935149ae5778bac5b136ed2a",
-    "sample-three-e-workshop-record-v1.0.0.pdf": "586c434afb1601f34abff69267bb996d347ede8cce3cc4c4216b12c24ff72f73",
-    "sample-three-e-workshop-record-v1.0.0.txt": "e5c88ecb23f9288b16614ce2c5431795c51ab96c641b141ad188ef57700bbefb"
+    "sample-three-e-workshop-record-v1.0.0.docx": "3ecb5de55c93d2c03808115dd48375f544ef3c87008609ccca18cc878386ca45",
+    "sample-three-e-workshop-record-v1.0.0.html": "3987044bc129250858372250c706b650f9d8f5967057abc394fd4609036d2acf",
+    "sample-three-e-workshop-record-v1.0.0.json": "bf85938b6d239d4a11ccf76c3af6ef933b3bfa8eaa96df2d46ba448052580f9f",
+    "sample-three-e-workshop-record-v1.0.0.md": "a1e820f75daa08b943556c0af035c6ec0742dfc084070f183be8c9892549c3a6",
+    "sample-three-e-workshop-record-v1.0.0.pdf": "43daae8e21b55202e274d60ae07793012075d1d19bed18c9eeb32676ab14b554",
+    "sample-three-e-workshop-record-v1.0.0.txt": "6719ce74076e3087d91b7a6b537ddd08cac7cec926bd15a119e658b06dbcc3cb"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

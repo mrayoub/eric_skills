@@ -49,7 +49,7 @@
     {
       "data": {
         "section_key": "d1_d2_diagnosis",
-        "text": "D1–D2 — Percepções e diagnóstico"
+        "text": "D1 e D2: Percepções e diagnóstico"
       },
       "id": "h-d1_d2_diagnosis",
       "type": "heading"
@@ -375,5 +375,5 @@
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
-  "title": "EXEMPLO FICTÍCIO — Solicitações com informações incompletas"
+  "title": "EXEMPLO FICTÍCIO: Solicitações com informações incompletas"
 }

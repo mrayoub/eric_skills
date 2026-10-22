@@ -974,7 +974,7 @@ class PptxLayoutJsonTests(unittest.TestCase):
     def test_custom_layout_file_moves_the_title_box(self):
         # Desvio documentado em relação ao plano 029: um deliverable_type inventado
         # (__plan029_fake__) falha antes de chegar em render_pptx, em validate()
-        # (render.py:106 — "deliverable_type sem perfil visual"), porque profiles.json
+        # (render.py:106: "deliverable_type sem perfil visual"), porque profiles.json
         # não tem entrada para tipos fictícios. Confirmado empiricamente rodando
         # scripts/render.py via subprocess com deliverable_type="__plan029_fake__":
         # ValueError: deliverable_type sem perfil visual: '__plan029_fake__'.
@@ -1719,6 +1719,56 @@ class TitleRuleTests(unittest.TestCase):
             self.renderer.validate(item, self.profiles)
 
 
+class DashRuleTests(unittest.TestCase):
+    """Nenhum entregável tem travessão: o conteúdo é recusado e o renderizador não acrescenta nenhum."""
+    DASHES = re.compile("[‒–—―]")
+
+    @classmethod
+    def setUpClass(cls):
+        cls.renderer = load_render_module()
+        cls.profiles = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))
+        cls.tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
+
+    def sample(self, kind: str) -> dict:
+        return json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
+
+    def test_dash_in_title_or_nested_text_is_rejected_with_field(self):
+        cases = [("title", "Potencial de Inovação — GEIN-6"), ("title", "Prazo de 10–20 dias"),
+                 ("title", "GEIN-6 - Jornada de reuniões")]
+        for field, value in cases:
+            with self.subTest(value=value):
+                item = self.sample("innovation_potential_assessment")
+                item[field] = value
+                with self.assertRaisesRegex(ValueError, r"travessão no texto: title\b"):
+                    self.renderer.validate(item, self.profiles)
+        item = self.sample("four_d_report")
+        item["blocks"][1]["data"]["text"] = "Diagnóstico — versão revisada"
+        with self.assertRaisesRegex(ValueError, r"blocks\[1\]\.data\.text"):
+            self.renderer.validate(item, self.profiles)
+
+    def test_hyphenated_words_and_list_items_are_allowed(self):
+        item = self.sample("innovation_potential_assessment")
+        item["title"] = "GEIN-6: jornada de reuniões da diretoria"
+        item["blocks"][1]["data"]["text"] = "Itens:\n- primeiro\n- segundo"
+        self.renderer.validate(item, self.profiles)
+
+    def test_rendered_samples_have_no_dash(self):
+        for folder in sorted((ROOT.parent / "_SAMPLES_ENTREGAVEIS").iterdir()):
+            if not (folder / "input.json").is_file():
+                continue
+            with self.subTest(kind=folder.name):
+                item = self.sample(folder.name)
+                profile = self.renderer.validate(item, self.profiles)
+                outputs = {"html": self.renderer.render_html(item, self.tokens, profile),
+                           "md": self.renderer.render_md(item)}
+                with tempfile.TemporaryDirectory() as tmp:
+                    pdf = Path(tmp) / "saida.pdf"
+                    self.renderer.render_pdf_reportlab(item, self.tokens, profile, pdf)
+                    outputs["pdf"] = "".join(page.extract_text() or "" for page in PdfReader(pdf).pages)
+                for name, text in outputs.items():
+                    self.assertEqual(self.DASHES.findall(text), [], name)
+
+
 class FormatParityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1935,7 +1985,7 @@ class FlowLayoutTests(unittest.TestCase):
         del scores["data"]["overall_score"], scores["data"]["classification"]
         out = self.render.render_html(partial, self.tokens, self.profile)
         self.assertIn("PENDENTE", out)
-        self.assertIn("Total: —", out)
+        self.assertIn("Total: pendente", out)
 
 
 class IqbPanelTests(unittest.TestCase):

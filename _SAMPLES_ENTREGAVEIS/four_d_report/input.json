@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "four_d_report",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO — Solicitações com informações incompletas",
+  "title": "EXEMPLO FICTÍCIO: Solicitações com informações incompletas",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
@@ -56,7 +56,7 @@
       "type": "heading",
       "data": {
         "section_key": "d1_d2_diagnosis",
-        "text": "D1–D2 — Percepções e diagnóstico"
+        "text": "D1 e D2: Percepções e diagnóstico"
       }
     },
     {

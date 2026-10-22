@@ -3,7 +3,7 @@
     {
       "data": {
         "section_key": "c1_heading",
-        "text": "C1 — Contextualizar"
+        "text": "C1: Contextualizar"
       },
       "id": "heading-c1",
       "type": "heading"
@@ -22,7 +22,7 @@
     {
       "data": {
         "section_key": "c2_heading",
-        "text": "C2 — Compreender"
+        "text": "C2: Compreender"
       },
       "id": "heading-c2",
       "type": "heading"
@@ -41,7 +41,7 @@
     {
       "data": {
         "section_key": "c3_heading",
-        "text": "C3 — Confirmar"
+        "text": "C3: Confirmar"
       },
       "id": "heading-c3",
       "type": "heading"
@@ -60,7 +60,7 @@
     {
       "data": {
         "section_key": "c4_heading",
-        "text": "C4 — Cocriar"
+        "text": "C4: Cocriar"
       },
       "id": "heading-c4",
       "type": "heading"
@@ -79,7 +79,7 @@
     {
       "data": {
         "section_key": "c5_heading",
-        "text": "C5 — Conduzir"
+        "text": "C5: Conduzir"
       },
       "id": "heading-c5",
       "type": "heading"
@@ -118,7 +118,7 @@
             "4"
           ]
         ],
-        "title": "C2 — temas priorizados, exemplo fictício"
+        "title": "C2: temas priorizados, exemplo fictício"
       },
       "id": "themes-votes",
       "type": "table"
@@ -150,7 +150,7 @@
             "Entrevista"
           ]
         ],
-        "title": "C5 — distribuição de 50 créditos fictícios"
+        "title": "C5: distribuição de 50 créditos fictícios"
       },
       "id": "proposal-credits",
       "type": "table"
@@ -179,5 +179,5 @@
   },
   "schema_version": "1.0.0",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
-  "title": "EXEMPLO FICTÍCIO — Encontro com clientes sobre solicitações de dados"
+  "title": "EXEMPLO FICTÍCIO: Encontro com clientes sobre solicitações de dados"
 }

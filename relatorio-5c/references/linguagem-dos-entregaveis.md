@@ -12,6 +12,13 @@ padrão; ajuste o detalhe quando o usuário pedir uma explicação especializada
 - O título diz o assunto ou a mensagem do documento. Não repita o tipo do
   entregável (“Relatório 4D”, “Plano de experimentação”, “Test Card”): ele já
   aparece no cabeçalho, acima do título, e o renderizador recusa a repetição.
+- Não use travessão (—) nem meia-risca (–) em nenhum entregável: título, texto,
+  tabela, card, slide, fonte ou arquivo escrito à mão. Também não ponha hífen com
+  espaços (“ - ”) no lugar deles. Use dois-pontos para apresentar
+  (“GEIN-6: jornada de reuniões da diretoria”), vírgula ou parênteses para
+  intercalar, ponto para separar frases e “de 10 a 20” ou “D1 a D4” para
+  intervalos. Ao citar uma fonte ou um título com travessão, troque-o da mesma
+  forma. O renderizador recusa conteúdo com travessão e indica os campos.
 - Use frases curtas, verbos diretos e uma ideia por frase. Prefira “o que vamos
   testar”, “como vamos medir” e “o que falta definir” a títulos abstratos.
 - Troque o jargão por uma expressão comum. Quando um termo técnico for necessário,

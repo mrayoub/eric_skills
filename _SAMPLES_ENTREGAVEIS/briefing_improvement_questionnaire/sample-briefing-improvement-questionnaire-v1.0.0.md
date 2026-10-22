@@ -1,4 +1,4 @@
-# EXEMPLO FICTÍCIO — Lacunas a fechar sobre as solicitações internas
+# EXEMPLO FICTÍCIO: Lacunas a fechar sobre as solicitações internas
 
 ID sample-briefing-improvement-questionnaire · versão 1.0.0 · Completo
 

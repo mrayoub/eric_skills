@@ -4,7 +4,7 @@ Use este procedimento quando houver sessões moderadas com MVP, vídeo, áudio, 
 
 ## Preparação e moderação
 
-Orientações adaptadas de [Jakob Nielsen, NN/g — Thinking Aloud: The #1 Usability Tool](https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/), publicado em 15 jan 2012, consultado em 28 set 2026:
+Orientações adaptadas de [Jakob Nielsen, NN/g, Thinking Aloud: The #1 Usability Tool](https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/), publicado em 15 jan 2012, consultado em 28 set 2026:
 
 - Recrute perfis representativos e proponha tarefas plausíveis de uso; registre desvios de representatividade.
 - Explique a verbalização simultânea e faça breve demonstração ou prática. Diferencie pensamentos durante a ação de explicações retrospectivas.
