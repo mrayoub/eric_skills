@@ -245,10 +245,8 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
                                  styles["table_body"]) for index in range(ncols)] for row in rows)
         proportions = iqb_widths.get(slug)
         padding = 4 if proportions else 6
-        if proportions and len(proportions) == ncols:
-            col_widths = [width * proportion / 100 for proportion in proportions]
-        else:
-            col_widths = _content_widths([headings, *rows], ncols, width, padding, styles)
+        col_widths = _content_widths([headings, *rows], ncols, width, padding, styles,
+                                     proportions if proportions and len(proportions) == ncols else None)
         table = Table(matrix, colWidths=col_widths, repeatRows=1, splitByRow=1)
         commands = [
             ("BACKGROUND", (0, 0), (-1, 0), palette["document_primary"]),
@@ -269,9 +267,10 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
 
 
 def _content_widths(lines: list[list[str]], ncols: int, width: float, padding: float,
-                    styles: dict[str, Any]) -> list[float]:
-    """Larguras pelo conteúdo: cada coluna cabe sua palavra mais longa, e o espaço que sobra
-    é dividido pela quantidade de texto. Sem espaço para isso, volta às colunas iguais."""
+                    styles: dict[str, Any], proportions: list[int] | None = None) -> list[float]:
+    """Larguras em que cada coluna cabe sua palavra mais longa. Com proporções fixas, mantém-nas e
+    só alarga as colunas estreitas demais, tirando a diferença das que têm folga; sem proporções,
+    divide o espaço que sobra pela quantidade de texto. Sem espaço para isso, mantém a base."""
     from reportlab.pdfbase.pdfmetrics import stringWidth
 
     minimum, amount = [0.0] * ncols, [0.0] * ncols
@@ -283,6 +282,15 @@ def _content_widths(lines: list[list[str]], ncols: int, width: float, padding: f
             minimum[index] = max(minimum[index], max(words, default=0) + 2 * padding + 1)
             amount[index] += sum(words)
     spare = width - sum(minimum)
+    if proportions:
+        base = [width * proportion / 100 for proportion in proportions]
+        widths = [max(low, start) for low, start in zip(minimum, base)]
+        slack = [current - low for current, low in zip(widths, minimum)]
+        excess = sum(widths) - width
+        if spare < 0 or excess > sum(slack):
+            return base
+        return [current - excess * room / sum(slack) if sum(slack) else current
+                for current, room in zip(widths, slack)]
     if spare < 0 or not sum(amount):
         return [width / ncols] * ncols
     return [low + spare * share / sum(amount) for low, share in zip(minimum, amount)]
