@@ -5,16 +5,14 @@ tipo de entregável: tamanho de página e os "slots" (zonas nomeadas com posiç�
 em mm) que compõem aquele layout. São gerados e editados com a ferramenta em
 `../../_LAYOUT_STUDIO/` (fora do git de skills, só de uso do mantenedor).
 
-Hoje estes arquivos são **só a definição visual** — `scripts/render.py` ainda não os lê.
-A estrutura de cada entregável continua sendo decidida pelo código Python em `render.py`
-(funções `render_html`, `render_docx`, `render_pptx`) e pelas regras de `profiles.json`.
+Dois tipos já são desenhados a partir do `layout.json`:
 
-Quando a integração for feita, a expectativa é: `render.py` passa a ler o
-`layout.json` do tipo correspondente e encaixar os blocos do JSON canônico nos slots
-definidos, em vez de ter a estrutura hardcoded por tipo espalhada no código — com um
-mecanismo de verificação (comparação estrutural para DOCX/PPTX, comparação visual com
-limiar para PDF — ver Plano 028 Fase 2) garantindo que a saída real não diverge do que
-foi desenhado, até que o layout seja redefinido na ferramenta.
+- `executive_presentation`: HTML, PPTX e PDF posicionam logo, título, corpo e rodapé de cada slide nos slots.
+- `briefing_one_page`: HTML e PDF desenham cada bloco no slot com o mesmo `section_key`, nas mesmas
+  posições, e recusam blocos sem slot. Editar este layout no Studio muda os dois formatos.
+
+Nos demais tipos, o arquivo ainda é só a definição visual: a estrutura continua decidida
+pelo código em `render.py` e `pdf_reportlab.py` e pelas regras de `profiles.json`.
 
 Convenção de nome de arquivo: `<deliverable_type>.layout.json`, mesmo valor de
 `deliverable_type` usado nos schemas de `../contracts/`.

@@ -573,11 +573,136 @@ def load_presentation_layout(deliverable_type: str) -> dict[str, dict[str, Any]]
     return {s["name"]: s for s in data.get("slots", []) if s.get("name")}
 
 
+ONE_PAGE_SLOTS = ("titulo_documento", "identificacao_versao")
+
+
+def render_one_page_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any],
+                         logo_uri: str, logo_size: tuple[int, int]) -> str:
+    """Resumo de uma página nos slots do layout.json, espelhando _render_one_page_layout do PDF.
+
+    Mesmas posições, recuos, cores, fontes e regras de conteúdo; blocos sem slot são recusados.
+    """
+    slots = load_presentation_layout(content["deliverable_type"]) or {}
+    missing = [name for name in ONE_PAGE_SLOTS if name not in slots]
+    if missing:
+        raise ValueError("layout.json do resumo sem slots obrigatórios: " + ", ".join(missing))
+    mapped_keys = {slot.get("section_key") or name for name, slot in slots.items() if name not in ONE_PAGE_SLOTS}
+    unmapped = [block["id"] for block in content["blocks"]
+                if block["type"] != "page_break" and block.get("data", {}).get("section_key") not in mapped_keys]
+    if unmapped:
+        raise ValueError("executive_one_page: blocos sem slot no layout: " + ", ".join(unmapped))
+    color = tokens["color"]
+    page = tokens["page"][profile["paper"]]
+    gap = 1.5
+
+    def cited(value: Any, block: dict[str, Any]) -> str:
+        return html.escape(str(value)) + "".join(f"<sup>[{html.escape(x)}]</sup>" for x in block.get("citation_ids", []))
+
+    def box(name: str, inner: str, css_class: str) -> str:
+        slot = slots[name]
+        x, y, width, height = (float(slot[key]) for key in ("x", "y", "width", "height"))
+        if min(x, y, width, height) < 0 or x + width > page["width"] + .1 or y + height > page["height"] + .1:
+            raise ValueError(f"layout.json do resumo: slot {name} fora da página")
+        if css_class in ("op-hmw", "op-field", "op-people"):
+            x, y, width, height = x + gap, y + gap, width - 2 * gap, height - 2 * gap
+        return (f'<div class="op-slot {css_class}" data-slot="{html.escape(name)}" style="left: {x}mm; top: {y}mm; '
+                f'width: {width}mm; height: {height}mm;">{inner}</div>')
+
+    # Cabeçalho na faixa acima do título, com as mesmas medidas do PDF.
+    title_slot = slots["titulo_documento"]
+    tx, ty, tw = (float(title_slot[key]) for key in ("x", "y", "width"))
+    band_top = 3.0
+    available = ty - band_top - 2
+    if available < 5:
+        raise ValueError("layout.json do resumo: titulo_documento precisa de ao menos 10 mm livres acima")
+    image_width, image_height = logo_size
+    scale = min(38 / image_width, min(11, available) / image_height)
+    logo_width, logo_height = image_width * scale, image_height * scale
+    parts = [
+        f'<img class="op-logo" src="{logo_uri}" alt="CCEE" style="left: {tx + tw - logo_width}mm; top: {band_top}mm; '
+        f'width: {logo_width}mm; height: {logo_height}mm;">',
+        f'<span class="eyebrow op-eyebrow" style="left: {tx}mm; top: {band_top}mm; height: {logo_height}mm;">'
+        f'{html.escape(header_label(content))}</span>',
+        f'<div class="op-rule" style="left: {tx}mm; top: {band_top + logo_height + 1.5}mm; width: {tw}mm;"></div>',
+        box("titulo_documento", f'<h1>{html.escape(content["title"])}</h1>', "op-title"),
+    ]
+    by_key: dict[str, list[dict[str, Any]]] = {}
+    for block in content["blocks"]:
+        by_key.setdefault(block.get("data", {}).get("section_key"), []).append(block)
+    for name, slot in slots.items():
+        key = slot.get("section_key") or name
+        if name in ONE_PAGE_SLOTS or key in ONE_PAGE_SLOTS or key not in by_key:
+            continue
+        blocks = by_key[key]
+        if key == "hmw":
+            parts.append(box(name, "".join(f"<p>{cited(block_text(block), block)}</p>" for block in blocks), "op-hmw"))
+            continue
+        items = []
+        for block in blocks:
+            data = block.get("data", {})
+            if data.get("title"):
+                items.append(f'<h2>{html.escape(data["title"])}</h2>')
+            if block["type"] == "table" and data.get("rows"):
+                headers, rows = table_rows(block)
+                lines = ([" | ".join(headers)] if headers else []) + [" | ".join(row) for row in rows]
+                items.extend(f"<p>{html.escape(line)}</p>" for line in lines)
+            elif data.get("description") or data.get("text"):
+                items.append(f'<p>{html.escape(data.get("description") or data.get("text"))}</p>')
+            elif data.get("value") is not None or data.get("content"):
+                items.append(f'<p>{html.escape(str(data["value"] if data.get("value") is not None else data["content"]))}</p>')
+            elif block["type"] == "table" or data.get("cards") or not (data.get("points") or data.get("items") or data.get("title")):
+                items.extend(f"<p>{html.escape(line)}</p>" for line in block_text(block).splitlines() if line.strip())
+            for point in data.get("points", []) or data.get("items", []):
+                items.append(f"<p>• {html.escape(str(point))}</p>")
+            if block.get("citation_ids"):
+                items.append(f"<p>{cited('', block)}</p>")
+        parts.append(box(name, "".join(items), "op-people" if key == "people" else "op-field"))
+    footer = []
+    if content["citations"]:
+        sources = "; ".join(f"{citation['id']} — {citation['source_id']}"
+                            + (f", {citation['locator']}" if citation.get("locator") else "")
+                            for citation in content["citations"])
+        footer.append(f"<p>{html.escape('Fontes: ' + sources)}</p>")
+    footer.append(f"<p>{html.escape(identity_line(content))}</p>")
+    parts.append(box("identificacao_versao", "".join(footer), "op-footer"))
+
+    styles = tokens["typography"]["styles"]
+    one_page_css = f"""
+@page {{ size: {page['width']}mm {page['height']}mm; margin: 0; }}
+body {{ max-width: {page['width']}mm; padding: 0 !important; }}
+.one-page {{ position: relative; width: {page['width']}mm; height: {page['height']}mm; background: {color['surface']}; overflow: hidden; }}
+.op-slot, .op-logo, .op-eyebrow, .op-rule {{ position: absolute; }}
+.op-slot {{ display: flex; flex-direction: column; }}
+.op-slot p, .op-slot h1, .op-slot h2 {{ margin: 0; padding: 0; border: 0; }}
+.op-eyebrow {{ display: flex; align-items: center; }}
+.op-rule {{ border-top: 1.5pt solid {color['document_primary']}; }}
+.op-title {{ justify-content: center; }}
+.op-title h1 {{ font-size: 24pt; line-height: {styles['cover_title']['line_height']}; }}
+.op-hmw {{ justify-content: center; background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; padding: 5mm; }}
+.op-hmw p {{ font-family: Roboto, Arial, sans-serif; font-size: 15pt; line-height: 19pt; font-weight: 700; color: {color['inverse']}; }}
+.op-field, .op-people {{ padding: 4mm; }}
+.op-field {{ background: {color['document_accent_soft']}; border-left: 3pt solid {color['document_accent']}; }}
+.op-people {{ background: {color['surface_muted']}; border-left: 3pt solid {color['border_strong']}; }}
+.op-field h2, .op-people h2 {{ font-family: Roboto, Arial, sans-serif; font-size: 11pt; line-height: 14pt; font-weight: 700; color: {color['document_primary']}; margin-bottom: 5pt; }}
+.op-field p, .op-people p {{ font-size: 10pt; line-height: 13.5pt; color: {color['text_body']}; margin-bottom: 4pt; }}
+.op-footer p {{ font-size: {styles['footer']['size']}pt; line-height: {styles['footer']['line_height']}; font-weight: 500; color: {color['text_muted']}; }}
+.op-slot sup {{ font-size: 7.5pt; }}
+"""
+    title = html.escape(content["title"])
+    return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
+            f"<title>{title}</title><style>{css(tokens, profile['paper'])}{one_page_css}</style></head>"
+            f'<body><article class="document one-page">{"".join(parts)}</article></body></html>\n')
+
+
 def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
     logo = ROOT / "assets" / "logo_ccee.png"
     if not logo.is_file():
         raise FileNotFoundError("Logo CCEE ausente; não é possível assegurar timbre idempotente")
-    uri = "data:image/png;base64," + base64.b64encode(logo.read_bytes()).decode("ascii")
+    logo_bytes = logo.read_bytes()
+    uri = "data:image/png;base64," + base64.b64encode(logo_bytes).decode("ascii")
+    if profile["layout"] == "executive_one_page":
+        logo_size = (int.from_bytes(logo_bytes[16:20], "big"), int.from_bytes(logo_bytes[20:24], "big"))
+        return render_one_page_html(content, tokens, profile, uri, logo_size)
     meta = content["metadata"]
     title = html.escape(content["title"])
     deliverable_label = html.escape(header_label(content))
@@ -658,18 +783,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     refs = f'<section class="refs"><h2>Fontes</h2><ol>{citations}</ol></section>' if citations else ""
     summary = f'<p class="summary">{html.escape(content["summary"])}</p>' if content.get("summary") else ""
     variant_css = ""
-    if profile["layout"] == "executive_one_page":
-        variant_css = (".masthead { min-height: 12mm; margin-bottom: 6pt; } "
-                       "h1 { font-size: 24pt; margin: 4pt 0 8pt; } "
-                       ".summary { margin-bottom: 8pt; } "
-                       ".block { margin: 5pt 0; } .callout { padding: 8pt; } "
-                       ".refs { margin-top: 8pt; } "
-                       ".section-grid { column-count: 2; column-gap: 8pt; } "
-                       ".section-card { display: inline-block; width: 100%; margin-bottom: 6pt; } "
-                       ".section-pair { display: block; margin: 0; } .section-pair .section-card { display: block; width: 100%; } "
-                       ".section-band { padding: 5pt 7pt; font-size: 9pt; } "
-                       ".section-content { padding: 5pt 7pt; font-size: 8.5pt; }")
-    elif profile["layout"] == "report_landscape":
+    if profile["layout"] == "report_landscape":
         variant_css = (".masthead { margin-bottom: 8pt; } "
                        "h1 { font-size: 24pt; margin: 4pt 0 9pt; } "
                        "h2 { margin: 10pt 0 5pt; } "

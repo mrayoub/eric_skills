@@ -90,8 +90,8 @@ mas não há verificação cruzada automática ainda).
 ## O que esta ferramenta NÃO faz (ainda)
 
 Ela só desenha e exporta a estrutura (posições/tamanhos/nomes/fonte de dados). Ela **não**:
-- Lê nem escreve o `render.py` — a integração para `render.py` de fato posicionar o
-  conteúdo real segundo esse layout é trabalho futuro, separado.
+- Lê nem escreve o `render.py`. O renderizador lê os layouts salvos: a apresentação e o
+  Briefing (`briefing_one_page`, em HTML e PDF) já seguem os slots; os demais tipos ainda não.
 - Valida se os slots cobrem todas as seções obrigatórias de `response-sections.json` ou
   dos schemas em `contracts/` (só oferece as opções corretas no dropdown; não avisa se
   faltou alguma).
