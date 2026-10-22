@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeria de templates ERIC</title>
+<style>
+:root { --bg: #f4f5f9; --surface: #fff; --text: #1d2233; --muted: #5d6478; --line: #dfe3ec; --navy: #102661; --accent: #4c73d1; --warn: #9a5b00; --warn-bg: #fff4d9; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0f1220; --surface: #181c2e; --text: #e5e8f2; --muted: #9aa1b8; --line: #2b3150; --navy: #c8d2ff; --accent: #8aa6ff; --warn: #f0c46a; --warn-bg: #2d2512; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+.layout { display: grid; grid-template-columns: 290px 1fr; height: 100vh; }
+aside { overflow: auto; background: var(--surface); border-right: 1px solid var(--line); padding: 18px 12px 32px; }
+aside h1 { margin: 0 8px 2px; font-size: 17px; color: var(--navy); }
+aside .meta { margin: 0 8px 16px; color: var(--muted); font-size: 12px; }
+.skill { margin: 14px 8px 4px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.none { margin: 0 8px; color: var(--muted); font-size: 12.5px; font-style: italic; }
+.nav { display: block; width: 100%; text-align: left; font: inherit; background: none; border: 0; border-radius: 7px; padding: 6px 8px; color: var(--text); cursor: pointer; }
+.nav:hover { background: var(--bg); }
+.nav[aria-current="true"] { background: var(--accent); color: #fff; }
+.nav .warn { color: var(--warn); font-weight: 700; }
+main { display: flex; flex-direction: column; min-width: 0; }
+header { padding: 16px 22px 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
+header h2 { margin: 0; font-size: 20px; color: var(--navy); }
+header p { margin: 3px 0 10px; color: var(--muted); }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.mode { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 7px; padding: 5px 11px; cursor: pointer; }
+.mode[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--surface); }
+.bar a { color: var(--accent); margin-left: 6px; }
+.alert { margin: 10px 0 0; padding: 8px 12px; border-radius: 7px; background: var(--warn-bg); color: var(--warn); }
+.views { flex: 1; display: grid; gap: 12px; padding: 12px; min-height: 0; }
+.views.both { grid-template-columns: 1fr 1fr; }
+.view { display: flex; flex-direction: column; min-height: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.view h3 { margin: 0; padding: 7px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--line); }
+iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+.fit { position: relative; flex: 1; overflow: hidden; }
+.fit iframe { position: absolute; left: 0; top: 0; width: 1400px; transform-origin: 0 0; }
+.empty { padding: 40px; color: var(--muted); }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; height: auto; } aside { max-height: 40vh; } .views.both { grid-template-columns: 1fr; } iframe { min-height: 70vh; } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <h1>Galeria de templates</h1>
+    <p class="meta" id="meta"></p>
+    <nav id="nav"></nav>
+  </aside>
+  <main>
+    <header>
+      <h2 id="title">Escolha um entregável</h2>
+      <p id="subtitle">Os templates são as amostras fictícias de _SAMPLES_ENTREGAVEIS renderizadas com o design system atual.</p>
+      <div class="bar" id="bar" hidden>
+        <button class="mode" data-mode="both" aria-pressed="true">HTML e PDF</button>
+        <button class="mode" data-mode="html" aria-pressed="false">Só HTML</button>
+        <button class="mode" data-mode="pdf" aria-pressed="false">Só PDF</button>
+        <span id="links"></span>
+      </div>
+      <p class="alert" id="alert" hidden></p>
+    </header>
+    <div class="views both" id="views"><p class="empty">Rode <code>python3 _GALERIA/gerar.py</code> para atualizar os templates.</p></div>
+  </main>
+</div>
+<script>
+const DATA = /*DADOS*/null;
+const nav = document.getElementById("nav"), views = document.getElementById("views");
+let current = null, mode = "both";
+function esc(text) { const span = document.createElement("span"); span.textContent = text; return span.innerHTML; }
+function show(kind) {
+  current = kind;
+  const item = DATA.types[kind];
+  document.querySelectorAll(".nav").forEach(button => button.setAttribute("aria-current", button.dataset.kind === kind));
+  document.getElementById("title").textContent = item.label;
+  document.getElementById("subtitle").textContent = `${kind} · ${item.layout} · skills: ${item.skills.join(", ")}`;
+  document.getElementById("bar").hidden = false;
+  const links = [["md", "Markdown"], ["docx", "DOCX"], ["pptx", "PPTX"]].filter(([key]) => item.files[key])
+    .map(([key, name]) => `<a href="${item.files[key]}">${name}</a>`);
+  if (item.studio) links.push(`<span title="Abra no Layout Studio: Carregar layout existente">layout do Studio: ${esc(item.studio.split("/").pop())}</span>`);
+  document.getElementById("links").innerHTML = links.join(" ");
+  const alert = document.getElementById("alert");
+  alert.hidden = !item.error;
+  alert.textContent = item.error ? `Aviso ao gerar: ${item.error}` : "";
+  render();
+  try { history.replaceState(null, "", "#" + kind); } catch (error) {}
+}
+function render() {
+  const item = DATA.types[current];
+  const panes = [];
+  if (mode !== "pdf") panes.push(item.files.html ? `<section class="view"><h3>HTML</h3><div class="fit"><iframe src="${item.files.html}" title="HTML de ${esc(item.label)}"></iframe></div></section>` : `<p class="empty">HTML não gerado.</p>`);
+  if (mode !== "html") panes.push(item.files.pdf ? `<section class="view"><h3>PDF</h3><iframe src="${item.files.pdf}" title="PDF de ${esc(item.label)}"></iframe></section>` : `<p class="empty">PDF não gerado.</p>`);
+  views.className = "views" + (mode === "both" ? " both" : "");
+  views.innerHTML = panes.join("");
+  views.querySelectorAll(".fit").forEach(box => fitObserver.observe(box));
+}
+// O HTML tem a largura física da folha; reduz o quadro para caber no painel, como o leitor de PDF.
+const fitObserver = new ResizeObserver(entries => entries.forEach(({ target }) => {
+  const frame = target.querySelector("iframe"), scale = Math.min(1, target.clientWidth / 1400);
+  frame.style.transform = `scale(${scale})`;
+  frame.style.height = `${target.clientHeight / scale}px`;
+}));
+if (DATA) {
+  document.getElementById("meta").textContent = `Gerada em ${DATA.generated} · ${DATA.commit}`;
+  for (const [skill, kinds] of Object.entries(DATA.skills)) {
+    nav.insertAdjacentHTML("beforeend", `<div class="skill">${esc(skill)}</div>`);
+    if (!kinds.length) nav.insertAdjacentHTML("beforeend", `<p class="none">Sem entregável próprio: orienta a esteira.</p>`);
+    for (const kind of kinds) {
+      const item = DATA.types[kind];
+      nav.insertAdjacentHTML("beforeend", `<button class="nav" data-kind="${kind}">${esc(item.label)}${item.error ? ' <span class="warn">!</span>' : ""}</button>`);
+    }
+  }
+  nav.addEventListener("click", event => { const button = event.target.closest(".nav"); if (button) show(button.dataset.kind); });
+  document.querySelectorAll(".mode").forEach(button => button.addEventListener("click", () => {
+    mode = button.dataset.mode;
+    document.querySelectorAll(".mode").forEach(other => other.setAttribute("aria-pressed", other === button));
+    if (current) render();
+  }));
+  const start = location.hash.slice(1);
+  show(DATA.types[start] ? start : Object.keys(DATA.types)[0]);
+}
+</script>
+</body>
+</html>

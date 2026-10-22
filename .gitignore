@@ -11,3 +11,7 @@ _DIST/
 
 # Worktrees e estado local de agentes
 .claude/
+
+# Galeria de templates: gerada por _GALERIA/gerar.py
+_GALERIA/saida/
+_GALERIA/index.html
