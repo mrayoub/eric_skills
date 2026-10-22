@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-five-c-workshop-record",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "5df0ff7e7d934f2712cb077c4041ce1a2dfe802a8f213fc4420b66b6fcb83384",
   "content_version": "1.0.0",
   "deliverable_type": "five_c_workshop_record",
   "files": {
-    "sample-five-c-workshop-record-v1.0.0.docx": "2fd9453ee692ce3b2d9b8e94f6074dc78879f49fde02910c3c39e229e91c20a0",
+    "sample-five-c-workshop-record-v1.0.0.docx": "ee324284d2d82e32b309387e0526f33fd8d26809896ed84cf428e06f62fad27f",
     "sample-five-c-workshop-record-v1.0.0.json": "5df0ff7e7d934f2712cb077c4041ce1a2dfe802a8f213fc4420b66b6fcb83384",
     "sample-five-c-workshop-record-v1.0.0.md": "d40738985fc6344a91cfc6fc44411a129389f742c814372b23dc62a0fa2c0e93",
-    "sample-five-c-workshop-record-v1.0.0.pdf": "7625ece023aa99328045f33a6b7a8f77a019e6bea3b5968ada20d5566a67a4b5",
+    "sample-five-c-workshop-record-v1.0.0.pdf": "6fb4392fadec68b1859dbe7db8657aa8c7a2d4ec2ee4ae029c0c987e2b9f136f",
     "sample-five-c-workshop-record-v1.0.0.txt": "b61729c52f704514808c17986fa9f84b65ba390a895eea3b965e4cfb37716a74"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

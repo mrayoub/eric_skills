@@ -1,15 +1,15 @@
 {
   "artifact_id": "sample-briefing-one-page",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "b0e8f3ebe585d0421bddc2ebf82756e8925cd3cc2a2581709131b39d3f64867a",
   "content_version": "1.0.0",
   "deliverable_type": "briefing_one_page",
   "files": {
-    "sample-briefing-one-page-v1.0.0.docx": "8111d353141145a04966fcee6f261a697fcd778053e63661db5be2d03251f1d9",
-    "sample-briefing-one-page-v1.0.0.html": "9cda9504e4696748b9a2e26e7d9d9722285e948fc141c9223fe17443187815aa",
+    "sample-briefing-one-page-v1.0.0.docx": "86983597e7fc19c113a1f3fa7a1553128328f4f266d10e15249ef128dae0defb",
+    "sample-briefing-one-page-v1.0.0.html": "03e8636ee5e0446a48e35d4b014672ff2da619ce20a968fdb0b4f52b8f4a8ce9",
     "sample-briefing-one-page-v1.0.0.json": "b0e8f3ebe585d0421bddc2ebf82756e8925cd3cc2a2581709131b39d3f64867a",
     "sample-briefing-one-page-v1.0.0.md": "373d162f84eb170f02a46d2dea0355e6aa7cd019a003e4886b5cac1532ff6889",
-    "sample-briefing-one-page-v1.0.0.pdf": "7b5649c0b4d66d71822adebc2f3a7075a8ef3a3d04e601ee2a9ec06a1e3db7db",
+    "sample-briefing-one-page-v1.0.0.pdf": "1af68fe1d7c569ffaca017f8964584600111c0ce4550a037fb1dcaab23ab2f94",
     "sample-briefing-one-page-v1.0.0.txt": "2d1702bffd5331ef64b0cc5059144217220db96af1b8f2df14fb7272e9993e2a"
   },
   "layout": "executive_one_page",
@@ -18,6 +18,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "c007cff27a5c7d7f8bc3b067a287d76540dfa758c197fe7ca31f2354e9fd45c2",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

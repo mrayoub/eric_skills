@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-experiment-report",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_report",
   "files": {
-    "sample-experiment-report-v1.0.0.docx": "2f977f0eb8343d715d9c51e77e9441053c66db3da7b8c9bb52d3bbff5d181882",
+    "sample-experiment-report-v1.0.0.docx": "40e75e770675165f11677b7f2d4f78c8df3f6795930d09bcff5a7153f785a81b",
     "sample-experiment-report-v1.0.0.json": "34519c247d5773078cb74604c1a9af838bde346a23ae88715fc8940730099201",
     "sample-experiment-report-v1.0.0.md": "0cd57a70e00b4904135998b66d11a3dccbe936b5425748b6c3edd4dd68ea6485",
-    "sample-experiment-report-v1.0.0.pdf": "5e620227336227f3c6ec961d57f572356b5c9fc4f210ea3b3fcd3449cdab26d5",
+    "sample-experiment-report-v1.0.0.pdf": "2fb1bbade28ab0b7895ea849a64721dccc15e9e243b7c4438b190254f21231cd",
     "sample-experiment-report-v1.0.0.txt": "9523cc0044c0ee817497bf26b2a1f6e207629205e198eb2f0c8b7e9da51966f8"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

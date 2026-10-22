@@ -16,17 +16,27 @@ class PdfOverflow(ValueError):
     """O conteúdo excede a página única exigida pelo perfil."""
 
 
-def _register_fonts() -> None:
+def _font(tokens: dict[str, Any], family: str, weight: int) -> str:
+    """Nome da instância estática para a família do token (font_brand é sempre negrito)."""
+    name = tokens["typography"][family]
+    if family == "font_brand" or weight >= 600:
+        return f"{name}-Bold"
+    return f"{name}-Medium" if weight >= 500 else f"{name}-Regular"
+
+
+def _register_fonts(tokens: dict[str, Any]) -> None:
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
 
-    for name in ("Montserrat-Bold", "Roboto-Regular", "Roboto-Medium", "Roboto-Bold"):
+    names = {_font(tokens, "font_brand", 700)} | {_font(tokens, "font_body", weight) for weight in (400, 500, 700)}
+    for name in sorted(names):
         font_path = FONT_DIR / f"{name}.ttf"
         if not font_path.is_file():
             raise FileNotFoundError("Fontes estáticas ausentes em assets/fonts/static; rode _TOOLS/make_static_fonts.py")
         if name not in pdfmetrics.getRegisteredFontNames():
             pdfmetrics.registerFont(TTFont(name, str(font_path)))
-    pdfmetrics.registerFontFamily("Roboto-Regular", normal="Roboto-Regular", bold="Roboto-Bold")
+    regular, bold = _font(tokens, "font_body", 400), _font(tokens, "font_body", 700)
+    pdfmetrics.registerFontFamily(regular, normal=regular, bold=bold)
 
 
 def make_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any]:
@@ -44,8 +54,7 @@ def make_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any]:
         if font_size < minimum:
             raise ValueError(f"{name}: fonte abaixo do mínimo de {minimum} pt")
         font_weight = int(weight if weight is not None else spec["weight"])
-        font = "Montserrat-Bold" if spec["family"] == "font_brand" else (
-            "Roboto-Bold" if font_weight >= 600 else "Roboto-Medium" if font_weight >= 500 else "Roboto-Regular")
+        font = _font(tokens, spec["family"], font_weight)
         return ParagraphStyle(name, fontName=font, fontSize=font_size,
                               leading=leading or font_size * float(spec["line_height"]),
                               textColor=colors.HexColor(palette[color]),
@@ -235,10 +244,12 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
         matrix.extend([Paragraph(_markup(row[index] if index < len(row) else ""),
                                  styles["table_body"]) for index in range(ncols)] for row in rows)
         proportions = iqb_widths.get(slug)
-        col_widths = ([width * proportion / 100 for proportion in proportions]
-                      if proportions and len(proportions) == ncols else [width / ncols] * ncols)
-        table = Table(matrix, colWidths=col_widths, repeatRows=1, splitByRow=1)
         padding = 4 if proportions else 6
+        if proportions and len(proportions) == ncols:
+            col_widths = [width * proportion / 100 for proportion in proportions]
+        else:
+            col_widths = _content_widths([headings, *rows], ncols, width, padding, styles)
+        table = Table(matrix, colWidths=col_widths, repeatRows=1, splitByRow=1)
         commands = [
             ("BACKGROUND", (0, 0), (-1, 0), palette["document_primary"]),
             ("GRID", (0, 0), (-1, -1), 0.75, palette["border"]),
@@ -255,6 +266,26 @@ def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,
     if block.get("citation_ids"):
         result.append(Paragraph(_cited("", block), styles["source"]))
     return result
+
+
+def _content_widths(lines: list[list[str]], ncols: int, width: float, padding: float,
+                    styles: dict[str, Any]) -> list[float]:
+    """Larguras pelo conteúdo: cada coluna cabe sua palavra mais longa, e o espaço que sobra
+    é dividido pela quantidade de texto. Sem espaço para isso, volta às colunas iguais."""
+    from reportlab.pdfbase.pdfmetrics import stringWidth
+
+    minimum, amount = [0.0] * ncols, [0.0] * ncols
+    for number, line in enumerate(lines):
+        style = styles["table_header" if number == 0 else "table_body"]
+        for index in range(ncols):
+            text = str(line[index]) if index < len(line) else ""
+            words = [stringWidth(word, style.fontName, style.fontSize) for word in text.split()]
+            minimum[index] = max(minimum[index], max(words, default=0) + 2 * padding + 1)
+            amount[index] += sum(words)
+    spare = width - sum(minimum)
+    if spare < 0 or not sum(amount):
+        return [width / ncols] * ncols
+    return [low + spare * share / sum(amount) for low, share in zip(minimum, amount)]
 
 
 def _report_card_grid(block: dict[str, Any], styles: dict[str, Any], width: float) -> list[Any]:
@@ -479,7 +510,7 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
             total = len(self.saved_pages)
             for state in self.saved_pages:
                 self.__dict__.update(state)
-                self.setFont("Roboto-Medium", styles["footer"].fontSize)
+                self.setFont(styles["footer"].fontName, styles["footer"].fontSize)
                 self.setFillColor(palette["text_muted"])
                 self.drawRightString(paper_width - right, bottom / 2,
                                      f"{footer_label} · página {self._pageNumber} de {total}")
@@ -531,8 +562,7 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
     def slide_style(name: str, token: str, color: str, *, size: float | None = None) -> Any:
         spec = definitions[token]
         font_size = size or float(spec["size"])
-        font = "Montserrat-Bold" if spec["family"] == "font_brand" else (
-            "Roboto-Bold" if spec["weight"] >= 600 else "Roboto-Medium" if spec["weight"] >= 500 else "Roboto-Regular")
+        font = _font(tokens, spec["family"], int(spec["weight"]))
         return ParagraphStyle(name, fontName=font, fontSize=font_size,
                               leading=font_size * float(spec["line_height"]),
                               textColor=palette[color], splitLongWords=1)
@@ -857,7 +887,7 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
     layout = profile["layout"]
     if layout not in SUPPORTED_LAYOUTS:
         raise ValueError(f"ReportLab ainda não suporta o layout {layout}")
-    _register_fonts()
+    _register_fonts(tokens)
     if layout == "presentation":
         if load_presentation_layout is None or identity_line is None:
             raise ValueError("Apresentação requer layout e identificação")
@@ -995,7 +1025,7 @@ def render_pdf(content: dict[str, Any], tokens: dict[str, Any], profile: dict[st
 
     def on_page(canvas: Any, doc: Any) -> None:
         pages.append(doc.page)
-        canvas.setFont("Roboto-Regular", styles["footer"].fontSize)
+        canvas.setFont(_font(tokens, "font_body", 400), styles["footer"].fontSize)
         canvas.setFillColor(palette["text_muted"])
         canvas.drawRightString(paper_width - right, bottom / 2, footer_label)
 

@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-test-card",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "989bf2a8cabdb4a2fd662fc82d7a5780b490c409552acd3af06afd36de9de877",
   "content_version": "1.0.0",
   "deliverable_type": "test_card",
   "files": {
-    "sample-test-card-v1.0.0.docx": "ecd0079690b289b7f6583924effe594bc9a5f6b1ef991b1dda359461d15d08b2",
+    "sample-test-card-v1.0.0.docx": "a9b47f2543aa028412aa3902db0554711da0cdac916b73af1c098c03a45657d5",
     "sample-test-card-v1.0.0.json": "989bf2a8cabdb4a2fd662fc82d7a5780b490c409552acd3af06afd36de9de877",
     "sample-test-card-v1.0.0.md": "82eeed5f0f05b7655248fd011ecc9c6f1b8d02826fbad9455e439892aad1391f",
-    "sample-test-card-v1.0.0.pdf": "e498a5af8df7970187c8d99ebe2f7f19e9ffd8d7e522de73a36f15129fc3c56f",
+    "sample-test-card-v1.0.0.pdf": "8a1a3d2465316e8b405cf1b18336fd64e74abada048de44f41cc81b88af09d8e",
     "sample-test-card-v1.0.0.txt": "ee04638f8a4391a1a4107617fb28276a44bc519b78c02f3ef3940e1e842c1d71"
   },
   "layout": "card_portrait",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

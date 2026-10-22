@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-five-c-report",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "1bdc4f008acdaf56b7bcbce2978783010693a475d87797bffd0351038aaf2d08",
   "content_version": "1.0.0",
   "deliverable_type": "five_c_report",
   "files": {
-    "sample-five-c-report-v1.0.0.docx": "39a5a3c8ae501fbbbf2547a95e635ef53f508f5a7b152d984cddbc2f33936ab3",
+    "sample-five-c-report-v1.0.0.docx": "d785ac662aa190471b1207ab0a9becf1fe93b22f9e6ac0869936a2e4b33fd007",
     "sample-five-c-report-v1.0.0.json": "1bdc4f008acdaf56b7bcbce2978783010693a475d87797bffd0351038aaf2d08",
     "sample-five-c-report-v1.0.0.md": "e92b7e95a705654ed8a0cba32a2e37de3bdc28d0347e8058de1fd4b33be8bba6",
-    "sample-five-c-report-v1.0.0.pdf": "bc766a3c67a8331b575633911d78fa75b7b439439692d8c55f571e8878aa9d92",
+    "sample-five-c-report-v1.0.0.pdf": "a8097119aa6264019c25d849bec730453586e52017c19747fe8a177c57cf9cab",
     "sample-five-c-report-v1.0.0.txt": "e59370138cf2a36927da81ba6e7c3a3992b64c0881b41c252e039d127d60f20a"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

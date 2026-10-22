@@ -21,6 +21,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
+FONT_BODY = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))["typography"]["font_body"]
 SCRIPT = ROOT / "scripts" / "render.py"
 
 
@@ -242,7 +243,7 @@ class RenderTests(unittest.TestCase):
                             self.assertLessEqual(footer.left + footer.width, presentation.slide_width)
                             other_text = [shape for shape in slide.shapes if shape.has_text_frame and shape.shape_id != footer.shape_id]
                             self.assertGreaterEqual(footer.top, max(shape.top + shape.height for shape in other_text))
-                            self.assertEqual(footer.text_frame.paragraphs[0].font.name, "Roboto")
+                            self.assertEqual(footer.text_frame.paragraphs[0].font.name, FONT_BODY)
                             self.assertGreaterEqual(footer.text_frame.paragraphs[0].font.size.pt, 7.5)
                         html = (folder / f"{stem}.html").read_text()
                         self.assertEqual(html.count(f'<footer class="meta">{identity}</footer>'), len(presentation.slides))
@@ -1312,7 +1313,7 @@ class ReportLabPdfTests(unittest.TestCase):
             page = PdfReader(str(next(folder.glob("*.pdf")))).pages[0]
             names = [str(value.get_object().get("/BaseFont", "")) for value in page["/Resources"]["/Font"].get_object().values()]
             self.assertTrue(any(name.endswith("Montserrat-Bold") for name in names), names)
-            self.assertTrue(any(name.endswith("Roboto-Regular") for name in names), names)
+            self.assertTrue(any(name.endswith(f"{FONT_BODY}-Regular") for name in names), names)
             self.assertFalse(any("Thin" in name or "Variable" in name for name in names), names)
 
     def test_manifest_records_engine(self):

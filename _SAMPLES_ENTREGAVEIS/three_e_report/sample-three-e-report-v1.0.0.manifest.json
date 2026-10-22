@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-three-e-report",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "c2547b1a283ee67e8271cac8245dff9a931f34010396e45a2da24a1ff3ae4c22",
   "content_version": "1.0.0",
   "deliverable_type": "three_e_report",
   "files": {
-    "sample-three-e-report-v1.0.0.docx": "9af4881017087f6975b8f5a6471c93686c8ef3355e8f848f06abe22a70ff2cdf",
+    "sample-three-e-report-v1.0.0.docx": "96edec884b624704982e36fde4adaa4238bfc7deb5efcc59df6228a98036f159",
     "sample-three-e-report-v1.0.0.json": "c2547b1a283ee67e8271cac8245dff9a931f34010396e45a2da24a1ff3ae4c22",
     "sample-three-e-report-v1.0.0.md": "4e7f35aeb7543cb3a771069e48112e78ff840730be120263cfb16ee9473804d1",
-    "sample-three-e-report-v1.0.0.pdf": "64aa62c87703da508ee3647a094199c6302b2ce5b187314c963a26d247a06503",
+    "sample-three-e-report-v1.0.0.pdf": "0b6edec6662fdde8c3228d37bb28b694956c18de2b48dc6abb47ecc6b460e792",
     "sample-three-e-report-v1.0.0.txt": "ef5e459d9a20e8ddeed0c542af94f131a0ff9706e129c7432bf485d1e6a1c3ee"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-experiment-plan",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
   "content_version": "1.0.0",
   "deliverable_type": "experiment_plan",
   "files": {
-    "sample-experiment-plan-v1.0.0.docx": "6fc861bbcc1cf09d672533b41e566eeec3a0d8638c18b7c3b3b2968a2b098a75",
+    "sample-experiment-plan-v1.0.0.docx": "e11527ab418524e5a3a26af821045aa639133dfb76252b0f81f8dd0e706035ed",
     "sample-experiment-plan-v1.0.0.json": "87b145160722d99ce7ebe031c97765388f5aa8d665639020322acc44d27997f2",
     "sample-experiment-plan-v1.0.0.md": "1cb9a94c0363e00a2e82d76eba56743b41d51fbdd924149d54a33b98c3c32ecf",
-    "sample-experiment-plan-v1.0.0.pdf": "772fa9b99c3a4f41fbd0fb27cf1410f9c310901839bf0c26b3d49cafd8e07c13",
+    "sample-experiment-plan-v1.0.0.pdf": "99d00ceffcb610fb2d65bc6be39d84e9d66352393e704854c0582dab36e9d018",
     "sample-experiment-plan-v1.0.0.txt": "96bd28c4da57aeca2dea770d619573f6d636867dba9ee6616e90479eb43ca218"
   },
   "layout": "report_portrait",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

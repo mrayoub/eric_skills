@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-executive-presentation",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "3a933e3cba4a2ed53fb4bbdb2655a4cbd3f648b799ac78c28c1096f63b0048bd",
   "content_version": "1.0.0",
   "deliverable_type": "executive_presentation",
   "files": {
     "sample-executive-presentation-v1.0.0.json": "3a933e3cba4a2ed53fb4bbdb2655a4cbd3f648b799ac78c28c1096f63b0048bd",
     "sample-executive-presentation-v1.0.0.md": "14db40ce2765be9047b950d738c65eef3151d3f99c93656003295824ff8b2913",
-    "sample-executive-presentation-v1.0.0.pdf": "bc650a2a12e99993e4356847e218d8278a2db88de96af800aa0f6c60536a3e30",
-    "sample-executive-presentation-v1.0.0.pptx": "0fb2caab0ff321f845f340789c6f26f3d038373c0e74693334ab127d1130b20d",
+    "sample-executive-presentation-v1.0.0.pdf": "cf25a764b8a55231f0db7a703475c9ebb6544d61ae2a3c8eea6f41c179e738cc",
+    "sample-executive-presentation-v1.0.0.pptx": "03939021e3f9ca15de841601773f1fab301e06362b313bd1227d9700360d18b8",
     "sample-executive-presentation-v1.0.0.txt": "e034b985e438a968b8a944572822299055f9d949a54af138a5902dd8f97b7199"
   },
   "layout": "presentation",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

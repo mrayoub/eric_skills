@@ -436,13 +436,15 @@ def html_report_blocks(blocks: list[dict[str, Any]]) -> str:
 def css(tokens: dict[str, Any], paper: str) -> str:
     color = tokens["color"]
     page = tokens["page"][paper]
-    fonts = ROOT / "assets" / "fonts"
-    montserrat = fonts / "Montserrat-Variable.ttf"
-    roboto = fonts / "Roboto-Variable.ttf"
-    if not montserrat.is_file() or not roboto.is_file():
-        raise FileNotFoundError("Fontes Montserrat e Roboto incorporadas ausentes")
-    montserrat_data = base64.b64encode(montserrat.read_bytes()).decode("ascii")
-    roboto_data = base64.b64encode(roboto.read_bytes()).decode("ascii")
+    brand, body = tokens["typography"]["font_brand"], tokens["typography"]["font_body"]
+    font_faces = ""
+    for family in dict.fromkeys((brand, body)):
+        font_file = ROOT / "assets" / "fonts" / f"{family}-Variable.ttf"
+        if not font_file.is_file():
+            raise FileNotFoundError(f"Fonte {family} incorporada ausente em assets/fonts")
+        data = base64.b64encode(font_file.read_bytes()).decode("ascii")
+        font_faces += (f"@font-face {{ font-family: {family}; src: url(data:font/ttf;base64,{data}) "
+                       "format('truetype'); font-weight: 100 900; }\n")
     if paper == "presentation_16_9":
         size = "13.333in 7.5in"
         margins = "0.4in"
@@ -454,17 +456,15 @@ def css(tokens: dict[str, Any], paper: str) -> str:
         for slug, widths in IQB_TABLE_WIDTHS.items() for index, width in enumerate(widths, 1)
     )
     return f"""
-@font-face {{ font-family: Montserrat; src: url(data:font/ttf;base64,{montserrat_data}) format('truetype'); font-weight: 100 900; }}
-@font-face {{ font-family: Roboto; src: url(data:font/ttf;base64,{roboto_data}) format('truetype'); font-weight: 100 900; }}
-@page {{ size: {size}; margin: {margins}; }}
+{font_faces}@page {{ size: {size}; margin: {margins}; }}
 * {{ box-sizing: border-box; }}
 html {{ background: {color['surface_muted']}; }}
-body {{ max-width: {page.get('width', 338.66)}mm; margin: 0 auto; background: {color['canvas']}; color: {color['text_body']}; font-family: Roboto, Arial, sans-serif; font-size: 9.5pt; line-height: 1.35; }}
+body {{ max-width: {page.get('width', 338.66)}mm; margin: 0 auto; background: {color['canvas']}; color: {color['text_body']}; font-family: {body}, Arial, sans-serif; font-size: 9.5pt; line-height: 1.35; }}
 .document {{ padding: 0; }}
 .masthead {{ display: flex; align-items: center; justify-content: space-between; min-height: 16mm; border-bottom: 1.5pt solid {color['document_primary']}; margin-bottom: 12pt; }}
 .masthead img {{ max-width: 38mm; max-height: 11mm; object-fit: contain; }}
-.eyebrow {{ font-family: Montserrat, Arial, sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: 700; letter-spacing: .12em; color: {color['document_accent']}; }}
-h1, h2, h3 {{ font-family: Montserrat, Arial, sans-serif; color: {color['document_primary']}; break-after: avoid; }}
+.eyebrow {{ font-family: {brand}, Arial, sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: 700; letter-spacing: .12em; color: {color['document_accent']}; }}
+h1, h2, h3 {{ font-family: {brand}, Arial, sans-serif; color: {color['document_primary']}; break-after: avoid; }}
 h1 {{ font-size: 30pt; line-height: 1.1; margin: 6pt 0 16pt; }}
 h2 {{ font-size: 13pt; line-height: 1.15; border-bottom: .75pt solid {color['border']}; margin: 16pt 0 8pt; padding-bottom: 4pt; }}
 h3 {{ font-size: 11pt; line-height: 1.2; margin: 12pt 0 5pt; }}
@@ -497,7 +497,7 @@ table.scores caption {{ text-align: left; font-weight: 700; padding: 8pt 0 4pt; 
 .section-card.wide {{ break-inside: avoid; }}
 .section-pair {{ display: table; table-layout: fixed; width: 100%; border-spacing: 5pt 0; margin: 0 -5pt 10pt; break-inside: avoid; }}
 .section-pair .section-card {{ display: table-cell; width: 50%; vertical-align: top; }}
-.section-band {{ background: {color['document_deep']}; color: {color['inverse']}; padding: 9pt 12pt; font-family: Montserrat, Arial, sans-serif; font-size: 11pt; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; }}
+.section-band {{ background: {color['document_deep']}; color: {color['inverse']}; padding: 9pt 12pt; font-family: {brand}, Arial, sans-serif; font-size: 11pt; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; }}
 .section-content {{ padding: 10pt 11pt; }}
 .section-content .block:first-child, .section-content p:first-child {{ margin-top: 0; }}
 .card-grid-block {{ width: 100%; }}
@@ -667,6 +667,7 @@ def render_one_page_html(content: dict[str, Any], tokens: dict[str, Any], profil
     parts.append(box("identificacao_versao", "".join(footer), "op-footer"))
 
     styles = tokens["typography"]["styles"]
+    body = tokens["typography"]["font_body"]
     one_page_css = f"""
 @page {{ size: {page['width']}mm {page['height']}mm; margin: 0; }}
 body {{ max-width: {page['width']}mm; padding: 0 !important; }}
@@ -679,11 +680,11 @@ body {{ max-width: {page['width']}mm; padding: 0 !important; }}
 .op-title {{ justify-content: center; }}
 .op-title h1 {{ font-size: 24pt; line-height: {styles['cover_title']['line_height']}; }}
 .op-hmw {{ justify-content: center; background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; padding: 5mm; }}
-.op-hmw p {{ font-family: Roboto, Arial, sans-serif; font-size: 15pt; line-height: 19pt; font-weight: 700; color: {color['inverse']}; }}
+.op-hmw p {{ font-family: {body}, Arial, sans-serif; font-size: 15pt; line-height: 19pt; font-weight: 700; color: {color['inverse']}; }}
 .op-field, .op-people {{ padding: 4mm; }}
 .op-field {{ background: {color['document_accent_soft']}; border-left: 3pt solid {color['document_accent']}; }}
 .op-people {{ background: {color['surface_muted']}; border-left: 3pt solid {color['border_strong']}; }}
-.op-field h2, .op-people h2 {{ font-family: Roboto, Arial, sans-serif; font-size: 11pt; line-height: 14pt; font-weight: 700; color: {color['document_primary']}; margin-bottom: 5pt; }}
+.op-field h2, .op-people h2 {{ font-family: {body}, Arial, sans-serif; font-size: 11pt; line-height: 14pt; font-weight: 700; color: {color['document_primary']}; margin-bottom: 5pt; }}
 .op-field p, .op-people p {{ font-size: 10pt; line-height: 13.5pt; color: {color['text_body']}; margin-bottom: 4pt; }}
 .op-footer p {{ font-size: {styles['footer']['size']}pt; line-height: {styles['footer']['line_height']}; font-weight: 500; color: {color['text_muted']}; }}
 .op-slot sup {{ font-size: 7.5pt; }}
@@ -748,7 +749,7 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
         slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
         slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
-        slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: Roboto; '
+        slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: {tokens["typography"]["font_body"]}; '
                       f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
                       f'color: {tokens["color"]["text_muted"]}; }}')
         if layout_slots:
@@ -798,7 +799,8 @@ def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     label = footer_label(content)
     css_footer_label = json.dumps(label, ensure_ascii=False).replace("<", "\\003c ")
     footer_css = (f'@page {{ @bottom-right {{ content: {css_footer_label}; '
-                  f'font-family: Roboto; font-size: 7.5pt; color: {tokens["color"]["text_muted"]}; }} }} '
+                  f'font-family: {tokens["typography"]["font_body"]}; font-size: 7.5pt; '
+                  f'color: {tokens["color"]["text_muted"]}; }} }} '
                   '@media print { footer.meta { display: none; } }')
     return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
             f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"

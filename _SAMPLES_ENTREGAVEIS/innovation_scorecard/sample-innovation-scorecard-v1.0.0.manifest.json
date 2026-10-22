@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-innovation-scorecard",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "f0c542241dd8ebb70867ed50eadf8d99dcb7a388dc6e9f0d0ecbb96cd1a4db62",
   "content_version": "1.0.0",
   "deliverable_type": "innovation_scorecard",
   "files": {
-    "sample-innovation-scorecard-v1.0.0.docx": "75e70998bd85e0f3cfebf8199830beb3b8b7957fe69b23e614c5aac4978a8ac3",
+    "sample-innovation-scorecard-v1.0.0.docx": "ec8b0233a9f8c976d8ddb0a5149eb4eae63f190e36af20d146804028c4e5f8af",
     "sample-innovation-scorecard-v1.0.0.json": "f0c542241dd8ebb70867ed50eadf8d99dcb7a388dc6e9f0d0ecbb96cd1a4db62",
     "sample-innovation-scorecard-v1.0.0.md": "79a19ad4a75ed0c488b91f5d122c9210f83f850b6220e587523e0a17d9b4cecc",
-    "sample-innovation-scorecard-v1.0.0.pdf": "13d9961a0199cadf0b4b6d3dcf7c3610c69f04d04c1bb782ec95525f6ba31bb8",
+    "sample-innovation-scorecard-v1.0.0.pdf": "0f6242f910de4fb7ad72b41bfe2a3a93d8dbb7afdb0332aa0a0d10598990ef4c",
     "sample-innovation-scorecard-v1.0.0.txt": "3ad4158b94bf41e2fe2f0a8b7a877294ca77554ecfa52b2d30f688f9ee1e74d2"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }

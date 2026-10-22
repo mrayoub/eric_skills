@@ -1,14 +1,14 @@
 {
   "artifact_id": "sample-four-d-workshop-record",
-  "branding_version": "1.1.0",
+  "branding_version": "1.2.0",
   "content_sha256": "eb7fa584e3cbee649e404786d2eb9ad704a89ecd31e20112b38bd04799e6225e",
   "content_version": "1.0.0",
   "deliverable_type": "four_d_workshop_record",
   "files": {
-    "sample-four-d-workshop-record-v1.0.0.docx": "a6f019cb8eb96f4c5d8389a1e9f93ddc163112cbc3f3ea0dbc6962ff54df5332",
+    "sample-four-d-workshop-record-v1.0.0.docx": "e1b43e4fe0a6e7a625ebe1189c56f456c49419fe1ce2fe8ddf73f7623e0b4f91",
     "sample-four-d-workshop-record-v1.0.0.json": "eb7fa584e3cbee649e404786d2eb9ad704a89ecd31e20112b38bd04799e6225e",
     "sample-four-d-workshop-record-v1.0.0.md": "e7f00950b25444a215ba02afd8e9e0a47104f3979d191836eef72fc236e36f28",
-    "sample-four-d-workshop-record-v1.0.0.pdf": "db6f6c61e35ba890cddb9b609aba2bce670faa2cf87bac353af676182f815b66",
+    "sample-four-d-workshop-record-v1.0.0.pdf": "1ec6522b67a43f160c9f95c697c2ddc8807bb0804edb5dd7694227fab615d3c8",
     "sample-four-d-workshop-record-v1.0.0.txt": "0bd85422b89f481f93b451c90e43a95613a60d4853e1b2785dd774aa0471dab4"
   },
   "layout": "report_landscape",
@@ -17,6 +17,6 @@
   "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
   "profile_version": "1.2.0",
   "renderer_version": "2.0.0",
-  "tokens_sha256": "3348e7ea443e5b25b897588b8f4a9cd4626a5088057fb819c5d6086579267649",
+  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
   "unavailable": {}
 }
