@@ -39,48 +39,83 @@ def _register_fonts(tokens: dict[str, Any]) -> None:
     pdfmetrics.registerFontFamily(regular, normal=regular, bold=bold)
 
 
-def make_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any]:
+def style_specs(tokens: dict[str, Any], layout: str) -> dict[str, dict[str, Any]]:
+    """Família, peso, tamanho, entrelinha e cor de cada estilo; o HTML usa os mesmos valores do PDF."""
+    definitions = tokens["typography"]["styles"]
+    minimum = float(tokens["density"]["minimum_font_size"])
+
+    def spec(name: str, token: str, color: str, *, size: float | None = None,
+             weight: int | None = None, leading: float | None = None) -> dict[str, Any]:
+        definition = definitions[token]
+        font_size = float(size if size is not None else definition["size"])
+        if font_size < minimum:
+            raise ValueError(f"{name}: fonte abaixo do mínimo de {minimum} pt")
+        return {"family": definition["family"],
+                "weight": int(weight if weight is not None else definition["weight"]),
+                "size": font_size,
+                "leading": leading or font_size * float(definition["line_height"]),
+                "color": color}
+
+    return {
+        "eyebrow": spec("eyebrow", "cover_eyebrow", "document_accent"),
+        "title": spec("title", "cover_title", "document_primary", size=24 if layout == "executive_one_page" else None),
+        "summary": spec("summary", "body", "text_strong", size=10.5),
+        "body": spec("body", "body", "text_body", size=8.5 if layout == "executive_one_page" else None),
+        "body_inverse": spec("body_inverse", "body", "inverse", size=8.5 if layout == "executive_one_page" else None),
+        "field": spec("field", "section_title", "document_primary", size=13),
+        "section": spec("section", "section_title", "inverse", size=9, weight=700),
+        "metric": spec("metric", "metric", "document_primary"),
+        "table_header": spec("table_header", "table_header", "inverse"),
+        "table_body": spec("table_body", "table_body", "text_body"),
+        "source": spec("source", "body_dense", "text_body"),
+        "footer": spec("footer", "footer", "text_muted"),
+        "report_title": spec("report_title", "cover_title", "document_primary",
+                             size=24 if layout == "report_landscape" else 25),
+        "report_section": spec("report_section", "section_title", "inverse", size=11, weight=700),
+        "card_title": spec("card_title", "section_title", "document_primary", size=9, weight=700),
+    }
+
+
+def slide_style_specs(tokens: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Estilos próprios dos slides, sobrepostos aos de style_specs na apresentação."""
+    definitions = tokens["typography"]["styles"]
+
+    def spec(token: str, color: str, *, size: float | None = None) -> dict[str, Any]:
+        definition = definitions[token]
+        font_size = size or float(definition["size"])
+        return {"family": definition["family"], "weight": int(definition["weight"]), "size": font_size,
+                "leading": font_size * float(definition["line_height"]), "color": color}
+
+    return {
+        "cover": spec("slide_cover_title", "document_primary"),
+        "slide_title": spec("slide_title", "document_primary"),
+        "body": spec("slide_body", "text_body"),
+        "body_inverse": spec("slide_body", "inverse"),
+        "metric": spec("slide_metric", "document_primary"),
+        "source": spec("slide_body", "text_body", size=12),
+        "table_header": spec("slide_body", "inverse", size=12),
+        "table_body": spec("slide_body", "text_body", size=12),
+        "card_title": spec("slide_body", "document_primary", size=12),
+        "footer": spec("slide_footer", "text_muted"),
+        "eyebrow": spec("cover_eyebrow", "document_accent"),
+    }
+
+
+def _paragraph_style(tokens: dict[str, Any], name: str, spec: dict[str, Any], **extra: Any) -> Any:
     from reportlab.lib import colors
     from reportlab.lib.styles import ParagraphStyle
 
-    definitions = tokens["typography"]["styles"]
-    minimum = float(tokens["density"]["minimum_font_size"])
-    palette = tokens["color"]
+    return ParagraphStyle(name, fontName=_font(tokens, spec["family"], spec["weight"]), fontSize=spec["size"],
+                          leading=spec["leading"], textColor=colors.HexColor(tokens["color"][spec["color"]]),
+                          splitLongWords=1, **extra)
 
-    def style(name: str, token: str, color: str, *, size: float | None = None,
-              weight: int | None = None, leading: float | None = None) -> Any:
-        spec = definitions[token]
-        font_size = float(size if size is not None else spec["size"])
-        if font_size < minimum:
-            raise ValueError(f"{name}: fonte abaixo do mínimo de {minimum} pt")
-        font_weight = int(weight if weight is not None else spec["weight"])
-        font = _font(tokens, spec["family"], font_weight)
-        return ParagraphStyle(name, fontName=font, fontSize=font_size,
-                              leading=leading or font_size * float(spec["line_height"]),
-                              textColor=colors.HexColor(palette[color]),
-                              splitLongWords=1, spaceAfter=0, spaceBefore=0)
 
-    result = {
-        "eyebrow": style("eyebrow", "cover_eyebrow", "document_accent"),
-        "title": style("title", "cover_title", "document_primary", size=24 if layout == "executive_one_page" else None),
-        "summary": style("summary", "body", "text_strong", size=10.5),
-        "body": style("body", "body", "text_body", size=8.5 if layout == "executive_one_page" else None),
-        "body_inverse": style("body_inverse", "body", "inverse", size=8.5 if layout == "executive_one_page" else None),
-        "field": style("field", "section_title", "document_primary", size=13),
-        "section": style("section", "section_title", "inverse", size=9, weight=700),
-        "metric": style("metric", "metric", "document_primary"),
-        "table_header": style("table_header", "table_header", "inverse"),
-        "table_body": style("table_body", "table_body", "text_body"),
-        "source": style("source", "body_dense", "text_body"),
-        "footer": style("footer", "footer", "text_muted"),
-        "report_title": style("report_title", "cover_title", "document_primary",
-                              size=24 if layout == "report_landscape" else 25),
-        "report_section": style("report_section", "section_title", "inverse", size=11,
-                                weight=700),
-        "card_title": style("card_title", "section_title", "document_primary", size=9,
-                            weight=700),
-    }
-    result["_colors"] = {name: colors.HexColor(value) for name, value in palette.items()}
+def make_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any]:
+    from reportlab.lib import colors
+
+    result: dict[str, Any] = {name: _paragraph_style(tokens, name, spec, spaceAfter=0, spaceBefore=0)
+                              for name, spec in style_specs(tokens, layout).items()}
+    result["_colors"] = {name: colors.HexColor(value) for name, value in tokens["color"].items()}
     return result
 
 
@@ -540,63 +575,12 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
     path.write_bytes(buffer.getvalue())
 
 
-def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: Path, *,
-                         deliverable_label: str,
-                         block_text: Callable[[dict[str, Any]], str],
-                         table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
-                         table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]] | None,
-                         load_layout: Callable[[str], dict[str, dict[str, Any]] | None],
-                         identity: str) -> None:
-    from reportlab.lib import colors
-    from reportlab.lib.styles import ParagraphStyle
-    from reportlab.lib.units import inch, mm
-    from reportlab.lib.utils import ImageReader
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfgen.canvas import Canvas
-    from reportlab.platypus import KeepInFrame, Paragraph, Spacer
-
-    slots = load_layout(content["deliverable_type"]) or {}
-    for name in ("logo", "titulo_slide", "corpo_slide", "rodape_slide"):
-        if name not in slots or any(key not in slots[name] for key in ("x", "y", "width", "height")):
-            raise ValueError(f"layout.json da apresentação sem o slot {name}")
-    if float(slots["titulo_slide"]["height"]) < 19:
-        raise ValueError("layout.json da apresentação: titulo_slide precisa de pelo menos 19 mm")
-    page = tokens["page"]["presentation_16_9"]
-    page_width, page_height = float(page["width_in"]) * inch, float(page["height_in"]) * inch
-    palette = {key: colors.HexColor(value) for key, value in tokens["color"].items()}
-    styles = make_styles(tokens, "presentation")
-    definitions = tokens["typography"]["styles"]
-
-    def slide_style(name: str, token: str, color: str, *, size: float | None = None) -> Any:
-        spec = definitions[token]
-        font_size = size or float(spec["size"])
-        font = _font(tokens, spec["family"], int(spec["weight"]))
-        return ParagraphStyle(name, fontName=font, fontSize=font_size,
-                              leading=font_size * float(spec["line_height"]),
-                              textColor=palette[color], splitLongWords=1)
-
-    styles["cover"] = slide_style("slide_cover", "slide_cover_title", "document_primary")
-    styles["slide_title"] = slide_style("slide_title", "slide_title", "document_primary")
-    styles["body"] = slide_style("slide_body", "slide_body", "text_body")
-    styles["body_inverse"] = slide_style("slide_body_inverse", "slide_body", "inverse")
-    styles["metric"] = slide_style("slide_metric", "slide_metric", "document_primary")
-    styles["source"] = slide_style("slide_source", "slide_body", "text_body", size=12)
-    styles["table_header"] = slide_style("slide_table_header", "slide_body", "inverse", size=12)
-    styles["table_body"] = slide_style("slide_table_body", "slide_body", "text_body", size=12)
-    styles["card_title"] = slide_style("slide_card_title", "slide_body", "document_primary", size=12)
-    footer = slide_style("slide_footer", "slide_footer", "text_muted")
-    eyebrow = slide_style("slide_eyebrow", "cover_eyebrow", "document_accent")
-
-    def rectangle(name: str) -> tuple[float, float, float, float]:
-        slot = slots[name]
-        x, y, width, height = (float(slot[key]) * mm for key in ("x", "y", "width", "height"))
-        if min(x, y, width, height) < 0 or x + width > page_width + .1 or y + height > page_height + .1:
-            raise ValueError(f"layout.json da apresentação: slot {name} fora da página")
-        return x, page_height - y - height, width, height
-
-    title_rect, body_rect = rectangle("titulo_slide"), rectangle("corpo_slide")
-    logo_rect, footer_rect = rectangle("logo"), rectangle("rodape_slide")
-
+def plan_slides(content: dict[str, Any], block_text: Callable[[dict[str, Any]], str],
+                table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
+                table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]] | None,
+                body_width: float, body_height: float,
+                sources_fit: Callable[[list[str]], bool]) -> list[tuple[str, Any]]:
+    """Sequência de slides (capa, seções com tabelas paginadas e fontes), comum ao PDF e ao HTML."""
     sections = _sections(content["blocks"], block_text)
     slides: list[tuple[str, Any]] = [("cover", None)]
     for section_title, blocks in sections:
@@ -611,7 +595,7 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
             views = table_views(block) if table_views else [("", "", *table_rows(block))]
             continued = False
             for _, legend, heads, rows in views:
-                for chunk, _ in paginate_table_rows(heads, rows, body_rect[2], body_rect[3]):
+                for chunk, _ in paginate_table_rows(heads, rows, body_width, body_height):
                     table_block = {**block, "data": {"headers": heads, "rows": chunk,
                                                       "title": legend or block.get("data", {}).get("title", "")}}
                     slide_title = section_title + (" (continuação)" if continued else "")
@@ -630,14 +614,63 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
         current: list[str] = []
         for line in source_lines:
             candidate = current + [line]
-            flow = [Paragraph(_markup(item), styles["source"]) for item in candidate]
-            if current and sum(item.wrap(body_rect[2], body_rect[3])[1] + 12 for item in flow) > body_rect[3]:
+            if current and not sources_fit(candidate):
                 slides.append(("sources", current))
                 current = [line]
             else:
                 current = candidate
         if current:
             slides.append(("sources", current))
+    return slides
+
+
+def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: Path, *,
+                         deliverable_label: str,
+                         block_text: Callable[[dict[str, Any]], str],
+                         table_rows: Callable[[dict[str, Any]], tuple[list[str], list[list[str]]]],
+                         table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]] | None,
+                         load_layout: Callable[[str], dict[str, dict[str, Any]] | None],
+                         identity: str) -> None:
+    from reportlab.lib import colors
+    from reportlab.lib.units import inch, mm
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfgen.canvas import Canvas
+    from reportlab.platypus import KeepInFrame, Paragraph, Spacer
+
+    slots = load_layout(content["deliverable_type"]) or {}
+    for name in ("logo", "titulo_slide", "corpo_slide", "rodape_slide"):
+        if name not in slots or any(key not in slots[name] for key in ("x", "y", "width", "height")):
+            raise ValueError(f"layout.json da apresentação sem o slot {name}")
+    if float(slots["titulo_slide"]["height"]) < 19:
+        raise ValueError("layout.json da apresentação: titulo_slide precisa de pelo menos 19 mm")
+    page = tokens["page"]["presentation_16_9"]
+    page_width, page_height = float(page["width_in"]) * inch, float(page["height_in"]) * inch
+    palette = {key: colors.HexColor(value) for key, value in tokens["color"].items()}
+    styles = make_styles(tokens, "presentation")
+    names = {"cover": "slide_cover", "slide_title": "slide_title", "body": "slide_body",
+             "body_inverse": "slide_body_inverse", "metric": "slide_metric", "source": "slide_source",
+             "table_header": "slide_table_header", "table_body": "slide_table_body",
+             "card_title": "slide_card_title", "footer": "slide_footer", "eyebrow": "slide_eyebrow"}
+    slide_styles = {key: _paragraph_style(tokens, names[key], spec) for key, spec in slide_style_specs(tokens).items()}
+    footer, eyebrow = slide_styles.pop("footer"), slide_styles.pop("eyebrow")
+    styles.update(slide_styles)
+
+    def rectangle(name: str) -> tuple[float, float, float, float]:
+        slot = slots[name]
+        x, y, width, height = (float(slot[key]) * mm for key in ("x", "y", "width", "height"))
+        if min(x, y, width, height) < 0 or x + width > page_width + .1 or y + height > page_height + .1:
+            raise ValueError(f"layout.json da apresentação: slot {name} fora da página")
+        return x, page_height - y - height, width, height
+
+    title_rect, body_rect = rectangle("titulo_slide"), rectangle("corpo_slide")
+    logo_rect, footer_rect = rectangle("logo"), rectangle("rodape_slide")
+
+    def sources_fit(lines: list[str]) -> bool:
+        flow = [Paragraph(_markup(item), styles["source"]) for item in lines]
+        return sum(item.wrap(body_rect[2], body_rect[3])[1] + 12 for item in flow) <= body_rect[3]
+
+    slides = plan_slides(content, block_text, table_rows, table_views, body_rect[2], body_rect[3], sources_fit)
 
     buffer = io.BytesIO()
     canvas = Canvas(buffer, pagesize=(page_width, page_height), invariant=1,

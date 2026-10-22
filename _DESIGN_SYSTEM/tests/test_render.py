@@ -1043,10 +1043,9 @@ class PdfIdempotencyTests(unittest.TestCase):
 
 
 class PresentationLayoutJsonTests(unittest.TestCase):
-    """Garante que o caminho 'presentation' de render_html usa
-    _DESIGN_SYSTEM/layouts/<tipo>.layout.json quando existe, e não muda nada
-    quando o arquivo não existe (fallback idêntico ao comportamento anterior).
-    Chama render_html direto, sem subprocess, porque testa só o HTML."""
+    """O HTML da apresentação usa os slots de _DESIGN_SYSTEM/layouts/<tipo>.layout.json com as mesmas
+    regras do PDF: título, corpo e rodapé nos slots, logo alinhado à direita do slot e recusa sem
+    layout. Chama render_html direto, sem subprocess, porque testa só o HTML."""
 
     @classmethod
     def setUpClass(cls):
@@ -1059,33 +1058,26 @@ class PresentationLayoutJsonTests(unittest.TestCase):
 
     def test_uses_real_layout_positions(self):
         out = self.render.render_html(self.content, self.tokens, self.profile)
-        self.assertIn("left: 16mm; top: 16mm", out)  # slot "logo" (faixa do cabeçalho)
-        self.assertIn(".slide { position: relative; }", out)
+        slots = self.render.load_presentation_layout("executive_presentation")
+        for name in ("titulo_slide", "corpo_slide", "rodape_slide"):
+            slot = slots[name]
+            self.assertIn(f"left: {slot['x']}mm; top: {slot['y']}mm; width: {slot['width']}mm; height: {slot['height']}mm;", out)
+        # Como no PDF, o logo encosta na borda direita do slot.
+        logo = slots["logo"]
+        left, width = map(float, re.search(r'class="slide-logo"[^>]*left: ([\d.]+)mm;[^>]*width: ([\d.]+)mm;', out).groups())
+        self.assertAlmostEqual(left + width, logo["x"] + logo["width"], places=2)
 
     def test_page_margin_zeroed_when_layout_present(self):
         out = self.render.render_html(self.content, self.tokens, self.profile)
-        # a regra @page { margin: 0.4in } vem do css() compartilhado e continua lá;
-        # o que importa é que uma regra @page POSTERIOR zera a margem, porque em CSS
-        # a última declaração de uma propriedade em regras @page do mesmo stylesheet
-        # vence. Sem isso, as coordenadas absolutas abaixo ficam deslocadas ~10mm
-        # da posição real do canvas quando o HTML é impresso (@page margin:10mm
-        # desloca um elemento position:absolute left:5mm para x0=15mm).
-        style_start = out.index("<style>")
-        style_end = out.index("</style>")
-        style = out[style_start:style_end]
-        assert style.rindex("@page { margin: 0; }") > style.rindex("margin: 0.4in")
+        style = out[out.index("<style>"):out.index("</style>")]
+        rules = re.findall(r"@page \{[^{}]*\}", style)
+        self.assertTrue(rules)
+        self.assertTrue(all("margin: 0;" in rule for rule in rules), rules)
 
-    def test_falls_back_without_layout_file(self):
-        # DELIVERABLE_LABELS[content["deliverable_type"]] é resolvido em
-        # render_html antes do ramo "presentation", então um deliverable_type
-        # inventado (sem entrada em DELIVERABLE_LABELS) gera KeyError antes de
-        # chegar a exercitar o fallback -- por isso simulamos "sem arquivo de
-        # layout" fazendo load_presentation_layout devolver None, em vez de
-        # trocar o deliverable_type.
+    def test_refuses_without_layout_file_like_pdf(self):
         with unittest.mock.patch.object(self.render, "load_presentation_layout", return_value=None):
-            out = self.render.render_html(self.content, self.tokens, self.profile)
-        self.assertNotIn("position: absolute", out)
-        self.assertNotIn(".slide { position: relative; }", out)
+            with self.assertRaisesRegex(ValueError, "layout.json da apresentação sem o slot"):
+                self.render.render_html(self.content, self.tokens, self.profile)
 
 
 @unittest.skipUnless(reportlab_available(), "reportlab indisponível")

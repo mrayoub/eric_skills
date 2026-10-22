@@ -377,189 +377,411 @@ def card_text(card: dict[str, Any]) -> str:
     return " — ".join(x for x in parts if x)
 
 
-def html_card_grid(block: dict[str, Any]) -> str:
-    data = block["data"]
-    columns = data.get("columns", 2)
-    cards = []
-    for card in data["cards"]:
-        tone = card.get("tone", "blue")
-        if tone not in ("blue", "neutral", "red", "green", "yellow"):
-            tone = "neutral"
-        title = html.escape(str(card["title"]))
-        value = f'<div class="grid-value">{html.escape(str(card["value"]))}</div>' if card.get("value") is not None else ""
-        body = f'<p>{html.escape(str(card["text"]))}</p>' if card.get("text") else ""
-        items = '<ul>' + ''.join(f'<li>{html.escape(str(x))}</li>' for x in card.get("items", [])) + '</ul>' if card.get("items") else ""
-        refs = ''.join(f'<sup>[{html.escape(str(x))}]</sup>' for x in card.get("citation_ids", []))
-        cards.append(f'<article class="grid-card tone-{tone}"><h3>{title}</h3>{value}{body}{items}{refs}</article>')
-    title = f'<h3 class="grid-title">{html.escape(str(data["title"]))}</h3>' if data.get("title") else ""
-    refs = ''.join(f'<sup>[{html.escape(str(x))}]</sup>' for x in block.get("citation_ids", []))
-    rows = ['<div class="card-row">' + "".join(cards[i:i + columns]) + "</div>" for i in range(0, len(cards), columns)]
-    return f'<div class="block card-grid-block">{title}<div class="card-grid columns-{columns}">{"".join(rows)}</div>{refs}</div>'
+_PDF_MODULE: Any = None
+PT_PER_MM = 72 / 25.4
 
 
-def html_report_blocks(blocks: list[dict[str, Any]]) -> str:
-    sections: list[tuple[str, bool]] = []
-    pending: list[dict[str, Any]] = []
-    def flush() -> None:
-        if not pending:
-            return
-        heading = pending[0] if pending[0]["type"] == "heading" else None
-        body = pending[1:] if heading else pending[:]
-        wide = any(x["type"] in ("table", "card_grid", "canvas", "chart") for x in body)
-        title = html.escape(block_text(heading)) if heading else "Notas"
-        inner = "".join(html_block(x) for x in body)
-        sections.append((f'<section class="section-card {"wide" if wide else ""}"><header class="section-band"><span>{title}</span></header><div class="section-content">{inner}</div></section>', wide))
-        pending.clear()
-    for block in blocks:
-        if block["type"] == "page_break":
-            flush()
-            sections.append(('<div class="page-break"></div>', True))
-        elif block["type"] == "heading":
-            flush()
-            pending.append(block)
-        else:
-            pending.append(block)
-    flush()
-    rendered = []
-    i = 0
-    while i < len(sections):
-        markup, wide = sections[i]
-        if not wide and i + 1 < len(sections) and not sections[i + 1][1]:
-            rendered.append('<div class="section-pair">' + markup + sections[i + 1][0] + '</div>')
-            i += 2
-        else:
-            rendered.append(markup)
-            i += 1
-    return '<div class="section-grid">' + ''.join(rendered) + '</div>'
+def pdf_module() -> Any:
+    """scripts/pdf_reportlab.py, que também define estilos e paginação usados pelo HTML."""
+    global _PDF_MODULE
+    if _PDF_MODULE is None:
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("pdf_reportlab", ROOT / "scripts/pdf_reportlab.py")
+        _PDF_MODULE = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_PDF_MODULE)
+    return _PDF_MODULE
 
 
-def css(tokens: dict[str, Any], paper: str) -> str:
+def reportlab_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any] | None:
+    """Estilos do ReportLab para medir texto como o PDF; None sem a biblioteca instalada."""
+    try:
+        pdf_module()._register_fonts(tokens)
+        return pdf_module().make_styles(tokens, layout)
+    except ImportError:
+        return None
+
+
+def _number(value: float) -> str:
+    return f"{round(value, 3):g}"
+
+
+def style_rules(tokens: dict[str, Any], specs: dict[str, dict[str, Any]], scope: str = "") -> str:
+    """Uma classe .st-<nome> por estilo do PDF: mesma família, peso, tamanho, entrelinha e cor."""
+    rules = []
+    for name, spec in specs.items():
+        weight = 700 if spec["family"] == "font_brand" or spec["weight"] >= 600 else 500 if spec["weight"] >= 500 else 400
+        selector = f"{scope}.st-{name}" + (f", {scope}.eyebrow" if name == "eyebrow" else "")
+        rules.append(f'{selector} {{ font-family: {tokens["typography"][spec["family"]]}, Arial, sans-serif; '
+                     f'font-weight: {weight}; font-size: {_number(spec["size"])}pt; '
+                     f'line-height: {_number(spec["leading"])}pt; color: {tokens["color"][spec["color"]]}; }}')
+    return "\n".join(rules) + "\n"
+
+
+def base_css(tokens: dict[str, Any]) -> str:
     color = tokens["color"]
-    page = tokens["page"][paper]
-    brand, body = tokens["typography"]["font_brand"], tokens["typography"]["font_body"]
     font_faces = ""
-    for family in dict.fromkeys((brand, body)):
+    for family in dict.fromkeys((tokens["typography"]["font_brand"], tokens["typography"]["font_body"])):
         font_file = ROOT / "assets" / "fonts" / f"{family}-Variable.ttf"
         if not font_file.is_file():
             raise FileNotFoundError(f"Fonte {family} incorporada ausente em assets/fonts")
         data = base64.b64encode(font_file.read_bytes()).decode("ascii")
         font_faces += (f"@font-face {{ font-family: {family}; src: url(data:font/ttf;base64,{data}) "
                        "format('truetype'); font-weight: 100 900; }\n")
-    if paper == "presentation_16_9":
-        size = "13.333in 7.5in"
-        margins = "0.4in"
-    else:
-        size = f"{page['width']}mm {page['height']}mm"
-        margins = f"{page['margin_top']}mm {page['margin_right']}mm {page['margin_bottom']}mm {page['margin_left']}mm"
-    iqb_columns = "\n".join(
-        f"table.scores-{slug} col:nth-child({index}) {{ width: {width}%; }}"
-        for slug, widths in IQB_TABLE_WIDTHS.items() for index, width in enumerate(widths, 1)
-    )
-    return f"""
-{font_faces}@page {{ size: {size}; margin: {margins}; }}
-* {{ box-sizing: border-box; }}
+    return f"""{font_faces}* {{ box-sizing: border-box; }}
 html {{ background: {color['surface_muted']}; }}
-body {{ max-width: {page.get('width', 338.66)}mm; margin: 0 auto; background: {color['canvas']}; color: {color['text_body']}; font-family: {body}, Arial, sans-serif; font-size: 9.5pt; line-height: 1.35; }}
-.document {{ padding: 0; }}
-.masthead {{ display: flex; align-items: center; justify-content: space-between; min-height: 16mm; border-bottom: 1.5pt solid {color['document_primary']}; margin-bottom: 12pt; }}
-.masthead img {{ max-width: 38mm; max-height: 11mm; object-fit: contain; }}
-.eyebrow {{ font-family: {brand}, Arial, sans-serif; text-transform: uppercase; font-size: 8pt; font-weight: 700; letter-spacing: .12em; color: {color['document_accent']}; }}
-h1, h2, h3 {{ font-family: {brand}, Arial, sans-serif; color: {color['document_primary']}; break-after: avoid; }}
-h1 {{ font-size: 30pt; line-height: 1.1; margin: 6pt 0 16pt; }}
-h2 {{ font-size: 13pt; line-height: 1.15; border-bottom: .75pt solid {color['border']}; margin: 16pt 0 8pt; padding-bottom: 4pt; }}
-h3 {{ font-size: 11pt; line-height: 1.2; margin: 12pt 0 5pt; }}
-p, li {{ orphans: 2; widows: 2; }}
-sup {{ font-size: {tokens['density']['minimum_font_size']}pt; line-height: 0; }}
-.summary {{ font-size: 10.5pt; color: {color['text_strong']}; margin: 0 0 16pt; }}
-.block {{ margin: 8pt 0; break-inside: avoid; }}
-.block.long {{ break-inside: auto; }}
-.callout, .metric, .panel {{ padding: 12pt; border-radius: 6pt; }}
-.callout {{ color: {color['inverse']}; background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; }}
-.metric {{ color: {color['document_primary']}; background: {color['document_accent_soft']}; font-size: 16pt; font-weight: 700; }}
-.panel {{ background: {color['surface_muted']}; border: .75pt solid {color['border']}; }}
-.missing {{ border-left: 3pt solid {color['danger']}; background: {color['danger_soft']}; padding: 12pt; }}
-table {{ border-collapse: collapse; width: 100%; font-size: 8pt; break-inside: auto; }}
-th {{ background: {color['document_primary']}; color: {color['inverse']}; text-align: left; }}
-td, th {{ border: .75pt solid {color['border']}; padding: 6pt 8pt; vertical-align: top; overflow-wrap: anywhere; }}
-tr {{ break-inside: avoid; }}
-table.scores {{ table-layout: fixed; font-size: 8pt; }}
-table.scores td, table.scores th {{ padding: 4pt; white-space: normal; overflow-wrap: anywhere; }}
-table.scores caption {{ text-align: left; font-weight: 700; padding: 8pt 0 4pt; break-after: avoid; }}
-{iqb_columns}
-.refs {{ margin-top: 18pt; border-top: .75pt solid {color['border']}; font-size: 8pt; }}
-.meta {{ margin-top: 12pt; color: {color['text_muted']}; font-size: 7.5pt; }}
-.page-break {{ break-before: page; }}
-.card-field {{ border: .75pt solid {color['border']}; border-left: 3pt solid {color['document_accent']}; border-radius: 4pt; padding: 12pt; margin: 10pt 0; break-inside: avoid; }}
-.card-field h2 {{ margin: 0 0 7pt; border: 0; padding: 0; }}
-.card-field p {{ margin: 0; }}
-.section-grid {{ display: block; }}
-.section-card {{ width: 100%; margin: 0 0 10pt; background: {color['surface']}; border: .75pt solid {color['border']}; border-radius: 6pt; overflow: hidden; break-inside: avoid; }}
-.section-card.wide {{ break-inside: avoid; }}
-.section-pair {{ display: table; table-layout: fixed; width: 100%; border-spacing: 5pt 0; margin: 0 -5pt 10pt; break-inside: avoid; }}
-.section-pair .section-card {{ display: table-cell; width: 50%; vertical-align: top; }}
-.section-band {{ background: {color['document_deep']}; color: {color['inverse']}; padding: 9pt 12pt; font-family: {brand}, Arial, sans-serif; font-size: 11pt; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; }}
-.section-content {{ padding: 10pt 11pt; }}
-.section-content .block:first-child, .section-content p:first-child {{ margin-top: 0; }}
-.card-grid-block {{ width: 100%; }}
-.grid-title {{ margin: 0 0 7pt; border: 0; }}
-.card-grid {{ display: block; }}
-.card-row {{ display: table; table-layout: fixed; width: 100%; border-spacing: 6pt 0; margin: 0 -6pt 7pt; break-inside: avoid; }}
-.grid-card {{ display: table-cell; width: 50%; vertical-align: top; padding: 9pt 10pt; border-radius: 5pt; border-left: 3pt solid {color['document_accent']}; background: {color['document_accent_soft']}; break-inside: avoid; }}
-.card-grid.columns-1 .grid-card {{ width: 100%; }}
-.card-grid.columns-3 .grid-card {{ width: 33.333%; }}
-.card-grid.columns-4 .grid-card {{ width: 25%; }}
-.grid-card h3 {{ font-size: 9pt; text-transform: uppercase; letter-spacing: .035em; margin: 0 0 5pt; }}
-.grid-card p {{ margin: 0 0 4pt; }}
-.grid-card ul {{ margin: 3pt 0 0; padding-left: 13pt; }}
-.grid-value {{ font-size: 16pt; font-weight: 700; color: {color['document_primary']}; margin-bottom: 3pt; }}
+body {{ margin: 0; padding: 8mm 0; color: {color['text_body']}; font-family: {tokens['typography']['font_body']}, Arial, sans-serif; }}
+p, h1, h2, h3, ul, ol {{ margin: 0; padding: 0; }}
+sup {{ font-size: 7.5pt; line-height: 0; vertical-align: 3pt; }}
+.gap {{ display: block; }}
+.sheet {{ position: relative; margin: 0 auto 8mm; background: {color['surface']}; box-shadow: 0 3px 28px #10266126; }}
+.eyebrow {{ text-transform: uppercase; }}
+.masthead {{ display: grid; grid-template-columns: 1fr 40mm; align-items: center; padding-bottom: 5pt; border-bottom: 1.5pt solid {color['document_primary']}; }}
+.masthead img {{ display: block; }}
+.band {{ background: {color['document_deep']}; padding: 9pt 12pt; text-transform: uppercase; }}
+.boxed-table {{ border-collapse: collapse; table-layout: fixed; }}
+.boxed-table th {{ background: {color['document_primary']}; text-align: left; }}
+.boxed-table th, .boxed-table td {{ border: .75pt solid {color['border']}; vertical-align: top; overflow-wrap: break-word; }}
+.boxed-table tbody tr:nth-child(even) {{ background: {color['surface_muted']}; }}
+.grid {{ display: grid; column-gap: 6pt; row-gap: 6pt; margin-bottom: 6pt; }}
+.grid-card {{ padding: 7pt 9pt; border-left: 3pt solid {color['document_accent']}; background: {color['document_accent_soft']}; }}
+.grid-card .st-card_title {{ text-transform: uppercase; }}
 .grid-card.tone-neutral {{ background: {color['surface_muted']}; border-left-color: {color['border_strong']}; }}
 .grid-card.tone-red {{ background: {color['danger_soft']}; border-left-color: {color['danger']}; }}
 .grid-card.tone-green {{ background: #E8F4EE; border-left-color: #3F9270; }}
 .grid-card.tone-yellow {{ background: #FFF4D9; border-left-color: #BD8A28; }}
-.section-content table tbody tr:nth-child(even) {{ background: {color['surface_muted']}; }}
-@media screen and (max-width: 740px) {{ .card-row {{ display: block; }} .grid-card {{ display: block; width: 100% !important; margin-bottom: 7pt; }} }}
-@media screen {{ body {{ box-shadow: 0 3px 28px #10266126; padding: 16mm; }} }}
-@media print {{ html, body {{ background: {color['canvas']}; }} body {{ max-width: none; box-shadow: none; padding: 0; }} }}
+.metric-box {{ background: {color['document_accent_soft']}; padding: 3pt 8pt; }}
+.callout-box {{ background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; padding: 8pt 9pt; }}
+.missing-box {{ background: {color['danger_soft']}; border-left: 3pt solid {color['danger']}; padding: 3pt 8pt; }}
+@media print {{ html, body {{ background: {color['surface']}; padding: 0; }} .sheet {{ margin: 0; box-shadow: none; }} }}
 """
 
 
-def html_block(block: dict[str, Any]) -> str:
-    kind = block["type"]
-    data = block.get("data", {})
-    label = html.escape(block_text(block)).replace("\n", "<br>")
-    refs = "".join(f'<sup>[{html.escape(x)}]</sup>' for x in block.get("citation_ids", []))
-    if kind == "page_break":
-        return '<div class="page-break"></div>'
-    if kind == "heading":
-        level = int(data.get("level", 2)) if str(data.get("level", 2)).isdigit() else 2
-        level = min(3, max(2, level))
-        return f'<h{level} id="{html.escape(block["id"])}">{label}</h{level}>'
-    if kind == "card_grid":
-        return html_card_grid(block)
+def _gap(points: float) -> str:
+    return f'<div class="gap" style="height: {_number(points)}pt"></div>'
+
+
+def _text(value: Any) -> str:
+    return html.escape(str(value)).replace("\n", "<br>")
+
+
+def _refs(ids: list[str]) -> str:
+    return "".join(f"<sup>[{html.escape(str(ref))}]</sup>" for ref in ids)
+
+
+def _box_width(inset: float) -> str:
+    return f"width: calc(100% - {_number(inset)}pt);" if inset else "width: 100%;"
+
+
+def _logo(tokens: dict[str, Any]) -> tuple[str, float, float]:
+    """URI do logo e tamanho em mm, com a mesma escala do PDF (cabe em 38 x 11 mm)."""
+    data = (ROOT / "assets" / "logo_ccee.png").read_bytes()
+    width, height = int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+    scale = min(38 / width, 11 / height)
+    return "data:image/png;base64," + base64.b64encode(data).decode("ascii"), width * scale, height * scale
+
+
+def html_masthead(content: dict[str, Any], tokens: dict[str, Any]) -> str:
+    uri, width, height = _logo(tokens)
+    return (f'<header class="masthead"><span class="eyebrow">{html.escape(header_label(content))}</span>'
+            f'<img src="{uri}" alt="CCEE" style="width: {_number(width)}mm; height: {_number(height)}mm;"></header>')
+
+
+def html_flowables(block: dict[str, Any], inset: float = 0) -> str:
+    """Espelha block_flowables do PDF."""
+    kind, data = block["type"], block.get("data", {})
+    refs = _refs(block.get("citation_ids", []))
+    if kind in ("heading", "page_break"):
+        return ""
     if kind == "table":
-        iqb = isinstance(data.get("dimensions"), dict)
-        tables = []
-        for index, (slug, legend, headers, rows) in enumerate(table_views(block)):
-            table_class = f' class="scores scores-{slug}"' if iqb else ""
-            columns = "<colgroup>" + "<col>" * len(headers) + "</colgroup>" if iqb else ""
-            heads = "".join(f"<th>{html.escape(x)}</th>" for x in headers)
-            body = "".join("<tr>" + "".join(f"<td>{html.escape(v)}</td>" for v in row) + "</tr>" for row in rows)
-            if index == 0 and data.get("title"):
-                legend = data["title"]
-            caption = f"<caption>{html.escape(str(legend))}</caption>" if legend else ""
-            tables.append(f'<table{table_class}>{caption}{columns}<thead><tr>{heads}</tr></thead><tbody>{body}</tbody></table>')
-        return f'<div class="block long">{"".join(tables)}{refs}</div>'
+        headings, rows = table_rows(block)
+        ncols = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
+        cell = 'style="padding: 5pt 6pt;"'
+        head = "".join(f'<th class="st-table_header" {cell}>{_text(headings[i] if i < len(headings) else "")}</th>'
+                       for i in range(ncols))
+        body = "".join("<tr>" + "".join(f'<td class="st-table_body" {cell}>{_text(row[i] if i < len(row) else "")}</td>'
+                                        for i in range(ncols)) + "</tr>" for row in rows)
+        table = (f'<table class="boxed-table" style="{_box_width(inset)}"><thead><tr>{head}</tr></thead>'
+                 f'<tbody>{body}</tbody></table>')
+        return table + (f'<p class="st-body">{refs}</p>' if refs else "")
     if kind == "list":
-        items = data.get("items", [])
-        tag = "ol" if data.get("ordered") else "ul"
-        return f'<div class="block long"><{tag}>' + "".join(f"<li>{html.escape(str(x))}</li>" for x in items) + f"</{tag}>{refs}</div>"
-    if kind in ("callout", "metric"):
-        return f'<div class="block {kind}">{label}{refs}</div>'
-    if kind in ("image_ref", "chart", "canvas"):
-        alt = html.escape(str(data.get("alt") or data.get("description") or "Elemento visual sem descrição"))
-        return f'<div class="block panel"><strong>{label}</strong><p>{alt}</p>{refs}</div>'
-    status = "missing" if data.get("status") in ("missing", "pending", "inconclusive") else "block long"
-    return f'<p class="{status}">{label}{refs}</p>'
+        return "".join(f'<p class="st-body">• {_text(item)}{refs}</p>' for item in data.get("items", []))
+    if kind == "metric":
+        return f'<div class="metric-box" style="{_box_width(inset)}"><p class="st-metric">{_text(block_text(block))}{refs}</p></div>'
+    if kind == "callout":
+        return (f'<div class="callout-box" style="{_box_width(inset)}">'
+                f'<p class="st-body_inverse">{_text(block_text(block))}{refs}</p></div>')
+    return f'<p class="st-body">{_text(block_text(block))}{refs}</p>'
+
+
+def html_card_grid(block: dict[str, Any], inset: float = 0, max_columns: int = 4) -> str:
+    """Espelha _report_card_grid do PDF."""
+    data = block.get("data", {})
+    columns = max(1, min(max_columns, int(data.get("columns", 2))))
+    result = f'<p class="st-card_title" style="margin-bottom: 5pt;">{_text(data["title"])}</p>' if data.get("title") else ""
+    cards = []
+    for card in data.get("cards", []):
+        tone = card.get("tone", "blue")
+        tone = tone if tone in ("blue", "neutral", "red", "green", "yellow") else "blue"
+        lines = [f'<p class="st-card_title">{_text(card.get("title", ""))}</p>']
+        if card.get("value") is not None:
+            lines.append(f'<p class="st-metric">{_text(card["value"])}</p>')
+        if card.get("text"):
+            lines.append(f'<p class="st-body">{_text(card["text"])}</p>')
+        lines.extend(f'<p class="st-body">• {_text(item)}</p>' for item in card.get("items", []))
+        if card.get("citation_ids"):
+            lines.append(f'<p class="st-source">{_refs(card["citation_ids"])}</p>')
+        cards.append(f'<article class="grid-card tone-{tone}">{"".join(lines)}</article>')
+    result += (f'<div class="grid" style="grid-template-columns: repeat({columns}, minmax(0, 1fr)); {_box_width(inset)}">'
+               + "".join(cards) + "</div>")
+    if block.get("citation_ids"):
+        result += f'<p class="st-source">{_refs(block["citation_ids"])}</p>'
+    return result
+
+
+def html_report_table(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None) -> str:
+    """Espelha _report_table do PDF, com as mesmas larguras de coluna quando o ReportLab está instalado."""
+    data = block.get("data", {})
+    views = table_views(block) if isinstance(data.get("dimensions"), dict) else [("", data.get("title", ""), *table_rows(block))]
+    result = ""
+    for slug, caption, headings, rows in views:
+        if caption:
+            result += f'<p class="st-card_title" style="margin-bottom: 4pt;">{_text(caption)}</p>'
+        ncols = max(1, len(headings), *(len(row) for row in rows)) if rows else max(1, len(headings))
+        proportions = IQB_TABLE_WIDTHS.get(slug)
+        padding = 4 if proportions else 6
+        columns = ""
+        if measure is not None:
+            widths = pdf_module()._content_widths([headings, *rows], ncols, width_pt, padding, measure,
+                                                  proportions if proportions and len(proportions) == ncols else None)
+            columns = "<colgroup>" + "".join(f'<col style="width: {_number(100 * w / sum(widths))}%">' for w in widths) + "</colgroup>"
+        cell = f'style="padding: {padding}pt;"'
+        head = "".join(f'<th class="st-table_header" {cell}>{_text(headings[i] if i < len(headings) else "")}</th>'
+                       for i in range(ncols))
+        body = "".join("<tr>" + "".join(f'<td class="st-table_body" {cell}>{_text(row[i] if i < len(row) else "")}</td>'
+                                        for i in range(ncols)) + "</tr>" for row in rows)
+        result += (f'<table class="boxed-table" style="{_box_width(inset)}">{columns}<thead><tr>{head}</tr></thead>'
+                   f'<tbody>{body}</tbody></table>' + _gap(7))
+    if block.get("citation_ids"):
+        result += f'<p class="st-source">{_refs(block["citation_ids"])}</p>'
+    return result
+
+
+def html_report_block(block: dict[str, Any], inset: float, width_pt: float, measure: dict[str, Any] | None) -> str:
+    """Espelha _report_block do PDF."""
+    if block["type"] == "table":
+        return html_report_table(block, inset, width_pt, measure)
+    if block["type"] == "card_grid":
+        return html_card_grid(block, inset)
+    items = html_flowables(block, inset)
+    if block.get("data", {}).get("status") in ("missing", "pending", "inconclusive"):
+        return f'<div class="missing-box" style="{_box_width(inset)}">{items}</div>'
+    return items
+
+
+def html_sources(content: dict[str, Any]) -> str:
+    lines = []
+    for citation in content["citations"]:
+        line = f"<b>{html.escape(citation['id'])}</b> — {html.escape(citation['source_id'])}"
+        if citation.get("locator"):
+            line += f", {html.escape(citation['locator'])}"
+        lines.append(f'<p class="st-source">{line}</p>')
+    return "".join(lines)
+
+
+def page_css(tokens: dict[str, Any], paper: str, footer: str | None) -> str:
+    page = tokens["page"][paper]
+    margins = (f"{page['margin_top']}mm {page['margin_right']}mm "
+               f"{page['margin_bottom'] + 10}mm {page['margin_left']}mm")
+    if footer is None:
+        return (f"@page {{ size: {page['width']}mm {page['height']}mm; margin: 0; }}\n"
+                f".sheet {{ width: {page['width']}mm; height: {page['height']}mm; padding: {margins}; overflow: hidden; }}\n")
+    spec = pdf_module().style_specs(tokens, "report_portrait")["footer"]
+    label = json.dumps(footer + " · página ", ensure_ascii=False).replace("<", "\\003c ")
+    return (f"@page {{ size: {page['width']}mm {page['height']}mm; margin: {margins}; "
+            f"@bottom-right {{ content: {label} counter(page) \" de \" counter(pages); "
+            f"font-family: {tokens['typography'][spec['family']]}; font-size: {_number(spec['size'])}pt; "
+            f"color: {tokens['color'][spec['color']]}; }} }}\n"
+            f".sheet {{ width: {page['width']}mm; min-height: {page['height']}mm; padding: {margins}; }}\n"
+            ".sheet > footer.meta { position: absolute; right: "
+            f"{page['margin_right']}mm; bottom: {page['margin_bottom'] / 2}mm; }}\n"
+            "@media print { .sheet { width: auto; min-height: 0; padding: 0; } .sheet > footer.meta { display: none; } }\n")
+
+
+def html_document(content: dict[str, Any], css_text: str, body: str) -> str:
+    return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
+            f"<title>{html.escape(content['title'])}</title><style>{css_text}</style></head>"
+            f"<body>{body}</body></html>\n")
+
+
+def render_report_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
+    """Relatórios em retrato e paisagem com a mesma sequência de blocos e medidas de _render_report."""
+    layout, page = profile["layout"], tokens["page"][profile["paper"]]
+    usable_pt = (page["width"] - page["margin_left"] - page["margin_right"]) * PT_PER_MM
+    column_pt = (usable_pt - 10) / 2
+    measure = reportlab_styles(tokens, layout)
+    parts = [html_masthead(content, tokens), _gap(8), f'<h1 class="st-report_title">{_text(content["title"])}</h1>']
+    if content.get("summary"):
+        parts += [_gap(6), f'<p class="st-summary">{_text(content["summary"])}</p>']
+    parts.append(_gap(12))
+
+    def band(title: str) -> str:
+        return f'<h2 class="band st-report_section">{_text(title)}</h2>'
+
+    sections = pdf_module().group_sections(content["blocks"], block_text)
+    position = 0
+    while position < len(sections):
+        item = sections[position]
+        if item[0] == "page_break":
+            parts.append('<div class="page-break" style="break-before: page;"></div>')
+            position += 1
+            continue
+        if (not item[3] and position + 1 < len(sections)
+                and sections[position + 1][0] == "section" and not sections[position + 1][3]):
+            cells = []
+            for _, title, blocks, _ in sections[position:position + 2]:
+                inner = "".join(html_report_block(block, 22, column_pt - 22, measure) + _gap(7) for block in blocks)
+                cells.append(f'<section class="report-section">{band(title)}{_gap(7)}{inner}</section>')
+            parts.append('<div class="section-pair" style="display: grid; grid-template-columns: minmax(0, 1fr) 10pt minmax(0, 1fr); '
+                         f'break-inside: avoid;">{cells[0]}<div></div>{cells[1]}</div>' + _gap(10))
+            position += 2
+            continue
+        _, title, blocks, _ = item
+        inner = "".join(html_report_block(block, 0, usable_pt - 22, measure) + _gap(7) for block in blocks)
+        parts.append(f'<section class="report-section">{band(title)}{_gap(7)}'
+                     f'<div style="padding: 0 11pt;">{inner}</div></section>' + _gap(10))
+        position += 1
+    if content["citations"]:
+        parts += ['<h2 class="st-field">Fontes</h2>', _gap(4), html_sources(content)]
+    label = footer_label(content)
+    parts.append(f'<footer class="meta st-footer">{html.escape(label)}</footer>')
+    css_text = (base_css(tokens) + style_rules(tokens, pdf_module().style_specs(tokens, layout))
+                + page_css(tokens, profile["paper"], label))
+    return html_document(content, css_text, f'<article class="sheet document">{"".join(parts)}</article>')
+
+
+def render_card_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
+    """Test Card e Learning Card numa página, como o ramo card_portrait de render_pdf."""
+    page = tokens["page"][profile["paper"]]
+    fields = CARD_LABELS[content["deliverable_type"]]
+    parts = [html_masthead(content, tokens), _gap(9), f'<h1 class="st-title">{_text(content["title"])}</h1>']
+    if content.get("summary"):
+        parts += [_gap(6), f'<p class="st-summary">{_text(content["summary"])}</p>']
+    parts.append(_gap(9))
+    for block in content["blocks"]:
+        key = block.get("data", {}).get("section_key")
+        if key in fields:
+            field_block = {**block, "type": "paragraph"} if block["type"] == "heading" else block
+            parts.append(f'<section class="card-field"><h2 class="st-field">{_text(fields[key])}</h2>{_gap(5)}'
+                         f'{html_flowables(field_block)}</section>' + _gap(10))
+        else:
+            parts.append(html_flowables(block))
+    if content["citations"]:
+        parts += [_gap(7), '<h2 class="st-field">Fontes</h2>', html_sources(content)]
+    footer_css = (f".sheet > footer.meta {{ position: absolute; right: {page['margin_right']}mm; "
+                  f"bottom: {page['margin_bottom'] / 2}mm; font-weight: 400; }}\n"
+                  f".card-field {{ border: .75pt solid {tokens['color']['border']}; "
+                  f"border-left: 3pt solid {tokens['color']['document_accent']}; padding: 10pt 12pt; }}\n")
+    parts.append(f'<footer class="meta st-footer">{html.escape(footer_label(content))}</footer>')
+    css_text = (base_css(tokens) + style_rules(tokens, pdf_module().style_specs(tokens, "card_portrait"))
+                + page_css(tokens, profile["paper"], None) + footer_css)
+    return html_document(content, css_text, f'<article class="sheet document">{"".join(parts)}</article>')
+
+
+def render_presentation_html(content: dict[str, Any], tokens: dict[str, Any]) -> str:
+    """Slides 16:9 com os slots do layout.json e a mesma sequência de _render_presentation."""
+    slots = load_presentation_layout(content["deliverable_type"]) or {}
+    for name in ("logo", "titulo_slide", "corpo_slide", "rodape_slide"):
+        if name not in slots or any(key not in slots[name] for key in ("x", "y", "width", "height")):
+            raise ValueError(f"layout.json da apresentação sem o slot {name}")
+    page = tokens["page"]["presentation_16_9"]
+    width_mm, height_mm = float(page["width_in"]) * 25.4, float(page["height_in"]) * 25.4
+
+    def rect(name: str) -> tuple[float, float, float, float]:
+        return tuple(float(slots[name][key]) for key in ("x", "y", "width", "height"))  # type: ignore[return-value]
+
+    title_x, title_y, title_w, title_h = rect("titulo_slide")
+    body_x, body_y, body_w, body_h = rect("corpo_slide")
+    logo_x, logo_y, logo_w, logo_h = rect("logo")
+    measure = reportlab_styles(tokens, "presentation")
+    if measure is not None:
+        from reportlab.platypus import Paragraph
+
+        slide_source = pdf_module()._paragraph_style(tokens, "slide_source", pdf_module().slide_style_specs(tokens)["source"])
+        body_size = (body_w * PT_PER_MM, body_h * PT_PER_MM)
+
+        def sources_fit(lines: list[str]) -> bool:
+            flow = [Paragraph(pdf_module()._markup(line), slide_source) for line in lines]
+            return sum(item.wrap(*body_size)[1] + 12 for item in flow) <= body_size[1]
+    else:
+        def sources_fit(lines: list[str]) -> bool:
+            return len(lines) <= 8
+    slides = pdf_module().plan_slides(content, block_text, table_rows, table_views,
+                                      body_w * PT_PER_MM, body_h * PT_PER_MM, sources_fit)
+    uri, image_w, image_h = _logo(tokens)
+    scale = min(min(logo_w, 38) / image_w, min(logo_h, 11) / image_h)
+    logo = (f'<img class="slide-logo" src="{uri}" alt="CCEE" style="left: {_number(logo_x + logo_w - image_w * scale)}mm; '
+            f'top: {_number(logo_y + (logo_h - image_h * scale) / 2)}mm; width: {_number(image_w * scale)}mm; '
+            f'height: {_number(image_h * scale)}mm;">')
+
+    def frame(left: float, top: float, width: float, height: float, inner: str) -> str:
+        return (f'<div class="slide-frame" style="left: {_number(left)}mm; top: {_number(top)}mm; '
+                f'width: {_number(width)}mm; height: {_number(height)}mm;">{inner}</div>')
+
+    identity = html.escape(identity_line(content))
+    footer_x, footer_y, footer_w, footer_h = rect("rodape_slide")
+    rendered = []
+    for number, (kind, payload) in enumerate(slides, 1):
+        parts = [logo]
+        if kind == "cover":
+            parts.append('<div class="cover-bar"></div>')
+            parts.append(frame(title_x, title_y, title_w, title_h + 34,
+                               f'<div class="cover-label"><span class="eyebrow">{html.escape(header_label(content))}</span></div>{_gap(16)}'
+                               f'<h1 class="st-cover">{_text(content["title"])}</h1>'))
+            parts.append(frame(body_x, body_y + 20, body_w, body_h - 40,
+                               f'<p class="st-body">{_text(content.get("summary", ""))}</p>'))
+        elif kind == "section":
+            title, blocks = payload
+            parts.append(frame(title_x, title_y, title_w, title_h, f'<h2 class="st-slide_title">{_text(title)}</h2>'))
+            items = []
+            for block in blocks:
+                data = block.get("data", {})
+                if block["type"] == "metric":
+                    value = data.get("value") or data.get("text") or block_text(block)
+                    items.append(f'<p class="st-metric">{_text(value)}{_refs(block.get("citation_ids", []))}</p>')
+                    support = data.get("description") or data.get("title")
+                    if support:
+                        items.append(_gap(8) + f'<p class="st-body">{_text(support)}</p>')
+                elif block["type"] == "card_grid":
+                    items.append(html_card_grid(block, max_columns=3))
+                else:
+                    items.append(html_flowables(block))
+                items.append(_gap(12))
+            parts.append(frame(body_x, body_y, body_w, body_h, "".join(items)))
+        else:
+            earlier = any(item[0] == "sources" for item in slides[:number - 1])
+            title = "Fontes (cont.)" if earlier else "Fontes"
+            parts.append(frame(title_x, title_y, title_w, title_h, f'<h2 class="st-slide_title">{title}</h2>'))
+            parts.append(frame(body_x, body_y, body_w, body_h,
+                               "".join(f'<p class="st-source">{_text(line)}</p>{_gap(12)}' for line in payload)))
+        parts.append(f'<div class="slide-footer st-slide_footer" style="left: {_number(footer_x)}mm; top: {_number(footer_y)}mm; '
+                     f'width: {_number(footer_w)}mm; height: {_number(footer_h)}mm;">'
+                     f'<footer class="meta">{identity}</footer><span>{number} / {len(slides)}</span></div>')
+        rendered.append(f'<section class="sheet slide">{"".join(parts)}</section>')
+    slide_specs = pdf_module().slide_style_specs(tokens)
+    footer_spec = slide_specs.pop("footer")
+    color = tokens["color"]
+    css_text = (base_css(tokens) + style_rules(tokens, pdf_module().style_specs(tokens, "presentation"))
+                + style_rules(tokens, slide_specs, ".slide ") + style_rules(tokens, {"slide_footer": footer_spec})
+                + f"@page {{ size: {_number(width_mm)}mm {_number(height_mm)}mm; margin: 0; }}\n"
+                f".slide {{ width: {_number(width_mm)}mm; height: {_number(height_mm)}mm; overflow: hidden; break-after: page; }}\n"
+                ".slide:last-child { break-after: auto; }\n"
+                ".slide-logo, .slide-frame, .slide-footer { position: absolute; }\n"
+                f".cover-bar {{ position: absolute; left: 0; top: 0; width: 6mm; height: 100%; background: {color['document_accent']}; }}\n"
+                ".slide-footer { display: flex; align-items: center; justify-content: space-between; }\n"
+                ".cover-label .eyebrow { display: block; }\n"
+                ".slide-footer footer, .slide-footer span { font: inherit; color: inherit; }\n")
+    return html_document(content, css_text, "".join(rendered))
 
 
 def load_presentation_layout(deliverable_type: str) -> dict[str, dict[str, Any]] | None:
@@ -624,7 +846,7 @@ def render_one_page_html(content: dict[str, Any], tokens: dict[str, Any], profil
         f'<span class="eyebrow op-eyebrow" style="left: {tx}mm; top: {band_top}mm; height: {logo_height}mm;">'
         f'{html.escape(header_label(content))}</span>',
         f'<div class="op-rule" style="left: {tx}mm; top: {band_top + logo_height + 1.5}mm; width: {tw}mm;"></div>',
-        box("titulo_documento", f'<h1>{html.escape(content["title"])}</h1>', "op-title"),
+        box("titulo_documento", f'<h1 class="st-title">{html.escape(content["title"])}</h1>', "op-title"),
     ]
     by_key: dict[str, list[dict[str, Any]]] = {}
     for block in content["blocks"]:
@@ -670,15 +892,13 @@ def render_one_page_html(content: dict[str, Any], tokens: dict[str, Any], profil
     body = tokens["typography"]["font_body"]
     one_page_css = f"""
 @page {{ size: {page['width']}mm {page['height']}mm; margin: 0; }}
-body {{ max-width: {page['width']}mm; padding: 0 !important; }}
-.one-page {{ position: relative; width: {page['width']}mm; height: {page['height']}mm; background: {color['surface']}; overflow: hidden; }}
+.one-page {{ width: {page['width']}mm; height: {page['height']}mm; overflow: hidden; }}
 .op-slot, .op-logo, .op-eyebrow, .op-rule {{ position: absolute; }}
 .op-slot {{ display: flex; flex-direction: column; }}
 .op-slot p, .op-slot h1, .op-slot h2 {{ margin: 0; padding: 0; border: 0; }}
 .op-eyebrow {{ display: flex; align-items: center; }}
 .op-rule {{ border-top: 1.5pt solid {color['document_primary']}; }}
 .op-title {{ justify-content: center; }}
-.op-title h1 {{ font-size: 24pt; line-height: {styles['cover_title']['line_height']}; }}
 .op-hmw {{ justify-content: center; background: {color['document_deep']}; border-left: 3pt solid {color['document_accent']}; padding: 5mm; }}
 .op-hmw p {{ font-family: {body}, Arial, sans-serif; font-size: 15pt; line-height: 19pt; font-weight: 700; color: {color['inverse']}; }}
 .op-field, .op-people {{ padding: 4mm; }}
@@ -691,123 +911,27 @@ body {{ max-width: {page['width']}mm; padding: 0 !important; }}
 """
     title = html.escape(content["title"])
     return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
-            f"<title>{title}</title><style>{css(tokens, profile['paper'])}{one_page_css}</style></head>"
-            f'<body><article class="document one-page">{"".join(parts)}</article></body></html>\n')
+            f"<title>{title}</title><style>{base_css(tokens)}{style_rules(tokens, pdf_module().style_specs(tokens, profile['layout']))}"
+            f"{one_page_css}</style></head>"
+            f'<body><article class="sheet document one-page">{"".join(parts)}</article></body></html>\n')
 
 
 def render_html(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any]) -> str:
+    """HTML com a mesma estrutura, medidas e estilos do PDF de cada layout."""
     logo = ROOT / "assets" / "logo_ccee.png"
     if not logo.is_file():
         raise FileNotFoundError("Logo CCEE ausente; não é possível assegurar timbre idempotente")
-    logo_bytes = logo.read_bytes()
-    uri = "data:image/png;base64," + base64.b64encode(logo_bytes).decode("ascii")
-    if profile["layout"] == "executive_one_page":
+    layout = profile["layout"]
+    if layout == "executive_one_page":
+        logo_bytes = logo.read_bytes()
+        uri = "data:image/png;base64," + base64.b64encode(logo_bytes).decode("ascii")
         logo_size = (int.from_bytes(logo_bytes[16:20], "big"), int.from_bytes(logo_bytes[20:24], "big"))
         return render_one_page_html(content, tokens, profile, uri, logo_size)
-    meta = content["metadata"]
-    title = html.escape(content["title"])
-    deliverable_label = html.escape(header_label(content))
-    if profile["layout"] == "presentation":
-        sections: list[tuple[str, list[dict[str, Any]]]] = []
-        current_title = "Conteúdo"
-        current_blocks: list[dict[str, Any]] = []
-        for block in content["blocks"]:
-            if block["type"] in ("heading", "page_break"):
-                if current_blocks:
-                    sections.append((current_title, current_blocks))
-                    current_blocks = []
-                if block["type"] == "heading":
-                    current_title = block_text(block)
-                continue
-            current_blocks.append(block)
-        if current_blocks:
-            sections.append((current_title, current_blocks))
-        layout_slots = load_presentation_layout(content["deliverable_type"])
-
-        def slot_css(selector: str, slot_name: str) -> str:
-            slot = layout_slots.get(slot_name) if layout_slots else None
-            if not slot or not all(k in slot for k in ("x", "y", "width", "height")):
-                return ""
-            return (f"{selector} {{ position: absolute; left: {slot['x']}mm; top: {slot['y']}mm; "
-                     f"width: {slot['width']}mm; height: {slot['height']}mm; }} ")
-
-        def wrap_slide_content(inner_html: str) -> str:
-            return f'<div class="slide-content">{inner_html}</div>' if layout_slots else inner_html
-
-        masthead = f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
-        first_summary = f'<p class="summary">{html.escape(content.get("summary", ""))}</p>'
-        slides = [f'<section class="slide">{masthead}<h1>{title}</h1>{wrap_slide_content(first_summary)}</section>']
-        for section_title, section_blocks in sections:
-            body_html = "\n".join(html_block(block) for block in section_blocks)
-            slides.append(f'<section class="slide">{masthead}<h1>{html.escape(section_title)}</h1>'
-                          + wrap_slide_content(body_html) + '</section>')
-        if content["citations"]:
-            refs = ''.join(f'<li><strong>{html.escape(c["id"])}</strong> — {html.escape(c["source_id"])}'
-                           + (f', {html.escape(c["locator"])}' if c.get("locator") else '') + '</li>'
-                           for c in content["citations"])
-            slides.append(f'<section class="slide">{masthead}<h1>Fontes</h1>' + wrap_slide_content(f'<ol>{refs}</ol>') + '</section>')
-        slide_footer = f'<footer class="meta">{html.escape(identity_line(content))}</footer>'
-        slides = [slide.removesuffix("</section>") + slide_footer + "</section>" for slide in slides]
-        slide_css = "@media print { .slide { break-after: page; } .slide:last-child { break-after: auto; } } @media screen { .slide { min-height: 170mm; border-bottom: 1px solid #ddd; padding-bottom: 10mm; } }"
-        slide_css += (f'.slide .meta {{ margin-top: 10pt; font-family: {tokens["typography"]["font_body"]}; '
-                      f'font-size: {tokens["typography"]["styles"]["footer"]["size"]}pt; '
-                      f'color: {tokens["color"]["text_muted"]}; }}')
-        if layout_slots:
-            slide_css += " .slide { position: relative; }"
-            slide_css += slot_css(".slide .masthead", "logo")
-            slide_css += slot_css(".slide h1", "titulo_slide")
-            slide_css += slot_css(".slide .slide-content", "corpo_slide")
-            slide_css += slot_css(".slide .meta", "rodape_slide")
-            slide_css += " @page { margin: 0; }"
-        return ('<!doctype html>\n<html lang="pt-BR"><head><meta charset="utf-8">'
-                f'<title>{title}</title><style>{css(tokens, profile["paper"])}{slide_css}</style></head>'
-                f'<body><article class="document">{"".join(slides)}</article></body></html>\n')
-    if content["deliverable_type"] in CARD_LABELS:
-        fields = CARD_LABELS[content["deliverable_type"]]
-        rendered = []
-        for block in content["blocks"]:
-            key = block.get("data", {}).get("section_key")
-            if key in fields:
-                value = html.escape(block_text(block)).replace("\n", "<br>")
-                refs = ''.join(f'<sup>[{html.escape(x)}]</sup>' for x in block.get("citation_ids", []))
-                rendered.append(f'<section class="card-field"><h2>{html.escape(fields[key])}</h2><p>{value}{refs}</p></section>')
-            else:
-                rendered.append(html_block(block))
-        blocks = "\n".join(rendered)
-    else:
-        blocks = html_report_blocks(content["blocks"])
-    citations = "".join(
-        f"<li><strong>{html.escape(c['id'])}</strong> — {html.escape(c['source_id'])}"
-        + (f", {html.escape(c['locator'])}" if c.get("locator") else "") + "</li>"
-        for c in content["citations"]
-    )
-    refs = f'<section class="refs"><h2>Fontes</h2><ol>{citations}</ol></section>' if citations else ""
-    summary = f'<p class="summary">{html.escape(content["summary"])}</p>' if content.get("summary") else ""
-    variant_css = ""
-    if profile["layout"] == "report_landscape":
-        variant_css = (".masthead { margin-bottom: 8pt; } "
-                       "h1 { font-size: 24pt; margin: 4pt 0 9pt; } "
-                       "h2 { margin: 10pt 0 5pt; } "
-                       ".summary { margin-bottom: 9pt; } "
-                       ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
-    elif profile["layout"] == "report_portrait":
-        variant_css = (".masthead { margin-bottom: 8pt; } "
-                       "h1 { font-size: 25pt; margin: 4pt 0 9pt; } "
-                       "h2 { margin: 10pt 0 5pt; } "
-                       ".summary { margin-bottom: 9pt; } "
-                       ".block { margin: 6pt 0; } .refs { margin-top: 9pt; }")
-    label = footer_label(content)
-    css_footer_label = json.dumps(label, ensure_ascii=False).replace("<", "\\003c ")
-    footer_css = (f'@page {{ @bottom-right {{ content: {css_footer_label}; '
-                  f'font-family: {tokens["typography"]["font_body"]}; font-size: 7.5pt; '
-                  f'color: {tokens["color"]["text_muted"]}; }} }} '
-                  '@media print { footer.meta { display: none; } }')
-    return ("<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\">"
-            f"<title>{title}</title><style>{css(tokens, profile['paper'])}{variant_css}{footer_css}</style></head><body><article class=\"document\">"
-            f'<header class="masthead"><span class="eyebrow">{deliverable_label}</span><img src="{uri}" alt="CCEE"></header>'
-            f"<h1>{title}</h1>{summary}{blocks}{refs}"
-            f'<footer class="meta">{html.escape(label)}</footer>'
-            "</article></body></html>\n")
+    if layout == "presentation":
+        return render_presentation_html(content, tokens)
+    if layout == "card_portrait":
+        return render_card_html(content, tokens, profile)
+    return render_report_html(content, tokens, profile)
 
 
 def render_md(content: dict[str, Any]) -> str:
@@ -1011,10 +1135,7 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         from pptx.enum.shapes import MSO_SHAPE
     except ImportError as exc:
         raise RuntimeError("PPTX requer python-pptx: pip install python-pptx") from exc
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("pdf_reportlab", ROOT / "scripts/pdf_reportlab.py")
-    pdf_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(pdf_module)
+    pdf = pdf_module()
     layout = load_pptx_layout(content["deliverable_type"])
 
     def box(name: str, fx: float, fy: float, fw: float, fh: float) -> tuple[Any, Any, Any, Any]:
@@ -1134,7 +1255,7 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
             refs = " [" + ", ".join(block["citation_ids"]) + "]" if block.get("citation_ids") else ""
             for _, legend, heads, rows in table_views(block):
                 body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
-                chunks = pdf_module.paginate_table_rows(heads, rows, body_w / 12700, body_h / 12700)
+                chunks = pdf.paginate_table_rows(heads, rows, body_w / 12700, body_h / 12700)
                 for chunk, heights in chunks:
                     slide(title, table=((str(legend) if legend else "") + refs, heads, chunk, heights))
                     if not title.endswith("(continuação)"):
@@ -1193,12 +1314,7 @@ def check_pdf_quality(path: Path, tokens: dict[str, Any]) -> list[str]:
 
 def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
                          profile: dict[str, Any], path: Path) -> None:
-    import importlib.util
-
-    spec = importlib.util.spec_from_file_location("pdf_reportlab", ROOT / "scripts/pdf_reportlab.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    module.render_pdf(content, tokens, profile, path,
+    pdf_module().render_pdf(content, tokens, profile, path,
                       deliverable_label=header_label(content),
                       footer_label=footer_label(content),
                       field_labels=CARD_LABELS.get(content["deliverable_type"]),
