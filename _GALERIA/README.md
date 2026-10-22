@@ -6,7 +6,9 @@ as skills.
 
 ## Como usar
 
-1. Na raiz do repositório, rode `python3 _GALERIA/gerar.py`. Ele renderiza as amostras fictícias de
+1. A galeria é regenerada ao final de `python3 _TOOLS/sync_shared.py` (exceto com `--check`,
+   `--dry-run` ou `--no-gallery`). Para gerá-la sozinha, rode `python3 _GALERIA/gerar.py` na raiz do
+   repositório. O gerador renderiza as amostras fictícias de
    `_SAMPLES_ENTREGAVEIS/<tipo>/input.json` com `_DESIGN_SYSTEM/scripts/render.py` em
    `_GALERIA/saida/<tipo>/` (HTML, PDF, Markdown, DOCX e, na apresentação, PPTX) e grava
    `_GALERIA/index.html`.
@@ -15,7 +17,7 @@ as skills.
    Markdown, DOCX e PPTX. Um `!` na lista indica que algum formato não foi gerado; o motivo
    aparece no topo.
 
-Rode o gerador de novo sempre que mudar `_DESIGN_SYSTEM` (tokens, renderizador ou um layout salvo no
+Sincronize ou rode o gerador de novo sempre que mudar `_DESIGN_SYSTEM` (tokens, renderizador ou um layout salvo no
 Layout Studio): a galeria mostra o estado da pasta, mesmo antes do commit, e indica quando há
 alterações locais no design system.
 

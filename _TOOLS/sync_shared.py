@@ -6,12 +6,14 @@ import argparse
 import sys
 import hashlib
 import shutil
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_DIRS = {"tests", "__pycache__", ".pytest_cache"}
 # Skills que só orientam e não renderizam entregáveis: não recebem o design system.
 WITHOUT_DESIGN_SYSTEM = {"esteira-eric"}
+GALLERY = ROOT / "_GALERIA/gerar.py"
 
 
 def digest(path: Path) -> bytes:
@@ -99,6 +101,19 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
     return result
 
 
+def refresh_gallery() -> None:
+    """Regenera a galeria de templates; uma falha só avisa e não interrompe a sincronização."""
+    if not GALLERY.is_file():
+        return
+    print("Gerando a galeria de templates (_GALERIA)…", flush=True)
+    result = subprocess.run([sys.executable, str(GALLERY)], capture_output=True, text=True, encoding="utf-8")
+    lines = (result.stdout + result.stderr).strip().splitlines()
+    if result.returncode:
+        print(f"AVISO: galeria não gerada ({lines[-1] if lines else 'erro'}). A sincronização foi concluída.")
+    elif lines:
+        print(lines[-1])
+
+
 def main() -> int:
     for stream in (sys.stdout, sys.stderr):  # UTF-8 também no console do Windows (cp1252)
         if hasattr(stream, "reconfigure"):
@@ -107,6 +122,8 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true", help="verifica sem escrever")
     mode.add_argument("--dry-run", action="store_true", help="mostra o que faria")
+    parser.add_argument("--no-gallery", action="store_true",
+                        help="não regenera _GALERIA ao final (ela só é gerada na sincronização que grava)")
     args = parser.parse_args()
     try:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
@@ -139,6 +156,8 @@ def main() -> int:
             else:
                 dst.unlink()
             print(f"OK {kind} {rel}")
+        if not (args.check or args.dry_run or args.no_gallery):
+            refresh_gallery()
         return int(args.check and bool(pending))
     except OSError as exc:
         parser.exit(1, f"Erro na sincronização: {exc}\n")

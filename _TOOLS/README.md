@@ -5,7 +5,8 @@ As fontes são `_DESIGN_SYSTEM/` (design system), `_ERIC_CONTEXT/README.md`
 `<skill>/assets/design-system/` e as referências comuns em `<skill>/references/`
 são cópias geradas. Os testes ficam na fonte e não são distribuídos nas skills.
 
-Edite só a fonte e rode `python3 _TOOLS/sync_shared.py`. Antes de distribuir,
+Edite só a fonte e rode `python3 _TOOLS/sync_shared.py`. Ao final, ele também regenera a galeria de
+templates (`_GALERIA/`); use `--no-gallery` para pular. Uma falha da galeria só gera aviso. Antes de distribuir,
 rode `python3 _TOOLS/sync_shared.py --check`: código 0 confirma a sincronização;
 código 1 lista as divergências. Para visualizar as ações sem alterar arquivos,
 use `python3 _TOOLS/sync_shared.py --dry-run`.
