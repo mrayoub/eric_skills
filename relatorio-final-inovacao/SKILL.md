@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE, exceto o material do Pitch Canvas (asse
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.12"
+  version: "1.3.13"
 ---
 
 # Relatório final e apresentação da esteira
@@ -67,7 +67,7 @@ ERIC = Esteira Robusta de Inovação Colaborativa da CCEE (Câmara de Comerciali
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md) e sem travessão. Em arquivo, siga [o design system](assets/design-system/README.md): `evidence_recommendation` com `metadata.content_profile: "final_report"` (seções `history`, `feasibility` e `decision`) para o relatório final e `executive_presentation` para os slides, com blocos adicionais de contexto e decisão quando úteis. Monte JSON canônico validado e gere derivados com `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida`. Preserve JSON e fontes junto dos derivados. Para apresentação editável, gere PPTX; se o renderizador padrão não comportar o visual necessário, componha uma versão melhor a partir do mesmo conteúdo validado e confira equivalência de números, citações e decisão. A apresentação não precisa reproduzir todo o texto do relatório.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão. Em arquivo, siga [o design system](assets/design-system/README.md): `evidence_recommendation` com `metadata.content_profile: "final_report"` (seções `history`, `feasibility` e `decision`) para o relatório final e `executive_presentation` para os slides, com blocos adicionais de contexto e decisão quando úteis. Monte JSON canônico validado e gere derivados com `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida`. Preserve JSON e fontes junto dos derivados. Para apresentação editável, gere PPTX; se o renderizador padrão não comportar o visual necessário, componha uma versão melhor a partir do mesmo conteúdo validado e confira equivalência de números, citações e decisão. A apresentação não precisa reproduzir todo o texto do relatório.
 
 Se faltarem elementos decisivos, marque `metadata.completeness` como `partial` ou `inconclusive` e identifique exatamente o que a gestão ainda não pode concluir; não contorne o schema nem fabrique fatos para preenchê-lo. Inspecione visualmente PDF/PPTX gerados antes da entrega e corrija cortes, excesso de texto e legibilidade.
 

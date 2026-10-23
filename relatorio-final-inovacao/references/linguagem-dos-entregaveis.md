@@ -1,7 +1,8 @@
 # Linguagem das respostas e dos entregáveis
 
 Escreva para quem conhece o projeto, mas não precisa conhecer o método, estatística
-ou os sistemas usados para gerar arquivos. Aplique estas orientações no chat, nos
+ou os sistemas usados para gerar arquivos. Revise também o texto com o [guia de escrita](guia-de-escrita.md),
+que lista os sinais de texto gerado em série e como evitá-los. Aplique estas orientações no chat, nos
 cards, nas tabelas, nos relatórios e nas apresentações. Use português simples como
 padrão; ajuste o detalhe quando o usuário pedir uma explicação especializada.
 

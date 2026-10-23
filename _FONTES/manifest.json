@@ -596,16 +596,16 @@
     "distribuido": true
   },
   {
-    "id": "cdt-campos",
-    "titulo": "Campos da CDT e insumos da esteira",
+    "id": "cdt-campos-jira",
+    "titulo": "Campos do formulário da CDT no Jira e padrão de escrita",
     "tipo": "adaptacao",
-    "arquivo": "references/campos-da-cdt.md",
+    "arquivo": "references/campos-jira.md",
     "skills": [
       "gerador-cdt"
     ],
-    "origem": "Adaptação da publicação sobre escopo à esteira ERIC e estrutura de campos observada em CDTs reais preenchidas no Jira (outubro de 2026).",
+    "origem": "Levantamento campo a campo do formulário de criação da CDT no Jira, a partir de prints enviados pelo usuário em 23/10/2026, com as regras de preenchimento combinadas.",
     "deriva_de": "cdt-publicacao",
-    "notas": "CDT = Cadastro de Demanda Tecnológica. Exemplos usados só para a estrutura dos campos; nomes, siglas de áreas, números de ticket e conteúdo identificável foram retirados.",
+    "notas": "Regras confirmadas pelo usuário em 23/10/2026. Listas de processos, famílias e serviços transcritas como no Jira; siglas de áreas, nome de fornecedor, nomes de pessoas e números de ticket ficaram de fora. O padrão de escrita vem de uma CDT real, descrita sem identificação.",
     "autor": null,
     "versao_declarada": null,
     "data_importacao": "2026-10-23",

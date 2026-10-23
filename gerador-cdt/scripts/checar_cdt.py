@@ -33,6 +33,9 @@ def main() -> int:
     result["suggested_completeness"] = "complete" if result["ready"] else "partial"
     if declared == "complete":
         result["errors"] = validator.validate(content)
+    elif not result["pending_fields"] and not result["checklist_gaps"]:
+        result["errors"].append("versão parcial sem pendência marcada: escreva 'a confirmar: <dado> (<quem>)' no campo "
+                                "que falta, ou marque a CDT como completa e 'Pronta para envio'")
     elif not result["readiness_text_ok"]:
         result["errors"].append("readiness: a versão parcial deve dizer 'Parcial' e o que falta")
     print(json.dumps(result, ensure_ascii=False, indent=2))

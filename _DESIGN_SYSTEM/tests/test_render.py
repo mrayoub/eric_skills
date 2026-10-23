@@ -879,13 +879,10 @@ class RenderTests(unittest.TestCase):
                     for key in keys
                 ]
                 if kind == "cdt":
-                    special = {
-                        "readiness": "Pronta para envio.",
-                        "publication_checklist": "\n".join(f"- {label}: atendido." for label in (
-                            "Problema e objetivo", "Públicos impactados", "Entregas essenciais",
-                            "Prioridades e resultados esperados", "Regras, restrições e dependências", "Responsáveis")),
-                        "quality_review": "Pontos fortes: síntese.\nPontos fracos: síntese.",
-                    }
+                    # Os campos de lista da CDT só aceitam opções do Jira: usa os textos da amostra.
+                    sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/cdt/input.json").read_text(encoding="utf-8"))
+                    special = {block["data"]["section_key"]: block["data"]["text"] for block in sample["blocks"]
+                               if block["type"] == "paragraph"}
                     for block in item["blocks"]:
                         block["data"]["text"] = special.get(block["id"], block["data"]["text"])
                 if kind == "innovation_potential_assessment":
@@ -1414,7 +1411,7 @@ class ReportLabReportTests(unittest.TestCase):
         "four_d_report": 5, "three_e_workshop_record": 1,
         "three_e_report": 2, "innovation_scorecard": 1,
         "experiment_report": 2, "evidence_recommendation": 2,
-        "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 4,
+        "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 6,
     }
 
     @classmethod
@@ -1490,7 +1487,8 @@ class ReportLabReportTests(unittest.TestCase):
                 expected.extend(citation["id"] for citation in item["citations"])
                 for phrase in expected:
                     if phrase:
-                        self.assertIn(" ".join(str(phrase).split()).casefold(), extracted.casefold(),
+                        # O negrito em Markdown (**texto**) sai formatado, sem os asteriscos.
+                        self.assertIn(" ".join(str(phrase).replace("**", "").split()).casefold(), extracted.casefold(),
                                       f"{kind}: {phrase!r}")
 
     def test_long_table_repeats_header(self):
@@ -1573,6 +1571,8 @@ class ReportLabReportTests(unittest.TestCase):
         for kind in self.TYPES:
             with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
                 item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                # Na CDT, os campos do Jira não mostram fonte; só as seções fora do Jira.
+                item = self.renderer.presentation_content(item)
                 expected = sum(len(block.get("citation_ids", [])) for block in item["blocks"])
                 expected += sum(len(card.get("citation_ids", [])) for block in item["blocks"]
                                 if block["type"] == "card_grid" for card in block.get("data", {}).get("cards", []))

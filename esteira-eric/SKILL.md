@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Não gera entregáveis; Python opcional, só para preferências locais e aviso de atualização."
   author: "GEIN-CCEE"
-  version: "1.2.3"
+  version: "1.2.4"
 ---
 
 # Esteira ERIC
@@ -44,7 +44,8 @@ skill ou todas; usuário ou projeto) e só grave com confirmação. "Resetar" vo
 
 ## Resposta
 
-Curta, em linguagem simples e sem travessão ([guia](references/linguagem-dos-entregaveis.md)):
+Curta, em linguagem simples e sem travessão ([guia](references/linguagem-dos-entregaveis.md)), revisada com o
+[guia de escrita](references/guia-de-escrita.md):
 
 - **Onde o projeto está**: etapa provável e a evidência que a indica.
 - **O que já existe**: entregáveis encontrados, com data ou versão.

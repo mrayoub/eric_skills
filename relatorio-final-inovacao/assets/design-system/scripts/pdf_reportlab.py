@@ -4,6 +4,7 @@ from __future__ import annotations
 import html
 import io
 import math
+import re
 from pathlib import Path
 from typing import Any, Callable
 
@@ -124,7 +125,8 @@ def make_styles(tokens: dict[str, Any], layout: str) -> dict[str, Any]:
 
 
 def _markup(value: Any) -> str:
-    return html.escape(str(value)).replace("\n", "<br/>")
+    # Negrito em Markdown (**texto**), usado na Descrição da CDT.
+    return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", html.escape(str(value))).replace("\n", "<br/>")
 
 
 def _cited(value: Any, block: dict[str, Any]) -> str:
@@ -264,6 +266,8 @@ def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str,
 
 # Tipos cuja ordem e colunas vêm do layout.json do Layout Studio; o conteúdo continua fluindo entre páginas.
 FLOW_LAYOUT_TYPES = ("innovation_potential_assessment",)
+# Tipos em que cada seção ocupa a largura inteira: nunca agrupa duas seções curtas lado a lado.
+SINGLE_COLUMN_TYPES = ("cdt",)
 FLOW_FIXED_SLOTS = ("titulo_documento", "identificacao_versao", "logo", "rodape")
 SCORE_LABELS = {"impact": "Impacto", "viability": "Viabilidade", "strategic_alignment": "Alinhamento estratégico",
                 "urgency": "Urgência", "innovation": "Novidade"}
@@ -806,7 +810,7 @@ def _render_report(content: dict[str, Any], tokens: dict[str, Any], profile: dic
             story.append(PageBreak())
             position += 1
             continue
-        if (not item[3] and position + 1 < len(sections)
+        if (not item[3] and position + 1 < len(sections) and content["deliverable_type"] not in SINGLE_COLUMN_TYPES
                 and sections[position + 1][0] == "section" and not sections[position + 1][3]):
             pair = sections[position:position + 2]
             column_width = (usable_width - 10) / 2

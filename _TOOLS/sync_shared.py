@@ -66,6 +66,7 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
         (ROOT / "_ERIC_CONTEXT/README.md", "eric-esteira.md", False),
         (ROOT / "_SHARED/grilling-operacional.md", "grilling-operacional.md", False),
         (ROOT / "_SHARED/linguagem-dos-entregaveis.md", "linguagem-dos-entregaveis.md", False),
+        (ROOT / "_SHARED/guia-de-escrita.md", "guia-de-escrita.md", False),
         (ROOT / "_SHARED/preferencias-do-usuario.md", "preferencias-do-usuario.md", False),
     ]
     for src, name, optional in references:
@@ -128,7 +129,8 @@ def main() -> int:
     try:
         required = [ROOT / "_DESIGN_SYSTEM", ROOT / "_ERIC_CONTEXT/README.md",
                     ROOT / "_SHARED/grilling-operacional.md",
-                    ROOT / "_SHARED/linguagem-dos-entregaveis.md", ROOT / "LICENSE",
+                    ROOT / "_SHARED/linguagem-dos-entregaveis.md", ROOT / "_SHARED/guia-de-escrita.md",
+                    ROOT / "LICENSE",
                     ROOT / "_SHARED/preferencias.py", ROOT / "_SHARED/preferencias-do-usuario.md",
                     ROOT / "THIRD_PARTY_NOTICES.md"]
         for path in required:

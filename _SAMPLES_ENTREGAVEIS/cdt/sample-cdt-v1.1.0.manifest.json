@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-cdt",
+  "branding_version": "1.2.0",
+  "content_sha256": "ab5b763929d8c65f5f78901fe97f149647d297ef4b6b984411848f466187f6e9",
+  "content_version": "1.1.0",
+  "deliverable_type": "cdt",
+  "files": {
+    "sample-cdt-v1.1.0.docx": "7877a278d3d864040d0d0a5b998a0394519ddac4b090ab1c5a158f32a22c8121",
+    "sample-cdt-v1.1.0.html": "3d0880280aeab26019e90c1c52b90424c7e6af24394ad2687673d1e1155f586e",
+    "sample-cdt-v1.1.0.json": "ab5b763929d8c65f5f78901fe97f149647d297ef4b6b984411848f466187f6e9",
+    "sample-cdt-v1.1.0.md": "f511e12efd4ea21709ffac281efff3ed97d23977512099bf6e37134c387312af",
+    "sample-cdt-v1.1.0.pdf": "80b5bad33493dfd8005f04d35972beb85bdb50da7a4d6194d7f2cb1df308fde0",
+    "sample-cdt-v1.1.0.txt": "d6d7985e04f2f0775f6723de66f3151e861012570060cebc7312864668571d57"
+  },
+  "layout": "report_portrait",
+  "paper": "a4_portrait",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "42506e9b1a052c2f255184846ba72e873ebaae9c0a5311b99675f30e231ffd14",
+  "profile_version": "1.2.0",
+  "renderer_version": "2.0.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

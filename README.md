@@ -7,6 +7,9 @@ que diagnostica a etapa do projeto e indica a próxima skill. Pedidos diretos (p
 continuam indo direto para a skill específica. Funcionam no Claude (app e
 Claude Code), no ChatGPT/Codex e em outras ferramentas compatíveis.
 
+Todas as skills seguem o mesmo [guia de escrita](_SHARED/guia-de-escrita.md), copiado para a pasta `references/`
+de cada uma, com os sinais de texto gerado em série e como evitá-los.
+
 Na `briefing-inovacao`, as entregas são **Entrevista Inicial de sete campos**,
 **Briefing** de uma página e **Perguntas para fechar lacunas**. A skill
 `avaliacao-briefing-iqb` identifica qual desses documentos está avaliando.

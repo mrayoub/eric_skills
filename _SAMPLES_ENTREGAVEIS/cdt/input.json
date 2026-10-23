@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "deliverable_type": "cdt",
   "locale": "pt-BR",
-  "title": "EXEMPLO FICTÍCIO: Entrada guiada para solicitações completas",
+  "title": "EXEMPLO FICTÍCIO: Formulário guiado para pedidos de dados históricos",
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas e resultados são fictícios.",
   "blocks": [
     {
@@ -18,7 +18,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "readiness",
-        "text": "Pronta para envio. Todos os campos da área têm fonte e os seis itens do comunicado estão atendidos. Principal ponto fraco: a meta de devoluções é uma proposta da área, ainda sem estudo de viabilidade."
+        "text": "Pronta para envio. Todos os campos têm fonte e o checklist do comunicado está atendido. Principal ponto fraco: a meta de horas é proposta, medida só no piloto."
       },
       "citation_ids": [
         "FIC-01"
@@ -29,7 +29,7 @@
       "type": "heading",
       "data": {
         "section_key": "jira_title_heading",
-        "text": "Título da demanda"
+        "text": "Informações Gerais: Rótulo Epic (título)"
       }
     },
     {
@@ -37,26 +37,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "jira_title",
-        "text": "Pedidos de dados com formulário guiado e protocolo único"
-      },
-      "citation_ids": [
-        "FIC-01"
-      ]
-    },
-    {
-      "id": "heading-objective",
-      "type": "heading",
-      "data": {
-        "section_key": "objective_heading",
-        "text": "Descrição: objetivo da demanda"
-      }
-    },
-    {
-      "id": "objective",
-      "type": "paragraph",
-      "data": {
-        "section_key": "objective",
-        "text": "Fazer com que os pedidos de dados cheguem completos na primeira tentativa, reduzindo devoluções e o tempo até a resposta."
+        "text": "Formulário guiado para pedidos de dados históricos no portal de atendimento"
       },
       "citation_ids": [
         "FIC-01"
@@ -67,7 +48,7 @@
       "type": "heading",
       "data": {
         "section_key": "problem_heading",
-        "text": "Descrição: problema e contexto"
+        "text": "Descrição: Qual problema queremos resolver?"
       }
     },
     {
@@ -75,7 +56,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "problem",
-        "text": "Pedidos de dados chegam por e-mail e planilha sem as informações mínimas. No exemplo, cerca de 4 em cada 10 voltam ao solicitante para complemento, o que atrasa a resposta e gera retrabalho na equipe de atendimento."
+        "text": "Os pedidos de dados históricos chegam por e-mail, sem padrão e muitas vezes sem as informações mínimas. Cerca de 4 em cada 10 pedidos voltam ao agente para complemento (exemplo).\nIsso gera retrabalho na equipe de atendimento e atrasa a entrega dos dados ao mercado."
       },
       "citation_ids": [
         "FIC-01"
@@ -86,7 +67,7 @@
       "type": "heading",
       "data": {
         "section_key": "audience_heading",
-        "text": "Descrição: públicos impactados"
+        "text": "Descrição: Quem é impactado?"
       }
     },
     {
@@ -94,7 +75,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "audience",
-        "text": "- Agentes de mercado que pedem dados (organizações, não pessoas)\n- Analistas da equipe de atendimento, que recebem e respondem\n- Gestores da área, que acompanham prazos"
+        "text": "- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores (organizações, não pessoas).\n- Analistas da equipe de atendimento, que conferem e respondem os pedidos.\n- Gestão da área, que acompanha prazos sem visão consolidada."
       },
       "citation_ids": [
         "FIC-01"
@@ -105,7 +86,7 @@
       "type": "heading",
       "data": {
         "section_key": "current_process_heading",
-        "text": "Descrição: como funciona hoje"
+        "text": "Descrição: Como o processo funciona hoje?"
       }
     },
     {
@@ -113,85 +94,29 @@
       "type": "paragraph",
       "data": {
         "section_key": "current_process",
-        "text": "O agente envia e-mail ou planilha. O analista confere manualmente, pede complementos por e-mail quando falta informação e registra o andamento em planilha própria. Não há campo obrigatório nem status visível ao agente."
+        "text": "1. O agente envia o pedido por e-mail.\n2. O analista confere o pedido e, se faltar informação, pede complemento por e-mail.\n3. O andamento é controlado em planilha própria.\n4. Os dados são extraídos e enviados por e-mail.\n**Onde falha:** não há campos obrigatórios nem status visível ao agente."
       },
       "citation_ids": [
         "FIC-02"
       ]
     },
     {
-      "id": "heading-expected_results",
+      "id": "heading-objective",
       "type": "heading",
       "data": {
-        "section_key": "expected_results_heading",
-        "text": "Descrição: resultados esperados e indicadores"
+        "section_key": "objective_heading",
+        "text": "Descrição: Qual resultado esperamos alcançar?"
       }
     },
     {
-      "id": "expected_results",
+      "id": "objective",
       "type": "paragraph",
       "data": {
-        "section_key": "expected_results",
-        "text": "- Devoluções por informação ausente: de 40% para até 15% dos pedidos em 3 meses (meta proposta pela área, sem estudo de viabilidade)\n- Já medido no teste: 7 de 8 analistas simulados preencheram o formulário guiado sem ajuda\n- Fonte de apuração: registro de pedidos da equipe"
+        "section_key": "objective",
+        "text": "**Objetivo:** receber pedidos completos na primeira tentativa e dar ao agente visibilidade do andamento.\n**Resultado esperado:** menos devoluções e menos horas da equipe com complementos. O desenvolvimento interno foi aprovado pela gestão da área (exemplo)."
       },
       "citation_ids": [
-        "FIC-02"
-      ]
-    },
-    {
-      "id": "heading-scope_essential",
-      "type": "heading",
-      "data": {
-        "section_key": "scope_essential_heading",
-        "text": "Descrição: entregas essenciais"
-      }
-    },
-    {
-      "id": "scope_essential",
-      "type": "paragraph",
-      "data": {
-        "section_key": "scope_essential",
-        "text": "- Formulário guiado com campos obrigatórios por tipo de pedido\n- Registro único dos pedidos com número de protocolo"
-      },
-      "citation_ids": [
-        "FIC-02"
-      ]
-    },
-    {
-      "id": "heading-scope_important",
-      "type": "heading",
-      "data": {
-        "section_key": "scope_important_heading",
-        "text": "Descrição: entregas importantes, que podem vir depois"
-      }
-    },
-    {
-      "id": "scope_important",
-      "type": "paragraph",
-      "data": {
-        "section_key": "scope_important",
-        "text": "- Status do pedido visível ao agente\n- Painel de prazos para a gestão"
-      },
-      "citation_ids": [
-        "FIC-02"
-      ]
-    },
-    {
-      "id": "heading-scope_out",
-      "type": "heading",
-      "data": {
-        "section_key": "scope_out_heading",
-        "text": "Descrição: fora do escopo"
-      }
-    },
-    {
-      "id": "scope_out",
-      "type": "paragraph",
-      "data": {
-        "section_key": "scope_out",
-        "text": "- Integração automática com outros sistemas internos (depende de outra área)\n- Resposta automática dos pedidos"
-      },
-      "citation_ids": [
+        "FIC-01",
         "FIC-02"
       ]
     },
@@ -200,7 +125,7 @@
       "type": "heading",
       "data": {
         "section_key": "priorities_heading",
-        "text": "Descrição: prioridades"
+        "text": "Descrição: O que é prioridade neste momento?"
       }
     },
     {
@@ -208,86 +133,119 @@
       "type": "paragraph",
       "data": {
         "section_key": "priorities",
-        "text": "Primeiro o formulário guiado, porque ataca a principal causa das devoluções; depois o registro único."
+        "text": "**Essencial**\n- Formulário com campos obrigatórios por tipo de pedido.\n- Número de protocolo para cada pedido.\n**Importante, pode vir depois**\n- Status do pedido visível ao agente.\n- Painel de prazos para a gestão.\n**Fora do escopo**\n- Extração automática dos dados.\n- Integração com outros sistemas internos."
       },
       "citation_ids": [
         "FIC-02"
       ]
     },
     {
-      "id": "heading-constraints",
+      "id": "heading-transversal_process",
       "type": "heading",
       "data": {
-        "section_key": "constraints_heading",
-        "text": "Descrição: regras, restrições e dependências"
+        "section_key": "transversal_process_heading",
+        "text": "Informações Gerais: Processo e Sub-processo Tranversal"
       }
     },
     {
-      "id": "constraints",
+      "id": "transversal_process",
       "type": "paragraph",
       "data": {
-        "section_key": "constraints",
-        "text": "- Campos obrigatórios variam por tipo de pedido (regra a detalhar com a área)\n- Pedidos trazem dados de contato de pessoas: tratar como dados pessoais\n- Acesso externo de agentes depende das regras de autenticação da Tecnologia"
-      },
-      "citation_ids": [
-        "FIC-02"
-      ]
-    },
-    {
-      "id": "heading-responsibles",
-      "type": "heading",
-      "data": {
-        "section_key": "responsibles_heading",
-        "text": "Descrição: responsáveis"
-      }
-    },
-    {
-      "id": "responsibles",
-      "type": "paragraph",
-      "data": {
-        "section_key": "responsibles",
-        "text": "- Dúvidas de negócio: coordenação da equipe de atendimento (exemplo)\n- Validação das entregas: coordenação da equipe de atendimento (exemplo)\n- Decisão sobre mudanças de escopo: patrocinador da área (exemplo)"
+        "section_key": "transversal_process",
+        "text": "Prover Informações ao Mercado / Disponibilizar informações ao Mercado\nMotivo: a demanda melhora a entrega de dados aos agentes."
       },
       "citation_ids": [
         "FIC-01"
       ]
     },
     {
-      "id": "heading-evidence",
+      "id": "heading-family_service",
       "type": "heading",
       "data": {
-        "section_key": "evidence_heading",
-        "text": "Descrição: evidências"
+        "section_key": "family_service_heading",
+        "text": "Informações Gerais: Família / Serviços"
       }
     },
     {
-      "id": "evidence",
+      "id": "family_service",
       "type": "paragraph",
       "data": {
-        "section_key": "evidence",
-        "text": "Teste com protótipo do formulário guiado: 7 de 8 analistas simulados preencheram sem ajuda (critério prévio: 6 de 8). Devoluções em produção ainda não foram medidas."
-      },
-      "citation_ids": [
-        "FIC-02"
-      ]
-    },
-    {
-      "id": "heading-theme",
-      "type": "heading",
-      "data": {
-        "section_key": "theme_heading",
-        "text": "Informações Gerais: tema(s)"
-      }
-    },
-    {
-      "id": "theme",
-      "type": "paragraph",
-      "data": {
-        "section_key": "theme",
-        "text": "Aprimoramento Tecnológico (sugestão: a demanda melhora um processo existente com apoio de sistema)."
+        "section_key": "family_service",
+        "text": "Informações aos Clientes / Disponibilizar dados históricos sob demanda\nMotivo: é o serviço que recebe os pedidos."
       },
       "citation_ids": [
         "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-product_area",
+      "type": "heading",
+      "data": {
+        "section_key": "product_area_heading",
+        "text": "Informações Gerais: Produto/Área"
+      }
+    },
+    {
+      "id": "product_area",
+      "type": "paragraph",
+      "data": {
+        "section_key": "product_area",
+        "text": "Operação de Mercado\nMotivo: é a área que opera o atendimento dos pedidos."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-service_area",
+      "type": "heading",
+      "data": {
+        "section_key": "service_area_heading",
+        "text": "Informações Gerais: Área Responsável pelo Atendimento"
+      }
+    },
+    {
+      "id": "service_area",
+      "type": "paragraph",
+      "data": {
+        "section_key": "service_area",
+        "text": "Deixar vazio: a Tecnologia define a área que atende."
+      }
+    },
+    {
+      "id": "heading-release",
+      "type": "heading",
+      "data": {
+        "section_key": "release_heading",
+        "text": "Informações Gerais: Release"
+      }
+    },
+    {
+      "id": "release",
+      "type": "paragraph",
+      "data": {
+        "section_key": "release",
+        "text": "Selecionar no Jira."
+      }
+    },
+    {
+      "id": "heading-attachments",
+      "type": "heading",
+      "data": {
+        "section_key": "attachments_heading",
+        "text": "Informações Gerais: Anexo"
+      }
+    },
+    {
+      "id": "attachments",
+      "type": "paragraph",
+      "data": {
+        "section_key": "attachments",
+        "text": "Registro da decisão da gestão: comprova a aprovação.\nRelatório da experimentação: comprova o resultado do piloto.\nRelatório 4D: comprova o processo atual (jornada).\nRelatório 3E: comprova o essencial e o fora do escopo."
+      },
+      "citation_ids": [
+        "FIC-01",
+        "FIC-02"
       ]
     },
     {
@@ -295,7 +253,7 @@
       "type": "heading",
       "data": {
         "section_key": "regulatory_heading",
-        "text": "Informações Gerais: é uma demanda regulatória?"
+        "text": "Informações Gerais: É uma demanda regulatória?"
       }
     },
     {
@@ -303,29 +261,80 @@
       "type": "paragraph",
       "data": {
         "section_key": "regulatory",
-        "text": "Não. Nenhuma norma exige a mudança neste exemplo."
+        "text": "Não\nMotivo: nenhuma norma da ANEEL, do MME ou do CNPE motiva a demanda."
       },
       "citation_ids": [
         "FIC-01"
       ]
     },
     {
-      "id": "heading-risk_if_not_done",
+      "id": "heading-operation_date",
       "type": "heading",
       "data": {
-        "section_key": "risk_if_not_done_heading",
-        "text": "Informações Gerais: há riscos associados à não implementação?"
+        "section_key": "operation_date_heading",
+        "text": "Informações Gerais: Data de operação"
       }
     },
     {
-      "id": "risk_if_not_done",
+      "id": "operation_date",
       "type": "paragraph",
       "data": {
-        "section_key": "risk_if_not_done",
-        "text": "Sim. Justificativa: as devoluções continuam consumindo a capacidade da equipe e atrasando respostas aos agentes."
+        "section_key": "operation_date",
+        "text": "Deixar vazio: preenchida depois."
+      }
+    },
+    {
+      "id": "heading-regulatory_act",
+      "type": "heading",
+      "data": {
+        "section_key": "regulatory_act_heading",
+        "text": "Informações Gerais: Ato regulatório"
+      }
+    },
+    {
+      "id": "regulatory_act",
+      "type": "paragraph",
+      "data": {
+        "section_key": "regulatory_act",
+        "text": "Deixar vazio: a demanda não vem da ANEEL, do MME ou do CNPE."
+      }
+    },
+    {
+      "id": "heading-theme",
+      "type": "heading",
+      "data": {
+        "section_key": "theme_heading",
+        "text": "Informações Gerais: Tema(s)"
+      }
+    },
+    {
+      "id": "theme",
+      "type": "paragraph",
+      "data": {
+        "section_key": "theme",
+        "text": "Evolução das Operações de Mercado\nMotivo: melhora um serviço prestado ao mercado."
       },
       "citation_ids": [
         "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-measurable_benefit",
+      "type": "heading",
+      "data": {
+        "section_key": "measurable_benefit_heading",
+        "text": "Informações Gerais: Benefícios mensuráveis"
+      }
+    },
+    {
+      "id": "measurable_benefit",
+      "type": "paragraph",
+      "data": {
+        "section_key": "measurable_benefit",
+        "text": "Reduz horas operacionais internas"
+      },
+      "citation_ids": [
+        "FIC-02"
       ]
     },
     {
@@ -333,7 +342,7 @@
       "type": "heading",
       "data": {
         "section_key": "benefits_heading",
-        "text": "Informações Gerais: benefícios"
+        "text": "Informações Gerais: Benefícios"
       }
     },
     {
@@ -341,7 +350,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "benefits",
-        "text": "- Menos devoluções por informação ausente\n- Resposta mais rápida aos agentes\n- Rastreabilidade de cada pedido por protocolo"
+        "text": "Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta proposta, medida no piloto com 8 analistas; exemplo)."
       },
       "citation_ids": [
         "FIC-02"
@@ -352,7 +361,7 @@
       "type": "heading",
       "data": {
         "section_key": "process_simplification_heading",
-        "text": "Simplificação do Processo"
+        "text": "Informações Gerais: Simplificação do Processo"
       }
     },
     {
@@ -360,94 +369,272 @@
       "type": "paragraph",
       "data": {
         "section_key": "process_simplification",
-        "text": "Simplificação do processo: média (sugestão: elimina a troca de e-mails de complemento, mas mantém a conferência pelo analista).\nHá processo atual e/ou futuro desenhado? Sim: jornada atual anexada (exemplo)."
+        "text": "Média: simplificação parcial do processo\nMotivo: das 4 etapas, a troca de e-mails de complemento deixa de existir."
       },
       "citation_ids": [
         "FIC-02"
       ]
     },
     {
-      "id": "heading-requester",
+      "id": "heading-process_design",
       "type": "heading",
       "data": {
-        "section_key": "requester_heading",
-        "text": "Dados do Solicitante"
+        "section_key": "process_design_heading",
+        "text": "Informações Gerais: Há processo atual e/ou futuro desenhado?"
       }
     },
     {
-      "id": "requester",
+      "id": "process_design",
       "type": "paragraph",
       "data": {
-        "section_key": "requester",
-        "text": "Diretoria, gerência e gerência executiva da área solicitante, perfil e gestor de quem abre a CDT (preencher com os dados reais no Jira)."
+        "section_key": "process_design",
+        "text": "Sim\nProcesso atual na jornada do Relatório 4D (anexo); processo futuro não desenhado."
+      },
+      "citation_ids": [
+        "FIC-02"
+      ]
+    },
+    {
+      "id": "heading-risk_if_not_done",
+      "type": "heading",
+      "data": {
+        "section_key": "risk_if_not_done_heading",
+        "text": "Informações Gerais: Há riscos associados a não implementação da demanda?"
+      }
+    },
+    {
+      "id": "risk_if_not_done",
+      "type": "paragraph",
+      "data": {
+        "section_key": "risk_if_not_done",
+        "text": "Sim"
       },
       "citation_ids": [
         "FIC-01"
       ]
     },
     {
-      "id": "heading-personal_data",
+      "id": "heading-justification",
       "type": "heading",
       "data": {
-        "section_key": "personal_data_heading",
-        "text": "Histórico: faz uso de dados pessoais ou sensíveis (LGPD)?"
+        "section_key": "justification_heading",
+        "text": "Informações Gerais: Justificativa"
       }
     },
     {
-      "id": "personal_data",
+      "id": "justification",
       "type": "paragraph",
       "data": {
-        "section_key": "personal_data",
-        "text": "Sim. Nome e telefone de contatos dos agentes informados nos pedidos."
+        "section_key": "justification",
+        "text": "Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe de atendimento.\nAtraso ao mercado: os agentes seguem sem prazo previsível para receber os dados."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-demand_origin",
+      "type": "heading",
+      "data": {
+        "section_key": "demand_origin_heading",
+        "text": "Benefícios da Demanda: Qual a origem da demanda?"
+      }
+    },
+    {
+      "id": "demand_origin",
+      "type": "paragraph",
+      "data": {
+        "section_key": "demand_origin",
+        "text": "Proposta interna da CCEE\nMotivo: a dor nasceu na equipe de atendimento e passou pela esteira."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-formal_act",
+      "type": "heading",
+      "data": {
+        "section_key": "formal_act_heading",
+        "text": "Benefícios da Demanda: Qual Ato formal publicado ou não por órgão do setor (ANEEL/MME/CNPE)?"
+      }
+    },
+    {
+      "id": "formal_act",
+      "type": "paragraph",
+      "data": {
+        "section_key": "formal_act",
+        "text": "Deixar vazio: a demanda não vem da ANEEL, do MME ou do CNPE."
+      }
+    },
+    {
+      "id": "heading-agent_benefits",
+      "type": "heading",
+      "data": {
+        "section_key": "agent_benefits_heading",
+        "text": "Benefícios da Demanda: Há benefícios para os Agentes?"
+      }
+    },
+    {
+      "id": "agent_benefits",
+      "type": "paragraph",
+      "data": {
+        "section_key": "agent_benefits",
+        "text": "Sim\nO agente envia o pedido completo de uma vez e acompanha o andamento."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-market_impact",
+      "type": "heading",
+      "data": {
+        "section_key": "market_impact_heading",
+        "text": "Benefícios da Demanda: Grau de impacto no mercado"
+      }
+    },
+    {
+      "id": "market_impact",
+      "type": "paragraph",
+      "data": {
+        "section_key": "market_impact",
+        "text": "2 Classes de Agente\nComercializadores e geradores, que concentram os pedidos (exemplo)."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-usage_frequency",
+      "type": "heading",
+      "data": {
+        "section_key": "usage_frequency_heading",
+        "text": "Benefícios da Demanda: Frequência de utilização"
+      }
+    },
+    {
+      "id": "usage_frequency",
+      "type": "paragraph",
+      "data": {
+        "section_key": "usage_frequency",
+        "text": "Menor que mensal\nOs pedidos chegam todos os dias úteis."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-agent_transaction_cost",
+      "type": "heading",
+      "data": {
+        "section_key": "agent_transaction_cost_heading",
+        "text": "Benefícios da Demanda: Reduz custo de transação do agente?"
+      }
+    },
+    {
+      "id": "agent_transaction_cost",
+      "type": "paragraph",
+      "data": {
+        "section_key": "agent_transaction_cost",
+        "text": "Sim\nElimina o reenvio do pedido para complemento."
       },
       "citation_ids": [
         "FIC-02"
       ]
     },
     {
-      "id": "heading-prototype",
+      "id": "heading-corporate_risk",
       "type": "heading",
       "data": {
-        "section_key": "prototype_heading",
-        "text": "Solução: protótipo"
+        "section_key": "corporate_risk_heading",
+        "text": "Benefícios da Demanda: Reduz risco identificado na Matriz de Riscos Corporativos?"
       }
     },
     {
-      "id": "prototype",
+      "id": "corporate_risk",
       "type": "paragraph",
       "data": {
-        "section_key": "prototype",
-        "text": "Protótipo navegável do formulário guiado, usado no teste com analistas (exemplo)."
+        "section_key": "corporate_risk",
+        "text": "Não\nNenhum risco da Matriz é citado no material."
       },
       "citation_ids": [
-        "FIC-02"
+        "FIC-01"
       ]
     },
     {
-      "id": "heading-attachments",
+      "id": "heading-risk_identification",
       "type": "heading",
       "data": {
-        "section_key": "attachments_heading",
-        "text": "Anexos"
+        "section_key": "risk_identification_heading",
+        "text": "Benefícios da Demanda: Identificação dos Riscos"
       }
     },
     {
-      "id": "attachments",
+      "id": "risk_identification",
       "type": "paragraph",
       "data": {
-        "section_key": "attachments",
-        "text": "- Jornada atual do processo\n- Relatório da experimentação"
+        "section_key": "risk_identification",
+        "text": "Deixar vazio: nenhum risco da Matriz."
+      }
+    },
+    {
+      "id": "heading-process_incidents",
+      "type": "heading",
+      "data": {
+        "section_key": "process_incidents_heading",
+        "text": "Benefícios da Demanda: Resolve Incidentes de Processo Registrados no Processo Transversal?"
+      }
+    },
+    {
+      "id": "process_incidents",
+      "type": "paragraph",
+      "data": {
+        "section_key": "process_incidents",
+        "text": "Não\nNão há incidentes registrados; os relatos vêm de entrevistas."
       },
       "citation_ids": [
-        "FIC-02"
+        "FIC-01"
       ]
+    },
+    {
+      "id": "heading-incident_identification",
+      "type": "heading",
+      "data": {
+        "section_key": "incident_identification_heading",
+        "text": "Benefícios da Demanda: Identificação de Incidentes de Processo"
+      }
+    },
+    {
+      "id": "incident_identification",
+      "type": "paragraph",
+      "data": {
+        "section_key": "incident_identification",
+        "text": "Deixar vazio: nenhum incidente registrado."
+      }
+    },
+    {
+      "id": "heading-usage_frequency_score",
+      "type": "heading",
+      "data": {
+        "section_key": "usage_frequency_score_heading",
+        "text": "Benefícios da Demanda: Frequência de utilização (escala de 1 a 10)"
+      }
+    },
+    {
+      "id": "usage_frequency_score",
+      "type": "paragraph",
+      "data": {
+        "section_key": "usage_frequency_score",
+        "text": "Escolher no Jira."
+      }
     },
     {
       "id": "heading-publication_checklist",
       "type": "heading",
       "data": {
         "section_key": "publication_checklist_heading",
-        "text": "Checklist do comunicado de escopo"
+        "text": "Fora do Jira: Checklist do comunicado"
       }
     },
     {
@@ -455,7 +642,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "publication_checklist",
-        "text": "- Problema e objetivo: atendido. Problema com frequência estimada e objetivo verificável.\n- Públicos impactados: atendido. Agentes, analistas e gestores separados.\n- Entregas essenciais: atendido. Duas entregas ligadas ao objetivo e testadas com protótipo.\n- Prioridades e resultados esperados: atendido. Ordem justificada; indicador com linha de base e meta proposta.\n- Regras, restrições e dependências: atendido. Regra de campos, dados pessoais e autenticação registrados.\n- Responsáveis: atendido. Dúvidas, validação e mudanças de escopo com papel definido.\nPerguntas do comunicado: o problema, o público, o processo atual, o resultado e a prioridade estão nos campos de mesmo nome da Descrição."
+        "text": "- Problema e objetivo: atendido. Descrição, perguntas 1 e 4.\n- Públicos impactados: atendido. Descrição, pergunta 2.\n- Entregas essenciais: atendido. Descrição, pergunta 5.\n- Prioridades e resultados esperados: atendido. Descrição, perguntas 4 e 5.\n- Regras, restrições e dependências: atendido. Campos obrigatórios variam por tipo de pedido; os pedidos trazem nome e telefone de contatos (dados pessoais); o acesso externo segue a autenticação da Tecnologia.\n- Responsáveis: atendido. A coordenação do atendimento esclarece dúvidas e valida as entregas; a gestão da área decide mudanças de escopo (exemplo)."
       },
       "citation_ids": [
         "FIC-01",
@@ -467,7 +654,7 @@
       "type": "heading",
       "data": {
         "section_key": "quality_review_heading",
-        "text": "Avaliação crítica: pontos fortes e fracos"
+        "text": "Fora do Jira: Avaliação crítica"
       }
     },
     {
@@ -475,11 +662,10 @@
       "type": "paragraph",
       "data": {
         "section_key": "quality_review",
-        "text": "Pontos fortes:\n- Escopo em três grupos, com o essencial testado com protótipo (Descrição: entregas essenciais).\n- Restrição de dados pessoais identificada e coerente com o campo LGPD.\nPontos fracos:\n- A meta de 15% é proposta, sem estudo: a Tecnologia pode questionar o indicador. Fortalecer com a linha de base medida e o prazo de apuração.\n- O teste usou 8 analistas simulados e protótipo: não mostra o efeito em produção.\n- Sistemas impactados não foram levantados pela área.\nPerguntas que a Tecnologia deve fazer:\n- Quais tipos de pedido existem e quais campos cada um exige? Falta a regra detalhada.\n- Quem homologa as entregas? Respondido em Descrição: responsáveis."
+        "text": "Pontos fortes: problema com frequência estimada e escopo em três grupos.\nPontos fracos: meta de horas proposta, medida só no piloto com 8 analistas; regra de campos por tipo de pedido ainda não detalhada.\nPerguntas que a Tecnologia deve fazer: quais campos cada tipo de pedido exige (checklist, regras); quem homologa (checklist, responsáveis)."
       },
       "citation_ids": [
-        "FIC-01",
-        "FIC-02"
+        "FIC-01"
       ]
     },
     {
@@ -487,7 +673,7 @@
       "type": "heading",
       "data": {
         "section_key": "data_to_obtain_heading",
-        "text": "Dados a obter antes do envio"
+        "text": "Fora do Jira: Dados a obter"
       }
     },
     {
@@ -495,7 +681,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "data_to_obtain",
-        "text": "Nenhum dado pendente que impeça o envio. Vale obter antes da análise da Tecnologia a regra de campos por tipo de pedido."
+        "text": "Nenhum dado pendente. Antes da análise, vale obter a regra de campos por tipo de pedido."
       },
       "citation_ids": [
         "FIC-02"
@@ -506,21 +692,19 @@
       "type": "table",
       "data": {
         "headers": [
-          "Dado a obter",
-          "Campo da CDT",
-          "Por que a Tecnologia precisa",
-          "Onde ou com quem obter",
-          "Pergunta pronta",
+          "Dado",
+          "Campo",
+          "Com quem",
+          "Pergunta",
           "Impede o envio?"
         ],
         "rows": [
           [
-            "Campos obrigatórios por tipo de pedido",
-            "Descrição: regras, restrições e dependências",
-            "Define o formulário e o esforço",
-            "Coordenação da equipe de atendimento",
+            "Campos por tipo de pedido",
+            "Checklist: regras",
+            "Equipe de atendimento",
             "Quais campos cada tipo de pedido exige?",
-            "Não: pode ser detalhado na análise"
+            "Não"
           ]
         ]
       }
@@ -530,7 +714,7 @@
       "type": "heading",
       "data": {
         "section_key": "traceability_heading",
-        "text": "Origem e natureza dos dados"
+        "text": "Fora do Jira: Origem dos dados"
       }
     },
     {
@@ -538,7 +722,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "traceability",
-        "text": "19 campos da área com fonte: 12 documentados, 3 medidos, 2 decididos e 2 propostas. Fontes: Entrevista Inicial e relatório 3E simulados; nenhuma fonte real."
+        "text": "Cada campo indica suas fontes; todas são fictícias."
       },
       "citation_ids": [
         "FIC-01",
@@ -551,28 +735,34 @@
       "data": {
         "headers": [
           "Campo",
-          "Fonte e localizador",
+          "Fonte",
           "Natureza",
           "Limite"
         ],
         "rows": [
           [
-            "Descrição: problema e contexto",
-            "FIC-01, exemplo fictício",
-            "medido",
-            "estimativa do exemplo"
+            "Problema e resultado esperado",
+            "FIC-01: Entrevista Inicial simulada",
+            "estimativa e decidido",
+            "exemplo"
           ],
           [
-            "Descrição: resultados esperados",
-            "FIC-02, exemplo fictício",
+            "Processo atual e prioridade",
+            "FIC-02: Relatório 3E simulado",
+            "documentado",
+            "teste com protótipo"
+          ],
+          [
+            "Benefícios e frequência",
+            "FIC-02: Relatório 3E simulado",
             "proposta",
-            "meta sem estudo"
+            "meta medida só no piloto"
           ],
           [
-            "Descrição: entregas essenciais",
-            "FIC-02, exemplo fictício",
-            "decidido",
-            "teste só com protótipo"
+            "Demais campos do Jira",
+            "FIC-01; FIC-02",
+            "documentado",
+            "exemplo"
           ]
         ]
       }
@@ -592,7 +782,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-cdt",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "portrait",
     "sample": true
