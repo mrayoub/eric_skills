@@ -1,27 +1,28 @@
 ---
 name: gerador-cdt
-description: "Gera os dados para preencher no Jira um Cadastro de Demanda Tecnológica (CDT) de qualidade, a demanda que a área leva à Diretoria de Tecnologia, a partir dos entregáveis da esteira ERIC. Preenche os 28 campos das abas Informações Gerais e Benefícios da Demanda, na ordem da tela e com as opções exatas das listas do Jira; a Descrição responde às cinco perguntas do comunicado interno sobre escopo (problema, quem é impactado, processo atual, resultado esperado e prioridade). Fora do Jira, traz o checklist do comunicado respondido, fontes, pontos fortes e fracos e os dados a obter quando o material não basta. Use quando o usuário pedir para abrir, preencher, montar, revisar ou completar uma CDT, levar a demanda para a Tecnologia ou TI, ou organizar o escopo para o Jira. Não use para pedir a decisão da gestão (use relatorio-final-inovacao) nem para escrever a Entrevista Inicial ou o Briefing (use briefing-inovacao)."
+description: "Gera, a partir dos entregáveis da esteira ERIC, um Cadastro de Demanda Tecnológica (CDT) de qualidade para a área abrir no Jira e levar à Diretoria de Tecnologia. Entrega dois arquivos: a CDT, só com os campos para copiar e colar (Rótulo Epic com título tecnológico, Descrição com as cinco perguntas do comunicado interno sobre escopo, Justificativa e Benefícios), e a Análise da CDT, com o checklist do comunicado em destaque, o que obter e analisar primeiro, pontos fortes e fracos e a origem dos dados. Conhece os 28 campos do formulário para raciocinar com coerência. Use quando o usuário pedir para abrir, preencher, montar, revisar ou completar uma CDT, levar a demanda para a Tecnologia ou TI, ou organizar o escopo para o Jira. Não use para pedir a decisão da gestão (use relatorio-final-inovacao) nem para escrever a Entrevista Inicial ou o Briefing (use briefing-inovacao)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Gerador de CDT
 
-CDT é o Cadastro de Demanda Tecnológica, aberto no Jira. Esta skill transforma o que a esteira produziu nos campos do
-formulário, prontos para copiar, mais uma parte fora do Jira que mostra se a demanda está pronta para envio. A CDT não
-é o relatório do projeto: é curta, direta e deixa o detalhe para os anexos.
+CDT é o Cadastro de Demanda Tecnológica, aberto no Jira. Esta skill transforma o que a esteira produziu em dois
+arquivos: a **CDT**, com os quatro campos que a pessoa copia e cola no Jira, e a **Análise da CDT**, que mostra se a
+demanda está pronta para envio e o que falta obter. A CDT não é o relatório do projeto: é curta, direta e deixa o
+detalhe para os anexos.
 
 ## Leia primeiro
 
-- [Campos do Jira](references/campos-jira.md): os 28 campos, opções exatas, padrão de escrita, formato de cada campo,
-  coerência entre campos e insumos da esteira.
+- [Campos da CDT](references/campos-jira.md): o que cada arquivo traz, padrão de escrita, Rótulo Epic, Descrição,
+  Justificativa e Benefícios, os 28 campos do formulário, coerência entre campos e insumos da esteira.
 - [Publicação sobre escopo](references/publicacao-escopo-tecnologia.md): as cinco perguntas da Descrição e o
   checklist.
-- [Qualidade e veracidade](references/qualidade-e-veracidade.md): estado, pendência, campo vazio, checklist,
-  avaliação crítica, dados a obter e origem dos dados.
+- [Qualidade e veracidade](references/qualidade-e-veracidade.md): a Análise da CDT, com estado, checklist, o que
+  obter e analisar primeiro, avaliação crítica e origem dos dados.
 - [Esteira ERIC](references/eric-esteira.md): o que é a CCEE, as etapas da esteira, BP1/BP2, rotas e relações entre
   entregáveis. Leia antes de interpretar qualquer insumo.
 - [Grilling operacional](references/grilling-operacional.md) e o
@@ -55,47 +56,59 @@ obter. Se a rota for externa, diga o que muda no pedido à Tecnologia em vez de 
 
 1. **Inventário.** Liste os entregáveis recebidos com data, versão e estado de leitura e identifique a decisão
    vigente mais recente.
-2. **Descrição.** Responda sempre às cinco perguntas do comunicado, nesta ordem: qual problema, quem é impactado,
-   como funciona hoje, qual resultado e o que é prioridade (essencial, importante e fora do escopo). Markdown só
-   aqui. Nada além das cinco perguntas.
-3. **Demais campos, na ordem da tela.** Opção exata da lista na primeira linha e `Motivo:` em uma linha; Sim ou Não
-   com a linha que sustenta a resposta; texto simples, sem Markdown. Release, Data de operação e a escala de 1 a 10
-   nunca são preenchidos ([formato](references/campos-jira.md#formato-de-cada-campo-no-entregável)).
+2. **Raciocine com o formulário inteiro.** Percorra os 28 campos ([campos](references/campos-jira.md#os-28-campos-do-formulário))
+   para saber se há risco de não implementar, qual benefício é mensurável, se a demanda é regulatória e se as
+   respostas se contradizem. Esses campos não são entregues; o que faltar vai para a análise.
+3. **CDT, quatro blocos, nesta ordem.** Rótulo Epic: uma linha que nomeia a tecnologia (plataforma, sistema,
+   ferramenta, integração, interface) e o que ela faz, sem nada que sugira uma pessoa. Descrição: um bloco só, com as
+   cinco perguntas do comunicado como subtítulos em negrito, sempre respondidas. Justificativa: os riscos de não
+   implementar, um por linha. Benefícios: o principal com número na primeira linha. Markdown só na Descrição; nenhuma
+   fonte no texto.
 4. **Corte.** Cada fato aparece uma vez; siglas por extenso na primeira menção de cada campo; nada de narrar o
-   método da esteira. Limites: 150 palavras por pergunta da Descrição, 60 nos demais campos, 12 no título.
-5. **Fora do Jira.** Escreva estado, checklist (com regras e responsáveis na própria linha), avaliação crítica, dados
-   a obter e origem dos dados ([qualidade](references/qualidade-e-veracidade.md)). Rode
-   `python3 scripts/checar_cdt.py cdt.json` até o código 0 ou declare a versão parcial.
-6. **Entregue.** No chat: o estado, onde estão os arquivos, o principal ponto fraco e os dados a obter. Não repita a
-   CDT inteira no chat.
+   método da esteira. Limites: 16 palavras no Rótulo Epic, 150 por pergunta da Descrição, 80 na Justificativa e nos
+   Benefícios.
+5. **Análise da CDT.** Estado; em destaque, o checklist do comunicado (regras e responsáveis respondidos na linha) e
+   o que obter e analisar primeiro, em ordem de prioridade; depois avaliação crítica e origem dos dados, com as
+   fontes ([qualidade](references/qualidade-e-veracidade.md)). Rode `python3 scripts/checar_cdt.py cdt.json
+   analise.json` até o código 0 ou declare a versão parcial nos dois arquivos.
+6. **Entregue.** No chat: o estado, onde estão os arquivos, o principal ponto fraco e o primeiro dado a obter. Não
+   repita a CDT no chat.
 
 ## Exemplo
 
 Entrada: "Monte a CDT do formulário de pedidos de dados com o relatório 3E, os Learning Cards e o relatório final."
-Saída (trecho do arquivo):
+Saída (CDT, para colar no Jira):
 
 ```
-Descrição: O que é prioridade neste momento?
+Rótulo Epic
+
+Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento
+
+Descrição
+
+**Qual problema queremos resolver?**
+Os pedidos de dados históricos chegam por e-mail, sem padrão. Cerca de 4 em cada 10 voltam ao agente para complemento.
+...
+**O que é prioridade neste momento?**
 **Essencial**
 - Formulário com campos obrigatórios por tipo de pedido.
-**Fora do escopo**
-- Extração automática dos dados.
 
-Informações Gerais: Família / Serviços
-Informações aos Clientes / Disponibilizar dados históricos sob demanda
-Motivo: é o serviço que recebe os pedidos.
+Justificativa
 
-Informações Gerais: Release
-Selecionar no Jira.
+Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe de atendimento.
+
+Benefícios
+
+Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta proposta, medida no piloto).
 ```
 
 ## Checagem final
 
-- [ ] Descrição com as cinco perguntas, na ordem do comunicado, e nada mais; Markdown só nela
-- [ ] Os 28 campos presentes, na ordem da tela, com a opção exata do Jira e sem contradição entre campos
-- [ ] Todo campo com fonte, "a confirmar:" listado em dados a obter ou marcado para deixar vazio
-- [ ] Checklist com os seis itens, regras e responsáveis respondidos na linha; avaliação crítica com pontos fracos
-- [ ] `scripts/checar_cdt.py` sem erros; estado igual em `readiness`, no chat e em `metadata.completeness`
+- [ ] CDT com só Rótulo Epic, Descrição, Justificativa e Benefícios, nesta ordem, sem fonte e sem cabeçalho no MD e no TXT
+- [ ] Rótulo Epic tecnológico, sem termo que sugira pessoa
+- [ ] Descrição num bloco só, com as cinco perguntas na ordem e respondidas; Markdown só nela
+- [ ] Análise com estado, checklist e prioridades em destaque, avaliação crítica com pontos fracos e fontes na origem dos dados
+- [ ] `scripts/checar_cdt.py` sem erros; mesmo estado nos dois arquivos, em `readiness` e no chat
 
 ## Contexto ERIC
 
@@ -106,16 +119,18 @@ relações entre entregáveis; a CDT costuma nascer na etapa 8 (implementar).
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos (as opções do Jira com hífen, como "PLD - Preço de Liquidação das Diferenças", são exceção); siga
-[o design system](assets/design-system/README.md) com `deliverable_type` `cdt`: um bloco `paragraph` por campo, com
-`data.section_key` e `data.text`, precedido de um `heading` com o título `Aba: Rótulo` (a Descrição usa
-`Descrição: <pergunta>`; a parte fora do Jira usa `Fora do Jira: <seção>`). As chaves e a ordem estão em
-`assets/design-system/response-sections.json`. Abra com `readiness` e feche com `publication_checklist`,
-`quality_review`, `data_to_obtain` e `traceability`; os dois últimos são seguidos de uma tabela sem `section_key`.
-Monte o JSON canônico, rode o `checar_cdt.py`, depois `python3 assets/design-system/scripts/render.py entrada.json
---out-dir saida`, e entregue o JSON junto dos derivados. O MD e o TXT servem para colar no Jira; o PDF e o DOCX, para
-revisão. Se a validação falhar, corrija o conteúdo ou marque `metadata.completeness: "partial"`: nunca contorne o
-schema.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos; siga
+[o design system](assets/design-system/README.md). Monte dois JSON canônicos:
+
+- `deliverable_type` `cdt`: um `heading` e um `paragraph` para cada campo, com `data.section_key` `jira_title`,
+  `description`, `justification` e `benefits`, nessa ordem, e `citation_ids` em cada parágrafo.
+- `deliverable_type` `cdt_analysis`: `readiness`, `publication_checklist`, `data_to_obtain` (seguido da tabela de
+  prioridades), `quality_review` e `traceability` (seguido da tabela de fontes).
+
+Rode o `checar_cdt.py` com os dois, depois `python3 assets/design-system/scripts/render.py <arquivo>.json --out-dir
+saida` para cada um, e entregue os JSON junto dos derivados. Da CDT, o MD e o TXT trazem só os campos, prontos para
+colar no Jira; o PDF e o DOCX servem para revisão. Se a validação falhar, corrija o conteúdo ou marque
+`metadata.completeness: "partial"` nos dois arquivos: nunca contorne o schema.
 
 **Proveniência:** estrutura adaptada de publicação interna da CCEE sobre definição de escopo
 (`references/publicacao-escopo-tecnologia.md`, anonimizada), do formulário da CDT no Jira levantado com o usuário em

@@ -267,7 +267,7 @@ def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str,
 # Tipos cuja ordem e colunas vêm do layout.json do Layout Studio; o conteúdo continua fluindo entre páginas.
 FLOW_LAYOUT_TYPES = ("innovation_potential_assessment",)
 # Tipos em que cada seção ocupa a largura inteira: nunca agrupa duas seções curtas lado a lado.
-SINGLE_COLUMN_TYPES = ("cdt",)
+SINGLE_COLUMN_TYPES = ("cdt", "cdt_analysis")
 FLOW_FIXED_SLOTS = ("titulo_documento", "identificacao_versao", "logo", "rodape")
 SCORE_LABELS = {"impact": "Impacto", "viability": "Viabilidade", "strategic_alignment": "Alinhamento estratégico",
                 "urgency": "Urgência", "innovation": "Novidade"}

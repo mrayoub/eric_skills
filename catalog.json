@@ -3,74 +3,74 @@
   "schema_version": "1.0.0",
   "skills": {
     "avaliacao-briefing-iqb": {
-      "files": 84,
-      "sha256": "bb675c194d49e6d9cca80f76f8dd93b87b24a06b941265b5155cb5780e93a219",
-      "version": "1.1.18"
+      "files": 86,
+      "sha256": "595349fb8e37e6154b19667f8d2cad30775a81f59a3b7e6f8701262ec07ea4b3",
+      "version": "1.1.19"
     },
     "briefing-inovacao": {
-      "files": 85,
-      "sha256": "67bb0f4213f407151ba3e4e28420eb46aaa984432e2f335acb22b2cc64213d86",
-      "version": "1.1.18"
+      "files": 87,
+      "sha256": "bfad10bb4f2b0110e10839cb0a14ce01e1df7e2b0ad2b62e94618be71c009dd8",
+      "version": "1.1.19"
     },
     "esteira-eric": {
       "files": 13,
-      "sha256": "58969c65f74ec99bd5ed24fe694a203222317693ad69a6226b686cdfe40c945f",
-      "version": "1.2.4"
+      "sha256": "038f72d1e28e22773f0da0fcb0b43cc133197bf4fc23ad3def845921d2ce1fcc",
+      "version": "1.2.5"
     },
     "experimentacao-inovacao": {
-      "files": 94,
-      "sha256": "ea532c7d3e32913cd4ff0020495c1f87184bfd1baa16d797e0a5dcca3b671cbd",
-      "version": "1.4.13"
+      "files": 96,
+      "sha256": "b0b9d757df832356ab3fdb874fadf0b8a648165244255cf18e9d3c08cb9d98b3",
+      "version": "1.4.14"
     },
     "gerador-cdt": {
-      "files": 85,
-      "sha256": "335ed422773bd22d514319eef934e4df93bd4e2c56be92161bfdd5156c71cf29",
-      "version": "1.1.0"
+      "files": 87,
+      "sha256": "caa2f6581835595d58461be92f3b394230e8c16f2ec3d5629cc7e2fd52174c78",
+      "version": "1.2.0"
     },
     "potencial-inovacao": {
-      "files": 83,
-      "sha256": "b6289b1fce22df640dd9602d0c415b8a94ee86dba5d5615de6489c7d961d69a7",
-      "version": "1.1.18"
+      "files": 85,
+      "sha256": "e279593451e7b8593df04abc8cfb314e59d6a4ea8d59bde410de792ce3a13fe8",
+      "version": "1.1.19"
     },
     "relatorio-3e": {
-      "files": 87,
-      "sha256": "759587bf9d6d81415d832799c182ad0f53ccad45fcfff9098ec62a7a8359430c",
-      "version": "1.1.18"
+      "files": 89,
+      "sha256": "16adc4792a30aef417f0c2c9e3bfaf4bd67a0aedb5afd6ca04851a79098ef6af",
+      "version": "1.1.19"
     },
     "relatorio-4d": {
-      "files": 88,
-      "sha256": "c8d5df970b97b57822cd4a2ba8abf8188204fa5d58ef53c8d0105e0d9a110ca2",
-      "version": "1.1.18"
+      "files": 90,
+      "sha256": "4478cacfcc679fc8e0df25f856180de99c2488c38359cffc7ab5472c5ecced2b",
+      "version": "1.1.19"
     },
     "relatorio-5c": {
-      "files": 84,
-      "sha256": "97e8410c95b8559d990a10c0f8e1cd3b780ed90924e6f32ce5a889f016dbd137",
-      "version": "1.1.18"
+      "files": 86,
+      "sha256": "5c594001bc8cceafee1527510d2a01a3253998bcd542ef53659127dc880c62bb",
+      "version": "1.1.19"
     },
     "relatorio-final-inovacao": {
-      "files": 84,
-      "sha256": "124adcc017c0245ff53164de594b9ebdc24b83f04234ba860d365a18fa60e6ec",
-      "version": "1.3.13"
+      "files": 86,
+      "sha256": "b6448d4443a3b6906d4c498087352be85a9ed84da014fef1a764c5ce6e8bf39a",
+      "version": "1.3.14"
     },
     "scorecard-inovacao": {
-      "files": 85,
-      "sha256": "56c62c5f9bead3870aaea904545f52e21badca1dafdc770de85530d7501c8b43",
-      "version": "1.1.18"
+      "files": 87,
+      "sha256": "1cf77c927746466c9c1ce80bc00e7667c5dc1443e612c1b43f29ba0b95e786ac",
+      "version": "1.1.19"
     },
     "workshop-3e": {
-      "files": 88,
-      "sha256": "112421a42c447f1d94268de07424b96986bcc0ed470aa6f11c9ac93d88e0b1a4",
-      "version": "1.1.18"
+      "files": 90,
+      "sha256": "92879a17843f876c7e346af7a6b3c9093c10601abff2b5d25c5651aaaa7d738d",
+      "version": "1.1.19"
     },
     "workshop-4d": {
-      "files": 87,
-      "sha256": "5a136746ca0a4dda17c0c3691195f0ba45c907b8b46adadcb43674f870cf20d4",
-      "version": "1.1.18"
+      "files": 89,
+      "sha256": "0099a7a27f531ccbcbdfa8d7871bdbc4985c55cbcaae00f4f3e95ecbc7bdaed5",
+      "version": "1.1.19"
     },
     "workshop-5c": {
-      "files": 84,
-      "sha256": "ee4230ed67dc3ac106f167a6d65ee349e3de6b32ea01b6210e73383d712b193c",
-      "version": "1.1.18"
+      "files": 86,
+      "sha256": "c13f7d5e54f2051919392b9fd26bb8c2b96829fba4f9d6e0a05e4dd080a4ec29",
+      "version": "1.1.19"
     }
   }
 }

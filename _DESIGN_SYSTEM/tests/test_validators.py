@@ -366,206 +366,186 @@ class ObjectivityValidatorTests(unittest.TestCase):
 
 class CdtValidationTests(unittest.TestCase):
     def setUp(self):
-        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/cdt/input.json"
-        self.content = json.loads(path.read_text(encoding="utf-8"))
+        samples = ROOT.parent / "_SAMPLES_ENTREGAVEIS"
+        self.content = json.loads((samples / "cdt/input.json").read_text(encoding="utf-8"))
+        self.analysis = json.loads((samples / "cdt_analysis/input.json").read_text(encoding="utf-8"))
         self.cdt = load_module("cdt_validator", ROOT / "scripts/validators/cdt.py")
 
-    def block(self, key):
-        return next(block for block in self.content["blocks"] if block["data"].get("section_key") == key)
+    def block(self, key, content=None):
+        return next(block for block in (content or self.content)["blocks"] if block["data"].get("section_key") == key)
 
-    def errors(self):
-        return validators.run(self.content)
+    def errors(self, content=None):
+        return validators.run(content or self.content)
+
+    def text(self, key, value, content=None):
+        self.block(key, content)["data"]["text"] = value
+
+    def check(self):
+        """Roda o checar_cdt.py da skill sobre os dois arquivos."""
+        script = ROOT.parent / "gerador-cdt/scripts/checar_cdt.py"
+        with tempfile.TemporaryDirectory() as temp:
+            paths = [Path(temp) / "cdt.json", Path(temp) / "analise.json"]
+            for path, content in zip(paths, (self.content, self.analysis)):
+                path.write_text(json.dumps(content), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(script), *map(str, paths)], capture_output=True, text=True)
+        return result.returncode, json.loads(result.stdout)
 
     def partial(self, readiness="Parcial. Falta um dado."):
-        self.content["metadata"]["completeness"] = "partial"
-        self.block("readiness")["data"]["text"] = readiness
+        for content in (self.content, self.analysis):
+            content["metadata"]["completeness"] = "partial"
+        self.text("readiness", readiness, self.analysis)
+        self.text("data_to_obtain", "Dados que faltam, em ordem de prioridade:", self.analysis)
 
-    def test_complete_sample_is_valid(self):
+    def test_samples_are_valid(self):
+        self.assertEqual(self.errors(), [])
+        self.assertEqual(self.errors(self.analysis), [])
+        self.assertEqual(self.check(), (0, self.check()[1]))
+
+    def test_official_document_has_only_the_four_jira_fields(self):
+        keys = [block["data"]["section_key"] for block in self.content["blocks"] if block["type"] == "paragraph"]
+        self.assertEqual(keys, ["jira_title", "description", "justification", "benefits"])
+        self.content["blocks"].append({"id": "theme", "type": "paragraph", "citation_ids": ["FIC-01"],
+                                       "data": {"section_key": "theme", "text": "Governança e Gestão"}})
+        self.assertTrue(any("só Rótulo Epic, Descrição, Justificativa e Benefícios" in error for error in self.errors()))
+
+    def test_epic_label_comes_first(self):
+        blocks = self.content["blocks"]
+        blocks[:2], blocks[2:4] = blocks[2:4], blocks[:2]
+        self.assertTrue(any("fora de ordem" in error for error in self.errors()))
+
+    def test_epic_label_names_the_technology_not_a_person(self):
+        self.text("jira_title", "Assistente conversacional para consulta de pendências")
+        errors = " ".join(self.errors())
+        self.assertIn("sugere uma pessoa", errors)
+        self.assertIn("artefato tecnológico", errors)
+        self.text("jira_title", "Interface conversacional com IA para consulta de pendências no sistema X")
         self.assertEqual(self.errors(), [])
 
-    def test_pending_field_blocks_complete_version(self):
-        self.block("product_area")["data"]["text"] = "a confirmar: área de negócio (sponsor)"
-        self.assertTrue(any("campos a confirmar" in error and "product_area" in error for error in self.errors()))
+    def test_description_has_the_five_questions_in_one_block(self):
+        description = self.block("description")["data"]["text"]
+        self.text("description", description.replace("**Como o processo funciona hoje?**", "**Processo atual**"))
+        self.assertTrue(any("Como o processo funciona hoje?" in error for error in self.errors()))
+
+    def test_description_questions_follow_the_communique_order(self):
+        description = self.block("description")["data"]["text"]
+        first, rest = description.split("**Quem é impactado?**")
+        self.text("description", "**Quem é impactado?**" + rest + "\n\n" + first)
+        self.assertTrue(any("ordem do comunicado" in error for error in self.errors()))
+
+    def test_every_question_needs_an_answer_even_when_partial(self):
         self.partial()
-        report = self.cdt.report(self.content)
-        self.assertEqual(report["pending_fields"], ["product_area"])
-        self.assertFalse(report["ready"])
-        self.assertTrue(report["readiness_text_ok"])
+        description = self.block("description")["data"]["text"]
+        start = description.index("**Quem é impactado?**") + len("**Quem é impactado?**")
+        end = description.index("**Como o processo funciona hoje?**")
+        self.text("description", description[:start] + "\n\n" + description[end:])
+        self.assertTrue(any("pergunta sem resposta" in error for error in self.cdt.report(self.content)["errors"]))
+
+    def test_priorities_split_into_three_groups(self):
+        description = self.block("description")["data"]["text"]
+        self.text("description", description.split("**Essencial**")[0] + "Primeiro o formulário.")
+        self.assertTrue(any("essencial, importante e fora do escopo" in error for error in self.errors()))
+
+    def test_pending_field_blocks_complete_version(self):
+        self.text("benefits", "a confirmar: horas mensais gastas hoje (gestão da área)")
+        self.assertTrue(any("campos a confirmar" in error and "benefits" in error for error in self.errors()))
+        self.partial()
+        code, report = self.check()
+        self.assertEqual(code, 0, report)
+        self.assertEqual(report["pending_fields"], ["benefits"])
+        self.assertEqual(report["suggested_completeness"], "partial")
+
+    def test_pending_must_reach_the_analysis(self):
+        self.partial()
+        self.text("benefits", "a confirmar: horas mensais gastas hoje (gestão da área)")
+        self.text("data_to_obtain", "Nenhum dado pendente.", self.analysis)
+        code, report = self.check()
+        self.assertEqual(code, 1)
+        self.assertTrue(any("liste-os nos dados a obter" in error for error in report["errors"]))
+
+    def test_partial_without_marked_pending_is_explained(self):
+        self.partial("Parcial. Falta a diretoria.")
+        code, report = self.check()
+        self.assertEqual(code, 1)
+        self.assertTrue(any("sem pendência marcada" in error for error in report["errors"]))
+
+    def test_both_files_declare_the_same_state(self):
+        self.analysis["metadata"]["completeness"] = "partial"
+        code, report = self.check()
+        self.assertEqual(code, 1)
+        self.assertTrue(any("mesmo estado" in error for error in report["errors"]))
 
     def test_field_without_source_or_pending_is_rejected(self):
         self.block("benefits").pop("citation_ids")
         self.assertTrue(any("sem fonte" in error and "benefits" in error for error in self.errors()))
 
-    def test_blank_field_needs_no_source(self):
-        self.assertIn("release", self.cdt.report(self.content)["blank_fields"])
-        self.assertNotIn("release", self.cdt.report(self.content)["unsourced_fields"])
-
-    def test_description_requires_all_five_questions_even_when_partial(self):
-        self.partial()
-        self.content["blocks"] = [block for block in self.content["blocks"]
-                                  if block["data"].get("section_key") != "current_process"]
-        errors = self.cdt.report(self.content)["errors"]
-        self.assertTrue(any("Descrição sem resposta" in error and "current_process" in error for error in errors))
-
-    def test_description_must_follow_the_order_of_the_communique(self):
-        blocks = self.content["blocks"]
-        first, second = (next(i for i, b in enumerate(blocks) if b["data"].get("section_key") == key)
-                         for key in ("problem", "objective"))
-        blocks[first], blocks[second] = blocks[second], blocks[first]
-        self.assertTrue(any("fora da ordem" in error for error in self.errors()))
-
-    def test_retired_sections_are_rejected(self):
-        self.content["blocks"].append({"id": "constraints", "type": "paragraph", "citation_ids": ["FIC-01"],
-                                       "data": {"section_key": "constraints", "text": "Regras."}})
-        self.assertTrue(any("não fazem mais parte" in error for error in self.errors()))
-
-    def test_list_fields_use_exact_jira_options(self):
-        self.block("product_area")["data"]["text"] = "Operações de Mercado"
-        self.block("family_service")["data"]["text"] = "Informações aos Clientes / Info da CCEE"
-        self.block("transversal_process")["data"]["text"] = "Contabilizar e Liquidar Mercado Regulado / Gerir MVE"
-        errors = " ".join(self.errors())
-        self.assertIn("product_area", errors)
-        self.assertIn("'Info da CCEE' não é opção", errors)
-        self.assertIn("opção duplicada", errors)
-
-    def test_second_level_can_be_left_to_the_jira(self):
-        self.block("family_service")["data"]["text"] = "Informações aos Clientes / selecionar no Jira"
-        self.assertEqual(self.errors(), [])
-
-    def test_theme_accepts_two_options_at_most(self):
-        self.block("theme")["data"]["text"] = "Governança e Gestão; Segurança de Mercado"
-        self.assertEqual(self.errors(), [])
-        self.block("theme")["data"]["text"] = "Governança e Gestão; Segurança de Mercado; Academia CCEE"
-        self.assertTrue(any("no máximo 2" in error for error in self.errors()))
-
-    def test_fields_the_skill_never_fills_stay_blank(self):
-        self.block("release")["data"]["text"] = "Release de março"
-        self.assertTrue(any("release: a skill não preenche" in error for error in self.errors()))
-
-    def test_regulatory_answer_and_act_fields_are_coherent(self):
-        self.block("regulatory")["data"]["text"] = "Sim"
-        errors = " ".join(self.errors())
-        self.assertIn("regulatory_act: demanda regulatória", errors)
-        self.assertIn("formal_act: demanda regulatória", errors)
-
-    def test_yes_no_pairs_are_coherent(self):
-        self.block("corporate_risk")["data"]["text"] = "Sim"
-        self.block("agent_benefits")["data"]["text"] = "Não"
-        errors = " ".join(self.errors())
-        self.assertIn("risk_identification: obrigatório", errors)
-        self.assertIn("agent_transaction_cost", errors)
-
-    def test_markdown_only_in_description(self):
-        self.block("attachments")["data"]["text"] = "- Relatório final: comprova a decisão."
-        self.assertTrue(any("Markdown fora da Descrição" in error and "attachments" in error for error in self.errors()))
-        self.block("attachments")["data"]["text"] = "Relatório final: comprova a decisão."
-        self.assertIn("**", self.block("priorities")["data"]["text"])
-        self.assertEqual(self.errors(), [])
-
     def test_jira_fields_do_not_cite_sources(self):
-        self.block("benefits")["data"]["text"] += " Fonte: relatório final."
+        self.text("benefits", self.block("benefits")["data"]["text"] + " Fonte: relatório final.")
         self.assertTrue(any("fonte citada em campo do Jira" in error for error in self.errors()))
 
-    def test_rendered_files_hide_sources_of_jira_fields(self):
-        render = load_module("render_sources", SCRIPT)
-        shown = render.presentation_content(self.content)
-        by_key = {block["data"].get("section_key"): block for block in shown["blocks"]}
-        self.assertNotIn("citation_ids", by_key["benefits"])
-        self.assertNotIn("citation_ids", by_key["problem"])
-        self.assertIn("citation_ids", by_key["traceability"])
-        self.assertIn("citation_ids", self.block("benefits"))
-        markdown = render.render_md(shown)
-        jira_part = markdown.split("## Informações Gerais: Rótulo Epic")[1].split("Fora do Jira")[0]
-        self.assertNotIn("FIC-0", jira_part)
-
-    def test_priorities_split_into_three_groups(self):
-        self.block("priorities")["data"]["text"] = "Primeiro o formulário."
-        self.assertTrue(any("essencial, importante e fora do escopo" in error for error in self.errors()))
-
-    def test_jira_option_with_spaced_hyphen_passes_the_dash_rule(self):
-        render = load_module("render_dash", SCRIPT)
-        self.block("family_service")["data"]["text"] = "PLD - Preço de Liquidação das Diferenças / Reajuste do CVU"
-        self.assertEqual(render.dash_paths(self.content), [])
-        self.block("benefits")["data"]["text"] += " Mais rápido - e simples."
-        self.assertTrue(render.dash_paths(self.content))
-
-    def test_quality_review_requires_strengths_and_weaknesses(self):
-        self.block("quality_review")["data"]["text"] = "Pontos fortes: escopo claro."
-        self.assertTrue(any("Pontos fracos" in error for error in self.errors()))
-
-    def test_checklist_needs_all_six_items_with_status(self):
-        block = self.block("publication_checklist")
-        block["data"]["text"] = "\n".join(line for line in block["data"]["text"].splitlines()
-                                          if not line.startswith("- Responsáveis"))
-        self.assertTrue(any("Responsáveis" in error for error in self.errors()))
-
-    def test_rules_and_responsibles_are_answered_in_the_checklist(self):
-        block = self.block("publication_checklist")
-        lines = [line if not line.startswith("- Responsáveis") else "- Responsáveis: atendido."
-                 for line in block["data"]["text"].splitlines()]
-        block["data"]["text"] = "\n".join(lines)
-        self.assertTrue(any("'Responsáveis' só aparece no checklist" in error for error in self.errors()))
-
-    def test_checklist_gap_blocks_complete_version(self):
-        block = self.block("publication_checklist")
-        block["data"]["text"] = block["data"]["text"].replace("- Responsáveis: atendido.", "- Responsáveis: parcial.")
-        self.assertTrue(any("checklist não atendidos" in error for error in self.errors()))
-
-    def test_pending_without_data_to_obtain_is_rejected(self):
-        self.partial()
-        self.block("theme")["data"]["text"] = "a confirmar: tema (Tecnologia)"
-        self.block("data_to_obtain")["data"]["text"] = " "
-        self.assertTrue(any("data_to_obtain" in error for error in self.cdt.report(self.content)["errors"]))
-
-    def test_partial_without_marked_pending_is_explained(self):
-        self.partial("Parcial. Falta a diretoria.")
-        script = ROOT.parent / "gerador-cdt/scripts/checar_cdt.py"
-        with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "cdt.json"
-            path.write_text(json.dumps(self.content), encoding="utf-8")
-            result = subprocess.run([sys.executable, str(script), str(path)], capture_output=True, text=True)
-        self.assertEqual(result.returncode, 1)
-        self.assertIn("sem pendência marcada", result.stdout)
+    def test_markdown_only_in_description(self):
+        self.text("justification", "- Retrabalho contínuo: horas da equipe.")
+        self.assertTrue(any("Markdown fora da Descrição" in error for error in self.errors()))
+        self.assertIn("**", self.block("description")["data"]["text"])
 
     def test_stage_wording_is_not_a_pending_marker(self):
-        self.block("objective")["data"]["text"] += " A meta fica a confirmar na homologação."
+        self.text("benefits", self.block("benefits")["data"]["text"] + " A meta fica a confirmar na homologação.")
         self.assertEqual(self.cdt.report(self.content)["pending_fields"], [])
 
-    def test_long_sections_and_long_cdt_are_rejected(self):
-        self.block("problem")["data"]["text"] = "palavra " * 151
-        self.block("benefits")["data"]["text"] = "palavra " * 61
-        report = self.cdt.report(self.content)
-        self.assertEqual(sorted(report["long_sections"]), ["benefits", "problem"])
-        self.assertTrue(any("longas demais" in error for error in report["errors"]))
-        for key in ("audience", "current_process", "objective", "quality_review", "traceability",
-                    "publication_checklist", "data_to_obtain"):
-            self.block(key)["data"]["text"] = "palavra " * 140
-        self.assertTrue(any("limite 1800" in error for error in self.cdt.report(self.content)["errors"]))
+    def test_long_texts_are_rejected(self):
+        self.text("benefits", "palavra " * 81)
+        self.assertTrue(any("longos demais" in error for error in self.errors()))
 
-    def test_sections_are_single_column_in_pdf_and_html(self):
+    def test_rendered_cdt_is_plain_copy_and_paste(self):
+        render = load_module("render_cdt", SCRIPT)
+        shown = render.presentation_content(self.content)
+        self.assertEqual(shown["citations"], [])
+        self.assertFalse(any("citation_ids" in block for block in shown["blocks"]))
+        self.assertIn("citation_ids", self.block("benefits"))
+        markdown = render.render_md(shown)
+        self.assertTrue(markdown.startswith("## Rótulo Epic"))
+        self.assertNotIn("FIC-0", markdown)
+        self.assertNotIn(self.content["title"], markdown)
+
+    def test_analysis_highlights_checklist_and_priorities(self):
+        keys = [block["data"]["section_key"] for block in self.analysis["blocks"] if block["type"] == "paragraph"]
+        self.assertEqual(keys[:3], ["readiness", "publication_checklist", "data_to_obtain"])
+        self.text("data_to_obtain", "Falta a regra de campos.", self.analysis)
+        table = next(block for block in self.analysis["blocks"] if block["id"] == "data_to_obtain-table")
+        table["data"]["headers"] = table["data"]["headers"][1:] + ["Prioridade"]
+        self.assertTrue(any("coluna 'Prioridade' primeiro" in error for error in self.errors(self.analysis)))
+
+    def test_checklist_needs_all_six_items_with_status(self):
+        block = self.block("publication_checklist", self.analysis)
+        block["data"]["text"] = "\n".join(line for line in block["data"]["text"].splitlines()
+                                          if not line.startswith("- Responsáveis"))
+        self.assertTrue(any("Responsáveis" in error for error in self.errors(self.analysis)))
+
+    def test_rules_and_responsibles_are_answered_in_the_checklist(self):
+        block = self.block("publication_checklist", self.analysis)
+        block["data"]["text"] = "\n".join("- Responsáveis: atendido." if line.startswith("- Responsáveis") else line
+                                          for line in block["data"]["text"].splitlines())
+        self.assertTrue(any("'Responsáveis' não tem campo" in error for error in self.errors(self.analysis)))
+
+    def test_checklist_gap_blocks_complete_version(self):
+        block = self.block("publication_checklist", self.analysis)
+        block["data"]["text"] = block["data"]["text"].replace("- Responsáveis: atendido.", "- Responsáveis: parcial.")
+        self.assertTrue(any("checklist não atendidos" in error for error in self.errors(self.analysis)))
+
+    def test_quality_review_requires_strengths_and_weaknesses(self):
+        self.text("quality_review", "Pontos fortes: escopo claro.", self.analysis)
+        self.assertTrue(any("Pontos fracos" in error for error in self.errors(self.analysis)))
+
+    def test_sections_are_single_column_with_bold_in_html(self):
         render = load_module("render_single_column", SCRIPT)
-        self.assertIn("cdt", render.pdf_module().SINGLE_COLUMN_TYPES)
+        for kind in ("cdt", "cdt_analysis"):
+            self.assertIn(kind, render.pdf_module().SINGLE_COLUMN_TYPES)
         tokens = json.loads((ROOT / "tokens.json").read_text(encoding="utf-8"))
         profiles = json.loads((ROOT / "profiles.json").read_text(encoding="utf-8"))
         profile = render.validate(self.content, profiles)
-        page = render.render_html(self.content, tokens, profile)
+        page = render.render_html(render.presentation_content(self.content), tokens, profile)
         self.assertNotIn("section-pair", page)
-        self.assertIn("report-section", page)
         self.assertIn("<strong>Essencial</strong>", page)
         self.assertNotIn("**", page)
-
-    def test_checker_script_reports_partial(self):
-        self.partial("Parcial. Falta o tema.")
-        self.block("theme")["data"]["text"] = "a confirmar: tema (Tecnologia)"
-        script = ROOT.parent / "gerador-cdt/scripts/checar_cdt.py"
-        with tempfile.TemporaryDirectory() as temp:
-            path = Path(temp) / "cdt.json"
-            path.write_text(json.dumps(self.content), encoding="utf-8")
-            result = subprocess.run([sys.executable, str(script), str(path)], capture_output=True, text=True)
-        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        report = json.loads(result.stdout)
-        self.assertEqual(report["pending_fields"], ["theme"])
-        self.assertEqual(report["suggested_completeness"], "partial")
 
 
 if __name__ == "__main__":

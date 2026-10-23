@@ -1,26 +1,36 @@
 # Qualidade e veracidade da CDT
 
-A Tecnologia precisa confiar em cada dado sem voltar à área para perguntar de onde ele veio. Por isso o entregável
-tem duas partes: o conteúdo para colar no Jira, campo a campo ([campos](campos-jira.md)), e uma parte fora do Jira,
-com estado, checklist do comunicado, avaliação crítica, dados a obter e origem dos dados. O script
-`scripts/checar_cdt.py` confere as regras marcadas com (script).
+A Tecnologia precisa confiar em cada dado sem voltar à área para perguntar de onde ele veio. Por isso a skill entrega,
+além da CDT para colar no Jira ([campos](campos-jira.md)), a **Análise da CDT**: um arquivo separado, que não vai ao
+Jira, com estado, checklist do comunicado, o que obter e analisar primeiro, avaliação crítica e origem dos dados. O
+script `scripts/checar_cdt.py cdt.json analise.json` confere as regras marcadas com (script).
+
+## Estrutura da Análise da CDT
+
+Nesta ordem; os dois primeiros blocos depois do estado são o destaque do documento:
+
+| Ordem | `section_key` | Título | Conteúdo |
+|---|---|---|---|
+| 1 | `readiness` | Estado da CDT | Pronta para envio ou Parcial, em até três frases |
+| 2 | `publication_checklist` | Checklist do comunicado | Os seis itens, com status e resposta curta |
+| 3 | `data_to_obtain` | O que obter e analisar primeiro | Uma frase e a tabela de prioridades |
+| 4 | `quality_review` | Avaliação crítica | Pontos fortes, pontos fracos, perguntas da Tecnologia |
+| 5 | `traceability` | Origem dos dados | Uma frase e a tabela de fontes |
 
 ## Estado (`readiness`)
 
-Até três frases, no início do entregável:
-
-- **Pronta para envio** quando nenhum campo tem pendência e os seis itens do checklist estão atendidos (script).
-  Diga o principal ponto fraco em uma frase.
+- **Pronta para envio** quando nenhum campo da CDT tem pendência e os seis itens do checklist estão atendidos
+  (script). Diga o principal ponto fraco em uma frase.
 - **Parcial** em qualquer outro caso: quantos campos faltam, qual impede o envio e o próximo passo (script).
-- `metadata.completeness` acompanha: `complete` ou `partial`.
+- `metadata.completeness` é o mesmo nos dois arquivos: `complete` ou `partial` (script).
 
 ## Pendência e campo vazio
 
-- Campo sem fonte recebe `a confirmar: <o dado> (<quem>)`, com dois-pontos (script). Sem os dois-pontos, a expressão
-  não é pendência: "a CI valida na homologação" descreve uma etapa. Nunca preencha um campo para parecer completo.
-- Campo que fica vazio por regra começa com `Deixar vazio:`, `Selecionar no Jira.` ou `Escolher no Jira.` e não
-  precisa de fonte (script). Release, Data de operação e a escala de 1 a 10 ficam sempre assim (script).
+- Campo da CDT sem fonte recebe `a confirmar: <o dado> (<quem>)`, com dois-pontos (script). Sem os dois-pontos, a
+  expressão não é pendência: "a CI valida na homologação" descreve uma etapa. Nunca preencha um campo para parecer
+  completo. Toda pendência aparece em "O que obter e analisar primeiro" (script).
 - As cinco perguntas da Descrição nunca ficam vazias, nem na versão parcial (script).
+- A Justificativa fica "Deixar vazio: <motivo>" quando não há risco concreto de não implementar.
 
 ## Natureza do dado
 
@@ -29,38 +39,38 @@ Escreva a natureza no próprio texto, em poucas palavras, quando ela não for ó
 | Natureza | Como escrever |
 |---|---|
 | medido | "9 de 11 usuários (testes de set. 2026)" |
-| documentado | a norma com número e data, quando o campo pede o ato |
+| documentado | a norma com número e data, quando ela motiva a demanda |
 | decidido | "aprovado pelas gerências em 20/10/2026" |
 | relatado | "segundo a responsável da área" |
 | estimativa ou proposta | "estimativa, não medida"; "meta proposta" |
 | hipótese | "hipótese:" |
 
-Todo campo preenchido tem `citation_ids` no JSON ou uma pendência declarada (script). As citações servem à
-conferência e à tabela Origem dos dados: o texto que vai ao Jira não cita fonte nem documento, e os arquivos gerados
-não mostram as citações desses campos (script). Resumo derivado não é fonte independente: cite a primária.
-
-## Opções e coerência
-
-- Campos de lista usam a opção exata do Jira; opções duplicadas no Jira não são usadas (script).
-- Campos que se contradizem são recusados (script): demanda regulatória sem ato, ou ato numa demanda que não é
-  regulatória; Sim sem o campo de texto que o detalha, ou Não com ele preenchido; benefício aos agentes ou redução
-  de custo do agente com "Não" em Há benefícios para os Agentes. As demais regras de coerência estão em
-  [campos](campos-jira.md#coerência-entre-campos); quando o material levar a uma combinação estranha, diga isso na
-  avaliação crítica.
+Todo campo da CDT tem `citation_ids` no JSON ou uma pendência declarada (script). As citações servem à conferência e
+à tabela Origem dos dados: o texto da CDT não cita fonte nem documento (script), e os arquivos da CDT não mostram
+citações. Resumo derivado não é fonte independente: cite a primária.
 
 ## Checklist do comunicado (`publication_checklist`)
 
-Fica fora do Jira. Uma linha por item, com o nome exato e o status (script). Os quatro primeiros itens remetem à
-Descrição; regras e responsáveis não têm campo no Jira e são respondidos só aqui, na própria linha (script):
+Uma linha por item, com o nome exato e o status (script). Os quatro primeiros itens remetem à Descrição; regras e
+responsáveis não têm campo na CDT e são respondidos só aqui, na própria linha (script):
 
 ```
-- Problema e objetivo: atendido. Descrição, perguntas 1 e 4.
-- Públicos impactados: atendido. Descrição, pergunta 2.
-- Entregas essenciais: atendido. Descrição, pergunta 5.
+- Problema e objetivo: atendido. Descrição, primeira e quarta perguntas.
+- Públicos impactados: atendido. Descrição, segunda pergunta.
+- Entregas essenciais: atendido. Descrição, quinta pergunta.
 - Prioridades e resultados esperados: parcial. As metas são propostas; a linha de base sai em 30 dias.
 - Regras, restrições e dependências: atendido. Campos obrigatórios por tipo de pedido; dados pessoais de contato.
 - Responsáveis: atendido. Coordenação do atendimento valida as entregas; a gestão da área decide mudanças de escopo.
 ```
+
+## O que obter e analisar primeiro (`data_to_obtain`)
+
+Uma frase, seguida de uma tabela sem `section_key` com as colunas Prioridade, Dado, Por que importa, Com quem,
+Pergunta e Impede o envio?, em ordem de importância (script). Primeiro o que impede o envio (dados da Descrição,
+resposta regulatória, responsáveis); depois o que mais fortalece a CDT diante da Tecnologia (linha de base dos
+Benefícios, regras ainda não detalhadas, contradições entre campos do formulário). A pergunta pode ser enviada como
+está; não sugira a resposta. Sem pendências, comece com "Nenhum dado pendente" e liste, se houver, o que vale obter e
+analisar antes da conversa com a Tecnologia.
 
 ## Avaliação crítica (`quality_review`)
 
@@ -69,25 +79,18 @@ Três parágrafos curtos, mesmo com todos os campos preenchidos (script):
 - **Pontos fortes:** uma ou duas frases sobre o que torna a CDT confiável.
 - **Pontos fracos:** o que pode gerar questionamento, separado por ponto e vírgula. Uma CDT sem ponto fraco é
   improvável.
-- **Perguntas que a Tecnologia deve fazer:** de duas a quatro, com o campo da CDT que responde ou a indicação de que
-  a resposta falta.
+- **Perguntas que a Tecnologia deve fazer:** de duas a quatro, com o campo da CDT ou o item do checklist que responde,
+  ou a indicação de que a resposta falta.
 
 Sinais de ponto fraco: estimativa sem medição, amostra pequena ou teste com protótipo, meta sem base, decisão sem
 registro escrito, fonte única, conflito entre fontes, uma pessoa concentrando todos os papéis, regra ainda não
-validada, opção de lista escolhida por aproximação.
-
-## Dados a obter (`data_to_obtain`)
-
-Uma frase, seguida de uma tabela sem `section_key` com as colunas Dado, Campo, Com quem, Pergunta e Impede o envio?.
-Todo campo com pendência aparece na tabela (script). "Impede o envio?" é sim quando o dado afeta a Descrição, a
-resposta regulatória ou os responsáveis. A pergunta pode ser enviada como está; não sugira a resposta. Sem
-pendências, escreva "Nenhum dado pendente" e, se houver, o que vale reforçar antes do envio.
+validada, combinação incoerente entre campos do formulário ([coerência](campos-jira.md#coerência-entre-campos)).
 
 ## Origem dos dados (`traceability`)
 
-É aqui, fora do Jira, que as fontes aparecem. Uma frase, seguida de uma tabela sem `section_key` com as colunas
-Campo, Fonte, Natureza e Limite, em que a coluna Fonte nomeia o documento e o localizador. Agrupe campos que usam as
-mesmas fontes: quatro a oito linhas costumam bastar (por exemplo, "Demais campos do Jira" em uma linha).
+É aqui que as fontes aparecem. Uma frase, seguida de uma tabela sem `section_key` com as colunas Campo, Fonte,
+Natureza e Limite, em que a coluna Fonte nomeia o documento e o localizador. Uma linha por campo da CDT; a Descrição
+pode ter uma linha por grupo de perguntas.
 
 ## Regras de veracidade
 

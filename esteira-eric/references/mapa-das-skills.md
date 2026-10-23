@@ -15,7 +15,7 @@ pergunta atual do projeto.
 | 7. Experimentar → BP2 | O teste responde à pergunta crítica? | `experimentacao-inovacao` | Hipóteses com Test Cards, Modelo de experimentação, Apresentação e direcionamento | Há Test Cards a executar ou resultados a analisar |
 | Qualquer etapa | Quão madura está a evidência? | `scorecard-inovacao` | Scorecard de evidências | Antes de um gate, ou para comparar a maturidade ao longo do tempo |
 | Qualquer etapa (usual no BP2 e na implementação) | Que decisão pedir à gestão? | `relatorio-final-inovacao` | Relatório final e pitch executivo | A gestão precisa decidir avançar, iterar, investigar ou encerrar |
-| 8. Implementar | O que levar à Tecnologia? | `gerador-cdt` | Cadastro de Demanda Tecnológica (CDT): campos do Jira com fonte, checklist do comunicado de escopo, pontos fortes e fracos e dados a obter | Há decisão de implementar (ou se quer preparar a demanda, mesmo com material incompleto) e falta organizar problema, escopo e responsáveis para a Tecnologia; ou há uma CDT escrita a revisar |
+| 8. Implementar | O que levar à Tecnologia? | `gerador-cdt` | Cadastro de Demanda Tecnológica (CDT) para colar no Jira (Rótulo Epic, Descrição, Justificativa e Benefícios) e Análise da CDT com checklist do comunicado, o que obter primeiro, pontos fortes e fracos e fontes | Há decisão de implementar (ou se quer preparar a demanda, mesmo com material incompleto) e falta organizar problema, escopo e responsáveis para a Tecnologia; ou há uma CDT escrita a revisar |
 | Transversal | Como o cliente vive a experiência? | `workshop-5c` | Roteiro e registro C1 a C5 | A experiência de clientes ou agentes é central e precisa de cocriação |
 | Transversal | O que o encontro com clientes concluiu? | `relatorio-5c` | Relatório 5C | Há registros do 5C e falta o relatório |
 
@@ -32,4 +32,4 @@ e o relatório final (decisão e plano). Diga isso ao usuário em vez de inventa
 - Registros de sessões ou execução sem Learning Cards → `experimentacao-inovacao` (consolidação).
 - Learning Cards e recomendação, sem decisão de gestão → `relatorio-final-inovacao` ou `scorecard-inovacao` antes do BP2.
 - Decisão de implementar com construção ou integração interna, sem CDT → `gerador-cdt`.
-- CDT já escrita, sem fonte por campo ou sem avaliação crítica → `gerador-cdt` (revisão).
+- CDT já escrita, sem as cinco perguntas na Descrição ou sem avaliação crítica → `gerador-cdt` (revisão).

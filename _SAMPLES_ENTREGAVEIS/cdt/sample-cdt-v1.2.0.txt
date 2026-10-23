@@ -1,0 +1,48 @@
+Rótulo Epic
+
+Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento
+
+Descrição
+
+**Qual problema queremos resolver?**
+Os pedidos de dados históricos chegam por e-mail, sem padrão e muitas vezes sem as informações mínimas. Cerca de 4 em cada 10 pedidos voltam ao agente para complemento (exemplo). Isso gera retrabalho na equipe de atendimento e atrasa a entrega dos dados ao mercado.
+
+**Quem é impactado?**
+- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores.
+- Analistas da equipe de atendimento, que conferem e respondem os pedidos.
+- Gestão da área, que acompanha prazos sem visão consolidada.
+
+**Como o processo funciona hoje?**
+1. O agente envia o pedido por e-mail.
+2. O analista confere o pedido e, se faltar informação, pede complemento por e-mail.
+3. O andamento é controlado em planilha própria.
+4. Os dados são extraídos e enviados por e-mail.
+
+**Onde falha:** não há campos obrigatórios nem status visível ao agente.
+
+**Qual resultado esperamos alcançar?**
+**Objetivo:** receber pedidos completos na primeira tentativa e dar ao agente visibilidade do andamento.
+**Resultado esperado:** menos devoluções e menos horas da equipe com complementos.
+
+**O que é prioridade neste momento?**
+**Essencial**
+- Formulário com campos obrigatórios por tipo de pedido.
+- Número de protocolo para cada pedido.
+
+**Importante, pode vir depois**
+- Status do pedido visível ao agente.
+- Painel de prazos para a gestão.
+
+**Fora do escopo**
+- Extração automática dos dados.
+- Integração com outros sistemas internos.
+
+Justificativa
+
+Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe de atendimento.
+Atraso ao mercado: os agentes seguem sem prazo previsível para receber os dados.
+
+Benefícios
+
+Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta proposta, medida no piloto com 8 analistas; exemplo).
+O agente envia o pedido completo de uma vez e acompanha o andamento.

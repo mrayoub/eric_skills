@@ -878,9 +878,9 @@ class RenderTests(unittest.TestCase):
                     {"id": key, "type": "paragraph", "data": {"section_key": key, "text": "Síntese registrada."}, "citation_ids": ["F01"]}
                     for key in keys
                 ]
-                if kind == "cdt":
-                    # Os campos de lista da CDT só aceitam opções do Jira: usa os textos da amostra.
-                    sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS/cdt/input.json").read_text(encoding="utf-8"))
+                if kind in ("cdt", "cdt_analysis"):
+                    # A CDT e a análise exigem formatos próprios (perguntas, checklist): usa os textos da amostra.
+                    sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
                     special = {block["data"]["section_key"]: block["data"]["text"] for block in sample["blocks"]
                                if block["type"] == "paragraph"}
                     for block in item["blocks"]:
@@ -1411,7 +1411,7 @@ class ReportLabReportTests(unittest.TestCase):
         "four_d_report": 5, "three_e_workshop_record": 1,
         "three_e_report": 2, "innovation_scorecard": 1,
         "experiment_report": 2, "evidence_recommendation": 2,
-        "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 6,
+        "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 2, "cdt_analysis": 2,
     }
 
     @classmethod
@@ -1458,8 +1458,12 @@ class ReportLabReportTests(unittest.TestCase):
         for kind in self.TYPES:
             with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
                 item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
+                item = self.renderer.presentation_content(item)
                 reader = self._render(kind, Path(temp))
                 extracted = " ".join(" ".join(page.extract_text().split()) for page in reader.pages)
+                # Um bloco longo continua na página seguinte: o rodapé não faz parte do texto do bloco.
+                extracted = " ".join(re.sub(r"ID \S+ · versão \S+ · \S+ · página \d+ de \d+", " ", extracted,
+                                            flags=re.IGNORECASE).split())
                 expected = [item["title"], item.get("summary", "")]
                 for block in item["blocks"]:
                     data = block.get("data", {})

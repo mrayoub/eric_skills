@@ -1,110 +1,144 @@
-# Campos do formulário da CDT no Jira
+# Campos da CDT no Jira
 
 Levantamento campo a campo do formulário de criação da CDT (Cadastro de Demanda Tecnológica), feito a partir de prints
-do Jira em 23/10/2026. Registra rótulo, tipo, opções e a regra de preenchimento de cada campo. As opções das listas
-também estão em `assets/design-system/scripts/validators/cdt_options.json`, que o checador usa.
+do Jira em 23/10/2026, e o que a skill entrega a partir dele.
 
 Rótulos e opções estão grafados exatamente como no Jira, inclusive erros ("Tranversal", "Sansões",
-"Penalidadades", "encarramento"), acentos ausentes e hífens com espaços. Quem procura a opção na tela precisa achá-la
-pelo mesmo texto. Essas grafias são exceção às regras de linguagem dos entregáveis.
+"Penalidadades", "encarramento"), acentos ausentes e hífens com espaços.
 
 ## Sumário
 
-- [Regras gerais](#regras-gerais)
+- [O que a skill entrega](#o-que-a-skill-entrega)
 - [Padrão de escrita](#padrão-de-escrita)
-- [Formato de cada campo no entregável](#formato-de-cada-campo-no-entregável)
+- [Rótulo Epic](#rótulo-epic)
 - [Descrição](#descrição)
+- [Justificativa e Benefícios](#justificativa-e-benefícios)
+- [Os 28 campos do formulário](#os-28-campos-do-formulário)
 - [Aba Informações Gerais](#aba-informações-gerais)
 - [Aba Benefícios da Demanda](#aba-benefícios-da-demanda)
 - [Coerência entre campos](#coerência-entre-campos)
 - [Lista: Processo e Sub-processo Tranversal](#lista-processo-e-sub-processo-tranversal)
 - [Lista: Família / Serviços](#lista-família--serviços)
-- [Fora do Jira: checklist do comunicado](#fora-do-jira-checklist-do-comunicado)
+- [Análise da CDT: checklist do comunicado](#análise-da-cdt-checklist-do-comunicado)
 - [Insumos da esteira](#insumos-da-esteira)
 - [Lições do exemplo real](#lições-do-exemplo-real)
 
-## Regras gerais
+## O que a skill entrega
 
-- A saída segue as abas do Jira, um bloco por aba, com os campos na ordem da tela.
-- Nenhum valor sem base no material. Sem dado, o campo leva "a confirmar: [dado que falta]" e o dado vai para os
-  dados a obter. Nada é deduzido pelo assunto.
-- Cada coisa é escrita num lugar só: um número ou argumento não se repete entre Descrição, Benefícios e Justificativa.
-- Campos de texto curtos: até 3 linhas, no máximo 60 palavras, sem adjetivos vazios ("mais agilidade", "maior
-  eficiência") sem número ao lado.
-- Campos de Sim ou Não: Sim só com evidência citada; a linha que sustenta o Sim vai no campo de texto que faz par com
-  ele.
+Dois arquivos:
+
+1. **CDT** (documento oficial, `deliverable_type` `cdt`): só os quatro campos que a pessoa copia e cola no Jira,
+   nesta ordem e sem nada mais (sem cabeçalho, sem fontes, sem sugestão para outros campos):
+
+   | Ordem | Campo | Formato |
+   |---|---|---|
+   | 1 | Rótulo Epic | Uma linha, título tecnológico |
+   | 2 | Descrição | Um bloco só, em Markdown, com as cinco perguntas como subtítulos em negrito |
+   | 3 | Justificativa | Texto simples, um risco por linha |
+   | 4 | Benefícios | Texto simples, o benefício principal com número na primeira linha |
+
+2. **Análise da CDT** (`deliverable_type` `cdt_analysis`): tudo o que não vai ao Jira. Em destaque, logo depois do
+   estado, o checklist do comunicado e o que obter e analisar primeiro, em ordem de prioridade; depois a avaliação
+   crítica e a origem dos dados, com as fontes ([qualidade](qualidade-e-veracidade.md)).
+
+Os outros 24 campos do formulário não aparecem em nenhum documento. A skill os conhece para raciocinar: saber se há
+risco de não implementar (o que vai na Justificativa), qual benefício é mensurável (o que vai nos Benefícios), se a
+demanda é regulatória e se as respostas se contradizem. Quando um desses campos revelar um dado que falta, o dado
+entra na análise, em "O que obter e analisar primeiro".
+
+Regras que valem para os quatro campos:
+
+- Nenhum valor sem base no material. Sem dado, o campo leva "a confirmar: [dado que falta] ([com quem])" e o dado vai
+  para a análise. Nada é deduzido pelo assunto.
+- Cada coisa é escrita num lugar só: um número ou argumento não se repete entre Descrição, Justificativa e Benefícios.
 - **Sem fonte no que vai ao Jira.** O Jira não tem como referenciar fontes: os campos não trazem "Fonte:", códigos de
-  citação nem nome de documento como prova. As fontes ficam fora do Jira, na tabela Origem dos dados, campo a campo.
-  O checador recusa "Fonte:" nos campos do Jira, e os arquivos gerados não mostram as citações desses campos.
-- A skill preenche só os 28 campos das abas Informações Gerais e Benefícios da Demanda listados aqui. Os demais
-  campos que aparecem no Jira (Status da Demanda, Planejamento, Simplificação do Processo como aba, Dados do
-  Solicitante, Histórico, Responsável, Relator, Analista de Negócios, Story Points, vínculos entre tickets) ficam de
-  fora.
+  citação nem nome de documento como prova. As fontes ficam no JSON e aparecem só na Análise da CDT, na tabela Origem
+  dos dados. Os arquivos da CDT não mostram citações.
 
 ## Padrão de escrita
 
 O padrão vem de uma CDT real bem avaliada: texto institucional, curto e direto, que o leitor da Tecnologia entende
 sem conhecer a esteira.
 
-- **Descrição em Markdown.** Só a Descrição usa formatação: parágrafos curtos, rótulos em negrito no início da linha
-  (`**Objetivo:**`, `**Onde falha:**`), listas com marcador e grupos numerados quando o escopo tem blocos.
-- **Demais campos em texto simples.** Sem marcador, negrito, título ou link; um item por linha. O checador recusa
-  Markdown fora da Descrição.
-- **Justificativa:** um risco por linha, aberto pelo nome do risco e dois-pontos ("Retrabalho contínuo: ...").
+- **Markdown só na Descrição:** parágrafos curtos, rótulos em negrito no início da linha (`**Objetivo:**`,
+  `**Onde falha:**`), listas com marcador. Rótulo Epic, Justificativa e Benefícios são texto simples, sem marcador,
+  negrito, título ou link.
 - **Frases curtas, sem jargão da esteira** (4D, 3E, BP2, Test Card) e sem narrar o método. Siglas por extenso na
   primeira menção de cada campo, porque cada campo é lido isolado.
 - **Natureza do dado no texto, sem rodeio:** "estimativa", "meta proposta", "medido no piloto com 8 analistas",
   "aprovado em 20/10/2026".
+- Sem adjetivos vazios ("mais agilidade", "maior eficiência") sem número ao lado.
 
-## Formato de cada campo no entregável
+## Rótulo Epic
 
-Cada campo é um bloco com o título `Aba: Rótulo` (a Descrição usa `Descrição: <pergunta>`). Dentro do bloco:
+É o título do ticket, o primeiro bloco da CDT. Como o ticket é uma demanda à Tecnologia, o título nomeia o que será
+construído ou alterado, como tecnologia, e o que isso faz:
 
-| Tipo de campo | Primeira linha | Linhas seguintes |
-|---|---|---|
-| Lista de opção única | A opção exata do Jira | `Motivo: ...` em uma linha |
-| Lista em dois níveis | `Opção / Segundo nível` ou `Opção / selecionar no Jira` | `Motivo: ...` |
-| Tema(s) | Até 2 opções separadas por `; ` | `Motivo: ...` |
-| Sim ou Não | `Sim` ou `Não` | A linha que sustenta a resposta, quando houver |
-| Texto livre | O texto que vai ao Jira | |
-| Campo que a skill não preenche | `Deixar vazio: <motivo>`, `Selecionar no Jira.` ou `Escolher no Jira.` | |
-| Dado faltando | `a confirmar: <dado> (<com quem>)` | O dado entra nos dados a obter |
+- Começa pelo artefato: plataforma, sistema, ferramenta, módulo, aplicação, portal, painel, formulário web,
+  integração, API, automação, interface. Depois diz o que faz e onde atua.
+- Nada que sugira uma pessoa: "assistente", "atendente", "analista", "consultor". Prefira "interface conversacional com
+  IA" a "assistente virtual".
+- Uma linha, até 16 palavras, sem jargão da esteira.
 
-O que vai ao Jira é a primeira linha (nos campos de lista e de Sim ou Não) ou o texto inteiro (nos campos de texto).
-A linha `Motivo:` orienta quem preenche e não é colada.
+Exemplos: "Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento";
+"Interface conversacional com IA para consulta de pendências no sistema X".
+
+O checador exige um termo tecnológico no título e recusa termos que sugerem pessoa.
 
 ## Descrição
 
-Fica na aba Informações Gerais. Responde às cinco perguntas de "Comece pelo problema" da
-[publicação sobre escopo](publicacao-escopo-tecnologia.md), uma seção por pergunta, nesta ordem, e nada além delas:
+Responde às cinco perguntas de "Comece pelo problema" da [publicação sobre escopo](publicacao-escopo-tecnologia.md),
+num bloco só, cada pergunta como subtítulo em negrito, nesta ordem, e nada além delas:
 
-1. Qual problema queremos resolver?
-2. Quem é impactado?
-3. Como o processo funciona hoje?
-4. Qual resultado esperamos alcançar?
-5. O que é prioridade neste momento? Separa as entregas em essencial, importante (pode vir depois) e fora do escopo.
+```
+**Qual problema queremos resolver?**
+...
 
-As cinco perguntas são obrigatórias em qualquer versão, inclusive na parcial: com dado faltando, a seção responde o
-que o material sustenta e marca "a confirmar:". Cada seção tem até 150 palavras.
+**Quem é impactado?**
+...
 
-O que saiu da Descrição e foi para campos próprios:
+**Como o processo funciona hoje?**
+...
 
-| Item | Para onde vai |
-|---|---|
-| Como vamos medir o resultado | Benefícios mensuráveis e Benefícios |
-| Risco de não implementar | Justificativa |
-| Riscos da Matriz de Riscos Corporativos | Identificação dos Riscos |
-| Incidentes registrados | Identificação de Incidentes de Processo |
-| Ato da ANEEL, MME ou CNPE | Ato regulatório e Qual Ato formal |
-| Regras, restrições e dependências | Checklist do comunicado, fora do Jira |
-| Responsáveis | Checklist do comunicado, fora do Jira |
+**Qual resultado esperamos alcançar?**
+...
+
+**O que é prioridade neste momento?**
+**Essencial**
+- ...
+
+**Importante, pode vir depois**
+- ...
+
+**Fora do escopo**
+- ...
+```
+
+As cinco perguntas são obrigatórias em qualquer versão, inclusive na parcial: com dado faltando, a resposta traz o que
+o material sustenta e marca "a confirmar:". Cada resposta tem até 150 palavras. Regras, restrições, dependências e
+responsáveis não entram aqui: vão no checklist da análise.
+
+## Justificativa e Benefícios
+
+- **Justificativa:** os riscos de não implementar, um por linha, abertos pelo nome do risco e dois-pontos
+  ("Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe."). Até 80 palavras. Sem risco
+  concreto (multa, prazo regulatório, falha com histórico, segurança ou dados, perda de cliente identificado), o campo
+  fica "Deixar vazio: <motivo>". Ineficiência não é risco: é o problema, já descrito na Descrição.
+- **Benefícios:** a primeira linha quantifica o benefício principal (hoje, meta, unidade e período), com a natureza do
+  dado; até dois benefícios secundários, um por linha. Até 80 palavras. Sem número no material, "a confirmar:".
+
+## Os 28 campos do formulário
+
+As tabelas abaixo descrevem o formulário inteiro, para a skill entender o que cada campo pede e raciocinar com
+coerência. Só Rótulo Epic, Descrição, Justificativa e Benefícios são entregues; as regras dos demais orientam o
+raciocínio e a análise, não um texto para colar.
 
 ## Aba Informações Gerais
 
 | # | Rótulo | Tipo | Regra |
 |---|---|---|---|
-| 1 | Descrição | texto longo | Ver [Descrição](#descrição). |
-| 2 | Rótulo Epic | texto livre | É o título do ticket. A skill sugere: o que a demanda é e onde atua, em até 12 palavras (ex.: "Assistente conversacional para consulta de pendências no sistema X"). |
+| 1 | Descrição | texto longo | Entregue. Ver [Descrição](#descrição). |
+| 2 | Rótulo Epic | texto livre | Entregue. Ver [Rótulo Epic](#rótulo-epic). |
 | 3 | Processo e Sub-processo Tranversal | lista em dois níveis, um par | Ver regra abaixo e a [lista](#lista-processo-e-sub-processo-tranversal). |
 | 4 | Família / Serviços | lista em dois níveis, um par | Ver regra abaixo e a [lista](#lista-família--serviços). |
 | 5 | Produto/Área | lista, opção única | Estratégica; Gestão de Mercado; Inovação e Novos Negócios; Operação de Mercado; Segurança de Mercado; Tecnologia de mercado. Não obrigatório. |
@@ -116,13 +150,13 @@ O que saiu da Descrição e foi para campos próprios:
 | 11 | Ato regulatório | texto livre | Só com demanda da ANEEL, MME ou CNPE. Uma linha por ato publicado: `Tipo e número/ano, órgão: o que exige. Vigência: data.` |
 | 12 | Tema(s) | lista, várias opções | Ver regra abaixo. |
 | 13 | Benefícios mensuráveis | lista, opção única | Ver regra abaixo. |
-| 14 | Benefícios | texto livre | Primeira linha quantifica o campo 13: `hoje, meta, unidade e período`, com a natureza do dado (medido, meta proposta) Até dois benefícios secundários. |
+| 14 | Benefícios | texto livre | Entregue. Ver [Justificativa e Benefícios](#justificativa-e-benefícios). |
 | 15 | Simplificação do Processo | lista, opção única | Alta: simplificação Total do processo; Média: simplificação parcial do processo; Baixa: nenhuma simplificação do processo. Justificar contando etapas antes e depois. Baixa não é nota ruim. |
 | 16 | Há processo atual e/ou futuro desenhado? | Sim ou Não | Sim só com desenho (fluxograma, BPMN, jornada do D2, blueprint), que entra nos anexos. Texto não conta. |
 | 17 | Há riscos associados a não implementação da demanda? | Sim ou Não | Sim só com risco concreto: multa, prazo regulatório, falha com histórico, segurança ou dados, perda de cliente identificado. Ineficiência não é risco. |
-| 18 | Justificativa | texto livre | Descreve os riscos de não implementar (campo 17), um por linha, aberto pelo nome do risco, com a consequência. |
+| 18 | Justificativa | texto livre | Entregue. Ver [Justificativa e Benefícios](#justificativa-e-benefícios). |
 
-No entregável, o Rótulo Epic (título) vem primeiro e a Descrição logo depois, seguidos dos demais campos na ordem da tela.
+Na CDT entregue, o Rótulo Epic vem primeiro, depois a Descrição, a Justificativa e os Benefícios.
 
 **Processo e Família.** A skill sugere sempre o primeiro nível, com uma linha de justificativa, e o segundo nível
 quando o material permitir; nos outros casos, "selecionar no Jira o subprocesso (ou serviço) de X". O processo e a
@@ -178,7 +212,7 @@ tem opção própria: a skill marca "Anual" e escreve a frequência real ao lado
 
 ## Coerência entre campos
 
-A skill aponta na avaliação qualquer combinação incoerente:
+Ao raciocinar sobre os campos, a skill aponta na avaliação crítica da análise qualquer combinação incoerente:
 
 - Regulatória Sim exige ato nos dois campos de ato.
 - "Elimina risco de penalidade ou multa" exige Sim em riscos de não implementar.
@@ -233,10 +267,9 @@ Opções duplicadas: a skill usa a versão por extenso e sem erro ("Gerir Mecani
 | Serviços Internos | Preparação para Reuniões dos Colegiados |
 | Treinamento e Capacitação | Certificado Operador de Mercado de Energia Elétrica; Treinamento In Company; Treinamento Online |
 
-## Fora do Jira: checklist do comunicado
+## Análise da CDT: checklist do comunicado
 
-O entregável tem duas partes: o conteúdo para colar no Jira, campo a campo, e uma parte fora do Jira. Na parte fora do
-Jira, a skill responde ao "Checklist antes de envolver a Tecnologia" da
+Na Análise da CDT, logo depois do estado, a skill responde ao "Checklist antes de envolver a Tecnologia" da
 [publicação sobre escopo](publicacao-escopo-tecnologia.md), um item por linha, com a resposta curta:
 
 | Item do checklist | Onde a resposta aparece |
@@ -249,7 +282,7 @@ Jira, a skill responde ao "Checklist antes de envolver a Tecnologia" da
 | Os responsáveis por esclarecer dúvidas e validar decisões | Só aqui: papel e área de cada responsável |
 
 Os itens já respondidos na Descrição só remetem a ela, sem repetir o texto. Item sem resposta no material fica "a
-obter" e entra nos dados a obter. Nada desta parte é colado no Jira.
+obter" e entra em "O que obter e analisar primeiro". Nada desta parte é colado no Jira.
 
 ## Insumos da esteira
 

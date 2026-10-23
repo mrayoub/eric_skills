@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "cdt_analysis",
+  "canvas": {
+    "unit": "mm",
+    "width": 210,
+    "height": 297
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 178,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "readiness",
+      "x": 16,
+      "y": 30.0,
+      "width": 178,
+      "height": 50.2,
+      "z": 1,
+      "section_key": "readiness",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "publication_checklist",
+      "x": 16,
+      "y": 80.2,
+      "width": 178,
+      "height": 50.2,
+      "z": 1,
+      "section_key": "publication_checklist",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "data_to_obtain",
+      "x": 16,
+      "y": 130.4,
+      "width": 178,
+      "height": 50.2,
+      "z": 1,
+      "section_key": "data_to_obtain",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "quality_review",
+      "x": 16,
+      "y": 180.6,
+      "width": 178,
+      "height": 50.2,
+      "z": 1,
+      "section_key": "quality_review",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "traceability",
+      "x": 16,
+      "y": 230.8,
+      "width": 178,
+      "height": 50.2,
+      "z": 1,
+      "section_key": "traceability",
+      "display_mode": "title_and_content"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

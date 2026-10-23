@@ -340,7 +340,8 @@
     briefing_one_page: ["hmw", "problem_opportunity", "business_relevance", "expected_outcomes", "people"],
     briefing_improvement_questionnaire: ["questions"],
     briefing_validation: ["challenge", "hmw", "scores", "iqb", "strengths", "gaps", "provocations"],
-    cdt: ["readiness", "jira_title", "problem", "audience", "current_process", "objective", "priorities", "transversal_process", "family_service", "product_area", "service_area", "release", "attachments", "regulatory", "operation_date", "regulatory_act", "theme", "measurable_benefit", "benefits", "process_simplification", "process_design", "risk_if_not_done", "justification", "demand_origin", "formal_act", "agent_benefits", "market_impact", "usage_frequency", "agent_transaction_cost", "corporate_risk", "risk_identification", "process_incidents", "incident_identification", "usage_frequency_score", "publication_checklist", "quality_review", "data_to_obtain", "traceability"],
+    cdt: ["jira_title", "description", "justification", "benefits"],
+    cdt_analysis: ["readiness", "publication_checklist", "data_to_obtain", "quality_review", "traceability"],
     evidence_recommendation: ["question", "evidence", "options", "recommendation", "conditions"],
     executive_presentation: ["context", "method", "findings", "recommendation", "next_steps"],
     experiment_plan: ["hypothesis", "method", "population", "measures", "protocol", "guardrails"],
@@ -376,7 +377,8 @@
       "executive_presentation": "Apresentação executiva",
       "five_c_workshop_record": "Registro do workshop 5C",
       "five_c_report": "Relatório 5C",
-      "cdt": "Cadastro de Demanda Tecnológica (CDT)"
+      "cdt": "Cadastro de Demanda Tecnológica (CDT)",
+      "cdt_analysis": "Análise da CDT"
   };
   const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE)
     .sort((a, b) => (DELIVERABLE_LABELS[a] || a).localeCompare(DELIVERABLE_LABELS[b] || b, "pt-BR"));

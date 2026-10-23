@@ -39,6 +39,7 @@ DELIVERABLE_LABELS = {
     "five_c_workshop_record": "Registro do workshop 5C",
     "five_c_report": "Relatório 5C",
     "cdt": "Cadastro de Demanda Tecnológica (CDT)",
+    "cdt_analysis": "Análise da CDT",
 }
 COMPLETENESS_LABELS = {
     "complete": "Completo",
@@ -150,36 +151,9 @@ def normalized_title(value: str) -> str:
 DASH = re.compile(r"[\u2012\u2013\u2014\u2015]|(?<=\S) - (?=\S)")
 
 
-def dash_exceptions() -> tuple[str, ...]:
-    """Opções do Jira grafadas com hífen e espaços: a CDT precisa citá-las exatamente como na tela."""
-    path = ROOT / "scripts/validators/cdt_options.json"
-    if not path.is_file():
-        return ()
-    found: set[str] = set()
-
-    def collect(value: Any) -> None:
-        if isinstance(value, str) and DASH.search(value):
-            found.add(value)
-        elif isinstance(value, dict):
-            for key, item in value.items():
-                collect(key)
-                collect(item)
-        elif isinstance(value, list):
-            for item in value:
-                collect(item)
-
-    collect(json.loads(path.read_text(encoding="utf-8")))
-    return tuple(sorted(found, key=len, reverse=True))
-
-
-DASH_EXCEPTIONS = dash_exceptions()
-
-
 def dash_paths(value: Any, path: str = "") -> list[str]:
     """Caminhos dos textos do conteúdo que têm travessão."""
     if isinstance(value, str):
-        for allowed in DASH_EXCEPTIONS:
-            value = value.replace(allowed, "")
         return [path or "(raiz)"] if DASH.search(value) else []
     if isinstance(value, dict):
         return [found for key, item in value.items() for found in dash_paths(item, f"{path}.{key}" if path else key)]
@@ -1113,6 +1087,10 @@ def render_md(content: dict[str, Any]) -> str:
     def grid_cell(text: str) -> str:
         return text.replace("|", "\\|").replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>")
 
+    if content["deliverable_type"] == "cdt":
+        # Só os campos, para copiar e colar no Jira: título do campo e texto, sem cabeçalho nem fontes.
+        fields = [("## " if block["type"] == "heading" else "") + block_text(block) for block in content["blocks"]]
+        return "\n\n".join(fields).rstrip() + "\n"
     lines = [f"# {content['title']}", "", identity_line(content), ""]
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
@@ -1508,18 +1486,15 @@ def render_pdf_reportlab(content: dict[str, Any], tokens: dict[str, Any],
                       identity_line=identity_line)
 
 
-# Na CDT, o que vai ao Jira não mostra fonte (o Jira não tem como referenciá-la); as fontes aparecem só nas seções
-# que ficam fora do Jira. O JSON canônico mantém as citações, que o checador usa.
-CDT_SECTIONS_WITH_SOURCES = ("readiness", "publication_checklist", "quality_review", "data_to_obtain", "traceability")
-
-
 def presentation_content(content: dict[str, Any]) -> dict[str, Any]:
+    """A CDT vai ao Jira, que não referencia fontes: os arquivos não mostram citações. O JSON canônico as mantém, e as
+    fontes aparecem na Análise da CDT."""
     if content.get("deliverable_type") != "cdt":
         return content
     shown = copy.deepcopy(content)
+    shown["citations"] = []
     for block in shown.get("blocks", []):
-        if block.get("data", {}).get("section_key") not in CDT_SECTIONS_WITH_SOURCES:
-            block.pop("citation_ids", None)
+        block.pop("citation_ids", None)
     return shown
 
 

@@ -109,6 +109,11 @@
       "layout": "report_portrait",
       "paper": "a4_portrait",
       "schema": "cdt.schema.json"
+    },
+    "cdt_analysis": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "cdt_analysis.schema.json"
     }
   }
 }
