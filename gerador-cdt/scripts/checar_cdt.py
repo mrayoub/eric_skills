@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Confere a CDT oficial e a Análise da CDT antes de renderizar: os três campos do Jira, as cinco perguntas da
-Descrição, pendências, checklist do comunicado, dados a obter e coerência de estado entre os dois arquivos.
+"""Confere a CDT oficial e a Análise da CDT antes de renderizar.
+
+A CDT é sempre gerada. O texto afirma o que foi decidido; o dado que falta vira lacuna "[COMPLETAR: o dado]", que
+quem abre a CDT completa antes de enviar. Cada lacuna aparece na Análise da CDT, em "O que obter e analisar
+primeiro", e o estado da análise diz "Com lacunas a preencher".
 
 Uso: python3 scripts/checar_cdt.py cdt.json analise.json
-Imprime um relatório JSON. Código 0: podem ser entregues no estado declarado; 1: corrija antes de renderizar.
+Imprime um relatório JSON. Código 0: podem ser entregues; 1: corrija antes de renderizar.
 """
 from __future__ import annotations
 
@@ -29,32 +32,25 @@ def main() -> int:
     cdt, analysis = (json.loads(Path(arg).read_text(encoding="utf-8")) for arg in sys.argv[1:])
     official, review = load("cdt"), load("cdt_analysis")
     cdt_report, analysis_report = official.report(cdt), review.report(analysis)
-    errors = [f"CDT: {error}" for error in cdt_report["errors"]]
+    errors = [f"CDT: {error}" for error in official.validate(cdt)]
     errors += [f"Análise: {error}" for error in analysis_report["errors"]]
-    declared = {name: content.get("metadata", {}).get("completeness") or "complete"
-                for name, content in (("cdt", cdt), ("analise", analysis))}
-    pending = cdt_report["pending_fields"]
-    ready = not pending and not analysis_report["checklist_gaps"] and not errors
-    suggested = "complete" if ready else "partial"
-    if len(set(declared.values())) > 1:
-        errors.append(f"os dois arquivos precisam declarar o mesmo estado em metadata.completeness: {declared}")
-    if pending and not analysis_report["declares_pending"]:
-        errors.append(f"Análise: a CDT tem campos 'a confirmar:' ({pending}); liste-os nos dados a obter")
-    if declared["cdt"] == "complete":
-        errors += [f"CDT: {error}" for error in official.validate(cdt) if error not in cdt_report["errors"]]
-        errors += [f"Análise: {error}" for error in review.validate(analysis) if error not in analysis_report["errors"]]
+    states = {name: content.get("metadata", {}).get("completeness") or "complete"
+              for name, content in (("cdt", cdt), ("analise", analysis))}
+    if len(set(states.values())) > 1:
+        errors.append(f"os dois arquivos declaram o mesmo estado em metadata.completeness: {states}")
+    gaps = cdt_report["gaps"]
+    if gaps:
+        if not analysis_report["readiness_says_gaps"]:
+            errors.append("Análise: readiness: diga 'Com lacunas a preencher' e quais são")
+        if not analysis_report["declares_pending"]:
+            errors.append(f"Análise: liste as lacunas {sorted(gaps)} em 'O que obter e analisar primeiro'")
     else:
-        if not pending and not analysis_report["checklist_gaps"]:
-            errors.append("versão parcial sem pendência marcada: escreva 'a confirmar: <dado> (<quem>)' no campo que "
-                          "falta, ou marque os dois arquivos como completos e 'Pronta para envio'")
-        if not analysis_report["readiness_says_partial"]:
-            errors.append("Análise: readiness: a versão parcial deve dizer 'Parcial' e o que falta")
+        errors += [f"Análise: {error}" for error in review.validate(analysis) if error not in analysis_report["errors"]]
     result = {
-        "pending_fields": pending,
+        "gaps": gaps,
         "checklist": analysis_report["checklist"],
         "checklist_gaps": analysis_report["checklist_gaps"],
-        "declared_completeness": declared["cdt"],
-        "suggested_completeness": suggested,
+        "declared_completeness": states["cdt"],
         "errors": errors,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))

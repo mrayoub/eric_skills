@@ -1,6 +1,6 @@
 """Verifica a CDT oficial: os quatro campos que vão ao Jira (Rótulo Epic, Descrição, Justificativa e Benefícios), com
-título tecnológico, a Descrição respondendo às cinco perguntas do comunicado, sem fonte citada e com Markdown só na
-Descrição."""
+título tecnológico, a Descrição respondendo às cinco perguntas do comunicado, sem pergunta em aberto (o que falta é
+lacuna [COMPLETAR: ...] para quem abre a CDT), sem fonte citada, com Markdown só na Descrição e escrita pela gerência que abre a demanda, em primeira pessoa."""
 from __future__ import annotations
 
 import re
@@ -25,8 +25,19 @@ TECH_TERMS = re.compile(
 PERSON_LIKE = re.compile(r"\b(assistente|atendente|analista|consultor|secret[áa]ri[oa]|ajudante|colaborador)\b",
                          re.IGNORECASE)
 MAX_TITLE_WORDS = 16
-# Pendência é marcada com dois-pontos ("a confirmar: o dado (quem)"); "a confirmar na homologação" não é pendência.
-PENDING = re.compile(r"\ba (confirmar|definir|levantar|obter):", re.IGNORECASE)
+# A CDT é aberta quando a decisão de seguir já foi tomada: o texto afirma, não pergunta nem deixa algo "a confirmar".
+# O dado que falta vira lacuna explícita, que quem abre a CDT preenche antes de enviar.
+GAP = re.compile(r"\[COMPLETAR: [^\]\n?]+\]")
+PENDING = re.compile(r"\b(a (confirmar|definir|levantar|obter|validar)|tbd|pendente de definição)\b", re.IGNORECASE)
+# Quem abre a CDT é a gerência que patrocinou a esteira: ela não fala de si mesma na terceira pessoa.
+THIRD_PERSON = re.compile(r"\b(a (área|gerência|gestão) (solicitante|demandante|da área|responsável)|"
+                          r"a gestão da área|(o|a) sponsor|(o|a) patrocinador[a]?|a área de negócio)\b", re.IGNORECASE)
+# Expressões de texto gerado por IA, que deixam a CDT distante e pouco direta.
+AI_TICS = re.compile(r"\b(vale (destacar|ressaltar|mencionar)|é importante (destacar|ressaltar|mencionar|notar)|"
+                     r"cabe (destacar|ressaltar)|nesse sentido|neste contexto|além disso|dessa forma|desse modo|"
+                     r"em suma|robust[oa]s?|abrangente|alavanc\w+|potencializ\w+|sinergia|holístic[oa]|"
+                     r"de forma (eficiente|eficaz|estratégica)|no cenário atual|cada vez mais|crucial)\b",
+                     re.IGNORECASE)
 # Justificativa sem risco concreto fica vazia no Jira.
 BLANK = re.compile(r"^deixar vazio\b", re.IGNORECASE)
 # O Jira não referencia fontes.
@@ -63,6 +74,13 @@ def questions(description: str) -> tuple[dict[str, str], list[str]]:
     return answers, missing
 
 
+def strip_questions(text: str) -> str:
+    """O texto sem os subtítulos das cinco perguntas, que são as únicas perguntas permitidas."""
+    for question in QUESTIONS:
+        text = text.replace(f"**{question}**", "")
+    return text
+
+
 def report(content: dict[str, Any]) -> dict[str, Any]:
     """Diagnóstico da CDT oficial em qualquer estado; `errors` impede a entrega."""
     by_key = sections(content)
@@ -78,7 +96,7 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
         errors.append(f"campos fora de ordem: {order}; use {list(FIELDS)}")
 
     title = texts.get("jira_title", "").strip()
-    if title and not PENDING.search(title):
+    if title:
         if "\n" in title or words(title) > MAX_TITLE_WORDS:
             errors.append(f"Rótulo Epic: uma linha com até {MAX_TITLE_WORDS} palavras")
         if not TECH_TERMS.search(title):
@@ -95,20 +113,37 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
                       f"ordem; falta {missing}")
     empty = [question for question, answer in answers.items() if not answer]
     if empty:
-        errors.append(f"Descrição: pergunta sem resposta {empty}; com dado faltando, responda o que o material "
-                      "sustenta e marque 'a confirmar:'")
+        errors.append(f"Descrição: pergunta sem resposta {empty}; responda com o material ou deixe a lacuna "
+                      "'[COMPLETAR: o dado]'")
     priority = answers.get(QUESTIONS[-1], "")
-    if priority and not PENDING.search(priority):
+    if priority:
         groups = [group for group in PRIORITY_GROUPS if group not in priority.casefold()]
         if groups:
             errors.append(f"Descrição: separe a prioridade em essencial, importante e fora do escopo; falta {groups}")
 
-    pending = sorted(key for key in FIELDS if key in texts and PENDING.search(texts[key]))
+    gaps = {key: GAP.findall(texts[key]) for key in FIELDS if key in texts and GAP.search(texts[key])}
+    plain = {key: GAP.sub("", text) for key, text in texts.items()}
+    pending = sorted(key for key in FIELDS if key in plain and PENDING.search(plain[key]))
+    if pending:
+        errors.append(f"ponto em aberto na CDT: {pending}; o texto afirma o que foi decidido. O dado que falta vira "
+                      "lacuna '[COMPLETAR: o dado]' para quem abre a CDT")
+    asking = [key for key in FIELDS if key in plain and "?" in strip_questions(plain[key])]
+    if asking:
+        errors.append(f"pergunta no texto da CDT: {asking}; só os subtítulos da Descrição são perguntas, o resto "
+                      "afirma o que foi decidido")
+    distant = sorted({match.group(0) for key in FIELDS if key in texts for match in THIRD_PERSON.finditer(texts[key])})
+    if distant:
+        errors.append(f"a gerência que abre a CDT fala de si em primeira pessoa (nossa equipe, precisamos); troque "
+                      f"{distant}")
+    tics = sorted({match.group(0).lower() for key in FIELDS if key in texts for match in AI_TICS.finditer(texts[key])})
+    if tics:
+        errors.append(f"expressões que deixam o texto distante e com cara de IA: {tics}; escreva direto")
     blank = sorted(key for key in ("justification",) if key in texts and BLANK.match(texts[key].strip()))
+    only_gaps = {key for key in FIELDS if key in plain and not plain[key].strip(" \n.:;")}
     unsourced = sorted(key for key in FIELDS if key in by_key and not by_key[key].get("citation_ids")
-                       and key not in pending and key not in blank)
+                       and key not in blank and key not in only_gaps)
     if unsourced:
-        errors.append(f"campos sem fonte no JSON e sem pendência declarada: {unsourced}")
+        errors.append(f"campos sem fonte no JSON: {unsourced}")
     cited = sorted(key for key in FIELDS if key in texts and SOURCE_MENTION.search(texts[key]))
     if cited:
         errors.append(f"fonte citada em campo do Jira: {cited}; as fontes vão só na Análise da CDT")
@@ -124,6 +159,7 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
         errors.append(f"textos longos demais (palavras): {long_sections}; limites: {MAX_WORDS_PER_QUESTION} por "
                       f"pergunta da Descrição, {MAX_WORDS['justification']} na Justificativa e nos Benefícios")
     return {
+        "gaps": gaps,
         "pending_fields": pending,
         "blank_fields": blank,
         "unsourced_fields": unsourced,
@@ -135,6 +171,9 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
 def validate(content: dict[str, Any]) -> list[str]:
     result = report(content)
     errors = list(result["errors"])
-    if result["pending_fields"]:
-        errors.append(f"versão completa com campos a confirmar: {result['pending_fields']}; use completeness partial")
+    completeness = content.get("metadata", {}).get("completeness") or "complete"
+    if result["gaps"] and completeness == "complete":
+        errors.append(f"CDT com lacunas {sorted(result['gaps'])}; marque completeness partial")
+    if not result["gaps"] and completeness != "complete":
+        errors.append("CDT sem lacunas: marque completeness complete")
     return errors

@@ -13,6 +13,7 @@
         "A CDT traz só Rótulo Epic, Descrição, Justificativa e Benefícios, nesta ordem, sem fonte citada e sem sugestão para os outros campos do Jira.",
         "O Rótulo Epic nomeia a tecnologia (por exemplo, formulário web ou portal) e o que ela faz, sem termos que sugiram uma pessoa.",
         "A Descrição é um bloco só, com as cinco perguntas do comunicado como subtítulos em negrito; na prioridade, formulário guiado e protocolo em essencial, status visível em importante (LC-02 não atingido) e integração com faturamento fora do escopo.",
+        "Escreve como a gerência que abre a CDT, em primeira pessoa do plural, direto e sem perguntas, e não contradiz o que o relatório final decidiu.",
         "Usa a linha de base de 90 em 360 pedidos (25%) e trata 7 de 8 analistas como resultado de teste com protótipo, não como ganho em produção.",
         "A Análise da CDT abre com o estado, o checklist do comunicado (dados pessoais de contato em regras; Bruno Lima como decisor e Ana Souza como validadora em responsáveis) e a tabela do que obter e analisar primeiro, em ordem de prioridade.",
         "A Análise apresenta pontos fortes e fracos, incluindo a meta de 10% como proposta do sponsor sem estudo de viabilidade, e as fontes de cada campo na origem dos dados."
@@ -21,16 +22,16 @@
     {
       "id": 2,
       "prompt": "O sponsor quer abrir a CDT já. Use a Entrevista Inicial e gere a CDT.",
-      "expected_output": "CDT parcial nos dois arquivos: as cinco perguntas da Descrição respondidas com o que a Entrevista Inicial sustenta, 'a confirmar:' no que falta e a Análise listando esses dados em ordem de prioridade.",
+      "expected_output": "CDT gerada com lacunas [COMPLETAR: ...] onde a Entrevista Inicial não basta, sem 'a confirmar' nem perguntas no texto, e a Análise listando cada lacuna em ordem de prioridade.",
       "files": [
         "files/so-entrevista.md"
       ],
       "expectations": [
-        "Declara a CDT como parcial nos dois arquivos e explica por quê na Análise, sem recusar a entrega.",
-        "Responde às cinco perguntas da Descrição mesmo na versão parcial, marcando 'a confirmar:' onde falta dado.",
+        "Gera a CDT mesmo com material insuficiente, com lacunas '[COMPLETAR: ...]' no ponto exato do que falta, e marca os dois arquivos como parciais.",
+        "Responde às cinco perguntas da Descrição, sem perguntas nem 'a confirmar' no texto, na voz da gerência em primeira pessoa.",
         "Não inventa volume, linha de base, meta numérica, regras ou responsáveis ausentes.",
-        "Não transforma 'um sistema novo com tudo integrado' em entrega essencial; trata como pedido a avaliar e descreve o problema antes da solução.",
-        "Na Análise, lista os dados a obter numa tabela com a prioridade primeiro, o motivo, com quem obter, pergunta pronta e se impedem o envio.",
+        "Não transforma 'um sistema novo com tudo integrado' em entrega essencial; descreve o problema antes da solução.",
+        "Na Análise, diz 'Com lacunas a preencher' e lista cada lacuna numa tabela com a prioridade primeiro, com quem obter e se impede o envio.",
         "Pergunta apenas o que é decisivo e não pergunta ao usuário qual conclusão ele deseja."
       ]
     }

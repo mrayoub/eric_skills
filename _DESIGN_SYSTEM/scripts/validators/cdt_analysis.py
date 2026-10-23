@@ -76,7 +76,7 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
         "checklist_gaps": gaps,
         "declares_pending": pending_declared,
         "readiness_says_ready": "pronta para envio" in readiness,
-        "readiness_says_partial": "parcial" in readiness,
+        "readiness_says_gaps": "lacunas" in readiness,
         "errors": errors,
     }
 

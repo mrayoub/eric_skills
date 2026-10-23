@@ -1,0 +1,111 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "jira_title_heading",
+        "text": "Rótulo Epic"
+      },
+      "id": "heading-jira_title",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "jira_title",
+        "text": "Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento"
+      },
+      "id": "jira_title",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "description_heading",
+        "text": "Descrição"
+      },
+      "id": "heading-description",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01",
+        "FIC-02",
+        "FIC-03"
+      ],
+      "data": {
+        "section_key": "description",
+        "text": "**Qual problema queremos resolver?**\nQueremos que os pedidos de dados históricos cheguem completos na primeira tentativa. Hoje recebemos esses pedidos por e-mail, sem padrão e muitas vezes sem as informações mínimas: cerca de 4 em cada 10 voltam ao agente para complemento. O retrabalho ocupa nossa equipe de atendimento e atrasa a entrega dos dados ao mercado.\n\n**Quem é impactado?**\n- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores.\n- Nossa equipe de atendimento, que confere e responde os pedidos.\n- Nossa gestão, que acompanha os prazos sem visão consolidada.\n\n**Como o processo funciona hoje?**\n1. O agente envia o pedido por e-mail.\n2. Nosso analista confere o pedido e, se falta informação, pede complemento por e-mail.\n3. Controlamos o andamento numa planilha própria.\n4. Extraímos os dados e enviamos por e-mail.\n\n**Onde falha:** não há campos obrigatórios nem status visível ao agente.\n\n**Qual resultado esperamos alcançar?**\nPedidos completos na primeira tentativa, menos horas da nossa equipe com complementos e o agente acompanhando o andamento do próprio pedido. Aprovamos o desenvolvimento interno na apresentação final do projeto.\n\n**O que é prioridade neste momento?**\n**Essencial**\n- Formulário com campos obrigatórios por tipo de pedido.\n- Número de protocolo para cada pedido.\n\n**Importante, pode vir depois**\n- Status do pedido visível ao agente.\n- Painel de prazos para nossa gestão.\n\n**Fora do escopo**\n- Extração automática dos dados.\n- Integração com outros sistemas internos."
+      },
+      "id": "description",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "justification_heading",
+        "text": "Justificativa"
+      },
+      "id": "heading-justification",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "justification",
+        "text": "Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da nossa equipe de atendimento.\nAtraso ao mercado: os agentes seguem sem prazo previsível para receber os dados."
+      },
+      "id": "justification",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "benefits_heading",
+        "text": "Benefícios"
+      },
+      "id": "heading-benefits",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-03"
+      ],
+      "data": {
+        "section_key": "benefits",
+        "text": "Reduz de 40 para 15 as horas mensais da nossa equipe com pedidos de complemento (meta medida no piloto com 8 analistas).\nO agente envia o pedido completo de uma vez e acompanha o andamento."
+      },
+      "id": "benefits",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "briefing-simulado"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "relatorio-4d-simulado"
+    },
+    {
+      "id": "FIC-03",
+      "locator": "exemplo fictício, sem decisão real",
+      "source_id": "relatorio-final-simulado"
+    }
+  ],
+  "deliverable_type": "cdt",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-cdt",
+    "completeness": "complete",
+    "content_version": "1.3.0",
+    "orientation": "portrait",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO: Formulário guiado para pedidos de dados históricos"
+}

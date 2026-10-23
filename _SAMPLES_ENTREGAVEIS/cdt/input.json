@@ -37,11 +37,12 @@
       "type": "paragraph",
       "data": {
         "section_key": "description",
-        "text": "**Qual problema queremos resolver?**\nOs pedidos de dados históricos chegam por e-mail, sem padrão e muitas vezes sem as informações mínimas. Cerca de 4 em cada 10 pedidos voltam ao agente para complemento (exemplo). Isso gera retrabalho na equipe de atendimento e atrasa a entrega dos dados ao mercado.\n\n**Quem é impactado?**\n- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores.\n- Analistas da equipe de atendimento, que conferem e respondem os pedidos.\n- Gestão da área, que acompanha prazos sem visão consolidada.\n\n**Como o processo funciona hoje?**\n1. O agente envia o pedido por e-mail.\n2. O analista confere o pedido e, se faltar informação, pede complemento por e-mail.\n3. O andamento é controlado em planilha própria.\n4. Os dados são extraídos e enviados por e-mail.\n\n**Onde falha:** não há campos obrigatórios nem status visível ao agente.\n\n**Qual resultado esperamos alcançar?**\n**Objetivo:** receber pedidos completos na primeira tentativa e dar ao agente visibilidade do andamento.\n**Resultado esperado:** menos devoluções e menos horas da equipe com complementos.\n\n**O que é prioridade neste momento?**\n**Essencial**\n- Formulário com campos obrigatórios por tipo de pedido.\n- Número de protocolo para cada pedido.\n\n**Importante, pode vir depois**\n- Status do pedido visível ao agente.\n- Painel de prazos para a gestão.\n\n**Fora do escopo**\n- Extração automática dos dados.\n- Integração com outros sistemas internos."
+        "text": "**Qual problema queremos resolver?**\nQueremos que os pedidos de dados históricos cheguem completos na primeira tentativa. Hoje recebemos esses pedidos por e-mail, sem padrão e muitas vezes sem as informações mínimas: cerca de 4 em cada 10 voltam ao agente para complemento. O retrabalho ocupa nossa equipe de atendimento e atrasa a entrega dos dados ao mercado.\n\n**Quem é impactado?**\n- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores.\n- Nossa equipe de atendimento, que confere e responde os pedidos.\n- Nossa gestão, que acompanha os prazos sem visão consolidada.\n\n**Como o processo funciona hoje?**\n1. O agente envia o pedido por e-mail.\n2. Nosso analista confere o pedido e, se falta informação, pede complemento por e-mail.\n3. Controlamos o andamento numa planilha própria.\n4. Extraímos os dados e enviamos por e-mail.\n\n**Onde falha:** não há campos obrigatórios nem status visível ao agente.\n\n**Qual resultado esperamos alcançar?**\nPedidos completos na primeira tentativa, menos horas da nossa equipe com complementos e o agente acompanhando o andamento do próprio pedido. Aprovamos o desenvolvimento interno na apresentação final do projeto.\n\n**O que é prioridade neste momento?**\n**Essencial**\n- Formulário com campos obrigatórios por tipo de pedido.\n- Número de protocolo para cada pedido.\n\n**Importante, pode vir depois**\n- Status do pedido visível ao agente.\n- Painel de prazos para nossa gestão.\n\n**Fora do escopo**\n- Extração automática dos dados.\n- Integração com outros sistemas internos."
       },
       "citation_ids": [
         "FIC-01",
-        "FIC-02"
+        "FIC-02",
+        "FIC-03"
       ]
     },
     {
@@ -57,7 +58,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "justification",
-        "text": "Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe de atendimento.\nAtraso ao mercado: os agentes seguem sem prazo previsível para receber os dados."
+        "text": "Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da nossa equipe de atendimento.\nAtraso ao mercado: os agentes seguem sem prazo previsível para receber os dados."
       },
       "citation_ids": [
         "FIC-01"
@@ -76,28 +77,33 @@
       "type": "paragraph",
       "data": {
         "section_key": "benefits",
-        "text": "Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta proposta, medida no piloto com 8 analistas; exemplo).\nO agente envia o pedido completo de uma vez e acompanha o andamento."
+        "text": "Reduz de 40 para 15 as horas mensais da nossa equipe com pedidos de complemento (meta medida no piloto com 8 analistas).\nO agente envia o pedido completo de uma vez e acompanha o andamento."
       },
       "citation_ids": [
-        "FIC-02"
+        "FIC-03"
       ]
     }
   ],
   "citations": [
     {
       "id": "FIC-01",
-      "source_id": "entrevista-inicial-simulada",
+      "source_id": "briefing-simulado",
       "locator": "exemplo fictício, sem dados reais"
     },
     {
       "id": "FIC-02",
-      "source_id": "relatorio-3e-simulado",
+      "source_id": "relatorio-4d-simulado",
       "locator": "exemplo fictício, sem coleta real"
+    },
+    {
+      "id": "FIC-03",
+      "source_id": "relatorio-final-simulado",
+      "locator": "exemplo fictício, sem decisão real"
     }
   ],
   "metadata": {
     "artifact_id": "sample-cdt",
-    "content_version": "1.2.0",
+    "content_version": "1.3.0",
     "completeness": "complete",
     "orientation": "portrait",
     "sample": true

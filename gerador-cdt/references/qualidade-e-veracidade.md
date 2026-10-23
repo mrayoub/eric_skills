@@ -19,17 +19,18 @@ Nesta ordem; os dois primeiros blocos depois do estado são o destaque do docume
 
 ## Estado (`readiness`)
 
-- **Pronta para envio** quando nenhum campo da CDT tem pendência e os seis itens do checklist estão atendidos
-  (script). Diga o principal ponto fraco em uma frase.
-- **Parcial** em qualquer outro caso: quantos campos faltam, qual impede o envio e o próximo passo (script).
-- `metadata.completeness` é o mesmo nos dois arquivos: `complete` ou `partial` (script).
+- **Pronta para envio** quando a CDT não tem lacuna e os seis itens do checklist estão atendidos (script). Diga o
+  principal ponto fraco em uma frase.
+- **Com lacunas a preencher** quando a CDT tem `[COMPLETAR: ...]`: quais são e onde estão (script).
+- `metadata.completeness` é o mesmo nos dois arquivos: `complete` sem lacuna, `partial` com lacuna (script).
 
-## Pendência e campo vazio
+## Lacuna e campo vazio
 
-- Campo da CDT sem fonte recebe `a confirmar: <o dado> (<quem>)`, com dois-pontos (script). Sem os dois-pontos, a
-  expressão não é pendência: "a CI valida na homologação" descreve uma etapa. Nunca preencha um campo para parecer
-  completo. Toda pendência aparece em "O que obter e analisar primeiro" (script).
-- As cinco perguntas da Descrição nunca ficam vazias, nem na versão parcial (script).
+- A CDT afirma o que foi decidido: sem "a confirmar", "a definir" ou perguntas no texto (script). O dado que o
+  material não traz vira lacuna `[COMPLETAR: o dado que falta]`, no ponto exato do texto, para quem abre a CDT
+  completar antes de enviar (script). Nunca preencha um campo por suposição para parecer completo.
+- Toda lacuna aparece em "O que obter e analisar primeiro", com quem obter o dado (script).
+- As cinco perguntas da Descrição sempre têm resposta, mesmo que parte dela seja lacuna (script).
 - A Justificativa fica "Deixar vazio: <motivo>" quando não há risco concreto de não implementar.
 
 ## Natureza do dado
@@ -45,7 +46,7 @@ Escreva a natureza no próprio texto, em poucas palavras, quando ela não for ó
 | estimativa ou proposta | "estimativa, não medida"; "meta proposta" |
 | hipótese | "hipótese:" |
 
-Todo campo da CDT tem `citation_ids` no JSON ou uma pendência declarada (script). As citações servem à conferência e
+Todo campo da CDT tem `citation_ids` no JSON, salvo o que for só lacuna (script). As citações servem à conferência e
 à tabela Origem dos dados: o texto da CDT não cita fonte nem documento (script), e os arquivos da CDT não mostram
 citações. Resumo derivado não é fonte independente: cite a primária.
 

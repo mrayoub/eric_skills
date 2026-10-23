@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.1"
+  version: "1.3.0"
 ---
 
 # Gerador de CDT
@@ -37,8 +37,8 @@ nos arquivos tudo que for pesquisável; pergunte só a fronteira de questões de
 cujas dependências já estão resolvidas; registre origem e localizador de cada resposta;
 entregue versão parcial quando faltar suporte decisivo. Nunca pergunte a nota, o
 resultado ou a conclusão desejada: isso não é dado, e contaminaria a avaliação.
-Na CDT, cada campo do Jira é uma questão do registro: um campo sem fonte vira
-"a confirmar:" e entra nos dados a obter, nunca é completado por suposição.
+Na CDT, cada campo do Jira é uma questão do registro: o dado sem fonte que o usuário
+não souber vira lacuna "[COMPLETAR: ...]" e entra na análise, nunca é completado por suposição.
 
 ## Preferências do usuário
 
@@ -49,8 +49,9 @@ skill ou todas; usuário ou projeto) e só grave com confirmação. "Resetar" vo
 ## Quando usar
 
 A fase do projeto é contexto, não pré-requisito. O caso típico é depois do BP2, na implementação com rota interna ou
-híbrida. Com material insuficiente, entregue a CDT parcial: preencha o que as fontes sustentam e assinale os dados a
-obter. Se a rota for externa, diga o que muda no pedido à Tecnologia em vez de pedir construção.
+híbrida. Quem abre a CDT é a gerência que patrocinou a esteira, e a decisão de seguir já foi tomada. Com material
+insuficiente, entregue a CDT mesmo assim, com lacunas "[COMPLETAR: ...]" no que falta. Se a rota for externa, diga o
+que muda no pedido à Tecnologia em vez de pedir construção.
 
 ## Passos
 
@@ -62,23 +63,27 @@ obter. Se a rota for externa, diga o que muda no pedido à Tecnologia em vez de 
 3. **CDT, quatro blocos, nesta ordem.** Rótulo Epic: uma linha que nomeia a tecnologia (plataforma, sistema,
    ferramenta, integração, interface) e o que ela faz, sem nada que sugira uma pessoa. Descrição: um bloco só, com as
    cinco perguntas do comunicado como subtítulos em negrito, sempre respondidas, cada uma a partir da sua fonte
-   principal (Briefing, todo o material, Relatório 4D, Relatório 3E e Learning Cards, Relatório 3E e Relatório final;
-   [de/para](references/campos-jira.md#fonte-principal-de-cada-pergunta)), com o documento mais recente
-   prevalecendo. Justificativa: os riscos de não implementar, um por linha. Benefícios: o principal com número na
-   primeira linha. Markdown só na Descrição; nenhuma fonte no texto.
-4. **Corte.** Cada fato aparece uma vez; siglas por extenso na primeira menção de cada campo; nada de narrar o
+   principal (Briefing, todo o material, Relatório 4D, Relatório 3E, Relatório 3E; o Relatório final em todas;
+   [de/para](references/campos-jira.md#fonte-principal-de-cada-pergunta)). Nada contradiz o Relatório final.
+   Justificativa: os riscos de não implementar, um por linha. Benefícios: o principal com número na primeira linha.
+   Markdown só na Descrição; nenhuma fonte no texto.
+4. **Voz da gerência.** Escreva como a gerência que abre a CDT: primeira pessoa do plural ("nossa equipe",
+   "aprovamos"), frases afirmativas e diretas, sem perguntas fora dos subtítulos, sem "a confirmar" e sem expressões
+   de texto gerado por IA ([padrão de escrita](references/campos-jira.md#padrão-de-escrita)). O que faltar vira
+   lacuna "[COMPLETAR: o dado]".
+5. **Corte.** Cada fato aparece uma vez; siglas por extenso na primeira menção de cada campo; nada de narrar o
    método da esteira. Limites: 16 palavras no Rótulo Epic, 150 por pergunta da Descrição, 80 na Justificativa e nos
    Benefícios.
-5. **Análise da CDT.** Estado; em destaque, o checklist do comunicado (regras e responsáveis respondidos na linha) e
+6. **Análise da CDT.** Estado; em destaque, o checklist do comunicado (regras e responsáveis respondidos na linha) e
    o que obter e analisar primeiro, em ordem de prioridade; depois avaliação crítica e origem dos dados, com as
    fontes ([qualidade](references/qualidade-e-veracidade.md)). Rode `python3 scripts/checar_cdt.py cdt.json
-   analise.json` até o código 0 ou declare a versão parcial nos dois arquivos.
-6. **Entregue.** No chat: o estado, onde estão os arquivos, o principal ponto fraco e o primeiro dado a obter. Não
+   analise.json` até o código 0; com lacunas, os dois arquivos são `partial`.
+7. **Entregue.** No chat: o estado, onde estão os arquivos, as lacunas a preencher e o principal ponto fraco. Não
    repita a CDT no chat.
 
 ## Exemplo
 
-Entrada: "Monte a CDT do formulário de pedidos de dados com o relatório 3E, os Learning Cards e o relatório final."
+Entrada: "Monte a CDT do formulário de pedidos de dados com o briefing, os relatórios 4D e 3E e o relatório final."
 Saída (CDT, para colar no Jira):
 
 ```
@@ -89,7 +94,8 @@ Formulário web com protocolo automático para pedidos de dados históricos no p
 Descrição
 
 **Qual problema queremos resolver?**
-Os pedidos de dados históricos chegam por e-mail, sem padrão. Cerca de 4 em cada 10 voltam ao agente para complemento.
+Queremos que os pedidos de dados históricos cheguem completos na primeira tentativa. Hoje recebemos esses pedidos por
+e-mail, sem padrão: cerca de 4 em cada 10 voltam ao agente para complemento.
 ...
 **O que é prioridade neste momento?**
 **Essencial**
@@ -97,11 +103,11 @@ Os pedidos de dados históricos chegam por e-mail, sem padrão. Cerca de 4 em ca
 
 Justificativa
 
-Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da equipe de atendimento.
+Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da nossa equipe de atendimento.
 
 Benefícios
 
-Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta proposta, medida no piloto).
+Reduz de [COMPLETAR: horas mensais gastas hoje] para 15 as horas mensais da nossa equipe com complementos.
 ```
 
 ## Checagem final
@@ -109,6 +115,8 @@ Reduz de 40 para 15 as horas mensais da equipe com pedidos de complemento (meta 
 - [ ] CDT com só Rótulo Epic, Descrição, Justificativa e Benefícios, nesta ordem, sem fonte e sem cabeçalho no MD e no TXT
 - [ ] Rótulo Epic tecnológico, sem termo que sugira pessoa
 - [ ] Descrição num bloco só, com as cinco perguntas na ordem e respondidas; Markdown só nela
+- [ ] Texto da gerência em primeira pessoa, direto, sem perguntas, sem "a confirmar" e sem contradizer o Relatório final
+- [ ] O que falta como "[COMPLETAR: ...]", com cada lacuna listada na análise
 - [ ] Análise com estado, checklist e prioridades em destaque, avaliação crítica com pontos fracos e fontes na origem dos dados
 - [ ] `scripts/checar_cdt.py` sem erros; mesmo estado nos dois arquivos, em `readiness` e no chat
 
@@ -131,8 +139,8 @@ Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [
 
 Rode o `checar_cdt.py` com os dois, depois `python3 assets/design-system/scripts/render.py <arquivo>.json --out-dir
 saida` para cada um, e entregue os JSON junto dos derivados. Da CDT, o MD e o TXT trazem só os campos, prontos para
-colar no Jira; o PDF e o DOCX servem para revisão. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"` nos dois arquivos: nunca contorne o schema.
+colar no Jira; o PDF e o DOCX servem para revisão. Com lacunas, marque `metadata.completeness: "partial"`
+nos dois arquivos; se a validação falhar, corrija o conteúdo: nunca contorne o schema.
 
 **Proveniência:** estrutura adaptada de publicação interna da CCEE sobre definição de escopo
 (`references/publicacao-escopo-tecnologia.md`, anonimizada), do formulário da CDT no Jira levantado com o usuário em

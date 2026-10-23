@@ -14,7 +14,7 @@
       ],
       "data": {
         "section_key": "readiness",
-        "text": "Pronta para envio. As cinco perguntas da Descrição estão respondidas e os seis itens do checklist estão atendidos. Principal ponto fraco: a meta de horas é proposta, medida só no piloto."
+        "text": "Pronta para envio. As cinco perguntas da Descrição estão respondidas, sem ponto em aberto, e os seis itens do checklist estão atendidos. Principal ponto fraco: a meta de horas foi medida só no piloto."
       },
       "id": "readiness",
       "type": "paragraph"
@@ -34,7 +34,7 @@
       ],
       "data": {
         "section_key": "publication_checklist",
-        "text": "- Problema e objetivo: atendido. Descrição, primeira e quarta perguntas.\n- Públicos impactados: atendido. Descrição, segunda pergunta.\n- Entregas essenciais: atendido. Descrição, quinta pergunta.\n- Prioridades e resultados esperados: atendido. Descrição, quarta e quinta perguntas; a meta de horas é proposta.\n- Regras, restrições e dependências: atendido. Campos obrigatórios variam por tipo de pedido; os pedidos trazem nome e telefone de contatos (dados pessoais); o acesso externo segue a autenticação da Tecnologia.\n- Responsáveis: atendido. A coordenação do atendimento esclarece dúvidas e valida as entregas; a gestão da área decide mudanças de escopo (exemplo)."
+        "text": "- Problema e objetivo: atendido. Descrição, primeira e quarta perguntas.\n- Públicos impactados: atendido. Descrição, segunda pergunta.\n- Entregas essenciais: atendido. Descrição, quinta pergunta.\n- Prioridades e resultados esperados: atendido. Descrição, quarta e quinta perguntas; a meta de horas é proposta.\n- Regras, restrições e dependências: atendido. Campos obrigatórios variam por tipo de pedido; os pedidos trazem nome e telefone de contatos (dados pessoais); o acesso externo segue a autenticação da Tecnologia.\n- Responsáveis: atendido. Nossa coordenação de atendimento esclarece dúvidas e valida as entregas; eu, como gerente, decido mudanças de escopo."
       },
       "id": "publication_checklist",
       "type": "paragraph"
@@ -139,28 +139,34 @@
         ],
         "rows": [
           [
-            "Descrição: problema e resultado",
-            "FIC-01: Entrevista Inicial simulada",
-            "estimativa e decidido",
+            "Descrição: problema",
+            "FIC-01: Briefing simulado",
+            "estimativa",
             "exemplo"
           ],
           [
-            "Descrição: processo atual e prioridade",
-            "FIC-02: Relatório 3E simulado",
+            "Descrição: processo atual",
+            "FIC-02: Relatório 4D simulado",
             "documentado",
-            "teste com protótipo"
+            "exemplo"
+          ],
+          [
+            "Descrição: resultado e prioridade",
+            "FIC-03: Relatório final simulado",
+            "decidido",
+            "prevalece sobre o 3E"
           ],
           [
             "Justificativa",
-            "FIC-01: Entrevista Inicial simulada",
+            "FIC-01: Briefing simulado",
             "relatado",
             "exemplo"
           ],
           [
             "Benefícios",
-            "FIC-02: Relatório 3E simulado",
-            "proposta",
-            "meta medida só no piloto"
+            "FIC-03: Relatório final simulado",
+            "medido no piloto",
+            "8 analistas"
           ]
         ]
       },
@@ -172,12 +178,17 @@
     {
       "id": "FIC-01",
       "locator": "exemplo fictício, sem dados reais",
-      "source_id": "entrevista-inicial-simulada"
+      "source_id": "briefing-simulado"
     },
     {
       "id": "FIC-02",
       "locator": "exemplo fictício, sem coleta real",
-      "source_id": "relatorio-3e-simulado"
+      "source_id": "relatorio-4d-simulado"
+    },
+    {
+      "id": "FIC-03",
+      "locator": "exemplo fictício, sem decisão real",
+      "source_id": "relatorio-final-simulado"
     }
   ],
   "deliverable_type": "cdt_analysis",
@@ -185,7 +196,7 @@
   "metadata": {
     "artifact_id": "sample-cdt-analise",
     "completeness": "complete",
-    "content_version": "1.2.0",
+    "content_version": "1.3.0",
     "orientation": "portrait",
     "sample": true
   },

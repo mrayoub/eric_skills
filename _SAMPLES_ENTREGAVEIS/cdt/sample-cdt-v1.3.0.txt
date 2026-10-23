@@ -1,0 +1,47 @@
+Rótulo Epic
+
+Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento
+
+Descrição
+
+**Qual problema queremos resolver?**
+Queremos que os pedidos de dados históricos cheguem completos na primeira tentativa. Hoje recebemos esses pedidos por e-mail, sem padrão e muitas vezes sem as informações mínimas: cerca de 4 em cada 10 voltam ao agente para complemento. O retrabalho ocupa nossa equipe de atendimento e atrasa a entrega dos dados ao mercado.
+
+**Quem é impactado?**
+- Agentes de mercado que pedem dados históricos, principalmente comercializadores e geradores.
+- Nossa equipe de atendimento, que confere e responde os pedidos.
+- Nossa gestão, que acompanha os prazos sem visão consolidada.
+
+**Como o processo funciona hoje?**
+1. O agente envia o pedido por e-mail.
+2. Nosso analista confere o pedido e, se falta informação, pede complemento por e-mail.
+3. Controlamos o andamento numa planilha própria.
+4. Extraímos os dados e enviamos por e-mail.
+
+**Onde falha:** não há campos obrigatórios nem status visível ao agente.
+
+**Qual resultado esperamos alcançar?**
+Pedidos completos na primeira tentativa, menos horas da nossa equipe com complementos e o agente acompanhando o andamento do próprio pedido. Aprovamos o desenvolvimento interno na apresentação final do projeto.
+
+**O que é prioridade neste momento?**
+**Essencial**
+- Formulário com campos obrigatórios por tipo de pedido.
+- Número de protocolo para cada pedido.
+
+**Importante, pode vir depois**
+- Status do pedido visível ao agente.
+- Painel de prazos para nossa gestão.
+
+**Fora do escopo**
+- Extração automática dos dados.
+- Integração com outros sistemas internos.
+
+Justificativa
+
+Retrabalho contínuo: os pedidos incompletos continuam consumindo horas da nossa equipe de atendimento.
+Atraso ao mercado: os agentes seguem sem prazo previsível para receber os dados.
+
+Benefícios
+
+Reduz de 40 para 15 as horas mensais da nossa equipe com pedidos de complemento (meta medida no piloto com 8 analistas).
+O agente envia o pedido completo de uma vez e acompanha o andamento.

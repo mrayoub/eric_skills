@@ -48,8 +48,11 @@ entra na análise, em "O que obter e analisar primeiro".
 
 Regras que valem para os quatro campos:
 
-- Nenhum valor sem base no material. Sem dado, o campo leva "a confirmar: [dado que falta] ([com quem])" e o dado vai
-  para a análise. Nada é deduzido pelo assunto.
+- A CDT é aberta quando a decisão de seguir já foi tomada: o texto afirma o que foi decidido, sem perguntas e sem
+  nada "a confirmar". O dado que o material não traz vira lacuna explícita, `[COMPLETAR: o dado que falta]`, que quem
+  abre a CDT completa antes de enviar; cada lacuna aparece na análise. Nada é deduzido pelo assunto.
+- O Relatório final (a apresentação final do projeto) é a palavra final: nada do que foi produzido antes na esteira
+  pode contradizê-lo na CDT.
 - Cada coisa é escrita num lugar só: um número ou argumento não se repete entre Descrição, Justificativa e Benefícios.
 - **Sem fonte no que vai ao Jira.** O Jira não tem como referenciar fontes: os campos não trazem "Fonte:", códigos de
   citação nem nome de documento como prova. As fontes ficam no JSON e aparecem só na Análise da CDT, na tabela Origem
@@ -59,6 +62,14 @@ Regras que valem para os quatro campos:
 
 O padrão vem de uma CDT real bem avaliada: texto institucional, curto e direto, que o leitor da Tecnologia entende
 sem conhecer a esteira.
+
+- **Quem escreve é a gerência que abre a CDT**, a mesma que patrocinou a esteira. O texto fala em primeira pessoa do
+  plural ("nossa equipe", "recebemos", "precisamos", "aprovamos"), nunca da própria área na terceira pessoa ("a
+  gestão da área", "a área solicitante", "o sponsor"). O checador recusa essa autorreferência distante.
+- **Direto e sem cara de IA.** Frases afirmativas, verbo no começo, sem rodeio. Nada de "vale destacar", "é
+  importante ressaltar", "nesse sentido", "além disso", "robusto", "abrangente", "alavancar", "potencializar",
+  "crucial"; o checador recusa essas expressões.
+- **Sem perguntas no texto.** As únicas perguntas são os cinco subtítulos da Descrição; o resto afirma.
 
 - **Markdown só na Descrição:** parágrafos curtos, rótulos em negrito no início da linha (`**Objetivo:**`,
   `**Onde falha:**`), listas com marcador. Rótulo Epic, Justificativa e Benefícios são texto simples, sem marcador,
@@ -114,26 +125,28 @@ num bloco só, cada pergunta como subtítulo em negrito, nesta ordem, e nada al�
 - ...
 ```
 
-As cinco perguntas são obrigatórias em qualquer versão, inclusive na parcial: com dado faltando, a resposta traz o que
-o material sustenta e marca "a confirmar:". Cada resposta tem até 150 palavras. Regras, restrições, dependências e
+As cinco perguntas são sempre respondidas: com dado faltando, a resposta traz o que o material sustenta e uma lacuna
+`[COMPLETAR: o dado]` no ponto exato. Cada resposta tem até 150 palavras. Regras, restrições, dependências e
 responsáveis não entram aqui: vão no checklist da análise.
 
 ### Fonte principal de cada pergunta
 
-Todo o material disponível (arquivos e conversa) pode sustentar as respostas, mas cada pergunta tem uma base:
+Todo o material disponível (arquivos e conversa) pode sustentar as respostas, mas cada pergunta tem uma base, e o
+Relatório final entra em todas:
 
 | Pergunta | Base | Como usar |
 |---|---|---|
-| Qual problema queremos resolver? | Briefing | Use o Briefing inteiro: o "Como poderíamos" responde à pergunta, e Problema, Relevância e Resultados esperados a completam. Os quatro precisam ficar claros na resposta. |
-| Quem é impactado? | Todo o material | Nenhum entregável responde direto: junte o que a Entrevista Inicial, o Briefing, os relatórios 4D, 3E e 5C, a experimentação e o relatório final dizem sobre quem usa, quem opera e quem é afetado. |
-| Como o processo funciona hoje? | Relatório 4D | O levantamento do processo atual (jornada do D2 e diagnóstico) é a base da resposta. |
-| Qual resultado esperamos alcançar? | Relatório 3E e Learning Cards | O 3E diz o que a demanda deve atender e o que fica fora do escopo; os Learning Cards sustentam as hipóteses que defendem esse resultado. |
+| Qual problema queremos resolver? | Briefing e Relatório final | Use o Briefing inteiro: o "Como poderíamos" responde à pergunta (escrito como afirmação, "Queremos..."), e Problema, Relevância e Resultados esperados a completam. Os quatro precisam ficar claros na resposta. |
+| Quem é impactado? | Todo o material e Relatório final | Nenhum entregável responde direto: junte o que a Entrevista Inicial, o Briefing, os relatórios 4D, 3E e 5C, a experimentação e o Relatório final dizem sobre quem usa, quem opera e quem é afetado. |
+| Como o processo funciona hoje? | Relatório 4D e Relatório final | O levantamento do processo atual (jornada do D2 e diagnóstico) é a base da resposta. |
+| Qual resultado esperamos alcançar? | Relatório 3E e Relatório final | O 3E diz o que a demanda deve atender e o que fica fora do escopo; o Relatório final confirma ou muda. |
 | O que é prioridade neste momento? | Relatório 3E e Relatório final | O 3E traz essencial, importante e fora do escopo; o Relatório final confirma ou muda esse recorte. |
 
-**O documento mais recente prevalece.** Se o escopo definido no 3E mudou depois (no Relatório final, numa decisão da
-gestão ou em outro entregável posterior), responda com o escopo vigente e registre a mudança na Análise da CDT, na
-origem dos dados. Fonte principal ausente não impede a resposta: use o restante do material, marque "a confirmar:" o
-que só ela daria e ponha o entregável em "O que obter e analisar primeiro".
+**O Relatório final prevalece.** O que foi definido na apresentação final não pode ser desmentido pelo conteúdo
+produzido antes na esteira: se o 3E, o 4D ou outro entregável diz outra coisa, a CDT segue o Relatório final, sem
+mencionar a versão anterior. A mudança fica registrada só na Análise da CDT, na origem dos dados. Fonte principal
+ausente não impede a resposta: use o restante do material, deixe a lacuna `[COMPLETAR: ...]` no que só ela daria e
+ponha o entregável em "O que obter e analisar primeiro".
 
 ## Justificativa e Benefícios
 
@@ -142,7 +155,7 @@ que só ela daria e ponha o entregável em "O que obter e analisar primeiro".
   concreto (multa, prazo regulatório, falha com histórico, segurança ou dados, perda de cliente identificado), o campo
   fica "Deixar vazio: <motivo>". Ineficiência não é risco: é o problema, já descrito na Descrição.
 - **Benefícios:** a primeira linha quantifica o benefício principal (hoje, meta, unidade e período), com a natureza do
-  dado; até dois benefícios secundários, um por linha. Até 80 palavras. Sem número no material, "a confirmar:".
+  dado; até dois benefícios secundários, um por linha. Até 80 palavras. Sem número no material, lacuna `[COMPLETAR: ...]` no lugar do número.
 
 ## Os 28 campos do formulário
 

@@ -390,11 +390,14 @@ class CdtValidationTests(unittest.TestCase):
             result = subprocess.run([sys.executable, str(script), *map(str, paths)], capture_output=True, text=True)
         return result.returncode, json.loads(result.stdout)
 
-    def partial(self, readiness="Parcial. Falta um dado."):
+    def with_gap(self, readiness="Com lacunas a preencher: horas mensais de hoje nos Benefícios."):
+        """Benefícios com lacuna, os dois arquivos parciais e a análise listando a lacuna."""
+        self.text("benefits", "Reduz as horas mensais da nossa equipe com complementos de "
+                              "[COMPLETAR: horas mensais gastas hoje] para 15.")
         for content in (self.content, self.analysis):
             content["metadata"]["completeness"] = "partial"
         self.text("readiness", readiness, self.analysis)
-        self.text("data_to_obtain", "Dados que faltam, em ordem de prioridade:", self.analysis)
+        self.text("data_to_obtain", "Lacunas a preencher, em ordem de prioridade:", self.analysis)
 
     def test_samples_are_valid(self):
         self.assertEqual(self.errors(), [])
@@ -432,41 +435,56 @@ class CdtValidationTests(unittest.TestCase):
         self.text("description", "**Quem é impactado?**" + rest + "\n\n" + first)
         self.assertTrue(any("ordem do comunicado" in error for error in self.errors()))
 
-    def test_every_question_needs_an_answer_even_when_partial(self):
-        self.partial()
+    def test_every_question_needs_an_answer(self):
         description = self.block("description")["data"]["text"]
         start = description.index("**Quem é impactado?**") + len("**Quem é impactado?**")
         end = description.index("**Como o processo funciona hoje?**")
         self.text("description", description[:start] + "\n\n" + description[end:])
-        self.assertTrue(any("pergunta sem resposta" in error for error in self.cdt.report(self.content)["errors"]))
+        self.assertTrue(any("pergunta sem resposta" in error for error in self.errors()))
 
     def test_priorities_split_into_three_groups(self):
         description = self.block("description")["data"]["text"]
         self.text("description", description.split("**Essencial**")[0] + "Primeiro o formulário.")
         self.assertTrue(any("essencial, importante e fora do escopo" in error for error in self.errors()))
 
-    def test_pending_field_blocks_complete_version(self):
-        self.text("benefits", "a confirmar: horas mensais gastas hoje (gestão da área)")
-        self.assertTrue(any("campos a confirmar" in error and "benefits" in error for error in self.errors()))
-        self.partial()
+    def test_missing_data_becomes_a_gap_to_fill(self):
+        self.with_gap()
         code, report = self.check()
         self.assertEqual(code, 0, report)
-        self.assertEqual(report["pending_fields"], ["benefits"])
-        self.assertEqual(report["suggested_completeness"], "partial")
+        self.assertEqual(sorted(report["gaps"]), ["benefits"])
 
-    def test_pending_must_reach_the_analysis(self):
-        self.partial()
-        self.text("benefits", "a confirmar: horas mensais gastas hoje (gestão da área)")
+    def test_gap_needs_partial_state_in_both_files(self):
+        self.text("benefits", "Reduz para 15 as horas mensais de [COMPLETAR: horas mensais gastas hoje].")
+        self.assertTrue(any("marque completeness partial" in error for error in self.errors()))
+
+    def test_open_points_are_not_written_in_the_cdt(self):
+        self.text("benefits", "Reduz as horas mensais da equipe; meta a confirmar com a gestão.")
+        self.assertTrue(any("ponto em aberto" in error for error in self.errors()))
+
+    def test_cdt_does_not_ask_questions_outside_the_subtitles(self):
+        self.text("justification", "Retrabalho contínuo: quantas horas ainda vamos perder?")
+        self.assertTrue(any("pergunta no texto" in error for error in self.errors()))
+
+    def test_gaps_must_reach_the_analysis(self):
+        self.with_gap()
         self.text("data_to_obtain", "Nenhum dado pendente.", self.analysis)
         code, report = self.check()
         self.assertEqual(code, 1)
-        self.assertTrue(any("liste-os nos dados a obter" in error for error in report["errors"]))
+        self.assertTrue(any("liste as lacunas" in error for error in report["errors"]))
 
-    def test_partial_without_marked_pending_is_explained(self):
-        self.partial("Parcial. Falta a diretoria.")
+    def test_analysis_states_the_gaps(self):
+        self.with_gap("Pronta para envio.")
         code, report = self.check()
         self.assertEqual(code, 1)
-        self.assertTrue(any("sem pendência marcada" in error for error in report["errors"]))
+        self.assertTrue(any("Com lacunas a preencher" in error for error in report["errors"]))
+
+    def test_written_by_the_management_in_first_person(self):
+        self.text("justification", "Retrabalho contínuo: a gestão da área segue sem visão dos prazos.")
+        self.assertTrue(any("primeira pessoa" in error for error in self.errors()))
+
+    def test_ai_sounding_expressions_are_rejected(self):
+        self.text("benefits", self.block("benefits")["data"]["text"] + " Além disso, a solução é robusta.")
+        self.assertTrue(any("cara de IA" in error for error in self.errors()))
 
     def test_both_files_declare_the_same_state(self):
         self.analysis["metadata"]["completeness"] = "partial"
@@ -486,10 +504,6 @@ class CdtValidationTests(unittest.TestCase):
         self.text("justification", "- Retrabalho contínuo: horas da equipe.")
         self.assertTrue(any("Markdown fora da Descrição" in error for error in self.errors()))
         self.assertIn("**", self.block("description")["data"]["text"])
-
-    def test_stage_wording_is_not_a_pending_marker(self):
-        self.text("benefits", self.block("benefits")["data"]["text"] + " A meta fica a confirmar na homologação.")
-        self.assertEqual(self.cdt.report(self.content)["pending_fields"], [])
 
     def test_long_texts_are_rejected(self):
         self.text("benefits", "palavra " * 81)
