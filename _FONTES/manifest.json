@@ -460,6 +460,7 @@
       "briefing-inovacao",
       "esteira-eric",
       "experimentacao-inovacao",
+      "gerador-cdt",
       "potencial-inovacao",
       "relatorio-3e",
       "relatorio-4d",
@@ -574,5 +575,81 @@
     "titular": "CCEE (adaptação de The Pitch Canvas©, Best 3 Minutes)",
     "licenca": "CC BY-SA 4.0",
     "distribuido": true
+  },
+  {
+    "id": "cdt-publicacao",
+    "titulo": "Publicação interna sobre definição de escopo para a Tecnologia",
+    "tipo": "transcricao",
+    "arquivo": "references/publicacao-escopo-tecnologia.md",
+    "skills": [
+      "gerador-cdt"
+    ],
+    "origem": "Publicação interna da CCEE dirigida às áreas que levam demandas à Diretoria de Tecnologia, fornecida pelo usuário.",
+    "deriva_de": null,
+    "notas": "Transcrição anonimizada: nome de pessoa e marca de campanha retirados. Orienta a qualidade esperada; não é norma formal do formulário do Jira.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-10-23",
+    "vigencia": "desconhecida",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
+  },
+  {
+    "id": "cdt-campos",
+    "titulo": "Campos da CDT e insumos da esteira",
+    "tipo": "adaptacao",
+    "arquivo": "references/campos-da-cdt.md",
+    "skills": [
+      "gerador-cdt"
+    ],
+    "origem": "Adaptação da publicação sobre escopo à esteira ERIC e estrutura de campos observada em CDTs reais preenchidas no Jira (outubro de 2026).",
+    "deriva_de": "cdt-publicacao",
+    "notas": "CDT = Cadastro de Demanda Tecnológica. Exemplos usados só para a estrutura dos campos; nomes, siglas de áreas, números de ticket e conteúdo identificável foram retirados.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-10-23",
+    "vigencia": "desconhecida",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
+  },
+  {
+    "id": "cdt-qualidade",
+    "titulo": "Qualidade e veracidade da CDT",
+    "tipo": "adaptacao",
+    "arquivo": "references/qualidade-e-veracidade.md",
+    "origem": "Regras de estado, origem, checklist do comunicado, avaliação crítica e dados a obter, derivadas da publicação sobre escopo e do grilling.",
+    "deriva_de": "cdt-publicacao",
+    "notas": "Regras estruturais conferidas por scripts/checar_cdt.py e pelo validador do tipo cdt.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-10-23",
+    "vigencia": "desconhecida",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true,
+    "skills": [
+      "gerador-cdt"
+    ]
+  },
+  {
+    "id": "cdt-script",
+    "titulo": "Checagem da CDT",
+    "tipo": "script",
+    "arquivo": "scripts/checar_cdt.py",
+    "origem": "Script desta skill; usa o validador cdt do design system.",
+    "deriva_de": "cdt-qualidade",
+    "notas": "Confere estrutura e pendências; não julga a qualidade do conteúdo.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-10-23",
+    "vigencia": "desconhecida",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true,
+    "skills": [
+      "gerador-cdt"
+    ]
   }
 ]

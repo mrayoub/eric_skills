@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "cdt",
+  "canvas": {
+    "unit": "mm",
+    "width": 210,
+    "height": 297
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 178,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "readiness",
+      "x": 16,
+      "y": 30.0,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "readiness",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "jira_title",
+      "x": 16,
+      "y": 40.04,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "jira_title",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "objective",
+      "x": 16,
+      "y": 50.08,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "objective",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "problem",
+      "x": 16,
+      "y": 60.12,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "problem",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "audience",
+      "x": 16,
+      "y": 70.16,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "audience",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s7",
+      "name": "current_process",
+      "x": 16,
+      "y": 80.2,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "current_process",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s8",
+      "name": "expected_results",
+      "x": 16,
+      "y": 90.24,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "expected_results",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s9",
+      "name": "scope_essential",
+      "x": 16,
+      "y": 100.28,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "scope_essential",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s10",
+      "name": "scope_important",
+      "x": 16,
+      "y": 110.32,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "scope_important",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s11",
+      "name": "scope_out",
+      "x": 16,
+      "y": 120.36,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "scope_out",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s12",
+      "name": "priorities",
+      "x": 16,
+      "y": 130.4,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "priorities",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s13",
+      "name": "constraints",
+      "x": 16,
+      "y": 140.44,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "constraints",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s14",
+      "name": "responsibles",
+      "x": 16,
+      "y": 150.48,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "responsibles",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s15",
+      "name": "theme",
+      "x": 16,
+      "y": 160.52,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "theme",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s16",
+      "name": "regulatory",
+      "x": 16,
+      "y": 170.56,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "regulatory",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s17",
+      "name": "risk_if_not_done",
+      "x": 16,
+      "y": 180.6,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "risk_if_not_done",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s18",
+      "name": "benefits",
+      "x": 16,
+      "y": 190.64,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "benefits",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s19",
+      "name": "process_simplification",
+      "x": 16,
+      "y": 200.68,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "process_simplification",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s20",
+      "name": "requester",
+      "x": 16,
+      "y": 210.72,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "requester",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s21",
+      "name": "personal_data",
+      "x": 16,
+      "y": 220.76,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "personal_data",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s22",
+      "name": "publication_checklist",
+      "x": 16,
+      "y": 230.8,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "publication_checklist",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s23",
+      "name": "quality_review",
+      "x": 16,
+      "y": 240.84,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "quality_review",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s24",
+      "name": "data_to_obtain",
+      "x": 16,
+      "y": 250.88,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "data_to_obtain",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s25",
+      "name": "traceability",
+      "x": 16,
+      "y": 260.92,
+      "width": 178,
+      "height": 10.04,
+      "z": 1,
+      "section_key": "traceability",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s26",
+      "name": "identificacao_versao",
+      "x": 16,
+      "y": 271,
+      "width": 178,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

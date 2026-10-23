@@ -37,6 +37,7 @@ DELIVERABLE_LABELS = {
     "executive_presentation": "Apresentação executiva",
     "five_c_workshop_record": "Registro do workshop 5C",
     "five_c_report": "Relatório 5C",
+    "cdt": "Cadastro de Demanda Tecnológica (CDT)",
 }
 COMPLETENESS_LABELS = {
     "complete": "Completo",

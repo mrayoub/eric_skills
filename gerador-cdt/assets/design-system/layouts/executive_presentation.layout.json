@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "executive_presentation",
+  "canvas": {
+    "unit": "mm",
+    "width": 338.67,
+    "height": 190.5
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "logo",
+      "x": 16,
+      "y": 16,
+      "width": 307,
+      "height": 16,
+      "z": 2,
+      "section_key": "logo",
+      "display_mode": ""
+    },
+    {
+      "id": "s2",
+      "name": "titulo_slide",
+      "x": 16,
+      "y": 32,
+      "width": 307,
+      "height": 24,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "corpo_slide",
+      "x": 16,
+      "y": 56,
+      "width": 307,
+      "height": 108,
+      "z": 1,
+      "section_key": "",
+      "display_mode": "content_only"
+    },
+    {
+      "id": "s4",
+      "name": "rodape_slide",
+      "x": 16,
+      "y": 164,
+      "width": 307,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ]
+}

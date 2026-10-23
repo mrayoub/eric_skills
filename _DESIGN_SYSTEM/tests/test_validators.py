@@ -364,5 +364,67 @@ class ObjectivityValidatorTests(unittest.TestCase):
         self.assertEqual(validators.run(content), [])
 
 
+class CdtValidationTests(unittest.TestCase):
+    def setUp(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/cdt/input.json"
+        self.content = json.loads(path.read_text(encoding="utf-8"))
+        self.cdt = load_module("cdt_validator", ROOT / "scripts/validators/cdt.py")
+
+    def block(self, key):
+        return next(block for block in self.content["blocks"] if block["data"].get("section_key") == key)
+
+    def test_complete_sample_is_valid(self):
+        self.assertEqual(validators.run(self.content), [])
+
+    def test_pending_field_blocks_complete_version(self):
+        self.block("responsibles")["data"]["text"] = "Validação das entregas: a confirmar (sponsor)."
+        errors = validators.run(self.content)
+        self.assertTrue(any("campos a confirmar" in error and "responsibles" in error for error in errors), errors)
+        self.content["metadata"]["completeness"] = "partial"
+        self.block("readiness")["data"]["text"] = "Parcial. Falta quem valida as entregas."
+        report = self.cdt.report(self.content)
+        self.assertEqual(report["pending_fields"], ["responsibles"])
+        self.assertFalse(report["ready"])
+        self.assertTrue(report["readiness_text_ok"])
+
+    def test_field_without_source_or_pending_is_rejected(self):
+        self.block("benefits").pop("citation_ids")
+        self.assertTrue(any("sem fonte" in error and "benefits" in error for error in validators.run(self.content)))
+
+    def test_quality_review_requires_strengths_and_weaknesses(self):
+        self.block("quality_review")["data"]["text"] = "Pontos fortes:\n- Escopo claro."
+        self.assertTrue(any("Pontos fracos" in error for error in validators.run(self.content)))
+
+    def test_checklist_needs_all_six_items_with_status(self):
+        block = self.block("publication_checklist")
+        block["data"]["text"] = block["data"]["text"].replace("- Responsáveis: atendido.", "- Responsáveis.")
+        self.assertTrue(any("Responsáveis" in error for error in validators.run(self.content)))
+
+    def test_checklist_gap_blocks_complete_version(self):
+        block = self.block("publication_checklist")
+        block["data"]["text"] = block["data"]["text"].replace("- Responsáveis: atendido.", "- Responsáveis: parcial.")
+        self.assertTrue(any("checklist não atendidos" in error for error in validators.run(self.content)))
+
+    def test_pending_without_data_to_obtain_is_rejected(self):
+        self.content["metadata"]["completeness"] = "partial"
+        self.block("theme")["data"]["text"] = "a confirmar com a Tecnologia"
+        self.block("data_to_obtain")["data"]["text"] = " "
+        self.assertTrue(any("data_to_obtain" in error for error in self.cdt.report(self.content)["errors"]))
+
+    def test_checker_script_reports_partial(self):
+        self.content["metadata"]["completeness"] = "partial"
+        self.block("theme")["data"]["text"] = "a confirmar com a Tecnologia"
+        self.block("readiness")["data"]["text"] = "Parcial. Falta o tema."
+        script = ROOT.parent / "gerador-cdt/scripts/checar_cdt.py"
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "cdt.json"
+            path.write_text(json.dumps(self.content), encoding="utf-8")
+            result = subprocess.run([sys.executable, str(script), str(path)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["pending_fields"], ["theme"])
+        self.assertEqual(report["suggested_completeness"], "partial")
+
+
 if __name__ == "__main__":
     unittest.main()

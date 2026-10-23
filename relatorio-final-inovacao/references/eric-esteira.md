@@ -1,6 +1,6 @@
 # ERIC: Esteira Robusta de Inovação Colaborativa
 
-Esta é a referência metodológica comum das treze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
+Esta é a referência metodológica comum das catorze skills. **ERIC aqui é somente a Esteira Robusta de Inovação Colaborativa.** O quadro descreve a sequência usual, os objetivos, as evidências e as decisões da inovação na CCEE. Cada skill pode ser usada em qualquer momento, inclusive fora da esteira; posição ou nota de fase nunca substitui os requisitos de evidência da entrega.
 
 ## Contexto institucional
 
@@ -23,7 +23,7 @@ As etapas abaixo são o arranjo metodológico de referência do RC6. O RC5 usa r
 | 6 | **Buscar soluções externas** | Há alternativa externa aderente e viável? | Quando a rota justificar, comparar ferramentas, startups, fornecedores e parceiros com critérios de integração, custo, risco e adequação. | Comparação de alternativas e recomendação; etapa condicional na referência RC6. |
 | 7 | **Experimentar** | O teste ou piloto responde à pergunta crítica? | Definir hipótese, Test Card, método, população, medida, critério, fonte e guardrails antes da coleta; executar; reconciliar registros; interpretar limites e resultados adversos. | Evidências, KPIs apropriados, Learning Cards após execução, relatório e recomendação proporcional. |
 | BP2 | **Solução experimentada** | Há evidência e viabilidade suficientes para implementar? | Avaliar resultados, riscos, custo, dependências e prontidão; distinguir efeito observado de promessa. | Parecer sobre avanço, ajuste, novo teste ou interrupção, com decisão de gestão separada. |
-| 8 | **Implementar** | Como obter e sustentar o resultado? | Definir estratégia de implementação, responsáveis, recursos, handoff, operação, monitoramento e revisão de benefícios. | Recomendação de implementação, plano, indicadores e acompanhamento. |
+| 8 | **Implementar** | Como obter e sustentar o resultado? | Definir estratégia de implementação, responsáveis, recursos, handoff, operação, monitoramento e revisão de benefícios. | Recomendação de implementação, plano, indicadores e acompanhamento; Cadastro de Demanda Tecnológica (CDT) com os dados da demanda à Tecnologia quando houver construção ou integração. |
 
 ### O que conferir em cada transição
 

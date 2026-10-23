@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "briefing_validation",
+  "canvas": {
+    "unit": "mm",
+    "width": 210,
+    "height": 297
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 178,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "challenge",
+      "x": 16,
+      "y": 30,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "challenge",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "hmw",
+      "x": 16,
+      "y": 64.43,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "hmw",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "scores",
+      "x": 16,
+      "y": 98.86,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "scores",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "iqb",
+      "x": 16,
+      "y": 133.29,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "iqb",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "strengths",
+      "x": 16,
+      "y": 167.72,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "strengths",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s7",
+      "name": "gaps",
+      "x": 16,
+      "y": 202.15,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "gaps",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s8",
+      "name": "provocations",
+      "x": 16,
+      "y": 236.58,
+      "width": 178,
+      "height": 34.43,
+      "z": 1,
+      "section_key": "provocations",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s9",
+      "name": "identificacao_versao",
+      "x": 16,
+      "y": 271,
+      "width": 178,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

@@ -1,0 +1,37 @@
+{
+  "skill_name": "gerador-cdt",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Monte a CDT do portal de solicitações para eu cadastrar no Jira, com o relatório 3E e a consolidação da experimentação.",
+      "expected_output": "CDT campo a campo, com fontes, escopo em três grupos coerente com o 3E e os Learning Cards, resultado medido separado da meta projetada.",
+      "files": [
+        "files/relatorio-3e.md",
+        "files/experimentacao-e-decisao.md"
+      ],
+      "expectations": [
+        "Organiza a saída pelos campos do Jira (título, seções da Descrição, tema, demanda regulatória, riscos, benefícios, simplificação do processo, dados do solicitante, LGPD), cada um com fonte verificável, sem preencher campos da Tecnologia como tamanho ou squad.",
+        "Põe formulário guiado e protocolo em essenciais, status visível em importantes (LC-02 não atingido) e integração com faturamento fora do escopo, com o motivo.",
+        "Usa a linha de base de 90 em 360 pedidos (25%) e trata 7 de 8 analistas como resultado de teste com protótipo, não como ganho em produção.",
+        "Registra os dados pessoais de contato como restrição e indica Bruno Lima como decisor e Ana Souza como validadora das entregas.",
+        "Começa pelo problema e não usa 3E, Learning Card ou BP2 sem explicar ao leitor da Tecnologia.",
+        "Mesmo com os campos preenchidos, apresenta pontos fortes e fracos, incluindo a meta de 10% como proposta do sponsor sem estudo de viabilidade, e o checklist do comunicado com os seis itens."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "O sponsor quer abrir a CDT já. Use a Entrevista Inicial e gere a CDT.",
+      "expected_output": "CDT parcial: preenche o que a Entrevista Inicial sustenta, marca a confirmar o que falta e não converte o pedido do sponsor em escopo.",
+      "files": [
+        "files/so-entrevista.md"
+      ],
+      "expectations": [
+        "Declara a CDT como parcial e explica por quê, sem recusar a entrega.",
+        "Não inventa volume, linha de base, meta numérica, regras ou responsáveis ausentes; usa 'a confirmar' com pendência registrada.",
+        "Não transforma 'um sistema novo com tudo integrado' em entrega essencial; trata como pedido a avaliar e descreve o problema antes da solução.",
+        "Lista os dados a obter (volume e linha de base, entregas essenciais, sponsor e validação, restrições) com o campo afetado, onde ou com quem obter, pergunta pronta e se impedem o envio.",
+        "Pergunta apenas o que é decisivo e não pergunta ao usuário qual conclusão ele deseja."
+      ]
+    }
+  ]
+}

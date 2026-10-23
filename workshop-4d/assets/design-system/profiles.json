@@ -104,6 +104,11 @@
       "layout": "report_landscape",
       "paper": "a4_landscape",
       "schema": "five-c-report.schema.json"
+    },
+    "cdt": {
+      "layout": "report_portrait",
+      "paper": "a4_portrait",
+      "schema": "cdt.schema.json"
     }
   }
 }

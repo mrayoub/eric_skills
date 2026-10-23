@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eric:schemas:briefing-improvement-questionnaire",
+  "title": "ERIC Perguntas para fechar lacunas",
+  "description": "Perguntas priorizadas para fechar lacunas da Entrevista Inicial ou do Briefing.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "briefing_improvement_questionnaire"
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "briefing_version_id",
+            "generation_mode"
+          ],
+          "properties": {
+            "phase_key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Contexto opcional da fase registrada; não controla o uso da skill."
+            },
+            "briefing_version_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "generation_mode": {
+              "const": "gap_driven"
+            }
+          }
+        },
+        "blocks": {
+          "contains": {
+            "type": "object",
+            "required": [
+              "type",
+              "data"
+            ],
+            "properties": {
+              "type": {
+                "const": "list"
+              },
+              "data": {
+                "type": "object",
+                "required": [
+                  "section_key",
+                  "items"
+                ],
+                "properties": {
+                  "section_key": {
+                    "const": "questions"
+                  },
+                  "items": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 12,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    }
+  ]
+}

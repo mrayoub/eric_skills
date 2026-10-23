@@ -72,5 +72,31 @@
     "c3",
     "c4",
     "c5"
+  ],
+  "cdt": [
+    "readiness",
+    "jira_title",
+    "objective",
+    "problem",
+    "audience",
+    "current_process",
+    "expected_results",
+    "scope_essential",
+    "scope_important",
+    "scope_out",
+    "priorities",
+    "constraints",
+    "responsibles",
+    "theme",
+    "regulatory",
+    "risk_if_not_done",
+    "benefits",
+    "process_simplification",
+    "requester",
+    "personal_data",
+    "publication_checklist",
+    "quality_review",
+    "data_to_obtain",
+    "traceability"
   ]
 }

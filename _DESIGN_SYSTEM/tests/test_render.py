@@ -878,6 +878,16 @@ class RenderTests(unittest.TestCase):
                     {"id": key, "type": "paragraph", "data": {"section_key": key, "text": "Síntese registrada."}, "citation_ids": ["F01"]}
                     for key in keys
                 ]
+                if kind == "cdt":
+                    special = {
+                        "readiness": "Pronta para envio.",
+                        "publication_checklist": "\n".join(f"- {label}: atendido." for label in (
+                            "Problema e objetivo", "Públicos impactados", "Entregas essenciais",
+                            "Prioridades e resultados esperados", "Regras, restrições e dependências", "Responsáveis")),
+                        "quality_review": "Pontos fortes: síntese.\nPontos fracos: síntese.",
+                    }
+                    for block in item["blocks"]:
+                        block["data"]["text"] = special.get(block["id"], block["data"]["text"])
                 if kind == "innovation_potential_assessment":
                     item["blocks"].insert(0, {
                         "id": "scores", "type": "table", "data": {
@@ -1404,7 +1414,7 @@ class ReportLabReportTests(unittest.TestCase):
         "four_d_report": 5, "three_e_workshop_record": 1,
         "three_e_report": 2, "innovation_scorecard": 1,
         "experiment_report": 2, "evidence_recommendation": 2,
-        "five_c_workshop_record": 2, "five_c_report": 2,
+        "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 4,
     }
 
     @classmethod

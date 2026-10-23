@@ -14,7 +14,7 @@ OTHERS = sorted(p.name for p in ROOT.iterdir() if p.is_dir() and (p / "SKILL.md"
 class EsteiraEricTests(unittest.TestCase):
     def test_map_covers_every_other_skill(self) -> None:
         mapa = (MASTER / "references/mapa-das-skills.md").read_text(encoding="utf-8")
-        self.assertEqual(len(OTHERS), 12)
+        self.assertEqual(len(OTHERS), 13)
         for name in OTHERS:
             with self.subTest(skill=name):
                 self.assertIn(f"`{name}`", mapa)

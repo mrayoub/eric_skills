@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eric:schemas:briefing",
+  "title": "ERIC Entrevista Inicial de sete campos",
+  "description": "Contrato especializado da Entrevista Inicial de sete campos da fase de conhecimento do problema ou oportunidade.",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "briefing"
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "generation_mode"
+          ],
+          "properties": {
+            "phase_key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Contexto opcional da fase registrada; não controla o uso da skill."
+            },
+            "generation_mode": {
+              "enum": [
+                "draft",
+                "structured",
+                "improve",
+                "imported"
+              ]
+            },
+            "source_version_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/challengeTitleBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/challengeBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/problemBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/relevanceBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/outcomesBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/responsibleBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "urn:eric:schemas:briefing#/$defs/sponsorBlock"
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sectionBlock": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "type": "object",
+          "required": [
+            "section_key"
+          ]
+        }
+      }
+    },
+    "challengeTitleBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/sectionBlock"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "heading"
+            },
+            "data": {
+              "required": [
+                "section_key",
+                "text"
+              ],
+              "properties": {
+                "section_key": {
+                  "const": "challenge_title"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 150
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "challengeBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/sectionBlock"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "callout"
+            },
+            "data": {
+              "required": [
+                "section_key",
+                "text"
+              ],
+              "properties": {
+                "section_key": {
+                  "const": "challenge"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "narrativeSection": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/sectionBlock"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "rich_text"
+            },
+            "data": {
+              "required": [
+                "section_key",
+                "title",
+                "description",
+                "points"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "points": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "problemBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/narrativeSection"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "problem_opportunity"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "relevanceBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/narrativeSection"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "business_relevance"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "outcomesBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/narrativeSection"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "expected_outcomes"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "personBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/sectionBlock"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "paragraph"
+            },
+            "data": {
+              "required": [
+                "section_key",
+                "name",
+                "description"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "responsibleBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/personBlock"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "responsible"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "sponsorBlock": {
+      "allOf": [
+        {
+          "$ref": "urn:eric:schemas:briefing#/$defs/personBlock"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "sponsor"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

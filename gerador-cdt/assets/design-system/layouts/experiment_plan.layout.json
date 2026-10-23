@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "experiment_plan",
+  "canvas": {
+    "unit": "mm",
+    "width": 210,
+    "height": 297
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 16,
+      "y": 16,
+      "width": 178,
+      "height": 14,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "hypothesis",
+      "x": 16,
+      "y": 30,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "hypothesis",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "method",
+      "x": 16,
+      "y": 70.17,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "method",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "population",
+      "x": 16,
+      "y": 110.34,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "population",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "measures",
+      "x": 16,
+      "y": 150.51,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "measures",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "protocol",
+      "x": 16,
+      "y": 190.68,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "protocol",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s7",
+      "name": "guardrails",
+      "x": 16,
+      "y": 230.85,
+      "width": 178,
+      "height": 40.17,
+      "z": 1,
+      "section_key": "guardrails",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s8",
+      "name": "identificacao_versao",
+      "x": 16,
+      "y": 271,
+      "width": 178,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

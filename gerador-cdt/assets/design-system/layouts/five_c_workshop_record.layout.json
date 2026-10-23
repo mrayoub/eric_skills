@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "five_c_workshop_record",
+  "canvas": {
+    "unit": "mm",
+    "width": 297,
+    "height": 210
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "s1",
+      "name": "titulo_documento",
+      "x": 12,
+      "y": 12,
+      "width": 273,
+      "height": 16,
+      "z": 1,
+      "section_key": "titulo_documento",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "c1",
+      "x": 12,
+      "y": 28,
+      "width": 273,
+      "height": 32.0,
+      "z": 1,
+      "section_key": "c1",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "c2",
+      "x": 12,
+      "y": 60.0,
+      "width": 273,
+      "height": 32.0,
+      "z": 1,
+      "section_key": "c2",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "c3",
+      "x": 12,
+      "y": 92.0,
+      "width": 273,
+      "height": 32.0,
+      "z": 1,
+      "section_key": "c3",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "c4",
+      "x": 12,
+      "y": 124.0,
+      "width": 273,
+      "height": 32.0,
+      "z": 1,
+      "section_key": "c4",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "c5",
+      "x": 12,
+      "y": 156.0,
+      "width": 273,
+      "height": 32.0,
+      "z": 1,
+      "section_key": "c5",
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s7",
+      "name": "identificacao_versao",
+      "x": 12,
+      "y": 188,
+      "width": 273,
+      "height": 10,
+      "z": 1,
+      "section_key": "identificacao_versao",
+      "display_mode": "content_only"
+    }
+  ],
+  "_draft_note": "Rascunho proposto (título + 1 bloco por section_key na ordem do schema + rodapé), não é extração de render.py; esse tipo é renderizado em fluxo, sem posição fixa hoje."
+}

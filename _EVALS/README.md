@@ -22,6 +22,7 @@ e começa com `> Material fictício para avaliação de skill.`
 | `experimentacao-inovacao/` | Critério não atingido, Learning Card, plano sem dados, modelo de experimentação e avaliação do MVP |
 | `scorecard-inovacao/` | Estados de evidência, limites de entrevistas e ausência de média geral |
 | `esteira-eric/` | Diagnóstico da etapa pelos arquivos e encaminhamento para uma skill |
+| `gerador-cdt/` | Campos do Jira com fonte, escopo em três grupos e CDT parcial sem dados decisivos |
 | `triggers/` | Seleção da skill pelo pedido; conjunto distinto do teste comportamental |
 
 Cada pasta comportamental contém `evals.json` e `files/`. São dois casos por
@@ -45,7 +46,7 @@ from pathlib import Path
 
 root = Path('_EVALS')
 paths = sorted(root.glob('*/evals.json'))
-assert len(paths) == 13
+assert len(paths) == 14
 for path in paths:
     data = json.loads(path.read_text(encoding='utf-8'))
     assert data['skill_name'] == path.parent.name
@@ -59,7 +60,7 @@ for path in paths:
             text = fixture.read_text(encoding='utf-8')
             assert text.startswith('> Material fictício para avaliação de skill.')
             assert len(text.splitlines()) <= 60, fixture
-print('ok: 13 conjuntos, 26 casos')
+print('ok: 14 conjuntos, 28 casos')
 PY
 ```
 
@@ -68,7 +69,7 @@ que um modelo cumpre as expectativas.
 
 ## Conjunto complementar: critério local da experimentação
 
-[`experimentacao-inovacao/casos-criterio-local.json`](experimentacao-inovacao/casos-criterio-local.json) acrescenta quatro casos fictícios aos dois casos originais: critério prévio não atingido (3/5), atingido localmente (4/5), plano exploratório sem limiar e coleta incompleta. O conjunto original `experimentacao-inovacao/evals.json` e a checagem de 13 conjuntos/26 casos acima continuam independentes. [`experimentacao-inovacao/casos-tres-blocos.json`](experimentacao-inovacao/casos-tres-blocos.json) acrescenta dois casos para o processo em três blocos: o Modelo de experimentação a partir do Test Card aprovado e a consolidação com avaliação do MVP separada das hipóteses.
+[`experimentacao-inovacao/casos-criterio-local.json`](experimentacao-inovacao/casos-criterio-local.json) acrescenta quatro casos fictícios aos dois casos originais: critério prévio não atingido (3/5), atingido localmente (4/5), plano exploratório sem limiar e coleta incompleta. O conjunto original `experimentacao-inovacao/evals.json` e a checagem de 14 conjuntos/28 casos acima continuam independentes. [`experimentacao-inovacao/casos-tres-blocos.json`](experimentacao-inovacao/casos-tres-blocos.json) acrescenta dois casos para o processo em três blocos: o Modelo de experimentação a partir do Test Card aprovado e a consolidação com avaliação do MVP separada das hipóteses.
 
 Para conferir a estrutura sem chamadas de modelo, carregue esse JSON, exija `skill_name: experimentacao-inovacao`, IDs 1–4, quatro a sete expectativas por caso e verifique que cada arquivo listado existe, começa com o marcador de material fictício e tem no máximo 60 linhas. Isso confere os insumos; **não mede o comportamento**. A execução comportamental permanece **não rodada** e exige autorização específica de custo.
 

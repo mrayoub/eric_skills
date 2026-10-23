@@ -24,6 +24,7 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 | `executive_presentation` | experimentacao-inovacao | `presentation` | [executive_presentation](./executive_presentation/) |
 | `five_c_workshop_record` | workshop-5c | `report_landscape` | [five_c_workshop_record](./five_c_workshop_record/) |
 | `five_c_report` | relatorio-5c | `report_landscape` | [five_c_report](./five_c_report/) |
+| `cdt`: Cadastro de Demanda Tecnológica (CDT) | gerador-cdt | `report_portrait` | [cdt](./cdt/) |
 
 Os relatórios agora apresentam seções em cards tabulados; a amostra 4D inclui grades de diagnóstico, jornada, alternativas e priorização inspiradas apenas na estrutura visual do PDF de referência. A orientação continua definida por perfil, e os Test/Learning Cards mantêm seus quatro campos Strategyzer.
 

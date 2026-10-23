@@ -1,0 +1,5 @@
+interface:
+  display_name: "Gerador de CDT"
+  short_description: "Prepara o Cadastro de Demanda Tecnológica (CDT)"
+  brand_color: "#193C8E"
+  default_prompt: "Use $gerador-cdt para montar a CDT deste projeto para o Jira."

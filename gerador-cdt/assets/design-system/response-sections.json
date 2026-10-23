@@ -1,0 +1,102 @@
+{
+  "innovation_potential_assessment": [
+    "impact",
+    "feasibility",
+    "alignment",
+    "urgency",
+    "novelty",
+    "recommendation"
+  ],
+  "four_d_workshop_record": [
+    "d1",
+    "d2",
+    "d3",
+    "d4"
+  ],
+  "three_e_workshop_record": [
+    "e1",
+    "e2",
+    "e3"
+  ],
+  "three_e_report": [
+    "e1",
+    "e2",
+    "e3",
+    "route"
+  ],
+  "innovation_scorecard": [
+    "alignment_opportunity",
+    "risk_reduction",
+    "next_gate"
+  ],
+  "experiment_plan": [
+    "hypothesis",
+    "method",
+    "population",
+    "measures",
+    "protocol",
+    "guardrails"
+  ],
+  "experiment_report": [
+    "scope",
+    "method",
+    "evidence",
+    "results",
+    "limits",
+    "recommendation"
+  ],
+  "evidence_recommendation": [
+    "question",
+    "evidence",
+    "options",
+    "recommendation",
+    "conditions"
+  ],
+  "executive_presentation": [
+    "context",
+    "method",
+    "findings",
+    "recommendation",
+    "next_steps"
+  ],
+  "five_c_workshop_record": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "five_c_report": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+  ],
+  "cdt": [
+    "readiness",
+    "jira_title",
+    "objective",
+    "problem",
+    "audience",
+    "current_process",
+    "expected_results",
+    "scope_essential",
+    "scope_important",
+    "scope_out",
+    "priorities",
+    "constraints",
+    "responsibles",
+    "theme",
+    "regulatory",
+    "risk_if_not_done",
+    "benefits",
+    "process_simplification",
+    "requester",
+    "personal_data",
+    "publication_checklist",
+    "quality_review",
+    "data_to_obtain",
+    "traceability"
+  ]
+}

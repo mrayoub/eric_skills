@@ -33,6 +33,7 @@ SKILLS = {
                                 "evidence_recommendation", "executive_presentation"],
     "scorecard-inovacao": ["innovation_scorecard"],
     "relatorio-final-inovacao": ["evidence_recommendation", "executive_presentation"],
+    "gerador-cdt": ["cdt"],
 }
 LAYOUT_NAMES = {"report_portrait": "Relatório A4 retrato", "report_landscape": "Relatório A4 paisagem",
                 "card_portrait": "Cartão A4 retrato", "executive_one_page": "Página única A4 paisagem",

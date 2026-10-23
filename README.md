@@ -1,8 +1,8 @@
 # Skills de inovação da GEIN-CCEE
 
-Treze skills no padrão aberto [Agent Skills](https://agentskills.io/specification) para a Esteira
+Catorze skills no padrão aberto [Agent Skills](https://agentskills.io/specification) para a Esteira
 Robusta de Inovação Colaborativa (ERIC) da CCEE: briefing, avaliação IQB, potencial, workshops e
-relatórios 4D, 3E e 5C, experimentação, scorecard e relatório final, mais a `esteira-eric`, porta de entrada
+relatórios 4D, 3E e 5C, experimentação, scorecard, relatório final e o Cadastro de Demanda Tecnológica (CDT) para a Tecnologia, mais a `esteira-eric`, porta de entrada
 que diagnostica a etapa do projeto e indica a próxima skill. Pedidos diretos (por exemplo, "faça o relatório 4D")
 continuam indo direto para a skill específica. Funcionam no Claude (app e
 Claude Code), no ChatGPT/Codex e em outras ferramentas compatíveis.
@@ -17,7 +17,7 @@ O [`catalog.json`](catalog.json) registra a versão publicada de cada uma.
 ## 1. Instalar com `npx skills` (Claude Code, Codex, Cursor, Copilot e outras)
 
 ```bash
-npx skills add mrayoub/eric_skills --all                 # as 13 skills em todas as ferramentas detectadas
+npx skills add mrayoub/eric_skills --all                 # as 14 skills em todas as ferramentas detectadas
 npx skills add mrayoub/eric_skills --skill relatorio-4d  # só uma skill
 npx skills add mrayoub/eric_skills --all -g              # instalação global (todos os projetos)
 npx skills add mrayoub/eric_skills --skill relatorio-4d -a claude-code codex  # ferramentas específicas
@@ -32,7 +32,7 @@ Enquanto o repositório for privado, é preciso ter acesso a ele no GitHub, com 
      https://learn.chatgpt.com/docs/build-skills (pasta $HOME/.agents/skills do Codex). -->
 
 Baixe na Release [`pacotes`](https://github.com/mrayoub/eric_skills/releases/tag/pacotes), que sempre tem a versão
-mais recente das 13 skills (mais `catalog.json` e `SHA256SUMS`); cada versão também tem sua própria Release
+mais recente das 14 skills (mais `catalog.json` e `SHA256SUMS`); cada versão também tem sua própria Release
 (`<skill>-v<versão>`). Localmente, `python3 _TOOLS/build_dist.py` gera os mesmos pacotes em `_DIST/`. Cada `.skill`
 é um ZIP com a pasta da skill na raiz.
 
@@ -64,7 +64,7 @@ nenhum arquivo. Com o repositório privado, defina `GITHUB_TOKEN` para ler o cat
 4. Rode os testes e abra um pull request. A CI recusa conteúdo de skill alterado sem `--bump` e confere os três
    canais (`python3 _TOOLS/check_channels.py`). Depois do merge, a CI publica as Releases das versões novas.
 
-Uma mudança no design system altera o pacote das 12 skills e, portanto, a versão de todas.
+Uma mudança no design system altera o pacote das 13 skills e, portanto, a versão de todas.
 
 ## Preferências do usuário
 

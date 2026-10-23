@@ -1,0 +1,66 @@
+[
+  {
+    "query": "Preciso abrir a CDT no Jira do portal de solicitações, monta os campos pra mim",
+    "should_trigger": true
+  },
+  {
+    "query": "Monta a demanda para a TI com problema, escopo e responsáveis a partir dos relatórios da esteira",
+    "should_trigger": true
+  },
+  {
+    "query": "Revisa essa CDT antes de eu mandar para a Tecnologia",
+    "should_trigger": true
+  },
+  {
+    "query": "Separe o que é essencial, importante e fora do escopo para levar à Diretoria de Tecnologia",
+    "should_trigger": true
+  },
+  {
+    "query": "A gestão aprovou implementar; preciso organizar o escopo para cadastrar no Jira",
+    "should_trigger": true
+  },
+  {
+    "query": "Completa os campos que faltam na CDT com o que temos do 3E e dos Learning Cards",
+    "should_trigger": true
+  },
+  {
+    "query": "Gera os dados da CDT em PDF e no texto para colar no Jira",
+    "should_trigger": true
+  },
+  {
+    "query": "Quais informações a Tecnologia precisa para dimensionar essa demanda? Prepare a partir dos nossos documentos",
+    "should_trigger": true
+  },
+  {
+    "query": "Faça o relatório final com a recomendação para a diretoria decidir",
+    "should_trigger": false
+  },
+  {
+    "query": "Escreva a Entrevista Inicial de sete campos desse desafio",
+    "should_trigger": false
+  },
+  {
+    "query": "Avalie o IQB do briefing",
+    "should_trigger": false
+  },
+  {
+    "query": "Monte os Test Cards do workshop 3E",
+    "should_trigger": false
+  },
+  {
+    "query": "Em que etapa da esteira estamos e qual o próximo passo?",
+    "should_trigger": false
+  },
+  {
+    "query": "Abra um ticket de bug no Jira para o erro de login",
+    "should_trigger": false
+  },
+  {
+    "query": "Classifique o potencial destas três oportunidades",
+    "should_trigger": false
+  },
+  {
+    "query": "Compile o relatório 3E com a decisão de rota",
+    "should_trigger": false
+  }
+]

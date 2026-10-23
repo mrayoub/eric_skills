@@ -340,6 +340,7 @@
     briefing_one_page: ["hmw", "problem_opportunity", "business_relevance", "expected_outcomes", "people"],
     briefing_improvement_questionnaire: ["questions"],
     briefing_validation: ["challenge", "hmw", "scores", "iqb", "strengths", "gaps", "provocations"],
+    cdt: ["readiness", "jira_title", "objective", "problem", "audience", "current_process", "expected_results", "scope_essential", "scope_important", "scope_out", "priorities", "constraints", "responsibles", "theme", "regulatory", "risk_if_not_done", "benefits", "process_simplification", "requester", "personal_data", "publication_checklist", "quality_review", "data_to_obtain", "traceability"],
     evidence_recommendation: ["question", "evidence", "options", "recommendation", "conditions"],
     executive_presentation: ["context", "method", "findings", "recommendation", "next_steps"],
     experiment_plan: ["hypothesis", "method", "population", "measures", "protocol", "guardrails"],
@@ -374,7 +375,8 @@
       "evidence_recommendation": "Evidências e recomendação",
       "executive_presentation": "Apresentação executiva",
       "five_c_workshop_record": "Registro do workshop 5C",
-      "five_c_report": "Relatório 5C"
+      "five_c_report": "Relatório 5C",
+      "cdt": "Cadastro de Demanda Tecnológica (CDT)"
   };
   const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE)
     .sort((a, b) => (DELIVERABLE_LABELS[a] || a).localeCompare(DELIVERABLE_LABELS[b] || b, "pt-BR"));
