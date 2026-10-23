@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Gerador de CDT
@@ -61,9 +61,11 @@ obter. Se a rota for externa, diga o que muda no pedido à Tecnologia em vez de 
    respostas se contradizem. Esses campos não são entregues; o que faltar vai para a análise.
 3. **CDT, quatro blocos, nesta ordem.** Rótulo Epic: uma linha que nomeia a tecnologia (plataforma, sistema,
    ferramenta, integração, interface) e o que ela faz, sem nada que sugira uma pessoa. Descrição: um bloco só, com as
-   cinco perguntas do comunicado como subtítulos em negrito, sempre respondidas. Justificativa: os riscos de não
-   implementar, um por linha. Benefícios: o principal com número na primeira linha. Markdown só na Descrição; nenhuma
-   fonte no texto.
+   cinco perguntas do comunicado como subtítulos em negrito, sempre respondidas, cada uma a partir da sua fonte
+   principal (Briefing, todo o material, Relatório 4D, Relatório 3E e Learning Cards, Relatório 3E e Relatório final;
+   [de/para](references/campos-jira.md#fonte-principal-de-cada-pergunta)), com o documento mais recente
+   prevalecendo. Justificativa: os riscos de não implementar, um por linha. Benefícios: o principal com número na
+   primeira linha. Markdown só na Descrição; nenhuma fonte no texto.
 4. **Corte.** Cada fato aparece uma vez; siglas por extenso na primeira menção de cada campo; nada de narrar o
    método da esteira. Limites: 16 palavras no Rótulo Epic, 150 por pergunta da Descrição, 80 na Justificativa e nos
    Benefícios.

@@ -118,6 +118,23 @@ As cinco perguntas são obrigatórias em qualquer versão, inclusive na parcial:
 o material sustenta e marca "a confirmar:". Cada resposta tem até 150 palavras. Regras, restrições, dependências e
 responsáveis não entram aqui: vão no checklist da análise.
 
+### Fonte principal de cada pergunta
+
+Todo o material disponível (arquivos e conversa) pode sustentar as respostas, mas cada pergunta tem uma base:
+
+| Pergunta | Base | Como usar |
+|---|---|---|
+| Qual problema queremos resolver? | Briefing | Use o Briefing inteiro: o "Como poderíamos" responde à pergunta, e Problema, Relevância e Resultados esperados a completam. Os quatro precisam ficar claros na resposta. |
+| Quem é impactado? | Todo o material | Nenhum entregável responde direto: junte o que a Entrevista Inicial, o Briefing, os relatórios 4D, 3E e 5C, a experimentação e o relatório final dizem sobre quem usa, quem opera e quem é afetado. |
+| Como o processo funciona hoje? | Relatório 4D | O levantamento do processo atual (jornada do D2 e diagnóstico) é a base da resposta. |
+| Qual resultado esperamos alcançar? | Relatório 3E e Learning Cards | O 3E diz o que a demanda deve atender e o que fica fora do escopo; os Learning Cards sustentam as hipóteses que defendem esse resultado. |
+| O que é prioridade neste momento? | Relatório 3E e Relatório final | O 3E traz essencial, importante e fora do escopo; o Relatório final confirma ou muda esse recorte. |
+
+**O documento mais recente prevalece.** Se o escopo definido no 3E mudou depois (no Relatório final, numa decisão da
+gestão ou em outro entregável posterior), responda com o escopo vigente e registre a mudança na Análise da CDT, na
+origem dos dados. Fonte principal ausente não impede a resposta: use o restante do material, marque "a confirmar:" o
+que só ela daria e ponha o entregável em "O que obter e analisar primeiro".
+
 ## Justificativa e Benefícios
 
 - **Justificativa:** os riscos de não implementar, um por linha, abertos pelo nome do risco e dois-pontos
@@ -290,9 +307,7 @@ Use a decisão mais recente documentada; não reabra o que ela encerrou.
 
 | Campo | Fontes principais |
 |---|---|
-| Problema, resultado esperado | Entrevista Inicial, Briefing, Relatório 4D (diagnóstico), Relatório final, decisão de gestão |
-| Quem é impactado, processo atual | Entrevista Inicial, jornada do 4D, Relatório 5C, população da experimentação |
-| Prioridade | Relatório 3E (precisa ter, pode evoluir, fora do recorte), Learning Cards, avaliação do MVP |
+| Descrição | Ver [fonte principal de cada pergunta](#fonte-principal-de-cada-pergunta) |
 | Benefícios, frequência | Test Cards (medida e critério), Learning Cards, Relatório final |
 | Riscos, regras, dependências | Barco da inovação do 4D, dependências do 3E, viabilidade do Relatório final |
 | Responsáveis | Entrevista Inicial (responsável e sponsor), Relatório final (decisor), resposta do usuário |

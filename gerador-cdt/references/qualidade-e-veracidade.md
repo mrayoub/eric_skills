@@ -89,8 +89,9 @@ validada, combinação incoerente entre campos do formulário ([coerência](camp
 ## Origem dos dados (`traceability`)
 
 É aqui que as fontes aparecem. Uma frase, seguida de uma tabela sem `section_key` com as colunas Campo, Fonte,
-Natureza e Limite, em que a coluna Fonte nomeia o documento e o localizador. Uma linha por campo da CDT; a Descrição
-pode ter uma linha por grupo de perguntas.
+Natureza e Limite, em que a coluna Fonte nomeia o documento e o localizador. Uma linha por campo da CDT e uma por
+pergunta da Descrição, com a fonte principal primeiro. Quando o escopo do Relatório 3E mudou num documento posterior,
+diga na coluna Limite qual documento prevaleceu.
 
 ## Regras de veracidade
 
