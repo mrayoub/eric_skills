@@ -1607,6 +1607,8 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                                 add_block(cell, child)
                 paragraph_text(doc.add_paragraph(), "", "body").paragraph_format.space_after = Pt(8)
         sections = pdf_module().group_sections(remaining_blocks, block_text)
+        section_keys = {block_text(block): block.get("data", {}).get("section_key")
+                        for block in remaining_blocks if block["type"] == "heading"}
         index = 0
         while index < len(sections):
             item = sections[index]
@@ -1615,6 +1617,9 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                 index += 1
                 continue
             _, heading_text, blocks, wide = item
+            if (content["deliverable_type"] == "four_d_report"
+                    and section_keys.get(heading_text) == "d4_prioritization"):
+                doc.add_page_break()
             pair = None
             if (not wide and index + 1 < len(sections) and content["deliverable_type"] not in pdf_module().SINGLE_COLUMN_TYPES
                     and sections[index + 1][0] == "section" and not sections[index + 1][3]):

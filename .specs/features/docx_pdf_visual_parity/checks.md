@@ -66,7 +66,7 @@ Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.
 ## Handoff
 
 - **Settled mid-build:** 2026-10-28 - user: "aprovado pode continuar e preciso que vc de prioridade a presevar a edicao"
-- **Dispatched:** none
-- **Boundary:** C1-C9 fechadas na construção; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada. Evidência visual em `evidence/report.json` e três imagens lado a lado; verificação independente pendente.
+- **Dispatched:** Verifier at `6d91edf` (returned; três achados corrigidos)
+- **Boundary:** C1-C9 fechadas na construção e após a revisão; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada. Evidência visual em `evidence/report.json` e imagens lado a lado, inclusive páginas 2 e 3 do Relatório 4D.
 - **Abandoned:** none
 - **Walked:** n/a - não há tela de aplicativo

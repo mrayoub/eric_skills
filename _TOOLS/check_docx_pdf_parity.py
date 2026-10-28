@@ -95,7 +95,7 @@ def comparison_failures(reference_sizes: list[list[float]], editable_sizes: list
     if len(reference_sizes) != len(editable_sizes):
         failures.append("page_count")
     if len(reference_sizes) != len(editable_sizes) or any(
-            abs(a - b) > .2 for ref_size, edit_size in zip(reference_sizes, editable_sizes)
+            round(abs(a - b), 2) > .2 for ref_size, edit_size in zip(reference_sizes, editable_sizes)
             for a, b in zip(ref_size, edit_size)):
         failures.append("page_size")
     if clipped:

@@ -436,12 +436,12 @@
           "blue_region_iou": 0.3769
         },
         {
-          "mean_rgb_difference": 43.702,
-          "blue_region_iou": 0.0083
+          "mean_rgb_difference": 33.431,
+          "blue_region_iou": 0.0111
         },
         {
-          "mean_rgb_difference": 48.059,
-          "blue_region_iou": 0.0838
+          "mean_rgb_difference": 40.763,
+          "blue_region_iou": 0.2497
         }
       ],
       "failures": []

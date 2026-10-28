@@ -117,11 +117,21 @@ class DocxParityTests(unittest.TestCase):
             with self.subTest(kind=kind):
                 self.assertEqual(row["clipped_characters"], 0)
                 self.assertGreaterEqual(row["pages"][0]["blue_region_iou"], .25)
+                for page_number, page in enumerate(row["pages"], 1):
+                    self.assertLessEqual(page["mean_rgb_difference"], 42.0,
+                                         f"{kind} página {page_number}: composição distante do PDF")
                 path = next((self.cache / "generated" / kind).glob("*.docx"))
                 document = Document(path)
                 body_xml = document.element.body.xml
                 self.assertIn(self.tokens["color"]["document_deep"].lstrip("#"), body_xml)
                 self.assertIn(self.tokens["color"]["document_primary"].lstrip("#"), body_xml)
+        reference = PdfReader(next((SAMPLES / "four_d_report").glob("sample-*.pdf")))
+        converted = PdfReader(next((self.cache / "converted").glob("sample-four-d-report*.pdf")))
+        for section in ("JORNADA DO PROCESSO", "ALTERNATIVAS", "PRIORIZAÇÃO", "CONCLUSÃO E PRÓXIMOS PASSOS"):
+            def pages_with_heading(reader):
+                return [number for number, page in enumerate(reader.pages, 1)
+                        if section in (page.extract_text() or "").splitlines()]
+            self.assertEqual(pages_with_heading(reference), pages_with_heading(converted), section)
 
     def test_cards_one_page_and_order(self):
         for kind in ("test_card", "learning_card"):
@@ -156,15 +166,21 @@ class DocxParityTests(unittest.TestCase):
                 path = next((self.cache / "generated" / kind).glob("*.docx"))
                 pdf = next((SAMPLES / kind).glob("sample-*.pdf"))
                 texts = (normalized(docx_text(path)), normalized(" ".join(p.extract_text() or "" for p in PdfReader(pdf).pages)))
+                expected_state = self.renderer.COMPLETENESS_LABELS[source["metadata"].get("completeness") or "complete"]
                 for target in texts:
                     self.assertIn(normalized(source["title"]), target)
                     self.assertIn(normalized(source["metadata"]["artifact_id"]), target)
                     self.assertIn(normalized(source["metadata"]["content_version"]), target)
+                    self.assertIn(normalized(expected_state), target)
                     if kind != "cdt":
                         for citation in source["citations"]:
                             self.assertIn(normalized(citation["source_id"]), target)
                     for atom in text_atoms(source["blocks"]):
                         self.assertIn(normalized(atom), target, f"{kind}: {atom[:60]}")
+                for atom in text_atoms(source["blocks"]):
+                    if len(normalized(atom)) >= 15:
+                        self.assertEqual(texts[0].count(normalized(atom)), texts[1].count(normalized(atom)),
+                                         f"{kind}: duplicação ou omissão de {atom[:60]}")
 
     def test_missing_font_fails_explicitly(self):
         sample = json.loads((SAMPLES / "test_card/input.json").read_text(encoding="utf-8"))
@@ -184,6 +200,8 @@ class DocxParityTests(unittest.TestCase):
                 self.assertTrue((self.cache / "pictures" / f"{kind}-{page}-side-by-side.png").is_file())
                 self.assertTrue((self.cache / "pictures" / f"{kind}-{page}-side-by-side-diff.png").is_file())
         self.assertIn("page_count", comparator.comparison_failures([[595, 842]], [[595, 842], [595, 842]], 0))
+        self.assertNotIn("page_size", comparator.comparison_failures([[595.28, 841.89]], [[595.48, 841.89]], 0))
+        self.assertIn("page_size", comparator.comparison_failures([[595.28, 841.89]], [[595.49, 841.89]], 0))
         self.assertIn("clipped_text", comparator.comparison_failures([[595, 842]], [[595, 842]], 1))
 
 

@@ -1,0 +1,23 @@
+[
+  {
+    "file": "_TOOLS/check_docx_pdf_parity.py",
+    "old": "round(abs(a - b), 2) > .2 for ref_size, edit_size",
+    "new": "round(abs(a - b), 2) > 20 for ref_size, edit_size",
+    "proof": "/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_comparator_artifacts_and_failures",
+    "label": "C9 page size tolerance 0.2 -> 20 pt"
+  },
+  {
+    "file": "_DESIGN_SYSTEM/scripts/render.py",
+    "old": "(2, \"business_relevance\"), (4, \"expected_outcomes\")",
+    "new": "(2, \"expected_outcomes\"), (4, \"business_relevance\")",
+    "proof": "/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_one_page_briefing_geometry",
+    "label": "C2 swap briefing card positions"
+  },
+  {
+    "file": "_DESIGN_SYSTEM/scripts/render.py",
+    "old": "if content[\"citations\"]:\n            sources = \"; \".join",
+    "new": "if False and content[\"citations\"]:\n            sources = \"; \".join",
+    "proof": "/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_all_samples_semantic_parity",
+    "label": "C6 omit briefing source list"
+  }
+]
