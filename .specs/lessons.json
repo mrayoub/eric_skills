@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "promote_threshold": 2,
+  "window_days": 45,
+  "quarantine_threshold": 2,
+  "next_id": 4,
+  "lessons": [
+    {
+      "id": "L-001",
+      "key": "surviving_mutant::assert the page size rejection boundary directly so a relaxed tolerance fails the proof",
+      "text": "Assert the page-size rejection boundary directly so a relaxed tolerance fails the proof.",
+      "signal": "surviving_mutant",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "docx_pdf_visual_parity"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C9 (document-rendering)"
+      ],
+      "created": "2026-10-28T21:47:18Z",
+      "last_seen": "2026-10-28T21:47:18Z"
+    },
+    {
+      "id": "L-002",
+      "key": "spec_precision_gap::compare layout metrics and section placement on every page of multi page deliverables",
+      "text": "Compare layout metrics and section placement on every page of multi-page deliverables.",
+      "signal": "spec_precision_gap",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "docx_pdf_visual_parity"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C3 (document-rendering)"
+      ],
+      "created": "2026-10-28T21:47:18Z",
+      "last_seen": "2026-10-28T21:47:18Z"
+    },
+    {
+      "id": "L-003",
+      "key": "spec_precision_gap::assert rendered document state and content occurrence counts when parity requires no duplication",
+      "text": "Assert rendered document state and content occurrence counts when parity requires no duplication.",
+      "signal": "spec_precision_gap",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "docx_pdf_visual_parity"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C6 (document-rendering)"
+      ],
+      "created": "2026-10-28T21:47:18Z",
+      "last_seen": "2026-10-28T21:47:18Z"
+    }
+  ]
+}
