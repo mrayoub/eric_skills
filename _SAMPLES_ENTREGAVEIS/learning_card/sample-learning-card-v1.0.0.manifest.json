@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "learning_card",
   "files": {
-    "sample-learning-card-v1.0.0.docx": "756ffa024c71e0183c64f938d5964ad6a2e98413c23584be09db7378fa085cdb",
+    "sample-learning-card-v1.0.0.docx": "a93d68a0114f773e5edf376ff2208c8d4ae937669af206b8380006d986110fb5",
     "sample-learning-card-v1.0.0.html": "1736b225d458b0b1f68a1a0772fd1f966568de07284a237aca84bbd4f7a9739a",
     "sample-learning-card-v1.0.0.json": "f98fbe2019db4c2d0fafcbdf2a6b79aaea550eeabe56676e6414fc48d7ab862a",
     "sample-learning-card-v1.0.0.md": "aa8d72d807aa107dfb70d84a0d55ad7ceff1b46def3e684edf1da6712eb94139",
@@ -15,9 +15,9 @@
   "layout": "card_portrait",
   "paper": "a4_portrait",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

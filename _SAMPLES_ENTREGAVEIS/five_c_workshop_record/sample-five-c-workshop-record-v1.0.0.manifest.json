@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "five_c_workshop_record",
   "files": {
-    "sample-five-c-workshop-record-v1.0.0.docx": "12785c29fd18d003a0a2f39d06a3db46202f0669dcc3f018165ae1d2b67ae6b0",
+    "sample-five-c-workshop-record-v1.0.0.docx": "39936968275795199b3a41ca296d4589b5160e333333f38ba00e33d82c1ff8fc",
     "sample-five-c-workshop-record-v1.0.0.html": "aa158908fd3a87ff640398ab664a5a58a77ab603e564fef43445c56bbff0fc06",
     "sample-five-c-workshop-record-v1.0.0.json": "0a3a04ac87a3366f55bd21bd074a4adb9ba8ca20e273c6e72e237415a1f75603",
     "sample-five-c-workshop-record-v1.0.0.md": "80c959b7062cc1b64de0cda1758fa615e50c1202b26dce8abbf4b5bbb39a3a43",
@@ -15,9 +15,9 @@
   "layout": "report_landscape",
   "paper": "a4_landscape",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

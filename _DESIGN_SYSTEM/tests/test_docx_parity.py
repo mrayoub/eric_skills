@@ -1,0 +1,191 @@
+"""Proofs for editable DOCX visual parity against the 19 sample PDFs."""
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import json
+import copy
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+from unittest import mock
+
+from docx import Document
+from pypdf import PdfReader
+
+ROOT = Path(__file__).resolve().parents[2]
+SAMPLES = ROOT / "_SAMPLES_ENTREGAVEIS"
+COMPARATOR = ROOT / "_TOOLS/check_docx_pdf_parity.py"
+RENDER = ROOT / "_DESIGN_SYSTEM/scripts/render.py"
+
+
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def normalized(value: str) -> str:
+    return " ".join(value.replace("**", "").split()).casefold()
+
+
+def docx_text(path: Path) -> str:
+    document = Document(path)
+    return " ".join(node.text or "" for node in document.element.body.xpath(".//w:t"))
+
+
+def text_atoms(data: object):
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key in {"text", "description", "title", "label", "content", "justification", "evidence"}:
+                if isinstance(value, str) and len(value.strip()) >= 8:
+                    for line in value.splitlines():
+                        if len(line.strip()) >= 8:
+                            yield line
+            elif isinstance(value, (dict, list)):
+                yield from text_atoms(value)
+    elif isinstance(data, list):
+        for value in data:
+            yield from text_atoms(value)
+
+
+class DocxParityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        digest = hashlib.sha256()
+        for path in [RENDER, COMPARATOR, *sorted(SAMPLES.glob("*/input.json")),
+                     *sorted(SAMPLES.glob("*/*.pdf"))]:
+            digest.update(path.read_bytes())
+        cls.cache = Path(tempfile.gettempdir()) / "eric-docx-parity-tests" / digest.hexdigest()[:16]
+        report_path = cls.cache / "report.json"
+        if not report_path.is_file():
+            result = subprocess.run([sys.executable, str(COMPARATOR), "--out-dir", str(cls.cache)],
+                                    capture_output=True, text=True)
+            if result.returncode:
+                raise AssertionError(result.stdout + "\n" + result.stderr)
+        cls.report = json.loads(report_path.read_text(encoding="utf-8"))
+        cls.rows = {item["type"]: item for item in cls.report["results"]}
+        cls.renderer = load_module(RENDER, "render_for_docx_parity")
+        cls.tokens = json.loads((ROOT / "_DESIGN_SYSTEM/tokens.json").read_text(encoding="utf-8"))
+        cls.profiles = json.loads((ROOT / "_DESIGN_SYSTEM/profiles.json").read_text(encoding="utf-8"))
+
+    def test_all_sample_page_counts(self):
+        self.assertEqual(self.report["sample_count"], 19)
+        for kind, row in self.rows.items():
+            with self.subTest(kind=kind):
+                self.assertEqual(row["reference_pages"], row["docx_pages"])
+                self.assertEqual(row["failures"], [])
+                sizes = row["docx_sizes_pt"]
+                paper = self.profiles["types"][kind]["paper"]
+                self.assertTrue(all((width > height) == (paper == "a4_landscape")
+                                    for width, height in sizes))
+
+    def test_one_page_briefing_geometry(self):
+        row = self.rows["briefing_one_page"]
+        self.assertEqual(row["docx_pages"], 1)
+        self.assertGreaterEqual(row["pages"][0]["blue_region_iou"], .65)
+        path = next((self.cache / "generated/briefing_one_page").glob("*.docx"))
+        document = Document(path)
+        table = document.tables[0]
+        self.assertEqual(len(table.rows), 5)
+        self.assertEqual(len(table.columns), 5)
+        self.assertEqual(round(table.rows[2].height.cm, 1), 3.2)
+        card_row = table.rows[3]
+        for position, label in ((0, "Problema ou oportunidade"), (2, "Relevância"),
+                                (4, "Resultados esperados")):
+            self.assertIn(label, card_row.cells[position].text)
+        self.assertIn("Responsáveis", table.rows[4].cells[0].text)
+        self.assertIn("ID sample-briefing-one-page", "\n".join(p.text for p in document.paragraphs))
+        sample = json.loads((SAMPLES / "briefing_one_page/input.json").read_text(encoding="utf-8"))
+        profile = self.renderer.validate(sample, self.profiles)
+        changed = copy.deepcopy(self.renderer.load_presentation_layout("briefing_one_page"))
+        changed["hmw"]["height"] = 35
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(
+                self.renderer, "load_presentation_layout", return_value=changed):
+            adjusted = Path(temporary) / "changed-layout.docx"
+            self.renderer.render_docx(sample, self.tokens, profile, adjusted)
+            self.assertEqual(round(Document(adjusted).tables[0].rows[2].height.cm, 1), 3.5)
+
+    def test_report_structure_and_safe_area(self):
+        card_types = {"test_card", "learning_card", "briefing_one_page"}
+        for kind, row in self.rows.items():
+            if kind in card_types:
+                continue
+            with self.subTest(kind=kind):
+                self.assertEqual(row["clipped_characters"], 0)
+                self.assertGreaterEqual(row["pages"][0]["blue_region_iou"], .25)
+                path = next((self.cache / "generated" / kind).glob("*.docx"))
+                document = Document(path)
+                body_xml = document.element.body.xml
+                self.assertIn(self.tokens["color"]["document_deep"].lstrip("#"), body_xml)
+                self.assertIn(self.tokens["color"]["document_primary"].lstrip("#"), body_xml)
+
+    def test_cards_one_page_and_order(self):
+        for kind in ("test_card", "learning_card"):
+            with self.subTest(kind=kind):
+                row = self.rows[kind]
+                self.assertEqual(row["docx_pages"], 1)
+                self.assertEqual(row["clipped_characters"], 0)
+                path = next((self.cache / "generated" / kind).glob("*.docx"))
+                document = Document(path)
+                labels = list(self.renderer.CARD_LABELS[kind].values())
+                text = "\n".join(p.text for p in document.paragraphs)
+                positions = [text.index(label) for label in labels]
+                self.assertEqual(positions, sorted(positions))
+                self.assertGreaterEqual(document.element.body.xml.count('w:val="single"'), 12)
+                self.assertGreaterEqual(document.element.body.xml.count('w:color="4C73D1"'), 4)
+
+    def test_all_samples_editable(self):
+        for kind in self.rows:
+            with self.subTest(kind=kind):
+                path = next((self.cache / "generated" / kind).glob("*.docx"))
+                document = Document(path)
+                text_nodes = document.element.body.xpath(".//w:t")
+                images = document.element.body.xpath(".//a:blip")
+                self.assertGreater(len(text_nodes), 8)
+                self.assertLessEqual(len(images), 1, "só o logo pode ser imagem")
+                self.assertIn("EXEMPLO FICTÍCIO", docx_text(path).upper())
+
+    def test_all_samples_semantic_parity(self):
+        for kind in self.rows:
+            with self.subTest(kind=kind):
+                source = json.loads((SAMPLES / kind / "input.json").read_text(encoding="utf-8"))
+                path = next((self.cache / "generated" / kind).glob("*.docx"))
+                pdf = next((SAMPLES / kind).glob("sample-*.pdf"))
+                texts = (normalized(docx_text(path)), normalized(" ".join(p.extract_text() or "" for p in PdfReader(pdf).pages)))
+                for target in texts:
+                    self.assertIn(normalized(source["title"]), target)
+                    self.assertIn(normalized(source["metadata"]["artifact_id"]), target)
+                    self.assertIn(normalized(source["metadata"]["content_version"]), target)
+                    if kind != "cdt":
+                        for citation in source["citations"]:
+                            self.assertIn(normalized(citation["source_id"]), target)
+                    for atom in text_atoms(source["blocks"]):
+                        self.assertIn(normalized(atom), target, f"{kind}: {atom[:60]}")
+
+    def test_missing_font_fails_explicitly(self):
+        sample = json.loads((SAMPLES / "test_card/input.json").read_text(encoding="utf-8"))
+        profile = self.renderer.validate(sample, self.profiles)
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(self.renderer, "ROOT", Path(temporary)):
+            with self.assertRaisesRegex(FileNotFoundError, "DOCX requer a fonte"):
+                self.renderer.render_docx(sample, self.tokens, profile, Path(temporary) / "out.docx")
+        with mock.patch.dict(sys.modules, {"docx": None}):
+            with self.assertRaisesRegex(RuntimeError, "DOCX requer python-docx"):
+                self.renderer.render_docx(sample, self.tokens, profile, Path(tempfile.gettempdir()) / "unused.docx")
+
+    def test_comparator_artifacts_and_failures(self):
+        comparator = load_module(COMPARATOR, "docx_parity_comparator")
+        self.assertEqual(len(self.rows), 19)
+        for kind, row in self.rows.items():
+            for page in range(1, row["docx_pages"] + 1):
+                self.assertTrue((self.cache / "pictures" / f"{kind}-{page}-side-by-side.png").is_file())
+                self.assertTrue((self.cache / "pictures" / f"{kind}-{page}-side-by-side-diff.png").is_file())
+        self.assertIn("page_count", comparator.comparison_failures([[595, 842]], [[595, 842], [595, 842]], 0))
+        self.assertIn("clipped_text", comparator.comparison_failures([[595, 842]], [[595, 842]], 1))
+
+
+if __name__ == "__main__":
+    unittest.main()

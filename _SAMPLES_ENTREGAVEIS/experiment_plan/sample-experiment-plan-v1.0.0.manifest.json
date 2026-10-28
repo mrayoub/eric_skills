@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "experiment_plan",
   "files": {
-    "sample-experiment-plan-v1.0.0.docx": "a5d7fc06a1c0b9bcae7125ddbc5e4979f7ddf4022b70076388ed4140430c80d4",
+    "sample-experiment-plan-v1.0.0.docx": "628e1d9cd7092c48a4b854d5162ed6c60536e9911fd6533c78c41ac0736aa973",
     "sample-experiment-plan-v1.0.0.html": "9cc2d27b1f56b4765a83f6d63d1de27bcad8d2e3666d45c018d041c05811e585",
     "sample-experiment-plan-v1.0.0.json": "ed3e76c1d152c08f102975e7cb659b1b49b8c75cad74f12c062c0b680a6281ef",
     "sample-experiment-plan-v1.0.0.md": "ee8e30837be257a93e55ffb1e203b1a192395e73a38a16da2f5f318e432167e3",
@@ -15,9 +15,9 @@
   "layout": "report_portrait",
   "paper": "a4_portrait",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

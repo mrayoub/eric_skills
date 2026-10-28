@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "2.0.0"
+RENDERER_VERSION = "2.1.0"
 DELIVERABLE_LABELS = {
     "briefing": "Entrevista Inicial de sete campos",
     "briefing_one_page": "Briefing",
@@ -1142,12 +1142,84 @@ def render_md(content: dict[str, Any]) -> str:
 def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[str, Any], path: Path) -> None:
     try:
         from docx import Document
-        from docx.enum.text import WD_ALIGN_PARAGRAPH
+        from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_ROW_HEIGHT_RULE
+        from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
         from docx.shared import Cm, Pt, RGBColor
         from docx.oxml import OxmlElement
         from docx.oxml.ns import qn
     except ImportError as exc:
         raise RuntimeError("DOCX requer python-docx: pip install python-docx") from exc
+    for family in {tokens["typography"]["font_body"], tokens["typography"]["font_brand"]}:
+        for weight in ("Regular", "Bold"):
+            font_file = ROOT / "assets" / "fonts" / "static" / f"{family}-{weight}.ttf"
+            if not font_file.is_file():
+                raise FileNotFoundError(f"DOCX requer a fonte {font_file.name} em assets/fonts/static")
+    colors = tokens["color"]
+    specs = pdf_module().style_specs(tokens, profile["layout"])
+    def rgb(key: str) -> Any:
+        return RGBColor.from_string(colors[key].lstrip("#"))
+
+    def format_run(run: Any, style: str = "body") -> Any:
+        spec = specs[style]
+        run.font.name = tokens["typography"][spec["family"]]
+        run.font.size = Pt(spec["size"])
+        run.font.bold = spec["weight"] >= 600
+        run.font.color.rgb = rgb(spec["color"])
+        rpr = run._r.get_or_add_rPr()
+        fonts = rpr.rFonts
+        if fonts is not None:
+            fonts.set(qn("w:eastAsia"), run.font.name)
+            fonts.set(qn("w:cs"), run.font.name)
+        return run
+
+    def paragraph_text(paragraph: Any, value: str, style: str = "body") -> Any:
+        paragraph.text = ""
+        format_run(paragraph.add_run(str(value)), style)
+        paragraph.paragraph_format.space_before = Pt(0)
+        paragraph.paragraph_format.space_after = Pt(0)
+        paragraph.paragraph_format.line_spacing = Pt(specs[style]["leading"])
+        return paragraph
+
+    def cell_margins(cell: Any, top: int = 80, left: int = 120, bottom: int = 80, right: int = 120) -> None:
+        tcpr = cell._tc.get_or_add_tcPr()
+        margins = tcpr.first_child_found_in("w:tcMar")
+        if margins is None:
+            margins = OxmlElement("w:tcMar")
+            tcpr.append(margins)
+        for edge, amount in (("top", top), ("start", left), ("bottom", bottom), ("end", right)):
+            node = margins.find(qn("w:" + edge))
+            if node is None:
+                node = OxmlElement("w:" + edge)
+                margins.append(node)
+            node.set(qn("w:w"), str(amount))
+            node.set(qn("w:type"), "dxa")
+
+    def cell_border(cell: Any, edge: str, color: str, size: int = 18) -> None:
+        tcpr = cell._tc.get_or_add_tcPr()
+        borders = tcpr.first_child_found_in("w:tcBorders")
+        if borders is None:
+            borders = OxmlElement("w:tcBorders")
+            tcpr.append(borders)
+        border = OxmlElement("w:" + edge)
+        border.set(qn("w:val"), "single")
+        border.set(qn("w:sz"), str(size))
+        border.set(qn("w:color"), colors.get(color, color).lstrip("#"))
+        borders.append(border)
+
+    def paragraph_border(paragraph: Any, edges: tuple[str, ...], *, accent: bool = False) -> None:
+        ppr = paragraph._p.get_or_add_pPr()
+        borders = ppr.find(qn("w:pBdr"))
+        if borders is None:
+            borders = OxmlElement("w:pBdr")
+            ppr.append(borders)
+        for edge in edges:
+            border = OxmlElement("w:" + edge)
+            border.set(qn("w:val"), "single")
+            border.set(qn("w:sz"), "24" if accent and edge == "left" else "6")
+            border.set(qn("w:color"), colors["document_accent" if accent and edge == "left" else "border"].lstrip("#"))
+            border.set(qn("w:space"), "5")
+            borders.append(border)
+
     def shade(cell: Any, fill: str) -> None:
         element = OxmlElement("w:shd")
         element.set(qn("w:fill"), fill.lstrip("#"))
@@ -1164,99 +1236,441 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     section = doc.sections[0]
     page = tokens["page"][profile["paper"]]
     section.page_width, section.page_height = Cm(page["width"] / 10), Cm(page["height"] / 10)
-    section.top_margin, section.right_margin = Cm(page["margin_top"] / 10), Cm(page["margin_right"] / 10)
-    section.bottom_margin, section.left_margin = Cm(page["margin_bottom"] / 10), Cm(page["margin_left"] / 10)
+    top_mm = 3 if profile["layout"] == "executive_one_page" else page["margin_top"]
+    section.top_margin, section.right_margin = Cm(top_mm / 10), Cm(page["margin_right"] / 10)
+    bottom_mm = 4 if profile["layout"] == "executive_one_page" else page["margin_bottom"]
+    section.bottom_margin, section.left_margin = Cm(bottom_mm / 10), Cm(page["margin_left"] / 10)
+    section.header_distance = Cm(.2)
+    section.footer_distance = Cm(.5)
     style = doc.styles["Normal"]
     style.font.name = tokens["typography"]["font_body"]
-    style.font.size = Pt(tokens["typography"]["styles"]["body"]["size"])
+    style.font.size = Pt(specs["body"]["size"])
+    style.paragraph_format.space_after = Pt(0)
+    style.paragraph_format.line_spacing = Pt(specs["body"]["leading"])
     for key in ("Title", "Heading 1", "Heading 2"):
         doc.styles[key].font.name = tokens["typography"]["font_brand"]
         doc.styles[key].font.color.rgb = RGBColor.from_string(tokens["color"]["document_primary"].lstrip("#"))
-    header = section.header.paragraphs[0]
-    header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    header.add_run(header_label(content).upper() + "    ")
-    header.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.2))
-    doc.add_heading(content["title"], 0)
-    identity = doc.add_paragraph(identity_line(content))
-    for run in identity.runs:
-        run.font.size = Pt(tokens["typography"]["styles"]["footer"]["size"])
-        run.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
+    doc.styles["Title"].font.size = Pt(specs["title"]["size"])
+    doc.styles["Title"].font.bold = True
+    doc.styles["Heading 1"].font.size = Pt(specs["report_section"]["size"])
+    doc.styles["Heading 1"].font.bold = True
+
+    if profile["layout"] == "executive_one_page":
+        slots = load_presentation_layout(content["deliverable_type"]) or {}
+        required = {"titulo_documento", "hmw", "problem_opportunity", "business_relevance",
+                    "expected_outcomes", "people", "identificacao_versao"}
+        if not required.issubset(slots):
+            raise ValueError("executive_one_page: faltam slots do layout")
+        title_slot = slots["titulo_documento"]
+        card_slots = [slots[key] for key in ("problem_opportunity", "business_relevance", "expected_outcomes")]
+        if len({round(slot["height"], 2) for slot in card_slots}) != 1:
+            raise ValueError("executive_one_page: os três cartões precisam ter a mesma altura")
+        inset_gap = 3.0  # dois recuos de 1,5 mm do PDF, entre cartões vizinhos
+        first = card_slots[1]["x"] - card_slots[0]["x"] - inset_gap
+        second = card_slots[2]["x"] - card_slots[1]["x"] - inset_gap
+        third = title_slot["width"] - first - second - 2 * inset_gap
+        if min(first, second, third) <= 0:
+            raise ValueError("executive_one_page: colunas inválidas no layout")
+        table = doc.add_table(rows=0, cols=5)
+        table.autofit = False
+        for col, mm in zip(table.columns, (first, inset_gap, second, inset_gap, third)):
+            col.width = Cm(mm / 10)
+        def row(mm: float) -> Any:
+            item = table.add_row()
+            item.height = Cm(mm / 10)
+            item.height_rule = WD_ROW_HEIGHT_RULE.EXACTLY
+            for cell in item.cells:
+                cell_margins(cell, 0, 0, 0, 0)
+                cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+            return item
+        masthead = row(title_slot["y"] - top_mm)
+        left = masthead.cells[0].merge(masthead.cells[3])
+        paragraph_text(left.paragraphs[0], header_label(content).upper(), "eyebrow")
+        logo_p = masthead.cells[4].paragraphs[0]
+        logo_p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        logo_p.paragraph_format.line_spacing = Pt(18)
+        logo_p.add_run().add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(1.5))
+        for cell in (left, masthead.cells[4]):
+            cell_border(cell, "bottom", "document_primary", 12)
+        title_row = row(title_slot["height"])
+        title_cell = title_row.cells[0].merge(title_row.cells[4])
+        paragraph_text(title_cell.paragraphs[0], content["title"], "title")
+        by_key: dict[str, list[dict[str, Any]]] = {}
+        for block in content["blocks"]:
+            by_key.setdefault(block.get("data", {}).get("section_key"), []).append(block)
+        def fill_slot(cell: Any, key: str, dark: bool = False) -> None:
+            shade(cell, colors["document_deep" if dark else "surface_muted" if key == "people" else "document_accent_soft"])
+            cell_border(cell, "start", "document_accent" if key != "people" else "border_strong", 24)
+            cell_margins(cell, 120, 180, 80, 120)
+            cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER if dark else WD_CELL_VERTICAL_ALIGNMENT.TOP
+            first = True
+            for block in by_key.get(key, []):
+                data = block.get("data", {})
+                if key == "hmw":
+                    value = block_text(block)
+                    if block.get("citation_ids"):
+                        value += "[" + ", ".join(block["citation_ids"]) + "]"
+                    paragraph_text(cell.paragraphs[0] if first else cell.add_paragraph(), value, "field")
+                    for run in (cell.paragraphs[0] if first else cell.paragraphs[-1]).runs:
+                        run.font.color.rgb = rgb("inverse")
+                        run.font.size = Pt(15)
+                    first = False
+                    continue
+                if data.get("title"):
+                    paragraph_text(cell.paragraphs[0] if first else cell.add_paragraph(), data["title"], "card_title")
+                    for run in cell.paragraphs[-1].runs:
+                        run.font.size = Pt(11)
+                    first = False
+                if block["type"] == "table" and data.get("rows"):
+                    heads, rows = table_rows(block)
+                    lines = [" | ".join(heads)] if heads else []
+                    lines += [" | ".join(values) for values in rows]
+                else:
+                    value = data.get("description") or data.get("text") or data.get("value") or data.get("content")
+                    lines = [str(value)] if value is not None else [line for line in block_text(block).splitlines() if line.strip()]
+                    lines += ["• " + str(point) for point in data.get("points", []) or data.get("items", [])]
+                for line in lines:
+                    paragraph = paragraph_text(cell.paragraphs[0] if first else cell.add_paragraph(), line, "body")
+                    for run in paragraph.runs:
+                        run.font.size = Pt(10)
+                    paragraph.paragraph_format.line_spacing = Pt(13.5)
+                    first = False
+                if block.get("citation_ids"):
+                    paragraph_text(cell.add_paragraph(), "[" + ", ".join(block["citation_ids"]) + "]", "footer")
+            if first:
+                paragraph_text(cell.paragraphs[0], "", "body")
+        hmw = row(slots["hmw"]["height"])
+        fill_slot(hmw.cells[0].merge(hmw.cells[4]), "hmw", True)
+        cards = row(card_slots[0]["height"])
+        for col, key in ((0, "problem_opportunity"), (2, "business_relevance"), (4, "expected_outcomes")):
+            fill_slot(cards.cells[col], key)
+        people = row(slots["people"]["height"])
+        fill_slot(people.cells[0].merge(people.cells[4]), "people")
+        table.rows[-1].cells[0].paragraphs[0].paragraph_format.keep_with_next = False
+        if content["citations"]:
+            sources = "; ".join(f"{c['id']}: {c['source_id']}" + (f", {c['locator']}" if c.get("locator") else "")
+                                for c in content["citations"])
+            paragraph_text(doc.add_paragraph(), "Fontes: " + sources, "footer")
+        paragraph_text(doc.add_paragraph(), identity_line(content), "footer")
+        doc.core_properties.title = content["title"]
+        doc.core_properties.author = "my_skills"
+        doc.save(path)
+        return
+
+    available_width = section.page_width - section.left_margin - section.right_margin
+    masthead = doc.add_paragraph()
+    masthead.paragraph_format.tab_stops.add_tab_stop(available_width, WD_TAB_ALIGNMENT.RIGHT)
+    masthead.paragraph_format.line_spacing = Pt(28)
+    format_run(masthead.add_run(header_label(content).upper()), "eyebrow")
+    masthead.add_run("\t").add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.0))
+    ppr = masthead._p.get_or_add_pPr()
+    borders = OxmlElement("w:pBdr")
+    border = OxmlElement("w:bottom")
+    border.set(qn("w:val"), "single")
+    border.set(qn("w:sz"), "12")
+    border.set(qn("w:color"), colors["document_primary"].lstrip("#"))
+    borders.append(border)
+    ppr.append(borders)
+    title = doc.add_heading(content["title"], 0)
+    title.paragraph_format.space_before = Pt(8)
+    title.paragraph_format.space_after = Pt(6)
+    for run in title.runs:
+        format_run(run, "report_title" if profile["layout"] in ("report_portrait", "report_landscape") else "title")
+    identity = paragraph_text(doc.add_paragraph(), identity_line(content), "footer")
+    identity.paragraph_format.space_after = Pt(5)
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
         doc.add_paragraph(f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}')
     if content.get("summary"):
-        doc.add_paragraph(content["summary"])
-    for block in content["blocks"]:
+        paragraph_text(doc.add_paragraph(), content["summary"], "summary")
+    def add_score_panel(target: Any, block: dict[str, Any]) -> None:
+        panel = pdf_module().score_panel_data(block)
+        header = target.add_table(rows=1, cols=3)
+        header.autofit = False
+        panel_width = int(target.width) if target is not doc else available_width
+        for column, share in zip(header.columns, (.63, .17, .20)):
+            column.width = int(panel_width * share)
+        for cell in header.rows[0].cells:
+            shade(cell, colors["document_deep"])
+            cell_margins(cell, 100, 120, 100, 120)
+        paragraph_text(header.cell(0, 0).paragraphs[0], panel["title"].upper(), "section")
+        paragraph_text(header.cell(0, 1).paragraphs[0], f"{panel['total_prefix']}: {panel['total']}", "section")
+        badge = header.cell(0, 2)
+        shade(badge, colors[panel["tone"][0]])
+        paragraph_text(badge.paragraphs[0], panel["badge"], "badge")
+        grid = target.add_table(rows=1, cols=len(panel["heads"]))
+        grid.autofit = False
+        for col, share in zip(grid.columns, panel["shares"]):
+            col.width = int(panel_width * share)
+        for col, value in enumerate(panel["heads"]):
+            paragraph_text(grid.cell(0, col).paragraphs[0], value, "score_head")
+            shade(grid.cell(0, col), colors["surface_muted"])
+        for row_data in panel["rows"]:
+            cells = grid.add_row().cells
+            for col, value in enumerate(row_data["cells"]):
+                if col == panel["bar"] and row_data["bar"] is not None:
+                    bar = "▰" * max(1, round(row_data["bar"] / 10))
+                    value = f"{bar}\n{value}"
+                paragraph_text(cells[col].paragraphs[0], value,
+                               "score_value" if col == panel["bar"] else "card_title" if col in panel["strong"] else "table_body")
+        total = grid.add_row().cells
+        for cell in total:
+            shade(cell, colors["surface_muted"])
+        paragraph_text(total[0].paragraphs[0], panel["total_label"], "card_title")
+        paragraph_text(total[panel["value"]].paragraphs[0], panel["total"], "card_title")
+        paragraph_text(total[panel["badge_column"]].paragraphs[0], panel["badge"], "score_value")
+        for row in grid.rows:
+            for col, cell in enumerate(row.cells):
+                cell.width = grid.columns[col].width
+                cell_margins(cell, 80, 100, 80, 100)
+                for edge in ("bottom", "start", "end"):
+                    cell_border(cell, edge, "border", 4)
+        if block.get("citation_ids"):
+            paragraph_text(target.add_paragraph(), "Fontes: " + ", ".join(block["citation_ids"]), "source")
+
+    def add_block(target: Any, block: dict[str, Any], *, in_card: bool = False) -> None:
         kind = block["type"]
-        card_key = block.get("data", {}).get("section_key")
-        card_label = CARD_LABELS.get(content["deliverable_type"], {}).get(card_key)
-        if card_label:
-            doc.add_heading(card_label, 1)
-        if kind == "heading":
-            if card_label:
-                doc.add_paragraph(block_text(block))
-            else:
-                band(doc.add_heading(block_text(block), 1))
-        elif kind == "card_grid":
-            cards = block["data"]["cards"]
-            columns = block["data"].get("columns", 2)
+        references = block.get("citation_ids", [])
+        if pdf_module().is_score_panel(block):
+            add_score_panel(target, block)
+            return
+        if kind == "card_grid":
+            data = block["data"]
+            if data.get("title"):
+                paragraph_text(target.add_paragraph(), data["title"], "card_title")
+            cards = data["cards"]
+            columns = max(1, min(4, int(data.get("columns", 2))))
             for offset in range(0, len(cards), columns):
                 row_cards = cards[offset:offset + columns]
-                table = doc.add_table(rows=1, cols=len(row_cards))
-                table.style = "Table Grid"
-                for cell, card in zip(table.rows[0].cells, row_cards):
-                    cell.text = card_text(card)
-                    tones = {"blue": tokens["color"]["document_accent_soft"], "neutral": tokens["color"]["surface_muted"], "red": tokens["color"]["danger_soft"], "green": "#E8F4EE", "yellow": "#FFF4D9"}
-                    shade(cell, tones.get(card.get("tone", "blue"), tones["blue"]))
+                grid = target.add_table(rows=1, cols=len(row_cards))
+                grid.autofit = False
+                for cell, card in zip(grid.rows[0].cells, row_cards):
+                    cell.text = ""
+                    paragraph_text(cell.paragraphs[0], str(card.get("title", "")).upper(), "card_title")
+                    if card.get("value") is not None:
+                        paragraph_text(cell.add_paragraph(), str(card["value"]), "metric")
+                    if card.get("text"):
+                        paragraph_text(cell.add_paragraph(), card["text"])
+                    for item in card.get("items", []):
+                        paragraph_text(cell.add_paragraph(), "• " + str(item))
                     if card.get("citation_ids"):
-                        cell.add_paragraph("Fontes: " + ", ".join(card["citation_ids"]))
+                        paragraph_text(cell.add_paragraph(), "Fontes: " + ", ".join(card["citation_ids"]), "source")
+                    tones = {"blue": ("document_accent_soft", "document_accent"),
+                             "neutral": ("surface_muted", "border_strong"),
+                             "red": ("danger_soft", "danger"),
+                             "green": ("#E8F4EE", "#3F9270"),
+                             "yellow": ("#FFF4D9", "#BD8A28")}
+                    background, accent = tones.get(card.get("tone", "blue"), tones["blue"])
+                    shade(cell, colors[background] if background in colors else background)
+                    cell_margins(cell, 140, 180, 140, 180)
+                    cell_border(cell, "start", accent, 24)
+                grid.rows[0].height_rule = WD_ROW_HEIGHT_RULE.AT_LEAST
+                paragraph_text(target.add_paragraph(), "", "body").paragraph_format.space_after = Pt(6)
         elif kind == "table":
+            # No relatório IQB, a matriz de 40 critérios começa após a página de síntese.
+            # O PDF faz a mesma quebra ao manter o cabeçalho da matriz com as primeiras linhas.
+            if target is doc and content["deliverable_type"] == "briefing_validation" and block["id"] == "scores":
+                doc.add_page_break()
             for slug, legend, heads, rows in table_views(block):
                 if legend:
-                    doc.add_paragraph(str(legend))
+                    paragraph_text(target.add_paragraph(), str(legend), "card_title")
                 width = max(1, len(heads), *(len(row) for row in rows))
-                table = doc.add_table(rows=1 if heads else 0, cols=width)
-                table.style = "Table Grid"
+                table = target.add_table(rows=1 if heads else 0, cols=width)
+                table.autofit = False
                 if heads:
                     for cell, value in zip(table.rows[0].cells, heads):
                         cell.text = value
-                for row in rows:
+                for row_values in rows:
                     cells = table.add_row().cells
-                    for cell, value in zip(cells, row):
+                    for cell, value in zip(cells, row_values):
                         cell.text = value
-                if isinstance(block["data"].get("dimensions"), dict):
-                    table.autofit = False
-                    available_width = section.page_width - section.left_margin - section.right_margin
-                    for column, percentage in zip(table.columns, IQB_TABLE_WIDTHS[slug]):
-                        column.width = int(available_width * percentage / 100)
-                    for row in table.rows:
-                        for cell, column in zip(row.cells, table.columns):
-                            cell.width = column.width
-                            for paragraph in cell.paragraphs:
-                                for run in paragraph.runs:
-                                    run.font.size = Pt(8)
+                if isinstance(block["data"].get("dimensions"), dict) and slug in IQB_TABLE_WIDTHS:
+                    widths = IQB_TABLE_WIDTHS[slug]
+                else:
+                    widths = [100 / width] * width
+                target_width = int(target.width) if target is not doc else available_width
+                for column, percentage in zip(table.columns, widths):
+                    column.width = int(target_width * percentage / 100)
+                for row_index, table_row in enumerate(table.rows):
+                    for col_index, cell in enumerate(table_row.cells):
+                        cell.width = table.columns[col_index].width
+                        cell_margins(cell, 100, 100, 100, 100)
+                        if heads and row_index == 0:
+                            shade(cell, colors["document_primary"])
+                        elif row_index % 2 == 0:
+                            shade(cell, colors["surface_muted"])
+                        for edge in ("top", "bottom", "start", "end"):
+                            cell_border(cell, edge, "border", 6)
+                        for paragraph in cell.paragraphs:
+                            paragraph.paragraph_format.space_after = Pt(0)
+                            paragraph.paragraph_format.line_spacing = Pt(specs["table_body"]["leading"])
+                            for run in paragraph.runs:
+                                format_run(run, "table_header" if heads and row_index == 0 else "table_body")
+                paragraph_text(target.add_paragraph(), "", "body").paragraph_format.space_after = Pt(7)
             if score_summary(block):
-                doc.add_paragraph(score_summary(block))
+                paragraph_text(target.add_paragraph(), score_summary(block), "body")
         elif kind == "list":
             for item in block.get("data", {}).get("items", []):
-                doc.add_paragraph(str(item), style="List Bullet")
+                paragraph_text(target.add_paragraph(), "• " + str(item))
         elif kind == "page_break":
-            doc.add_page_break()
-        else:
-            if content["deliverable_type"] in CARD_LABELS:
-                doc.add_paragraph(block_text(block))
+            if target is doc:
+                doc.add_page_break()
+        elif kind == "heading" and in_card:
+            paragraph_text(target.add_paragraph(), block_text(block))
+        elif kind == "heading":
+            return
+        elif in_card:
+            paragraph_text(target.add_paragraph(), block_text(block))
+        elif kind in ("callout", "metric") or block.get("data", {}).get("status") in ("missing", "pending", "inconclusive"):
+            if kind == "callout":
+                fill, accent = "document_deep", "document_accent"
+                style_name = "body_inverse"
+            elif kind == "metric":
+                fill, accent = "document_accent_soft", None
+                style_name = "metric"
             else:
-                table = doc.add_table(rows=1, cols=1)
-                table.style = "Table Grid"
-                cell = table.rows[0].cells[0]
-                add_rich_text(cell.paragraphs[0], block_text(block))
-                shade(cell, tokens["color"]["surface_muted"])
-        if block.get("citation_ids"):
-            doc.add_paragraph("Fontes: " + ", ".join(block["citation_ids"]))
+                fill, accent = "danger_soft", "danger"
+                style_name = "body"
+            if target is doc:
+                cell = target.add_table(rows=1, cols=1).cell(0, 0)
+                shade(cell, colors[fill])
+                if accent:
+                    cell_border(cell, "start", accent, 24)
+                cell_margins(cell, 160, 180, 160, 180)
+                paragraph_text(cell.paragraphs[0], block_text(block), style_name)
+            else:
+                paragraph = paragraph_text(target.add_paragraph(), block_text(block), style_name)
+                element = OxmlElement("w:shd")
+                element.set(qn("w:fill"), colors[fill].lstrip("#"))
+                paragraph._p.get_or_add_pPr().append(element)
+                if accent:
+                    paragraph_border(paragraph, ("left",), accent=True)
+        else:
+            paragraph = target.add_paragraph()
+            add_rich_text(paragraph, block_text(block))
+            paragraph.paragraph_format.space_after = Pt(7)
+            paragraph.paragraph_format.line_spacing = Pt(specs["body"]["leading"])
+            for run in paragraph.runs:
+                format_run(run)
+        if references:
+            paragraph_text(target.add_paragraph(), "Fontes: " + ", ".join(references), "source")
+
+    if profile["layout"] == "card_portrait":
+        for block in content["blocks"]:
+            key = block.get("data", {}).get("section_key")
+            label = CARD_LABELS.get(content["deliverable_type"], {}).get(key)
+            if label:
+                heading = paragraph_text(doc.add_heading(label, 1), label, "field")
+                heading.paragraph_format.space_before = Pt(10)
+                heading.paragraph_format.space_after = Pt(0)
+                heading.paragraph_format.keep_with_next = True
+                paragraph_border(heading, ("top", "left", "right"), accent=True)
+                body = paragraph_text(doc.add_paragraph(), block_text(block), "body")
+                body.paragraph_format.space_after = Pt(10)
+                if block.get("citation_ids"):
+                    format_run(body.add_run("[" + ", ".join(block["citation_ids"]) + "]"), "source")
+                paragraph_border(body, ("bottom", "left", "right"), accent=True)
+            else:
+                add_block(doc, block, in_card=True)
+    else:
+        remaining_blocks = content["blocks"]
+        if content["deliverable_type"] in pdf_module().FLOW_LAYOUT_TYPES:
+            slots = load_presentation_layout(content["deliverable_type"]) or {}
+            flow_rows, remaining_blocks = pdf_module().plan_flow(content, slots)
+            for flow_row in flow_rows:
+                if len(flow_row) == 1 and flow_row[0]["mode"] == "tabular_list":
+                    for child in flow_row[0]["blocks"]:
+                        add_block(doc, child)
+                else:
+                    columns = doc.add_table(rows=1, cols=3 if len(flow_row) == 2 else 1)
+                    columns.autofit = False
+                    if len(flow_row) == 2:
+                        half = int((available_width - Pt(8)) / 2)
+                        for col, width in zip(columns.columns, (half, Pt(8), half)):
+                            col.width = width
+                    for i, flow_cell in enumerate(flow_row):
+                        cell = columns.cell(0, i * 2 if len(flow_row) == 2 else 0)
+                        cell_margins(cell, 100, 140, 100, 140)
+                        dark = flow_cell["mode"] == "content_only"
+                        shade(cell, colors["document_deep" if dark else "surface_muted"])
+                        if dark:
+                            cell_border(cell, "start", "document_accent", 24)
+                        if flow_cell["heading"]:
+                            paragraph_text(cell.paragraphs[0], block_text(flow_cell["heading"]).upper(),
+                                           "callout_label" if dark else "section")
+                            if not dark:
+                                band(cell.paragraphs[0])
+                        for child in flow_cell["blocks"]:
+                            if dark and child["type"] not in ("table", "card_grid"):
+                                paragraph_text(cell.add_paragraph(), block_text(child), "body_inverse")
+                            else:
+                                add_block(cell, child)
+                paragraph_text(doc.add_paragraph(), "", "body").paragraph_format.space_after = Pt(8)
+        sections = pdf_module().group_sections(remaining_blocks, block_text)
+        index = 0
+        while index < len(sections):
+            item = sections[index]
+            if item[0] == "page_break":
+                doc.add_page_break()
+                index += 1
+                continue
+            _, heading_text, blocks, wide = item
+            pair = None
+            if (not wide and index + 1 < len(sections) and content["deliverable_type"] not in pdf_module().SINGLE_COLUMN_TYPES
+                    and sections[index + 1][0] == "section" and not sections[index + 1][3]):
+                pair = sections[index + 1]
+            if pair:
+                columns = doc.add_table(rows=1, cols=3)
+                columns.autofit = False
+                half = int((available_width - Pt(10)) / 2)
+                for col, width in zip(columns.columns, (half, Pt(10), half)):
+                    col.width = width
+                for col_index, section_item in ((0, item), (2, pair)):
+                    cell = columns.cell(0, col_index)
+                    cell_margins(cell, 0, 0, 0, 0)
+                    cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.TOP
+                    heading = paragraph_text(cell.paragraphs[0], section_item[1], "report_section")
+                    band(heading)
+                    for run in heading.runs:
+                        run.font.all_caps = True
+                    heading.paragraph_format.space_after = Pt(7)
+                    for child in section_item[2]:
+                        add_block(cell, child)
+                index += 2
+            else:
+                heading = paragraph_text(doc.add_heading(heading_text, 1), heading_text, "report_section")
+                band(heading)
+                for run in heading.runs:
+                    run.font.all_caps = True
+                heading.paragraph_format.space_before = Pt(10)
+                heading.paragraph_format.space_after = Pt(7)
+                for child in blocks:
+                    add_block(doc, child)
+                index += 1
+            paragraph_text(doc.add_paragraph(), "", "body").paragraph_format.space_after = Pt(8)
     if content["citations"]:
-        doc.add_heading("Fontes", 1)
-        for citation in content["citations"]:
-            doc.add_paragraph(f"{citation['id']}: {citation['source_id']} {citation.get('locator', '')}")
+        source_pages: dict[str, int] = {}
+        if len(content["citations"]) > 1:
+            # O PDF é a referência de paginação. Quando a lista de fontes atravessa
+            # uma página, preserve a mesma fronteira no formato editável.
+            try:
+                import tempfile
+                from pypdf import PdfReader
+                with tempfile.TemporaryDirectory(prefix="eric-docx-sources-") as temporary:
+                    pdf_path = Path(temporary) / "reference.pdf"
+                    render_pdf_reportlab(content, tokens, profile, pdf_path)
+                    for page_number, pdf_page in enumerate(PdfReader(pdf_path).pages):
+                        page_text = pdf_page.extract_text() or ""
+                        for citation in content["citations"]:
+                            if citation["source_id"] in page_text:
+                                source_pages.setdefault(citation["id"], page_number)
+            except (ImportError, OSError, RuntimeError, ValueError):
+                source_pages = {}
+        paragraph_text(doc.add_heading("Fontes", 1), "Fontes", "field")
+        for index, citation in enumerate(content["citations"]):
+            if index and source_pages.get(citation["id"], 0) > source_pages.get(content["citations"][index - 1]["id"], 0):
+                doc.add_page_break()
+            paragraph_text(doc.add_paragraph(), f"{citation['id']}: {citation['source_id']} {citation.get('locator', '')}", "source")
     doc.core_properties.title = content["title"]
     doc.core_properties.author = "my_skills"
     doc.save(path)

@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "test_card",
   "files": {
-    "sample-test-card-v1.0.0.docx": "7454f7cb5dd51bda730b330252256fe2fdd1697d0ac35cbd0170f519fb45933e",
+    "sample-test-card-v1.0.0.docx": "2ebff85f636499c2216542fb8669715cd9c5ea2ce7d88650396b599876250dbc",
     "sample-test-card-v1.0.0.html": "7abcece428223546ba9b29298b48072c7d45dca9ab88681706cdb9ab2d5c9c6a",
     "sample-test-card-v1.0.0.json": "9d2feace3028580393cf7a463e941278327aaf6a5823494dac08d86ef45f596e",
     "sample-test-card-v1.0.0.md": "e92fa52366484e61985b89d422f572f74796356fb97a3f6fada3ae68e19f8cda",
@@ -15,9 +15,9 @@
   "layout": "card_portrait",
   "paper": "a4_portrait",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

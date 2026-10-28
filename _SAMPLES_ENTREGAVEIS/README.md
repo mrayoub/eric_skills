@@ -29,3 +29,5 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 Os relatórios agora apresentam seções em cards tabulados; a amostra 4D inclui grades de diagnóstico, jornada, alternativas e priorização inspiradas apenas na estrutura visual do PDF de referência. A orientação continua definida por perfil, e os Test/Learning Cards mantêm seus quatro campos Strategyzer.
 
 Os formatos PDF/HTML mostram a apresentação visual; DOCX/PPTX permitem avaliar a edição. A mesma versão de conteúdo alimenta todos os derivados. Os arquivos CSV existem apenas nas duas tabelas marcadas para exportação.
+
+Os DOCX das 19 amostras foram recompostos com texto, tabelas e cartões editáveis para acompanhar a orientação, a hierarquia e a paginação dos PDFs correspondentes. Para comparar novamente todos os pares após converter DOCX com LibreOffice, execute `python3 _TOOLS/check_docx_pdf_parity.py --out-dir /caminho/para/resultado` no ambiente com as dependências do design system. O `report.json` e as imagens lado a lado registram diferenças visuais que ainda dependem do motor de renderização e das fontes instaladas.

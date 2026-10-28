@@ -26,6 +26,16 @@ Use `--types test_card,learning_card` para limitar os tipos. O `index.html`
 gerado reúne as páginas lado a lado, o resultado do verificador e os erros de
 renderização. Ele serve às aprovações visuais dos Planos 034–036.
 
+Para comparar os 19 DOCX editáveis com os PDFs das amostras, instale as dependências de
+`_DESIGN_SYSTEM/requirements.txt`, LibreOffice e `pdftoppm`, e rode
+`python3 _TOOLS/check_docx_pdf_parity.py --out-dir /tmp/comparacao-docx`.
+O comando renderiza os DOCX a partir dos JSON, converte com as fontes Montserrat incluídas,
+grava `report.json` com páginas, medidas, texto cortado e métricas de imagem, além de PNGs
+lado a lado e diffs em `pictures/`. Ele sai com código 1 se houver página extra, página
+ausente, tamanho incorreto ou texto fora da folha. Confira as imagens antes de distribuir:
+a métrica visual serve para localizar diferenças, não para declarar pixels idênticos entre
+ReportLab, Word e LibreOffice.
+
 Ao importar ou substituir uma fonte, atualize `_FONTES/manifest.json` (nova entrada; a anterior vira `historica`) e rode `python3 _TOOLS/build_sources.py`. Nunca reescreva um original. O gerador confere as cópias e os hashes fixados dos DOCX 4D/3E/5C antes de produzir as páginas `references/fontes.md`; `python3 _TOOLS/build_sources.py --check` verifica tudo sem escrever e retorna código 1 para fonte ausente, divergente ou página desatualizada. Metadados desconhecidos ficam nulos; publicação oficial não confirma adoção institucional.
 
 ## Licença e material de terceiros

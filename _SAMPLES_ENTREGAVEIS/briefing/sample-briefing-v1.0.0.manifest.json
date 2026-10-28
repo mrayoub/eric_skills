@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "briefing",
   "files": {
-    "sample-briefing-v1.0.0.docx": "2e8ba54658c51d62dbe8d74385ce997df4b37be4226643e300f5d6136d1eafad",
+    "sample-briefing-v1.0.0.docx": "510d4225a87bbe4de8eb84e957da9141a6d9a2392ae0073da9b266fc2880fd01",
     "sample-briefing-v1.0.0.html": "cde108f343dfa2f2b56b8bfde8accb7eac731da42b51f5514922b7e4d112cfc7",
     "sample-briefing-v1.0.0.json": "acd734658546d076a9bd453a2afee144973e35550c3617a1b39e835889d93db5",
     "sample-briefing-v1.0.0.md": "ee24808486b6ad740cd877951f1bf169a1f320b1a6f63152a25b40bd4ed8d82a",
@@ -15,9 +15,9 @@
   "layout": "report_portrait",
   "paper": "a4_portrait",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

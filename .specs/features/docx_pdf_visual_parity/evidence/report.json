@@ -1,0 +1,661 @@
+{
+  "sample_count": 19,
+  "failures": 0,
+  "results": [
+    {
+      "type": "briefing",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 16.292,
+          "blue_region_iou": 0.4438
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "briefing_improvement_questionnaire",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 10.87,
+          "blue_region_iou": 0.2875
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "briefing_one_page",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 12.211,
+          "blue_region_iou": 0.7016
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "briefing_validation",
+      "reference_pages": 5,
+      "docx_pages": 5,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 15.926,
+          "blue_region_iou": 0.5711
+        },
+        {
+          "mean_rgb_difference": 14.031,
+          "blue_region_iou": 0.6433
+        },
+        {
+          "mean_rgb_difference": 17.802,
+          "blue_region_iou": 0.0
+        },
+        {
+          "mean_rgb_difference": 30.367,
+          "blue_region_iou": 0.0049
+        },
+        {
+          "mean_rgb_difference": 7.105,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "cdt",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 21.391,
+          "blue_region_iou": 0.3071
+        },
+        {
+          "mean_rgb_difference": 20.053,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "cdt_analysis",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 28.454,
+          "blue_region_iou": 0.3374
+        },
+        {
+          "mean_rgb_difference": 19.62,
+          "blue_region_iou": 0.1718
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "evidence_recommendation",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 28.517,
+          "blue_region_iou": 0.4114
+        },
+        {
+          "mean_rgb_difference": 0.253,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "experiment_plan",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 20.671,
+          "blue_region_iou": 0.3145
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "experiment_report",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 36.194,
+          "blue_region_iou": 0.3856
+        },
+        {
+          "mean_rgb_difference": 0.613,
+          "blue_region_iou": 0.0034
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "five_c_report",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 34.211,
+          "blue_region_iou": 0.3609
+        },
+        {
+          "mean_rgb_difference": 6.906,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "five_c_workshop_record",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 34.566,
+          "blue_region_iou": 0.3557
+        },
+        {
+          "mean_rgb_difference": 6.923,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "four_d_report",
+      "reference_pages": 3,
+      "docx_pages": 3,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 29.512,
+          "blue_region_iou": 0.3769
+        },
+        {
+          "mean_rgb_difference": 43.702,
+          "blue_region_iou": 0.0083
+        },
+        {
+          "mean_rgb_difference": 48.059,
+          "blue_region_iou": 0.0838
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "four_d_workshop_record",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 28.775,
+          "blue_region_iou": 0.385
+        },
+        {
+          "mean_rgb_difference": 0.533,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "innovation_potential_assessment",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ],
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ],
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 34.161,
+          "blue_region_iou": 0.2604
+        },
+        {
+          "mean_rgb_difference": 0.554,
+          "blue_region_iou": 0.5484
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "innovation_scorecard",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 21.159,
+          "blue_region_iou": 0.419
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "learning_card",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 12.056,
+          "blue_region_iou": 0.1486
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "test_card",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          595.28,
+          841.89
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          595.3,
+          841.89
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 11.706,
+          "blue_region_iou": 0.1377
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "three_e_report",
+      "reference_pages": 2,
+      "docx_pages": 2,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ],
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ],
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 29.468,
+          "blue_region_iou": 0.3815
+        },
+        {
+          "mean_rgb_difference": 0.518,
+          "blue_region_iou": 0.0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "type": "three_e_workshop_record",
+      "reference_pages": 1,
+      "docx_pages": 1,
+      "reference_sizes_pt": [
+        [
+          841.89,
+          595.28
+        ]
+      ],
+      "docx_sizes_pt": [
+        [
+          841.89,
+          595.3
+        ]
+      ],
+      "clipped_characters": 0,
+      "pages": [
+        {
+          "mean_rgb_difference": 18.975,
+          "blue_region_iou": 0.3231
+        }
+      ],
+      "failures": []
+    }
+  ]
+}

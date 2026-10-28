@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "innovation_potential_assessment",
   "files": {
-    "sample-innovation-potential-assessment-v1.0.0.docx": "c83034bdfaf42c7894542f7de712ae7cca362bc7ada51b773fe2bbcdef86946d",
+    "sample-innovation-potential-assessment-v1.0.0.docx": "c33f3d84ef9009cae7017076e1d682f3a7dbca6f2681f21f8d5727272e90e7a6",
     "sample-innovation-potential-assessment-v1.0.0.html": "217589cbbc20a986941ccff604d654fe824cf3be86a813d99404a8164ca4252a",
     "sample-innovation-potential-assessment-v1.0.0.json": "5ef7232d5b9d75091180d97631886caed5b208ce7653aecee5a73b066e30199b",
     "sample-innovation-potential-assessment-v1.0.0.md": "be985d77a46701375806b705b7007e31368aa3729110cb99df6820467ce839fd",
@@ -15,9 +15,9 @@
   "layout": "report_portrait",
   "paper": "a4_portrait",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

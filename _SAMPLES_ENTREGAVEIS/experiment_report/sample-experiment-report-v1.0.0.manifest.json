@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "experiment_report",
   "files": {
-    "sample-experiment-report-v1.0.0.docx": "84b0ca9ed190b5491d73eab45db25a6d78da2d37c070116d5345288762b85aa9",
+    "sample-experiment-report-v1.0.0.docx": "f00c021299760c3fa822d9964b049378db50fa4df403538fb2b9e79c0d9adef3",
     "sample-experiment-report-v1.0.0.html": "d8e55c9dcb7b374316b821f87359e64c541afa73b7ef97855e2d5b03c3489c5d",
     "sample-experiment-report-v1.0.0.json": "b0ebf04e840b1ed8547a5cb5b11ff0bfabd72a17dd27bfa7055ec718e925ee32",
     "sample-experiment-report-v1.0.0.md": "6801c9fea4f61d9a7899a2f80cc67165d960d7ac33842057e7346f7beaafabd6",
@@ -15,9 +15,9 @@
   "layout": "report_landscape",
   "paper": "a4_landscape",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }
