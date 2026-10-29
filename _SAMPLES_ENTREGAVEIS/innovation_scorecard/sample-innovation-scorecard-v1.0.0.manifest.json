@@ -5,8 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "innovation_scorecard",
   "files": {
-    "sample-innovation-scorecard-v1.0.0.docx": "975ff02b120e1470c7f7a62260456459c67bdd89d81c389133fe9dd9a50d1a07",
-    "sample-innovation-scorecard-v1.0.0.html": "dee049ca224086ee66e1265b0c2bb48328275673d437417dd0ed2d236edf5e02",
+    "sample-innovation-scorecard-v1.0.0.docx": "2aaa849408ba0447711946da13ab55d75f72ed1770222c217fdda24208717ab2",
     "sample-innovation-scorecard-v1.0.0.json": "9ca205b65d9995a16c7ef2df9dad8561978c851b9f6bb80da4ac7df2be03c2cb",
     "sample-innovation-scorecard-v1.0.0.md": "e87f8809275ea13e2fdc7c5a40dc1f965b646d6142da2b3cf258c82c8b85b591",
     "sample-innovation-scorecard-v1.0.0.pdf": "7925f7fa94d39a92bf557deb967b8480f20620cfe91455de7241fb930ac8ddbe",
@@ -17,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.0",
+  "renderer_version": "2.1.1",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

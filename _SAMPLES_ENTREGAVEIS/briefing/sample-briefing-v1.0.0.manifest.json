@@ -5,8 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "briefing",
   "files": {
-    "sample-briefing-v1.0.0.docx": "510d4225a87bbe4de8eb84e957da9141a6d9a2392ae0073da9b266fc2880fd01",
-    "sample-briefing-v1.0.0.html": "cde108f343dfa2f2b56b8bfde8accb7eac731da42b51f5514922b7e4d112cfc7",
+    "sample-briefing-v1.0.0.docx": "e4fcf1ed2dd51e8fd7396adc62f28ede9c314c64f4764fae021729b7bbc12ae1",
     "sample-briefing-v1.0.0.json": "acd734658546d076a9bd453a2afee144973e35550c3617a1b39e835889d93db5",
     "sample-briefing-v1.0.0.md": "ee24808486b6ad740cd877951f1bf169a1f320b1a6f63152a25b40bd4ed8d82a",
     "sample-briefing-v1.0.0.pdf": "54e1279b631c8314f5a4c1d80122733e4d9c5b3aab105cfeb34b8fe4c6ac40bd",
@@ -17,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.0",
+  "renderer_version": "2.1.1",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

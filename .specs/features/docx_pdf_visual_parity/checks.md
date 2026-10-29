@@ -4,7 +4,7 @@ Mutations: 3
 Build: `/private/tmp/eric-docx-venv/bin/python -m compileall -q _DESIGN_SYSTEM/scripts _TOOLS`
 Plan: `.specs/features/docx_pdf_visual_parity/plan.md`
 
-9 checks in 3 slices · 0 one-way doors · 0 open
+10 checks in 3 slices · 0 one-way doors · 0 open
 
 ## Checks
 
@@ -21,6 +21,9 @@ Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.
 
 **C4** - Test Card e Learning Card têm quatro campos em ordem, visíveis em uma página A4 retrato (AC 4)
 Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_cards_one_page_and_order`
+
+**C10** - O logo CCEE mantém a proporção visual da arte original nas 19 primeiras páginas convertidas, sem alterar a paginação (AC 10)
+Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_all_sample_logos_uncropped`
 
 ### S2 - Edição e identidade
 
@@ -51,6 +54,8 @@ Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.
 | Falhas do comparador (2) | páginas diferentes C9 · conteúdo cortado C9 | - |
 | Skills sincronizadas (13) | `avaliacao-briefing-iqb` C8 · `briefing-inovacao` C8 · `experimentacao-inovacao` C8 · `gerador-cdt` C8 · `potencial-inovacao` C8 · `relatorio-3e` C8 · `relatorio-4d` C8 · `relatorio-5c` C8 · `relatorio-final-inovacao` C8 · `scorecard-inovacao` C8 · `workshop-3e` C8 · `workshop-4d` C8 · `workshop-5c` C8 | - |
 
+C10 percorre os mesmos 19 tipos da primeira linha e mede o logo na primeira página convertida de cada um.
+
 ## Swept
 
 - validation: C1, C3, C7, C9
@@ -66,7 +71,8 @@ Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.
 ## Handoff
 
 - **Settled mid-build:** 2026-10-28 - user: "aprovado pode continuar e preciso que vc de prioridade a presevar a edicao"
+- **Settled mid-build:** 2026-10-29 - user: "vc consegue resolver o problema do corte do logo da ccee?"
 - **Dispatched:** Verifier at `6d91edf` (returned; três achados corrigidos)
-- **Boundary:** C1-C9 fechadas na construção e após a revisão; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada. Evidência visual em `evidence/report.json` e imagens lado a lado, inclusive páginas 2 e 3 do Relatório 4D.
+- **Boundary:** C1-C10 fechadas; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada e logo inteiro no DOCX convertido. Evidência visual em `evidence/report.json` e nas 34 imagens lado a lado.
 - **Abandoned:** none
 - **Walked:** n/a - não há tela de aplicativo

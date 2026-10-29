@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "2.1.0"
+RENDERER_VERSION = "2.1.1"
 DELIVERABLE_LABELS = {
     "briefing": "Entrevista Inicial de sete campos",
     "briefing_one_page": "Briefing",
@@ -1360,7 +1360,7 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     available_width = section.page_width - section.left_margin - section.right_margin
     masthead = doc.add_paragraph()
     masthead.paragraph_format.tab_stops.add_tab_stop(available_width, WD_TAB_ALIGNMENT.RIGHT)
-    masthead.paragraph_format.line_spacing = Pt(28)
+    masthead.paragraph_format.line_spacing = Pt(36)
     format_run(masthead.add_run(header_label(content).upper()), "eyebrow")
     masthead.add_run("\t").add_picture(str(ROOT / "assets" / "logo_ccee.png"), width=Cm(3.0))
     ppr = masthead._p.get_or_add_pPr()
@@ -1372,7 +1372,7 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     borders.append(border)
     ppr.append(borders)
     title = doc.add_heading(content["title"], 0)
-    title.paragraph_format.space_before = Pt(8)
+    title.paragraph_format.space_before = Pt(0)
     title.paragraph_format.space_after = Pt(6)
     for run in title.runs:
         format_run(run, "report_title" if profile["layout"] in ("report_portrait", "report_landscape") else "title")

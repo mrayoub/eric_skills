@@ -5,8 +5,7 @@
   "content_version": "1.3.0",
   "deliverable_type": "cdt_analysis",
   "files": {
-    "sample-cdt-analise-v1.3.0.docx": "4974096136858dd4e15f9203411d9a8e747ae28707cb968753e28a74c9bc3e17",
-    "sample-cdt-analise-v1.3.0.html": "1996fc9e452d8b34d5268d8b7c0d8327db2291062723e44330e6965f807c86f2",
+    "sample-cdt-analise-v1.3.0.docx": "4ff7c3e6f3287cc2a6c06975b779c5bcb9c0e3fe030e3e456e0f17cf2be20c60",
     "sample-cdt-analise-v1.3.0.json": "36514032679415b36a4cbab23f71f2e15bd66c6b8204ba620248da2c8ae27e43",
     "sample-cdt-analise-v1.3.0.md": "10b3232047d752d5ccd3f712d4fde61bc37a36b97c935ec93ba4838c21e1cc4d",
     "sample-cdt-analise-v1.3.0.pdf": "4484b6710c687e989a55c2bcd52c54ce7601788228f847951981ae5cd7542a87",
@@ -17,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.0",
+  "renderer_version": "2.1.1",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

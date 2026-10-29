@@ -1,6 +1,6 @@
 # docx_pdf_visual_parity proofs
 
-**HEAD**: 18d0d2f
+**HEAD**: 71103d4
 **Tree**: clean
 **Result**: 10 pass, 0 fail; mutations 3 killed, 0 not
 

@@ -5,8 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "experiment_report",
   "files": {
-    "sample-experiment-report-v1.0.0.docx": "f00c021299760c3fa822d9964b049378db50fa4df403538fb2b9e79c0d9adef3",
-    "sample-experiment-report-v1.0.0.html": "d8e55c9dcb7b374316b821f87359e64c541afa73b7ef97855e2d5b03c3489c5d",
+    "sample-experiment-report-v1.0.0.docx": "a726e7ed25e5a77093b90e73e2c46610bd4a51b77439f26d216b4e3c8b9daf0a",
     "sample-experiment-report-v1.0.0.json": "b0ebf04e840b1ed8547a5cb5b11ff0bfabd72a17dd27bfa7055ec718e925ee32",
     "sample-experiment-report-v1.0.0.md": "6801c9fea4f61d9a7899a2f80cc67165d960d7ac33842057e7346f7beaafabd6",
     "sample-experiment-report-v1.0.0.pdf": "1647b00ed28a95332a85addbd582233cd41a1c1579b0ee1534cd10340ffeffca",
@@ -17,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.0",
+  "renderer_version": "2.1.1",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

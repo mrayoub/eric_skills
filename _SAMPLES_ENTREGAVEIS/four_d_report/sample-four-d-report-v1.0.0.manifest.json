@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "four_d_report",
   "files": {
-    "sample-four-d-report-v1.0.0.docx": "01171400f0264402efa855876deb7deaf0777b95da854d9bd4745aa00735e22d",
+    "sample-four-d-report-v1.0.0.docx": "5f49b472037e2166775786f40893b0bd543b5fa4ec057481b8f3695a14a2ed68",
     "sample-four-d-report-v1.0.0.json": "e8b6aaff7a76abd4be12b8ac83809d6d1aa14255f5bd969f3f103d91e905d77e",
     "sample-four-d-report-v1.0.0.md": "d894d5d24232bca20b1fab9bb55de3cdf62a38b9711e4704c1eab2d5b1ac3531",
     "sample-four-d-report-v1.0.0.pdf": "9d697ee9116eca00f9fcb210f3ad395e36e21cd9a58ba04907905fe1b995ca52",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.0",
+  "renderer_version": "2.1.1",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

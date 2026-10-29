@@ -13,6 +13,7 @@ from pathlib import Path
 from unittest import mock
 
 from docx import Document
+from PIL import Image
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -158,6 +159,25 @@ class DocxParityTests(unittest.TestCase):
                 self.assertGreater(len(text_nodes), 8)
                 self.assertLessEqual(len(images), 1, "só o logo pode ser imagem")
                 self.assertIn("EXEMPLO FICTÍCIO", docx_text(path).upper())
+
+    def test_all_sample_logos_uncropped(self):
+        source = Image.open(ROOT / "_DESIGN_SYSTEM/assets/logo_ccee.png").convert("RGB")
+        def logo_pixels(image, x_start=0, y_end=None):
+            y_end = y_end or image.height
+            return [(x, y) for y in range(y_end) for x in range(x_start, image.width)
+                    if (lambda color: color[0] < 30 and color[1] < 30 and color[2] > 80)(image.getpixel((x, y)))]
+        points = logo_pixels(source)
+        expected_ratio = (max(x for x, _ in points) - min(x for x, _ in points) + 1) / (
+            max(y for _, y in points) - min(y for _, y in points) + 1)
+        for kind in self.rows:
+            with self.subTest(kind=kind):
+                image = Image.open(self.cache / "pictures" / f"{kind}-1-docx.png").convert("RGB")
+                points = logo_pixels(image, int(image.width * .58), int(image.height * .15))
+                self.assertGreater(len(points), 50, "logo ausente do cabeçalho")
+                width = max(x for x, _ in points) - min(x for x, _ in points) + 1
+                height = max(y for _, y in points) - min(y for _, y in points) + 1
+                self.assertLessEqual(abs(width / height / expected_ratio - 1), .12,
+                                     "proporção do logo indica corte no DOCX convertido")
 
     def test_all_samples_semantic_parity(self):
         for kind in self.rows:

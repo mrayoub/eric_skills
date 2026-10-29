@@ -1,6 +1,7 @@
 # Paridade visual DOCX/PDF dos entregáveis ERIC
 
 **Approved**: 2026-10-28 - user: "aprovado pode continuar e preciso que vc de prioridade a presevar a edicao"
+**Approved addendum**: 2026-10-29 - user: "vc consegue resolver o problema do corte do logo da ccee?"
 
 ## Problem
 
@@ -58,6 +59,7 @@ Cada DOCX tem a composição visual do PDF gerado do mesmo JSON.
 2. WHEN o Briefing de uma página for renderizado THEN o DOCX SHALL mostrar a pergunta em faixa azul, três cartões na mesma linha, faixa de responsáveis e identificação no rodapé, dentro de uma página A4 paisagem, seguindo os sete slots de `briefing_one_page.layout.json`.
 3. WHEN um relatório ou registro em A4 for renderizado THEN o DOCX SHALL preservar a ordem dos blocos e a composição de faixas de seção, cartões, tabelas e fontes do PDF correspondente, com títulos e textos dentro da área segura do papel.
 4. WHEN um Test Card ou Learning Card for renderizado THEN o DOCX SHALL mostrar os quatro campos na ordem do método em uma página A4 retrato, com rótulos e texto visíveis.
+10. WHEN qualquer um dos 19 DOCX for convertido para revisão visual THEN o logo CCEE SHALL aparecer inteiro no cabeçalho, com a proporção da arte original e sem criar página extra.
 
 ### S2: Edição e identidade (P1)
 
