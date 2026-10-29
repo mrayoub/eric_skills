@@ -15,3 +15,6 @@ _DIST/
 # Galeria de templates: gerada por _GALERIA/gerar.py
 _GALERIA/saida/
 _GALERIA/index.html
+
+# Provas regeneradas no HEAD pela tlc-spec-lean
+.specs/features/*/proofs.md
