@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "three_e_workshop_record",
   "files": {
-    "sample-three-e-workshop-record-v1.0.0.docx": "544099b4edc6a70629f86a9c2a971988e7b22e551358451a6d0dd1128f77e333",
+    "sample-three-e-workshop-record-v1.0.0.docx": "c7228c793a59fe15ce7ca8ecf170f9706e68b970cbbab151eac9af79ba6cd570",
     "sample-three-e-workshop-record-v1.0.0.json": "bf85938b6d239d4a11ccf76c3af6ef933b3bfa8eaa96df2d46ba448052580f9f",
     "sample-three-e-workshop-record-v1.0.0.md": "a1e820f75daa08b943556c0af035c6ec0742dfc084070f183be8c9892549c3a6",
     "sample-three-e-workshop-record-v1.0.0.pdf": "43daae8e21b55202e274d60ae07793012075d1d19bed18c9eeb32676ab14b554",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.2",
+  "renderer_version": "2.1.4",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

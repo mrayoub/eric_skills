@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "evidence_recommendation",
   "files": {
-    "sample-evidence-recommendation-v1.0.0.docx": "9a25512b0c5484a4b5eeee2ab32f304c66d2f2e43fd8b5871768c123f31d15ae",
+    "sample-evidence-recommendation-v1.0.0.docx": "aa12e22c9298a76f6f24a4a8a48fe50aac55add42da02f5454b849d3d985a204",
     "sample-evidence-recommendation-v1.0.0.json": "e13ff0db0c603b7fd71b9002e58abff720a5507e7922f53b590f6245a7e227f5",
     "sample-evidence-recommendation-v1.0.0.md": "e417d657eef4555eca047576a9b50d97947cf5734b61c84d9b9a3152776feb8d",
     "sample-evidence-recommendation-v1.0.0.pdf": "67ad412a04a34c0d42e4581c42b3ab8ee6bb969434adb9bc373d5d343ee0e9ab",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.2",
+  "renderer_version": "2.1.4",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

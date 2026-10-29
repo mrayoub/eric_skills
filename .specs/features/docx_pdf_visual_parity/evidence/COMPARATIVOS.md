@@ -1,6 +1,6 @@
 # Comparativos PDF e DOCX
 
-Em cada imagem, o PDF está à esquerda e o DOCX convertido pelo LibreOffice está à direita. Comparativo atualizado em 29/10/2026 com o renderizador 2.1.2.
+Em cada imagem, o PDF está à esquerda e o DOCX convertido pelo LibreOffice está à direita. Comparativo atualizado em 29/10/2026 com o renderizador 2.1.4.
 
 | Entregável | Páginas comparadas |
 | --- | --- |

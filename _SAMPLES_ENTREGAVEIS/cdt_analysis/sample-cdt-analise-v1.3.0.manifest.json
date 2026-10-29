@@ -5,7 +5,7 @@
   "content_version": "1.3.0",
   "deliverable_type": "cdt_analysis",
   "files": {
-    "sample-cdt-analise-v1.3.0.docx": "9ddd880bc6eb7225ca4732c24b053862eadb0a980dba409ec3ec09ea36e238a6",
+    "sample-cdt-analise-v1.3.0.docx": "67c915155d1f8921c4d49b9f1a738d7e514e014ea6d790992a5f399610e15c72",
     "sample-cdt-analise-v1.3.0.json": "36514032679415b36a4cbab23f71f2e15bd66c6b8204ba620248da2c8ae27e43",
     "sample-cdt-analise-v1.3.0.md": "10b3232047d752d5ccd3f712d4fde61bc37a36b97c935ec93ba4838c21e1cc4d",
     "sample-cdt-analise-v1.3.0.pdf": "4484b6710c687e989a55c2bcd52c54ce7601788228f847951981ae5cd7542a87",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.2",
+  "renderer_version": "2.1.4",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

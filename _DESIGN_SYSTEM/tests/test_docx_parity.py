@@ -180,7 +180,7 @@ class DocxParityTests(unittest.TestCase):
                 self.assertLessEqual(abs(width / height / expected_ratio - 1), .12,
                                      "proporção do logo indica corte no DOCX convertido")
 
-    def test_cdt_section_padding_matches_pdf(self):
+    def test_all_section_bands_match_pdf_padding(self):
         for kind in self.rows:
             if kind in {"test_card", "learning_card", "briefing_one_page"}:
                 continue
@@ -191,10 +191,16 @@ class DocxParityTests(unittest.TestCase):
                          if any(shade.get(qn("w:fill")) == self.tokens["color"]["document_deep"].lstrip("#")
                                 for shade in paragraph.xpath("./w:pPr/w:shd"))]
                 self.assertTrue(bands, "faixa de título ausente")
+                inset = "180" if kind == "innovation_potential_assessment" else "240"
+                vertical = "40" if kind == "innovation_potential_assessment" else "72"
                 for paragraph in bands:
-                    self.assertTrue(any(tab.get(qn("w:pos")) == "240"
+                    self.assertTrue(any(tab.get(qn("w:pos")) == inset
                                         for tab in paragraph.xpath("./w:pPr/w:tabs/w:tab")),
-                                    "faixa sem recuo de 12 pt")
+                                    "faixa sem recuo horizontal do PDF")
+                    for edge in ("top", "bottom"):
+                        borders = paragraph.xpath(f"./w:pPr/w:pBdr/w:{edge}")
+                        self.assertEqual(len(borders), 1, f"padding vertical {edge} ausente")
+                        self.assertEqual(borders[0].get(qn("w:sz")), vertical)
                     self.assertTrue(paragraph.xpath("./w:r[1]/w:tab"), "texto da faixa não começa no recuo")
 
         def first_band(image_path):
@@ -207,22 +213,28 @@ class DocxParityTests(unittest.TestCase):
                 )(image.getpixel((x, y)))]
                 if len(dark) > width * .6:
                     rows.append((y, min(dark), max(dark)))
-            self.assertTrue(rows, "faixa azul da CDT não encontrada")
+            self.assertTrue(rows, "faixa azul de título não encontrada")
             top = rows[0][0]
             band_rows = [row for row in rows if top <= row[0] <= top + 80]
             bottom = band_rows[-1][0]
             left = min(row[1] for row in band_rows)
             right = max(row[2] for row in band_rows)
-            white = [x for y in range(top, bottom + 1) for x in range(left, right + 1)
+            white = [(x, y) for y in range(top, bottom + 1) for x in range(left, right + 1)
                      if all(channel > 180 for channel in image.getpixel((x, y)))]
-            self.assertTrue(white, "rótulo branco da CDT não encontrado")
-            return min(white) - left, bottom - top + 1
+            self.assertTrue(white, "rótulo branco não encontrado")
+            text_top = min(y for _, y in white)
+            text_bottom = max(y for _, y in white)
+            return (min(x for x, _ in white) - left, bottom - top + 1,
+                    (text_top + text_bottom - top - bottom) / 2)
 
-        reference = first_band(self.cache / "pictures/cdt-1-reference.png")
-        editable = first_band(self.cache / "pictures/cdt-1-docx.png")
-        self.assertGreaterEqual(editable[0], 12, "título encostado na borda azul")
-        self.assertLessEqual(abs(reference[0] - editable[0]), 4, "recuo do título difere do PDF")
-        self.assertLessEqual(abs(reference[1] - editable[1]), 5, "altura da faixa difere do PDF")
+        for kind in ("cdt", "briefing_validation"):
+            with self.subTest(kind=kind):
+                reference = first_band(self.cache / "pictures" / f"{kind}-1-reference.png")
+                editable = first_band(self.cache / "pictures" / f"{kind}-1-docx.png")
+                self.assertGreaterEqual(editable[0], 12, "título encostado na borda azul")
+                self.assertLessEqual(abs(reference[0] - editable[0]), 4, "recuo do título difere do PDF")
+                self.assertLessEqual(abs(reference[1] - editable[1]), 5, "altura da faixa difere do PDF")
+                self.assertLessEqual(abs(editable[2]), 3, "título não está centralizado verticalmente")
 
     def test_all_samples_semantic_parity(self):
         for kind in self.rows:

@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "three_e_report",
   "files": {
-    "sample-three-e-report-v1.0.0.docx": "4904a0954581b8a3b09f12f5f5dc0dc0fa6c810be1aa1150242b30d351707c01",
+    "sample-three-e-report-v1.0.0.docx": "38084b320f42d7b6a73d97677330e85b2519943833d98bc2abd9f8b4c54cee3c",
     "sample-three-e-report-v1.0.0.json": "0a2b82164a3e6040065c2ccd8e254857ffeafa8ec721dfe8833ba60b14530187",
     "sample-three-e-report-v1.0.0.md": "b5c36a34d5945071f54fe6aa4c530328d52adeebaed7c26532251ce18278f1a1",
     "sample-three-e-report-v1.0.0.pdf": "69da021b2c80a8d7ac619a82502fe861ad0fd9497444d6f6c1f458bd879e73a5",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.2",
+  "renderer_version": "2.1.4",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

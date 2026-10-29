@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "2.1.2"
+RENDERER_VERSION = "2.1.4"
 DELIVERABLE_LABELS = {
     "briefing": "Entrevista Inicial de sete campos",
     "briefing_one_page": "Briefing",
@@ -1225,13 +1225,23 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         element.set(qn("w:fill"), fill.lstrip("#"))
         cell._tc.get_or_add_tcPr().append(element)
 
-    def band(paragraph: Any) -> None:
+    def band(paragraph: Any, *, inset_pt: int = 12, vertical_pt: int = 9) -> None:
+        deep = tokens["color"]["document_deep"].lstrip("#")
         element = OxmlElement("w:shd")
-        element.set(qn("w:fill"), tokens["color"]["document_deep"].lstrip("#"))
-        paragraph._p.get_or_add_pPr().append(element)
-        if content["deliverable_type"] == "cdt":
-            paragraph.paragraph_format.line_spacing = Pt(30)
-        paragraph.paragraph_format.tab_stops.add_tab_stop(Pt(12))
+        element.set(qn("w:fill"), deep)
+        ppr = paragraph._p.get_or_add_pPr()
+        ppr.append(element)
+        # Bordas da mesma cor criam padding vertical simétrico com texto editável.
+        borders = OxmlElement("w:pBdr")
+        for edge in ("top", "bottom"):
+            border = OxmlElement("w:" + edge)
+            border.set(qn("w:val"), "single")
+            border.set(qn("w:sz"), str(vertical_pt * 8))
+            border.set(qn("w:color"), deep)
+            border.set(qn("w:space"), "0")
+            borders.append(border)
+        ppr.append(borders)
+        paragraph.paragraph_format.tab_stops.add_tab_stop(Pt(inset_pt))
         if paragraph.runs:
             paragraph.runs[0].text = "\t" + paragraph.runs[0].text
         for run in paragraph.runs:
@@ -1558,7 +1568,10 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             for run in paragraph.runs:
                 format_run(run)
         if references:
-            paragraph_text(target.add_paragraph(), "Fontes: " + ", ".join(references), "source")
+            if kind in ("paragraph", "list") and target.paragraphs:
+                format_run(target.paragraphs[-1].add_run("[" + ", ".join(references) + "]"), "source")
+            else:
+                paragraph_text(target.add_paragraph(), "Fontes: " + ", ".join(references), "source")
 
     if profile["layout"] == "card_portrait":
         for block in content["blocks"]:
@@ -1604,13 +1617,15 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                             paragraph_text(cell.paragraphs[0], block_text(flow_cell["heading"]).upper(),
                                            "callout_label" if dark else "section")
                             if not dark:
-                                band(cell.paragraphs[0])
+                                band(cell.paragraphs[0], inset_pt=9, vertical_pt=5)
                         for child in flow_cell["blocks"]:
                             if dark and child["type"] not in ("table", "card_grid"):
                                 paragraph_text(cell.add_paragraph(), block_text(child), "body_inverse")
                             else:
                                 add_block(cell, child)
-                paragraph_text(doc.add_paragraph(), "", "body").paragraph_format.space_after = Pt(8)
+                flow_gap = doc.add_paragraph()
+                flow_gap.paragraph_format.line_spacing = Pt(11)
+                flow_gap.paragraph_format.space_after = Pt(9)
         sections = pdf_module().group_sections(remaining_blocks, block_text)
         section_keys = {block_text(block): block.get("data", {}).get("section_key")
                         for block in remaining_blocks if block["type"] == "heading"}
@@ -1625,6 +1640,11 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
             if (content["deliverable_type"] == "four_d_report"
                     and section_keys.get(heading_text) == "d4_prioritization"):
                 doc.add_page_break()
+            if (content["deliverable_type"] == "four_d_report"
+                    and section_keys.get(heading_text) == "d2_process_journey"):
+                lead = doc.add_paragraph()
+                lead.paragraph_format.page_break_before = True
+                lead.paragraph_format.line_spacing = Pt(24)
             pair = None
             if (not wide and index + 1 < len(sections) and content["deliverable_type"] not in pdf_module().SINGLE_COLUMN_TYPES
                     and sections[index + 1][0] == "section" and not sections[index + 1][3]):
@@ -1657,7 +1677,13 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                 for child in blocks:
                     add_block(doc, child)
                 index += 1
-            paragraph_text(doc.add_paragraph(), "", "body").paragraph_format.space_after = Pt(8)
+            gap = doc.add_paragraph()
+            if content["deliverable_type"] in {"four_d_workshop_record", "three_e_report"}:
+                gap.paragraph_format.line_spacing = Pt(6)
+                gap.paragraph_format.space_after = Pt(9)
+            else:
+                gap.paragraph_format.line_spacing = Pt(1)
+                gap.paragraph_format.space_after = Pt(9)
     if content["citations"]:
         source_pages: dict[str, int] = {}
         if len(content["citations"]) > 1:

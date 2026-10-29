@@ -445,7 +445,7 @@ class RenderTests(unittest.TestCase):
             self.assertLess(float(page.mediabox.width), float(page.mediabox.height))
             doc = Document(folder / "potencial-01-v1.0.0.docx")
             self.assertIn("Seção principal", "\n".join(p.text for p in doc.paragraphs))
-            self.assertIn("Fontes: F01", "\n".join(p.text for p in doc.paragraphs))
+            self.assertIn("[F01]", "\n".join(p.text for p in doc.paragraphs))
             self.assertIn("Seção principal", (folder / "potencial-01-v1.0.0.md").read_text())
             self.assertIn("Seção principal", (folder / "potencial-01-v1.0.0.html").read_text())
             self.assertIn("medidas", " ".join(result["files"]))
