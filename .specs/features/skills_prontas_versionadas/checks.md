@@ -52,7 +52,7 @@ Proof: `python3 -m pytest -q _TESTS/test_distribution.py::ReleaseSafetyTests::te
 ## Handoff
 
 - **Settled mid-build:** none
-- **Dispatched:** Verifier at `b17f456` - pending
+- **Dispatched:** Verifier at `b17f456` - returned; finding C5 closed at `d219ad8`
 - **Boundary:** C1-C6 closed at `b17f456`
 - **Abandoned:** none
 - **Walked:** n/a - sem interface gráfica

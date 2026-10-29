@@ -1,0 +1,23 @@
+[
+  {
+    "file": "_TOOLS/build_dist.py",
+    "old": "for skill in skills:\n        buffer = io.BytesIO()",
+    "new": "for skill in skills[1:]:\n        buffer = io.BytesIO()",
+    "proof": "python3 -m pytest -q _TESTS/test_distribution.py::PackageTests::test_complete_build_has_exact_catalog_set",
+    "label": "C1: omitir a primeira skill do conjunto"
+  },
+  {
+    "file": "_TOOLS/build_dist.py",
+    "old": "actual[name].read_bytes() != expected[name]",
+    "new": "actual[name].read_bytes() == expected[name]",
+    "proof": "python3 -m pytest -q _TESTS/test_distribution.py::PackageTests::test_check_rejects_missing_changed_and_extra_files",
+    "label": "C3: inverter a comparação de bytes"
+  },
+  {
+    "file": "_TOOLS/build_dist.py",
+    "old": "            path.unlink()",
+    "new": "            pass",
+    "proof": "python3 -m pytest -q _TESTS/test_distribution.py::PackageTests::test_build_removes_obsolete_package",
+    "label": "C4: conservar pacote obsoleto"
+  }
+]
