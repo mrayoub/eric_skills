@@ -334,8 +334,11 @@ class ReleaseSafetyTests(unittest.TestCase):
         tests = yaml.load((ROOT / ".github/workflows/tests.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
         self.assertEqual(tests["on"]["pull_request"], "")
         self.assertIn("main", tests["on"]["push"]["branches"])
-        commands = [step.get("run") for step in tests["jobs"]["versionamento"]["steps"]]
-        self.assertIn("python _TOOLS/build_dist.py --check", commands)
+        job = tests["jobs"]["versionamento"]
+        self.assertEqual(job.get("if"), "github.event_name != 'schedule'")
+        package_steps = [step for step in job["steps"] if step.get("run") == "python _TOOLS/build_dist.py --check"]
+        self.assertEqual(len(package_steps), 1)
+        self.assertNotIn("if", package_steps[0])
 
     def test_release_reads_ready_skills(self) -> None:
         release = yaml.load((ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
