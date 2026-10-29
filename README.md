@@ -34,9 +34,11 @@ Enquanto o repositório for privado, é preciso ter acesso a ele no GitHub, com 
 <!-- Fontes: https://support.claude.com/en/articles/12512180-use-skills-in-claude (consultado em 2026-10-09);
      https://learn.chatgpt.com/docs/build-skills (pasta $HOME/.agents/skills do Codex). -->
 
-Baixe na Release [`pacotes`](https://github.com/mrayoub/eric_skills/releases/tag/pacotes), que sempre tem a versão
+Baixe diretamente em [`_SKILLS_PRONTAS/`](_SKILLS_PRONTAS/) no repositório ou na Release
+[`pacotes`](https://github.com/mrayoub/eric_skills/releases/tag/pacotes), que tem a versão
 mais recente das 14 skills (mais `catalog.json` e `SHA256SUMS`); cada versão também tem sua própria Release
-(`<skill>-v<versão>`). Localmente, `python3 _TOOLS/build_dist.py` gera os mesmos pacotes em `_DIST/`. Cada `.skill`
+(`<skill>-v<versão>`). `python3 _TOOLS/build_dist.py` atualiza a pasta versionada e
+`python3 _TOOLS/build_dist.py --check` confirma que ela corresponde às fontes. Cada `.skill`
 é um ZIP com a pasta da skill na raiz.
 
 - **Claude.ai ou app do Claude:** Customize → Skills → *Upload a skill*. Se a interface não aceitar a
@@ -64,8 +66,10 @@ nenhum arquivo. Com o repositório privado, defina `GITHUB_TOKEN` para ler o cat
 1. Edite a skill ou a fonte compartilhada (`_DESIGN_SYSTEM/`, `_SHARED/`, `_ERIC_CONTEXT/`).
 2. `python3 _TOOLS/sync_shared.py` e `python3 _TOOLS/build_sources.py`.
 3. `python3 _TOOLS/build_catalog.py --bump` sobe a versão das skills cujo conteúdo mudou (`--bump minor` ou `major` quando couber).
-4. Rode os testes e abra um pull request. A CI recusa conteúdo de skill alterado sem `--bump` e confere os três
-   canais (`python3 _TOOLS/check_channels.py`). Depois do merge, a CI publica as Releases das versões novas.
+4. Rode `python3 _TOOLS/build_dist.py` e inclua `_SKILLS_PRONTAS/` no commit.
+5. Rode os testes e abra um pull request. A CI recusa conteúdo de skill alterado sem `--bump`, confere os três
+   canais (`python3 _TOOLS/check_channels.py`) e compara os pacotes versionados. Depois do merge,
+   a CI publica as Releases das versões novas.
 
 Uma mudança no design system altera o pacote das 13 skills e, portanto, a versão de todas.
 

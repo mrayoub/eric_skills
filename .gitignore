@@ -6,7 +6,7 @@ __pycache__/
 _SAMPLE/
 _OUTPUTS/
 
-# Pacotes gerados por _TOOLS/package_skills.py
+# Pacotes antigos, substituídos pela pasta versionada _SKILLS_PRONTAS/
 _DIST/
 
 # Worktrees e estado local de agentes

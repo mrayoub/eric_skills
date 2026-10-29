@@ -55,7 +55,7 @@ jobs:
       - if: steps.changes.outputs.publish == 'true'
         run: python _TOOLS/build_catalog.py --check
       - if: steps.changes.outputs.publish == 'true'
-        run: python _TOOLS/build_dist.py
+        run: python _TOOLS/build_dist.py --check
       - if: steps.changes.outputs.publish == 'true'
         run: python _TOOLS/publish_releases.py
         env:

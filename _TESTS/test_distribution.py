@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import io
 import json
 import os
 import shutil
@@ -9,6 +11,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stderr
 from unittest import mock
 import zipfile
 from pathlib import Path
@@ -112,6 +115,56 @@ class CatalogTests(unittest.TestCase):
 
 
 class PackageTests(unittest.TestCase):
+    def test_complete_build_has_exact_catalog_set(self) -> None:
+        with tempfile.TemporaryDirectory() as temp, mock.patch.object(DIST, "DIST", Path(temp)), mock.patch.object(
+                sys, "argv", ["build_dist.py"]):
+            self.assertEqual(DIST.main(), 0)
+            names = {path.name for path in Path(temp).iterdir()}
+            expected = {f"{skill}.skill" for skill in json.loads((ROOT / "catalog.json").read_text())["skills"]}
+            expected.update({"catalog.json", "SHA256SUMS"})
+            self.assertEqual(names, expected)
+            checksums = (Path(temp) / "SHA256SUMS").read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(checksums), len(expected) - 1)
+            for line in checksums:
+                digest, name = line.split("  ", 1)
+                self.assertEqual(hashlib.sha256((Path(temp) / name).read_bytes()).hexdigest(), digest)
+
+    def test_checked_in_packages_are_current(self) -> None:
+        directory = ROOT / "_SKILLS_PRONTAS"
+        before = {path.name: path.read_bytes() for path in directory.iterdir()}
+        with mock.patch.object(sys, "argv", ["build_dist.py", "--check"]):
+            self.assertEqual(DIST.main(), 0)
+        self.assertEqual({path.name: path.read_bytes() for path in directory.iterdir()}, before)
+
+    def test_check_rejects_missing_changed_and_extra_files(self) -> None:
+        expected = {"one.skill": b"one", "catalog.json": b"catalog", "SHA256SUMS": b"hashes"}
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            (directory / "one.skill").write_bytes(b"wrong")
+            (directory / "obsolete.skill").write_bytes(b"old")
+            self.assertEqual(DIST.differences(expected, directory), [
+                "ausente: SHA256SUMS", "ausente: catalog.json", "extra: obsolete.skill", "alterado: one.skill"])
+            with mock.patch.object(DIST, "DIST", directory), mock.patch.object(
+                    DIST, "expected_files", return_value=expected), mock.patch.object(
+                    sys, "argv", ["build_dist.py", "--check"]):
+                output = io.StringIO()
+                with redirect_stderr(output):
+                    self.assertEqual(DIST.main(), 1)
+                for name in ("SHA256SUMS", "catalog.json", "obsolete.skill", "one.skill"):
+                    self.assertIn(name, output.getvalue())
+
+    def test_build_removes_obsolete_package(self) -> None:
+        expected = {"one.skill": b"one", "catalog.json": b"catalog", "SHA256SUMS": b"new hashes"}
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            (directory / "obsolete.skill").write_bytes(b"old")
+            (directory / "SHA256SUMS").write_bytes(b"old hashes")
+            with mock.patch.object(DIST, "DIST", directory), mock.patch.object(
+                    DIST, "expected_files", return_value=expected), mock.patch.object(
+                    sys, "argv", ["build_dist.py"]):
+                self.assertEqual(DIST.main(), 0)
+            self.assertEqual({path.name: path.read_bytes() for path in directory.iterdir()}, expected)
+
     def test_package_matches_distributable_files_and_is_reproducible(self) -> None:
         skill = ROOT / "relatorio-4d"
         files = CATALOG.distributable_files(skill)
@@ -234,7 +287,7 @@ class ReleaseSafetyTests(unittest.TestCase):
 
     def test_rolling_removes_stale_assets_and_moves_tag(self) -> None:
         head = "a" * 40
-        files = [Path("_DIST/briefing-inovacao.skill"), Path("_DIST/catalog.json"), Path("_DIST/SHA256SUMS")]
+        files = [Path("_SKILLS_PRONTAS/briefing-inovacao.skill"), Path("_SKILLS_PRONTAS/catalog.json"), Path("_SKILLS_PRONTAS/SHA256SUMS")]
         calls = []
 
         def fake_run(*args, **kwargs):
@@ -276,6 +329,20 @@ class ReleaseSafetyTests(unittest.TestCase):
         node_step = next(step for step in tests["jobs"]["versionamento"]["steps"]
                          if step.get("uses", "").startswith("actions/setup-node@"))
         self.assertEqual(node_step["with"]["node-version"], "22.20.0")
+
+    def test_versionamento_checks_checked_in_packages(self) -> None:
+        tests = yaml.load((ROOT / ".github/workflows/tests.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        self.assertEqual(tests["on"]["pull_request"], "")
+        self.assertIn("main", tests["on"]["push"]["branches"])
+        commands = [step.get("run") for step in tests["jobs"]["versionamento"]["steps"]]
+        self.assertIn("python _TOOLS/build_dist.py --check", commands)
+
+    def test_release_reads_ready_skills(self) -> None:
+        release = yaml.load((ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        commands = [step.get("run") for step in release["jobs"]["publicar"]["steps"]]
+        self.assertIn("python _TOOLS/build_dist.py --check", commands)
+        self.assertEqual(PUBLISH.DIST, ROOT / "_SKILLS_PRONTAS")
+        self.assertNotIn("_DIST", (ROOT / "_TOOLS/publish_releases.py").read_text(encoding="utf-8"))
 
 
 class ChannelTests(unittest.TestCase):

@@ -58,8 +58,11 @@ produzido por empregados da CCEE no exercício da função tem `titular: "CCEE"`
 distribuível de cada skill. `python3 _TOOLS/build_catalog.py --check` falha se o conteúdo de uma skill
 mudou sem subir a versão; `--bump [patch|minor|major]` sobe a versão de quem mudou e regrava o catálogo.
 `python3 _TOOLS/build_dist.py` roda as checagens, valida o frontmatter (só `name`, `description`,
-`license`, `allowed-tools` e `metadata`) e gera `_DIST/<skill>.skill` reprodutíveis, `catalog.json` e
-`SHA256SUMS`. O pacote tem exatamente os arquivos que entram no hash, os mesmos que o `npx skills` instala.
+`license`, `allowed-tools` e `metadata`) e gera `_SKILLS_PRONTAS/<skill>.skill` reprodutíveis,
+`catalog.json` e `SHA256SUMS`. A pasta é versionada; `python3 _TOOLS/build_dist.py --check`
+compara nomes e bytes sem alterar arquivos e falha se houver pacote antigo, ausente ou divergente.
+Reconstrua e inclua a pasta no mesmo commit que muda uma skill. O pacote tem exatamente os arquivos
+que entram no hash, os mesmos que o `npx skills` instala.
 O verificador para usuários fica em `_DESIGN_SYSTEM/scripts/check_updates.py` e é copiado para
 `<skill>/scripts/check_updates.py` nas catorze skills, inclusive `esteira-eric`.
 
@@ -71,7 +74,7 @@ pacotes são reprodutíveis; e o `check_updates.py` reconhece todas como atualiz
 `.github/workflows/tests.yml` roda, em todo push e pull request, as checagens de versionamento e canais e a suíte
 em Linux; a matriz Windows/macOS/Linux x Python 3.10/3.12 roda toda segunda e sob demanda.
 `.github/workflows/release.yml` roda depois que o workflow `Testes` conclui com sucesso no push ao
-`main` e o `catalog.json` mudou: gera os pacotes e, com `_TOOLS/publish_releases.py`, cria uma Release
+`main` e o `catalog.json` mudou: confere os pacotes versionados e, com `_TOOLS/publish_releases.py`, cria uma Release
 por versão nova e atualiza a Release fixa `pacotes` (`--dry-run` mostra o que faria).
 As dependências distribuídas usam faixas em `_DESIGN_SYSTEM/requirements.txt`; o CI instala os pins de
 `_TESTS/requirements-lock.txt` por `_TESTS/requirements-dev.txt`.

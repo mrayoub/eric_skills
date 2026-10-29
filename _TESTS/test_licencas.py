@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = sorted(p.name for p in ROOT.iterdir() if p.is_dir() and (p / "SKILL.md").is_file())
-IGNORE = shutil.ignore_patterns(".git", "_SAMPLE", "_OUTPUTS", "_DIST", "__pycache__", ".claude")
+IGNORE = shutil.ignore_patterns(".git", "_SAMPLE", "_OUTPUTS", "_SKILLS_PRONTAS", "__pycache__", ".claude")
 
 
 def run_build_sources(root: Path) -> subprocess.CompletedProcess:

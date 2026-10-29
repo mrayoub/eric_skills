@@ -1,0 +1,76 @@
+{
+  "repository": "mrayoub/eric_skills",
+  "schema_version": "1.0.0",
+  "skills": {
+    "avaliacao-briefing-iqb": {
+      "files": 86,
+      "sha256": "a5a2e2adba11dd2bf1fef95938b526126cc06c467a8b5ff49edd3bbb4367bd50",
+      "version": "1.1.26"
+    },
+    "briefing-inovacao": {
+      "files": 87,
+      "sha256": "aafe0f11827df6caaed967d82fb673baa83bf975f6f69fff8d82fdbd563666cf",
+      "version": "1.1.26"
+    },
+    "esteira-eric": {
+      "files": 13,
+      "sha256": "038f72d1e28e22773f0da0fcb0b43cc133197bf4fc23ad3def845921d2ce1fcc",
+      "version": "1.2.5"
+    },
+    "experimentacao-inovacao": {
+      "files": 96,
+      "sha256": "a9f6840faea1669454a2e45b253ab042c581f92dccddc5bc43f0ffd737151dd0",
+      "version": "1.4.21"
+    },
+    "gerador-cdt": {
+      "files": 87,
+      "sha256": "62b26cf013e57f984d4ac6b864ede40eaf78cd4ae6810f2ef4ba3cc83ccc8273",
+      "version": "1.3.6"
+    },
+    "potencial-inovacao": {
+      "files": 85,
+      "sha256": "89f13de43c1e9a72ca6b84f51c93bbe1d09be02023c41d0ab72c91a3ac3bbf03",
+      "version": "1.1.26"
+    },
+    "relatorio-3e": {
+      "files": 89,
+      "sha256": "1d2d67dfa5450d4c16954b0ad56b4815b0a447afaf7f6f41a4b5c3512aad66aa",
+      "version": "1.1.26"
+    },
+    "relatorio-4d": {
+      "files": 90,
+      "sha256": "2e3e02f05d9660516d031076333a99256c34ade64721b9366245da22146abba0",
+      "version": "1.1.26"
+    },
+    "relatorio-5c": {
+      "files": 86,
+      "sha256": "d1d2f0352f68fdf8f230aa6d32349d25ad5c417553448fcbd40fabfdd344ec7d",
+      "version": "1.1.26"
+    },
+    "relatorio-final-inovacao": {
+      "files": 86,
+      "sha256": "3a60fac79886cc88ee05fd2999da10b91c438fc08eb350985ee91971fbb9154b",
+      "version": "1.3.21"
+    },
+    "scorecard-inovacao": {
+      "files": 87,
+      "sha256": "7cf6097ac7166836f603cde4456a308555b9f95967a9372f1f1ade9de509d8bc",
+      "version": "1.1.26"
+    },
+    "workshop-3e": {
+      "files": 90,
+      "sha256": "15c96592da335fa874cdb939f3a2536a6aa2c45b2fe5f839973405c561494758",
+      "version": "1.1.26"
+    },
+    "workshop-4d": {
+      "files": 89,
+      "sha256": "c9dec531029e280abbcdc4a5030255c48860ce9043d46676a44ef79260a72ef3",
+      "version": "1.1.26"
+    },
+    "workshop-5c": {
+      "files": 86,
+      "sha256": "14c0b47e8b3df0cd13c10948c1f07c515868554f7a27fd5f62d8f912005143d4",
+      "version": "1.1.26"
+    }
+  }
+}

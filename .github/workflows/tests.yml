@@ -47,6 +47,8 @@ jobs:
           }
       - name: Canais npx, .skill e clone
         run: python _TOOLS/check_channels.py
+      - name: Pacotes versionados iguais às fontes
+        run: python _TOOLS/build_dist.py --check
 
   testes:
     if: github.event_name != 'schedule'

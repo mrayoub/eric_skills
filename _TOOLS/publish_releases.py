@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Publica o canal .skill: uma Release por versão nova de skill e a Release fixa `pacotes` com tudo.
 
-Usa o `gh` (GitHub CLI). Com --dry-run, só mostra o que faria. Pressupõe `_DIST/` gerado por build_dist.py.
+Usa o `gh` (GitHub CLI). Com --dry-run, só mostra o que faria. Pressupõe `_SKILLS_PRONTAS/` conferida por build_dist.py.
 """
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DIST = ROOT / "_DIST"
+DIST = ROOT / "_SKILLS_PRONTAS"
 ROLLING = "pacotes"
 
 
