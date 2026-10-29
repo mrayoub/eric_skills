@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "briefing_improvement_questionnaire",
   "files": {
-    "sample-briefing-improvement-questionnaire-v1.0.0.docx": "411aaa5cb8e14a758e6c7c0f1aea904bc138b086aca209f7865f4a98d03dc0b8",
+    "sample-briefing-improvement-questionnaire-v1.0.0.docx": "392ce9e4a2f72d4f3612ca93106691c6406c8cf9972598635cb24173e1a6b2d3",
     "sample-briefing-improvement-questionnaire-v1.0.0.json": "0f3ee429ae487ad6e6143dfe235265ecf70fde709f0e89a9870f5ad1a4934802",
     "sample-briefing-improvement-questionnaire-v1.0.0.md": "ced0e3170adbefe8b52ccc3a0d6614b0ab9d339aae29529d51b520a539772719",
     "sample-briefing-improvement-questionnaire-v1.0.0.pdf": "7d5304b2f8e0700fefb868e13c593c59b9f5cb70a8da3874282478bcc6168c01",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.1",
+  "renderer_version": "2.1.2",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

@@ -4,7 +4,7 @@ Mutations: 3
 Build: `/private/tmp/eric-docx-venv/bin/python -m compileall -q _DESIGN_SYSTEM/scripts _TOOLS`
 Plan: `.specs/features/docx_pdf_visual_parity/plan.md`
 
-10 checks in 3 slices · 0 one-way doors · 0 open
+11 checks in 3 slices · 0 one-way doors · 0 open
 
 ## Checks
 
@@ -24,6 +24,9 @@ Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.
 
 **C10** - O logo CCEE mantém a proporção visual da arte original nas 19 primeiras páginas convertidas, sem alterar a paginação (AC 10)
 Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_all_sample_logos_uncropped`
+
+**C11** - As faixas azuis têm recuo de 12 pt no DOCX; na CDT, a primeira faixa mantém o recuo e a altura visual do PDF sem página extra (AC 11)
+Proof: `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_cdt_section_padding_matches_pdf`
 
 ### S2 - Edição e identidade
 
@@ -72,7 +75,8 @@ C10 percorre os mesmos 19 tipos da primeira linha e mede o logo na primeira pág
 
 - **Settled mid-build:** 2026-10-28 - user: "aprovado pode continuar e preciso que vc de prioridade a presevar a edicao"
 - **Settled mid-build:** 2026-10-29 - user: "vc consegue resolver o problema do corte do logo da ccee?"
+- **Settled mid-build:** 2026-10-29 - user: "ha como aplicar o padding nos blocos azuis de titulo no docx???"
 - **Dispatched:** Verifier at `6d91edf` (returned; três achados corrigidos)
-- **Boundary:** C1-C10 fechadas; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada e logo inteiro no DOCX convertido. Evidência visual em `evidence/report.json` e nas 34 imagens lado a lado.
+- **Boundary:** C1-C11 fechadas; 19 pares com páginas e orientação iguais, zero caractere cortado, edição preservada, logo inteiro e faixas azuis com recuo horizontal no DOCX convertido. A CDT iguala o recuo e a altura da primeira faixa do PDF. Evidência visual em `evidence/report.json` e nas 34 imagens lado a lado, atualizadas em 29/10/2026.
 - **Abandoned:** none
 - **Walked:** n/a - não há tela de aplicativo

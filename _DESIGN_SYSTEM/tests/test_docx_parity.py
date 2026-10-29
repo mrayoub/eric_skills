@@ -13,6 +13,7 @@ from pathlib import Path
 from unittest import mock
 
 from docx import Document
+from docx.oxml.ns import qn
 from PIL import Image
 from pypdf import PdfReader
 
@@ -178,6 +179,50 @@ class DocxParityTests(unittest.TestCase):
                 height = max(y for _, y in points) - min(y for _, y in points) + 1
                 self.assertLessEqual(abs(width / height / expected_ratio - 1), .12,
                                      "proporção do logo indica corte no DOCX convertido")
+
+    def test_cdt_section_padding_matches_pdf(self):
+        for kind in self.rows:
+            if kind in {"test_card", "learning_card", "briefing_one_page"}:
+                continue
+            with self.subTest(kind=kind):
+                path = next((self.cache / "generated" / kind).glob("*.docx"))
+                document = Document(path)
+                bands = [paragraph for paragraph in document.element.body.xpath(".//w:p")
+                         if any(shade.get(qn("w:fill")) == self.tokens["color"]["document_deep"].lstrip("#")
+                                for shade in paragraph.xpath("./w:pPr/w:shd"))]
+                self.assertTrue(bands, "faixa de título ausente")
+                for paragraph in bands:
+                    self.assertTrue(any(tab.get(qn("w:pos")) == "240"
+                                        for tab in paragraph.xpath("./w:pPr/w:tabs/w:tab")),
+                                    "faixa sem recuo de 12 pt")
+                    self.assertTrue(paragraph.xpath("./w:r[1]/w:tab"), "texto da faixa não começa no recuo")
+
+        def first_band(image_path):
+            image = Image.open(image_path).convert("RGB")
+            width, height = image.size
+            rows = []
+            for y in range(int(height * .15), int(height * .45)):
+                dark = [x for x in range(width) if (
+                    lambda color: color[0] < 40 and color[1] < 60 and 60 < color[2] < 140
+                )(image.getpixel((x, y)))]
+                if len(dark) > width * .6:
+                    rows.append((y, min(dark), max(dark)))
+            self.assertTrue(rows, "faixa azul da CDT não encontrada")
+            top = rows[0][0]
+            band_rows = [row for row in rows if top <= row[0] <= top + 80]
+            bottom = band_rows[-1][0]
+            left = min(row[1] for row in band_rows)
+            right = max(row[2] for row in band_rows)
+            white = [x for y in range(top, bottom + 1) for x in range(left, right + 1)
+                     if all(channel > 180 for channel in image.getpixel((x, y)))]
+            self.assertTrue(white, "rótulo branco da CDT não encontrado")
+            return min(white) - left, bottom - top + 1
+
+        reference = first_band(self.cache / "pictures/cdt-1-reference.png")
+        editable = first_band(self.cache / "pictures/cdt-1-docx.png")
+        self.assertGreaterEqual(editable[0], 12, "título encostado na borda azul")
+        self.assertLessEqual(abs(reference[0] - editable[0]), 4, "recuo do título difere do PDF")
+        self.assertLessEqual(abs(reference[1] - editable[1]), 5, "altura da faixa difere do PDF")
 
     def test_all_samples_semantic_parity(self):
         for kind in self.rows:

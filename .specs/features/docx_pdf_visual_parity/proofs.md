@@ -1,8 +1,8 @@
 # docx_pdf_visual_parity proofs
 
-**HEAD**: 71103d4
+**HEAD**: 2dcc77c
 **Tree**: clean
-**Result**: 10 pass, 0 fail; mutations 3 killed, 0 not
+**Result**: 11 pass, 0 fail; mutations 3 killed, 0 not
 
 | Check | Proof | Ran | Passed | Result |
 | --- | --- | --- | --- | --- |
@@ -10,6 +10,7 @@
 | C2 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
 | C3 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
 | C4 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
+| C10 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
 | C5 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
 | C6 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |
 | C7 | `/private/tmp/eric-docx-venv/bin/python -m unittest _DESIGN_SYSTEM.tests.test_docx_parity.DocxParityTests.test_` | 1 | - | pass |

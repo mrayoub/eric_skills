@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "briefing_validation",
   "files": {
-    "sample-briefing-validation-v1.0.0.docx": "7c43a5ecbe51175e803892a229b70fe9ef0c2970e61c4c1ba034880d6dcf90ec",
+    "sample-briefing-validation-v1.0.0.docx": "cc54925c5b998792a21b441db7bc6a1ffbce4d37296208cea299ebd47d9c1db1",
     "sample-briefing-validation-v1.0.0.json": "86178bade74e6dc442175f2f67990976ad31ba6711d8226f4308e80912bd44fb",
     "sample-briefing-validation-v1.0.0.md": "b3a0b82f529f50ff16b99f41e41952d1ca9a905745911d96c2973f66beb456b1",
     "sample-briefing-validation-v1.0.0.pdf": "2953ba1504d57b92c02ac33b0e9b02c309656097caee5abe4d28897137b7f21a",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.1",
+  "renderer_version": "2.1.2",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

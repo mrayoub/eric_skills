@@ -5,7 +5,7 @@
   "content_version": "1.0.0",
   "deliverable_type": "learning_card",
   "files": {
-    "sample-learning-card-v1.0.0.docx": "c961d34026053170a1e8b1eb7a20b412f09a5f6fa078c391f7bfa49b064021ef",
+    "sample-learning-card-v1.0.0.docx": "bf591c04771324edd93a24f3118bd220cbbf757b649e17f147f75f5dff68bca2",
     "sample-learning-card-v1.0.0.json": "f98fbe2019db4c2d0fafcbdf2a6b79aaea550eeabe56676e6414fc48d7ab862a",
     "sample-learning-card-v1.0.0.md": "aa8d72d807aa107dfb70d84a0d55ad7ceff1b46def3e684edf1da6712eb94139",
     "sample-learning-card-v1.0.0.pdf": "8aca28dba8d1071947810adc163b02a36edefc66ca72bfbf8f6af2663a63ef1e",
@@ -16,7 +16,7 @@
   "pdf_engine": "reportlab",
   "profile_sha256": "7f910fec0e3aad3ece823de2c9824e6ea2c6bafd3e5b368d5c3207358dd7ad08",
   "profile_version": "1.2.0",
-  "renderer_version": "2.1.1",
+  "renderer_version": "2.1.2",
   "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

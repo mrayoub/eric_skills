@@ -2,6 +2,7 @@
 
 **Approved**: 2026-10-28 - user: "aprovado pode continuar e preciso que vc de prioridade a presevar a edicao"
 **Approved addendum**: 2026-10-29 - user: "vc consegue resolver o problema do corte do logo da ccee?"
+**Approved addendum**: 2026-10-29 - user: "ha como aplicar o padding nos blocos azuis de titulo no docx???"
 
 ## Problem
 
@@ -60,6 +61,7 @@ Cada DOCX tem a composição visual do PDF gerado do mesmo JSON.
 3. WHEN um relatório ou registro em A4 for renderizado THEN o DOCX SHALL preservar a ordem dos blocos e a composição de faixas de seção, cartões, tabelas e fontes do PDF correspondente, com títulos e textos dentro da área segura do papel.
 4. WHEN um Test Card ou Learning Card for renderizado THEN o DOCX SHALL mostrar os quatro campos na ordem do método em uma página A4 retrato, com rótulos e texto visíveis.
 10. WHEN qualquer um dos 19 DOCX for convertido para revisão visual THEN o logo CCEE SHALL aparecer inteiro no cabeçalho, com a proporção da arte original e sem criar página extra.
+11. WHEN uma faixa azul de título for renderizada em DOCX THEN o texto SHALL ter recuo horizontal editável de 12 pt; na CDT, a primeira faixa SHALL também ter altura visual próxima à do PDF, preservando as duas páginas do par.
 
 ### S2: Edição e identidade (P1)
 

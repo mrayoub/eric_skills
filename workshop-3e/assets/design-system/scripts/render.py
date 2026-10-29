@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "2.1.1"
+RENDERER_VERSION = "2.1.2"
 DELIVERABLE_LABELS = {
     "briefing": "Entrevista Inicial de sete campos",
     "briefing_one_page": "Briefing",
@@ -1229,6 +1229,11 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         element = OxmlElement("w:shd")
         element.set(qn("w:fill"), tokens["color"]["document_deep"].lstrip("#"))
         paragraph._p.get_or_add_pPr().append(element)
+        if content["deliverable_type"] == "cdt":
+            paragraph.paragraph_format.line_spacing = Pt(30)
+        paragraph.paragraph_format.tab_stops.add_tab_stop(Pt(12))
+        if paragraph.runs:
+            paragraph.runs[0].text = "\t" + paragraph.runs[0].text
         for run in paragraph.runs:
             run.font.color.rgb = RGBColor(255, 255, 255)
 
