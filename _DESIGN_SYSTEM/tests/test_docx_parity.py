@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import copy
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -54,6 +55,8 @@ def text_atoms(data: object):
             yield from text_atoms(value)
 
 
+@unittest.skipUnless(shutil.which("soffice") and shutil.which("pdftoppm"),
+                     "comparação visual requer LibreOffice e pdftoppm")
 class DocxParityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

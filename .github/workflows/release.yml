@@ -40,7 +40,8 @@ jobs:
             echo "Commit antigo; publicação ignorada."
             exit 0
           fi
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] || ! git diff --quiet HEAD^ HEAD -- catalog.json; then
+          git fetch --tags origin
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || ! git rev-parse --verify refs/tags/pacotes >/dev/null 2>&1 || ! git diff --quiet refs/tags/pacotes HEAD -- catalog.json; then
             echo "publish=true" >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
