@@ -71,7 +71,7 @@ Quem acessa o repositório encontra o pacote correspondente ao código.
 | Excluded | Why |
 | --- | --- |
 | Alterar conteúdo ou versão de uma skill | A mudança é no canal de distribuição; os pacotes preservam as versões atuais. |
-| Publicar diretamente nesta tarefa | A autorização atual cobre alteração local; `git push` requer autorização específica pela skill. |
+| Criar manualmente uma nova Release | As versões das skills não mudaram; o push da pasta versionada usa a autorização anterior do usuário para o fluxo de commit e push. |
 
 ## Assumptions
 
