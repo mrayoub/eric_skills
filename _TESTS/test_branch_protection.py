@@ -44,11 +44,15 @@ class MainProtectionTests(unittest.TestCase):
         self.assertTrue(POLICY["enforce_admins"])
         self.assertFalse(POLICY["allow_force_pushes"])
         self.assertFalse(POLICY["allow_deletions"])
-        actual = effective()
-        actual["enforce_admins"]["enabled"] = False
-        actual["allow_force_pushes"]["enabled"] = True
-        actual["allow_deletions"]["enabled"] = True
-        self.assertEqual(len(GUARD.problems(actual, POLICY)), 3)
+        for field, expected_error in (
+            ("enforce_admins", "administradores não estão sujeitos à proteção"),
+            ("allow_force_pushes", "force push não está bloqueado"),
+            ("allow_deletions", "exclusão não está bloqueado"),
+        ):
+            with self.subTest(field=field):
+                actual = effective()
+                actual[field]["enabled"] = not actual[field]["enabled"]
+                self.assertEqual(GUARD.problems(actual, POLICY), [expected_error])
 
     def test_workflow_supplies_required_checks_on_pr(self) -> None:
         workflow = yaml.load((ROOT / ".github/workflows/tests.yml").read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
