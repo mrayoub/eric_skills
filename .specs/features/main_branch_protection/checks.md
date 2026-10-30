@@ -48,7 +48,7 @@ Proof: `python3 _TOOLS/check_main_protection.py`
 ## Handoff
 
 - **Settled mid-build:** user: "3" - escolheu PR + `versionamento` + `testes`
-- **Dispatched:** none
-- **Boundary:** pending
+- **Dispatched:** Verifier at `16e6841` - returned; finding C3 closed at `8ea4256`
+- **Boundary:** C1-C5 closed at `16e6841`; remote policy applied 2026-10-29
 - **Abandoned:** none
 - **Walked:** n/a - configuração sem tela própria
