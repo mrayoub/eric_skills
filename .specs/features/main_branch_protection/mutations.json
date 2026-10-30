@@ -1,0 +1,23 @@
+[
+  {
+    "file": "_TOOLS/check_main_protection.py",
+    "old": "reviews = actual.get(\"required_pull_request_reviews\")",
+    "new": "reviews = policy.get(\"required_pull_request_reviews\")",
+    "proof": "python3 -m pytest -q _TESTS/test_branch_protection.py::MainProtectionTests::test_policy_requires_pr",
+    "label": "PR ausente deixa de ser detectado"
+  },
+  {
+    "file": "_TOOLS/check_main_protection.py",
+    "old": "if checks.get(\"strict\") is not wanted[\"strict\"]:",
+    "new": "if checks.get(\"strict\") is wanted[\"strict\"]:",
+    "proof": "python3 -m pytest -q _TESTS/test_branch_protection.py::MainProtectionTests::test_policy_requires_current_checks",
+    "label": "strict invertido"
+  },
+  {
+    "file": "_TOOLS/check_main_protection.py",
+    "old": "(\"allow_deletions\", \"exclusão\")",
+    "new": "(\"allow_force_pushes\", \"exclusão\")",
+    "proof": "python3 -m pytest -q _TESTS/test_branch_protection.py::MainProtectionTests::test_policy_prevents_admin_force_delete",
+    "label": "exclusão consulta force push duas vezes"
+  }
+]
