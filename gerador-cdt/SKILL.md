@@ -1,11 +1,11 @@
 ---
 name: gerador-cdt
-description: "Gera, a partir dos entregáveis da esteira ERIC, um Cadastro de Demanda Tecnológica (CDT) de qualidade para a área abrir no Jira e levar à Diretoria de Tecnologia. Entrega dois arquivos: a CDT, só com os campos para copiar e colar (Rótulo Epic com título tecnológico, Descrição com as cinco perguntas do comunicado interno sobre escopo, Justificativa e Benefícios), e a Análise da CDT, com o checklist do comunicado em destaque, o que obter e analisar primeiro, pontos fortes e fracos e a origem dos dados. Conhece os 28 campos do formulário para raciocinar com coerência. Use quando o usuário pedir para abrir, preencher, montar, revisar ou completar uma CDT, levar a demanda para a Tecnologia ou TI, ou organizar o escopo para o Jira. Não use para pedir a decisão da gestão (use relatorio-final-inovacao) nem para escrever a Entrevista Inicial ou o Briefing (use briefing-inovacao)."
+description: "Gera, a partir dos entregáveis da esteira ERIC, um Cadastro de Demanda Tecnológica (CDT) de qualidade para a área abrir no Jira e levar à Diretoria de Tecnologia. Entrega dois arquivos: a CDT, só com os campos para copiar e colar (Rótulo Epic com o título oficial do desafio, o mesmo título dos dois arquivos, Descrição com as cinco perguntas do comunicado interno sobre escopo, Justificativa e Benefícios), e a Análise da CDT, com o checklist do comunicado em destaque, o que obter e analisar primeiro, pontos fortes e fracos e a origem dos dados. Conhece os 28 campos do formulário para raciocinar com coerência. Use quando o usuário pedir para abrir, preencher, montar, revisar ou completar uma CDT, levar a demanda para a Tecnologia ou TI, ou organizar o escopo para o Jira. Não use para pedir a decisão da gestão (use relatorio-final-inovacao) nem para escrever a Entrevista Inicial ou o Briefing (use briefing-inovacao)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.6"
+  version: "1.4.0"
 ---
 
 # Gerador de CDT
@@ -60,8 +60,9 @@ que muda no pedido à Tecnologia em vez de pedir construção.
 2. **Raciocine com o formulário inteiro.** Percorra os 28 campos ([campos](references/campos-jira.md#os-28-campos-do-formulário))
    para saber se há risco de não implementar, qual benefício é mensurável, se a demanda é regulatória e se as
    respostas se contradizem. Esses campos não são entregues; o que faltar vai para a análise.
-3. **CDT, quatro blocos, nesta ordem.** Rótulo Epic: uma linha que nomeia a tecnologia (plataforma, sistema,
-   ferramenta, integração, interface) e o que ela faz, sem nada que sugira uma pessoa. Descrição: um bloco só, com as
+3. **CDT, quatro blocos, nesta ordem.** Rótulo Epic: o título oficial do desafio, localizado nas fontes e copiado com
+   a mesma grafia ([onde procurar](references/campos-jira.md#rótulo-epic)); o `title` da CDT e o da Análise da CDT
+   são esse mesmo texto. Descrição: um bloco só, com as
    cinco perguntas do comunicado como subtítulos em negrito, sempre respondidas, cada uma a partir da sua fonte
    principal (Briefing, todo o material, Relatório 4D, Relatório 3E, Relatório 3E; o Relatório final em todas;
    [de/para](references/campos-jira.md#fonte-principal-de-cada-pergunta)). Nada contradiz o Relatório final.
@@ -89,7 +90,7 @@ Saída (CDT, para colar no Jira):
 ```
 Rótulo Epic
 
-Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento
+Formulário guiado para pedidos de dados históricos
 
 Descrição
 
@@ -113,7 +114,7 @@ Reduz de [COMPLETAR: horas mensais gastas hoje] para 15 as horas mensais da noss
 ## Checagem final
 
 - [ ] CDT com só Rótulo Epic, Descrição, Justificativa e Benefícios, nesta ordem, sem fonte e sem cabeçalho no MD e no TXT
-- [ ] Rótulo Epic tecnológico, sem termo que sugira pessoa
+- [ ] Rótulo Epic igual ao título oficial do desafio, com a grafia da fonte, e igual ao título dos dois arquivos
 - [ ] Descrição num bloco só, com as cinco perguntas na ordem e respondidas; Markdown só nela
 - [ ] Texto da gerência em primeira pessoa, direto, sem perguntas, sem "a confirmar" e sem contradizer o Relatório final
 - [ ] O que falta como "[COMPLETAR: ...]", com cada lacuna listada na análise

@@ -1163,7 +1163,8 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         spec = specs[style]
         run.font.name = tokens["typography"][spec["family"]]
         run.font.size = Pt(spec["size"])
-        run.font.bold = spec["weight"] >= 600
+        # Mantém o negrito que add_rich_text já marcou nos trechos entre **.
+        run.font.bold = spec["weight"] >= 600 or bool(run.font.bold)
         run.font.color.rgb = rgb(spec["color"])
         rpr = run._r.get_or_add_rPr()
         fonts = rpr.rFonts

@@ -1,5 +1,5 @@
 """Verifica a CDT oficial: os quatro campos que vão ao Jira (Rótulo Epic, Descrição, Justificativa e Benefícios), com
-título tecnológico, a Descrição respondendo às cinco perguntas do comunicado, sem pergunta em aberto (o que falta é
+o título oficial do desafio no Rótulo Epic e no título do documento, a Descrição respondendo às cinco perguntas do comunicado, sem pergunta em aberto (o que falta é
 lacuna [COMPLETAR: ...] para quem abre a CDT), sem fonte citada, com Markdown só na Descrição e escrita pela gerência que abre a demanda, em primeira pessoa."""
 from __future__ import annotations
 
@@ -16,15 +16,10 @@ QUESTIONS = (
     "O que é prioridade neste momento?",
 )
 PRIORITY_GROUPS = ("essencial", "importante", "fora do escopo")
-# O Rótulo Epic é o título do ticket: nomeia o que será construído, como tecnologia, e não sugere uma pessoa.
-TECH_TERMS = re.compile(
-    r"\b(plataforma|sistema|ferramenta|m[óo]dulo|aplica[çc][ãa]o|aplicativo|app|portal|painel|dashboard|formul[áa]rio|"
-    r"integra[çc][ãa]o|api|automa[çc][ãa]o|automatiza[çc][ãa]o|interface|chatbot|software|base de dados|banco de dados|"
-    r"servi[çc]o digital|funcionalidade|relat[óo]rio automatizado|rob[ôo]|rpa|workflow|fluxo automatizado|"
-    r"motor|algoritmo|modelo de ia|intelig[êe]ncia artificial|ia)\b", re.IGNORECASE)
-PERSON_LIKE = re.compile(r"\b(assistente|atendente|analista|consultor|secret[áa]ri[oa]|ajudante|colaborador)\b",
-                         re.IGNORECASE)
+# O Rótulo Epic é o título oficial do desafio, copiado da fonte da esteira, e o título do documento é o mesmo texto.
 MAX_TITLE_WORDS = 16
+# Amostras fictícias marcam o título do documento com este prefixo, que não faz parte do título do desafio.
+SAMPLE_PREFIX = re.compile(r"^EXEMPLO FICTÍCIO:\s*")
 # A CDT é aberta quando a decisão de seguir já foi tomada: o texto afirma, não pergunta nem deixa algo "a confirmar".
 # O dado que falta vira lacuna explícita, que quem abre a CDT preenche antes de enviar.
 GAP = re.compile(r"\[COMPLETAR: [^\]\n?]+\]")
@@ -99,13 +94,10 @@ def report(content: dict[str, Any]) -> dict[str, Any]:
     if title:
         if "\n" in title or words(title) > MAX_TITLE_WORDS:
             errors.append(f"Rótulo Epic: uma linha com até {MAX_TITLE_WORDS} palavras")
-        if not TECH_TERMS.search(title):
-            errors.append("Rótulo Epic: nomeie o artefato tecnológico (plataforma, sistema, ferramenta, módulo, "
-                          "integração, interface, painel, automação) e o que ele faz")
-        person = PERSON_LIKE.search(title)
-        if person:
-            errors.append(f"Rótulo Epic: '{person.group(0)}' sugere uma pessoa; descreva a tecnologia (por exemplo, "
-                          "'interface conversacional com IA' em vez de 'assistente')")
+        document_title = SAMPLE_PREFIX.sub("", str(content.get("title", "")).strip())
+        if not GAP.search(title) and document_title != title:
+            errors.append(f"Rótulo Epic e título do documento diferentes ({title!r} e {document_title!r}): os dois são "
+                          "o título oficial do desafio, copiado com a mesma grafia da fonte")
 
     answers, missing = questions(texts.get("description", ""))
     if missing:

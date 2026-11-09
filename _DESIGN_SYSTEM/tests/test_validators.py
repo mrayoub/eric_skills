@@ -416,13 +416,17 @@ class CdtValidationTests(unittest.TestCase):
         blocks[:2], blocks[2:4] = blocks[2:4], blocks[:2]
         self.assertTrue(any("fora de ordem" in error for error in self.errors()))
 
-    def test_epic_label_names_the_technology_not_a_person(self):
-        self.text("jira_title", "Assistente conversacional para consulta de pendências")
-        errors = " ".join(self.errors())
-        self.assertIn("sugere uma pessoa", errors)
-        self.assertIn("artefato tecnológico", errors)
-        self.text("jira_title", "Interface conversacional com IA para consulta de pendências no sistema X")
-        self.assertEqual(self.errors(), [])
+    def test_epic_label_is_the_official_challenge_title_and_the_document_title(self):
+        self.text("jira_title", "Formulário web com protocolo automático no portal de atendimento")
+        self.assertTrue(any("título do documento diferentes" in error for error in self.errors()))
+        self.text("jira_title", "[COMPLETAR: título oficial do desafio]")
+        self.assertFalse(any("título do documento" in error for error in self.errors()))
+
+    def test_cdt_and_analysis_share_the_title(self):
+        self.analysis["title"] = "Outro título"
+        code, result = self.check()
+        self.assertEqual(code, 1)
+        self.assertTrue(any("mesmo título" in error for error in result["errors"]))
 
     def test_description_has_the_five_questions_in_one_block(self):
         description = self.block("description")["data"]["text"]
@@ -518,7 +522,7 @@ class CdtValidationTests(unittest.TestCase):
         markdown = render.render_md(shown)
         self.assertTrue(markdown.startswith("## Rótulo Epic"))
         self.assertNotIn("FIC-0", markdown)
-        self.assertNotIn(self.content["title"], markdown)
+        self.assertFalse(markdown.startswith("# "))
 
     def test_analysis_highlights_checklist_and_priorities(self):
         keys = [block["data"]["section_key"] for block in self.analysis["blocks"] if block["type"] == "paragraph"]

@@ -91,7 +91,8 @@ validada, combinação incoerente entre campos do formulário ([coerência](camp
 
 É aqui que as fontes aparecem. Uma frase, seguida de uma tabela sem `section_key` com as colunas Campo, Fonte,
 Natureza e Limite, em que a coluna Fonte nomeia o documento e o localizador. Uma linha por campo da CDT e uma por
-pergunta da Descrição, com a fonte principal primeiro. Quando o escopo do Relatório 3E mudou num documento posterior,
+pergunta da Descrição, com a fonte principal primeiro. A linha do Rótulo Epic diz de onde saiu o título oficial do
+desafio e, se as fontes divergiam na grafia ou no nome, qual prevaleceu. Quando o escopo do Relatório 3E mudou num documento posterior,
 diga na coluna Limite qual documento prevaleceu.
 
 ## Regras de veracidade

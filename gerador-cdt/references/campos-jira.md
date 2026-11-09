@@ -32,7 +32,7 @@ Dois arquivos:
 
    | Ordem | Campo | Formato |
    |---|---|---|
-   | 1 | Rótulo Epic | Uma linha, título tecnológico |
+   | 1 | Rótulo Epic | Uma linha, o título oficial do desafio, igual ao título dos dois arquivos |
    | 2 | Descrição | Um bloco só, em Markdown, com as cinco perguntas como subtítulos em negrito |
    | 3 | Justificativa | Texto simples, um risco por linha |
    | 4 | Benefícios | Texto simples, o benefício principal com número na primeira linha |
@@ -82,19 +82,35 @@ sem conhecer a esteira.
 
 ## Rótulo Epic
 
-É o título do ticket, o primeiro bloco da CDT. Como o ticket é uma demanda à Tecnologia, o título nomeia o que será
-construído ou alterado, como tecnologia, e o que isso faz:
+É o título do ticket, o primeiro bloco da CDT, e o título (`title`) dos dois arquivos, a CDT e a Análise da CDT. É o
+**título oficial do desafio**, o nome pelo qual o projeto é conhecido na esteira, localizado nas fontes do projeto. A
+skill nunca cria esse título nem descreve a solução nele: o que a demanda vai construir fica na Descrição.
 
-- Começa pelo artefato: plataforma, sistema, ferramenta, módulo, aplicação, portal, painel, formulário web,
-  integração, API, automação, interface. Depois diz o que faz e onde atua.
-- Nada que sugira uma pessoa: "assistente", "atendente", "analista", "consultor". Prefira "interface conversacional com
-  IA" a "assistente virtual".
-- Uma linha, até 16 palavras, sem jargão da esteira.
+Procure nesta ordem. Vale a primeira fonte que trouxer o título, porque o documento mais recente prevalece:
 
-Exemplos: "Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento";
-"Interface conversacional com IA para consulta de pendências no sistema X".
+1. Título do Relatório final ou da apresentação executiva.
+2. Decisão da gestão ou outro documento posterior que tenha renomeado o desafio.
+3. Campo de título do Briefing que o projeto adota como oficial, ou da Entrevista Inicial ("Título do desafio",
+   "Título do Briefing").
+4. Título dos quadros e relatórios dos workshops 4D, 3E ou 5C ("Workshop 4D: [nome do desafio]").
 
-O checador exige um termo tecnológico no título e recusa termos que sugerem pessoa.
+Como extrair:
+
+- Tire o que não é o nome do desafio: código do projeto ("GEIN-44"), nome do entregável ("Relatório final",
+  "Workshop 4D"), nome do produto ou do protótipo e separadores. Em "GEIN-44 Fluidez na Comunicação Interna:
+  Relatório final do TOM", o título é "Fluidez na Comunicação Interna".
+- Copie a grafia da fonte que venceu, com as mesmas maiúsculas e acentos. Texto todo em maiúsculas, como num cartaz
+  de mural, não define a grafia: use a próxima fonte que tenha o mesmo título em caixa normal.
+- O nome de um arquivo só serve de pista para achar o documento, nunca como fonte do título.
+- Fontes com grafias ou nomes diferentes: vale a de maior precedência, e a diferença fica registrada na Análise da
+  CDT, na origem dos dados.
+- Sem título em nenhuma fonte: o Rótulo Epic e os dois `title` levam `[COMPLETAR: título oficial do desafio]`, e o
+  dado entra em "O que obter e analisar primeiro".
+- Uma linha, até 16 palavras.
+
+A origem dos dados tem uma linha para o Rótulo Epic, com o documento e o localizador de onde o título saiu. O
+checador confere que o Rótulo Epic e os dois títulos são iguais; ele não sabe qual é o título certo, por isso a busca
+acima é parte do preenchimento.
 
 ## Descrição
 
@@ -330,8 +346,7 @@ Item reprovado ou não testado não sobe para essencial. Resultado de teste com 
 ## Lições do exemplo real
 
 Uma CDT real de demanda vinda da esteira (assistente conversacional para consulta e orientação num sistema da CCEE)
-foi analisada; nomes, fornecedor e números foram retirados. O que copiar: título que diz o que a demanda é e onde
-atua; problema contado pelo usuário; escopo agrupado em blocos; experimentação citada e anexada. O que evitar: campo
+foi analisada; nomes, fornecedor e números foram retirados. O que copiar: problema contado pelo usuário; escopo agrupado em blocos; experimentação citada e anexada. O que evitar: campo
 Benefícios sem nenhum número apesar de "que podem ser medidos"; o mesmo parágrafo repetido na Descrição, na
 Justificativa e em Benefícios; Descrição sem o processo atual, sem quem é impactado com precisão e sem o que está fora
 do escopo.
