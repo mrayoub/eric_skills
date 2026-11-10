@@ -67,6 +67,8 @@ def package(skill: Path, files: list[Path], destination: Path | io.BytesIO) -> N
         for path in files:
             info = zipfile.ZipInfo(f"{skill.name}/{path.relative_to(skill).as_posix()}", date_time=(1980, 1, 1, 0, 0, 0))
             info.external_attr = 0o644 << 16
+            # O ZipInfo grava o sistema de origem (0 no Windows, 3 no Unix); fixado para o pacote ser igual em todos.
+            info.create_system = 3
             info.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(info, path.read_bytes())
 
