@@ -177,6 +177,16 @@ class PackageTests(unittest.TestCase):
                 names = archive.namelist()
         self.assertEqual(names, [f"relatorio-4d/{p.relative_to(skill).as_posix()}" for p in files])
 
+    def test_package_is_identical_when_built_on_windows(self) -> None:
+        # O ZipInfo grava o sistema de origem conforme sys.platform; a matriz do CI falhava no Windows por isso.
+        skill = ROOT / "relatorio-4d"
+        files = CATALOG.distributable_files(skill)
+        unix, windows = io.BytesIO(), io.BytesIO()
+        DIST.package(skill, files, unix)
+        with mock.patch.object(sys, "platform", "win32"):
+            DIST.package(skill, files, windows)
+        self.assertEqual(unix.getvalue(), windows.getvalue())
+
     def test_every_skill_passes_frontmatter_check(self) -> None:
         for skill in SKILLS:
             with self.subTest(skill=skill.name):
