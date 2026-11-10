@@ -1,9 +1,10 @@
 # Preparar e registrar o 5C pensando nas entregas
 
 O 5C gera duas entregas na skill `relatorio-5c`: o Relatório 5C (registro por etapa) e a Apresentação 5C (devolutiva
-por insight). As duas dependem do que foi registrado no dia. Num caso real, C3 e C5 aconteceram, mas a experiência
-desejada, os critérios de sucesso e os créditos não foram anotados, e a devolutiva saiu com lacunas. Prepare o encontro
-para que isso não se repita. Os [exemplos](exemplos/README.md) mostram uma preparação feita pela autora do playbook.
+por insight). As duas dependem do que foi registrado no dia. Num caso real, a devolutiva saiu sem os critérios do C3 e
+sem os créditos do C5, e foi preciso perguntar depois à autora se isso tinha sido desenho da sessão ou falta de
+registro. Era desenho: a sessão remota foi curta e objetiva. Deixe isso claro antes do encontro, para que fora do
+escopo e lacuna de registro nunca se confundam. Os [exemplos](exemplos/README.md) mostram uma preparação feita pela autora do playbook.
 
 ## 1. Ponto de partida (antes do C1)
 
@@ -26,7 +27,9 @@ entregas.
 Defina e registre antes do encontro:
 
 - **Formato e profundidade de cada sessão:** presencial ou remota, completa (C1 a C5) ou curta (C1 a C3, cerca de
-  1h30). Uma sessão curta pode preceder a completa para ampliar a escuta; diga o que uma leva para a outra.
+  1h30). Uma sessão curta pode preceder a completa para ampliar a escuta; diga o que uma leva para a outra. A sessão
+  curta é objetiva por desenho: o C3 usa só a confirmação por post-its, sem construir experiência desejada e
+  critérios, e não há C4 nem C5. Declare isso no roteiro: o que ela não cobre fica fora do escopo, não é lacuna.
 - **Adaptação do 5C oficial**, quando houver: etapa oficial, etapa aplicada, o que mudou e o motivo, conforme o
   [método](metodo-5c.md).
 - **Convidados e presentes, separados.** Convidados nunca são denominador. Registre a organização e o perfil de cada
@@ -41,12 +44,13 @@ Defina e registre antes do encontro:
 |---|---|---|
 | C1 Contextualizar | Ponto de partida apresentado, dúvidas e correções de enquadramento | Escopo, linha de base e validade temporal |
 | C2 Compreender | Relatos por bloco temático da jornada, com o bloco numerado, relator ou perfil e um caso concreto; o que funciona; votos com a regra | Dores por sessão e fichas de dor D01, D02... |
-| C3 Confirmar | Experiência desejada, situações a evitar e **critérios de sucesso** por dor priorizada, além dos post-its de confirmação | Critérios do C3 e contagem de menções; foi a primeira lacuna do caso real |
+| C3 Confirmar | Experiência desejada, situações a evitar e **critérios de sucesso** por dor priorizada, além dos post-its de confirmação | Critérios do C3 e contagem de menções; numa sessão completa, é o que mais se perde |
 | C4 Cocriar | Ideias individuais e, por grupo, o mini-canvas: proposta, dor que atende, como funciona, **benefício esperado**, dependências, alternativas descartadas, composição do grupo | Propostas cocriadas com benefício esperado e ressalvas |
-| C5 Conduzir | Pitches, **créditos por proposta e o total**, razões, objeções e encaminhamentos acordados com responsável | Priorização e próximos passos; foi a segunda lacuna do caso real |
+| C5 Conduzir | Pitches, **créditos por proposta e o total**, razões, objeções e encaminhamentos acordados com responsável | Priorização e próximos passos; também se perde com facilidade |
 
-Antes de encerrar o encontro, confira em voz alta com a equipe: os critérios do C3 e os créditos do C5 estão anotados?
-Se algo não foi registrado, anote a lacuna no dia, com o motivo, em vez de reconstruir depois.
+Antes de encerrar uma sessão completa, confira em voz alta com a equipe: os critérios do C3 e os créditos do C5 estão
+anotados? Se algo não foi registrado, anote a lacuna no dia, com o motivo, em vez de reconstruir depois. Numa sessão
+curta, confira só o que ela prevê (C1 a C3, com a confirmação por post-its).
 
 ## 4. Facilitação
 

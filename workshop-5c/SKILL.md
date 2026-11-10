@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.3.0"
+  version: "1.3.1"
 ---
 
 # Facilitar o workshop 5C
@@ -50,7 +50,7 @@ Prepare briefing, diagnóstico, entrevistas, jornada e decisões; extraia desafi
 4. **C4 Cocriar:** ideias individuais antes de grupos diversos; registre por grupo o mini-canvas com proposta, dor, funcionamento, benefício esperado e dependências. Preserve origens, alterações de grupos e alternativas descartadas, sem forçar consenso.
 5. **C5 Conduzir:** registre pitches; anote créditos por proposta e o total antes de encerrar; apure ranking reproduzível, razões e objeções. Separe preferência, decisão institucional e validação experimental. Encaminhamentos/responsáveis somente quando acordados.
 
-Devolva síntese e próximos passos definidos. Em modo assíncrono, declare dinâmicas substituídas e decisões não reproduzidas; etapas ausentes mantêm parcial. Antes de encerrar, confira com a equipe se os critérios do C3 e os créditos do C5 foram anotados; o que faltar vira lacuna anotada no dia, com o motivo. O registro (`five_c_workshop_record`) segue a base das entregas do `relatorio-5c`: ponto de partida, sessões, C1 a C5 e lacunas do registro, com sínteses, fontes, participantes, regras, votos e decisões. Relatos/votos não comprovam eficácia, escala, viabilidade ou impacto; proponha testes.
+Devolva síntese e próximos passos definidos. Em modo assíncrono, declare dinâmicas substituídas e decisões não reproduzidas; etapas ausentes mantêm parcial. Antes de encerrar uma sessão completa, confira com a equipe se os critérios do C3 e os créditos do C5 foram anotados; o que faltar vira lacuna anotada no dia, com o motivo. A sessão curta (C1 a C3) é objetiva por desenho: C3 só com a confirmação por post-its, sem C4 e C5; o que ela não cobre fica fora do escopo, não é lacuna. O registro (`five_c_workshop_record`) segue a base das entregas do `relatorio-5c`: ponto de partida, sessões, C1 a C5 e lacunas do registro, com sínteses, fontes, participantes, regras, votos e decisões. Relatos/votos não comprovam eficácia, escala, viabilidade ou impacto; proponha testes.
 
 ## Exemplo
 
@@ -69,7 +69,7 @@ Saída (trecho):
 - [ ] Agenda, adaptações do 5C oficial (com motivo) e próximos passos documentados
 - [ ] Organização de cada participante, convidados e presentes separados, e unidade de contagem registradas
 - [ ] Ponto de partida com linha de base e perguntas a responder
-- [ ] Critérios do C3 e créditos do C5 anotados no dia, ou lacuna registrada com motivo
+- [ ] Em sessão completa, critérios do C3 e créditos do C5 anotados no dia, ou lacuna registrada com motivo; em sessão curta, o que ficou fora do escopo declarado
 
 ## Contexto ERIC
 

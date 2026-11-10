@@ -11,8 +11,9 @@ termos genéricos, datas foram deslocadas e números arredondados. Não reutiliz
 Imite: a linha de base com peso por tema, as perguntas que o 5C deve responder, o aviso do que mudou desde o
 diagnóstico, o formato das sessões com presença e profundidade, e a trilha com entrada e saída.
 
-A [lista de registro](#lista-de-registro-do-dia) no fim foi acrescentada a partir das lacunas do caso real: o
-encontro aconteceu, mas os critérios do C3 e os créditos do C5 não chegaram à devolutiva.
+A [lista de registro](#lista-de-registro-do-dia) no fim foi acrescentada a partir do caso real: a devolutiva saiu
+sem critérios do C3 e sem créditos do C5, e só depois a autora confirmou que, na sessão remota, isso era desenho. A
+lista deixa claro, antes do encontro, o que cada sessão prevê.
 
 ---
 
@@ -38,7 +39,7 @@ C2 quais dores permanecem depois dela.
 | | Sessão remota | Sessão presencial |
 |---|---|---|
 | Data e duração | 14/09, 1h30 | 18/09, de 9h às 12h e de 14h às 17h |
-| Profundidade | Curta: C1 a C3, fluxo metodológico semelhante | Completa: C1 a C5, com cocriação |
+| Profundidade | Curta e objetiva, por desenho: C1 a C3, com o C3 só na confirmação por post-its; sem C4 e C5 | Completa: C1 a C5, com cocriação |
 | Participantes externos | Convidados e presentes registrados separadamente, com organização e perfil | Idem |
 | Ligação entre as sessões | Os blocos da jornada e as dores levantadas no remoto entram como contexto do presencial | |
 
@@ -67,4 +68,6 @@ A trilha 5C pode ser aplicada em diferentes profundidades sem perder o padrão m
 | C4 | Responsável a definir | Mini-canvas de cada grupo, com benefício esperado e dependências |
 | C5 | Responsável a definir | Créditos por proposta, total distribuído e encaminhamentos com responsável |
 
-Antes de encerrar: conferir C3 e C5. O que faltar vira lacuna anotada no dia, com o motivo.
+A lista vale para a sessão completa. Na sessão curta, só C2 e a confirmação por post-its do C3 estão previstos; o
+resto fica fora do escopo por desenho. Antes de encerrar a sessão completa: conferir C3 e C5. O que faltar vira
+lacuna anotada no dia, com o motivo.
