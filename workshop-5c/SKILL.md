@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.27"
+  version: "1.2.0"
 ---
 
 # Facilitar o workshop 5C
@@ -14,7 +14,7 @@ Prepara ou registra cocriação com clientes; playbook não determina serviço, 
 
 ## Leia primeiro
 
-- [Método 5C](references/metodo-5c.md): condução adaptada.
+- [Método 5C](references/metodo-5c.md): condução, modelo oficial e adaptações pontuais.
 Para conferir a fonte: [transcrição](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) e [DOCX](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx).
 
 ## Grilling
@@ -40,7 +40,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-Prepare briefing, diagnóstico, entrevistas, jornada e decisões; extraia desafio/evidências e perfis afetados sem copiar a aplicação original. Pergunte por público, acesso, objetivo, facilitadores, tempo, registro e condições decisivas ausentes. A amostra reúne perspectivas, sem representatividade automática. Combine presença, voto/créditos e preservação de ideias/dissensos antes de votar: três votos em C2 e dez créditos em C5 são referências adaptáveis com regra/data. Confira divergência entre duração declarada e intervalos do DOCX.
+Prepare briefing, diagnóstico, entrevistas, jornada e decisões; extraia desafio/evidências e perfis afetados sem copiar a aplicação original. Pergunte por público, acesso, objetivo, facilitadores, tempo, registro e condições decisivas ausentes. A amostra reúne perspectivas, sem representatividade automática. Combine presença, voto/créditos e preservação de ideias/dissensos antes de votar: três votos em C2 e dez créditos em C5 são referências adaptáveis com regra/data. Confira divergência entre duração declarada e intervalos do DOCX. O playbook é o 5C oficial; se o objetivo justificar adaptar etapas, formato (inclusive uma sessão por organização), unidade de contagem ou regra de voto, declare no roteiro a etapa oficial, a aplicada, o que mudou e o motivo, conforme o [método](references/metodo-5c.md). Registre a organização de cada participante.
 
 1. **C1 Contextualizar:** apresente desafio/origem/dúvidas e agenda; abra correções. Registre versão, fontes e dúvidas.
 2. **C2 Compreender:** peça episódios, condições, consequências, acertos, fricções e oportunidades; registre relator/perfil/tema/evidência. Priorize pela regra combinada; preserve contagem, elegibilidade, abstenções e dissensos.
@@ -64,7 +64,8 @@ Saída (trecho):
 - [ ] Regras, presença, elegibilidade e abstenções rastreáveis
 - [ ] Ideias, falas e dissensos preservados
 - [ ] Preferência separada de decisão e eficácia
-- [ ] Agenda, adaptações e próximos passos documentados
+- [ ] Agenda, adaptações do 5C oficial (com motivo) e próximos passos documentados
+- [ ] Organização de cada participante e unidade de contagem registradas
 
 ## Contexto ERIC
 

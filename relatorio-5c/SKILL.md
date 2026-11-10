@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.27"
+  version: "1.2.0"
 ---
 
 # Compilar o Relatório 5C
@@ -15,6 +15,8 @@ Consolida cocriação; playbook sozinho não fornece achados, votos ou consenso,
 ## Leia primeiro
 
 - [Método 5C](references/metodo-5c.md): estrutura metodológica.
+- [Escrita e organização do Relatório 5C](references/escrita-relatorio-5c.md): oficial e adaptações, análise por organização, ordem das seções e jeito de escrever.
+- [Exemplos](references/exemplos/README.md): escolha o mais próximo da execução e imite estrutura e escrita, nunca o conteúdo.
 Para conferir a fonte: [transcrição](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) e [DOCX](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx).
 
 ## Grilling
@@ -40,13 +42,13 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-1. **Entrada/contexto:** inventarie briefing, diagnóstico, convites/presença, materiais exibidos, mural/notas, gravações, formulários, votos, canvases, ata e decisões. Registre identificador/data/versão/localizador; distinga fala de cliente, relato interno, dado, proposta, inferência e decisão. Documente desafio original/revisão, convidados/presentes, perfis cobertos/ausentes, objetivo, duração/adaptações e regras. Presença não representa toda população; pergunte só por fontes/definições/decisões decisivas.
+1. **Entrada/contexto:** inventarie briefing, diagnóstico, convites/presença, materiais exibidos, mural/notas, gravações, formulários, votos, canvases, ata e decisões. Registre identificador/data/versão/localizador; distinga fala de cliente, relato interno, dado, proposta, inferência e decisão. Documente desafio original/revisão, convidados/presentes, perfis cobertos/ausentes, objetivo, duração/adaptações e regras. Presença não representa toda população; pergunte só por fontes/definições/decisões decisivas. O playbook é o 5C oficial; se a execução adaptou etapas, formato ou regras, declare a adaptação (etapa oficial, etapa aplicada, o que mudou e motivo) e a unidade de contagem, usando a organização participante como eixo da análise.
 2. **C1 Contextualizar:** enquadramento apresentado, evidências, dúvidas e mudanças.
 3. **C2 Compreender:** temas, experiências positivas, dificuldades, episódios, contradições e oportunidades; votos com regra efetiva, elegibilidade e denominador. Menções não são prevalência sem desenho adequado.
 4. **C3 Confirmar:** dores escolhidas, experiência desejada, situações a evitar, necessidades e critérios observáveis. Separe critério proposto, meta aprovada e resultado medido.
 5. **C4 Cocriar:** ideias/propostas, composição real dos grupos, origem das ideias, dor, funcionamento, benefícios alegados, dependências, riscos e alternativas descartadas.
 6. **C5 Conduzir:** pitches, créditos, votos/ranking reproduzível, razões, objeções e aprendizados; separe preferência, recomendação e decisão efetiva. Sem votação confiável, registre lacuna, não ranking fabricado.
-7. **Síntese/próximos passos:** achados citados, limites, suposições a testar, responsáveis e devolutiva acordada. Eficácia, adesão e viabilidade exigem experimento adequado, sem antecipar resultado.
+7. **Síntese/próximos passos:** Resumo no topo, divergências entre organizações e hipóteses a testar (não são decisões), com achados citados, limites, responsáveis e devolutiva acordada. Você compõe essas seções a partir das fontes e do grilling; não peça ao usuário que as escreva (veja "De onde vem cada seção" no guia de escrita). Eficácia, adesão e viabilidade exigem experimento adequado, sem antecipar resultado.
 
 Reconcilie totais entre narrativa/quadros; preserve conflitos e não atribua fala/aprovação sem fonte. Relatório completo exige síntese/fonte em C1 a C5; etapas ausentes mantêm parcial. Fontes posteriores atualizam com data; revisões preservam a versão original.
 
@@ -61,6 +63,7 @@ Saída (trecho):
 ## Checagem final
 
 - [ ] C1 a C5 e versões separadas, com síntese/fonte
+- [ ] Adaptação do 5C oficial declarada, quando houver, e análise por organização
 - [ ] Denominadores, regras e totais conferidos
 - [ ] Falas, conflitos e alternativas preservados
 - [ ] Preferência, meta, decisão e efeito distinguidos

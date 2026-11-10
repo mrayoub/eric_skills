@@ -6,6 +6,45 @@
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
+      "id": "heading-executive_summary",
+      "type": "heading",
+      "data": {
+        "section_key": "executive_summary_heading",
+        "text": "Resumo"
+      }
+    },
+    {
+      "id": "executive_summary",
+      "type": "paragraph",
+      "data": {
+        "section_key": "executive_summary",
+        "text": "Cinco participantes fictícios, de três organizações, apontaram o acompanhamento do pedido como a principal dificuldade. O tema recebeu 6 de 15 votos em C2, e a proposta de status visível recebeu 24 de 50 créditos em C5. Os votos mostram a preferência das pessoas presentes e não comprovam o efeito das propostas."
+      },
+      "citation_ids": [
+        "FIC-01",
+        "FIC-02"
+      ]
+    },
+    {
+      "id": "heading-scope",
+      "type": "heading",
+      "data": {
+        "section_key": "scope_heading",
+        "text": "Escopo e fontes"
+      }
+    },
+    {
+      "id": "scope",
+      "type": "paragraph",
+      "data": {
+        "section_key": "scope",
+        "text": "Exemplo fictício de 5C oficial, em uma sessão coletiva com as etapas do playbook e sem adaptação. A contagem é por pessoa: três votos em C2 e dez créditos em C5 para cada um dos cinco participantes."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
       "id": "heading-c1",
       "type": "heading",
       "data": {
@@ -80,6 +119,11 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "break-c5",
+      "type": "page_break",
+      "data": {}
     },
     {
       "id": "heading-c5",
@@ -159,6 +203,44 @@
       "citation_ids": [
         "FIC-02"
       ]
+    },
+    {
+      "id": "heading-divergences",
+      "type": "heading",
+      "data": {
+        "section_key": "divergences_heading",
+        "text": "Divergências entre as organizações"
+      }
+    },
+    {
+      "id": "divergences",
+      "type": "paragraph",
+      "data": {
+        "section_key": "divergences",
+        "text": "Duas das três organizações fictícias preferiram orientação prévia ao formulário guiado. A divergência foi mantida e não aparece no ranking como consenso."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-hypotheses",
+      "type": "heading",
+      "data": {
+        "section_key": "hypotheses_heading",
+        "text": "Hipóteses a testar e próximos passos"
+      }
+    },
+    {
+      "id": "hypotheses",
+      "type": "paragraph",
+      "data": {
+        "section_key": "hypotheses",
+        "text": "Hipóteses sugeridas, não decisões. H1: o status visível reduz os contatos de acompanhamento. Teste possível: protótipo com cinco usuários, contando as dúvidas por pedido. Responsável a definir."
+      },
+      "citation_ids": [
+        "FIC-02"
+      ]
     }
   ],
   "citations": [
@@ -175,7 +257,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-five-c-report",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true
