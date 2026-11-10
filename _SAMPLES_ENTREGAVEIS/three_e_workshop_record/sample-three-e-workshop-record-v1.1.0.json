@@ -1,0 +1,142 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "starting_point_heading",
+        "text": "Ponto de partida"
+      },
+      "id": "heading-starting_point",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "starting_point",
+        "text": "Hipótese do 4D fictício: acreditamos que uma entrada orientada com status visível permitirá pedidos completos e menos dúvidas, porque o diagnóstico mostrou entrada incompleta e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos."
+      },
+      "id": "starting_point",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "e1_heading",
+        "text": "E1: Esclarecer"
+      },
+      "id": "heading-e1",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "e1",
+        "text": "Hipótese focal simulada: uma entrada guiada pode reduzir solicitações incompletas para equipes e agentes elegíveis."
+      },
+      "id": "e1",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "e2_heading",
+        "text": "E2: Estruturar"
+      },
+      "id": "heading-e2",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "e2",
+        "text": "O MVP ilustrativo inclui perguntas condicionais e confirmação de envio. Integrações e automações ficam fora do primeiro recorte."
+      },
+      "id": "e2",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "e3_heading",
+        "text": "E3: Experimentar"
+      },
+      "id": "heading-e3",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "e3",
+        "text": "Planeja-se um Test Card de compreensão do fluxo e outro de completude da solicitação. Medidas e critérios devem ser fechados antes da coleta real."
+      },
+      "id": "e3",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "convergence_heading",
+        "text": "Convergência"
+      },
+      "id": "heading-convergence",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "convergence",
+        "text": "Primeiro: perguntas guiadas e teste de completude. Rota provável: indefinida, depende de capacidade interna. Aberto: integração do status."
+      },
+      "id": "convergence",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "record_gaps_heading",
+        "text": "Lacunas do registro"
+      },
+      "id": "heading-record_gaps",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "record_gaps",
+        "text": "Nenhuma lacuna no exemplo fictício: responsáveis, prazos e Test Cards foram anotados no dia."
+      },
+      "id": "record_gaps",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada-5c"
+    },
+    {
+      "id": "FIC-02",
+      "locator": "exemplo fictício, sem dados reais",
+      "source_id": "planilha-simulada"
+    }
+  ],
+  "deliverable_type": "three_e_workshop_record",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-three-e-workshop-record",
+    "completeness": "complete",
+    "content_version": "1.1.0",
+    "orientation": "landscape",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
+  "title": "EXEMPLO FICTÍCIO: Estruturação da entrada guiada"
+}

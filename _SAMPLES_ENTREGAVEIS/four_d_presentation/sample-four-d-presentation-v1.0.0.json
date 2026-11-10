@@ -1,0 +1,172 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "section_key": "challenge_heading",
+        "text": "O 4D fictício buscou onde a jornada de solicitações perde clareza"
+      },
+      "id": "heading-challenge",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "challenge",
+        "text": "Objetivo: entender por que pedidos chegam incompletos e voltam. Ponto de partida sem linha de base real. Pergunta central: que mudança reduz devoluções e dúvidas?"
+      },
+      "id": "challenge",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "findings_heading",
+        "text": "Entrada incompleta e status invisível atravessaram todo o 4D"
+      },
+      "id": "heading-findings",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "findings",
+        "text": "Os dois temas apareceram em três dinâmicas e se reforçam: a entrada incompleta gera devoluções, e sem status a dúvida vira contato. A causa dominante da devolução segue em disputa."
+      },
+      "id": "findings",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "cards": [
+          {
+            "text": "Jornada, D3 e D4. Força alta.",
+            "title": "Entrada incompleta",
+            "tone": "blue"
+          },
+          {
+            "text": "D1, jornada e D3. Força alta.",
+            "title": "Status invisível",
+            "tone": "blue"
+          },
+          {
+            "text": "Só no D1, com divergência. Força baixa.",
+            "title": "Causa da devolução",
+            "tone": "yellow"
+          }
+        ],
+        "columns": 3
+      },
+      "id": "findings-cards",
+      "type": "card_grid"
+    },
+    {
+      "data": {
+        "section_key": "solution_hypothesis_heading",
+        "text": "Uma entrada orientada com status visível é a hipótese que segue ao 3E"
+      },
+      "id": "heading-solution_hypothesis",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "solution_hypothesis",
+        "text": "Acreditamos que uma entrada orientada, com status visível depois do envio, permitirá pedidos completos e menos dúvidas. Porque o diagnóstico mostrou entrada incompleta e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos."
+      },
+      "id": "solution_hypothesis",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "convergence_heading",
+        "text": "O grupo priorizou o formulário guiado e convergiu para a entrada"
+      },
+      "id": "heading-convergence",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "convergence",
+        "text": "No D4, o formulário guiado ficou em primeiro; na rodada final, o grupo juntou entrada e acompanhamento. Preferência do grupo, não validação de eficácia."
+      },
+      "id": "convergence",
+      "type": "paragraph"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "cards": [
+          {
+            "text": "Responde à entrada incompleta.",
+            "title": "1º Formulário guiado",
+            "tone": "blue"
+          },
+          {
+            "text": "Responde à incerteza do andamento.",
+            "title": "2º Status visível",
+            "tone": "neutral"
+          },
+          {
+            "text": "Responde às dúvidas iniciais.",
+            "title": "3º Orientação prévia",
+            "tone": "neutral"
+          }
+        ],
+        "columns": 3
+      },
+      "id": "ranking-cards",
+      "type": "card_grid"
+    },
+    {
+      "data": {
+        "section_key": "next_steps_heading",
+        "text": "O 3E precisa estruturar a entrada e o acompanhamento"
+      },
+      "id": "heading-next_steps",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "next_steps",
+        "text": "Para o 3E: definir os componentes da entrada orientada e do status, e priorizar o teste de completude. Segue aberto: a causa dominante das devoluções. Responsável a definir."
+      },
+      "id": "next_steps",
+      "type": "paragraph"
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "locator": "exemplo fictício, sem coleta real",
+      "source_id": "ata-simulada"
+    }
+  ],
+  "deliverable_type": "four_d_presentation",
+  "locale": "pt-BR",
+  "metadata": {
+    "artifact_id": "sample-four-d-presentation",
+    "completeness": "complete",
+    "content_version": "1.0.0",
+    "orientation": "wide",
+    "sample": true
+  },
+  "schema_version": "1.0.0",
+  "summary": "Exemplo fictício: o 4D mostrou que o pedido perde clareza na entrada e no status. Hipótese para o 3E: entrada orientada com status visível.",
+  "title": "EXEMPLO FICTÍCIO: Solicitações com informações incompletas"
+}

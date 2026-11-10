@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:eric:schemas:four-d-report",
   "title": "ERIC Four-D Report",
-  "description": "Contrato especializado do entregavel oficial Relatorio 4D.",
+  "description": "Contrato especializado do entregavel oficial Relatorio 4D. Desde a orientação da autora do playbook (10/11/2026), exige também Resumo, temas transversais, síntese analítica e hipótese de solução; o validador semântico confere o texto dessas seções, da conclusão e as três partes da hipótese.",
   "allOf": [
     {
       "$ref": "urn:eric:schemas:deliverable-content"
@@ -86,6 +86,30 @@
             {
               "contains": {
                 "$ref": "#/$defs/decisionHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/executiveSummaryHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/crossThemesHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/synthesisHeading"
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "$ref": "#/$defs/hypothesisHeading"
               },
               "minContains": 1
             },
@@ -220,6 +244,78 @@
               "properties": {
                 "section_key": {
                   "const": "conclusion"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "executiveSummaryHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "executive_summary"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "crossThemesHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "cross_themes"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "synthesisHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "analytical_synthesis"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "hypothesisHeading": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sectionHeading"
+        },
+        {
+          "properties": {
+            "data": {
+              "properties": {
+                "section_key": {
+                  "const": "solution_hypothesis"
                 }
               }
             }

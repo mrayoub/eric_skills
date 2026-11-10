@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-four-d-report",
+  "branding_version": "1.2.0",
+  "content_sha256": "05f255fe4854b7b94b603b05b99eeb5cd35f9e3bf6852b3fbc8ef23155e446d1",
+  "content_version": "1.1.0",
+  "deliverable_type": "four_d_report",
+  "files": {
+    "sample-four-d-report-v1.1.0.docx": "ccaa54b216d5118bcd88b6d9108ee01cab64009de72706e7291c030d830ca376",
+    "sample-four-d-report-v1.1.0.html": "c1899ad4a995b58add601dda1a1f04fa19c4c347afe06fc7242c42a8f17efc64",
+    "sample-four-d-report-v1.1.0.json": "05f255fe4854b7b94b603b05b99eeb5cd35f9e3bf6852b3fbc8ef23155e446d1",
+    "sample-four-d-report-v1.1.0.md": "02737e737858ad612d452f111b4d22ad9f7197b60d1aa50d51b03c6c9b6c6d1f",
+    "sample-four-d-report-v1.1.0.pdf": "ee3bf12051c67a2ea6d379f4b49a3b61f4c231f6a8db5eb4236c1cf55758bd29",
+    "sample-four-d-report-v1.1.0.txt": "d761536f032171c5085c5e0ec56c06c8a95576de38ad9a9a20c44d827aff1207"
+  },
+  "layout": "report_landscape",
+  "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "1f576f97bec900e90044e24f7f276ec18d72939366e46dc820dffb09e54cd2c2",
+  "profile_version": "1.2.0",
+  "renderer_version": "2.1.4",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

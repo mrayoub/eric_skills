@@ -1,11 +1,11 @@
 ---
 name: relatorio-3e
-description: "Compila ou revisa o Relatório 3E: solução e escopo, plano de construção com responsáveis e prazos, Test Cards individuais prospectivos e decisão de rota (interna, externa, híbrida ou indefinida), separando plano de evidência observada. Use quando houver registros de E1 a E3 ou material equivalente e o usuário quiser o relatório ou os Test Cards consolidados. Não use para facilitar o workshop (use workshop-3e) nem para analisar resultados de testes já executados (use experimentacao-inovacao)."
+description: "Compila ou revisa o Relatório 3E: solução e escopo, plano de construção com responsáveis e prazos, Test Cards individuais prospectivos e decisão de rota (interna, externa, híbrida ou indefinida), separando plano de evidência observada, com rastreabilidade entre a hipótese e as dores do 4D e a solução, conclusão e a Apresentação 3E, devolutiva curta para gestores. Use quando houver registros de E1 a E3 ou material equivalente e o usuário quiser o relatório, a apresentação ou os Test Cards consolidados. Não use para facilitar o workshop (use workshop-3e) nem para analisar resultados de testes já executados (use experimentacao-inovacao)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.31"
+  version: "1.2.0"
 ---
 
 # Compilar o Relatório 3E
@@ -16,6 +16,7 @@ Consolida solução, construção, experimentos e rota; separa plano, execução
 
 - [Playbook 3E](references/3e-solution-structuring-playbook.md): estrutura do relatório.
 - [Test Card](assets/test-card.md): quatro campos por teste.
+- [Análise, rastreabilidade e conclusão](references/analise-e-conclusao-3e.md): do 4D à solução, acabativa e Apresentação 3E.
 Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais; registre diferença e data.
 
 ## Grilling
@@ -46,7 +47,8 @@ com data e não apresente reconstrução como plano combinado previamente.
 3. **Construção:** recursos, itens a desenvolver, dependências, responsável, apoio e prazo por ação; exponha lacunas antes de declarar MVP pronto.
 4. **Experimento:** suposições prioritárias, público elegível, método, intervenção, medida, fonte e critério. Entregue Test Card individual por teste com hipótese, teste, medida e critério, uma frase objetiva por campo (até 280 caracteres); tabela é só índice. Critérios/limiares sem baseline ficam `a fechar antes da coleta`. Preserve originais; cards reconstruídos são retrospectivos. Resultados existentes precisam de fontes/data; Learning Cards somente após execução, nunca achados antes do teste.
 5. **Rota:** registre `internal`, `external`, `hybrid` ou `undecided` com fonte e decisão efetiva. Externa/híbrida: o que buscar; interna: o que construir; indefinida: dependências abertas. Rota não valida solução.
-6. Confira relatório/cards/fontes; indique decisões, dados e autorizações necessários ao próximo uso. `experimentacao-inovacao` pode detalhar protocolo/analisar resultados, mas o pacote funciona isoladamente.
+6. **Rastreabilidade e conclusão** (obrigatório, conforme [o guia](references/analise-e-conclusao-3e.md)): compare a hipótese do 4D com a refinada no E1; ligue cada componente `precisa ter` à dor ou tema do 4D, com status sustentado, parcial ou sem evidência; confirme que as suposições de "Precisamos validar se" do 4D aparecem no E3 ou estão adiadas com motivo; feche com a conclusão da estruturação (solução, o que construir e testar primeiro, rota, o que segue aberto), condensada também no Resumo. Você compõe essas seções a partir das fontes.
+7. Confira relatório/cards/fontes; indique decisões, dados e autorizações necessários ao próximo uso. `experimentacao-inovacao` pode detalhar protocolo/analisar resultados, mas o pacote funciona isoladamente.
 
 ## Exemplo
 
@@ -63,6 +65,8 @@ Saída (trecho):
 - [ ] Cards individuais com quatro campos e status correto
 - [ ] Rota sustentada; aprovação não inferida
 - [ ] Plano separado de evidências e próximos passos
+- [ ] Rastreabilidade do 4D à solução, com status por componente
+- [ ] Conclusão com acabativa e Resumo no início
 
 ## Contexto ERIC
 
@@ -73,7 +77,7 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 ## Entrega em arquivo
 
 Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
-com `deliverable_type` `three_e_report` e `test_card` por teste: monte o JSON canônico, rode
+com `deliverable_type` `three_e_report` e `test_card` por teste, e `three_e_presentation` para a Apresentação 3E (no máximo 6 slides de conteúdo, conforme [o guia](references/analise-e-conclusao-3e.md#duas-saídas-da-mesma-base)), derivada da mesma análise: monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
 `metadata.completeness: "partial"`: nunca contorne o schema.

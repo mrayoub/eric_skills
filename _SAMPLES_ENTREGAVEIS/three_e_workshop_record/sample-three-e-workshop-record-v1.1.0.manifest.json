@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-three-e-workshop-record",
+  "branding_version": "1.2.0",
+  "content_sha256": "2efd43f0dfa7e965114e0e3e0e19bc358d2165186b9cd24ea86b187143d170a3",
+  "content_version": "1.1.0",
+  "deliverable_type": "three_e_workshop_record",
+  "files": {
+    "sample-three-e-workshop-record-v1.1.0.docx": "1044474f0ea3198e3df43fed7c01521e14cd6834843a6b42692538ba9f600c42",
+    "sample-three-e-workshop-record-v1.1.0.html": "72c0f0999c379e94dea59c1c1bafcae4988cb1612bab8e31c059eeea6e4eb57b",
+    "sample-three-e-workshop-record-v1.1.0.json": "2efd43f0dfa7e965114e0e3e0e19bc358d2165186b9cd24ea86b187143d170a3",
+    "sample-three-e-workshop-record-v1.1.0.md": "faef955d6a52b050f94b9bc508ac6a0991656d7e123d4571971584103be1313b",
+    "sample-three-e-workshop-record-v1.1.0.pdf": "fa2c4e487197f62fa36c73e8762bc5f1b89b561b1ecb94e0e5d124a757d319df",
+    "sample-three-e-workshop-record-v1.1.0.txt": "eb1c8f53e634e30837f29d0418ffb1c736845f962ac51c238031ef69d27eff43"
+  },
+  "layout": "report_landscape",
+  "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "1f576f97bec900e90044e24f7f276ec18d72939366e46dc820dffb09e54cd2c2",
+  "profile_version": "1.2.0",
+  "renderer_version": "2.1.4",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

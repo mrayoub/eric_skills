@@ -8,21 +8,30 @@
     "recommendation"
   ],
   "four_d_workshop_record": [
+    "starting_point",
     "d1",
     "d2",
     "d3",
-    "d4"
+    "d4",
+    "convergence",
+    "record_gaps"
   ],
   "three_e_workshop_record": [
-    "e1",
-    "e2",
-    "e3"
-  ],
-  "three_e_report": [
+    "starting_point",
     "e1",
     "e2",
     "e3",
-    "route"
+    "convergence",
+    "record_gaps"
+  ],
+  "three_e_report": [
+    "executive_summary",
+    "e1",
+    "e2",
+    "traceability",
+    "e3",
+    "route",
+    "conclusion"
   ],
   "innovation_scorecard": [
     "alignment_opportunity",
@@ -102,6 +111,20 @@
     "diagnosis_check",
     "proposals",
     "prioritization",
+    "next_steps"
+  ],
+  "four_d_presentation": [
+    "challenge",
+    "findings",
+    "solution_hypothesis",
+    "convergence",
+    "next_steps"
+  ],
+  "three_e_presentation": [
+    "solution",
+    "traceability",
+    "build_and_test",
+    "route",
     "next_steps"
   ]
 }

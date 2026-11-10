@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:my-skills:schemas:three-e-presentation",
+  "title": "Three E Presentation response schema",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "three_e_presentation"
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "solution"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "traceability"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "build_and_test"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "route"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "next_steps"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "description": "Seções obrigatórias da Apresentação 3E: devolutiva curta, de no máximo 6 slides de conteúdo, derivada da mesma análise do relatório."
+}

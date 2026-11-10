@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "three_e_presentation",
+  "locale": "pt-BR",
+  "title": "EXEMPLO FICTÍCIO: Entrada guiada para reduzir solicitações incompletas",
+  "summary": "Exemplo fictício: a entrada guiada vem da hipótese do 4D. Primeiro, perguntas guiadas e teste de completude; rota ainda indefinida.",
+  "blocks": [
+    {
+      "id": "heading-solution",
+      "type": "heading",
+      "data": {
+        "section_key": "solution_heading",
+        "text": "A entrada guiada é a solução que sai do 3E fictício"
+      }
+    },
+    {
+      "id": "solution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "solution",
+        "text": "Vem da hipótese do 4D: entrada orientada com status visível. No E1, o grupo tirou o status em tempo real do primeiro recorte por depender de integração."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-traceability",
+      "type": "heading",
+      "data": {
+        "section_key": "traceability_heading",
+        "text": "Cada componente do primeiro recorte responde a uma dor do 4D"
+      }
+    },
+    {
+      "id": "traceability",
+      "type": "paragraph",
+      "data": {
+        "section_key": "traceability",
+        "text": "Componentes ligados às dores do diagnóstico; o que não tem dor ficou fora do recorte."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "trace-table",
+      "type": "table",
+      "data": {
+        "title": "Do 4D à solução",
+        "headers": [
+          "Componente",
+          "Recorte",
+          "Dor do 4D",
+          "Status"
+        ],
+        "rows": [
+          [
+            "Perguntas guiadas",
+            "agora",
+            "Entrada incompleta",
+            "Sustentado"
+          ],
+          [
+            "Status em tempo real",
+            "futuro",
+            "Status pouco visível",
+            "Sustentado; adiado"
+          ],
+          [
+            "Automação de decisão",
+            "fora",
+            "Nenhuma",
+            "Sem evidência"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-build_and_test",
+      "type": "heading",
+      "data": {
+        "section_key": "build_and_test_heading",
+        "text": "Perguntas guiadas e teste de completude vêm primeiro"
+      }
+    },
+    {
+      "id": "build_and_test",
+      "type": "paragraph",
+      "data": {
+        "section_key": "build_and_test",
+        "text": "Construir primeiro o que responde à dor mais forte; testar primeiro a suposição de maior risco. A construção planejada não é evidência de eficácia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "build-test",
+      "type": "card_grid",
+      "data": {
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Construir",
+            "text": "Perguntas guiadas e confirmação de envio.",
+            "tone": "blue"
+          },
+          {
+            "title": "Testar",
+            "text": "Completude da solicitação, com critério fechado antes da coleta.",
+            "tone": "yellow"
+          }
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-route",
+      "type": "heading",
+      "data": {
+        "section_key": "route_heading",
+        "text": "A rota segue indefinida até avaliar a capacidade interna"
+      }
+    },
+    {
+      "id": "route",
+      "type": "paragraph",
+      "data": {
+        "section_key": "route",
+        "text": "Rota indefinida: interna, externa ou híbrida depende de capacidade, custo e requisitos ainda não verificados."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-next_steps",
+      "type": "heading",
+      "data": {
+        "section_key": "next_steps_heading",
+        "text": "Fechar o critério do Test Card antes de qualquer coleta"
+      }
+    },
+    {
+      "id": "next_steps",
+      "type": "paragraph",
+      "data": {
+        "section_key": "next_steps",
+        "text": "Próximos passos: fechar medida e critério do teste de completude, confirmar responsáveis e avaliar a integração do status. Responsáveis a definir."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "FIC-01",
+      "source_id": "ata-simulada",
+      "locator": "exemplo fictício, sem coleta real"
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-three-e-presentation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "orientation": "wide",
+    "sample": true
+  }
+}

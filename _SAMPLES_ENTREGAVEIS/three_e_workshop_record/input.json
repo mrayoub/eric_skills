@@ -6,6 +6,25 @@
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
+      "id": "heading-starting_point",
+      "type": "heading",
+      "data": {
+        "section_key": "starting_point_heading",
+        "text": "Ponto de partida"
+      }
+    },
+    {
+      "id": "starting_point",
+      "type": "paragraph",
+      "data": {
+        "section_key": "starting_point",
+        "text": "Hipótese do 4D fictício: acreditamos que uma entrada orientada com status visível permitirá pedidos completos e menos dúvidas, porque o diagnóstico mostrou entrada incompleta e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
       "id": "heading-e1",
       "type": "heading",
       "data": {
@@ -61,6 +80,44 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "heading-convergence",
+      "type": "heading",
+      "data": {
+        "section_key": "convergence_heading",
+        "text": "Convergência"
+      }
+    },
+    {
+      "id": "convergence",
+      "type": "paragraph",
+      "data": {
+        "section_key": "convergence",
+        "text": "Primeiro: perguntas guiadas e teste de completude. Rota provável: indefinida, depende de capacidade interna. Aberto: integração do status."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-record_gaps",
+      "type": "heading",
+      "data": {
+        "section_key": "record_gaps_heading",
+        "text": "Lacunas do registro"
+      }
+    },
+    {
+      "id": "record_gaps",
+      "type": "paragraph",
+      "data": {
+        "section_key": "record_gaps",
+        "text": "Nenhuma lacuna no exemplo fictício: responsáveis, prazos e Test Cards foram anotados no dia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
     }
   ],
   "citations": [
@@ -77,7 +134,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-three-e-workshop-record",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true

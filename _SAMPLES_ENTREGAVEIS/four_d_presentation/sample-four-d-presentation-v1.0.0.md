@@ -1,0 +1,55 @@
+# EXEMPLO FICTÍCIO: Solicitações com informações incompletas
+
+ID sample-four-d-presentation · versão 1.0.0 · Completo
+
+Exemplo fictício: o 4D mostrou que o pedido perde clareza na entrada e no status. Hipótese para o 3E: entrada orientada com status visível.
+
+## O 4D fictício buscou onde a jornada de solicitações perde clareza
+
+Objetivo: entender por que pedidos chegam incompletos e voltam. Ponto de partida sem linha de base real. Pergunta central: que mudança reduz devoluções e dúvidas?
+
+Fontes: FIC-01
+
+## Entrada incompleta e status invisível atravessaram todo o 4D
+
+Os dois temas apareceram em três dinâmicas e se reforçam: a entrada incompleta gera devoluções, e sem status a dúvida vira contato. A causa dominante da devolução segue em disputa.
+
+Fontes: FIC-01
+
+| Card | Conteúdo |
+| --- | --- |
+| Entrada incompleta | Entrada incompleta: Jornada, D3 e D4. Força alta. |
+| Status invisível | Status invisível: D1, jornada e D3. Força alta. |
+| Causa da devolução | Causa da devolução: Só no D1, com divergência. Força baixa. |
+
+Fontes: FIC-01
+
+## Uma entrada orientada com status visível é a hipótese que segue ao 3E
+
+Acreditamos que uma entrada orientada, com status visível depois do envio, permitirá pedidos completos e menos dúvidas. Porque o diagnóstico mostrou entrada incompleta e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos.
+
+Fontes: FIC-01
+
+## O grupo priorizou o formulário guiado e convergiu para a entrada
+
+No D4, o formulário guiado ficou em primeiro; na rodada final, o grupo juntou entrada e acompanhamento. Preferência do grupo, não validação de eficácia.
+
+Fontes: FIC-01
+
+| Card | Conteúdo |
+| --- | --- |
+| 1º Formulário guiado | 1º Formulário guiado: Responde à entrada incompleta. |
+| 2º Status visível | 2º Status visível: Responde à incerteza do andamento. |
+| 3º Orientação prévia | 3º Orientação prévia: Responde às dúvidas iniciais. |
+
+Fontes: FIC-01
+
+## O 3E precisa estruturar a entrada e o acompanhamento
+
+Para o 3E: definir os componentes da entrada orientada e do status, e priorizar o teste de completude. Segue aberto: a causa dominante das devoluções. Responsável a definir.
+
+Fontes: FIC-01
+
+## Fontes
+
+- FIC-01: ata-simulada exemplo fictício, sem coleta real

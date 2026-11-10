@@ -126,6 +126,30 @@
         "txt"
       ],
       "schema": "five-c-presentation.schema.json"
+    },
+    "four_d_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "formats": [
+        "json",
+        "pdf",
+        "pptx",
+        "md",
+        "txt"
+      ],
+      "schema": "four-d-presentation.schema.json"
+    },
+    "three_e_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "formats": [
+        "json",
+        "pdf",
+        "pptx",
+        "md",
+        "txt"
+      ],
+      "schema": "three-e-presentation.schema.json"
     }
   }
 }

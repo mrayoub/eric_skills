@@ -1,11 +1,11 @@
 ---
 name: workshop-3e
-description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
+description: "Prepara, conduz ou registra o workshop 3E de estruturação da solução: E1 esclarecer hipótese e escopo, E2 estruturar componentes (precisa ter, pode evoluir, fora do recorte) e E3 planejar experimentos com Test Cards individuais da Strategyzer. Use para montar pauta, perguntas, board ou registrar as decisões do grupo sobre a solução candidata, partindo da hipótese de solução do 4D. Não use para compilar o relatório 3E (use relatorio-3e) nem para planejar em detalhe ou analisar uma rodada de experimentação (use experimentacao-inovacao)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.31"
+  version: "1.2.0"
 ---
 
 # Facilitar o 3E
@@ -17,6 +17,7 @@ Prepara, conduz ou registra a solução candidata em E1 a E3; preserva decisões
 - [Playbook 3E](references/3e-solution-structuring-playbook.md): dinâmicas e tempos.
 - [Test Card](assets/test-card.md): quatro campos individuais.
 Para conferir a fonte: [transcrição](<assets/Modelo 3E Estruturacao da Solucao.transcricao.md>), [DOCX](<assets/Modelo 3E Estruturacao da Solucao.docx>), [divergências](references/fonte-3e-e-divergencias.md), [original RC6](assets/3e-solution-structuring-playbook-original-rc6.md). Preserve originais e registre diferenças/data.
+- [Preparar e registrar o 3E](references/preparacao-e-registro-3e.md): ponto de partida a partir da hipótese do 4D, IDs de componentes e suposições, o que registrar em cada E, rodada de convergência e registro como base do relatório.
 [Blueprint Mural](references/mural-board-3e-template.md) opcional: ferramenta autorizada ou registro manual.
 
 ## Grilling
@@ -42,13 +43,13 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-Prepare hipótese, problema, 4D, BP1, resultados e restrições existentes; não exija fase específica. Pergunte só por solução, papéis, dados e prazos não documentados; formule decisão neutra.
+Prepare hipótese, problema, 4D, BP1, resultados e restrições existentes; não exija fase específica. Do relatório 4D, extraia sem reescrever a hipótese de solução (Acreditamos que / Porque / Precisamos validar se), o que o 3E precisa resolver e os temas e IDs que a sustentam; sem 4D, registre a origem da solução candidata, conforme [preparar e registrar o 3E](references/preparacao-e-registro-3e.md). Pergunte só por solução, papéis, dados e prazos não documentados; formule decisão neutra.
 
-1. **E1 Esclarecer:** explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
-2. **E2 Estruturar:** classifique `precisa ter`, `pode evoluir`, `fora deste recorte`. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
-3. **E3 Experimentar:** priorize suposições pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério, uma frase objetiva por campo (até 280 caracteres); detalhes ficam no plano. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
+1. **E1 Esclarecer:** apresente a hipótese do 4D e registre o que o grupo muda nela e por quê; explicite hipótese de origem, dor, público, o que a solução é/não é/não resolve agora. Resultados esperados são hipóteses; critérios apontam medidas verificáveis ou lacunas.
+2. **E2 Estruturar:** classifique componentes com ID (C01...) em `precisa ter`, `pode evoluir`, `fora deste recorte`, cada um ligado à dor ou tema do 4D que o justifica; componente sem dor sinaliza escopo crescendo. Separe existente de construção/contratação; registre ação, responsável, apoio, dependência e prazo sem inventá-los.
+3. **E3 Experimentar:** priorize suposições com ID (S01...), incluindo as de "Precisamos validar se" do 4D, pelo risco; escolha método apropriado, não automaticamente think aloud. Produza Test Card individual por teste: hipótese, teste, medida, critério, uma frase objetiva por campo (até 280 caracteres); detalhes ficam no plano. Feche medidas/critérios verificatórios antes da execução; ausência de baseline/limiar mantém rascunho. Planeje evidências para Learning Cards; somente após execução registre achados. Distinga cards originalmente pactuados de reconstruções retrospectivas.
 
-Registre quem assumiu dependências e quando, separando decisão de sugestão. Tempos são sugestões, não prova de conclusão; etapa ausente mantém registro parcial e impacto da lacuna. `relatorio-3e` compila; `experimentacao-inovacao` pode detalhar/analisar testes, sem ser dependência obrigatória.
+Ao fim do E3, faça a rodada de convergência (o que construir ou testar primeiro, rota provável, o que segue aberto) e confira responsáveis, prazos e Test Cards anotados; o que faltar vira lacuna anotada no dia. O registro (`three_e_workshop_record`) inclui ponto de partida, E1 a E3, convergência e lacunas do registro. Registre quem assumiu dependências e quando, separando decisão de sugestão. Tempos são sugestões, não prova de conclusão; etapa ausente mantém registro parcial e impacto da lacuna. `relatorio-3e` compila; `experimentacao-inovacao` pode detalhar/analisar testes, sem ser dependência obrigatória.
 
 ## Exemplo
 
@@ -65,6 +66,9 @@ Saída (trecho):
 - [ ] Um Test Card completo ou rascunho explícito por teste
 - [ ] Método pelo risco; critérios prévios preservados
 - [ ] Learning Cards somente após execução
+- [ ] Ponto de partida com a hipótese do 4D e o que mudou no E1
+- [ ] Componentes e suposições com ID, ligados às dores do 4D
+- [ ] Rodada de convergência registrada, ou lacuna com motivo
 
 ## Contexto ERIC
 

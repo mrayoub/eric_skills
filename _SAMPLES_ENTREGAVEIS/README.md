@@ -13,8 +13,10 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 | `innovation_potential_assessment` | potencial-inovacao | `report_portrait` | [innovation_potential_assessment](./innovation_potential_assessment/) |
 | `four_d_workshop_record` | workshop-4d | `report_landscape` | [four_d_workshop_record](./four_d_workshop_record/) |
 | `four_d_report` | relatorio-4d | `report_landscape` | [four_d_report](./four_d_report/) |
+| `four_d_presentation`: Apresentação 4D | relatorio-4d | `presentation` | [four_d_presentation](./four_d_presentation/) |
 | `three_e_workshop_record` | workshop-3e | `report_landscape` | [three_e_workshop_record](./three_e_workshop_record/) |
 | `three_e_report` | relatorio-3e | `report_landscape` | [three_e_report](./three_e_report/) |
+| `three_e_presentation`: Apresentação 3E | relatorio-3e | `presentation` | [three_e_presentation](./three_e_presentation/) |
 | `innovation_scorecard` | scorecard-inovacao | `report_landscape` | [innovation_scorecard](./innovation_scorecard/) |
 | `experiment_plan` | experimentacao-inovacao | `report_portrait` | [experiment_plan](./experiment_plan/) |
 | `test_card` | experimentacao-inovacao / workshop-3e / relatorio-3e | `card_portrait` | [test_card](./test_card/) |

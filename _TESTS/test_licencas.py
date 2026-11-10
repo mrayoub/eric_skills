@@ -74,7 +74,7 @@ class ManifestoTests(unittest.TestCase):
 
 class AvisosTests(unittest.TestCase):
     def test_referencia_4d_e_ficticia(self) -> None:
-        sample = ROOT / "_SAMPLES_ENTREGAVEIS/four_d_report/sample-four-d-report-v1.0.0.pdf"
+        sample = ROOT / "_SAMPLES_ENTREGAVEIS/four_d_report/sample-four-d-report-v1.1.0.pdf"
         distributed = ROOT / "relatorio-4d/assets/official-four-d-report.pdf"
         self.assertEqual(distributed.read_bytes(), sample.read_bytes())
 

@@ -39,6 +39,8 @@ DELIVERABLE_LABELS = {
     "five_c_workshop_record": "Registro do workshop 5C",
     "five_c_report": "Relatório 5C",
     "five_c_presentation": "Apresentação 5C",
+    "four_d_presentation": "Apresentação 4D",
+    "three_e_presentation": "Apresentação 3E",
     "cdt": "Cadastro de Demanda Tecnológica (CDT)",
     "cdt_analysis": "Análise da CDT",
 }
@@ -1639,13 +1641,15 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                 index += 1
                 continue
             _, heading_text, blocks, wide = item
-            if (content["deliverable_type"] == "four_d_report"
+            # Uma quebra explícita (page_break) logo antes já abre a página; não quebre de novo.
+            after_break = index > 0 and sections[index - 1][0] == "page_break"
+            if (content["deliverable_type"] == "four_d_report" and not after_break
                     and section_keys.get(heading_text) == "d4_prioritization"):
                 doc.add_page_break()
             if (content["deliverable_type"] == "four_d_report"
                     and section_keys.get(heading_text) == "d2_process_journey"):
                 lead = doc.add_paragraph()
-                lead.paragraph_format.page_break_before = True
+                lead.paragraph_format.page_break_before = not after_break
                 lead.paragraph_format.line_spacing = Pt(24)
             pair = None
             if (not wide and index + 1 < len(sections) and content["deliverable_type"] not in pdf_module().SINGLE_COLUMN_TYPES
