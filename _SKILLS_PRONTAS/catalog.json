@@ -4,13 +4,13 @@
   "skills": {
     "avaliacao-briefing-iqb": {
       "files": 86,
-      "sha256": "a7feed7207230cb736b40d4fe04b40c47341b3c6484451e5bdcacfd76bf35606",
-      "version": "1.1.27"
+      "sha256": "3a8dad30f77ea9ce2b76ed262553a8a2d0877a357a48729fc9b7ced01d90e67f",
+      "version": "1.1.28"
     },
     "briefing-inovacao": {
       "files": 87,
-      "sha256": "ef2caf0ad8e8473f2a2f634f63789c8d3c88227ba50f05b69c2b91148931cc02",
-      "version": "1.1.27"
+      "sha256": "705339e4d39cc4c7ab7940358cef002769d986328aa46676b30b5e37407663f9",
+      "version": "1.1.28"
     },
     "esteira-eric": {
       "files": 13,
@@ -19,58 +19,58 @@
     },
     "experimentacao-inovacao": {
       "files": 96,
-      "sha256": "512dc1ca3a0f79e565157437f39c4376441ecd64b0f0e56f02103739bf4a967b",
-      "version": "1.4.22"
+      "sha256": "8952d129fbc905437ef728e1e38a14f9afee4b4c31760248052dd161098af7af",
+      "version": "1.4.23"
     },
     "gerador-cdt": {
       "files": 87,
-      "sha256": "5ac5ca6d68b63fd7592372359a9d045c00a68923f42e45ff25cf2c1290ffb5c4",
-      "version": "1.4.0"
+      "sha256": "21ba3b746786b26acec7cd775e8105fae46ad38be4ea5914c8dd8ea13ee481a8",
+      "version": "1.4.1"
     },
     "potencial-inovacao": {
       "files": 85,
-      "sha256": "c8f7000ce0ca09412916beee445f914165236a9ef2ea13e80997231e8088a6e9",
-      "version": "1.1.27"
+      "sha256": "f244b681c264c8335ae3dfba26e9738be6473e3313f0874f781f7f3401417f55",
+      "version": "1.1.28"
     },
     "relatorio-3e": {
       "files": 89,
-      "sha256": "ecce6278c604488f3c135f74b28e86f073629c6eba0dcb32b270b377179b2360",
-      "version": "1.1.27"
+      "sha256": "231e8b79b0c8678106be4af9df2480878f3d0743befda0868ece5aa87ec22076",
+      "version": "1.1.28"
     },
     "relatorio-4d": {
       "files": 90,
-      "sha256": "1bfbfe1986abe4b18becb4f88dcec15426781b02844458207959d06d97aacfad",
-      "version": "1.1.27"
+      "sha256": "fa48c236e8f236a85bb1831bbc46c2bebb03ea77432256f2176b92b2e511cbe4",
+      "version": "1.1.28"
     },
     "relatorio-5c": {
-      "files": 86,
-      "sha256": "6aa855fef980472387e30bc99217d0261a64abedfe575321aa6ba020582748b7",
-      "version": "1.1.27"
+      "files": 89,
+      "sha256": "e708fd87394478bd46d2c2210ae417dec84284237cea14c7333fdf3f66d15c0b",
+      "version": "1.2.0"
     },
     "relatorio-final-inovacao": {
       "files": 86,
-      "sha256": "96c3fd562d64ecc57e8ade8107ef932a773222b70d78512873c6786214886f72",
-      "version": "1.3.22"
+      "sha256": "798088762eef19b3a209d1445c4affb8f44050d65aeee0775b450feb3c63f26f",
+      "version": "1.3.23"
     },
     "scorecard-inovacao": {
       "files": 87,
-      "sha256": "342be5a37c00cae456887c2b00133227f28183ec6cece59c0c52f186379bbcbe",
-      "version": "1.1.27"
+      "sha256": "19f80fb000f206ce4ac9037bcd0d9193266d2ec168a89e9d340fb1eaa5fc0056",
+      "version": "1.1.28"
     },
     "workshop-3e": {
       "files": 90,
-      "sha256": "ef4488e179200f9c36fd74a602580f1835f112c8f65e6c4380fdc1fa48a821b8",
-      "version": "1.1.27"
+      "sha256": "6b063c93afd19d1154f726f27e7fb2bf620cb8cfd61ca47c90874442dfee4b23",
+      "version": "1.1.28"
     },
     "workshop-4d": {
       "files": 89,
-      "sha256": "d4649e30c6601e635f33e0fda8842d97ee685d93d989c7c88e4d454ea47e8c48",
-      "version": "1.1.27"
+      "sha256": "18b5a3e3d1bf0f66332439dc94334d0ba6989675eea63ee192d531f85e2fc593",
+      "version": "1.1.28"
     },
     "workshop-5c": {
       "files": 86,
-      "sha256": "97c121b94049bd441332362ed9ff0baeb3cd97e40b3ad7f40b2d45084bb855bb",
-      "version": "1.1.27"
+      "sha256": "7f64ec9748e7da3d762dfc08599767ee5b4d00b1e1b97c05c685468f89aa3452",
+      "version": "1.2.0"
     }
   }
 }

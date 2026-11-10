@@ -67,11 +67,15 @@
     "c5"
   ],
   "five_c_report": [
+    "executive_summary",
+    "scope",
     "c1",
     "c2",
     "c3",
     "c4",
-    "c5"
+    "c5",
+    "divergences",
+    "hypotheses"
   ],
   "cdt": [
     "jira_title",

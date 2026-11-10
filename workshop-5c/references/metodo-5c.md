@@ -14,6 +14,18 @@ A fonte primária desta adaptação é o `Playbook_Modelo_5C_Centralidade_Client
 
 O playbook de origem sugere 3 votos por participante em C2 e 10 créditos por participante em C5. São **parâmetros daquele encontro**, não propriedades obrigatórias do 5C. Defina e registre a regra antes de cada votação; se ela mudar, preserve as duas versões. Voto exprime preferência das pessoas presentes. Não o interprete como representatividade do mercado, prova de viabilidade, efeito da solução ou aprovação de implementação.
 
+## O 5C oficial e as adaptações pontuais
+
+O 5C é sempre a CCEE interagindo com o mercado ou com organizações externas. O playbook preservado em `assets/` é o **modelo oficial**: use as etapas e os nomes acima sempre que a execução não tiver motivo para mudar. Uma execução pode ser **adaptada pontualmente** quando o objetivo justificar, e a mesma adaptação pode se repetir em outra execução com motivo semelhante. A adaptação não substitui o modelo oficial.
+
+Podem variar: nome, duração, dinâmica e conteúdo de cada C; o formato (sessão coletiva ou uma sessão por organização, presencial ou remoto); a unidade de contagem (pessoa ou organização); e a regra de voto. Por exemplo, um C4 pode confrontar uma oferta já desenhada pela CCEE em vez de cocriar propostas, e um C5 pode tratar de adesão e disposição de pagar em vez de distribuir créditos.
+
+Não variam: cinco etapas em sequência, com contexto e escuta antes de qualquer proposta ou escolha; regra de contagem e denominador declarados antes de votar; preferência, decisão e evidência separadas; divergências preservadas; saída em hipóteses a testar, não em decisões; e fonte para cada achado.
+
+Declare a adaptação antes do encontro, no roteiro, e repita no registro e no relatório: etapa oficial, etapa aplicada, duração, o que mudou e o motivo. Sem motivo registrado, pergunte; se ninguém souber, escreva "motivo não registrado". Num 5C oficial, não é preciso quadro de adaptação.
+
+Como o 5C ouve organizações externas, registre a organização de cada participante e trate a organização como eixo da análise: o que cada uma relatou, escolheu e condicionou, e onde divergem. Só atribua uma escolha à organização quando isso estiver registrado; num encontro coletivo com voto por pessoa, declare a unidade de contagem e não converta votos individuais em posição da empresa.
+
 ## Preparação e execução responsável
 
 Leia briefing, diagnóstico, entrevistas, dados do serviço e decisões disponíveis antes de perguntar. Delimite público e perfis que precisam ser ouvidos; convide diversidade relevante sem tratar a amostra como estatística quando ela não foi desenhada para isso. Planeje como registrar falas, decisões, votos e fonte de cada achado. Separe observação do participante, hipótese da equipe e inferência do facilitador.
