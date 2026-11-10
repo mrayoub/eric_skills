@@ -6,6 +6,44 @@
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
+      "id": "heading-starting_point",
+      "type": "heading",
+      "data": {
+        "section_key": "starting_point_heading",
+        "text": "Ponto de partida"
+      }
+    },
+    {
+      "id": "starting_point",
+      "type": "paragraph",
+      "data": {
+        "section_key": "starting_point",
+        "text": "Objetivo fictício: entender as dores das solicitações de dados antes de propor soluções. Perguntas a responder: as dores de acompanhamento continuam atuais e onde estão as causas?"
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-sessions",
+      "type": "heading",
+      "data": {
+        "section_key": "sessions_heading",
+        "text": "Sessão, presença e regras"
+      }
+    },
+    {
+      "id": "sessions",
+      "type": "paragraph",
+      "data": {
+        "section_key": "sessions",
+        "text": "Uma sessão presencial fictícia de 5C oficial, de C1 a C5. Cinco presentes de três organizações fictícias, entre oito convidados. Três votos por pessoa em C2 e dez créditos por pessoa em C5."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
       "id": "heading-c1",
       "type": "heading",
       "data": {
@@ -80,6 +118,11 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "break-c5",
+      "type": "page_break",
+      "data": {}
     },
     {
       "id": "heading-c5",
@@ -159,6 +202,25 @@
       "citation_ids": [
         "FIC-02"
       ]
+    },
+    {
+      "id": "heading-record_gaps",
+      "type": "heading",
+      "data": {
+        "section_key": "record_gaps_heading",
+        "text": "Lacunas do registro"
+      }
+    },
+    {
+      "id": "record_gaps",
+      "type": "paragraph",
+      "data": {
+        "section_key": "record_gaps",
+        "text": "Nenhuma lacuna no exemplo fictício: critérios do C3 e créditos do C5 foram anotados no dia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
     }
   ],
   "citations": [
@@ -175,7 +237,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-five-c-workshop-record",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true

@@ -34,6 +34,90 @@
                     ],
                     "properties": {
                       "section_key": {
+                        "const": "starting_point"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "sessions"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
                         "const": "c1"
                       },
                       "text": {
@@ -203,6 +287,48 @@
                     "properties": {
                       "section_key": {
                         "const": "c5"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "citation_ids": {
+                    "type": "array",
+                    "minItems": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "citation_ids",
+                  "type",
+                  "data"
+                ],
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "record_gaps"
                       },
                       "text": {
                         "type": "string",

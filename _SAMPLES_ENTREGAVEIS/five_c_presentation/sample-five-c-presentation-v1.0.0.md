@@ -1,0 +1,118 @@
+# EXEMPLO FICTÍCIO: Cocriação com clientes sobre solicitações de dados
+
+ID sample-five-c-presentation · versão 1.0.0 · Completo
+
+Exemplo fictício: o acompanhamento do pedido foi a dor mais citada, e o status visível recebeu 24 de 50 créditos. Votos mostram preferência, não efeito.
+
+## O diagnóstico fictício aponta o acompanhamento como maior volume
+
+Objetivo: entender as dores antes de propor soluções. Base fictícia: 400 chamados em 12 meses, 45% sobre acompanhamento do pedido. O 5C deveria confirmar se essas dores continuam atuais.
+
+Fontes: FIC-03
+
+## Uma sessão presencial fictícia percorreu as cinco etapas do 5C
+
+5C oficial, sessão coletiva de 6 horas, com 5 participantes de 3 organizações fictícias. A contagem é por pessoa: post-its em C3, três votos em C2 e dez créditos em C5.
+
+Fontes: FIC-01
+
+## Participantes descrevem falta de status como a principal fricção
+
+Relatos agrupados por bloco da jornada, com um caso concreto em cada.
+
+Fontes: FIC-01
+
+| Card | Conteúdo |
+| --- | --- |
+| Acompanhamento | Acompanhamento: Depois do envio, ninguém sabe em que etapa o pedido está; a dúvida vira chamado. |
+| Clareza do pedido | Clareza do pedido: Campos ambíguos levam a pedidos incompletos e a ida e volta por e-mail. |
+| Devoluções | Devoluções: O pedido volta sem motivo claro, e o solicitante reenvia sem saber o que corrigir. |
+
+Fontes: FIC-01
+
+## Três dores fictícias concentram os relatos sobre solicitações de dados
+
+Mapa consolidado da sessão. Os impactos são consequências a examinar, não efeitos medidos.
+
+Fontes: FIC-01
+
+| Card | Conteúdo |
+| --- | --- |
+| D01: Status do pedido invisível | D01: Status do pedido invisível: Impacto a examinar: chamados repetidos e pressão sobre o atendimento. |
+| D02: Pedido sem informação suficiente | D02: Pedido sem informação suficiente: Impacto a examinar: retrabalho e prazo maior para concluir. |
+| D03: Devolução sem motivo explícito | D03: Devolução sem motivo explícito: Impacto a examinar: reenvios com o mesmo erro. |
+
+Fontes: FIC-01
+
+## Acompanhamento lidera as menções, à frente da clareza do pedido
+
+Contagem dos post-its de confirmação: 15 codificados, nenhum descartado. São menções, não votos do C5.
+
+Fontes: FIC-01
+
+### Menções por tema (15 post-its)
+
+| Tema | Menções |
+| --- | --- |
+| Acompanhamento | 6 |
+| Clareza do pedido | 5 |
+| Devoluções | 4 |
+
+Fontes: FIC-01
+
+## A escuta corrobora o diagnóstico e destaca devoluções como tema emergente
+
+Diagnóstico mede frequência histórica de chamados; o workshop traz evidência qualitativa e prioridades percebidas. Não representa validação de eficácia.
+
+Fontes: FIC-01, FIC-03
+
+### Do diagnóstico à escuta
+
+| Tema | Base | Leitura | Evidência do workshop |
+| --- | --- | --- | --- |
+| Acompanhamento | 45% dos chamados | Corroborado | Falta de status aparece em todos os relatos |
+| Devoluções | Fora do diagnóstico | Emergente | Motivo da devolução não chega ao solicitante |
+
+Fontes: FIC-01, FIC-03
+
+## Os grupos propuseram status visível, formulário guiado e orientação prévia
+
+Síntese dos mini-canvases. As propostas são hipóteses cocriadas; dependências seguem para avaliação.
+
+Fontes: FIC-01
+
+| Card | Conteúdo |
+| --- | --- |
+| Grupo 1: Status visível | Grupo 1: Status visível: Benefício esperado: menos chamados de acompanhamento. |
+| Grupo 2: Formulário guiado | Grupo 2: Formulário guiado: Benefício esperado: pedidos completos na primeira tentativa. |
+| Grupo 3: Orientação prévia | Grupo 3: Orientação prévia: Benefício esperado: menos devoluções por erro de preenchimento. |
+
+Fontes: FIC-01
+
+## Status visível recebeu quase metade dos créditos do C5
+
+Cinco participantes distribuíram dez créditos cada, totalizando 50. O ranking orienta o que investigar primeiro; não comprova viabilidade nem impacto.
+
+Fontes: FIC-02
+
+### Créditos do C5 (50 no total)
+
+| Proposta | Créditos |
+| --- | --- |
+| Status visível | 24 |
+| Formulário guiado | 18 |
+| Orientação prévia | 8 |
+
+Fontes: FIC-02
+
+## Um protótipo de status deve vir antes de decidir a construção
+
+Hipótese a testar, não decisão: o status visível reduz chamados de acompanhamento. Teste possível: protótipo com cinco usuários, contando dúvidas por pedido. Responsável a definir.
+
+Fontes: FIC-02
+
+## Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais
+- FIC-03: diagnostico-simulado exemplo fictício de chamados, sem dados reais

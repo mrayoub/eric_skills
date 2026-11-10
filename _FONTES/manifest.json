@@ -260,6 +260,44 @@
     "distribuido": true
   },
   {
+    "id": "5c-exemplo-oficial-apresentacao",
+    "titulo": "Exemplo de Apresentação 5C oficial, sessões coletivas",
+    "tipo": "adaptacao",
+    "arquivo": "references/exemplos/5c-oficial-sessao-coletiva-apresentacao.md",
+    "skills": [
+      "relatorio-5c"
+    ],
+    "origem": "Apresentação de devolutiva 5C real, feita pela autora do playbook e anonimizada para uso como exemplo de referência.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-11-10",
+    "deriva_de": null,
+    "vigencia": "desconhecida",
+    "notas": "Programa, áreas internas, sistemas, datas e números foram anonimizados, mantendo as somas. Lacunas do original (C3, C5, próximos passos) mantidas como lacunas. Ilustra estrutura e escrita; não é fonte de achados.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
+  },
+  {
+    "id": "5c-exemplo-oficial-preparacao",
+    "titulo": "Exemplo de preparação de um 5C oficial",
+    "tipo": "adaptacao",
+    "arquivo": "references/exemplos/5c-oficial-preparacao.md",
+    "skills": [
+      "workshop-5c"
+    ],
+    "origem": "Slides de ponto de partida, formato e trilha de uma devolutiva 5C real, feita pela autora do playbook e anonimizada.",
+    "autor": null,
+    "versao_declarada": null,
+    "data_importacao": "2026-11-10",
+    "deriva_de": "5c-exemplo-oficial-apresentacao",
+    "vigencia": "desconhecida",
+    "notas": "Mesmo material anonimizado do exemplo de apresentação. A lista de registro do dia foi acrescentada a partir das lacunas do caso real.",
+    "titular": "CCEE",
+    "licenca": "Licença de Uso Restrito CCEE",
+    "distribuido": true
+  },
+  {
     "id": "5c-exemplo-adaptado-sessoes",
     "titulo": "Exemplo de Relatório 5C adaptado, sessões individuais",
     "tipo": "adaptacao",

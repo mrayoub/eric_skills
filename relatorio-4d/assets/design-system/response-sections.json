@@ -60,11 +60,14 @@
     "next_steps"
   ],
   "five_c_workshop_record": [
+    "starting_point",
+    "sessions",
     "c1",
     "c2",
     "c3",
     "c4",
-    "c5"
+    "c5",
+    "record_gaps"
   ],
   "five_c_report": [
     "executive_summary",
@@ -89,5 +92,16 @@
     "data_to_obtain",
     "quality_review",
     "traceability"
+  ],
+  "five_c_presentation": [
+    "starting_point",
+    "format",
+    "pains",
+    "pain_map",
+    "mentions",
+    "diagnosis_check",
+    "proposals",
+    "prioritization",
+    "next_steps"
   ]
 }

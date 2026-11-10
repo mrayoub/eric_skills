@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Facilitar o workshop 5C
@@ -15,6 +15,8 @@ Prepara ou registra cocriação com clientes; playbook não determina serviço, 
 ## Leia primeiro
 
 - [Método 5C](references/metodo-5c.md): condução, modelo oficial e adaptações pontuais.
+- [Preparar e registrar o 5C](references/preparacao-e-registro-5c.md): ponto de partida, formato e presença, regras de contagem, o que registrar em cada C e o registro como base das entregas.
+- [Exemplos](references/exemplos/README.md): a preparação de referência, feita pela autora do playbook, prevalece sobre os demais.
 Para conferir a fonte: [transcrição](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) e [DOCX](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx).
 
 ## Grilling
@@ -40,15 +42,15 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-Prepare briefing, diagnóstico, entrevistas, jornada e decisões; extraia desafio/evidências e perfis afetados sem copiar a aplicação original. Pergunte por público, acesso, objetivo, facilitadores, tempo, registro e condições decisivas ausentes. A amostra reúne perspectivas, sem representatividade automática. Combine presença, voto/créditos e preservação de ideias/dissensos antes de votar: três votos em C2 e dez créditos em C5 são referências adaptáveis com regra/data. Confira divergência entre duração declarada e intervalos do DOCX. O playbook é o 5C oficial; se o objetivo justificar adaptar etapas, formato (inclusive uma sessão por organização), unidade de contagem ou regra de voto, declare no roteiro a etapa oficial, a aplicada, o que mudou e o motivo, conforme o [método](references/metodo-5c.md). Registre a organização de cada participante.
+Prepare briefing, diagnóstico, entrevistas, jornada e decisões; extraia desafio/evidências e perfis afetados sem copiar a aplicação original. Pergunte por público, acesso, objetivo, facilitadores, tempo, registro e condições decisivas ausentes. A amostra reúne perspectivas, sem representatividade automática. Combine presença, voto/créditos e preservação de ideias/dissensos antes de votar: três votos em C2 e dez créditos em C5 são referências adaptáveis com regra/data. Confira divergência entre duração declarada e intervalos do DOCX. O playbook é o 5C oficial; se o objetivo justificar adaptar etapas, formato (inclusive uma sessão por organização), unidade de contagem ou regra de voto, declare no roteiro a etapa oficial, a aplicada, o que mudou e o motivo, conforme o [método](references/metodo-5c.md). Registre a organização de cada participante, com convidados e presentes separados. Monte o ponto de partida (objetivo, linha de base com peso por tema, perguntas a responder, o que mudou desde o diagnóstico) e defina antes do encontro a profundidade de cada sessão (curta, C1 a C3, ou completa) e a regra de cada contagem, com o tratamento de duplicados, vazios e abstenções, conforme [preparar e registrar o 5C](references/preparacao-e-registro-5c.md).
 
 1. **C1 Contextualizar:** apresente desafio/origem/dúvidas e agenda; abra correções. Registre versão, fontes e dúvidas.
-2. **C2 Compreender:** peça episódios, condições, consequências, acertos, fricções e oportunidades; registre relator/perfil/tema/evidência. Priorize pela regra combinada; preserve contagem, elegibilidade, abstenções e dissensos.
-3. **C3 Confirmar:** construa experiência desejada, situações a evitar e critérios observáveis; são hipóteses a verificar, com desacordos preservados.
-4. **C4 Cocriar:** ideias individuais antes de grupos diversos; vincule propostas a dor, funcionamento, benefícios alegados e dependências. Preserve origens, alterações de grupos e alternativas descartadas, sem forçar consenso.
-5. **C5 Conduzir:** registre pitches; apure créditos/ranking reproduzível, razões e objeções. Separe preferência, decisão institucional e validação experimental. Encaminhamentos/responsáveis somente quando acordados.
+2. **C2 Compreender:** organize pelos blocos da jornada usados no diagnóstico; peça episódios, condições, consequências, acertos, fricções e oportunidades; registre relator/perfil/tema/evidência. Priorize pela regra combinada; preserve contagem, elegibilidade, abstenções e dissensos.
+3. **C3 Confirmar:** construa experiência desejada, situações a evitar e critérios observáveis; são hipóteses a verificar, com desacordos preservados. Anote os critérios no dia, além dos post-its; quando houver lista da CCEE, pergunte o que gera valor antes de mostrá-la.
+4. **C4 Cocriar:** ideias individuais antes de grupos diversos; registre por grupo o mini-canvas com proposta, dor, funcionamento, benefício esperado e dependências. Preserve origens, alterações de grupos e alternativas descartadas, sem forçar consenso.
+5. **C5 Conduzir:** registre pitches; anote créditos por proposta e o total antes de encerrar; apure ranking reproduzível, razões e objeções. Separe preferência, decisão institucional e validação experimental. Encaminhamentos/responsáveis somente quando acordados.
 
-Devolva síntese e próximos passos definidos. Em modo assíncrono, declare dinâmicas substituídas e decisões não reproduzidas; etapas ausentes mantêm parcial. Registro C1 a C5 para `relatorio-5c` exige sínteses/fontes, participantes/perfis, versão, regras, votos, decisões e lacunas. Relatos/votos não comprovam eficácia, escala, viabilidade ou impacto; proponha testes.
+Devolva síntese e próximos passos definidos. Em modo assíncrono, declare dinâmicas substituídas e decisões não reproduzidas; etapas ausentes mantêm parcial. Antes de encerrar, confira com a equipe se os critérios do C3 e os créditos do C5 foram anotados; o que faltar vira lacuna anotada no dia, com o motivo. O registro (`five_c_workshop_record`) segue a base das entregas do `relatorio-5c`: ponto de partida, sessões, C1 a C5 e lacunas do registro, com sínteses, fontes, participantes, regras, votos e decisões. Relatos/votos não comprovam eficácia, escala, viabilidade ou impacto; proponha testes.
 
 ## Exemplo
 
@@ -65,7 +67,9 @@ Saída (trecho):
 - [ ] Ideias, falas e dissensos preservados
 - [ ] Preferência separada de decisão e eficácia
 - [ ] Agenda, adaptações do 5C oficial (com motivo) e próximos passos documentados
-- [ ] Organização de cada participante e unidade de contagem registradas
+- [ ] Organização de cada participante, convidados e presentes separados, e unidade de contagem registradas
+- [ ] Ponto de partida com linha de base e perguntas a responder
+- [ ] Critérios do C3 e créditos do C5 anotados no dia, ou lacuna registrada com motivo
 
 ## Contexto ERIC
 

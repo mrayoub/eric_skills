@@ -1,40 +1,52 @@
-EXEMPLO FICTÍCIO: Encontro com clientes sobre solicitações de dados
+# EXEMPLO FICTÍCIO: Encontro com clientes sobre solicitações de dados
 
-ID sample-five-c-workshop-record · versão 1.0.0 · Completo
+ID sample-five-c-workshop-record · versão 1.1.0 · Completo
 
 Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
 
-C1: Contextualizar
+## Ponto de partida
+
+Objetivo fictício: entender as dores das solicitações de dados antes de propor soluções. Perguntas a responder: as dores de acompanhamento continuam atuais e onde estão as causas?
+
+Fontes: FIC-01
+
+## Sessão, presença e regras
+
+Uma sessão presencial fictícia de 5C oficial, de C1 a C5. Cinco presentes de três organizações fictícias, entre oito convidados. Três votos por pessoa em C2 e dez créditos por pessoa em C5.
+
+Fontes: FIC-01
+
+## C1: Contextualizar
 
 No encontro fictício, a equipe apresentou o desafio e registrou dúvidas sobre origem das devoluções.
 
 Fontes: FIC-01
 
-C2: Compreender
+## C2: Compreender
 
 Cinco participantes fictícios descreveram etapas que funcionam e dificuldades de acompanhamento. Com três votos por pessoa, foram registrados 15 votos em temas priorizados.
 
 Fontes: FIC-01
 
-C3: Confirmar
+## C3: Confirmar
 
 O grupo simulado descreveu experiência desejada com confirmação clara de envio e status visível, além de critérios observáveis.
 
 Fontes: FIC-01
 
-C4: Cocriar
+## C4: Cocriar
 
 Ideias individuais fictícias originaram propostas de orientação, formulário guiado e acompanhamento; benefícios são expectativas, não resultados.
 
 Fontes: FIC-01
 
-C5: Conduzir
+## C5: Conduzir
 
 Cinco participantes fictícios distribuíram dez créditos cada, totalizando 50. O ranking orienta investigação, sem comprovar viabilidade ou impacto.
 
 Fontes: FIC-01
 
-C2: temas priorizados, exemplo fictício
+### C2: temas priorizados, exemplo fictício
 
 | Tema | Votos |
 | --- | --- |
@@ -44,7 +56,7 @@ C2: temas priorizados, exemplo fictício
 
 Fontes: FIC-01
 
-C5: distribuição de 50 créditos fictícios
+### C5: distribuição de 50 créditos fictícios
 
 | Proposta | Créditos | Próxima verificação |
 | --- | --- | --- |
@@ -54,7 +66,13 @@ C5: distribuição de 50 créditos fictícios
 
 Fontes: FIC-02
 
-Fontes
+## Lacunas do registro
+
+Nenhuma lacuna no exemplo fictício: critérios do C3 e créditos do C5 foram anotados no dia.
+
+Fontes: FIC-01
+
+## Fontes
 
 - FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
 - FIC-02: planilha-simulada exemplo fictício, sem dados reais
