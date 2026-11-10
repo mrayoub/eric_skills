@@ -4,14 +4,14 @@
     {
       "id": 1,
       "prompt": "Monte a CDT do portal de solicitações para eu cadastrar no Jira, com o relatório 3E e a consolidação da experimentação.",
-      "expected_output": "Dois arquivos: a CDT com Rótulo Epic tecnológico, Descrição com as cinco perguntas num bloco só, Justificativa e Benefícios, sem fontes; e a Análise da CDT com checklist e prioridades em destaque.",
+      "expected_output": "Dois arquivos: a CDT com o Rótulo Epic igual ao título oficial do desafio e ao título dos dois arquivos, Descrição com as cinco perguntas num bloco só, Justificativa e Benefícios, sem fontes; e a Análise da CDT com checklist e prioridades em destaque.",
       "files": [
         "files/relatorio-3e.md",
         "files/experimentacao-e-decisao.md"
       ],
       "expectations": [
         "A CDT traz só Rótulo Epic, Descrição, Justificativa e Benefícios, nesta ordem, sem fonte citada e sem sugestão para os outros campos do Jira.",
-        "O Rótulo Epic nomeia a tecnologia (por exemplo, formulário web ou portal) e o que ela faz, sem termos que sugiram uma pessoa.",
+        "O Rótulo Epic é o título oficial do desafio, localizado nas fontes (Relatório final, decisão posterior, Briefing ou Entrevista Inicial, workshops) com a grafia da fonte que prevalece, e é igual ao título da CDT e da Análise da CDT; a origem dos dados diz de onde ele saiu.",
         "A Descrição é um bloco só, com as cinco perguntas do comunicado como subtítulos em negrito; na prioridade, formulário guiado e protocolo em essencial, status visível em importante (LC-02 não atingido) e integração com faturamento fora do escopo.",
         "Escreve como a gerência que abre a CDT, em primeira pessoa do plural, direto e sem perguntas, e não contradiz o que o relatório final decidiu.",
         "Usa a linha de base de 90 em 360 pedidos (25%) e trata 7 de 8 analistas como resultado de teste com protótipo, não como ganho em produção.",

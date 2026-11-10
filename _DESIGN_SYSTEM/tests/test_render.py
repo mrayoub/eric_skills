@@ -885,6 +885,8 @@ class RenderTests(unittest.TestCase):
                                if block["type"] == "paragraph"}
                     for block in item["blocks"]:
                         block["data"]["text"] = special.get(block["id"], block["data"]["text"])
+                    # O Rótulo Epic e o título do documento são o mesmo título oficial do desafio.
+                    item["title"] = sample["title"]
                 if kind == "innovation_potential_assessment":
                     item["blocks"].insert(0, {
                         "id": "scores", "type": "table", "data": {

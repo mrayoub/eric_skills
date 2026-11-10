@@ -14,7 +14,7 @@
       ],
       "data": {
         "section_key": "jira_title",
-        "text": "Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento"
+        "text": "Formulário guiado para pedidos de dados históricos"
       },
       "id": "jira_title",
       "type": "paragraph"

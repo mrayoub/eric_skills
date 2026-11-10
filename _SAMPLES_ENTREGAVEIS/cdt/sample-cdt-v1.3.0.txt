@@ -1,6 +1,6 @@
 Rótulo Epic
 
-Formulário web com protocolo automático para pedidos de dados históricos no portal de atendimento
+Formulário guiado para pedidos de dados históricos
 
 Descrição
 

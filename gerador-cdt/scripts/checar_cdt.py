@@ -36,6 +36,9 @@ def main() -> int:
     errors += [f"Análise: {error}" for error in analysis_report["errors"]]
     states = {name: content.get("metadata", {}).get("completeness") or "complete"
               for name, content in (("cdt", cdt), ("analise", analysis))}
+    titles = {name: str(content.get("title", "")).strip() for name, content in (("cdt", cdt), ("analise", analysis))}
+    if len(set(titles.values())) > 1:
+        errors.append(f"os dois arquivos têm o mesmo título, o título oficial do desafio: {titles}")
     if len(set(states.values())) > 1:
         errors.append(f"os dois arquivos declaram o mesmo estado em metadata.completeness: {states}")
     gaps = cdt_report["gaps"]
