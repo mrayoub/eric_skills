@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-five-c-workshop-record",
+  "branding_version": "1.2.0",
+  "content_sha256": "da21be44deff4464520678c821caac3b113845217ff74a6be0d6e482679c4657",
+  "content_version": "1.1.0",
+  "deliverable_type": "five_c_workshop_record",
+  "files": {
+    "sample-five-c-workshop-record-v1.1.0.docx": "cf4d29b0db7cb458f530f836a33eff09bacf69eb5a7540e04fec9a50619bf733",
+    "sample-five-c-workshop-record-v1.1.0.html": "33205e23342139b80c89af970845972d0f8d438c2d2aad5594df398b7191bc43",
+    "sample-five-c-workshop-record-v1.1.0.json": "da21be44deff4464520678c821caac3b113845217ff74a6be0d6e482679c4657",
+    "sample-five-c-workshop-record-v1.1.0.md": "6c6ab00cc454e1b2d2a9723c3acd3d7f0368be688cd475d0eaa5b407d85a816b",
+    "sample-five-c-workshop-record-v1.1.0.pdf": "ae88afdd3139617e5ca03ab8436d8e139611a385cf235e02e344393e4e5f20d0",
+    "sample-five-c-workshop-record-v1.1.0.txt": "29165fe4d28bf59303016c0357b6ea11d8112715070880dde48c5b7609f2aea9"
+  },
+  "layout": "report_landscape",
+  "paper": "a4_landscape",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "1f576f97bec900e90044e24f7f276ec18d72939366e46dc820dffb09e54cd2c2",
+  "profile_version": "1.2.0",
+  "renderer_version": "2.1.4",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

@@ -2,6 +2,44 @@
   "blocks": [
     {
       "data": {
+        "section_key": "starting_point_heading",
+        "text": "Ponto de partida"
+      },
+      "id": "heading-starting_point",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "starting_point",
+        "text": "Objetivo fictício: entender as dores das solicitações de dados antes de propor soluções. Perguntas a responder: as dores de acompanhamento continuam atuais e onde estão as causas?"
+      },
+      "id": "starting_point",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "section_key": "sessions_heading",
+        "text": "Sessão, presença e regras"
+      },
+      "id": "heading-sessions",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "sessions",
+        "text": "Uma sessão presencial fictícia de 5C oficial, de C1 a C5. Cinco presentes de três organizações fictícias, entre oito convidados. Três votos por pessoa em C2 e dez créditos por pessoa em C5."
+      },
+      "id": "sessions",
+      "type": "paragraph"
+    },
+    {
+      "data": {
         "section_key": "c1_heading",
         "text": "C1: Contextualizar"
       },
@@ -75,6 +113,11 @@
       },
       "id": "c4",
       "type": "paragraph"
+    },
+    {
+      "data": {},
+      "id": "break-c5",
+      "type": "page_break"
     },
     {
       "data": {
@@ -154,6 +197,25 @@
       },
       "id": "proposal-credits",
       "type": "table"
+    },
+    {
+      "data": {
+        "section_key": "record_gaps_heading",
+        "text": "Lacunas do registro"
+      },
+      "id": "heading-record_gaps",
+      "type": "heading"
+    },
+    {
+      "citation_ids": [
+        "FIC-01"
+      ],
+      "data": {
+        "section_key": "record_gaps",
+        "text": "Nenhuma lacuna no exemplo fictício: critérios do C3 e créditos do C5 foram anotados no dia."
+      },
+      "id": "record_gaps",
+      "type": "paragraph"
     }
   ],
   "citations": [
@@ -173,7 +235,7 @@
   "metadata": {
     "artifact_id": "sample-five-c-workshop-record",
     "completeness": "complete",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "orientation": "landscape",
     "sample": true
   },
