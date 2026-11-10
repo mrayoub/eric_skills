@@ -1,11 +1,11 @@
 ---
 name: relatorio-5c
-description: "Compila ou revisa o Relatório 5C de um encontro de cocriação com clientes, ligando C1 a C5 a falas, votos com denominador, critérios de experiência, propostas, dissensos e próximos passos. Use quando houver registros de um workshop 5C (notas, mural, gravação, votos, ata) e o usuário quiser o relatório, a síntese ou a devolutiva aos participantes. Não use para preparar ou facilitar o encontro (use workshop-5c)."
+description: "Compila ou revisa as duas entregas de um encontro de cocriação 5C com o mercado: o Relatório 5C (registro por etapa, ligando C1 a C5 a falas, votos com denominador, critérios de experiência, propostas, dissensos e próximos passos) e a Apresentação 5C (devolutiva por insight, com dores, triangulação com o diagnóstico e propostas). Use quando houver registros de um workshop 5C (notas, mural, gravação, votos, ata) e o usuário quiser o relatório, a síntese, a apresentação ou a devolutiva aos participantes e gestores. Não use para preparar ou facilitar o encontro (use workshop-5c)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Compilar o Relatório 5C
@@ -15,8 +15,9 @@ Consolida cocriação; playbook sozinho não fornece achados, votos ou consenso,
 ## Leia primeiro
 
 - [Método 5C](references/metodo-5c.md): estrutura metodológica.
-- [Escrita e organização do Relatório 5C](references/escrita-relatorio-5c.md): oficial e adaptações, análise por organização, ordem das seções e jeito de escrever.
-- [Exemplos](references/exemplos/README.md): escolha o mais próximo da execução e imite estrutura e escrita, nunca o conteúdo.
+- [Relatório e apresentação do 5C](references/entregas-5c.md): as duas entregas, a base comum da análise, a triangulação com o diagnóstico e a estrutura dos slides.
+- [Escrita e organização do Relatório 5C](references/escrita-relatorio-5c.md): eixo da análise, ordem das seções, de onde vem cada seção e jeito de escrever.
+- [Exemplos](references/exemplos/README.md): o exemplo de referência, feito pela autora do playbook, prevalece sobre os demais; imite estrutura e escrita, nunca o conteúdo.
 Para conferir a fonte: [transcrição](assets/Playbook_Modelo_5C_Centralidade_Cliente.transcricao.md) e [DOCX](assets/Playbook_Modelo_5C_Centralidade_Cliente.docx).
 
 ## Grilling
@@ -63,7 +64,8 @@ Saída (trecho):
 ## Checagem final
 
 - [ ] C1 a C5 e versões separadas, com síntese/fonte
-- [ ] Adaptação do 5C oficial declarada, quando houver, e análise por organização
+- [ ] Adaptação do 5C oficial declarada, quando houver, e eixo da análise adequado ao formato (tema ou organização)
+- [ ] Relatório e apresentação, quando houver os dois, consistentes entre si e com a mesma base
 - [ ] Denominadores, regras e totais conferidos
 - [ ] Falas, conflitos e alternativas preservados
 - [ ] Preferência, meta, decisão e efeito distinguidos
@@ -78,7 +80,7 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 ## Entrega em arquivo
 
 Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
-com `deliverable_type` `five_c_report`: monte o JSON canônico, rode
+com `deliverable_type` `five_c_report` para o relatório e `five_c_presentation` para a apresentação, conforme [as entregas do 5C](references/entregas-5c.md). Faça a análise uma vez e derive as duas da mesma base. Para cada entrega, monte o JSON canônico, rode
 `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
 JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
 `metadata.completeness: "partial"`: nunca contorne o schema.

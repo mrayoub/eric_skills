@@ -1046,7 +1046,10 @@ def _render_presentation(content: dict[str, Any], tokens: dict[str, Any], path: 
                 elif block["type"] == "card_grid":
                     card = dict(block)
                     card["data"] = {**data, "columns": min(3, int(data.get("columns", 2)))}
-                    items.extend(_report_card_grid(card, styles, body_rect[2]))
+                    # O quadro do slide já mantém tudo junto; um KeepTogether interno quebra no KeepInFrame.
+                    for flowable in _report_card_grid(card, styles, body_rect[2]):
+                        items.extend(getattr(flowable, "_content", [flowable])
+                                     if type(flowable).__name__ == "KeepTogether" else [flowable])
                 else:
                     items.extend(block_flowables(block, styles, body_rect[2], block_text, table_rows))
                 items.append(Spacer(1, 12))

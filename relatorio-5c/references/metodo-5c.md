@@ -18,7 +18,9 @@ O playbook de origem sugere 3 votos por participante em C2 e 10 créditos por pa
 
 O 5C é sempre a CCEE interagindo com o mercado ou com organizações externas. O playbook preservado em `assets/` é o **modelo oficial**: use as etapas e os nomes acima sempre que a execução não tiver motivo para mudar. Uma execução pode ser **adaptada pontualmente** quando o objetivo justificar, e a mesma adaptação pode se repetir em outra execução com motivo semelhante. A adaptação não substitui o modelo oficial.
 
-Podem variar: nome, duração, dinâmica e conteúdo de cada C; o formato (sessão coletiva ou uma sessão por organização, presencial ou remoto); a unidade de contagem (pessoa ou organização); e a regra de voto. Por exemplo, um C4 pode confrontar uma oferta já desenhada pela CCEE em vez de cocriar propostas, e um C5 pode tratar de adesão e disposição de pagar em vez de distribuir créditos.
+Podem variar: nome, duração, dinâmica e conteúdo de cada C; o formato (sessão coletiva ou uma sessão por organização, presencial ou remoto); a unidade de contagem (pessoa ou organização); e a regra de voto. Por exemplo, um C4 pode confrontar uma oferta já desenhada pela CCEE em vez de cocriar propostas, e um C5 pode tratar de adesão e disposição de pagar em vez de distribuir créditos. A profundidade também pode variar: a própria autora do playbook combinou uma sessão remota curta (cerca de 1h30, C1 a C3) com a sessão presencial completa (C1 a C5), mantendo o fluxo metodológico. Nesse caso, registre cada sessão com sua profundidade e compare o que cada uma trouxe.
+
+A priorização pode usar votos, créditos ou **menções codificadas** (post-its lidos e agrupados por tema depois da sessão). Declare a regra ("1 post-it preenchido = 1 indicação; cada post-it em um só tema"), o total e as exclusões (duplicados, vazios), e não chame menções de votos.
 
 Não variam: cinco etapas em sequência, com contexto e escuta antes de qualquer proposta ou escolha; regra de contagem e denominador declarados antes de votar; preferência, decisão e evidência separadas; divergências preservadas; saída em hipóteses a testar, não em decisões; e fonte para cada achado.
 

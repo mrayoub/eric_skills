@@ -114,6 +114,18 @@
       "layout": "report_portrait",
       "paper": "a4_portrait",
       "schema": "cdt_analysis.schema.json"
+    },
+    "five_c_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "formats": [
+        "json",
+        "pdf",
+        "pptx",
+        "md",
+        "txt"
+      ],
+      "schema": "five-c-presentation.schema.json"
     }
   }
 }

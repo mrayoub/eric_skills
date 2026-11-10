@@ -89,5 +89,16 @@
     "data_to_obtain",
     "quality_review",
     "traceability"
+  ],
+  "five_c_presentation": [
+    "starting_point",
+    "format",
+    "pains",
+    "pain_map",
+    "mentions",
+    "diagnosis_check",
+    "proposals",
+    "prioritization",
+    "next_steps"
   ]
 }

@@ -28,7 +28,7 @@ SKILLS = {
     "workshop-3e": ["three_e_workshop_record", "test_card"],
     "relatorio-3e": ["three_e_report", "test_card"],
     "workshop-5c": ["five_c_workshop_record"],
-    "relatorio-5c": ["five_c_report"],
+    "relatorio-5c": ["five_c_report", "five_c_presentation"],
     "experimentacao-inovacao": ["experiment_plan", "test_card", "learning_card", "experiment_report",
                                 "evidence_recommendation", "executive_presentation"],
     "scorecard-inovacao": ["innovation_scorecard"],
