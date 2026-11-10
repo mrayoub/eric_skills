@@ -66,7 +66,7 @@ Seções obrigatórias do `five_c_presentation`, nesta ordem. Cada uma começa c
 | `mentions` | O que mais foi indicado | Contagem com regra, total e exclusões; "são menções, não votos" quando for o caso |
 | `diagnosis_check` | Do diagnóstico à escuta | Tabela de triangulação; sem diagnóstico prévio, diga isso em uma frase |
 | `proposals` | Propostas cocriadas | Grupo, proposta, benefício esperado; ressalva de hipótese cocriada |
-| `prioritization` | Priorização | Créditos e ranking do C5, ou a lacuna registrada |
+| `prioritization` | Priorização | Créditos e ranking do C5, ou a lacuna registrada. Opcional a pedido: ver abaixo |
 | `next_steps` | Próximos passos | Hipóteses a testar, responsáveis ou "a definir" |
 
 Regras de cada slide:
@@ -78,7 +78,14 @@ Regras de cada slide:
 - **Tabela abre slide próprio**: o parágrafo da seção fica no slide anterior. Escreva-o para funcionar sozinho.
 - Ressalva de método no próprio slide, curta: "São menções, não votos do C5.", "Não representa validação de eficácia."
 
-Uma etapa sem registro vira slide com a lacuna ("O resultado da distribuição de créditos ainda não foi registrado"),
-nunca um slide omitido nem preenchido com dado inventado.
+Distinga três situações, nas duas entregas:
+
+- **Fora do escopo por desenho:** a sessão não previa a etapa (por exemplo, a sessão curta, C1 a C3, objetiva, sem
+  critérios no C3 e sem C4 e C5). Diga isso no formato e na etapa; não é lacuna.
+- **Lacuna de registro:** a etapa aconteceu, mas não foi anotada. Vira seção ou slide com a lacuna ("O resultado da
+  distribuição de créditos não foi registrado"), nunca omitido nem preenchido com dado inventado.
+- **Omitido a pedido:** só a priorização, só na apresentação e só quando o usuário pedir que ela não apareça. Omita o
+  slide e declare `metadata.omitted_sections: ["prioritization"]`; o renderizador recusa a omissão sem essa
+  declaração. Não ordene as propostas por preferência na apresentação. O Relatório 5C continua registrando o C5.
 
 Veja o [exemplo de referência](exemplos/5c-oficial-sessao-coletiva-apresentacao.md), feito pela autora do playbook.

@@ -28,6 +28,41 @@ def section(content, key):
     return next(block["data"] for block in content["blocks"] if block["data"].get("section_key") == key)
 
 
+class FiveCPresentationRulesTests(unittest.TestCase):
+    def setUp(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/five_c_presentation/input.json"
+        self.content = json.loads(path.read_text(encoding="utf-8"))
+
+    def without_prioritization(self):
+        self.content["blocks"] = [block for block in self.content["blocks"]
+                                  if not block["data"].get("section_key", "").startswith("prioritization")
+                                  and block["id"] != "credits-table"]
+
+    def test_complete_sample_is_valid(self):
+        self.assertEqual(validators.run(self.content), [])
+
+    def test_generic_heading_is_rejected(self):
+        self.content["blocks"][0]["data"]["text"] = "Mapa das dores"
+        self.assertTrue(any("título de slide" in error for error in validators.run(self.content)))
+
+    def test_prioritization_is_required_by_default(self):
+        self.without_prioritization()
+        self.assertTrue(any("falta a priorização" in error for error in validators.run(self.content)))
+
+    def test_prioritization_can_be_omitted_on_request(self):
+        self.without_prioritization()
+        self.content["metadata"]["omitted_sections"] = ["prioritization"]
+        self.assertEqual(validators.run(self.content), [])
+
+    def test_declared_omission_must_match_content(self):
+        self.content["metadata"]["omitted_sections"] = ["prioritization"]
+        self.assertTrue(any("declara omitida" in error for error in validators.run(self.content)))
+
+    def test_only_prioritization_can_be_omitted(self):
+        self.content["metadata"]["omitted_sections"] = ["pains"]
+        self.assertTrue(any("só pode omitir" in error for error in validators.run(self.content)))
+
+
 class ExecutivePresentationRulesTests(unittest.TestCase):
     def setUp(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/executive_presentation/input.json"

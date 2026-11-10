@@ -41,8 +41,27 @@ def _block_words(block: dict[str, Any]) -> int:
                ("text", "title", "description", "value", "content", "items", "headers", "columns", "rows", "cards"))
 
 
+OPTIONAL_SECTIONS = {"prioritization"}
+
+
+def _sections(content: dict[str, Any]) -> set[str]:
+    return {block.get("data", {}).get("section_key") for block in content.get("blocks", [])
+            if block.get("type") in ("paragraph", "heading", "callout", "metric")
+            and str(block.get("data", {}).get("text", "")).strip()}
+
+
 def validate(content: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    omitted = content.get("metadata", {}).get("omitted_sections") or []
+    if not isinstance(omitted, list) or not set(omitted) <= OPTIONAL_SECTIONS:
+        errors.append(f"metadata.omitted_sections: só pode omitir {sorted(OPTIONAL_SECTIONS)}, e só a pedido do usuário")
+    present = _sections(content)
+    for key in sorted(OPTIONAL_SECTIONS):
+        if key in omitted and key in present:
+            errors.append(f"{key}: a seção está no conteúdo, mas metadata.omitted_sections a declara omitida")
+        if key not in omitted and key not in present:
+            errors.append(f"{key}: falta a priorização do C5; inclua o slide (com a lacuna, se não houver registro) "
+                          "ou, se o usuário pediu para não apresentá-la, declare metadata.omitted_sections")
     if not content.get("summary") or _words(content["summary"]) > MAX_SUMMARY_WORDS:
         errors.append(f"summary: a capa precisa da mensagem principal em até {MAX_SUMMARY_WORDS} palavras")
 

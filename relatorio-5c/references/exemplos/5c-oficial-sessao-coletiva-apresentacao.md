@@ -27,9 +27,15 @@ Imite:
 Não imite: título de slide só com tema, rótulos de etapa que confundem sessão com etapa, denominador ambíguo
 (convidados × presentes) e a ausência de fonte por achado. Estes pontos já estão corrigidos abaixo.
 
-**Lacunas do material original.** O deck não traz a experiência desejada e os critérios do C3, o resultado do C5
-(créditos e ranking) nem próximos passos com responsáveis. O exemplo mantém essas seções com a marcação de lacuna, que
-é o comportamento esperado da skill quando o registro não existe: nunca preencha com dado inventado.
+**O que o deck não traz, e por quê.** A autora confirmou que as ausências foram intencionais: a sessão remota foi
+adaptada para ser objetiva. O exemplo mostra três tratamentos diferentes, que a skill precisa distinguir:
+
+- **Fora do escopo por desenho:** na sessão curta remota, o C3 usa só a confirmação por post-its, sem construir
+  experiência desejada e critérios, e não há C4 nem C5. Isso não é lacuna.
+- **Omitido a pedido:** a priorização do C5 não aparece na apresentação. O usuário pode pedir isso; a skill omite o
+  slide e declara `metadata.omitted_sections: ["prioritization"]`. O Relatório 5C continua registrando o C5.
+- **Lacuna de registro:** o que deveria existir e não foi anotado (aqui, responsáveis e prazos dos próximos passos).
+  A seção fica com a marcação de lacuna; nunca preencha com dado inventado.
 
 ---
 
@@ -65,7 +71,7 @@ Fontes: diagnóstico de chamados; roteiro do encontro.
 | | Sessão remota | Sessão presencial |
 |---|---|---|
 | Data e duração | 14/09, 1h30 | 18/09, de 9h às 12h e de 14h às 17h |
-| Profundidade | Formato curto: C1 a C3, fluxo metodológico semelhante | Completa: C1 a C5, com cocriação |
+| Profundidade | Curta e objetiva, por desenho: C1 a C3, com o C3 só na confirmação por post-its; sem C4 e C5 | Completa: C1 a C5, com cocriação |
 | Participantes externos | 36 presentes | 24 convidados; presença não registrada no material |
 
 A trilha 5C pode ser aplicada em diferentes profundidades sem perder o padrão metodológico. A contagem é por pessoa.
@@ -192,8 +198,9 @@ preenchido = 1 indicação; cada post-it entra em um só tema. **São menções,
 | Comunicação e status | 13 | Integração com API e distribuidoras | 9 |
 | Desligamento e prazos | 8 | Dados e responsabilidades | 7 |
 
-**Lacuna:** a experiência desejada e os critérios de sucesso construídos no C3 não estão no material. Aguardando
-registro.
+**Fora do escopo na sessão remota, por desenho:** o formato curto usa só a confirmação por post-its, sem construir
+experiência desejada e critérios. Na sessão presencial, os critérios não constam do material: se existirem, devem
+entrar; se não foram anotados, são lacuna de registro.
 
 Fontes: murais de confirmação das duas sessões, codificação da equipe.
 
@@ -238,14 +245,14 @@ As propostas são hipóteses cocriadas; dependências técnicas, operacionais e 
 
 Fontes: mini-canvases dos quatro grupos.
 
-## Slide 12: priorização (C5)
+## Priorização (C5): omitida a pedido
 
-**Título:** O resultado da distribuição de créditos ainda não foi registrado
+Esta devolutiva não apresenta a priorização: não há slide de créditos nem ranking, e o JSON declara
+`metadata.omitted_sections: ["prioritization"]`. Faça isso só quando o usuário pedir. Sem esse pedido, a apresentação
+tem o slide de priorização, com os créditos ou com a lacuna registrada. Mesmo omitida da apresentação, a priorização
+continua no Relatório 5C. Sem créditos apresentados, não ordene as propostas por preferência.
 
-**Lacuna:** o C5 (pitch, distribuição de créditos e ranking) aconteceu segundo o roteiro, mas o material não traz
-créditos nem ranking. Aguardando registro. Não ordene as propostas por preferência sem esse dado.
-
-## Slide 13: próximos passos
+## Slide 12: próximos passos
 
 **Título:** As propostas seguem para avaliação de dependências antes de qualquer decisão
 
@@ -267,5 +274,5 @@ A apresentação e o relatório saem da mesma base: fichas de dor, contagens, tr
 | O que mais foi indicado | C3, com a regra de contagem, as exclusões e a lacuna dos critérios |
 | Do diagnóstico à escuta | Seção de triangulação, depois do C3 |
 | Propostas cocriadas | C4, com mini-canvas, dependências e alternativas descartadas |
-| Priorização | C5, ou a lacuna registrada |
+| Priorização (omitida a pedido nesta apresentação) | C5 sempre no relatório, com os créditos ou a lacuna registrada |
 | Próximos passos | Divergências e Hipóteses a testar |
