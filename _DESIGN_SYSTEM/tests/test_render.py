@@ -878,8 +878,9 @@ class RenderTests(unittest.TestCase):
                     {"id": key, "type": "paragraph", "data": {"section_key": key, "text": "Síntese registrada."}, "citation_ids": ["F01"]}
                     for key in keys
                 ]
-                if kind in ("cdt", "cdt_analysis"):
-                    # A CDT e a análise exigem formatos próprios (perguntas, checklist): usa os textos da amostra.
+                if kind in ("cdt", "cdt_analysis", "four_d_presentation"):
+                    # A CDT e a análise exigem formatos próprios (perguntas, checklist), e a Apresentação 4D exige a
+                    # hipótese em três partes: usa os textos da amostra.
                     sample = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text(encoding="utf-8"))
                     special = {block["data"]["section_key"]: block["data"]["text"] for block in sample["blocks"]
                                if block["type"] == "paragraph"}
@@ -1410,8 +1411,8 @@ class ReportLabReportTests(unittest.TestCase):
         "briefing": 1, "briefing_improvement_questionnaire": 1,
         "briefing_validation": 5, "innovation_potential_assessment": 2,
         "experiment_plan": 1, "four_d_workshop_record": 2,
-        "four_d_report": 5, "three_e_workshop_record": 1,
-        "three_e_report": 2, "innovation_scorecard": 1,
+        "four_d_report": 6, "three_e_workshop_record": 1,
+        "three_e_report": 3, "innovation_scorecard": 1,
         "experiment_report": 2, "evidence_recommendation": 2,
         "five_c_workshop_record": 2, "five_c_report": 2, "cdt": 2, "cdt_analysis": 2,
     }

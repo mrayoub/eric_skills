@@ -1,11 +1,11 @@
 ---
 name: workshop-4d
-description: "Prepara, conduz ao vivo ou organiza de forma assíncrona o workshop 4D de aprofundamento de um desafio: D1 descongelar percepções, D2 diagnosticar (jornada e barco da inovação: ventos, âncoras, icebergs, porto), D3 desenhar alternativas e D4 decidir com créditos de votação. Use para montar roteiro, pauta, board colaborativo, perguntas de facilitação ou para registrar o que aconteceu em cada D. Não use para escrever o relatório consolidado depois do encontro (use relatorio-4d)."
+description: "Prepara, conduz ao vivo ou organiza de forma assíncrona o workshop 4D de aprofundamento de um desafio: D1 descongelar percepções, D2 diagnosticar (jornada e barco da inovação: ventos, âncoras, icebergs, porto), D3 desenhar alternativas e D4 decidir com créditos de votação. Use para montar roteiro, pauta, board colaborativo, perguntas de facilitação, a rodada de convergência que prepara a hipótese de solução, ou para registrar o que aconteceu em cada D. Não use para escrever o relatório consolidado depois do encontro (use relatorio-4d)."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.1.31"
+  version: "1.2.0"
 ---
 
 # Facilitar o 4D
@@ -16,6 +16,7 @@ Prepara, conduz ou registra D1 a D4 em sequência lógica; resultados posteriore
 
 - [Playbook 4D](references/4d-workshop-playbook.md): tempos e dinâmicas.
 Para conferir a fonte: [transcrição](<assets/Modelo 4D de Aprofundamento.transcricao.md>), [DOCX](<assets/Modelo 4D de Aprofundamento.docx>), [divergências](references/fonte-4d-e-divergencias.md), [original RC6](assets/4d-workshop-playbook-original-rc6.md). Preserve originais; registre diferenças e datas.
+- [Preparar e registrar o 4D](references/preparacao-e-registro-4d.md): ponto de partida, código de temas, IDs no diagnóstico, o que registrar em cada D, rodada de convergência e registro como base do relatório.
 [Blueprint Mural](references/mural-board-4d-template.md) opcional: board autorizado ou registros físicos/conversacionais.
 
 ## Grilling
@@ -41,14 +42,15 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos
 
-Prepare briefing/HMW, dados, entrevistas e decisões; se D1/D2 existirem, confira diagnóstico e lacunas. Pergunte só por objetivo, público, presença, acesso e restrições ausentes; distinga dados, percepções e hipóteses sem confirmar causas preferidas.
+Prepare briefing/HMW, dados, entrevistas e decisões; se D1/D2 existirem, confira diagnóstico e lacunas. Pergunte só por objetivo, público, presença, acesso e restrições ausentes; distinga dados, percepções e hipóteses sem confirmar causas preferidas. Monte o ponto de partida (linha de base, perguntas a responder, o que mudou desde o briefing), separe convidados de presentes e prepare material cruzável: código de temas comum para os post-its e IDs no diagnóstico, conforme [preparar e registrar o 4D](references/preparacao-e-registro-4d.md).
 
 1. **D1 Descongelar:** apresente desafio/dados citados; recolha anonimamente elefante na sala e sentimento dominante; preserve dissensos.
 2. **D2 Diagnosticar:** jornada antes/durante/depois; barco com ventos, âncoras, icebergs e porto. Registre relator, evidência, contraexemplos e verificações pendentes. Salve snapshot D2: intermediário, não diagnóstico final ou aprovação.
-3. **D3 Desenhar:** brainwriting individual para eliminar, simplificar e mudar a lógica; agrupe alternativas incrementais/estruturais/radicais ligadas à dor.
+3. **D3 Desenhar:** brainwriting individual para eliminar, simplificar e mudar a lógica; agrupe alternativas incrementais/estruturais/radicais ligadas à dor pelo ID. Pergunte por mudança e mecanismo, não por ferramenta.
 4. **D4 Decidir:** aplique créditos combinados antes do voto; registre ranking, razões, dissensos, riscos e responsáveis que aceitaram investigar. Voto indica prioridade, não efeito ou adesão.
+5. **Convergência** (5 a 10 min): registre o que ficou mais claro, a hipótese de solução que sai do grupo ("Acreditamos que... porque...", sem tecnologia) e o que o 3E precisa resolver, preservando versões diferentes. Antes de encerrar, confira créditos e convergência anotados; o que faltar vira lacuna anotada no dia.
 
-Em cada D, registre objetivo, tempo, pergunta e saída; adapte duração e documente desvios. Não invente participação/votos/dinâmicas. Sem D3/D4, entregue parcial; em modo assíncrono, indique substituições documentais. Registro por dimensão deve incluir fontes, participantes, versão, decisões e lacunas para `relatorio-4d`. Se houver BP1, seu insumo é o relatório concluído, não snapshot D2.
+Em cada D, registre objetivo, tempo, pergunta e saída; adapte duração e documente desvios. Não invente participação/votos/dinâmicas. Sem D3/D4, entregue parcial; em modo assíncrono, indique substituições documentais. O registro (`four_d_workshop_record`) inclui ponto de partida, D1 a D4, convergência e lacunas do registro, com fontes, participantes, versão, decisões e o código de temas, para o `relatorio-4d` analisar sem reconstruir. Se houver BP1, seu insumo é o relatório concluído, não snapshot D2.
 
 ## Exemplo
 
@@ -64,6 +66,8 @@ Saída (trecho):
 - [ ] Objetivo, duração, pergunta e registro por etapa
 - [ ] Snapshot intermediário e voto distinguidos de validação
 - [ ] Participação, decisões e responsáveis sustentados
+- [ ] Ponto de partida, código de temas e IDs no diagnóstico
+- [ ] Rodada de convergência registrada, ou lacuna com motivo
 
 ## Contexto ERIC
 

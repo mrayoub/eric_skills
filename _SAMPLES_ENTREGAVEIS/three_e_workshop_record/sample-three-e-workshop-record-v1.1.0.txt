@@ -1,0 +1,46 @@
+EXEMPLO FICTÍCIO: Estruturação da entrada guiada
+
+ID sample-three-e-workshop-record · versão 1.1.0 · Completo
+
+Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.
+
+Ponto de partida
+
+Hipótese do 4D fictício: acreditamos que uma entrada orientada com status visível permitirá pedidos completos e menos dúvidas, porque o diagnóstico mostrou entrada incompleta e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos.
+
+Fontes: FIC-01
+
+E1: Esclarecer
+
+Hipótese focal simulada: uma entrada guiada pode reduzir solicitações incompletas para equipes e agentes elegíveis.
+
+Fontes: FIC-01
+
+E2: Estruturar
+
+O MVP ilustrativo inclui perguntas condicionais e confirmação de envio. Integrações e automações ficam fora do primeiro recorte.
+
+Fontes: FIC-01
+
+E3: Experimentar
+
+Planeja-se um Test Card de compreensão do fluxo e outro de completude da solicitação. Medidas e critérios devem ser fechados antes da coleta real.
+
+Fontes: FIC-01
+
+Convergência
+
+Primeiro: perguntas guiadas e teste de completude. Rota provável: indefinida, depende de capacidade interna. Aberto: integração do status.
+
+Fontes: FIC-01
+
+Lacunas do registro
+
+Nenhuma lacuna no exemplo fictício: responsáveis, prazos e Test Cards foram anotados no dia.
+
+Fontes: FIC-01
+
+Fontes
+
+- FIC-01: ata-simulada-5c exemplo fictício, sem coleta real
+- FIC-02: planilha-simulada exemplo fictício, sem dados reais

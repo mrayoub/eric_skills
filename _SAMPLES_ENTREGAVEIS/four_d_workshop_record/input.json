@@ -6,6 +6,25 @@
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
+      "id": "heading-starting_point",
+      "type": "heading",
+      "data": {
+        "section_key": "starting_point_heading",
+        "text": "Ponto de partida"
+      }
+    },
+    {
+      "id": "starting_point",
+      "type": "paragraph",
+      "data": {
+        "section_key": "starting_point",
+        "text": "Desafio fictício: solicitações com informações incompletas. Perguntas a responder: onde a jornada perde clareza e que mudança reduz devoluções? Sem linha de base real. Código de temas: entrada, status, devolução."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
       "id": "heading-d1",
       "type": "heading",
       "data": {
@@ -112,6 +131,44 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "heading-convergence",
+      "type": "heading",
+      "data": {
+        "section_key": "convergence_heading",
+        "text": "Convergência"
+      }
+    },
+    {
+      "id": "convergence",
+      "type": "paragraph",
+      "data": {
+        "section_key": "convergence",
+        "text": "Mais claro: o pedido perde clareza na entrada e no acompanhamento. Hipótese do grupo: acreditamos que orientar a entrada e mostrar o status reduz devoluções e dúvidas, porque esses foram os pontos de atrito mais citados. Para o 3E: estruturar entrada e acompanhamento."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "heading-record_gaps",
+      "type": "heading",
+      "data": {
+        "section_key": "record_gaps_heading",
+        "text": "Lacunas do registro"
+      }
+    },
+    {
+      "id": "record_gaps",
+      "type": "paragraph",
+      "data": {
+        "section_key": "record_gaps",
+        "text": "Nenhuma lacuna no exemplo fictício: créditos do D4 e convergência foram anotados no dia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
     }
   ],
   "citations": [
@@ -128,7 +185,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-four-d-workshop-record",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true

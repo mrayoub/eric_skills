@@ -30,6 +30,43 @@
                     ],
                     "properties": {
                       "section_key": {
+                        "const": "starting_point"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
                         "const": "d1"
                       },
                       "text": {
@@ -142,6 +179,80 @@
                     "properties": {
                       "section_key": {
                         "const": "d4"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "convergence"
+                      },
+                      "text": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "heading",
+                      "callout",
+                      "metric"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "data"
+                ]
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "record_gaps"
                       },
                       "text": {
                         "type": "string",

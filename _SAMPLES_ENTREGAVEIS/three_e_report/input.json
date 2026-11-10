@@ -6,6 +6,25 @@
   "summary": "Amostra de validação visual e estrutural. Dados, pessoas, votos e resultados são fictícios.",
   "blocks": [
     {
+      "id": "heading-executive_summary",
+      "type": "heading",
+      "data": {
+        "section_key": "executive_summary_heading",
+        "text": "Resumo"
+      }
+    },
+    {
+      "id": "executive_summary",
+      "type": "paragraph",
+      "data": {
+        "section_key": "executive_summary",
+        "text": "Solução fictícia: entrada guiada, vinda da hipótese do 4D, agora sem o status em tempo real no primeiro recorte. Construir primeiro as perguntas guiadas; testar primeiro a completude. Rota indefinida. Aberto: integração do status."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
       "id": "heading-e1",
       "type": "heading",
       "data": {
@@ -38,6 +57,66 @@
       "data": {
         "section_key": "e2",
         "text": "O MVP ilustrativo inclui perguntas condicionais e confirmação de envio. Integrações e automações ficam fora do primeiro recorte."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "break-traceability",
+      "type": "page_break",
+      "data": {}
+    },
+    {
+      "id": "heading-traceability",
+      "type": "heading",
+      "data": {
+        "section_key": "traceability_heading",
+        "text": "Do 4D à solução"
+      }
+    },
+    {
+      "id": "traceability",
+      "type": "paragraph",
+      "data": {
+        "section_key": "traceability",
+        "text": "Cada componente precisa ter responde a uma dor do 4D fictício. O status em tempo real responde a uma dor sustentada, mas foi adiado por dependência de integração."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "trace-table",
+      "type": "table",
+      "data": {
+        "title": "Rastreabilidade (exemplo fictício)",
+        "headers": [
+          "Componente",
+          "Recorte",
+          "Dor do 4D",
+          "Status"
+        ],
+        "rows": [
+          [
+            "Perguntas guiadas",
+            "agora",
+            "Entrada incompleta",
+            "Sustentado"
+          ],
+          [
+            "Status em tempo real",
+            "futuro",
+            "Status pouco visível",
+            "Sustentado; adiado"
+          ],
+          [
+            "Automação de decisão",
+            "fora",
+            "Nenhuma",
+            "Sem evidência"
+          ]
+        ]
       },
       "citation_ids": [
         "FIC-01"
@@ -112,6 +191,25 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "heading-conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion_heading",
+        "text": "Conclusão da estruturação"
+      }
+    },
+    {
+      "id": "conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "Solução: entrada guiada; em relação ao 4D, o status saiu do primeiro recorte. Construir primeiro: perguntas guiadas. Testar primeiro: completude da solicitação. Rota: indefinida. Aberto: capacidade interna e integração do status. Construção planejada não é evidência de eficácia."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
     }
   ],
   "citations": [
@@ -128,7 +226,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-three-e-report",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true

@@ -52,6 +52,29 @@
       ]
     },
     {
+      "id": "h-executive_summary",
+      "type": "heading",
+      "data": {
+        "section_key": "executive_summary",
+        "text": "Resumo"
+      }
+    },
+    {
+      "id": "summary-callout",
+      "type": "callout",
+      "data": {
+        "text": "O problema que ficou mais claro no exercício fictício é a falta de visibilidade do pedido, da entrada ao status. Hipótese: uma entrada orientada com status visível pode reduzir devoluções e dúvidas. O 3E precisa estruturar a entrada e o acompanhamento e priorizar o teste de completude."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "break-d1_d2_diagnosis",
+      "type": "page_break",
+      "data": {}
+    },
+    {
       "id": "h-d1_d2_diagnosis",
       "type": "heading",
       "data": {
@@ -114,6 +137,11 @@
       "citation_ids": [
         "FIC-01"
       ]
+    },
+    {
+      "id": "break-d2_process_journey",
+      "type": "page_break",
+      "data": {}
     },
     {
       "id": "h-d2_process_journey",
@@ -239,6 +267,11 @@
       ]
     },
     {
+      "id": "break-d4_prioritization",
+      "type": "page_break",
+      "data": {}
+    },
+    {
       "id": "h-d4_prioritization",
       "type": "heading",
       "data": {
@@ -307,18 +340,108 @@
       ]
     },
     {
+      "id": "break-analysis",
+      "type": "page_break",
+      "data": {}
+    },
+    {
+      "id": "h-cross_themes",
+      "type": "heading",
+      "data": {
+        "section_key": "cross_themes",
+        "text": "Temas que atravessaram o 4D"
+      }
+    },
+    {
+      "id": "themes-table",
+      "type": "table",
+      "data": {
+        "title": "Temas transversais (exemplo fictício)",
+        "headers": [
+          "Tema",
+          "Onde apareceu",
+          "Evidências",
+          "Força"
+        ],
+        "rows": [
+          [
+            "Visibilidade do status",
+            "D1, jornada, D3",
+            "Incerteza sobre andamento; status pouco visível; painel de status",
+            "Alta: 3 dinâmicas"
+          ],
+          [
+            "Entrada incompleta",
+            "Jornada, D3, D4",
+            "Campos ausentes; formulário guiado escolhido no D4",
+            "Alta: 3 dinâmicas e prioridade do D4"
+          ],
+          [
+            "Causa da devolução",
+            "D1",
+            "Participantes divergiram sobre a causa dominante",
+            "Baixa: 1 dinâmica, com divergência"
+          ]
+        ]
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-analytical_synthesis",
+      "type": "heading",
+      "data": {
+        "section_key": "analytical_synthesis",
+        "text": "Síntese analítica"
+      }
+    },
+    {
+      "id": "synthesis",
+      "type": "paragraph",
+      "data": {
+        "text": "Os dois temas mais fortes se conectam: a entrada incompleta gera devoluções, e a falta de status faz a dúvida virar contato. O grupo priorizou o formulário guiado, mas o diagnóstico aponta também para o acompanhamento. Há contradição sobre a causa dominante da devolução. Limitações: exercício simulado, sem linha de base nem denominador real."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "h-solution_hypothesis",
+      "type": "heading",
+      "data": {
+        "section_key": "solution_hypothesis",
+        "text": "Hipótese de solução"
+      }
+    },
+    {
+      "id": "hypothesis-callout",
+      "type": "paragraph",
+      "data": {
+        "text": "Acreditamos que uma entrada orientada, com campos críticos guiados e status visível depois do envio, permitirá pedidos completos na primeira tentativa e menos dúvidas para quem solicita. Porque o diagnóstico mostrou entrada incompleta, devoluções sem motivo claro e status pouco visível. Precisamos validar se a orientação reduz pedidos incompletos e se o status reduz contatos de acompanhamento. Hipótese da análise; junta a proposta priorizada no D4 ao painel de status."
+      },
+      "citation_ids": [
+        "FIC-01"
+      ]
+    },
+    {
+      "id": "break-conclusion",
+      "type": "page_break",
+      "data": {}
+    },
+    {
       "id": "h-conclusion",
       "type": "heading",
       "data": {
         "section_key": "conclusion",
-        "text": "Conclusão e próximos passos"
+        "text": "Conclusão do aprofundamento"
       }
     },
     {
       "id": "conclusion-callout",
       "type": "callout",
       "data": {
-        "text": "Recomendação metodológica: medir volumes e causas reais antes de assumir eficácia ou iniciar construção. Nenhuma decisão real foi tomada nesta amostra."
+        "text": "O que entendemos: o pedido perde clareza na entrada e no acompanhamento. Hipótese: entrada orientada com status visível. Limitações: dados simulados, sem linha de base. O 3E precisa estruturar entrada e acompanhamento e priorizar o teste de completude. Segue aberto: a causa dominante das devoluções. Nenhuma decisão real foi tomada nesta amostra."
       },
       "citation_ids": [
         "FIC-01"
@@ -367,7 +490,7 @@
   ],
   "metadata": {
     "artifact_id": "sample-four-d-report",
-    "content_version": "1.0.0",
+    "content_version": "1.1.0",
     "completeness": "complete",
     "orientation": "landscape",
     "sample": true,

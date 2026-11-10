@@ -28,6 +28,74 @@ def section(content, key):
     return next(block["data"] for block in content["blocks"] if block["data"].get("section_key") == key)
 
 
+class ShortPresentationRulesTests(unittest.TestCase):
+    """Apresentações 4D e 3E: devolutiva curta, de no máximo 6 slides de conteúdo."""
+
+    def sample(self, kind):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json"
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def test_samples_are_valid(self):
+        for kind in ("four_d_presentation", "three_e_presentation"):
+            with self.subTest(kind=kind):
+                self.assertEqual(validators.run(self.sample(kind)), [])
+
+    def test_more_than_six_content_slides_is_rejected(self):
+        for kind in ("four_d_presentation", "three_e_presentation"):
+            with self.subTest(kind=kind):
+                content = self.sample(kind)
+                for number in range(2):
+                    content["blocks"].append({"id": f"extra-{number}", "type": "heading",
+                                              "data": {"text": f"Um slide extra que excede o limite número {number}"}})
+                    content["blocks"].append({"id": f"extra-text-{number}", "type": "paragraph",
+                                              "data": {"text": "Detalhe que deveria ficar no relatório."}})
+                self.assertTrue(any("slides de conteúdo" in error for error in validators.run(content)))
+
+    def test_generic_title_is_rejected(self):
+        content = self.sample("four_d_presentation")
+        content["blocks"][0]["data"]["text"] = "Principais achados"
+        self.assertTrue(any("título de slide" in error for error in validators.run(content)))
+
+    def test_four_d_hypothesis_needs_three_parts(self):
+        content = self.sample("four_d_presentation")
+        next(block for block in content["blocks"] if block["id"] == "solution_hypothesis")["data"]["text"] = (
+            "Padronizar o fluxo e centralizar os projetos.")
+        self.assertTrue(any("três partes" in error for error in validators.run(content)))
+
+
+class FourDReportAnalysisTests(unittest.TestCase):
+    """Orientação da autora do playbook 4D: o relatório termina em análise, hipótese e conclusão."""
+
+    def setUp(self):
+        path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/four_d_report/input.json"
+        self.content = json.loads(path.read_text(encoding="utf-8"))
+
+    def drop_after(self, heading_key):
+        blocks, keep, skipping = self.content["blocks"], [], False
+        for block in blocks:
+            if block["type"] == "heading":
+                skipping = block["data"].get("section_key") == heading_key
+                keep.append(block)
+            elif not skipping or block["type"] == "page_break":
+                keep.append(block)
+        self.content["blocks"] = keep
+
+    def test_complete_sample_is_valid(self):
+        self.assertEqual(validators.run(self.content), [])
+
+    def test_empty_analysis_sections_are_rejected(self):
+        for key in ("executive_summary", "cross_themes", "analytical_synthesis", "solution_hypothesis", "conclusion"):
+            with self.subTest(key=key):
+                self.setUp()
+                self.drop_after(key)
+                self.assertTrue(any(error.startswith(f"{key}:") for error in validators.run(self.content)))
+
+    def test_hypothesis_needs_three_parts(self):
+        block = next(block for block in self.content["blocks"] if block["id"] == "hypothesis-callout")
+        block["data"]["text"] = "Padronizar o fluxo, criar templates e centralizar projetos."
+        self.assertTrue(any("três partes" in error for error in validators.run(self.content)))
+
+
 class FiveCPresentationRulesTests(unittest.TestCase):
     def setUp(self):
         path = ROOT.parent / "_SAMPLES_ENTREGAVEIS/five_c_presentation/input.json"
