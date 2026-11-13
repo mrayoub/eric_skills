@@ -11,6 +11,7 @@ import hashlib
 import html
 import io
 import json
+import math
 import textwrap
 import re
 import unicodedata
@@ -1741,21 +1742,61 @@ def load_pptx_layout(deliverable_type: str) -> dict[str, Any] | None:
 
 
 def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> None:
+    """Slides editáveis com o mesmo desenho do PDF: mesma sequência (plan_slides), slots do layout.json,
+    estilos de slide_style_specs, cards com faixa de tom, capa com barra de destaque e rodapé numerado.
+    As alturas vêm do mesmo motor de medida do PDF (ReportLab); sem ele, usa uma estimativa."""
     try:
         from pptx import Presentation
-        from pptx.util import Inches, Mm, Pt
         from pptx.dml.color import RGBColor
         from pptx.enum.shapes import MSO_SHAPE
+        from pptx.enum.text import MSO_ANCHOR, MSO_AUTO_SIZE
+        from pptx.oxml.ns import qn
+        from pptx.util import Emu, Pt
     except ImportError as exc:
         raise RuntimeError("PPTX requer python-pptx: pip install python-pptx") from exc
+    from lxml import etree
+
     pdf = pdf_module()
     layout = load_pptx_layout(content["deliverable_type"])
+    fallback = {"logo": (.63, .63, 12.09, .63), "titulo_slide": (.63, 1.26, 12.09, .94),
+                "corpo_slide": (.63, 2.2, 12.09, 4.25), "rodape_slide": (.63, 6.46, 12.09, .39)}
 
-    def box(name: str, fx: float, fy: float, fw: float, fh: float) -> tuple[Any, Any, Any, Any]:
-        slot = layout["slots"].get(name) if layout else None
-        if slot and all(k in slot for k in ("x", "y", "width", "height")):
-            return Inches(slot["x"]), Inches(slot["y"]), Inches(slot["width"]), Inches(slot["height"])
-        return Inches(fx), Inches(fy), Inches(fw), Inches(fh)
+    def rect(name: str) -> tuple[float, float, float, float]:
+        """Slot em pontos, origem no canto superior esquerdo."""
+        slot = (layout or {}).get("slots", {}).get(name)
+        values = ((slot["x"], slot["y"], slot["width"], slot["height"])
+                  if slot and all(key in slot for key in ("x", "y", "width", "height")) else fallback[name])
+        return tuple(float(value) * 72 for value in values)  # type: ignore[return-value]
+
+    def emu(points: float) -> Any:
+        return Emu(int(round(points * 12700)))
+
+    mm = 72 / 25.4
+    width_in, height_in = (layout["width_in"], layout["height_in"]) if layout else (13.333, 7.5)
+    page_w, page_h = width_in * 72, height_in * 72
+    logo_r, title_r, body_r, footer_r = (rect(name) for name in ("logo", "titulo_slide", "corpo_slide", "rodape_slide"))
+    specs = pdf.slide_style_specs(tokens)
+    palette = tokens["color"]
+
+    def rgb(name: str) -> Any:
+        return RGBColor.from_string(palette[name].lstrip("#") if name in palette else name.lstrip("#"))
+
+    measure = reportlab_styles(tokens, "presentation")
+    if measure is not None:
+        from reportlab.platypus import Paragraph
+        for key, spec in specs.items():
+            measure[key] = pdf._paragraph_style(tokens, "pptx_" + key, spec)
+
+    def height(markup: str, key: str, width: float) -> float:
+        if measure is not None:
+            return float(Paragraph(markup, measure[key]).wrap(width, 100000)[1])
+        spec = specs[key]
+        plain = re.sub(r"<[^>]+>", "", markup)
+        per_line = max(1, int(width / (spec["size"] * .52)))
+        return max(1, math.ceil(len(plain) / per_line)) * spec["leading"]
+
+    def cited_markup(text: str, block: dict[str, Any]) -> str:
+        return pdf._cited(text, block)
 
     prs = Presentation()
     # O modelo padrão usa meia-risca como marcador dos níveis 2 e 4; os entregáveis não usam travessão.
@@ -1763,140 +1804,293 @@ def render_pptx(content: dict[str, Any], tokens: dict[str, Any], path: Path) -> 
         for bullet in master.element.iter("{http://schemas.openxmlformats.org/drawingml/2006/main}buChar"):
             if DASH.search(bullet.get("char", "")):
                 bullet.set("char", "•")
-    if layout:
-        prs.slide_width, prs.slide_height = Inches(layout["width_in"]), Inches(layout["height_in"])
-    else:
-        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
-    primary = RGBColor.from_string(tokens["color"]["document_primary"].lstrip("#"))
+    prs.slide_width, prs.slide_height = emu(page_w), emu(page_h)
     logo = ROOT / "assets" / "logo_ccee.png"
 
-    def color(name: str) -> Any:
-        return RGBColor.from_string(tokens["color"][name].lstrip("#"))
+    def style_font(font: Any, key: str, *, size: float | None = None) -> None:
+        spec = specs[key]
+        font.name = tokens["typography"][spec["family"]]
+        font.size = Pt(size or spec["size"])
+        font.bold = spec["family"] == "font_brand" or spec["weight"] >= 600
+        font.color.rgb = rgb(spec["color"])
 
-    table_size = Pt(max(12, min(14, tokens["typography"]["styles"]["slide_body"]["size"])))
+    def textbox(slide: Any, x: float, y: float, w: float, h: float,
+                paragraphs: list[tuple[str, list[tuple[str, bool]], float]], *,
+                anchor: Any = None, tab_right: float | None = None) -> Any:
+        """paragraphs: (estilo, [(texto, sobrescrito)], espaço antes em pt)."""
+        shape = slide.shapes.add_textbox(emu(x), emu(y), emu(w), emu(max(h, 1)))
+        frame = shape.text_frame
+        frame.word_wrap = True
+        frame.auto_size = MSO_AUTO_SIZE.NONE
+        frame.margin_left = frame.margin_right = frame.margin_top = frame.margin_bottom = 0
+        frame.vertical_anchor = anchor or MSO_ANCHOR.TOP
+        for index, (key, runs, before) in enumerate(paragraphs):
+            para = frame.paragraphs[0] if index == 0 else frame.add_paragraph()
+            style_font(para.font, key)
+            para.line_spacing = Pt(specs[key]["leading"])
+            para.space_before, para.space_after = Pt(before), Pt(0)
+            if tab_right is not None:
+                p_pr = para._p.get_or_add_pPr()
+                tabs = etree.SubElement(p_pr, qn("a:tabLst"))
+                tab = etree.SubElement(tabs, qn("a:tab"))
+                tab.set("pos", str(int(tab_right * 12700)))
+                tab.set("algn", "r")
+            for text, superscript in runs:
+                run = para.add_run()
+                run.text = text
+                style_font(run.font, key, size=7.5 if superscript else None)
+                if superscript:
+                    run.font._rPr.set("baseline", "30000")
+        return shape
 
-    def add_table(s: Any, table: tuple[str, list[str], list[list[str]], list[float]], x: Any, y: Any, width: Any, height: Any) -> None:
-        caption, heads, rows, heights = table
-        top = y
-        if caption:
-            caption_box = s.shapes.add_textbox(x, y, width, Inches(.45))
-            caption_box.text_frame.word_wrap = True
-            run = caption_box.text_frame.paragraphs[0].add_run()
-            run.text = caption
-            run.font.name, run.font.size, run.font.bold = tokens["typography"]["font_brand"], table_size, True
-            run.font.color.rgb = primary
-            top = y + Inches(.5)
-        columns = max(1, len(heads), *(len(row) for row in rows)) if rows else max(1, len(heads))
-        frame = s.shapes.add_table(len(rows) + 1, columns, x, top, width, Pt(sum(heights)))
-        grid = frame.table
-        for index, row_height in enumerate(heights):
-            grid.rows[index].height = Pt(row_height)
-        for index in range(columns):
-            grid.columns[index].width = int(width / columns)
-        for row_index, values in enumerate([heads, *rows]):
-            for column in range(columns):
-                cell = grid.cell(row_index, column)
-                cell.text = str(values[column]) if column < len(values) else ""
-                cell.fill.solid()
-                cell.fill.fore_color.rgb = color("document_primary") if row_index == 0 else (
-                    color("surface") if row_index % 2 else color("surface_muted"))
-                for paragraph in cell.text_frame.paragraphs:
-                    paragraph.font.name = tokens["typography"]["font_body"]
-                    paragraph.font.size = table_size
-                    paragraph.font.bold = row_index == 0
-                    paragraph.font.color.rgb = color("inverse") if row_index == 0 else color("text_body")
+    def runs_for(text: str, block: dict[str, Any] | None) -> list[tuple[str, bool]]:
+        runs = [(text, False)] if text else []
+        if block and block.get("citation_ids"):
+            runs.append(("".join(f"[{ref}]" for ref in block["citation_ids"]), True))
+        return runs
 
-    def slide(title: str, body: str = "", table: tuple[str, list[str], list[list[str]], list[float]] | None = None) -> None:
-        s = prs.slides.add_slide(prs.slide_layouts[6])
-        # O slot "logo" é a faixa do cabeçalho: como no HTML e no PDF, o logo cabe no
-        # slot e em 38 x 11 mm, alinhado à direita e centrado na altura.
-        logo_x, logo_y, logo_w, logo_h = box("logo", 11.1, 0.35, 1.7, 0)
-        picture = s.shapes.add_picture(str(logo), logo_x, logo_y)
-        max_w = min(logo_w, Mm(38))
-        max_h = min(logo_h, Mm(11)) if logo_h else Mm(11)
-        scale = min(max_w / picture.width, max_h / picture.height)
-        picture.width, picture.height = int(picture.width * scale), int(picture.height * scale)
-        picture.left = logo_x + logo_w - picture.width
-        picture.top = logo_y + (logo_h - picture.height) // 2 if logo_h else logo_y
-        title_x, title_y, title_w, title_h = box("titulo_slide", .5, .5, 10.3, .8)
-        title_box = s.shapes.add_textbox(title_x, title_y, title_w, title_h)
-        run = title_box.text_frame.paragraphs[0].add_run()
-        run.text, run.font.name, run.font.size, run.font.color.rgb = title, tokens["typography"]["font_brand"], Pt(tokens["typography"]["styles"]["slide_title"]["size"]), primary
-        body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
-        if table is not None:
-            add_table(s, table, body_x, body_y, body_w, body_h)
+    def filled(slide: Any, x: float, y: float, w: float, h: float, color: str, *, line: str | None = None,
+               line_width: float = .75) -> Any:
+        shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, emu(x), emu(y), emu(w), emu(h))
+        shape.fill.solid()
+        shape.fill.fore_color.rgb = rgb(color)
+        if line:
+            shape.line.color.rgb = rgb(line)
+            shape.line.width = Pt(line_width)
         else:
-            body_box = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, body_x, body_y, body_w, body_h)
-            body_box.fill.solid()
-            body_box.fill.fore_color.rgb = color("document_accent_soft")
-            body_box.line.color.rgb = color("border")
-            body_box.text_frame.margin_left = Inches(.2)
-            body_box.text_frame.margin_top = Inches(.2)
-            body_box.text_frame.word_wrap = True
-            for line in body.splitlines() or [""]:
-                para = body_box.text_frame.paragraphs[0] if not body_box.text_frame.text else body_box.text_frame.add_paragraph()
-                para.text = line
-                para.font.name, para.font.size = tokens["typography"]["font_body"], Pt(tokens["typography"]["styles"]["slide_body"]["size"])
-                # Sem cor explícita, o texto de uma forma herda o branco do tema e some no fundo claro.
-                para.font.color.rgb = color("text_body")
-        footer_x, footer_y, footer_w, footer_h = box("rodape_slide", .6, 7.02, 12.1, .33)
-        footer = s.shapes.add_textbox(footer_x, footer_y, footer_w, footer_h)
-        footer.text_frame.word_wrap = True
-        paragraph = footer.text_frame.paragraphs[0]
-        paragraph.text = identity_line(content)
-        paragraph.font.name = tokens["typography"]["font_body"]
-        paragraph.font.size = Pt(tokens["typography"]["styles"]["slide_footer"]["size"])
-        paragraph.font.color.rgb = RGBColor.from_string(tokens["color"]["text_muted"].lstrip("#"))
-        eyebrow = s.shapes.add_textbox(logo_x, logo_y, logo_w - Mm(42), logo_h or Mm(11))
-        eyebrow_run = eyebrow.text_frame.paragraphs[0].add_run()
-        eyebrow_run.text = header_label(content).upper()
-        eyebrow_run.font.name = tokens["typography"]["font_body"]
-        eyebrow_run.font.size = Pt(tokens["typography"]["styles"]["cover_eyebrow"]["size"])
-        eyebrow_run.font.color.rgb = color("document_accent")
+            shape.line.fill.background()
+        shape.shadow.inherit = False
+        # Sem o estilo herdado do tema: cor e borda já são explícitas, e o effectRef traria sombra.
+        style = shape._element.find(qn("p:style"))
+        if style is not None:
+            shape._element.remove(style)
+        return shape
 
-    slide(content["title"], content.get("summary", ""))
-    title = "Conteúdo"
-    lines: list[str] = []
-    for block in content["blocks"]:
-        if block["type"] == "heading" or block["type"] == "page_break":
-            if lines:
-                slide(title, "\n".join(lines))
-                lines = []
-            if block["type"] == "heading":
-                title = block_text(block)
-            continue
-        if block["type"] == "table":
-            # Tabela nativa: o texto acumulado sai antes; até 8 linhas por lâmina, cabeçalho repetido.
-            if lines:
-                slide(title, "\n".join(lines))
-                lines = []
-            refs = " [" + ", ".join(block["citation_ids"]) + "]" if block.get("citation_ids") else ""
-            for _, legend, heads, rows in table_views(block):
-                body_x, body_y, body_w, body_h = box("corpo_slide", .6, 1.55, 12.1, 5.35)
-                chunks = pdf.paginate_table_rows(heads, rows, body_w / 12700, body_h / 12700)
-                for chunk, heights in chunks:
-                    slide(title, table=((str(legend) if legend else "") + refs, heads, chunk, heights))
-                    if not title.endswith("(continuação)"):
-                        title += " (continuação)"
-            continue
-        line = block_text(block)
+    tones = {"blue": ("document_accent_soft", "document_accent"), "neutral": ("surface_muted", "border_strong"),
+             "red": ("danger_soft", "danger"), "green": ("#E8F4EE", "#3F9270"), "yellow": ("#FFF4D9", "#BD8A28")}
+
+    def draw_card_grid(slide: Any, block: dict[str, Any], x: float, y: float, width: float) -> float:
+        data = block.get("data", {})
+        cards = data.get("cards", [])
+        columns = max(1, min(3, int(data.get("columns", 2))))
+        top = y
+        if data.get("title"):
+            title_h = height(pdf._markup(data["title"]), "card_title", width)
+            textbox(slide, x, y, width, title_h, [("card_title", [(str(data["title"]), False)], 0)])
+            y += title_h + 5
+        gap = 6
+        card_w = (width - gap * (columns - 1)) / columns
+        inner = card_w - 18
+        for start in range(0, len(cards), columns):
+            row = cards[start:start + columns]
+            contents = []
+            for card in row:
+                parts: list[tuple[str, list[tuple[str, bool]], float]] = []
+                total = 0.0
+                title = str(card.get("title", "")).upper()
+                parts.append(("card_title", [(title, False)], 0))
+                total += height(pdf._markup(title), "card_title", inner)
+                if card.get("value") is not None:
+                    parts.append(("metric", [(str(card["value"]), False)], 0))
+                    total += height(pdf._markup(card["value"]), "metric", inner)
+                if card.get("text"):
+                    parts.append(("body", [(str(card["text"]), False)], 0))
+                    total += height(pdf._markup(card["text"]), "body", inner)
+                for item in card.get("items", []):
+                    parts.append(("body", [("• " + str(item), False)], 0))
+                    total += height(pdf._markup("• " + str(item)), "body", inner)
+                if card.get("citation_ids"):
+                    refs = "".join(f"[{ref}]" for ref in card["citation_ids"])
+                    parts.append(("source", [(refs, True)], 0))
+                    total += height(refs, "source", inner)
+                contents.append((card, parts, total))
+            row_h = max(total for _, _, total in contents) + 14
+            for index, (card, parts, _) in enumerate(contents):
+                left = x + index * (card_w + gap)
+                background, accent = tones.get(card.get("tone", "blue"), tones["blue"])
+                filled(slide, left, y, card_w, row_h, background)
+                filled(slide, left, y, 3, row_h, accent)
+                textbox(slide, left + 9, y + 7, inner, row_h - 14, parts)
+            y += row_h + gap
         if block.get("citation_ids"):
-            line += " [" + ", ".join(block["citation_ids"]) + "]"
-        # Divide em limites de palavra: nenhuma palavra fica partida entre lâminas.
-        chunks = [piece for paragraph in line.split("\n")
-                  for piece in (textwrap.wrap(paragraph, 650, break_long_words=False, break_on_hyphens=False) or [""])]
-        for chunk in chunks:
-            if lines and (sum(len(x) for x in lines) + len(chunk) > 650 or len(lines) >= 8):
-                slide(title, "\n".join(lines))
-                if not title.endswith("(continuação)"):
-                    title += " (continuação)"
-                lines = []
-            lines.append(chunk)
-    if lines:
-        slide(title, "\n".join(lines))
-    if content["citations"]:
-        slide("Fontes", "\n".join(f"{c['id']}: {c['source_id']}" + (f", {c['locator']}" if c.get('locator') else '')
-                                     for c in content["citations"]))
+            refs = "".join(f"[{ref}]" for ref in block["citation_ids"])
+            ref_h = height(refs, "source", width)
+            textbox(slide, x, y, width, ref_h, [("source", [(refs, True)], 0)])
+            y += ref_h
+        return y - top
+
+    def set_border(cell: Any, color: str) -> None:
+        tc_pr = cell._tc.get_or_add_tcPr()
+        for edge in ("a:lnL", "a:lnR", "a:lnT", "a:lnB"):
+            line = etree.SubElement(tc_pr, qn(edge), w=str(int(.75 * 12700)))
+            fill = etree.SubElement(line, qn("a:solidFill"))
+            etree.SubElement(fill, qn("a:srgbClr"), val=palette[color].lstrip("#"))
+
+    def draw_table(slide: Any, block: dict[str, Any], x: float, y: float, width: float) -> float:
+        heads, rows = table_rows(block)
+        columns = max(1, len(heads), *(len(row) for row in rows)) if rows else max(1, len(heads))
+        col_w = width / columns
+        matrix = [[heads[i] if i < len(heads) else "" for i in range(columns)]]
+        matrix += [[row[i] if i < len(row) else "" for i in range(columns)] for row in rows]
+        heights = [max(height(pdf._markup(value), "table_header" if r == 0 else "table_body", col_w - 12)
+                       for value in values) + 10 for r, values in enumerate(matrix)]
+        frame = slide.shapes.add_table(len(matrix), columns, emu(x), emu(y), emu(width), emu(sum(heights)))
+        grid = frame.table
+        grid.first_row = grid.horz_banding = False
+        for index in range(columns):
+            grid.columns[index].width = emu(col_w)
+        for r, values in enumerate(matrix):
+            grid.rows[r].height = emu(heights[r])
+            for c, value in enumerate(values):
+                cell = grid.cell(r, c)
+                cell.margin_left = cell.margin_right = emu(6)
+                cell.margin_top = cell.margin_bottom = emu(5)
+                cell.vertical_anchor = MSO_ANCHOR.TOP
+                cell.fill.solid()
+                cell.fill.fore_color.rgb = rgb("document_primary" if r == 0 else "surface")
+                key = "table_header" if r == 0 else "table_body"
+                para = cell.text_frame.paragraphs[0]
+                style_font(para.font, key)
+                para.line_spacing = Pt(specs[key]["leading"])
+                run = para.add_run()
+                run.text = str(value)
+                style_font(run.font, key)
+                set_border(cell, "border")
+        used = sum(heights)
+        if block.get("citation_ids"):
+            refs = "".join(f"[{ref}]" for ref in block["citation_ids"])
+            ref_h = height(refs, "body", width)
+            textbox(slide, x, y + used, width, ref_h, [("body", [(refs, True)], 0)])
+            used += ref_h
+        return used
+
+    def draw_block(slide: Any, block: dict[str, Any], x: float, y: float, width: float) -> float:
+        kind = block["type"]
+        data = block.get("data", {})
+        if kind == "card_grid":
+            return draw_card_grid(slide, block, x, y, width)
+        if kind == "table":
+            return draw_table(slide, block, x, y, width)
+        if kind == "metric":
+            value = str(data.get("value") or data.get("text") or block_text(block))
+            used = height(cited_markup(value, block), "metric", width)
+            parts: list[tuple[str, list[tuple[str, bool]], float]] = [("metric", runs_for(value, block), 0)]
+            support = data.get("description") or data.get("title")
+            if support:
+                parts.append(("body", [(str(support), False)], 8))
+                used += 8 + height(pdf._markup(support), "body", width)
+            textbox(slide, x, y, width, used, parts)
+            return used
+        if kind == "callout":
+            text = block_text(block)
+            inner = height(cited_markup(text, block), "body_inverse", width - 18)
+            filled(slide, x, y, width, inner + 16, "document_deep")
+            filled(slide, x, y, 3, inner + 16, "document_accent")
+            textbox(slide, x + 9, y + 8, width - 18, inner, [("body_inverse", runs_for(text, block), 0)])
+            return inner + 16
+        if kind == "list":
+            items = [str(item) for item in data.get("items", [])]
+            parts = [("body", runs_for("• " + item, block), 0) for item in items]
+            used = sum(height(cited_markup("• " + item, block), "body", width) for item in items)
+            textbox(slide, x, y, width, used, parts)
+            return used
+        text = block_text(block)
+        used = height(cited_markup(text, block), "body", width)
+        textbox(slide, x, y, width, used, [("body", runs_for(text, block), 0)])
+        return used
+
+    def sources_fit(lines: list[str]) -> bool:
+        return sum(height(pdf._markup(line), "source", body_r[2]) + 12 for line in lines) <= body_r[3]
+
+    slides = pdf.plan_slides(content, block_text, table_rows, table_views, body_r[2], body_r[3], sources_fit)
+    # O PDF recusa conteúdo que não cabe; no PPTX, texto longo demais continua em outro slide, sem partir palavras.
+    scratch = Presentation().slides.add_slide(Presentation().slide_layouts[6])
+
+    def block_height(block: dict[str, Any]) -> float:
+        return draw_block(scratch, block, 0, 0, body_r[2])
+
+    expanded: list[tuple[str, Any]] = []
+    for kind, payload in slides:
+        if kind != "section":
+            expanded.append((kind, payload))
+            continue
+        title, blocks = payload
+        current: list[dict[str, Any]] = []
+        used = 0.0
+        for block in blocks:
+            needed = block_height(block)
+            if block["type"] in ("paragraph", "rich_text") and used + needed > body_r[3]:
+                words = block_text(block).split()
+                while words:
+                    room = body_r[3] - used
+                    low, high = 1, len(words)
+                    while low < high:
+                        middle = (low + high + 1) // 2
+                        piece = {**block, "data": {**block.get("data", {}), "text": " ".join(words[:middle])}}
+                        if block_height(piece) <= room:
+                            low = middle
+                        else:
+                            high = middle - 1
+                    piece = {**block, "data": {**block.get("data", {}), "text": " ".join(words[:low])}}
+                    if block_height(piece) > room and current:
+                        expanded.append(("section", (title, current)))
+                        title, current, used = (title if title.endswith("(continuação)") else title + " (continuação)"), [], 0.0
+                        continue
+                    words = words[low:]
+                    current.append(piece)
+                    if words:
+                        expanded.append(("section", (title, current)))
+                        title = title if title.endswith("(continuação)") else title + " (continuação)"
+                        current, used = [], 0.0
+                    else:
+                        used += block_height(piece) + 12
+                continue
+            current.append(block)
+            used += needed + 12
+        expanded.append(("section", (title, current)))
+    slides = expanded
+    identity = identity_line(content)
+    total = len(slides)
+    for number, (kind, payload) in enumerate(slides, 1):
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        slide.background.fill.solid()
+        slide.background.fill.fore_color.rgb = rgb("surface")
+        # Logo: cabe no slot e em 38 x 11 mm, alinhado à direita e centrado na altura, como no PDF.
+        picture = slide.shapes.add_picture(str(logo), emu(logo_r[0]), emu(logo_r[1]))
+        scale = min(min(logo_r[2], 38 * mm) * 12700 / picture.width, min(logo_r[3] or 11 * mm, 11 * mm) * 12700 / picture.height)
+        picture.width, picture.height = int(picture.width * scale), int(picture.height * scale)
+        picture.left = emu(logo_r[0] + logo_r[2]) - picture.width
+        picture.top = emu(logo_r[1] + (logo_r[3] / 2)) - picture.height // 2 if logo_r[3] else emu(logo_r[1])
+        body_x, body_y, body_w, body_h = body_r
+        if kind == "cover":
+            textbox(slide, title_r[0], title_r[1], title_r[2], title_r[3] + 34 * mm, [
+                ("eyebrow", [(header_label(content).upper(), False)], 0),
+                ("cover", [(content["title"], False)], 16)])
+            textbox(slide, body_x, body_y + 20 * mm, body_w, max(body_h - 40 * mm, 12),
+                    [("body", [(content.get("summary", ""), False)], 0)])
+        elif kind == "section":
+            title, blocks = payload
+            textbox(slide, title_r[0], title_r[1], title_r[2], title_r[3], [("slide_title", [(title, False)], 0)])
+            cursor = body_y
+            for block in blocks:
+                cursor += draw_block(slide, block, body_x, cursor, body_w) + 12
+        else:
+            earlier = any(item[0] == "sources" for item in slides[:number - 1])
+            textbox(slide, title_r[0], title_r[1], title_r[2], title_r[3],
+                    [("slide_title", [("Fontes (cont.)" if earlier else "Fontes", False)], 0)])
+            cursor = body_y
+            for line in payload:
+                line_h = height(pdf._markup(line), "source", body_w)
+                textbox(slide, body_x, cursor, body_w, line_h, [("source", [(line, False)], 0)])
+                cursor += line_h + 12
+        textbox(slide, footer_r[0], footer_r[1], footer_r[2], footer_r[3],
+                [("footer", [(identity + "\t" + f"{number} / {total}", False)], 0)],
+                anchor=MSO_ANCHOR.MIDDLE, tab_right=footer_r[2])
+        if kind == "cover":
+            # Barra de destaque da capa como linha grossa: forma sem caixa de texto, como no PDF.
+            bar = slide.shapes.add_connector(1, emu(3 * mm), 0, emu(3 * mm), emu(page_h))
+            bar.line.color.rgb = rgb("document_accent")
+            bar.line.width = emu(6 * mm)
     prs.save(path)
 
 
