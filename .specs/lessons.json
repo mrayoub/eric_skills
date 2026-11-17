@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 4,
+  "next_id": 8,
   "lessons": [
     {
       "id": "L-001",
@@ -58,6 +58,78 @@
       ],
       "created": "2026-10-28T21:47:18Z",
       "last_seen": "2026-10-28T21:47:18Z"
+    },
+    {
+      "id": "L-004",
+      "key": "ac_gap::validate the visible recipe in partial documents require an explicit gap instead of bypassing structure",
+      "text": "Validate the visible recipe in partial documents; require an explicit gap instead of bypassing structure.",
+      "signal": "ac_gap",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "entregaveis_oficiais"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "F1 / AC17 / AC33 (document-rendering)"
+      ],
+      "created": "2026-11-17T19:25:02Z",
+      "last_seen": "2026-11-17T19:25:02Z"
+    },
+    {
+      "id": "L-005",
+      "key": "surviving_mutant::test method labels and meanings independently from block ordering and keep adapted applications valid",
+      "text": "Test method labels and meanings independently from block ordering, and keep adapted applications valid.",
+      "signal": "surviving_mutant",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "entregaveis_oficiais"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "M2 / C5 (document-rendering)"
+      ],
+      "created": "2026-11-17T19:25:02Z",
+      "last_seen": "2026-11-17T19:25:02Z"
+    },
+    {
+      "id": "L-006",
+      "key": "surviving_mutant::exercise both sides of each slide limit separately so a different limit cannot mask the regression",
+      "text": "Exercise both sides of each slide limit separately so a different limit cannot mask the regression.",
+      "signal": "surviving_mutant",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "entregaveis_oficiais"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "M1 / C8 (document-rendering)"
+      ],
+      "created": "2026-11-17T19:25:02Z",
+      "last_seen": "2026-11-17T19:25:02Z"
+    },
+    {
+      "id": "L-007",
+      "key": "spec_precision_gap::review example headings against their actual findings generic closure titles do not prove analytical tone",
+      "text": "Review example headings against their actual findings; generic closure titles do not prove analytical tone.",
+      "signal": "spec_precision_gap",
+      "scope": "document-rendering",
+      "status": "candidate",
+      "features": [
+        "entregaveis_oficiais"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "F4 / AC38 (document-rendering)"
+      ],
+      "created": "2026-11-17T19:25:02Z",
+      "last_seen": "2026-11-17T19:25:02Z"
     }
   ]
 }

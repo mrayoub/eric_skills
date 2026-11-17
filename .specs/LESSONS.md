@@ -32,6 +32,30 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: C6 (document-rendering)
 - last seen: 2026-10-28T21:47:18Z
 
+### L-004 - Validate the visible recipe in partial documents; require an explicit gap instead of bypassing structure.
+- signal: `ac_gap` · recurrence: 1 feature(s) · scope: `document-rendering` · harmful: 0
+- features: entregaveis_oficiais
+- evidence: F1 / AC17 / AC33 (document-rendering)
+- last seen: 2026-11-17T19:25:02Z
+
+### L-005 - Test method labels and meanings independently from block ordering, and keep adapted applications valid.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `document-rendering` · harmful: 0
+- features: entregaveis_oficiais
+- evidence: M2 / C5 (document-rendering)
+- last seen: 2026-11-17T19:25:02Z
+
+### L-006 - Exercise both sides of each slide limit separately so a different limit cannot mask the regression.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `document-rendering` · harmful: 0
+- features: entregaveis_oficiais
+- evidence: M1 / C8 (document-rendering)
+- last seen: 2026-11-17T19:25:02Z
+
+### L-007 - Review example headings against their actual findings; generic closure titles do not prove analytical tone.
+- signal: `spec_precision_gap` · recurrence: 1 feature(s) · scope: `document-rendering` · harmful: 0
+- features: entregaveis_oficiais
+- evidence: F4 / AC38 (document-rendering)
+- last seen: 2026-11-17T19:25:02Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.
