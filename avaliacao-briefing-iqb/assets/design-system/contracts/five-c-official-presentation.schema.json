@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eric:schemas:five-c-official-presentation",
+  "title": "5C official presentation",
+  "allOf": [
+    {
+      "$ref": "urn:eric:schemas:deliverable-content"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "deliverable_type": {
+          "const": "five_c_official_presentation"
+        },
+        "metadata": {
+          "type": "object",
+          "required": [
+            "method_application",
+            "decision_required"
+          ],
+          "properties": {
+            "method_application": {
+              "type": "object",
+              "required": [
+                "sessions"
+              ],
+              "properties": {
+                "sessions": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "variant",
+                      "stages",
+                      "out_of_scope_stages",
+                      "adaptation_reason"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                      },
+                      "variant": {
+                        "enum": [
+                          "standard",
+                          "adapted",
+                          "pocket"
+                        ]
+                      },
+                      "stages": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "label",
+                            "meaning",
+                            "official_stage_ids"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                            },
+                            "label": {
+                              "type": "string",
+                              "pattern": "\\S"
+                            },
+                            "meaning": {
+                              "type": "string",
+                              "pattern": "\\S"
+                            },
+                            "official_stage_ids": {
+                              "type": "array",
+                              "uniqueItems": true,
+                              "items": {
+                                "type": "string",
+                                "pattern": "\\S"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "out_of_scope_stages": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "official_stage_id",
+                            "reason"
+                          ],
+                          "properties": {
+                            "official_stage_id": {
+                              "type": "string",
+                              "pattern": "\\S"
+                            },
+                            "reason": {
+                              "type": "string",
+                              "pattern": "\\S"
+                            }
+                          }
+                        }
+                      },
+                      "adaptation_reason": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "decision_required": {
+              "type": "boolean"
+            }
+          }
+        },
+        "citations": {
+          "minItems": 1
+        },
+        "blocks": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data",
+                  "citation_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "callout",
+                      "metric"
+                    ]
+                  },
+                  "citation_ids": {
+                    "minItems": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "challenge_context"
+                      },
+                      "text": {
+                        "type": "string",
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data",
+                  "citation_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "callout",
+                      "metric"
+                    ]
+                  },
+                  "citation_ids": {
+                    "minItems": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "structuring"
+                      },
+                      "text": {
+                        "type": "string",
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data",
+                  "citation_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "callout",
+                      "metric"
+                    ]
+                  },
+                  "citation_ids": {
+                    "minItems": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "conclusion"
+                      },
+                      "text": {
+                        "type": "string",
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data",
+                  "citation_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "callout",
+                      "metric"
+                    ]
+                  },
+                  "citation_ids": {
+                    "minItems": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "recommendations"
+                      },
+                      "text": {
+                        "type": "string",
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "data",
+                  "citation_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "paragraph",
+                      "callout",
+                      "metric"
+                    ]
+                  },
+                  "citation_ids": {
+                    "minItems": 1
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "section_key",
+                      "text"
+                    ],
+                    "properties": {
+                      "section_key": {
+                        "const": "call_to_action"
+                      },
+                      "text": {
+                        "type": "string",
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

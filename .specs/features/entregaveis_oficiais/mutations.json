@@ -1,0 +1,23 @@
+[
+  {
+    "file": "_DESIGN_SYSTEM/scripts/validators/_official.py",
+    "old": "slide_blocks > 4 or slide_words > 140",
+    "new": "slide_blocks > 5 or slide_words > 140",
+    "proof": "python3 -m pytest -q _DESIGN_SYSTEM/tests/test_official_deliverables.py -k test_slide_density",
+    "label": "C8: aceitar cinco blocos no slide"
+  },
+  {
+    "file": "_DESIGN_SYSTEM/scripts/validators/_official.py",
+    "old": "if actual != expected or excluded:",
+    "new": "if excluded:",
+    "proof": "python3 -m pytest -q _DESIGN_SYSTEM/tests/test_official_deliverables.py -k test_standard_methods",
+    "label": "C5: ignorar nomes e significados do playbook na aplicação standard"
+  },
+  {
+    "file": "_DESIGN_SYSTEM/scripts/validators/_official.py",
+    "old": "slide_blocks > 4 or slide_words > 140",
+    "new": "slide_blocks > 4 or slide_words > 141",
+    "proof": "python3 -m pytest -q _DESIGN_SYSTEM/tests/test_official_deliverables.py -k test_slide_density",
+    "label": "C8: aceitar 141 palavras no slide"
+  }
+]

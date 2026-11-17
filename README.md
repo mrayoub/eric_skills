@@ -17,6 +17,11 @@ Na `briefing-inovacao`, as entregas são **Entrevista Inicial de sete campos**,
 Cada skill tem versão própria (`metadata.version` no `SKILL.md`) e é atualizada de forma independente.
 O [`catalog.json`](catalog.json) registra a versão publicada de cada uma.
 
+Os relatórios 4D, 3E e 5C oferecem **Relatório oficial** e **Apresentação oficial** como padrão, com receita comum,
+fontes e tom analítico. O playbook orienta cada método, com aplicações adaptadas e pocket documentadas por sessão.
+Os modelos anteriores continuam disponíveis como **Relatório depreciado** e **Apresentação depreciada**.
+Veja os seis modelos em [`_SAMPLES_ENTREGAVEIS`](./_SAMPLES_ENTREGAVEIS/README.md) e na galeria local.
+
 ## 1. Instalar com `npx skills` (Claude Code, Codex, Cursor, Copilot e outras)
 
 ```bash

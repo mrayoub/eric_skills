@@ -23,3 +23,10 @@ pelo código em `render.py` e `pdf_reportlab.py` e pelas regras de `profiles.jso
 
 Convenção de nome de arquivo: `<deliverable_type>.layout.json`, mesmo valor de
 `deliverable_type` usado nos schemas de `../contracts/`.
+
+## Oficiais 4D, 3E e 5C
+
+Cada novo tipo tem seu próprio layout. Nos relatórios oficiais, o motor em fluxo usa os componentes dos slots e
+preserva a ordem editorial da receita; etapas adaptadas ou prefixadas por sessão recebem slots em fluxo na ordem
+aplicada, sem limitar a altura do texto à miniatura do Studio. Em HTML, PDF e DOCX, conteúdo extenso pagina sem
+redução de fonte. Nas apresentações oficiais, as áreas físicas dos slides são lidas do layout do respectivo tipo.

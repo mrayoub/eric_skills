@@ -16,7 +16,8 @@ def run(content: dict[str, Any]) -> list[str]:
         common = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(common)
         errors.extend(common.validate(content))
-    path = HERE / f"{content.get('deliverable_type', '')}.py"
+    kind = content.get("deliverable_type", "")
+    path = HERE / ("_official.py" if "_official_" in kind else f"{kind}.py")
     if path.is_file():
         spec = importlib.util.spec_from_file_location(f"validators_{path.stem}", path)
         module = importlib.util.module_from_spec(spec)

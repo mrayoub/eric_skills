@@ -1,5 +1,10 @@
 # Escrita e organização do Relatório 5C
 
+> Estrutura dos entregáveis depreciados. Para os oficiais, siga [a receita oficial](entregaveis-oficiais.md),
+> o escopo aplicado e [o tom comum](tom-oficial.md). Os princípios de análise e evidência abaixo continuam úteis;
+> ordem fixa, limite legado de slides e exigência de cobertura integral não substituem a receita oficial.
+
+
 Complementa [a linguagem dos entregáveis](linguagem-dos-entregaveis.md) e [o guia de escrita](guia-de-escrita.md) com
 o que é próprio do 5C. A diferença entre relatório e apresentação, a base comum da análise e a triangulação com o
 diagnóstico ficam em [entregas do 5C](entregas-5c.md). Os [exemplos](exemplos/README.md) mostram estas regras

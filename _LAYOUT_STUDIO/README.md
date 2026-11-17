@@ -104,3 +104,14 @@ Ela só desenha e exporta a estrutura (posições/tamanhos/nomes/fonte de dados)
 Essas coisas ficam para quando a integração com `render.py` for desenhada (ver
 `~/skills-research/relatorio/analise-fidelidade-visual-objetividade.md` e a conversa que
 originou esta ferramenta).
+
+## Etapas dos oficiais
+
+Os seis tipos oficiais oferecem as etapas padrão de seus playbooks. Use **Configurar etapas aplicadas** para editar
+nome, significado, ordem e quantidade por uma lista JSON. Use IDs diferentes por sessão, como `remoto_c1` e
+`presencial_c1`. As fontes de dados dos slots passam a refletir os IDs aplicados, com descrição, execução e desfecho
+no relatório e síntese da execução na apresentação.
+
+A exportação mantém essa configuração no campo `applied_stages` do layout; importar ou reabrir o mesmo arquivo
+restaura as opções. Esse campo configura fontes dos slots e não substitui `metadata.method_application.sessions`
+do JSON canônico, onde ficam escopo, justificativas e exclusões. O botão explica quando o tipo escolhido não é oficial.

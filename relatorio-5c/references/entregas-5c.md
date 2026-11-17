@@ -1,5 +1,10 @@
 # Relatório e apresentação do 5C
 
+> Estrutura dos entregáveis depreciados. Para os oficiais, siga [a receita oficial](entregaveis-oficiais.md),
+> o escopo aplicado e [o tom comum](tom-oficial.md). Os princípios de análise e evidência abaixo continuam úteis;
+> ordem fixa, limite legado de slides e exigência de cobertura integral não substituem a receita oficial.
+
+
 O 5C tem duas entregas. As duas saem da **mesma análise** e das mesmas fontes, mas servem a leitores e usos
 diferentes. Faça a análise uma vez e derive as duas; nunca deixe que uma diga algo que a outra contradiga.
 

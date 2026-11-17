@@ -9,15 +9,15 @@
     "sample-executive-presentation-v1.0.0.json": "f1d45d29c9e78087cd8419fd14b7f5c7e4208cd76654858b53ef70ba6102edf5",
     "sample-executive-presentation-v1.0.0.md": "3b80dcfb06369d3d388a72401e4bddc5c7d330999701a56c059c7770f3e9ceaa",
     "sample-executive-presentation-v1.0.0.pdf": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29",
-    "sample-executive-presentation-v1.0.0.pptx": "ff63129235516e7a1fe1158dda5577d5a56c18dc99f3d8276ceca27c90ad66fe",
+    "sample-executive-presentation-v1.0.0.pptx": "7d418b03f2948a3d4e46cc7373953a39b044d0641b82d74cfdac65672eb2dbed",
     "sample-executive-presentation-v1.0.0.txt": "016615d10b2f5414362f0e617ce1577bddebcb7b9782490b3605dbc0fe0ffdc5"
   },
   "layout": "presentation",
   "paper": "presentation_16_9",
   "pdf_engine": "reportlab",
-  "profile_sha256": "6a1d85a2cfa2d4ecfcbc7bd24762a44d442fcef30a849d609a69e5d5e9128439",
+  "profile_sha256": "f66e28a5f62c9b1a167463aa9d203943e4f1b07f7ecb290564ce194cc7d02843",
   "profile_version": "1.2.0",
-  "renderer_version": "2.0.0",
-  "tokens_sha256": "6c5d87994da141e656d2f8f9561e467d7948fb451eebfebf68d05544a4a1933f",
+  "renderer_version": "2.1.4",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
   "unavailable": {}
 }

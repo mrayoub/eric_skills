@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "studio": [
+    "four_d_official_presentation: selected, configured, exported, reimported",
+    "three_e_official_presentation: selected, configured, exported, reimported",
+    "five_c_official_presentation: selected, configured, exported, reimported"
+  ],
+  "slot": "drawn; configured data source available",
+  "gallery": "six official types and deprecated labels available"
+}

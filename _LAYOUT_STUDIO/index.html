@@ -257,6 +257,7 @@
     <input type="checkbox" id="snapToggle" checked />
   </label>
 
+  <button id="configureStagesBtn" class="secondary" type="button">Configurar etapas aplicadas</button>
   <button id="drawModeBtn" class="secondary">+ Novo slot</button>
   <button id="loadTokensBtn" class="secondary">Carregar tokens.json</button>
 
@@ -301,6 +302,7 @@
   </div>
 </div>
 
+<script src="official-methods.js"></script>
 <script>
 (function () {
   "use strict";
@@ -357,29 +359,39 @@
     three_e_report: ["e1", "e2", "e3", "route"],
     three_e_workshop_record: ["e1", "e2", "e3"],
   };
+  OfficialMethods.types.forEach(type => { SECTION_KEYS_BY_TYPE[type] = OfficialMethods.sections(type); });
   // Rótulos em português, iguais a DELIVERABLE_LABELS de _DESIGN_SYSTEM/scripts/render.py.
   const DELIVERABLE_LABELS = {
-      "briefing": "Entrevista Inicial de sete campos",
-      "briefing_one_page": "Briefing",
-      "briefing_improvement_questionnaire": "Perguntas para fechar lacunas",
-      "briefing_validation": "Avaliação IQB",
-      "innovation_potential_assessment": "Avaliação do potencial de inovação",
-      "four_d_workshop_record": "Registro do workshop 4D",
-      "four_d_report": "Relatório 4D",
-      "three_e_workshop_record": "Registro do workshop 3E",
-      "three_e_report": "Relatório 3E",
-      "innovation_scorecard": "Avaliação das evidências de inovação",
-      "experiment_plan": "Plano de experimentação",
-      "test_card": "Cartão de teste",
-      "learning_card": "Cartão de aprendizado",
-      "experiment_report": "Relatório de experimentação",
-      "evidence_recommendation": "Evidências e recomendação",
-      "executive_presentation": "Apresentação executiva",
-      "five_c_workshop_record": "Registro do workshop 5C",
-      "five_c_report": "Relatório 5C", "five_c_presentation": "Apresentação 5C", "four_d_presentation": "Apresentação 4D", "three_e_presentation": "Apresentação 3E",
-      "cdt": "Cadastro de Demanda Tecnológica (CDT)",
-      "cdt_analysis": "Análise da CDT"
-  };
+  "briefing": "Entrevista Inicial de sete campos",
+  "briefing_one_page": "Briefing",
+  "briefing_improvement_questionnaire": "Perguntas para fechar lacunas",
+  "briefing_validation": "Avaliação IQB",
+  "innovation_potential_assessment": "Avaliação do potencial de inovação",
+  "four_d_workshop_record": "Registro do workshop 4D",
+  "four_d_report": "Relatório depreciado 4D",
+  "four_d_official_report": "Relatório oficial 4D",
+  "three_e_workshop_record": "Registro do workshop 3E",
+  "three_e_report": "Relatório depreciado 3E",
+  "three_e_official_report": "Relatório oficial 3E",
+  "innovation_scorecard": "Avaliação das evidências de inovação",
+  "experiment_plan": "Plano de experimentação",
+  "test_card": "Cartão de teste",
+  "learning_card": "Cartão de aprendizado",
+  "experiment_report": "Relatório de experimentação",
+  "evidence_recommendation": "Evidências e recomendação",
+  "executive_presentation": "Apresentação executiva",
+  "five_c_workshop_record": "Registro do workshop 5C",
+  "five_c_report": "Relatório depreciado 5C",
+  "five_c_official_report": "Relatório oficial 5C",
+  "five_c_presentation": "Apresentação depreciada 5C",
+  "five_c_official_presentation": "Apresentação oficial 5C",
+  "four_d_presentation": "Apresentação depreciada 4D",
+  "four_d_official_presentation": "Apresentação oficial 4D",
+  "three_e_presentation": "Apresentação depreciada 3E",
+  "three_e_official_presentation": "Apresentação oficial 3E",
+  "cdt": "Cadastro de Demanda Tecnológica (CDT)",
+  "cdt_analysis": "Análise da CDT"
+};
   const DELIVERABLE_TYPES = Object.keys(SECTION_KEYS_BY_TYPE)
     .sort((a, b) => (DELIVERABLE_LABELS[a] || a).localeCompare(DELIVERABLE_LABELS[b] || b, "pt-BR"));
   // Opções estruturais que não vêm de um section_key específico do conteúdo.
@@ -399,6 +411,7 @@
     deliverableType: DELIVERABLE_TYPES[0],
     canvas: { unit: "mm", width: PRESETS.a4_portrait.w, height: PRESETS.a4_portrait.h },
     grid_mm: 5,
+    appliedStages: null,
     slots: [], // {id, name, x, y, width, height, z, section_key}
   };
   let selectedId = null;
@@ -418,7 +431,9 @@
   }
 
   function sourceOptionsForCurrentType() {
-    const real = SECTION_KEYS_BY_TYPE[state.deliverableType] || [];
+    const real = OfficialMethods.types.includes(state.deliverableType)
+      ? OfficialMethods.sections(state.deliverableType, state.appliedStages)
+      : (SECTION_KEYS_BY_TYPE[state.deliverableType] || []);
     return ["", ...STRUCTURAL_SOURCES, ...real];
   }
 
@@ -713,7 +728,22 @@
 
   // --- controles de topo ---
   populateDeliverableSelect();
+  $("configureStagesBtn").addEventListener("click", () => {
+    if (!OfficialMethods.types.includes(state.deliverableType)) {
+      alert("Selecione um relatório ou apresentação oficial para configurar suas etapas.");
+      return;
+    }
+    const text = prompt("Etapas aplicadas: edite o JSON para registrar nomes e significados da aplicação. Use IDs diferentes por sessão. O escopo completo fica no JSON canônico do entregável.",
+      JSON.stringify(state.appliedStages || OfficialMethods.stages(state.deliverableType), null, 2));
+    if (text === null) return;
+    try {
+      state.appliedStages = OfficialMethods.parseStages(text);
+      renderSlotList();
+      setStatus("Etapas aplicadas atualizadas. As opções de fonte de dados já refletem a aplicação.");
+    } catch (err) { alert("Etapas inválidas: " + err.message); }
+  });
   deliverableSelect.addEventListener("change", async () => {
+    state.appliedStages = null;
     const newType = deliverableSelect.value;
 
     // Se há uma pasta conectada e já existe um layout salvo para esse tipo,
@@ -837,6 +867,7 @@
   function importPayload(data, sourceLabel) {
     if (!data.canvas || !Array.isArray(data.slots)) throw new Error("JSON não tem o formato esperado (canvas + slots).");
     state.deliverableType = data.deliverable_type || DELIVERABLE_TYPES[0];
+    state.appliedStages = data.applied_stages == null ? null : OfficialMethods.parseStages(JSON.stringify(data.applied_stages));
     ensureDeliverableOption(state.deliverableType);
     state.canvas = { unit: "mm", width: data.canvas.width, height: data.canvas.height };
     state.grid_mm = data.grid_mm || 5;
@@ -933,6 +964,7 @@
     return {
       schema_version: "1.2.0",
       deliverable_type: state.deliverableType,
+      ...(state.appliedStages ? {applied_stages: state.appliedStages} : {}),
       canvas: { unit: "mm", width: state.canvas.width, height: state.canvas.height },
       grid_mm: state.grid_mm,
       slots: state.slots.map(({ id, name, x, y, width, height, z, section_key, display_mode }) => ({

@@ -1,0 +1,130 @@
+Os clientes relacionam previsibilidade a estado e responsabilidade
+
+ID sample-five-c-official-report · versão 1.0.0 · Completo
+
+Exemplo fictício. A escuta relacionou a falta de previsão à informação sobre estado e responsável. Os grupos cocriaram duas propostas; a preferência registrada ainda não demonstra uso nem redução de prazo.
+
+O registro permite retomar a análise e seus encaminhamentos
+
+Este relatório registra como a aplicação foi estruturada, o que ocorreu nas etapas e o que os achados permitem encaminhar. Serve à equipe do projeto e a quem retoma ou decide sobre o trabalho.
+
+Fontes: F01
+
+O ponto de partida orientou a pergunta do encontro
+
+O diagnóstico de pedidos apontava dúvidas sobre andamento. A equipe apresentou essa leitura e ouviu organizações externas antes de discutir propostas. O 5C examinou o que os clientes precisam saber para acompanhar um pedido e orientar testes posteriores.
+
+Fontes: F02
+
+O formato delimitou a escuta e a contribuição de cada sessão
+
+O 5C organiza a escuta e a cocriação com clientes, do contexto aos encaminhamentos. Foi escolhido para entender o que os clientes precisam saber sobre um pedido antes de testar propostas de acompanhamento. A sessão coletiva reuniu seis representantes de três organizações externas, escolhidas por utilizar o fluxo com frequências diferentes. A jornada orientou a escuta, o quadro de experiência desejada apoiou a confirmação e os canvases organizaram a cocriação. A contagem de créditos foi por pessoa presente.
+
+Fontes: F01
+
+C1 Contextualizar: descrição da etapa
+
+Apresentar o desafio, suas fontes, objetivo e combinados.
+
+Fontes: F01
+
+C1 Contextualizar: execução realizada
+
+A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta.
+
+Fontes: F02
+
+C1 Contextualizar: desfecho
+
+Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço.
+
+Fontes: F02
+
+C2 Compreender: descrição da etapa
+
+Escutar experiências, dificuldades e oportunidades com episódios concretos.
+
+Fontes: F01
+
+C2 Compreender: execução realizada
+
+Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura.
+
+Fontes: F02
+
+C2 Compreender: desfecho
+
+A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização.
+
+Fontes: F02
+
+C3 Confirmar: descrição da etapa
+
+Converter dores priorizadas em experiência desejada e critérios observáveis.
+
+Fontes: F01
+
+C3 Confirmar: execução realizada
+
+A confirmação reuniu três necessidades: ver o estado, entender a previsão e identificar o responsável. Os participantes descreveram situações em que a previsão muda e pediram que o motivo da mudança fosse visível.
+
+Fontes: F02
+
+C3 Confirmar: desfecho
+
+Os critérios desejados foram registrados como sinais observáveis de acompanhamento. Não houve aprovação de meta de prazo nem medição de satisfação.
+
+Fontes: F02
+
+C4 Cocriar: descrição da etapa
+
+Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas.
+
+Fontes: F01
+
+C4 Cocriar: execução realizada
+
+Dois grupos produziram canvases. Um propôs uma consulta com estado, previsão e responsável; outro, avisos quando esses dados mudam. As duas propostas responderam às necessidades confirmadas.
+
+Fontes: F02
+
+C4 Cocriar: desfecho
+
+As propostas são hipóteses cocriadas. Menos contatos de acompanhamento é benefício esperado, ainda sem medição; atualização dos dados e acesso às informações são dependências a avaliar.
+
+Fontes: F02
+
+C5 Conduzir: descrição da etapa
+
+Apresentar propostas, priorizar com regra acordada e definir encaminhamentos.
+
+Fontes: F01
+
+C5 Conduzir: execução realizada
+
+Cada um dos seis presentes recebeu dez créditos. A consulta recebeu quarenta dos sessenta créditos; os avisos, vinte. A ata registrou a objeção sobre a possibilidade de mostrar uma previsão desatualizada.
+
+Fontes: F02
+
+C5 Conduzir: desfecho
+
+A consulta ficou como preferência para investigação. A distribuição não aprova implementação nem demonstra eficácia; a qualidade da atualização segue como condição para testar a proposta.
+
+Fontes: F02
+
+A preferência pela consulta depende de informação atualizada
+
+O 5C aprofundou a necessidade de previsibilidade e a ligou à informação sobre estado e responsabilidade. A consulta de andamento recebeu mais créditos, com uma condição explícita: a informação precisa ser atualizada. As propostas seguem como hipóteses para avaliação e teste.
+
+Fontes: F02
+
+Atualização e acesso precisam de avaliação antes do teste
+
+A equipe do projeto deve avaliar atualização e acesso com operação e apoio técnico; prazo a definir. A devolutiva às organizações deve registrar dependências e plano de teste. A aprovação de implementação continua pendente dessa avaliação.
+
+Fontes: F02
+
+Fontes
+
+- F01: roteiro-ficticio Método e escopo planejado da sessão; exemplo fictício.
+- F02: registro-ficticio Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real.

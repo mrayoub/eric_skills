@@ -1,5 +1,10 @@
 # Análise, hipótese e conclusão do Relatório 4D
 
+> Estrutura dos entregáveis depreciados. Para os oficiais, siga [a receita oficial](entregaveis-oficiais.md),
+> o escopo aplicado e [o tom comum](tom-oficial.md). Os princípios de análise e evidência abaixo continuam úteis;
+> ordem fixa, limite legado de slides e exigência de cobertura integral não substituem a receita oficial.
+
+
 O registro de D1 a D4 é necessário: preserva o mural, que pode se perder, e serve à gestão do conhecimento. Mas ele
 não basta. A autora do playbook 4D avaliou um relatório gerado por esta skill (10/11/2026) e apontou que ele relatava
 o que aconteceu sem analisar o que aconteceu, e terminava em ações e desejos soltos em vez de uma hipótese de solução.

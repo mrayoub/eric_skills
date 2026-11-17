@@ -1,0 +1,64 @@
+A visão compartilhada depende de atualização antes de automação
+
+ID sample-three-e-official-presentation · versão 1.0.0 · Completo
+
+Exemplo fictício. O 3E delimitou uma visão compartilhada dos pedidos e um teste de atualização entre áreas. A construção permanece planejada; uso e melhoria de previsibilidade ainda não foram medidos.
+
+O ponto de partida orientou a pergunta do encontro
+
+O 4D apontou registros dispersos na passagem de pedidos entre atendimento e operação. O 3E retomou essa hipótese e a objeção sobre atualização para definir escopo, construção e testes antes de solicitar implementação.
+
+Fontes: F02
+
+A estruturação reuniu operação e apoio técnico para delimitar a construção
+
+O 3E estrutura uma hipótese de solução em escopo, construção e experimentos. Foi escolhido para detalhar a hipótese do 4D e expor as condições ainda abertas antes de construir. A sessão reuniu responsáveis pelo fluxo, atendimento e apoio técnico, escolhidos por conhecer o repasse e a manutenção dos dados. O quadro de escopo separou o que precisa existir do que pode evoluir; os Test Cards organizaram testes prospectivos.
+
+Fontes: F01
+
+O primeiro recorte acompanha o pedido sem substituir os sistemas
+
+O grupo refinou a hipótese do 4D: tornar visíveis responsável, estado e previsão do pedido. Integração automática e substituição dos sistemas ficaram fora do primeiro recorte. Os três componentes respondem à dificuldade de continuidade registrada no 4D. A hipótese permanece parcial quanto ao esforço de atualização, que precisa ser avaliado antes da coleta.
+
+Fontes: F02
+
+A responsabilidade pela atualização condiciona o primeiro protótipo
+
+O plano prevê um protótipo com campos de responsável, estado e previsão. Atendimento abrirá o registro; operação atualizará a passagem. O apoio técnico verificará acesso, enquanto prazos e esforço de manutenção seguem a definir. A construção está planejada, não concluída. A rota permanece indefinida até a avaliação técnica; a dependência central é manter o registro atualizado sem duplicar trabalho.
+
+Fontes: F02
+
+O teste observará atualização antes de avaliar ganho de prazo
+
+TC-01: acreditamos que as duas áreas conseguirão manter o pedido atualizado. O teste acompanhará uma rodada simulada; medirá atualizações feitas e tempo de registro. O limiar será fechado antes da coleta, com responsáveis pelo fluxo. O Test Card é prospectivo e ainda precisa do critério aprovado antes da coleta. Não há resultado de uso ou eficácia. O plano separa observar atualização de medir eventual melhoria da previsibilidade.
+
+Fontes: F02
+
+A construção depende de fechar rota e critério do teste
+
+O 3E transformou a hipótese do 4D em escopo e construção planejados, com teste voltado à atualização. A rota e o esforço técnico seguem abertos. O próximo avanço depende de fechar responsabilidades e critério antes de executar o teste.
+
+Fontes: F02
+
+Fluxo e apoio técnico precisam fechar critério e esforço
+
+Responsáveis pelo fluxo devem fechar o critério do TC-01 antes da coleta; prazo a definir. Apoio técnico deve avaliar esforço e alternativas de rota. A aprovação para construir depende dessa avaliação, sem presumir autorização já concedida.
+
+Fontes: F02
+
+Os responsáveis pelo fluxo decidem sobre a disponibilidade para simulação
+
+Solicita-se aos responsáveis pelo fluxo deliberar sobre a disponibilidade para a simulação. A aprovação do critério do teste permanece pendente; este material não solicita escala da solução.
+
+Fontes: F02
+
+Fluxo e apoio técnico devem registrar critério e data da simulação
+
+Responsáveis pelo fluxo e apoio técnico: registrem critério, responsáveis e data da simulação antes da coleta. Prazo para fechar o plano a definir com a equipe do projeto.
+
+Fontes: F02
+
+Fontes
+
+- F01: roteiro-ficticio Método e escopo planejado da sessão; exemplo fictício.
+- F02: registro-ficticio Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real.

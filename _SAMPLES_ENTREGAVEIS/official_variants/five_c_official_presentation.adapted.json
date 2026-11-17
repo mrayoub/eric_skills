@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "five_c_official_presentation",
+  "locale": "pt-BR",
+  "title": "Os clientes relacionam previsibilidade a estado e responsabilidade",
+  "summary": "Exemplo fictício. A aplicação adaptada confrontou condições de uma oferta existente na rodada final. Os registros orientam novas perguntas; não houve votação nessa rodada nem aprovação de implementação.",
+  "blocks": [
+    {
+      "id": "h_challenge_context",
+      "type": "heading",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_challenge_context",
+      "type": "paragraph",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O diagnóstico de pedidos apontava dúvidas sobre andamento. A equipe apresentou essa leitura e ouviu organizações externas antes de discutir propostas. O 5C examinou o que os clientes precisam saber para acompanhar um pedido e orientar testes posteriores."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "O formato delimitou a escuta e a contribuição de cada sessão",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 5C organiza a escuta e a cocriação com clientes, do contexto aos encaminhamentos. Foi escolhido para entender o que os clientes precisam saber sobre um pedido antes de testar propostas de acompanhamento. Representantes de organizações externas contextualizaram o desafio, relataram experiências, confirmaram necessidades e cocriaram propostas em grupos. A rodada final confrontou condições de uma oferta existente, sem créditos ou ranking. O grupo precisava confrontar uma oferta existente antes de decidir novos testes. Etapas fora do escopo: nenhuma."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_execution_c1",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c1",
+        "text": "A escuta começou pela dúvida sobre o andamento do pedido",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c1",
+        "text": "A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta. Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c2",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c2",
+        "text": "O cliente procura uma previsão quando o pedido muda de área",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c2",
+        "text": "Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura. A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c3",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c3",
+        "text": "A experiência desejada exige saber quem responde pelo próximo movimento",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c3",
+        "text": "A confirmação reuniu três necessidades: ver o estado, entender a previsão e identificar o responsável. Os participantes descreveram situações em que a previsão muda e pediram que o motivo da mudança fosse visível. Os critérios desejados foram registrados como sinais observáveis de acompanhamento. Não houve aprovação de meta de prazo nem medição de satisfação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c4",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c4",
+        "text": "Os grupos propuseram consulta de andamento e avisos de mudança",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c4",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c4",
+        "text": "Dois grupos produziram canvases. Um propôs uma consulta com estado, previsão e responsável; outro, avisos quando esses dados mudam. As duas propostas responderam às necessidades confirmadas. As propostas são hipóteses cocriadas. Menos contatos de acompanhamento é benefício esperado, ainda sem medição; atualização dos dados e acesso às informações são dependências a avaliar."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c5",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c5",
+        "text": "A rodada adaptada confrontou condições antes de escolher propostas",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c5",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c5",
+        "text": "O grupo examinou uma oferta já descrita e registrou condições de adoção. A rodada substituiu a dinâmica prevista; não houve distribuição de créditos nem ranking. As condições registradas orientam perguntas para o próximo teste. A adaptação não fornece preferência comparável ao método integral nem decisão de implementação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "Consulta e avisos dependem de atualização sem preferência formal",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "A escuta ligou previsibilidade a estado e responsabilidade; os grupos cocriaram consulta e avisos de mudança. A rodada final confrontou condições da oferta, sem créditos ou ranking. Atualização e acesso seguem como dependências para testar, sem preferência formal entre as propostas."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "Os achados de acompanhamento precisam orientar o escopo da próxima rodada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. A rodada de condições não aprovou construção nem execução de testes."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_decision",
+      "type": "heading",
+      "data": {
+        "section_key": "decision",
+        "text": "O sponsor decide se haverá nova rodada de aprofundamento",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_decision",
+      "type": "paragraph",
+      "data": {
+        "section_key": "decision",
+        "text": "Solicita-se ao sponsor deliberar se haverá nova rodada de aprofundamento. O pedido se limita a esse encaminhamento, sem aprovação de construção ou escala."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_call_to_action",
+      "type": "heading",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe e sponsor devem registrar decisão e escopo da próxima rodada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_call_to_action",
+      "type": "paragraph",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe do projeto e sponsor: registrem a decisão sobre a próxima rodada e seu escopo. Responsável pela organização e prazo a definir."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-five-c-official-presentation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "adapted",
+          "stages": [
+            {
+              "id": "c1",
+              "label": "C1 Contextualizar",
+              "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados.",
+              "official_stage_ids": [
+                "c1"
+              ]
+            },
+            {
+              "id": "c2",
+              "label": "C2 Compreender",
+              "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos.",
+              "official_stage_ids": [
+                "c2"
+              ]
+            },
+            {
+              "id": "c3",
+              "label": "C3 Confirmar",
+              "meaning": "Converter dores priorizadas em experiência desejada e critérios observáveis.",
+              "official_stage_ids": [
+                "c3"
+              ]
+            },
+            {
+              "id": "c4",
+              "label": "C4 Cocriar",
+              "meaning": "Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas.",
+              "official_stage_ids": [
+                "c4"
+              ]
+            },
+            {
+              "id": "c5",
+              "label": "Confrontar condições",
+              "meaning": "Examinar condições de adoção da oferta apresentada, sem votar propostas.",
+              "official_stage_ids": [
+                "c5"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [],
+          "adaptation_reason": "O grupo precisava confrontar uma oferta existente antes de decidir novos testes."
+        }
+      ]
+    },
+    "decision_required": true
+  }
+}

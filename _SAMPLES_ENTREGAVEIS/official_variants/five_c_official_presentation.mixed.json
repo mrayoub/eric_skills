@@ -1,0 +1,400 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "five_c_official_presentation",
+  "locale": "pt-BR",
+  "title": "Os clientes relacionam previsibilidade a estado e responsabilidade",
+  "summary": "Exemplo fictício. O remoto confirmou temas; no presencial, os grupos cocriaram propostas e priorizaram a consulta. A preferência depende de informação atualizada e ainda não demonstra eficácia.",
+  "blocks": [
+    {
+      "id": "h_challenge_context",
+      "type": "heading",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_challenge_context",
+      "type": "paragraph",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O diagnóstico de pedidos apontava dúvidas sobre andamento. A equipe apresentou essa leitura e ouviu organizações externas antes de discutir propostas. O 5C examinou o que os clientes precisam saber para acompanhar um pedido e orientar testes posteriores."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "O formato delimitou a escuta e a contribuição de cada sessão",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 5C organiza a escuta e a cocriação com clientes, do contexto aos encaminhamentos. Foi escolhido para entender o que os clientes precisam saber sobre um pedido antes de testar propostas de acompanhamento. Duas sessões ouviram organizações externas que usam o fluxo em frequências diferentes. No remoto, a escuta e os post-its confirmaram temas. No presencial, seis representantes trabalharam experiência desejada, canvases e créditos por pessoa presente. A confirmação remota não incluiu critérios de experiência. A sessão remota cobriu C1 a C3 por desenho, com confirmação curta; C4 e C5 ocorreram apenas no presencial."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_execution_remoto_c1",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_remoto_c1",
+        "text": "A escuta começou pela dúvida sobre o andamento do pedido",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_remoto_c1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_remoto_c1",
+        "text": "remoto: A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta. Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_remoto_c2",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_remoto_c2",
+        "text": "O cliente procura uma previsão quando o pedido muda de área",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_remoto_c2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_remoto_c2",
+        "text": "remoto: Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura. A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_remoto_c3",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_remoto_c3",
+        "text": "A confirmação curta registrou os temas que ainda precisam de aprofundamento",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_remoto_c3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_remoto_c3",
+        "text": "remoto: Na sessão remota, os participantes confirmaram os temas por post-its. O formato curto não incluiu experiência desejada, critérios, cocriação ou priorização de propostas. A confirmação indica os temas a aprofundar. Os critérios de experiência ficaram fora do escopo por desenho; não são lacuna de registro desta sessão."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_presencial_c1",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_presencial_c1",
+        "text": "A escuta começou pela dúvida sobre o andamento do pedido",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_presencial_c1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_presencial_c1",
+        "text": "presencial: A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta. Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_presencial_c2",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_presencial_c2",
+        "text": "O cliente procura uma previsão quando o pedido muda de área",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_presencial_c2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_presencial_c2",
+        "text": "presencial: Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura. A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_presencial_c3",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_presencial_c3",
+        "text": "A experiência desejada exige saber quem responde pelo próximo movimento",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_presencial_c3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_presencial_c3",
+        "text": "presencial: A confirmação reuniu três necessidades: ver o estado, entender a previsão e identificar o responsável. Os participantes descreveram situações em que a previsão muda e pediram que o motivo da mudança fosse visível. Os critérios desejados foram registrados como sinais observáveis de acompanhamento. Não houve aprovação de meta de prazo nem medição de satisfação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_presencial_c4",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_presencial_c4",
+        "text": "Os grupos propuseram consulta de andamento e avisos de mudança",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_presencial_c4",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_presencial_c4",
+        "text": "presencial: Dois grupos produziram canvases. Um propôs uma consulta com estado, previsão e responsável; outro, avisos quando esses dados mudam. As duas propostas responderam às necessidades confirmadas. As propostas são hipóteses cocriadas. Menos contatos de acompanhamento é benefício esperado, ainda sem medição; atualização dos dados e acesso às informações são dependências a avaliar."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_presencial_c5",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_presencial_c5",
+        "text": "A consulta de andamento recebeu mais créditos entre os presentes",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_presencial_c5",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_presencial_c5",
+        "text": "presencial: Cada um dos seis presentes recebeu dez créditos. A consulta recebeu quarenta dos sessenta créditos; os avisos, vinte. A ata registrou a objeção sobre a possibilidade de mostrar uma previsão desatualizada. A consulta ficou como preferência para investigação. A distribuição não aprova implementação nem demonstra eficácia; a qualidade da atualização segue como condição para testar a proposta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "A preferência pela consulta depende de informação atualizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O 5C aprofundou a necessidade de previsibilidade e a ligou à informação sobre estado e responsabilidade. A consulta de andamento recebeu mais créditos, com uma condição explícita: a informação precisa ser atualizada. As propostas seguem como hipóteses para avaliação e teste."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "Atualização e acesso precisam de avaliação antes do teste",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar atualização e acesso com operação e apoio técnico; prazo a definir. A devolutiva às organizações deve registrar dependências e plano de teste. A aprovação de implementação continua pendente dessa avaliação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_decision",
+      "type": "heading",
+      "data": {
+        "section_key": "decision",
+        "text": "O sponsor decide sobre a avaliação das dependências da consulta",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_decision",
+      "type": "paragraph",
+      "data": {
+        "section_key": "decision",
+        "text": "Solicita-se ao sponsor deliberar sobre a avaliação de dependências da consulta de andamento. O pedido não inclui aprovação de implementação; o plano de teste deverá voltar com responsáveis e critérios antes da coleta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_call_to_action",
+      "type": "heading",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe e sponsor devem combinar a avaliação e a devolutiva",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_call_to_action",
+      "type": "paragraph",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe do projeto e sponsor: registrem responsáveis pela avaliação e combinem a data da devolutiva com as organizações. Prazo a definir, antes de iniciar o teste da proposta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-five-c-official-presentation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "remoto",
+          "variant": "pocket",
+          "stages": [
+            {
+              "id": "remoto_c1",
+              "label": "C1 Contextualizar",
+              "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados.",
+              "official_stage_ids": [
+                "c1"
+              ]
+            },
+            {
+              "id": "remoto_c2",
+              "label": "C2 Compreender",
+              "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos.",
+              "official_stage_ids": [
+                "c2"
+              ]
+            },
+            {
+              "id": "remoto_c3",
+              "label": "C3 Confirmar",
+              "meaning": "Confirmar temas por post-its, sem construir experiência desejada e critérios nesta sessão curta.",
+              "official_stage_ids": [
+                "c3"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [
+            {
+              "official_stage_id": "c4",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            },
+            {
+              "official_stage_id": "c5",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            }
+          ],
+          "adaptation_reason": "A rodada curta aprofundou a escuta sem realizar as etapas seguintes."
+        },
+        {
+          "id": "presencial",
+          "variant": "standard",
+          "stages": [
+            {
+              "id": "presencial_c1",
+              "label": "C1 Contextualizar",
+              "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados.",
+              "official_stage_ids": [
+                "c1"
+              ]
+            },
+            {
+              "id": "presencial_c2",
+              "label": "C2 Compreender",
+              "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos.",
+              "official_stage_ids": [
+                "c2"
+              ]
+            },
+            {
+              "id": "presencial_c3",
+              "label": "C3 Confirmar",
+              "meaning": "Converter dores priorizadas em experiência desejada e critérios observáveis.",
+              "official_stage_ids": [
+                "c3"
+              ]
+            },
+            {
+              "id": "presencial_c4",
+              "label": "C4 Cocriar",
+              "meaning": "Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas.",
+              "official_stage_ids": [
+                "c4"
+              ]
+            },
+            {
+              "id": "presencial_c5",
+              "label": "C5 Conduzir",
+              "meaning": "Apresentar propostas, priorizar com regra acordada e definir encaminhamentos.",
+              "official_stage_ids": [
+                "c5"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [],
+          "adaptation_reason": ""
+        }
+      ]
+    },
+    "decision_required": true
+  }
+}

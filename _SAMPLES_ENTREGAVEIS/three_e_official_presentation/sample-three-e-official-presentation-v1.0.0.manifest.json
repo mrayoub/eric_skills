@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-three-e-official-presentation",
+  "branding_version": "1.2.0",
+  "content_sha256": "992f0bcd29e70872f684f601a67a41c660ce862f9112f2c5bf99a5a35e152fd1",
+  "content_version": "1.0.0",
+  "deliverable_type": "three_e_official_presentation",
+  "files": {
+    "sample-three-e-official-presentation-v1.0.0.html": "5326eff2ae4530c42f28c2ae426c2d1de40bb1f49a0ed880016e1be6386d0245",
+    "sample-three-e-official-presentation-v1.0.0.json": "992f0bcd29e70872f684f601a67a41c660ce862f9112f2c5bf99a5a35e152fd1",
+    "sample-three-e-official-presentation-v1.0.0.md": "3bb1da5ced67b703613d4b938907f9bac7b4ad62275151e0d2f973172906c2d2",
+    "sample-three-e-official-presentation-v1.0.0.pdf": "8e1599620e75e61c66e23456c4f3683d263aa426906e36ea7023cf6c57a72ada",
+    "sample-three-e-official-presentation-v1.0.0.pptx": "72322c0d4670dd643cae65aaf0aebf090cf05d76c602f5ab0846a33065b91b28",
+    "sample-three-e-official-presentation-v1.0.0.txt": "a5b9e166512b40eab311aa959cc45cc0e53892a4b9c460e72a80cf9238be7ac1"
+  },
+  "layout": "presentation",
+  "paper": "presentation_16_9",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "dc84b7aa005f127480c5d192ea4d67d913e150dc36bdc001a36975fbb840f024",
+  "profile_version": "1.3.0",
+  "renderer_version": "2.2.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

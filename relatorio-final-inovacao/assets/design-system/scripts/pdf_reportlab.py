@@ -265,7 +265,7 @@ def group_sections(blocks: list[dict[str, Any]], block_text: Callable[[dict[str,
 
 
 # Tipos cuja ordem e colunas vêm do layout.json do Layout Studio; o conteúdo continua fluindo entre páginas.
-FLOW_LAYOUT_TYPES = ("innovation_potential_assessment",)
+FLOW_LAYOUT_TYPES = ("innovation_potential_assessment", "four_d_official_report", "three_e_official_report", "five_c_official_report")
 # Tipos em que cada seção ocupa a largura inteira: nunca agrupa duas seções curtas lado a lado.
 SINGLE_COLUMN_TYPES = ("cdt", "cdt_analysis")
 FLOW_FIXED_SLOTS = ("titulo_documento", "identificacao_versao", "logo", "rodape")
@@ -292,6 +292,12 @@ def plan_flow(content: dict[str, Any], slots: dict[str, dict[str, Any]]) -> tupl
     """
     candidates = [{**slot, "key": slot.get("section_key") or name} for name, slot in slots.items()
                   if name not in FLOW_FIXED_SLOTS and (slot.get("section_key") or name) not in FLOW_FIXED_SLOTS]
+    if content["deliverable_type"].endswith("_official_report"):
+        # A receita governa a ordem; slots de etapas prefixadas ou adaptadas herdam o componente em fluxo.
+        by_key = {slot["key"]: slot for slot in candidates}
+        ordered_keys = list(dict.fromkeys(b.get("data", {}).get("section_key") for b in content["blocks"] if b.get("data", {}).get("section_key")))
+        fallback = {"x": 12, "y": 28, "width": 273, "height": 5, "display_mode": "title_and_content"}
+        candidates = [{**by_key.get(key, fallback), "key": key, "y": 28 + i * 5} for i, key in enumerate(ordered_keys)]
     candidates.sort(key=lambda slot: (float(slot["y"]), float(slot["x"])))
     widest = max((float(slot["width"]) for slot in candidates), default=1.0)
     used: set[int] = set()
@@ -309,7 +315,8 @@ def plan_flow(content: dict[str, Any], slots: dict[str, dict[str, Any]]) -> tupl
             used.add(id(heading))
         cell = {"key": key, "heading": heading, "blocks": blocks, "y": float(slot["y"]),
                 "mode": slot.get("display_mode") or "title_and_content",
-                "half": float(slot["width"]) < .6 * widest}
+                "half": float(slot["width"]) < .6 * widest,
+                "keep_together": content["deliverable_type"].endswith("_official_report")}
         if rows and len(rows[-1]) < 2 and abs(rows[-1][0]["y"] - cell["y"]) < 3:
             rows[-1].append(cell)
         else:
@@ -482,7 +489,7 @@ def _flow_row(row: list[dict[str, Any]], styles: dict[str, Any], width: float,
               table_views: Callable[[dict[str, Any]], list[tuple[str, str, list[str], list[list[str]]]]],
               iqb_widths: dict[str, list[int]]) -> list[Any]:
     """Uma linha do layout do Studio: card compacto, caixa escura ou painel de notas, em 1 ou 2 colunas."""
-    from reportlab.platypus import Paragraph, Spacer, Table, TableStyle
+    from reportlab.platypus import KeepTogether, Paragraph, Spacer, Table, TableStyle
 
     palette = styles["_colors"]
     gap = 8
@@ -553,7 +560,7 @@ def _flow_row(row: list[dict[str, Any]], styles: dict[str, Any], width: float,
         matrix = [bodies]
     table = Table(matrix, colWidths=columns, hAlign="LEFT")
     table.setStyle(TableStyle(commands))
-    return [table]
+    return [KeepTogether([table])] if row[0].get("keep_together") else [table]
 
 
 def _report_table(block: dict[str, Any], styles: dict[str, Any], width: float,

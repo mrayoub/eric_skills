@@ -1,0 +1,470 @@
+[
+  {
+    "type": "executive_presentation",
+    "page": 1,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-01.png",
+    "running": "executive_presentation-01.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 6.654,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 2,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-02.png",
+    "running": "executive_presentation-02.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 2.817,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 3,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-03.png",
+    "running": "executive_presentation-03.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.171,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 4,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-04.png",
+    "running": "executive_presentation-04.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.395,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 5,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-05.png",
+    "running": "executive_presentation-05.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.414,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 6,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-06.png",
+    "running": "executive_presentation-06.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 2.938,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "executive_presentation",
+    "page": 7,
+    "source": "_SAMPLES_ENTREGAVEIS/executive_presentation/sample-executive-presentation-v1.0.0.pdf",
+    "reference": "executive_presentation-07.png",
+    "running": "executive_presentation-07.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 1.084,
+    "source_sha256": "38c7a868568f41850845a781874029a5f447b760bb3acf2a582ec76efc462d29"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 1,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-01.png",
+    "running": "five_c_presentation-01.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 8.052,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 2,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-02.png",
+    "running": "five_c_presentation-02.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.193,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 3,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-03.png",
+    "running": "five_c_presentation-03.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.854,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 4,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-04.png",
+    "running": "five_c_presentation-04.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.951,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 5,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-05.png",
+    "running": "five_c_presentation-05.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.872,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 6,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-06.png",
+    "running": "five_c_presentation-06.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.422,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 7,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-07.png",
+    "running": "five_c_presentation-07.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 2.887,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 8,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-08.png",
+    "running": "five_c_presentation-08.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.484,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 9,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-09.png",
+    "running": "five_c_presentation-09.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.134,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 10,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-10.png",
+    "running": "five_c_presentation-10.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.816,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 11,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-11.png",
+    "running": "five_c_presentation-11.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.767,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 12,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-12.png",
+    "running": "five_c_presentation-12.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 2.54,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 13,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-13.png",
+    "running": "five_c_presentation-13.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.276,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "five_c_presentation",
+    "page": 14,
+    "source": "_SAMPLES_ENTREGAVEIS/five_c_presentation/sample-five-c-presentation-v1.0.0.pdf",
+    "reference": "five_c_presentation-14.png",
+    "running": "five_c_presentation-14.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 1.464,
+    "source_sha256": "71a4693f7fb088c11fa28b6cd63011ab868e9a99dcebfce0a64f95ce15b5af6b"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 1,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-01.png",
+    "running": "four_d_presentation-01.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 7.028,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 2,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-02.png",
+    "running": "four_d_presentation-02.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.051,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 3,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-03.png",
+    "running": "four_d_presentation-03.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.822,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 4,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-04.png",
+    "running": "four_d_presentation-04.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.554,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 5,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-05.png",
+    "running": "four_d_presentation-05.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 5.114,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 6,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-06.png",
+    "running": "four_d_presentation-06.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.093,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "four_d_presentation",
+    "page": 7,
+    "source": "_SAMPLES_ENTREGAVEIS/four_d_presentation/sample-four-d-presentation-v1.0.0.pdf",
+    "reference": "four_d_presentation-07.png",
+    "running": "four_d_presentation-07.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 0.745,
+    "source_sha256": "523a8d7e3c8411110fdc6128a549a283641668d2e63eafc6d5da2bd5a8eefbac"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 1,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-01.png",
+    "running": "three_e_presentation-01.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 7.903,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 2,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-02.png",
+    "running": "three_e_presentation-02.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.62,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 3,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-03.png",
+    "running": "three_e_presentation-03.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 2.906,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 4,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-04.png",
+    "running": "three_e_presentation-04.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.333,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 5,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-05.png",
+    "running": "three_e_presentation-05.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 4.595,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 6,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-06.png",
+    "running": "three_e_presentation-06.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.079,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 7,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-07.png",
+    "running": "three_e_presentation-07.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 3.923,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  },
+  {
+    "type": "three_e_presentation",
+    "page": 8,
+    "source": "_SAMPLES_ENTREGAVEIS/three_e_presentation/sample-three-e-presentation-v1.0.0.pdf",
+    "reference": "three_e_presentation-08.png",
+    "running": "three_e_presentation-08.running.png",
+    "size": [
+      961,
+      540
+    ],
+    "mean_rgb_difference": 0.753,
+    "source_sha256": "17ab80edcb9077858578f43b8dee25c616c911083461c18bdcffdeff43aa50c5"
+  }
+]

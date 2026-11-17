@@ -1,5 +1,5 @@
 {
-  "profile_version": "1.2.0",
+  "profile_version": "1.3.0",
   "default_formats": [
     "json",
     "pdf",
@@ -41,7 +41,9 @@
     "four_d_report": {
       "layout": "report_landscape",
       "paper": "a4_landscape",
-      "schema": "four-d-report.schema.json"
+      "schema": "four-d-report.schema.json",
+      "deprecated": true,
+      "replacement": "four_d_official_report"
     },
     "three_e_workshop_record": {
       "layout": "report_landscape",
@@ -51,7 +53,9 @@
     "three_e_report": {
       "layout": "report_landscape",
       "paper": "a4_landscape",
-      "schema": "three-e-report.schema.json"
+      "schema": "three-e-report.schema.json",
+      "deprecated": true,
+      "replacement": "three_e_official_report"
     },
     "innovation_scorecard": {
       "layout": "report_landscape",
@@ -103,7 +107,9 @@
     "five_c_report": {
       "layout": "report_landscape",
       "paper": "a4_landscape",
-      "schema": "five-c-report.schema.json"
+      "schema": "five-c-report.schema.json",
+      "deprecated": true,
+      "replacement": "five_c_official_report"
     },
     "cdt": {
       "layout": "report_portrait",
@@ -125,7 +131,9 @@
         "md",
         "txt"
       ],
-      "schema": "five-c-presentation.schema.json"
+      "schema": "five-c-presentation.schema.json",
+      "deprecated": true,
+      "replacement": "five_c_official_presentation"
     },
     "four_d_presentation": {
       "layout": "presentation",
@@ -137,7 +145,9 @@
         "md",
         "txt"
       ],
-      "schema": "four-d-presentation.schema.json"
+      "schema": "four-d-presentation.schema.json",
+      "deprecated": true,
+      "replacement": "four_d_official_presentation"
     },
     "three_e_presentation": {
       "layout": "presentation",
@@ -149,7 +159,87 @@
         "md",
         "txt"
       ],
-      "schema": "three-e-presentation.schema.json"
+      "schema": "three-e-presentation.schema.json",
+      "deprecated": true,
+      "replacement": "three_e_official_presentation"
+    },
+    "four_d_official_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "four-d-official-report.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "docx",
+        "md",
+        "txt"
+      ]
+    },
+    "four_d_official_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "schema": "four-d-official-presentation.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "pptx",
+        "md",
+        "txt"
+      ]
+    },
+    "three_e_official_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "three-e-official-report.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "docx",
+        "md",
+        "txt"
+      ]
+    },
+    "three_e_official_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "schema": "three-e-official-presentation.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "pptx",
+        "md",
+        "txt"
+      ]
+    },
+    "five_c_official_report": {
+      "layout": "report_landscape",
+      "paper": "a4_landscape",
+      "schema": "five-c-official-report.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "docx",
+        "md",
+        "txt"
+      ]
+    },
+    "five_c_official_presentation": {
+      "layout": "presentation",
+      "paper": "presentation_16_9",
+      "schema": "five-c-official-presentation.schema.json",
+      "formats": [
+        "json",
+        "pdf",
+        "html",
+        "pptx",
+        "md",
+        "txt"
+      ]
     }
   }
 }

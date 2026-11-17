@@ -1,16 +1,27 @@
 ---
 name: relatorio-4d
-description: "Compila ou revisa o Relatório 4D a partir dos registros de D1 a D4 (mural, notas, transcrições, votos, snapshot D2): diagnóstico, alternativas, priorização com denominadores, dissensos, temas transversais, síntese analítica, hipótese de solução para o 3E e conclusão, além da Apresentação 4D, devolutiva curta para gestores. Use quando houver material de um workshop 4D ou fontes equivalentes e o usuário quiser o relatório, a síntese para o BP1, a apresentação ou a revisão de um relatório existente. Não use para preparar ou facilitar o encontro (use workshop-4d)."
+description: "Compila ou revisa o Relatório oficial 4D e a Apresentação oficial 4D a partir dos registros da execução, com fontes e análise; usa o playbook como padrão e admite adaptações e versões pocket documentadas. Mantém Relatório depreciado e Apresentação depreciada quando solicitados. Use para consolidar registros, apresentação a gestores, devolutiva ou revisão. Não use para facilitar o workshop."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.0"
+  version: "1.2.3"
 ---
 
 # Compilar o Relatório 4D
 
 Consolida registros de D1 a D4; playbook e referências visuais não fornecem resultados de uma execução.
+
+## Escolha da entrega
+
+O padrão é **Relatório oficial 4D** (`four_d_official_report`) ou **Apresentação oficial 4D**
+(`four_d_official_presentation`). Leia [a receita oficial](references/entregaveis-oficiais.md) antes de compor.
+Ela define conteúdo, JSON, adaptação do método e [tom da autora](references/tom-oficial.md) para os dois oficiais.
+
+Os antigos continuam disponíveis apenas quando pedidos como **Relatório depreciado 4D** (`four_d_report`)
+ou **Apresentação depreciada 4D** (`four_d_presentation`). As estruturas anteriores nas referências e no roteiro
+integral abaixo orientam análise e os depreciados; não substituem a receita oficial nem obrigam uma aplicação pocket
+a cobrir o playbook inteiro. Nos oficiais, prevalecem a receita oficial e o escopo de aplicação documentado.
 
 ## Leia primeiro
 
@@ -40,9 +51,9 @@ A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do mo
 usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
 com data e não apresente reconstrução como plano combinado previamente.
 
-## Passos
+## Passos de análise: aplicação integral de referência
 
-1. Identifique etapas existentes, mesmo em datas/fases distintas. Snapshot D2 não substitui D3/D4; somente D1/D2 exige parcial. Fontes posteriores são atualizações datadas. Na compilação assíncrona, declare materiais substitutos e deliberações não inferíveis; BP1 não é pré-requisito.
+1. Identifique etapas existentes, mesmo em datas/fases distintas. Se D3/D4 estavam previstas e faltam registros, somente D1/D2 exige parcial. Uma pocket documentada que previa apenas D1/D2 pode estar completa nesse escopo. Fontes posteriores são atualizações datadas. Na compilação assíncrona, declare materiais substitutos e deliberações não inferíveis; BP1 não é pré-requisito.
 2. Inventarie briefing, snapshot, mural, transcrições, dados, alternativas e votos. Distinga original/derivado; extraia páginas, linhas, timestamps e imagens. Pergunte só por documentos/decisões ausentes.
 3. Organize D1 percepções/enquadramento, D2 jornada/diagnóstico, D3 alternativas ligadas às dores, D4 ranking/regras/dissensos/responsáveis, conclusão e próximos passos. Preserve participantes, votos, denominadores e fontes.
 4. Distinga observação, relato, hipótese causal e interpretação; exponha contraevidências/conflitos. Dados de briefing e votos não validam eficácia, adoção ou impacto; voto prioriza investigação.
@@ -59,6 +70,8 @@ Saída (trecho):
 > Ranking não comprova impacto.
 
 ## Checagem final
+
+Nos oficiais, confira a receita e as etapas aplicadas conforme [o guia](references/entregaveis-oficiais.md). Os itens metodológicos abaixo se aplicam quando incluídos no escopo, preservando lacunas e exclusões por desenho.
 
 - [ ] D1 a D4 em ordem, com etapas ausentes identificadas
 - [ ] Texto/números, denominadores e fontes reconciliados
@@ -77,10 +90,14 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
-com `deliverable_type` `four_d_report` para o relatório e `four_d_presentation` para a Apresentação 4D (no máximo 6 slides de conteúdo, conforme [o guia](references/analise-e-conclusao-4d.md#duas-saídas-da-mesma-base)), as duas derivadas da mesma análise: monte o JSON canônico, rode
-`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
-JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"`: nunca contorne o schema.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e siga o [design system](assets/design-system/README.md) e os tipos oficiais acima por padrão; os tipos antigos só
+quando o usuário solicitar os depreciados. Faça a análise uma vez e derive relatório e apresentação da mesma base.
+Siga [a receita oficial](references/entregaveis-oficiais.md) para montar o JSON de cada oficial.
+
+
+Rode `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o JSON junto dos
+derivados. Para oficiais, HTML e PDF fazem parte do perfil; relatório também gera DOCX e apresentação, PPTX.
+Use linguagem simples e não use travessão. Corrija falhas de validação; havendo lacuna decisiva, registre versão
+parcial ou inconclusiva, sem usar esse estado para esconder conteúdo ausente nem inventar achados.
 
 **Proveniência:** reescrita de fonte metodológica RC6 (`compile-4d-report/`); a ordem interna D1 a D4 foi preservada, sem transformar a fase de origem em condição de uso.
