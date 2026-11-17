@@ -144,7 +144,7 @@
       "data": {
         "level": 2,
         "section_key": "conclusion",
-        "text": "O desfecho orienta o próximo passo dentro do escopo realizado"
+        "text": "A preferência pela consulta depende de informação atualizada"
       },
       "id": "h_conclusion",
       "type": "heading"
@@ -164,7 +164,7 @@
       "data": {
         "level": 2,
         "section_key": "recommendations",
-        "text": "As dependências precisam de responsáveis antes do próximo avanço"
+        "text": "Atualização e acesso precisam de avaliação antes do teste"
       },
       "id": "h_recommendations",
       "type": "heading"
@@ -184,7 +184,7 @@
       "data": {
         "level": 2,
         "section_key": "decision",
-        "text": "A decisão solicitada delimita o próximo avanço do projeto"
+        "text": "O sponsor decide sobre a avaliação das dependências da consulta"
       },
       "id": "h_decision",
       "type": "heading"
@@ -204,7 +204,7 @@
       "data": {
         "level": 2,
         "section_key": "call_to_action",
-        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada"
+        "text": "Equipe e sponsor devem combinar a avaliação e a devolutiva"
       },
       "id": "h_call_to_action",
       "type": "heading"

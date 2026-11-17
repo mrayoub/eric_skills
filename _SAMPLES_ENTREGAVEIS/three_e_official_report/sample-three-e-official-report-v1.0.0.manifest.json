@@ -1,16 +1,16 @@
 {
   "artifact_id": "sample-three-e-official-report",
   "branding_version": "1.2.0",
-  "content_sha256": "4dc6acb844155cf135a45f180f0ab9c8216ed94b48c70fa715604f4c4284da43",
+  "content_sha256": "d505a6ac7742d3d4c7b3724629b990cebed25c50cb3ec85c7f50cbbe9e2e3d6d",
   "content_version": "1.0.0",
   "deliverable_type": "three_e_official_report",
   "files": {
-    "sample-three-e-official-report-v1.0.0.docx": "ac2fa65ffa3ed3fe809d22e7caf68241330f1283942762e6d0886022b5f57472",
-    "sample-three-e-official-report-v1.0.0.html": "538297b81b80767b32365ec8f6ca73b114859e6e12c6acd3f34756e72b98a0e3",
-    "sample-three-e-official-report-v1.0.0.json": "4dc6acb844155cf135a45f180f0ab9c8216ed94b48c70fa715604f4c4284da43",
-    "sample-three-e-official-report-v1.0.0.md": "f1eb9c62d2538f0da77a1d59eb77a3295b25d95f5766211ef4926f2942a6fda0",
-    "sample-three-e-official-report-v1.0.0.pdf": "e1bf254329a2271c7d934cdbb4281b8fb9f0e34c005e27c3d6a7ed688fcaa5ba",
-    "sample-three-e-official-report-v1.0.0.txt": "96870b45851c65d1d8f3ba30becb6ca4df7cc7b33343a6e27dc5f66956853a44"
+    "sample-three-e-official-report-v1.0.0.docx": "bf6ddb98c1521c1354997d810efea4ea839318b024285118a0a9c36fd6f4654a",
+    "sample-three-e-official-report-v1.0.0.html": "744ec8c632f79768138184c69fc8dfa47afa7fa5a6acf2877c204ae88daf4d0e",
+    "sample-three-e-official-report-v1.0.0.json": "d505a6ac7742d3d4c7b3724629b990cebed25c50cb3ec85c7f50cbbe9e2e3d6d",
+    "sample-three-e-official-report-v1.0.0.md": "70d864b8ab943dded6ff97bbfc2c0646e699568633812857e9af02b7c71423a2",
+    "sample-three-e-official-report-v1.0.0.pdf": "a162e23430604ab810a272f39f06c15d83bdfed4e004d4aa67fcd40f27cd747f",
+    "sample-three-e-official-report-v1.0.0.txt": "fdc468919f93e4745c58091f54aa5ac5a0f16c59245e004c8ab3df8cda5f61e6"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

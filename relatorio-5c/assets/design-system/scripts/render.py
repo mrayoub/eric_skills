@@ -209,6 +209,14 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
             return f"{list(error.path)}: {error.message}"
         raise ValueError("Conteúdo inválido: " + "; ".join(schema_error(e) for e in errors[:8]))
 
+    if "_official_" in kind and effective_completeness != "complete":
+        # A versão parcial conserva o inventário; a lacuna fica no texto da etapa.
+        official_schema = read_json(ROOT / "contracts" / profile["schema"])
+        application_schema = official_schema["allOf"][1]["properties"]["metadata"]["properties"]["method_application"]
+        application_errors = list(Draft202012Validator(application_schema).iter_errors(meta.get("method_application")))
+        if application_errors:
+            raise ValueError("metadata.method_application: " + "; ".join(error.message for error in application_errors[:8]))
+
     # Perfil de conteúdo opcional: exige seções além do contrato do tipo nas versões completas.
     content_profile = meta.get("content_profile")
     if content_profile is not None:
@@ -295,7 +303,7 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
         unknown = nested_citations(block["data"]) - citation_ids
         if unknown:
             raise ValueError(f"{block['id']}: citações aninhadas inexistentes: {sorted(unknown)}")
-    if effective_completeness == "complete":
+    if effective_completeness == "complete" or "_official_" in kind:
         import importlib.util
 
         spec = importlib.util.spec_from_file_location("deliverable_validators", ROOT / "scripts/validators/__init__.py")

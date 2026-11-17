@@ -40,25 +40,25 @@ Cada participante recebeu três créditos. A visão compartilhada recebeu oito d
 
 Fontes: F02
 
-O desfecho orienta o próximo passo dentro do escopo realizado
+A visão compartilhada segue ao 3E com atualização por esclarecer
 
 O 4D aprofundou o problema de demora ao relacioná-lo à continuidade do registro entre áreas. A hipótese de uma visão compartilhada segue ao 3E com preferência do grupo, sem evidência de redução de prazo. A atualização da informação é a principal condição a examinar.
 
 Fontes: F02
 
-As dependências precisam de responsáveis antes do próximo avanço
+O 3E precisa delimitar escopo e responsabilidade pela atualização
 
 A equipe do projeto deve estruturar escopo e responsabilidade pela atualização no 3E; prazo a definir. A aprovação de construção permanece pendente de escopo e esforço. A preferência registrada não substitui essa aprovação.
 
 Fontes: F02
 
-A decisão solicitada delimita o próximo avanço do projeto
+O sponsor decide sobre a abertura do 3E
 
 Solicita-se ao sponsor deliberar sobre a abertura do 3E para estruturar a hipótese. A construção da solução ainda não está submetida à aprovação; a decisão deve considerar a disponibilidade das duas áreas.
 
 Fontes: F02
 
-Os responsáveis devem registrar o encaminhamento antes da próxima rodada
+As duas áreas devem indicar representantes para estruturar a hipótese
 
 Sponsor e representantes das duas áreas: indiquem quem participará do 3E e registrem a decisão sobre sua abertura. Prazo a definir com a equipe do projeto.
 

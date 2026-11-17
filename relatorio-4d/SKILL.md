@@ -5,7 +5,7 @@ license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.2"
+  version: "1.2.3"
 ---
 
 # Compilar o Relatório 4D
@@ -53,7 +53,7 @@ com data e não apresente reconstrução como plano combinado previamente.
 
 ## Passos de análise: aplicação integral de referência
 
-1. Identifique etapas existentes, mesmo em datas/fases distintas. Snapshot D2 não substitui D3/D4; somente D1/D2 exige parcial. Fontes posteriores são atualizações datadas. Na compilação assíncrona, declare materiais substitutos e deliberações não inferíveis; BP1 não é pré-requisito.
+1. Identifique etapas existentes, mesmo em datas/fases distintas. Se D3/D4 estavam previstas e faltam registros, somente D1/D2 exige parcial. Uma pocket documentada que previa apenas D1/D2 pode estar completa nesse escopo. Fontes posteriores são atualizações datadas. Na compilação assíncrona, declare materiais substitutos e deliberações não inferíveis; BP1 não é pré-requisito.
 2. Inventarie briefing, snapshot, mural, transcrições, dados, alternativas e votos. Distinga original/derivado; extraia páginas, linhas, timestamps e imagens. Pergunte só por documentos/decisões ausentes.
 3. Organize D1 percepções/enquadramento, D2 jornada/diagnóstico, D3 alternativas ligadas às dores, D4 ranking/regras/dissensos/responsáveis, conclusão e próximos passos. Preserve participantes, votos, denominadores e fontes.
 4. Distinga observação, relato, hipótese causal e interpretação; exponha contraevidências/conflitos. Dados de briefing e votos não validam eficácia, adoção ou impacto; voto prioriza investigação.

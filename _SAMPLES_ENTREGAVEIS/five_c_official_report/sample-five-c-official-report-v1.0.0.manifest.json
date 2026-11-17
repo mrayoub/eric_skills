@@ -1,16 +1,16 @@
 {
   "artifact_id": "sample-five-c-official-report",
   "branding_version": "1.2.0",
-  "content_sha256": "62e74457450e816c9d635ade4e3714dc69a9f782bacf4bb25c50d5790d6a4d2f",
+  "content_sha256": "13cba7f5abca5591933d5389393586711db833c053252032c8b200fc9b2ffbe4",
   "content_version": "1.0.0",
   "deliverable_type": "five_c_official_report",
   "files": {
-    "sample-five-c-official-report-v1.0.0.docx": "51c9ecd297112169dad1cef9eec83213e27156b9b5af341c93eddae2b9390d15",
-    "sample-five-c-official-report-v1.0.0.html": "a19abf2a3b3fd2781bbf9359e2c0b4eae77ed6ffb02912da6b114d524ba55b9c",
-    "sample-five-c-official-report-v1.0.0.json": "62e74457450e816c9d635ade4e3714dc69a9f782bacf4bb25c50d5790d6a4d2f",
-    "sample-five-c-official-report-v1.0.0.md": "84a0058e9278bc5d8b6fc3c981a1ad37bbda53e973e7f3c919b86fccb11efbea",
-    "sample-five-c-official-report-v1.0.0.pdf": "e58f1ca433d3a00780084eba329df720b5430122f165ae2fc8f87c47cb8462ea",
-    "sample-five-c-official-report-v1.0.0.txt": "5f26613d6fd77484a4fbb341f44663b16083c028234aa399583d899b6c900560"
+    "sample-five-c-official-report-v1.0.0.docx": "98d2d6c58d308f213705d82cb7e5eee0a5b2f366323fcc9ee9212f1aca9b8b6a",
+    "sample-five-c-official-report-v1.0.0.html": "6cbc47197c6b9fe0b3f7594277babf235a9448a062f57c67f2e082f4dc0833b6",
+    "sample-five-c-official-report-v1.0.0.json": "13cba7f5abca5591933d5389393586711db833c053252032c8b200fc9b2ffbe4",
+    "sample-five-c-official-report-v1.0.0.md": "9c3652eacdfd518d797566dbc3809d90ff7de201bfc96f5e19194c2d717b72d0",
+    "sample-five-c-official-report-v1.0.0.pdf": "f2124e6be65e3d5f801a406b5aa496c8d2a41bf69c04c8c70d0a6687e1ecce6c",
+    "sample-five-c-official-report-v1.0.0.txt": "6a698b6febf9347b6ff1b0a8a425adf31b9a08371bfc9985a67ebd8236bb9276"
   },
   "layout": "report_landscape",
   "paper": "a4_landscape",

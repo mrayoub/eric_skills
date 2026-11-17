@@ -76,13 +76,13 @@ O Test Card é prospectivo e ainda precisa do critério aprovado antes da coleta
 
 Fontes: F02
 
-## O desfecho orienta o próximo passo dentro do escopo realizado
+## A construção depende de fechar rota e critério do teste
 
 O 3E transformou a hipótese do 4D em escopo e construção planejados, com teste voltado à atualização. A rota e o esforço técnico seguem abertos. O próximo avanço depende de fechar responsabilidades e critério antes de executar o teste.
 
 Fontes: F02
 
-## As dependências precisam de responsáveis antes do próximo avanço
+## Fluxo e apoio técnico precisam fechar critério e esforço
 
 Responsáveis pelo fluxo devem fechar o critério do TC-01 antes da coleta; prazo a definir. Apoio técnico deve avaliar esforço e alternativas de rota. A aprovação para construir depende dessa avaliação, sem presumir autorização já concedida.
 

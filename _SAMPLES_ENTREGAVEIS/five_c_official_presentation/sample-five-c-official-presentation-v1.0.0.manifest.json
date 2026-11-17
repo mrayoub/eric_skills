@@ -1,16 +1,16 @@
 {
   "artifact_id": "sample-five-c-official-presentation",
   "branding_version": "1.2.0",
-  "content_sha256": "ca19708f45d9de7cc9360ef77b465a5425375dbc498626573a33fee85adfbd37",
+  "content_sha256": "49a1ca82cae2eab5e3a5c591bf166d4664141e4c98242f46b23b8cea9cfc6822",
   "content_version": "1.0.0",
   "deliverable_type": "five_c_official_presentation",
   "files": {
-    "sample-five-c-official-presentation-v1.0.0.html": "487df857d8950a6932c20473ae107de711e1718aea11f682ff9af17bebafc36f",
-    "sample-five-c-official-presentation-v1.0.0.json": "ca19708f45d9de7cc9360ef77b465a5425375dbc498626573a33fee85adfbd37",
-    "sample-five-c-official-presentation-v1.0.0.md": "4a96e6e1ae040ea5a9b0c189e9f57b279a46845423cc135788ba6af22f7c00bd",
-    "sample-five-c-official-presentation-v1.0.0.pdf": "b4f025a02a96153fd6ddaf347051718463b337901475147fcae7aa648639f4af",
-    "sample-five-c-official-presentation-v1.0.0.pptx": "8b3520db9d495e9a86c087bba446bafada9c1fc6b9c0478c3e5f6413979bc1fc",
-    "sample-five-c-official-presentation-v1.0.0.txt": "cec9657907d1668d12d559b12f64dc4d5e6e0b103d2fc8859361f6973a57d5d9"
+    "sample-five-c-official-presentation-v1.0.0.html": "b5b91b13b7508bffaac3bddfa53ede819f929804fd258d5a6686eef57f5bf62f",
+    "sample-five-c-official-presentation-v1.0.0.json": "49a1ca82cae2eab5e3a5c591bf166d4664141e4c98242f46b23b8cea9cfc6822",
+    "sample-five-c-official-presentation-v1.0.0.md": "663cbf3b8823a1f6fbce31ed4d22aeae6a0948749ec7957da1930dcfdbaab66a",
+    "sample-five-c-official-presentation-v1.0.0.pdf": "146e4c1a323d9e9e2d46c70bdcbd8a472f70a8575532984d4e160d7bcf5a85b1",
+    "sample-five-c-official-presentation-v1.0.0.pptx": "8131494c830688bf155c3b97d75a177055eee7fc637e596915c7c3ceb1c1604e",
+    "sample-five-c-official-presentation-v1.0.0.txt": "0c86419dfb5533aa432ac8c2d7a8e5e8176b4d2bb57a7b00b0278b7ea0a0ab44"
   },
   "layout": "presentation",
   "paper": "presentation_16_9",

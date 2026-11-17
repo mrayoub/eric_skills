@@ -112,13 +112,13 @@ A consulta ficou como preferência para investigação. A distribuição não ap
 
 Fontes: F02
 
-## O desfecho orienta o próximo passo dentro do escopo realizado
+## A preferência pela consulta depende de informação atualizada
 
 O 5C aprofundou a necessidade de previsibilidade e a ligou à informação sobre estado e responsabilidade. A consulta de andamento recebeu mais créditos, com uma condição explícita: a informação precisa ser atualizada. As propostas seguem como hipóteses para avaliação e teste.
 
 Fontes: F02
 
-## As dependências precisam de responsáveis antes do próximo avanço
+## Atualização e acesso precisam de avaliação antes do teste
 
 A equipe do projeto deve avaliar atualização e acesso com operação e apoio técnico; prazo a definir. A devolutiva às organizações deve registrar dependências e plano de teste. A aprovação de implementação continua pendente dessa avaliação.
 

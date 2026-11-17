@@ -94,13 +94,13 @@ A preferência orienta o que aprofundar no 3E. Não houve aprovação de constru
 
 Fontes: F02
 
-## O desfecho orienta o próximo passo dentro do escopo realizado
+## A visão compartilhada segue ao 3E com atualização por esclarecer
 
 O 4D aprofundou o problema de demora ao relacioná-lo à continuidade do registro entre áreas. A hipótese de uma visão compartilhada segue ao 3E com preferência do grupo, sem evidência de redução de prazo. A atualização da informação é a principal condição a examinar.
 
 Fontes: F02
 
-## As dependências precisam de responsáveis antes do próximo avanço
+## O 3E precisa delimitar escopo e responsabilidade pela atualização
 
 A equipe do projeto deve estruturar escopo e responsabilidade pela atualização no 3E; prazo a definir. A aprovação de construção permanece pendente de escopo e esforço. A preferência registrada não substitui essa aprovação.
 

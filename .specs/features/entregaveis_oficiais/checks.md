@@ -4,7 +4,7 @@ Mutations: 3
 Build: `python3 _TOOLS/sync_shared.py --check`; `python3 _TOOLS/build_catalog.py --check`; `python3 _TOOLS/build_dist.py --check`
 Plan: `.specs/features/entregaveis_oficiais/plan.md`
 
-17 checks em seis slices do plano, quatro contratos persistentes, nenhuma questão aberta.
+18 checks em seis slices do plano, quatro contratos persistentes, nenhuma questão aberta. C18 acrescentado após o achado F1 do Verifier; preserva AC17/33 nas versões parciais e inconclusivas.
 
 ## Checks
 
@@ -59,6 +59,9 @@ Proof: `python3 -m pytest -q _DESIGN_SYSTEM/tests/test_official_deliverables.py 
 **C17** - Configuração, exportação e reimportação das etapas funcionam pelos controles reais do Studio; a galeria abre os seis oficiais (AC 5, 6).
 Proof: `node .specs/features/entregaveis_oficiais/walk-studio.cjs`
 
+**C18** - Oficial parcial ou inconclusivo conserva inventário e receita ordenada; a seção sem registro exibe pendência explícita, sem exigir fonte inexistente nem aceitar afirmação sem fonte (AC 17, 33).
+Proof: `python3 -m pytest -q _DESIGN_SYSTEM/tests/test_official_deliverables.py -k test_partial_recipe`
+
 ## Coverage
 
 | Set (size) | Member -> proof | Unproven |
@@ -69,7 +72,7 @@ Proof: `node .specs/features/entregaveis_oficiais/walk-studio.cjs`
 | Receita do relatório (8 grupos) | título e finalidade C4 C12 · introdução C4 · estruturação C4 · descrição C4 · execução C4 · desfecho C4 · conclusão C4 · recomendações C4 | - |
 | Receita do pitch (7 grupos) | contextualização C6 · estruturação C6 · execução C6 · conclusão C6 · recomendações C6 · decisão C7 · call to action C6 | - |
 | Decisão (4 estados) | true C7 · false C7 · ausente C7 · desconhecida C7 | - |
-| Cobertura por sessão (4 estados) | integral C5 · pocket por desenho C9 · lacuna C9 · sessões mistas C10 | - |
+| Cobertura por sessão (4 estados) | integral C5 · pocket por desenho C9 · lacuna C9 C18 · sessões mistas C10 | - |
 | Landing (4) | identificadores C12 C13 · receita dinâmica C4 C6 · decisão C7 · inventário C11 | - |
 | Entidades (10) | SKILL C1 · TIPO_ENTREGAVEL C12 · CONTRATO C4 · PERFIL_VISUAL C12 · JSON_CANONICO C12 · APLICACAO_METODO C11 · SESSAO C10 · ETAPA_APLICADA C11 · ARQUIVO_DERIVADO C12 · PACOTE C16 | - |
 | Leitores (7) | skills C1 C14 · renderer C12 · galeria C2 C17 · Studio C3 C17 · amostras C12 · catálogo C16 · pacotes C16 | - |
@@ -91,7 +94,7 @@ Proof: `node .specs/features/entregaveis_oficiais/walk-studio.cjs`
 ## Handoff
 
 - **Settled mid-build:** user autorizou commit, merge e push ao GitHub após testes passarem; user: "aprovado" em 2026-11-17; padrão dos playbooks, adaptação/pocket nos três métodos e tom da autora nos seis oficiais confirmados na revisão anterior.
-- **Dispatched:** revisão editorial independente prevista antes do envio, base e53a71c593a19df777a9cc4b9dc73f78f691fa57 com alterações locais; Verifier final ainda não enviado.
+- **Dispatched:** Verifier final independente solicitado em 2026-11-17 no HEAD `f2553f5`, diff `e53a71c..f2553f5`, após `proofs.md` registrar 20 provas verdes. Revisão editorial preliminar concluída em `editorial-review.md`. Fontes visuais são inspiração, sem capturas vinculantes; controles reais do Studio e galeria provados por C17.
 - **Boundary:** retomado em 2026-11-17 a partir da sessão `01a1ea00-a992-7d32-bd43-030e69693142`. Implementação e revisão editorial concluídas; 13 versões atualizadas e pacotes reconstruídos. Comparação dos 22 DOCX/PDF passou (10 testes e 130 subtests). Suíte completa e provas finais em execução; Verifier final e publicação ainda pendentes. As alterações preexistentes na especificação `pptx_pdf_visual_parity` permanecem fora deste commit.
 - **Abandoned:** nenhum.
 - **Walked:** Chrome headless local: seleção dos três tipos de apresentação oficial, botão Configurar etapas aplicadas, prévia/exportação e importação por arquivo, desenho de slot e seleção de sua fonte; galeria abre HTML/PDF dos seis oficiais. Resultado PASS em evidence/walk.json; sem captura vinculante.

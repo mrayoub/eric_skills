@@ -124,7 +124,7 @@
       "data": {
         "level": 2,
         "section_key": "conclusion",
-        "text": "O desfecho orienta o próximo passo dentro do escopo realizado"
+        "text": "A visão compartilhada segue ao 3E com atualização por esclarecer"
       },
       "id": "h_conclusion",
       "type": "heading"
@@ -144,7 +144,7 @@
       "data": {
         "level": 2,
         "section_key": "recommendations",
-        "text": "As dependências precisam de responsáveis antes do próximo avanço"
+        "text": "O 3E precisa delimitar escopo e responsabilidade pela atualização"
       },
       "id": "h_recommendations",
       "type": "heading"
@@ -164,7 +164,7 @@
       "data": {
         "level": 2,
         "section_key": "decision",
-        "text": "A decisão solicitada delimita o próximo avanço do projeto"
+        "text": "O sponsor decide sobre a abertura do 3E"
       },
       "id": "h_decision",
       "type": "heading"
@@ -184,7 +184,7 @@
       "data": {
         "level": 2,
         "section_key": "call_to_action",
-        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada"
+        "text": "As duas áreas devem indicar representantes para estruturar a hipótese"
       },
       "id": "h_call_to_action",
       "type": "heading"

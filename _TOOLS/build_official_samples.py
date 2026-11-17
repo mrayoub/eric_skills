@@ -147,16 +147,32 @@ def compose(method: str, form: str, sessions: list, variant_note: str = "") -> d
             ("five_c", False): "A escuta ligou previsibilidade a estado e responsabilidade; os grupos cocriaram consulta e avisos de mudança. A rodada final confrontou condições da oferta, sem créditos ou ranking. Atualização e acesso seguem como dependências para testar, sem preferência formal entre as propostas.",
         }
         conclusion = scoped_conclusions[(method, reduced)]
-        next_step = "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação."
+        next_step = "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. " + ("Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação." if reduced else "A rodada de condições não aprovou construção nem execução de testes.")
         decision = "Solicita-se ao sponsor deliberar se haverá nova rodada de aprofundamento. O pedido se limita a esse encaminhamento, sem aprovação de construção ou escala."
         cta = "Equipe do projeto e sponsor: registrem a decisão sobre a próxima rodada e seu escopo. Responsável pela organização e prazo a definir."
     else:
         conclusion, next_step, decision, cta = (scenario[k] for k in ("conclusion", "next", "decision", "cta"))
-    section("conclusion", "O desfecho orienta o próximo passo dentro do escopo realizado", conclusion)
-    section("recommendations", "As dependências precisam de responsáveis antes do próximo avanço", next_step)
+    closing_titles = {
+        "four_d": ["A visão compartilhada segue ao 3E com atualização por esclarecer", "O 3E precisa delimitar escopo e responsabilidade pela atualização", "O sponsor decide sobre a abertura do 3E", "As duas áreas devem indicar representantes para estruturar a hipótese"],
+        "three_e": ["A construção depende de fechar rota e critério do teste", "Fluxo e apoio técnico precisam fechar critério e esforço", "Os responsáveis pelo fluxo decidem sobre a disponibilidade para simulação", "Fluxo e apoio técnico devem registrar critério e data da simulação"],
+        "five_c": ["A preferência pela consulta depende de informação atualizada", "Atualização e acesso precisam de avaliação antes do teste", "O sponsor decide sobre a avaliação das dependências da consulta", "Equipe e sponsor devem combinar a avaliação e a devolutiva"],
+    }
+    titles = closing_titles[method]
+    if reduced or adapted:
+        scoped_titles = {
+            ("four_d", True): "O diagnóstico aponta registros dispersos sem alternativa priorizada",
+            ("three_e", True): "O escopo está delimitado e o planejamento dos testes permanece aberto",
+            ("five_c", True): "A escuta confirmou temas sem cocriar ou priorizar propostas",
+            ("four_d", False): "As condições da oferta seguem abertas sem priorização por créditos",
+            ("three_e", False): "A avaliação técnica e os Test Cards ainda precisam ser planejados",
+            ("five_c", False): "Consulta e avisos dependem de atualização sem preferência formal",
+        }
+        titles = [scoped_titles[(method, reduced)], "Os achados de acompanhamento precisam orientar o escopo da próxima rodada", "O sponsor decide se haverá nova rodada de aprofundamento", "Equipe e sponsor devem registrar decisão e escopo da próxima rodada"]
+    section("conclusion", titles[0], conclusion)
+    section("recommendations", titles[1], next_step)
     if form == "presentation":
-        section("decision", "A decisão solicitada delimita o próximo avanço do projeto", decision)
-        section("call_to_action", "Os responsáveis devem registrar o encaminhamento antes da próxima rodada", cta)
+        section("decision", titles[2], decision)
+        section("call_to_action", titles[3], cta)
     return item
 
 

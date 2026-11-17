@@ -81,7 +81,7 @@ No relatório, use `<id>_description`, `<id>_execution` e `<id>_outcome`; no pit
 Nos blocos obrigatórios, use `paragraph`, `callout` ou `metric` com `data.text` não vazio e `citation_ids` com
 localizadores existentes. Use `heading` da mesma seção para os títulos; resumo, título ou tabela isolados não bastam.
 Mantenha a ordem da receita nos blocos e o inventário coerente nos dois oficiais. Sem registro de etapa prevista,
-entregue parcial ou inconclusivo com a pendência, preservando os campos e sem antecipar resultados.
+entregue parcial ou inconclusivo com a pendência, preservando os campos e sem antecipar resultados. Mantenha inventário e ordem da receita; no campo sem registro, escreva uma indicação explícita iniciada por `Pendente:`, `Lacuna:`, `Não registrado:` ou `A confirmar:`. Essa indicação pode ficar sem citação quando não há fonte disponível; afirmações sobre a execução continuam exigindo fonte. Se a necessidade de decisão for desconhecida, conserve o slide `decision` com a pendência visível.
 
 O renderer valida o schema e o significado estrutural do inventário antes de gerar derivados. Relatórios são A4
 paisagem; apresentações, 16:9. Os layouts reaproveitam a identidade visual existente. Gere JSON, PDF, HTML e DOCX

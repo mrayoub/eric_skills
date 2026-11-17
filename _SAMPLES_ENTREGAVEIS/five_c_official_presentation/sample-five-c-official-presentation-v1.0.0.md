@@ -46,25 +46,25 @@ Cada um dos seis presentes recebeu dez créditos. A consulta recebeu quarenta do
 
 Fontes: F02
 
-## O desfecho orienta o próximo passo dentro do escopo realizado
+## A preferência pela consulta depende de informação atualizada
 
 O 5C aprofundou a necessidade de previsibilidade e a ligou à informação sobre estado e responsabilidade. A consulta de andamento recebeu mais créditos, com uma condição explícita: a informação precisa ser atualizada. As propostas seguem como hipóteses para avaliação e teste.
 
 Fontes: F02
 
-## As dependências precisam de responsáveis antes do próximo avanço
+## Atualização e acesso precisam de avaliação antes do teste
 
 A equipe do projeto deve avaliar atualização e acesso com operação e apoio técnico; prazo a definir. A devolutiva às organizações deve registrar dependências e plano de teste. A aprovação de implementação continua pendente dessa avaliação.
 
 Fontes: F02
 
-## A decisão solicitada delimita o próximo avanço do projeto
+## O sponsor decide sobre a avaliação das dependências da consulta
 
 Solicita-se ao sponsor deliberar sobre a avaliação de dependências da consulta de andamento. O pedido não inclui aprovação de implementação; o plano de teste deverá voltar com responsáveis e critérios antes da coleta.
 
 Fontes: F02
 
-## Os responsáveis devem registrar o encaminhamento antes da próxima rodada
+## Equipe e sponsor devem combinar a avaliação e a devolutiva
 
 Equipe do projeto e sponsor: registrem responsáveis pela avaliação e combinem a data da devolutiva com as organizações. Prazo a definir, antes de iniciar o teste da proposta.
 

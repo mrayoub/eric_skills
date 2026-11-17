@@ -128,6 +128,27 @@ def test_standard_methods(kind):
     with pytest.raises(ValueError):
         validate(bad)
 
+    for field in ("label", "meaning"):
+        changed = copy.deepcopy(item)
+        session = changed["metadata"]["method_application"]["sessions"][0]
+        session["stages"][0][field] = "Leitura própria da aplicação"
+        with pytest.raises(ValueError):
+            validate(changed)
+        session["variant"] = "adapted"
+        session["adaptation_reason"] = "O grupo documentou uma interpretação diferente nesta sessão."
+        validate(changed)
+
+    reordered = copy.deepcopy(item)
+    session = reordered["metadata"]["method_application"]["sessions"][0]
+    session["stages"].reverse()
+    order = {key: index for index, key in enumerate(required_keys(reordered))}
+    reordered["blocks"].sort(key=lambda block: order[block["data"]["section_key"]])
+    with pytest.raises(ValueError):
+        validate(reordered)
+    session["variant"] = "adapted"
+    session["adaptation_reason"] = "A sequência aplicada foi invertida conforme registro da sessão."
+    validate(reordered)
+
 
 @pytest.mark.parametrize("kind", [k for k in KINDS if k.endswith("presentation")])
 def test_presentation_recipe(kind):
@@ -166,6 +187,11 @@ def test_conditional_decision(method):
     with pytest.raises(ValueError):
         validate(missing)
     missing["metadata"]["completeness"] = "partial"
+    insertion = next(i for i, block in enumerate(missing["blocks"]) if block["data"].get("section_key") == "call_to_action")
+    missing["blocks"][insertion:insertion] = [
+        {"id": "pending_decision_title", "type": "heading", "data": {"section_key": "decision", "text": "A necessidade de decisão permanece pendente de confirmação"}},
+        {"id": "pending_decision", "type": "paragraph", "data": {"section_key": "decision", "text": "Pendente: confirmar com o sponsor se há deliberação necessária."}},
+    ]
     validate(missing)
 
 
@@ -183,6 +209,25 @@ def test_slide_density():
     with pytest.raises(ValueError):
         validate(bad)
 
+    boundary = copy.deepcopy(item)
+    first = data_blocks(boundary)[0]
+    first["data"]["text"] = "Síntese curta registrada."
+    position = boundary["blocks"].index(first) + 1
+    additions = []
+    for index in range(3):
+        block = copy.deepcopy(first)
+        block["id"] = f"boundary_{index}"
+        additions.append(block)
+    boundary["blocks"][position:position] = additions
+    validate(boundary)  # Quatro blocos curtos cabem no slide.
+    fifth = copy.deepcopy(first)
+    fifth["id"] = "boundary_fifth"
+    boundary["blocks"].insert(position, fifth)
+    with pytest.raises(ValueError):
+        validate(boundary)
+    boundary["blocks"].insert(position, {"id": "boundary_continuation", "type": "heading", "data": {"section_key": first["data"]["section_key"], "text": "A continuação preserva o limite de blocos por slide"}})
+    validate(boundary)
+
 
 @pytest.mark.parametrize("kind", KINDS)
 def test_pocket_scopes(kind):
@@ -195,7 +240,44 @@ def test_pocket_scopes(kind):
     with pytest.raises(ValueError):
         validate(bad)
     bad["metadata"]["completeness"] = "partial"
+    with pytest.raises(ValueError):
+        validate(bad)
+    pending = next(block for block in item["blocks"] if block["data"].get("section_key") == key and block["type"] == "paragraph")
+    placeholder = copy.deepcopy(pending)
+    placeholder["data"]["text"] = "Pendente: registro da etapa não disponível; confirmar com a equipe."
+    placeholder["citation_ids"] = []
+    section = [copy.deepcopy(block) for block in item["blocks"] if block["data"].get("section_key") == key]
+    section = [placeholder if block["type"] == "paragraph" else block for block in section]
+    insertion = next(index for index, block in enumerate(item["blocks"]) if block["data"].get("section_key") == key)
+    bad["blocks"][insertion:insertion] = section
     validate(bad)
+
+
+@pytest.mark.parametrize("kind", KINDS)
+@pytest.mark.parametrize("state", ["partial", "inconclusive"])
+def test_partial_recipe(kind, state):
+    item = sample(kind)
+    item["metadata"]["completeness"] = state
+    key = next(key for key in required_keys(item) if "execution" in key)
+    pending = next(block for block in data_blocks(item) if block["data"]["section_key"] == key)
+    pending["data"]["text"] = "Pendente: execução sem registro disponível; consultar a equipe responsável."
+    pending["citation_ids"] = []
+    validate(item)
+    for mutation in ("missing", "empty", "order", "inventory", "uncited"):
+        bad = copy.deepcopy(item)
+        target = next(block for block in data_blocks(bad) if block["data"]["section_key"] == key)
+        if mutation == "missing":
+            bad["blocks"] = [block for block in bad["blocks"] if block["data"].get("section_key") != key]
+        elif mutation == "empty":
+            target["data"]["text"] = " "
+        elif mutation == "order":
+            bad["blocks"].reverse()
+        elif mutation == "inventory":
+            bad["metadata"].pop("method_application")
+        else:
+            target["data"]["text"] = "A equipe executou o trabalho e encerrou a etapa."
+        with pytest.raises(ValueError):
+            validate(bad)
 
 
 @pytest.mark.parametrize("kind", KINDS)

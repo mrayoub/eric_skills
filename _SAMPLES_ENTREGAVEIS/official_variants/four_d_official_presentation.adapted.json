@@ -130,7 +130,7 @@
       "type": "heading",
       "data": {
         "section_key": "conclusion",
-        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "text": "As condições da oferta seguem abertas sem priorização por créditos",
         "level": 2
       }
     },
@@ -150,7 +150,7 @@
       "type": "heading",
       "data": {
         "section_key": "recommendations",
-        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "text": "Os achados de acompanhamento precisam orientar o escopo da próxima rodada",
         "level": 2
       }
     },
@@ -159,7 +159,7 @@
       "type": "paragraph",
       "data": {
         "section_key": "recommendations",
-        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação."
+        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. A rodada de condições não aprovou construção nem execução de testes."
       },
       "citation_ids": [
         "F02"
@@ -170,7 +170,7 @@
       "type": "heading",
       "data": {
         "section_key": "decision",
-        "text": "A decisão solicitada delimita o próximo avanço do projeto",
+        "text": "O sponsor decide se haverá nova rodada de aprofundamento",
         "level": 2
       }
     },
@@ -190,7 +190,7 @@
       "type": "heading",
       "data": {
         "section_key": "call_to_action",
-        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada",
+        "text": "Equipe e sponsor devem registrar decisão e escopo da próxima rodada",
         "level": 2
       }
     },

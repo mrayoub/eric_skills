@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -16,11 +17,14 @@ def section_keys(content: dict) -> list[str]:
     stages = [s for session in content["metadata"]["method_application"]["sessions"] for s in session["stages"]]
     if content["deliverable_type"].endswith("report"):
         return ["purpose", "introduction", "structuring", *[f"{s['id']}_{part}" for s in stages for part in ("description", "execution", "outcome")], "conclusion", "recommendations"]
-    return ["challenge_context", "structuring", *[f"execution_{s['id']}" for s in stages], "conclusion", "recommendations", *(["decision"] if content["metadata"].get("decision_required") is True else []), "call_to_action"]
+    decision = content["metadata"].get("decision_required")
+    partial = content["metadata"].get("completeness") in ("partial", "inconclusive")
+    return ["challenge_context", "structuring", *[f"execution_{s['id']}" for s in stages], "conclusion", "recommendations", *(["decision"] if decision is True or (partial and decision is not False) else []), "call_to_action"]
 
 
 def validate(content: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    partial = content["metadata"].get("completeness") in ("partial", "inconclusive")
     method = content["deliverable_type"].split("_official_")[0]
     official = definitions()[method]["stages"]
     official_ids = {s["id"] for s in official}
@@ -111,7 +115,10 @@ def validate(content: dict[str, Any]) -> list[str]:
             slide_words += words(data)
         if block["type"] in ("paragraph", "callout", "metric") and isinstance(data.get("text"), str) and data["text"].strip():
             present.add(key)
-            if not block.get("citation_ids"):
+            pending = bool(re.match(r"^(pendente|lacuna|não registrad[oa]|a confirmar)\b", data["text"].strip(), re.IGNORECASE))
+            if pending and not partial:
+                errors.append(f"{key}: pendência de conteúdo exige versão parcial ou inconclusiva")
+            if not block.get("citation_ids") and not (partial and pending):
                 errors.append(f"{key}: síntese exige fonte rastreável")
     flush()
     for key in keys:

@@ -104,7 +104,7 @@
       "data": {
         "level": 2,
         "section_key": "conclusion",
-        "text": "O desfecho orienta o próximo passo dentro do escopo realizado"
+        "text": "A construção depende de fechar rota e critério do teste"
       },
       "id": "h_conclusion",
       "type": "heading"
@@ -124,7 +124,7 @@
       "data": {
         "level": 2,
         "section_key": "recommendations",
-        "text": "As dependências precisam de responsáveis antes do próximo avanço"
+        "text": "Fluxo e apoio técnico precisam fechar critério e esforço"
       },
       "id": "h_recommendations",
       "type": "heading"
@@ -144,7 +144,7 @@
       "data": {
         "level": 2,
         "section_key": "decision",
-        "text": "A decisão solicitada delimita o próximo avanço do projeto"
+        "text": "Os responsáveis pelo fluxo decidem sobre a disponibilidade para simulação"
       },
       "id": "h_decision",
       "type": "heading"
@@ -164,7 +164,7 @@
       "data": {
         "level": 2,
         "section_key": "call_to_action",
-        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada"
+        "text": "Fluxo e apoio técnico devem registrar critério e data da simulação"
       },
       "id": "h_call_to_action",
       "type": "heading"
