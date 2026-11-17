@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "four_d_official_report",
+  "locale": "pt-BR",
+  "title": "O acompanhamento dos pedidos depende de registros dispersos",
+  "summary": "Exemplo fictício. A sessão pocket aprofundou o recorte inicial. As etapas seguintes ficaram fora do escopo por desenho; os achados orientam a decisão sobre uma próxima rodada.",
+  "blocks": [
+    {
+      "id": "h_purpose",
+      "type": "heading",
+      "data": {
+        "section_key": "purpose",
+        "text": "O registro permite retomar a análise e seus encaminhamentos",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_purpose",
+      "type": "paragraph",
+      "data": {
+        "section_key": "purpose",
+        "text": "Este relatório registra como a aplicação foi estruturada, o que ocorreu nas etapas e o que os achados permitem encaminhar. Serve à equipe do projeto e a quem retoma ou decide sobre o trabalho."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_introduction",
+      "type": "heading",
+      "data": {
+        "section_key": "introduction",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_introduction",
+      "type": "paragraph",
+      "data": {
+        "section_key": "introduction",
+        "text": "O briefing apontava demora nas respostas aos pedidos internos. Atendimento e operação retomaram episódios do fluxo antes de desenhar alternativas. O 4D aprofundou o diagnóstico para orientar a estruturação de uma hipótese no 3E."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "A jornada e o barco orientaram o aprofundamento do fluxo",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 4D aprofunda um desafio por percepções, diagnóstico, alternativas e priorização. Foi escolhido para investigar a demora percebida antes de assumir uma solução. A sessão curta reuniu atendimento e operação para explicitar percepções e diagnosticar o fluxo com jornada e barco. D3 e D4 ficaram fora do escopo por desenho; não houve desenho de alternativas nem priorização nesta rodada. A rodada curta aprofundou a escuta sem realizar as etapas seguintes. Etapas fora do escopo: D3, D4."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_d1_description",
+      "type": "heading",
+      "data": {
+        "section_key": "d1_description",
+        "text": "D1 Descongelar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d1_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d1_description",
+        "text": "Alinhar o contexto e explicitar percepções, tensões e expectativas."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_d1_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "d1_execution",
+        "text": "D1 Descongelar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d1_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d1_execution",
+        "text": "Os quatro participantes relataram episódios de pedidos sem retorno. A condução apresentou o briefing e registrou a expectativa de acompanhar o fluxo."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_d1_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "d1_outcome",
+        "text": "D1 Descongelar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d1_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d1_outcome",
+        "text": "A conversa delimitou o acompanhamento como questão do diagnóstico. O relato de demora ainda não identifica sua causa nem mede o prazo real."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_d2_description",
+      "type": "heading",
+      "data": {
+        "section_key": "d2_description",
+        "text": "D2 Diagnosticar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d2_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d2_description",
+        "text": "Aprofundar a jornada e as causas, obstáculos e condições do desafio."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_d2_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "d2_execution",
+        "text": "D2 Diagnosticar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d2_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d2_execution",
+        "text": "A jornada mostrou que o protocolo, a previsão e o responsável ficam em registros diferentes. No barco, os participantes relacionaram o retrabalho à passagem entre atendimento e operação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_d2_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "d2_outcome",
+        "text": "D2 Diagnosticar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_d2_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "d2_outcome",
+        "text": "O registro disperso apareceu nas duas dinâmicas. A leitura sugere examinar a passagem entre áreas, além do tempo de resposta percebido; não houve medição de retrabalho."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "A sessão pocket relacionou a demora percebida à passagem de pedidos entre registros dispersos. D1 e D2 aprofundaram a questão, sem desenhar alternativas ou registrar preferência. O próximo recorte deve decidir se essa leitura sustenta uma rodada de desenho; não há hipótese priorizada nesta sessão."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-four-d-official-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "pocket",
+          "stages": [
+            {
+              "id": "d1",
+              "label": "D1 Descongelar",
+              "meaning": "Alinhar o contexto e explicitar percepções, tensões e expectativas.",
+              "official_stage_ids": [
+                "d1"
+              ]
+            },
+            {
+              "id": "d2",
+              "label": "D2 Diagnosticar",
+              "meaning": "Aprofundar a jornada e as causas, obstáculos e condições do desafio.",
+              "official_stage_ids": [
+                "d2"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [
+            {
+              "official_stage_id": "d3",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            },
+            {
+              "official_stage_id": "d4",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            }
+          ],
+          "adaptation_reason": "A rodada curta aprofundou a escuta sem realizar as etapas seguintes."
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,10 @@
 # Análise, rastreabilidade e conclusão do Relatório 3E
 
+> Estrutura dos entregáveis depreciados. Para os oficiais, siga [a receita oficial](entregaveis-oficiais.md),
+> o escopo aplicado e [o tom comum](tom-oficial.md). Os princípios de análise e evidência abaixo continuam úteis;
+> ordem fixa, limite legado de slides e exigência de cobertura integral não substituem a receita oficial.
+
+
 O 3E continua o 4D: transforma a hipótese priorizada no 4D numa solução concreta, com fluxo, responsáveis,
 dependências e experimento. Desde a orientação da autora do playbook 4D (10/11/2026), o `relatorio-4d` termina numa
 hipótese de solução em três partes e numa conclusão que diz o que o 3E precisa resolver. O Relatório 3E fecha esse

@@ -1,0 +1,23 @@
+{
+  "artifact_id": "sample-four-d-official-presentation",
+  "branding_version": "1.2.0",
+  "content_sha256": "e6a16071d1e76ce778b90503046fbb352cfe17a1c1171575a263bc1b81315cfe",
+  "content_version": "1.0.0",
+  "deliverable_type": "four_d_official_presentation",
+  "files": {
+    "sample-four-d-official-presentation-v1.0.0.html": "43d19ac615bb6ae83b83dcf058b985fe48b7f9234683072c9a4bf64b077fed26",
+    "sample-four-d-official-presentation-v1.0.0.json": "e6a16071d1e76ce778b90503046fbb352cfe17a1c1171575a263bc1b81315cfe",
+    "sample-four-d-official-presentation-v1.0.0.md": "2dbbbf2dbe1da9a5199a5ef11da7e4573819b0949b61077178eaf235b207b77b",
+    "sample-four-d-official-presentation-v1.0.0.pdf": "8d581b767e600cdf97fb1aee8c755cad1a180560c29f516ac9c8828f7e80b06f",
+    "sample-four-d-official-presentation-v1.0.0.pptx": "26bed1b64a61f21a8565a88bbdbeb65b09a324713aa99be9795998e54fdaa57b",
+    "sample-four-d-official-presentation-v1.0.0.txt": "cacc851a7a81562cd79116c3f968c844a24061315576aedee8d9cfa6f0098b6c"
+  },
+  "layout": "presentation",
+  "paper": "presentation_16_9",
+  "pdf_engine": "reportlab",
+  "profile_sha256": "dc84b7aa005f127480c5d192ea4d67d913e150dc36bdc001a36975fbb840f024",
+  "profile_version": "1.3.0",
+  "renderer_version": "2.2.0",
+  "tokens_sha256": "cbf68e4c022a9a3b89f5483fc217b7046bb8ec91d73f7197076d3d1ce0852bfa",
+  "unavailable": {}
+}

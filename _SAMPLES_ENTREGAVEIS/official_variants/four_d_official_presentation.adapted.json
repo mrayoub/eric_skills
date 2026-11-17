@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "four_d_official_presentation",
+  "locale": "pt-BR",
+  "title": "O acompanhamento dos pedidos depende de registros dispersos",
+  "summary": "Exemplo fictício. A aplicação adaptada confrontou condições de uma oferta existente na rodada final. Os registros orientam novas perguntas; não houve votação nessa rodada nem aprovação de implementação.",
+  "blocks": [
+    {
+      "id": "h_challenge_context",
+      "type": "heading",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_challenge_context",
+      "type": "paragraph",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O briefing apontava demora nas respostas aos pedidos internos. Atendimento e operação retomaram episódios do fluxo antes de desenhar alternativas. O 4D aprofundou o diagnóstico para orientar a estruturação de uma hipótese no 3E."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "A jornada e o barco orientaram o aprofundamento do fluxo",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 4D aprofunda um desafio por percepções, diagnóstico, alternativas e priorização. Foi escolhido para investigar a demora percebida antes de assumir uma solução. Atendimento e operação usaram jornada, barco e brainwriting para aprofundar o fluxo e desenhar alternativas. A rodada final foi adaptada para confrontar condições de uma oferta existente, sem distribuição de créditos. O grupo precisava confrontar uma oferta existente antes de decidir novos testes. Etapas fora do escopo: nenhuma."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_execution_d1",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_d1",
+        "text": "A ausência de previsão aparece antes da discussão de soluções",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_d1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_d1",
+        "text": "Os quatro participantes relataram episódios de pedidos sem retorno. A condução apresentou o briefing e registrou a expectativa de acompanhar o fluxo. A conversa delimitou o acompanhamento como questão do diagnóstico. O relato de demora ainda não identifica sua causa nem mede o prazo real."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_d2",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_d2",
+        "text": "O pedido perde continuidade quando muda de área",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_d2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_d2",
+        "text": "A jornada mostrou que o protocolo, a previsão e o responsável ficam em registros diferentes. No barco, os participantes relacionaram o retrabalho à passagem entre atendimento e operação. O registro disperso apareceu nas duas dinâmicas. A leitura sugere examinar a passagem entre áreas, além do tempo de resposta percebido; não houve medição de retrabalho."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_d3",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_d3",
+        "text": "As alternativas combinam registro compartilhado e revisão da passagem",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_d3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_d3",
+        "text": "O brainwriting gerou três alternativas: visão compartilhada, aviso de mudança e revisão do repasse. O grupo associou cada uma às dificuldades registradas na jornada. A visão compartilhada reuniu mecanismo e público numa hipótese. Acreditamos que ela pode tornar o fluxo previsível, porque o diagnóstico mostrou registros dispersos; precisamos validar se as áreas atualizam e usam a informação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_d4",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_d4",
+        "text": "A rodada adaptada confrontou condições antes de escolher propostas",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_d4",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_d4",
+        "text": "O grupo examinou uma oferta já descrita e registrou condições de adoção. A rodada substituiu a dinâmica prevista; não houve distribuição de créditos nem ranking. As condições registradas orientam perguntas para o próximo teste. A adaptação não fornece preferência comparável ao método integral nem decisão de implementação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O diagnóstico relacionou a demora a registros dispersos e o desenho gerou alternativas para a passagem entre áreas. A rodada final confrontou condições de uma oferta, sem priorização por créditos. Os achados sustentam examinar atualização e manutenção, mas não escolher uma alternativa vencedora."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_decision",
+      "type": "heading",
+      "data": {
+        "section_key": "decision",
+        "text": "A decisão solicitada delimita o próximo avanço do projeto",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_decision",
+      "type": "paragraph",
+      "data": {
+        "section_key": "decision",
+        "text": "Solicita-se ao sponsor deliberar se haverá nova rodada de aprofundamento. O pedido se limita a esse encaminhamento, sem aprovação de construção ou escala."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_call_to_action",
+      "type": "heading",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_call_to_action",
+      "type": "paragraph",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe do projeto e sponsor: registrem a decisão sobre a próxima rodada e seu escopo. Responsável pela organização e prazo a definir."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-four-d-official-presentation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "adapted",
+          "stages": [
+            {
+              "id": "d1",
+              "label": "D1 Descongelar",
+              "meaning": "Alinhar o contexto e explicitar percepções, tensões e expectativas.",
+              "official_stage_ids": [
+                "d1"
+              ]
+            },
+            {
+              "id": "d2",
+              "label": "D2 Diagnosticar",
+              "meaning": "Aprofundar a jornada e as causas, obstáculos e condições do desafio.",
+              "official_stage_ids": [
+                "d2"
+              ]
+            },
+            {
+              "id": "d3",
+              "label": "D3 Desenhar",
+              "meaning": "Gerar alternativas e consolidar propostas ligadas ao diagnóstico.",
+              "official_stage_ids": [
+                "d3"
+              ]
+            },
+            {
+              "id": "d4",
+              "label": "Confrontar condições",
+              "meaning": "Examinar condições de adoção da oferta apresentada, sem votar propostas.",
+              "official_stage_ids": [
+                "d4"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [],
+          "adaptation_reason": "O grupo precisava confrontar uma oferta existente antes de decidir novos testes."
+        }
+      ]
+    },
+    "decision_required": true
+  }
+}

@@ -12,11 +12,11 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 | `briefing_validation` | avaliacao-briefing-iqb | `report_portrait` | [briefing_validation](./briefing_validation/) |
 | `innovation_potential_assessment` | potencial-inovacao | `report_portrait` | [innovation_potential_assessment](./innovation_potential_assessment/) |
 | `four_d_workshop_record` | workshop-4d | `report_landscape` | [four_d_workshop_record](./four_d_workshop_record/) |
-| `four_d_report` | relatorio-4d | `report_landscape` | [four_d_report](./four_d_report/) |
-| `four_d_presentation`: Apresentação 4D | relatorio-4d | `presentation` | [four_d_presentation](./four_d_presentation/) |
+| `four_d_report`: Relatório depreciado 4D | relatorio-4d | `report_landscape` | [four_d_report](./four_d_report/) |
+| `four_d_presentation`: Apresentação depreciada 4D | relatorio-4d | `presentation` | [four_d_presentation](./four_d_presentation/) |
 | `three_e_workshop_record` | workshop-3e | `report_landscape` | [three_e_workshop_record](./three_e_workshop_record/) |
-| `three_e_report` | relatorio-3e | `report_landscape` | [three_e_report](./three_e_report/) |
-| `three_e_presentation`: Apresentação 3E | relatorio-3e | `presentation` | [three_e_presentation](./three_e_presentation/) |
+| `three_e_report`: Relatório depreciado 3E | relatorio-3e | `report_landscape` | [three_e_report](./three_e_report/) |
+| `three_e_presentation`: Apresentação depreciada 3E | relatorio-3e | `presentation` | [three_e_presentation](./three_e_presentation/) |
 | `innovation_scorecard` | scorecard-inovacao | `report_landscape` | [innovation_scorecard](./innovation_scorecard/) |
 | `experiment_plan` | experimentacao-inovacao | `report_portrait` | [experiment_plan](./experiment_plan/) |
 | `test_card` | experimentacao-inovacao / workshop-3e / relatorio-3e | `card_portrait` | [test_card](./test_card/) |
@@ -25,9 +25,23 @@ Cada pasta contém `input.json`, o JSON canônico validado, um manifesto com has
 | `evidence_recommendation` | experimentacao-inovacao | `report_landscape` | [evidence_recommendation](./evidence_recommendation/) |
 | `executive_presentation` | experimentacao-inovacao | `presentation` | [executive_presentation](./executive_presentation/) |
 | `five_c_workshop_record` | workshop-5c | `report_landscape` | [five_c_workshop_record](./five_c_workshop_record/) |
-| `five_c_report` | relatorio-5c | `report_landscape` | [five_c_report](./five_c_report/) |
-| `five_c_presentation`: Apresentação 5C | relatorio-5c | `presentation` | [five_c_presentation](./five_c_presentation/) |
+| `five_c_report`: Relatório depreciado 5C | relatorio-5c | `report_landscape` | [five_c_report](./five_c_report/) |
+| `five_c_presentation`: Apresentação depreciada 5C | relatorio-5c | `presentation` | [five_c_presentation](./five_c_presentation/) |
 | `cdt`: Cadastro de Demanda Tecnológica (CDT) | gerador-cdt | `report_portrait` | [cdt](./cdt/) |
+
+Os seis novos tipos oficiais ficam nas pastas de mesmo nome, com `input.json`, JSON canônico, manifesto e
+PDF/HTML/DOCX ou PDF/HTML/PPTX. Os casos integrais, adaptados e pocket dos três métodos, mais as sessões combinadas
+5C, ficam em [official_variants](./official_variants/). Regenere os JSONs fictícios com
+`python3 _TOOLS/build_official_samples.py`; renderize pelo design system.
+
+| Tipo oficial | Skill | Formatos de leitura |
+| --- | --- | --- |
+| [four_d_official_report](./four_d_official_report/) | relatorio-4d | PDF, HTML, DOCX |
+| [four_d_official_presentation](./four_d_official_presentation/) | relatorio-4d | PDF, HTML, PPTX |
+| [three_e_official_report](./three_e_official_report/) | relatorio-3e | PDF, HTML, DOCX |
+| [three_e_official_presentation](./three_e_official_presentation/) | relatorio-3e | PDF, HTML, PPTX |
+| [five_c_official_report](./five_c_official_report/) | relatorio-5c | PDF, HTML, DOCX |
+| [five_c_official_presentation](./five_c_official_presentation/) | relatorio-5c | PDF, HTML, PPTX |
 
 Os relatórios agora apresentam seções em cards tabulados; a amostra 4D inclui grades de diagnóstico, jornada, alternativas e priorização inspiradas apenas na estrutura visual do PDF de referência. A orientação continua definida por perfil, e os Test/Learning Cards mantêm seus quatro campos Strategyzer.
 

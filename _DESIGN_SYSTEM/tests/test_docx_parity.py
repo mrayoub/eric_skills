@@ -1,4 +1,4 @@
-"""Proofs for editable DOCX visual parity against the 19 sample PDFs."""
+"""Proofs for editable DOCX visual parity against the 22 sample PDFs."""
 from __future__ import annotations
 
 import hashlib
@@ -37,7 +37,10 @@ def normalized(value: str) -> str:
 
 def docx_text(path: Path) -> str:
     document = Document(path)
-    return " ".join(node.text or "" for node in document.element.body.xpath(".//w:t"))
+    parts = [document.element.body]
+    for section in document.sections:
+        parts.extend([section.header._element, section.footer._element])
+    return " ".join(node.text or "" for part in parts for node in part.xpath(".//w:t"))
 
 
 def text_atoms(data: object):
@@ -78,7 +81,7 @@ class DocxParityTests(unittest.TestCase):
         cls.profiles = json.loads((ROOT / "_DESIGN_SYSTEM/profiles.json").read_text(encoding="utf-8"))
 
     def test_all_sample_page_counts(self):
-        self.assertEqual(self.report["sample_count"], 19)
+        self.assertEqual(self.report["sample_count"], 22)
         for kind, row in self.rows.items():
             with self.subTest(kind=kind):
                 self.assertEqual(row["reference_pages"], row["docx_pages"])
@@ -196,8 +199,9 @@ class DocxParityTests(unittest.TestCase):
                          if any(shade.get(qn("w:fill")) == self.tokens["color"]["document_deep"].lstrip("#")
                                 for shade in paragraph.xpath("./w:pPr/w:shd"))]
                 self.assertTrue(bands, "faixa de título ausente")
-                inset = "180" if kind == "innovation_potential_assessment" else "240"
-                vertical = "40" if kind == "innovation_potential_assessment" else "72"
+                flow = kind == "innovation_potential_assessment" or kind.endswith("_official_report")
+                inset = "180" if flow else "240"
+                vertical = "40" if flow else "72"
                 for paragraph in bands:
                     self.assertTrue(any(tab.get(qn("w:pos")) == inset
                                         for tab in paragraph.xpath("./w:pPr/w:tabs/w:tab")),
@@ -276,7 +280,7 @@ class DocxParityTests(unittest.TestCase):
 
     def test_comparator_artifacts_and_failures(self):
         comparator = load_module(COMPARATOR, "docx_parity_comparator")
-        self.assertEqual(len(self.rows), 19)
+        self.assertEqual(len(self.rows), 22)
         for kind, row in self.rows.items():
             for page in range(1, row["docx_pages"] + 1):
                 self.assertTrue((self.cache / "pictures" / f"{kind}-{page}-side-by-side.png").is_file())

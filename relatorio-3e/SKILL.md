@@ -1,16 +1,27 @@
 ---
 name: relatorio-3e
-description: "Compila ou revisa o Relatório 3E: solução e escopo, plano de construção com responsáveis e prazos, Test Cards individuais prospectivos e decisão de rota (interna, externa, híbrida ou indefinida), separando plano de evidência observada, com rastreabilidade entre a hipótese e as dores do 4D e a solução, conclusão e a Apresentação 3E, devolutiva curta para gestores. Use quando houver registros de E1 a E3 ou material equivalente e o usuário quiser o relatório, a apresentação ou os Test Cards consolidados. Não use para facilitar o workshop (use workshop-3e) nem para analisar resultados de testes já executados (use experimentacao-inovacao)."
+description: "Compila ou revisa o Relatório oficial 3E e a Apresentação oficial 3E a partir dos registros da execução, com fontes e análise; usa o playbook como padrão e admite adaptações e versões pocket documentadas. Mantém Relatório depreciado e Apresentação depreciada quando solicitados. Use para consolidar registros, apresentação a gestores, devolutiva ou revisão. Não use para facilitar o workshop. No 3E, preserva Test Cards prospectivos; resultados de testes pertencem à experimentacao-inovacao."
 license: "Licença de Uso Restrito CCEE. Termos completos em LICENSE."
 metadata:
   requirements: "Requer Python 3 e os pacotes de assets/design-system/requirements.txt para gerar DOCX, PPTX e PDF."
   author: "GEIN-CCEE"
-  version: "1.2.1"
+  version: "1.2.2"
 ---
 
 # Compilar o Relatório 3E
 
 Consolida solução, construção, experimentos e rota; separa plano, execução e reconstrução posterior.
+
+## Escolha da entrega
+
+O padrão é **Relatório oficial 3E** (`three_e_official_report`) ou **Apresentação oficial 3E**
+(`three_e_official_presentation`). Leia [a receita oficial](references/entregaveis-oficiais.md) antes de compor.
+Ela define conteúdo, JSON, adaptação do método e [tom da autora](references/tom-oficial.md) para os dois oficiais.
+
+Os antigos continuam disponíveis apenas quando pedidos como **Relatório depreciado 3E** (`three_e_report`)
+ou **Apresentação depreciada 3E** (`three_e_presentation`). As estruturas anteriores nas referências e no roteiro
+integral abaixo orientam análise e os depreciados; não substituem a receita oficial nem obrigam uma aplicação pocket
+a cobrir o playbook inteiro. Nos oficiais, prevalecem a receita oficial e o escopo de aplicação documentado.
 
 ## Leia primeiro
 
@@ -40,9 +51,9 @@ A fase do projeto é contexto, não pré-requisito. Se o pedido vier antes do mo
 usual, entregue preparação ou versão parcial; se vier depois, use o material posterior
 com data e não apresente reconstrução como plano combinado previamente.
 
-## Passos
+## Passos de análise: aplicação integral de referência
 
-1. **Entrada:** identifique fontes, versões, participantes e decisões de hipótese, problema, 4D, BP1, E1 a E3 e experimentação que existirem. Não exija documentos alheios ao projeto. Em modo assíncrono, indique registros substitutos e deliberações ausentes; etapas incompletas exigem parcial. Não atribua aprovação a ausentes nem reescreva decisões anteriores.
+1. **Entrada:** identifique fontes, versões, participantes e decisões de hipótese, problema, 4D, BP1, E1 a E3 e experimentação que existirem. Não exija documentos alheios ao projeto. Em modo assíncrono, indique registros substitutos e deliberações ausentes; etapas previstas no escopo aplicado sem registro exigem parcial. Não atribua aprovação a ausentes nem reescreva decisões anteriores.
 2. **Solução/valor:** problema focal, população, hipótese master, escopo, componentes `agora/futuro/fora`, riscos e limites. Expectativa não é resultado observado.
 3. **Construção:** recursos, itens a desenvolver, dependências, responsável, apoio e prazo por ação; exponha lacunas antes de declarar MVP pronto.
 4. **Experimento:** suposições prioritárias, público elegível, método, intervenção, medida, fonte e critério. Entregue Test Card individual por teste com hipótese, teste, medida e critério, uma frase objetiva por campo (até 280 caracteres); tabela é só índice. Critérios/limiares sem baseline ficam `a fechar antes da coleta`. Preserve originais; cards reconstruídos são retrospectivos. Resultados existentes precisam de fontes/data; Learning Cards somente após execução, nunca achados antes do teste.
@@ -60,6 +71,8 @@ Saída (trecho):
 
 ## Checagem final
 
+Nos oficiais, confira a receita e as etapas aplicadas conforme [o guia](references/entregaveis-oficiais.md). Os itens metodológicos abaixo se aplicam quando incluídos no escopo, preservando lacunas e exclusões por desenho.
+
 - [ ] Fontes, versão e cronologia preservadas
 - [ ] Escopo, construção e lacunas explícitos
 - [ ] Cards individuais com quatro campos e status correto
@@ -76,10 +89,14 @@ interpretar etapas, pontos de avaliação (BP1/BP2), rotas ou relações entre e
 
 ## Entrega em arquivo
 
-Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e não use travessão no chat e nos arquivos; siga [o design system](assets/design-system/README.md)
-com `deliverable_type` `three_e_report` e `test_card` por teste, e `three_e_presentation` para a Apresentação 3E (no máximo 6 slides de conteúdo, conforme [o guia](references/analise-e-conclusao-3e.md#duas-saídas-da-mesma-base)), derivada da mesma análise: monte o JSON canônico, rode
-`python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o
-JSON junto dos derivados. Se a validação falhar, corrija o conteúdo ou marque
-`metadata.completeness: "partial"`: nunca contorne o schema.
+Use [linguagem simples](references/linguagem-dos-entregaveis.md), revise com o [guia de escrita](references/guia-de-escrita.md) e siga o [design system](assets/design-system/README.md) e os tipos oficiais acima por padrão; os tipos antigos só
+quando o usuário solicitar os depreciados. Faça a análise uma vez e derive relatório e apresentação da mesma base.
+Siga [a receita oficial](references/entregaveis-oficiais.md) para montar o JSON de cada oficial e os Test Cards individuais do 3E quando aplicáveis.
+
+
+Rode `python3 assets/design-system/scripts/render.py entrada.json --out-dir saida` e entregue o JSON junto dos
+derivados. Para oficiais, HTML e PDF fazem parte do perfil; relatório também gera DOCX e apresentação, PPTX.
+Use linguagem simples e não use travessão. Corrija falhas de validação; havendo lacuna decisiva, registre versão
+parcial ou inconclusiva, sem usar esse estado para esconder conteúdo ausente nem inventar achados.
 
 **Proveniência:** reescrita de fonte metodológica RC6 (`compile-3e-report/`), com separação entre plano, execução e reconstrução posterior, sem restrição por fase.

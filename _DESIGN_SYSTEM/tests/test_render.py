@@ -898,6 +898,8 @@ class RenderTests(unittest.TestCase):
                             "overall_score": 80.0, "classification": "priorizar",
                         },
                     })
+                if "_official_" in kind:
+                    item = json.loads((ROOT.parent / "_SAMPLES_ENTREGAVEIS" / kind / "input.json").read_text())
                 self.render(item, "md", folder)
                 item["blocks"].pop()
                 source = folder / "input.json"

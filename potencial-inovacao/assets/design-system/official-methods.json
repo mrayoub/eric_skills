@@ -1,0 +1,77 @@
+{
+  "four_d": {
+    "label": "4D",
+    "stages": [
+      {
+        "id": "d1",
+        "label": "D1 Descongelar",
+        "meaning": "Alinhar o contexto e explicitar percepções, tensões e expectativas."
+      },
+      {
+        "id": "d2",
+        "label": "D2 Diagnosticar",
+        "meaning": "Aprofundar a jornada e as causas, obstáculos e condições do desafio."
+      },
+      {
+        "id": "d3",
+        "label": "D3 Desenhar",
+        "meaning": "Gerar alternativas e consolidar propostas ligadas ao diagnóstico."
+      },
+      {
+        "id": "d4",
+        "label": "D4 Decidir",
+        "meaning": "Priorizar alternativas com regra explícita e registrar razões e encaminhamentos."
+      }
+    ]
+  },
+  "three_e": {
+    "label": "3E",
+    "stages": [
+      {
+        "id": "e1",
+        "label": "E1 Esclarecer",
+        "meaning": "Refinar a hipótese de solução, valor, escopo e critérios."
+      },
+      {
+        "id": "e2",
+        "label": "E2 Estruturar",
+        "meaning": "Definir componentes, construção, dependências, responsáveis e prazos."
+      },
+      {
+        "id": "e3",
+        "label": "E3 Experimentar",
+        "meaning": "Planejar testes com hipótese, teste, medida e critério, sem antecipar resultados."
+      }
+    ]
+  },
+  "five_c": {
+    "label": "5C",
+    "stages": [
+      {
+        "id": "c1",
+        "label": "C1 Contextualizar",
+        "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados."
+      },
+      {
+        "id": "c2",
+        "label": "C2 Compreender",
+        "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos."
+      },
+      {
+        "id": "c3",
+        "label": "C3 Confirmar",
+        "meaning": "Converter dores priorizadas em experiência desejada e critérios observáveis."
+      },
+      {
+        "id": "c4",
+        "label": "C4 Cocriar",
+        "meaning": "Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas."
+      },
+      {
+        "id": "c5",
+        "label": "C5 Conduzir",
+        "meaning": "Apresentar propostas, priorizar com regra acordada e definir encaminhamentos."
+      }
+    ]
+  }
+}

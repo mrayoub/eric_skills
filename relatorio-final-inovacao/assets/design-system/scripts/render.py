@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER_VERSION = "2.1.4"
+RENDERER_VERSION = "2.2.0"
 DELIVERABLE_LABELS = {
     "briefing": "Entrevista Inicial de sete campos",
     "briefing_one_page": "Briefing",
@@ -27,9 +27,11 @@ DELIVERABLE_LABELS = {
     "briefing_validation": "Avaliação IQB",
     "innovation_potential_assessment": "Avaliação do potencial de inovação",
     "four_d_workshop_record": "Registro do workshop 4D",
-    "four_d_report": "Relatório 4D",
+    "four_d_report": "Relatório depreciado 4D",
+    "four_d_official_report": "Relatório oficial 4D",
     "three_e_workshop_record": "Registro do workshop 3E",
-    "three_e_report": "Relatório 3E",
+    "three_e_report": "Relatório depreciado 3E",
+    "three_e_official_report": "Relatório oficial 3E",
     "innovation_scorecard": "Avaliação das evidências de inovação",
     "experiment_plan": "Plano de experimentação",
     "test_card": "Cartão de teste",
@@ -38,10 +40,14 @@ DELIVERABLE_LABELS = {
     "evidence_recommendation": "Evidências e recomendação",
     "executive_presentation": "Apresentação executiva",
     "five_c_workshop_record": "Registro do workshop 5C",
-    "five_c_report": "Relatório 5C",
-    "five_c_presentation": "Apresentação 5C",
-    "four_d_presentation": "Apresentação 4D",
-    "three_e_presentation": "Apresentação 3E",
+    "five_c_report": "Relatório depreciado 5C",
+    "five_c_official_report": "Relatório oficial 5C",
+    "five_c_presentation": "Apresentação depreciada 5C",
+    "five_c_official_presentation": "Apresentação oficial 5C",
+    "four_d_presentation": "Apresentação depreciada 4D",
+    "four_d_official_presentation": "Apresentação oficial 4D",
+    "three_e_presentation": "Apresentação depreciada 3E",
+    "three_e_official_presentation": "Apresentação oficial 3E",
     "cdt": "Cadastro de Demanda Tecnológica (CDT)",
     "cdt_analysis": "Análise da CDT",
 }
@@ -196,7 +202,12 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
     schema = read_json(ROOT / "contracts" / schema_file) if schema_file else envelope
     errors = sorted(Draft202012Validator(schema, registry=registry).iter_errors(content), key=lambda e: str(e.path))
     if errors:
-        raise ValueError("Conteúdo inválido: " + "; ".join(f"{list(e.path)}: {e.message}" for e in errors[:8]))
+        def schema_error(error):
+            required_section = error.schema.get("contains", {}).get("properties", {}).get("data", {}).get("properties", {}).get("section_key", {}).get("const")
+            if "_official_" in kind and required_section:
+                return f"{required_section}: falta síntese textual não vazia com fonte"
+            return f"{list(error.path)}: {error.message}"
+        raise ValueError("Conteúdo inválido: " + "; ".join(schema_error(e) for e in errors[:8]))
 
     # Perfil de conteúdo opcional: exige seções além do contrato do tipo nas versões completas.
     content_profile = meta.get("content_profile")
@@ -218,7 +229,7 @@ def validate(content: dict[str, Any], profiles: dict[str, Any]) -> dict[str, Any
 
     # O tipo do entregável já aparece no cabeçalho, acima do título; o título diz o assunto.
     title_key = normalized_title(str(content.get("title", "")))
-    for name in (header_label(content), DELIVERABLE_LABELS[kind], kind.replace("_", " ")):
+    for name in (header_label(content), DELIVERABLE_LABELS[kind], DELIVERABLE_LABELS[kind].replace(" depreciado", "").replace(" depreciada", ""), kind.replace("_", " ")):
         normalized_name = normalized_title(name)
         if normalized_name and re.search(rf"(?<!\w){re.escape(normalized_name)}(?!\w)", title_key):
             raise ValueError(f"title: não repita o tipo do entregável ({name}), que já aparece no "
@@ -1396,8 +1407,12 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
     title.paragraph_format.space_after = Pt(6)
     for run in title.runs:
         format_run(run, "report_title" if profile["layout"] in ("report_portrait", "report_landscape") else "title")
-    identity = paragraph_text(doc.add_paragraph(), identity_line(content), "footer")
-    identity.paragraph_format.space_after = Pt(5)
+    if content["deliverable_type"].endswith("_official_report"):
+        # A identificação fica no rodapé, como no PDF, sem deslocar as faixas do conteúdo.
+        identity = paragraph_text(section.footer.paragraphs[0], identity_line(content), "footer")
+    else:
+        identity = paragraph_text(doc.add_paragraph(), identity_line(content), "footer")
+        identity.paragraph_format.space_after = Pt(5)
     meta = content.get("metadata", {})
     if content["deliverable_type"] == "learning_card" and meta.get("test_card_id"):
         doc.add_paragraph(f'Test Card: {meta["test_card_id"]} v{meta.get("test_card_version", "")}')
@@ -1600,13 +1615,40 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
         if content["deliverable_type"] in pdf_module().FLOW_LAYOUT_TYPES:
             slots = load_presentation_layout(content["deliverable_type"]) or {}
             flow_rows, remaining_blocks = pdf_module().plan_flow(content, slots)
+            official_section_pages = {}
+            if content["deliverable_type"].endswith("_official_report"):
+                # O PDF determina as fronteiras de página; o DOCX conserva texto e tabelas editáveis.
+                import tempfile
+                try:
+                    from pypdf import PdfReader
+                    with tempfile.TemporaryDirectory(prefix="eric-official-pages-") as temporary:
+                        reference = Path(temporary) / "reference.pdf"
+                        render_pdf_reportlab(content, tokens, profile, reference)
+                        page_texts = [normalized_title(page.extract_text() or "") for page in PdfReader(reference).pages]
+                    for row in flow_rows:
+                        for flow_cell in row:
+                            heading = flow_cell["heading"]
+                            if heading:
+                                title = normalized_title(block_text(heading))
+                                match = next((number for number, text in enumerate(page_texts) if title in text), None)
+                                if match is not None:
+                                    official_section_pages[flow_cell["key"]] = match
+                except ImportError:
+                    pass  # DOCX continua disponível quando o motor de PDF não está instalado.
+            flow_page = 0
             for flow_row in flow_rows:
+                target_page = max((official_section_pages.get(cell["key"], flow_page) for cell in flow_row), default=flow_page)
+                while flow_page < target_page:
+                    doc.add_page_break()
+                    flow_page += 1
                 if len(flow_row) == 1 and flow_row[0]["mode"] == "tabular_list":
                     for child in flow_row[0]["blocks"]:
                         add_block(doc, child)
                 else:
                     columns = doc.add_table(rows=1, cols=3 if len(flow_row) == 2 else 1)
                     columns.autofit = False
+                    if content["deliverable_type"].endswith("_official_report"):
+                        columns.rows[0]._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
                     if len(flow_row) == 2:
                         half = int((available_width - Pt(8)) / 2)
                         for col, width in zip(columns.columns, (half, Pt(8), half)):
@@ -1629,8 +1671,9 @@ def render_docx(content: dict[str, Any], tokens: dict[str, Any], profile: dict[s
                             else:
                                 add_block(cell, child)
                 flow_gap = doc.add_paragraph()
-                flow_gap.paragraph_format.line_spacing = Pt(11)
-                flow_gap.paragraph_format.space_after = Pt(9)
+                official_flow = content["deliverable_type"].endswith("_official_report")
+                flow_gap.paragraph_format.line_spacing = Pt(1 if official_flow else 11)
+                flow_gap.paragraph_format.space_after = Pt(7 if official_flow else 9)
         sections = pdf_module().group_sections(remaining_blocks, block_text)
         section_keys = {block_text(block): block.get("data", {}).get("section_key")
                         for block in remaining_blocks if block["type"] == "heading"}

@@ -1,0 +1,478 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "five_c_official_report",
+  "locale": "pt-BR",
+  "title": "Os clientes relacionam previsibilidade a estado e responsabilidade",
+  "summary": "Exemplo fictício. A escuta relacionou a falta de previsão à informação sobre estado e responsável. Os grupos cocriaram duas propostas; a preferência registrada ainda não demonstra uso nem redução de prazo.",
+  "blocks": [
+    {
+      "id": "h_purpose",
+      "type": "heading",
+      "data": {
+        "section_key": "purpose",
+        "text": "O registro permite retomar a análise e seus encaminhamentos",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_purpose",
+      "type": "paragraph",
+      "data": {
+        "section_key": "purpose",
+        "text": "Este relatório registra como a aplicação foi estruturada, o que ocorreu nas etapas e o que os achados permitem encaminhar. Serve à equipe do projeto e a quem retoma ou decide sobre o trabalho."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_introduction",
+      "type": "heading",
+      "data": {
+        "section_key": "introduction",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_introduction",
+      "type": "paragraph",
+      "data": {
+        "section_key": "introduction",
+        "text": "O diagnóstico de pedidos apontava dúvidas sobre andamento. A equipe apresentou essa leitura e ouviu organizações externas antes de discutir propostas. O 5C examinou o que os clientes precisam saber para acompanhar um pedido e orientar testes posteriores."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "O formato delimitou a escuta e a contribuição de cada sessão",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 5C organiza a escuta e a cocriação com clientes, do contexto aos encaminhamentos. Foi escolhido para entender o que os clientes precisam saber sobre um pedido antes de testar propostas de acompanhamento. A sessão coletiva reuniu seis representantes de três organizações externas, escolhidas por utilizar o fluxo com frequências diferentes. A jornada orientou a escuta, o quadro de experiência desejada apoiou a confirmação e os canvases organizaram a cocriação. A contagem de créditos foi por pessoa presente."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c1_description",
+      "type": "heading",
+      "data": {
+        "section_key": "c1_description",
+        "text": "C1 Contextualizar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c1_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c1_description",
+        "text": "Apresentar o desafio, suas fontes, objetivo e combinados."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c1_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "c1_execution",
+        "text": "C1 Contextualizar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c1_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c1_execution",
+        "text": "A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c1_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "c1_outcome",
+        "text": "C1 Contextualizar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c1_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c1_outcome",
+        "text": "Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c2_description",
+      "type": "heading",
+      "data": {
+        "section_key": "c2_description",
+        "text": "C2 Compreender: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c2_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c2_description",
+        "text": "Escutar experiências, dificuldades e oportunidades com episódios concretos."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c2_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "c2_execution",
+        "text": "C2 Compreender: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c2_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c2_execution",
+        "text": "Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c2_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "c2_outcome",
+        "text": "C2 Compreender: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c2_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c2_outcome",
+        "text": "A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c3_description",
+      "type": "heading",
+      "data": {
+        "section_key": "c3_description",
+        "text": "C3 Confirmar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c3_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c3_description",
+        "text": "Converter dores priorizadas em experiência desejada e critérios observáveis."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c3_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "c3_execution",
+        "text": "C3 Confirmar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c3_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c3_execution",
+        "text": "A confirmação reuniu três necessidades: ver o estado, entender a previsão e identificar o responsável. Os participantes descreveram situações em que a previsão muda e pediram que o motivo da mudança fosse visível."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c3_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "c3_outcome",
+        "text": "C3 Confirmar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c3_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c3_outcome",
+        "text": "Os critérios desejados foram registrados como sinais observáveis de acompanhamento. Não houve aprovação de meta de prazo nem medição de satisfação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c4_description",
+      "type": "heading",
+      "data": {
+        "section_key": "c4_description",
+        "text": "C4 Cocriar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c4_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c4_description",
+        "text": "Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c4_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "c4_execution",
+        "text": "C4 Cocriar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c4_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c4_execution",
+        "text": "Dois grupos produziram canvases. Um propôs uma consulta com estado, previsão e responsável; outro, avisos quando esses dados mudam. As duas propostas responderam às necessidades confirmadas."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c4_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "c4_outcome",
+        "text": "C4 Cocriar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c4_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c4_outcome",
+        "text": "As propostas são hipóteses cocriadas. Menos contatos de acompanhamento é benefício esperado, ainda sem medição; atualização dos dados e acesso às informações são dependências a avaliar."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c5_description",
+      "type": "heading",
+      "data": {
+        "section_key": "c5_description",
+        "text": "C5 Conduzir: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c5_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c5_description",
+        "text": "Apresentar propostas, priorizar com regra acordada e definir encaminhamentos."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_c5_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "c5_execution",
+        "text": "C5 Conduzir: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c5_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c5_execution",
+        "text": "Cada um dos seis presentes recebeu dez créditos. A consulta recebeu quarenta dos sessenta créditos; os avisos, vinte. A ata registrou a objeção sobre a possibilidade de mostrar uma previsão desatualizada."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_c5_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "c5_outcome",
+        "text": "C5 Conduzir: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_c5_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "c5_outcome",
+        "text": "A consulta ficou como preferência para investigação. A distribuição não aprova implementação nem demonstra eficácia; a qualidade da atualização segue como condição para testar a proposta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O 5C aprofundou a necessidade de previsibilidade e a ligou à informação sobre estado e responsabilidade. A consulta de andamento recebeu mais créditos, com uma condição explícita: a informação precisa ser atualizada. As propostas seguem como hipóteses para avaliação e teste."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar atualização e acesso com operação e apoio técnico; prazo a definir. A devolutiva às organizações deve registrar dependências e plano de teste. A aprovação de implementação continua pendente dessa avaliação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-five-c-official-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "standard",
+          "stages": [
+            {
+              "id": "c1",
+              "label": "C1 Contextualizar",
+              "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados.",
+              "official_stage_ids": [
+                "c1"
+              ]
+            },
+            {
+              "id": "c2",
+              "label": "C2 Compreender",
+              "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos.",
+              "official_stage_ids": [
+                "c2"
+              ]
+            },
+            {
+              "id": "c3",
+              "label": "C3 Confirmar",
+              "meaning": "Converter dores priorizadas em experiência desejada e critérios observáveis.",
+              "official_stage_ids": [
+                "c3"
+              ]
+            },
+            {
+              "id": "c4",
+              "label": "C4 Cocriar",
+              "meaning": "Gerar e desenvolver propostas em conjunto, ligadas às dores identificadas.",
+              "official_stage_ids": [
+                "c4"
+              ]
+            },
+            {
+              "id": "c5",
+              "label": "C5 Conduzir",
+              "meaning": "Apresentar propostas, priorizar com regra acordada e definir encaminhamentos.",
+              "official_stage_ids": [
+                "c5"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [],
+          "adaptation_reason": ""
+        }
+      ]
+    }
+  }
+}

@@ -75,6 +75,10 @@ def actions(skill: Path) -> list[tuple[str, Path, Path | None]]:
             continue
         if not dst.is_file() or digest(src) != digest(dst):
             result.append(("copy", dst, src))
+    if skill.name in {"relatorio-4d", "relatorio-3e", "relatorio-5c"}:
+        src, dst = ROOT / "_SHARED/tom-oficial.md", skill / "references/tom-oficial.md"
+        if not dst.is_file() or digest(src) != digest(dst):
+            result.append(("copy", dst, src))
     # Script de preferências locais do usuário (plano 043): igual em todas as skills.
     prefs_src, prefs_dst = ROOT / "_SHARED/preferencias.py", skill / "scripts/preferencias.py"
     if not prefs_dst.is_file() or digest(prefs_src) != digest(prefs_dst):

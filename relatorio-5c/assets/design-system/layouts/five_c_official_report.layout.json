@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.2.0",
+  "deliverable_type": "five_c_official_report",
+  "canvas": {
+    "unit": "mm",
+    "width": 297,
+    "height": 210
+  },
+  "grid_mm": 5,
+  "slots": [
+    {
+      "id": "title",
+      "name": "titulo_documento",
+      "section_key": "titulo_documento",
+      "x": 12,
+      "y": 12,
+      "width": 273,
+      "height": 16,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s0",
+      "name": "purpose",
+      "section_key": "purpose",
+      "x": 12,
+      "y": 28,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s1",
+      "name": "introduction",
+      "section_key": "introduction",
+      "x": 12,
+      "y": 33,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s2",
+      "name": "structuring",
+      "section_key": "structuring",
+      "x": 12,
+      "y": 38,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s3",
+      "name": "c1_description",
+      "section_key": "c1_description",
+      "x": 12,
+      "y": 43,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s4",
+      "name": "c1_execution",
+      "section_key": "c1_execution",
+      "x": 12,
+      "y": 48,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s5",
+      "name": "c1_outcome",
+      "section_key": "c1_outcome",
+      "x": 12,
+      "y": 53,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s6",
+      "name": "c2_description",
+      "section_key": "c2_description",
+      "x": 12,
+      "y": 58,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s7",
+      "name": "c2_execution",
+      "section_key": "c2_execution",
+      "x": 12,
+      "y": 63,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s8",
+      "name": "c2_outcome",
+      "section_key": "c2_outcome",
+      "x": 12,
+      "y": 68,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s9",
+      "name": "c3_description",
+      "section_key": "c3_description",
+      "x": 12,
+      "y": 73,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s10",
+      "name": "c3_execution",
+      "section_key": "c3_execution",
+      "x": 12,
+      "y": 78,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s11",
+      "name": "c3_outcome",
+      "section_key": "c3_outcome",
+      "x": 12,
+      "y": 83,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s12",
+      "name": "c4_description",
+      "section_key": "c4_description",
+      "x": 12,
+      "y": 88,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s13",
+      "name": "c4_execution",
+      "section_key": "c4_execution",
+      "x": 12,
+      "y": 93,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s14",
+      "name": "c4_outcome",
+      "section_key": "c4_outcome",
+      "x": 12,
+      "y": 98,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s15",
+      "name": "c5_description",
+      "section_key": "c5_description",
+      "x": 12,
+      "y": 103,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s16",
+      "name": "c5_execution",
+      "section_key": "c5_execution",
+      "x": 12,
+      "y": 108,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s17",
+      "name": "c5_outcome",
+      "section_key": "c5_outcome",
+      "x": 12,
+      "y": 113,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s18",
+      "name": "conclusion",
+      "section_key": "conclusion",
+      "x": 12,
+      "y": 118,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    },
+    {
+      "id": "s19",
+      "name": "recommendations",
+      "section_key": "recommendations",
+      "x": 12,
+      "y": 123,
+      "width": 273,
+      "height": 5,
+      "z": 1,
+      "display_mode": "title_and_content"
+    }
+  ],
+  "flow": true
+}

@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "five_c_official_presentation",
+  "locale": "pt-BR",
+  "title": "Os clientes relacionam previsibilidade a estado e responsabilidade",
+  "summary": "Exemplo fictício. A sessão pocket aprofundou o recorte inicial. As etapas seguintes ficaram fora do escopo por desenho; os achados orientam a decisão sobre uma próxima rodada.",
+  "blocks": [
+    {
+      "id": "h_challenge_context",
+      "type": "heading",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_challenge_context",
+      "type": "paragraph",
+      "data": {
+        "section_key": "challenge_context",
+        "text": "O diagnóstico de pedidos apontava dúvidas sobre andamento. A equipe apresentou essa leitura e ouviu organizações externas antes de discutir propostas. O 5C examinou o que os clientes precisam saber para acompanhar um pedido e orientar testes posteriores."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "O formato delimitou a escuta e a contribuição de cada sessão",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 5C organiza a escuta e a cocriação com clientes, do contexto aos encaminhamentos. Foi escolhido para entender o que os clientes precisam saber sobre um pedido antes de testar propostas de acompanhamento. A sessão remota curta reuniu representantes de organizações externas para contextualizar, compreender e confirmar temas por post-its. A confirmação não construiu experiência desejada nem critérios; C4 e C5 ficaram fora do escopo. Não houve cocriação ou votação de propostas. A rodada curta aprofundou a escuta sem realizar as etapas seguintes. Etapas fora do escopo: C4, C5."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_execution_c1",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c1",
+        "text": "A escuta começou pela dúvida sobre o andamento do pedido",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c1",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c1",
+        "text": "A equipe apresentou o diagnóstico e perguntou quais dúvidas permaneciam na prática. Os seis presentes conheceram a agenda e os combinados de registro; propostas ficaram para depois da escuta. Os participantes reconheceram a questão do acompanhamento e pediram atenção à passagem entre áreas. Esse enquadramento define o recorte, sem representar todo o público do serviço."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c2",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c2",
+        "text": "O cliente procura uma previsão quando o pedido muda de área",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c2",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c2",
+        "text": "Quatro dos seis presentes relataram procurar atendimento quando não viam uma previsão. Os episódios apontaram mudanças de responsável sem atualização visível. Dois participantes também citaram utilidade no protocolo de abertura. A escuta aprofundou a relação entre estado, responsável e previsão. As quatro menções indicam experiências dos presentes, não prevalência no mercado nem votos de priorização."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_execution_c3",
+      "type": "heading",
+      "data": {
+        "section_key": "execution_c3",
+        "text": "A confirmação curta registrou os temas que ainda precisam de aprofundamento",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_execution_c3",
+      "type": "paragraph",
+      "data": {
+        "section_key": "execution_c3",
+        "text": "Na sessão remota, os participantes confirmaram os temas por post-its. O formato curto não incluiu experiência desejada, critérios, cocriação ou priorização de propostas. A confirmação indica os temas a aprofundar. Os critérios de experiência ficaram fora do escopo por desenho; não são lacuna de registro desta sessão."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "A escuta curta relacionou a dúvida sobre andamento à falta de informação atualizada. A confirmação por post-its delimitou temas para aprofundar, sem experiência desejada, critérios, propostas ou ranking. O próximo passo é avaliar quais temas exigem nova escuta antes de discutir soluções."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "A equipe do projeto deve avaliar se os achados exigem nova rodada e definir seu escopo; responsável e prazo a definir. Nenhuma decisão das etapas excluídas é presumida a partir desta aplicação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_decision",
+      "type": "heading",
+      "data": {
+        "section_key": "decision",
+        "text": "A decisão solicitada delimita o próximo avanço do projeto",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_decision",
+      "type": "paragraph",
+      "data": {
+        "section_key": "decision",
+        "text": "Solicita-se ao sponsor deliberar se haverá nova rodada de aprofundamento. O pedido se limita a esse encaminhamento, sem aprovação de construção ou escala."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_call_to_action",
+      "type": "heading",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Os responsáveis devem registrar o encaminhamento antes da próxima rodada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_call_to_action",
+      "type": "paragraph",
+      "data": {
+        "section_key": "call_to_action",
+        "text": "Equipe do projeto e sponsor: registrem a decisão sobre a próxima rodada e seu escopo. Responsável pela organização e prazo a definir."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-five-c-official-presentation",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "pocket",
+          "stages": [
+            {
+              "id": "c1",
+              "label": "C1 Contextualizar",
+              "meaning": "Apresentar o desafio, suas fontes, objetivo e combinados.",
+              "official_stage_ids": [
+                "c1"
+              ]
+            },
+            {
+              "id": "c2",
+              "label": "C2 Compreender",
+              "meaning": "Escutar experiências, dificuldades e oportunidades com episódios concretos.",
+              "official_stage_ids": [
+                "c2"
+              ]
+            },
+            {
+              "id": "c3",
+              "label": "C3 Confirmar",
+              "meaning": "Confirmar temas por post-its, sem construir experiência desejada e critérios nesta sessão curta.",
+              "official_stage_ids": [
+                "c3"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [
+            {
+              "official_stage_id": "c4",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            },
+            {
+              "official_stage_id": "c5",
+              "reason": "Fora do escopo por desenho da sessão curta."
+            }
+          ],
+          "adaptation_reason": "A rodada curta aprofundou a escuta sem realizar as etapas seguintes."
+        }
+      ]
+    },
+    "decision_required": true
+  }
+}

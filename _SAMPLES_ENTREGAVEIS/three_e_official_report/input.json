@@ -1,0 +1,342 @@
+{
+  "schema_version": "1.0.0",
+  "deliverable_type": "three_e_official_report",
+  "locale": "pt-BR",
+  "title": "A visão compartilhada depende de atualização antes de automação",
+  "summary": "Exemplo fictício. O 3E delimitou uma visão compartilhada dos pedidos e um teste de atualização entre áreas. A construção permanece planejada; uso e melhoria de previsibilidade ainda não foram medidos.",
+  "blocks": [
+    {
+      "id": "h_purpose",
+      "type": "heading",
+      "data": {
+        "section_key": "purpose",
+        "text": "O registro permite retomar a análise e seus encaminhamentos",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_purpose",
+      "type": "paragraph",
+      "data": {
+        "section_key": "purpose",
+        "text": "Este relatório registra como a aplicação foi estruturada, o que ocorreu nas etapas e o que os achados permitem encaminhar. Serve à equipe do projeto e a quem retoma ou decide sobre o trabalho."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_introduction",
+      "type": "heading",
+      "data": {
+        "section_key": "introduction",
+        "text": "O ponto de partida orientou a pergunta do encontro",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_introduction",
+      "type": "paragraph",
+      "data": {
+        "section_key": "introduction",
+        "text": "O 4D apontou registros dispersos na passagem de pedidos entre atendimento e operação. O 3E retomou essa hipótese e a objeção sobre atualização para definir escopo, construção e testes antes de solicitar implementação."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_structuring",
+      "type": "heading",
+      "data": {
+        "section_key": "structuring",
+        "text": "A estruturação reuniu operação e apoio técnico para delimitar a construção",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_structuring",
+      "type": "paragraph",
+      "data": {
+        "section_key": "structuring",
+        "text": "O 3E estrutura uma hipótese de solução em escopo, construção e experimentos. Foi escolhido para detalhar a hipótese do 4D e expor as condições ainda abertas antes de construir. A sessão reuniu responsáveis pelo fluxo, atendimento e apoio técnico, escolhidos por conhecer o repasse e a manutenção dos dados. O quadro de escopo separou o que precisa existir do que pode evoluir; os Test Cards organizaram testes prospectivos."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_e1_description",
+      "type": "heading",
+      "data": {
+        "section_key": "e1_description",
+        "text": "E1 Esclarecer: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e1_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e1_description",
+        "text": "Refinar a hipótese de solução, valor, escopo e critérios."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_e1_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "e1_execution",
+        "text": "E1 Esclarecer: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e1_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e1_execution",
+        "text": "O grupo refinou a hipótese do 4D: tornar visíveis responsável, estado e previsão do pedido. Integração automática e substituição dos sistemas ficaram fora do primeiro recorte."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_e1_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "e1_outcome",
+        "text": "E1 Esclarecer: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e1_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e1_outcome",
+        "text": "Os três componentes respondem à dificuldade de continuidade registrada no 4D. A hipótese permanece parcial quanto ao esforço de atualização, que precisa ser avaliado antes da coleta."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_e2_description",
+      "type": "heading",
+      "data": {
+        "section_key": "e2_description",
+        "text": "E2 Estruturar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e2_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e2_description",
+        "text": "Definir componentes, construção, dependências, responsáveis e prazos."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_e2_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "e2_execution",
+        "text": "E2 Estruturar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e2_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e2_execution",
+        "text": "O plano prevê um protótipo com campos de responsável, estado e previsão. Atendimento abrirá o registro; operação atualizará a passagem. O apoio técnico verificará acesso, enquanto prazos e esforço de manutenção seguem a definir."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_e2_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "e2_outcome",
+        "text": "E2 Estruturar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e2_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e2_outcome",
+        "text": "A construção está planejada, não concluída. A rota permanece indefinida até a avaliação técnica; a dependência central é manter o registro atualizado sem duplicar trabalho."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_e3_description",
+      "type": "heading",
+      "data": {
+        "section_key": "e3_description",
+        "text": "E3 Experimentar: descrição da etapa",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e3_description",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e3_description",
+        "text": "Planejar testes com hipótese, teste, medida e critério, sem antecipar resultados."
+      },
+      "citation_ids": [
+        "F01"
+      ]
+    },
+    {
+      "id": "h_e3_execution",
+      "type": "heading",
+      "data": {
+        "section_key": "e3_execution",
+        "text": "E3 Experimentar: execução realizada",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e3_execution",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e3_execution",
+        "text": "TC-01: acreditamos que as duas áreas conseguirão manter o pedido atualizado. O teste acompanhará uma rodada simulada; medirá atualizações feitas e tempo de registro. O limiar será fechado antes da coleta, com responsáveis pelo fluxo."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_e3_outcome",
+      "type": "heading",
+      "data": {
+        "section_key": "e3_outcome",
+        "text": "E3 Experimentar: desfecho",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_e3_outcome",
+      "type": "paragraph",
+      "data": {
+        "section_key": "e3_outcome",
+        "text": "O Test Card é prospectivo e ainda precisa do critério aprovado antes da coleta. Não há resultado de uso ou eficácia. O plano separa observar atualização de medir eventual melhoria da previsibilidade."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_conclusion",
+      "type": "heading",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O desfecho orienta o próximo passo dentro do escopo realizado",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_conclusion",
+      "type": "paragraph",
+      "data": {
+        "section_key": "conclusion",
+        "text": "O 3E transformou a hipótese do 4D em escopo e construção planejados, com teste voltado à atualização. A rota e o esforço técnico seguem abertos. O próximo avanço depende de fechar responsabilidades e critério antes de executar o teste."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    },
+    {
+      "id": "h_recommendations",
+      "type": "heading",
+      "data": {
+        "section_key": "recommendations",
+        "text": "As dependências precisam de responsáveis antes do próximo avanço",
+        "level": 2
+      }
+    },
+    {
+      "id": "p_recommendations",
+      "type": "paragraph",
+      "data": {
+        "section_key": "recommendations",
+        "text": "Responsáveis pelo fluxo devem fechar o critério do TC-01 antes da coleta; prazo a definir. Apoio técnico deve avaliar esforço e alternativas de rota. A aprovação para construir depende dessa avaliação, sem presumir autorização já concedida."
+      },
+      "citation_ids": [
+        "F02"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "F01",
+      "source_id": "roteiro-ficticio",
+      "locator": "Método e escopo planejado da sessão; exemplo fictício."
+    },
+    {
+      "id": "F02",
+      "source_id": "registro-ficticio",
+      "locator": "Mural, ata e encaminhamentos do exemplo fictício; não é evidência de execução real."
+    }
+  ],
+  "metadata": {
+    "artifact_id": "sample-three-e-official-report",
+    "content_version": "1.0.0",
+    "completeness": "complete",
+    "method_application": {
+      "sessions": [
+        {
+          "id": "sessao",
+          "variant": "standard",
+          "stages": [
+            {
+              "id": "e1",
+              "label": "E1 Esclarecer",
+              "meaning": "Refinar a hipótese de solução, valor, escopo e critérios.",
+              "official_stage_ids": [
+                "e1"
+              ]
+            },
+            {
+              "id": "e2",
+              "label": "E2 Estruturar",
+              "meaning": "Definir componentes, construção, dependências, responsáveis e prazos.",
+              "official_stage_ids": [
+                "e2"
+              ]
+            },
+            {
+              "id": "e3",
+              "label": "E3 Experimentar",
+              "meaning": "Planejar testes com hipótese, teste, medida e critério, sem antecipar resultados.",
+              "official_stage_ids": [
+                "e3"
+              ]
+            }
+          ],
+          "out_of_scope_stages": [],
+          "adaptation_reason": ""
+        }
+      ]
+    }
+  }
+}
